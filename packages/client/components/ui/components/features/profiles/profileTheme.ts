@@ -252,9 +252,13 @@ export function readableTheme(chosen: ProfileTheme): ReadableTheme {
   };
 }
 
+/** Every surface a theme's gradient paints, to judge text against */
+export const themeSurfaces = (theme: ProfileTheme) =>
+  along(theme.top, theme.bottom);
+
 /** Whether a person's name colours read everywhere on their own theme */
 export function readableName(colours: string[], theme: ReadableTheme) {
-  const surfaces = along(theme.top, theme.bottom);
+  const surfaces = themeSurfaces(theme);
   return colours.every((colour) =>
     surfaces.every((surface) => contrast(colour, surface) >= AA),
   );

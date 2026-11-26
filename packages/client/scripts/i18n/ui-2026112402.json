@@ -1,0 +1,50 @@
+{
+  "An outstanding Zrzur Designs creator, chosen by the team.": [
+    "مصمم متميّز في تصاميم زرزور يختاره الفريق.",
+    "Herausragende Designs-Creator, vom Team ausgewählt."
+  ],
+  "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program. 25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets don't count.": [
+    "أن تحمل شارة «مصمم»، ولك 25 تصميماً أصلياً معتمداً منشوراً على الأقل و180 يوماً على الأقل في برنامج المصممين. الرقم 25 حدّ أدنى فقط، والفريق هو من يختار. لا تُحسب النسخ المكررة ولا تغيير الألوان البسيط ولا الأصول المنسوخة.",
+    "Creator-Abzeichen, mindestens 25 geprüfte, eigene, veröffentlichte Designs und mindestens 180 Tage im Creator-Programm. 25 ist nur das Minimum; das Team wählt aus. Duplikate, einfache Umfärbungen und kopierte Assets zählen nicht."
+  ],
+  "Designs and publishes profile designs in Zrzur Designs.": [
+    "يصمّم تصاميم للملف الشخصي وينشرها في تصاميم زرزور.",
+    "Gestaltet und veröffentlicht Profildesigns in Zrzur Designs."
+  ],
+  "Given after you join the Designs creator program and publish your first original, approved design. It stays for good unless the work was fraudulent or infringing. Making bots or videos doesn't count.": [
+    "تُمنح بعد قبولك في برنامج مصممي التصاميم ونشر أول تصميم أصلي معتمد لك. تبقى دائمة ما لم يكن العمل احتيالياً أو منتهكاً للحقوق. صنع البوتات أو مقاطع الفيديو لا يُحتسب.",
+    "Nach Aufnahme ins Designs-Creator-Programm und deinem ersten eigenen, geprüften, veröffentlichten Design. Dauerhaft, außer das Werk war betrügerisch oder rechtsverletzend. Bots oder Videos zählen nicht."
+  ],
+  "Completed a Zrzur beta cycle with real contributions.": [
+    "أتمّ دورة اختبار في زرزور بمساهمات حقيقية.",
+    "Hat einen Zrzur-Beta-Zyklus mit echten Beiträgen abgeschlossen."
+  ],
+  "Complete a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle. It stays, but gives no beta access.": [
+    "أتمِم دورة اختبار بثلاثة تقارير ملاحظات راجعها الفريق على الأقل أو ببلاغ خطأ مؤكد واحد، ويوافق عليها الفريق بعد انتهاء الدورة. تبقى دائمة، لكنها لا تمنح دخولاً إلى النسخ التجريبية.",
+    "Schließe einen Beta-Zyklus mit mindestens 3 geprüften Feedbackberichten oder 1 bestätigten Fehlerbericht ab; das Team gibt es nach dem Zyklus frei. Bleibt, gibt aber keinen Beta-Zugang."
+  ],
+  "Owns a server that reached 100 genuine human members.": [
+    "يملك سيرفرًا بلغ 100 عضو بشري حقيقي.",
+    "Besitzt einen Server mit 100 echten menschlichen Mitgliedern."
+  ],
+  "Own a server that reaches 100 genuine human members. Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day; it stays if the server gets smaller.": [
+    "امتلك سيرفراً يبلغ 100 عضو بشري حقيقي. لا تُحسب البوتات ولا الحسابات المحذوفة أو المحظورة أو المعلّقة ولا الحسابات التي يقل عمرها عن 7 أيام أو التي لم يُؤكَّد بريدها، ولا من انضم قبل أقل من يوم. يُحسب العدد بضع مرات يومياً، وتبقى الشارة إن صغر السيرفر.",
+    "Besitze einen Server, der 100 echte menschliche Mitglieder erreicht. Bots, gelöschte, gesperrte oder suspendierte Konten, Konten unter 7 Tagen oder ohne bestätigte E-Mail und Personen, die vor weniger als einem Tag beigetreten sind, zählen nicht. Mehrmals täglich gezählt; bleibt, wenn der Server kleiner wird."
+  ],
+  "Owns a server that reached 1,000 genuine human members.": [
+    "يملك سيرفرًا بلغ 1,000 عضو بشري حقيقي.",
+    "Besitzt einen Server mit 1.000 echten menschlichen Mitgliedern."
+  ],
+  "Own a server that reaches 1,000 genuine human members, counted as for Community Builder. It stays if the server gets smaller. It is not a partnership or a verification.": [
+    "امتلك سيرفراً يبلغ 1,000 عضو بشري حقيقي، يُحسبون كما في «باني مجتمع». تبقى الشارة إن صغر السيرفر، وليست شراكة ولا توثيقاً.",
+    "Besitze einen Server, der 1.000 echte menschliche Mitglieder erreicht, gezählt wie bei Community-Aufbau. Bleibt, wenn der Server kleiner wird. Weder Partnerschaft noch Verifizierung."
+  ],
+  "Super Creator is chosen by the team after at least {0} approved, published designs and {1} days in the creator program.": [
+    "يختار الفريق «المصمم المتميز» بعد بلوغ الحد الأدنى: {0} من التصاميم المعتمدة المنشورة و{1} من الأيام في برنامج المصممين.",
+    "Super Creator wählt das Team ab mindestens {0} geprüften, veröffentlichten Designs und {1} Tagen im Creator-Programm aus."
+  ],
+  "You completed the beta. The team approves Beta Veteran when you sent at least 3 reviewed feedback reports or 1 confirmed bug report during the cycle.": [
+    "أتممتَ النسخة التجريبية. يوافق الفريق على شارة «مختبر مخضرم» إن أرسلت خلال الدورة ثلاثة تقارير ملاحظات راجعها الفريق على الأقل أو بلاغ خطأ مؤكدًا واحدًا.",
+    "Du hast die Beta abgeschlossen. Beta-Veteran gibt das Team frei, wenn du im Zyklus mindestens 3 geprüfte Feedbackberichte oder 1 bestätigten Fehlerbericht gesendet hast."
+  ]
+}

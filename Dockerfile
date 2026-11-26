@@ -1,12 +1,13 @@
 # ============================================
 # Stage 1: Build the web client
 # ============================================
-FROM node:24-alpine AS builder
+FROM node:26-alpine AS builder
 
 RUN apk add --no-cache git python3 make g++
 
 # Install pnpm
-RUN corepack enable && corepack prepare pnpm@11.3.0 --activate
+# Node 25+ images no longer ship corepack, so pnpm comes from npm (same pinned version)
+RUN npm install -g pnpm@11.3.0
 
 WORKDIR /build
 
@@ -74,7 +75,7 @@ RUN pnpm --filter client exec node scripts/bot-api/prerender-docs.mjs
 # ============================================
 # Stage 2: Minimal runtime image
 # ============================================
-FROM node:24-alpine
+FROM node:26-alpine
 
 WORKDIR /app
 

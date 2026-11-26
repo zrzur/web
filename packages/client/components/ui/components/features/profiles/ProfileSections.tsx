@@ -1,5 +1,15 @@
 import { lazy } from "@revolt/common/lib/lazyPart";
-import { For, JSX, Match, Show, Suspense, Switch, createMemo } from "solid-js";
+import {
+  For,
+  JSX,
+  Match,
+  Show,
+  Suspense,
+  Switch,
+  createMemo,
+  createSignal,
+  onCleanup,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { ServerMember, User, UserProfile } from "@zrzur/sdk/solid";
@@ -17,7 +27,11 @@ import { ProfileLinks } from "./ProfileLinks";
 import { ProfileRoles } from "./ProfileRoles";
 import { profileGames } from "./linkedGames";
 import { profileConnections } from "./linkedServices";
-import { type ProfileSize, ProfileSizeContext } from "./profileSize";
+import {
+  type ProfileSize,
+  ProfileSizeContext,
+  ProfileWidthContext,
+} from "./profileSize";
 import { visibleSections } from "./sections";
 
 // a bot's About, maker and commands: loaded when a bot's card first opens
@@ -57,55 +71,72 @@ export function ProfileBody(props: {
   // read by the sections below, each time they draw
   const size = (): ProfileSize => (props.full ? "full" : "card");
 
+  // how wide the content is: a framed profile on a phone is narrower, and
+  // the tiles in a row follow it (profileSize.ts)
+  const [width, setWidth] = createSignal<number>();
+  let observer: ResizeObserver | undefined;
+  onCleanup(() => observer?.disconnect());
+  const measure = (card: HTMLDivElement) => {
+    queueMicrotask(() => setWidth(card.clientWidth || undefined));
+    if (typeof ResizeObserver === "undefined") return;
+    observer?.disconnect();
+    observer = new ResizeObserver(() =>
+      setWidth(card.clientWidth || undefined),
+    );
+    observer.observe(card);
+  };
+
   return (
     <ProfileSizeContext.Provider value={size}>
-      <Show when={!props.loading} fallback={<ProfileSkeleton />}>
-        <ProfileCard>
-          <Show when={props.failed}>
-            <section>
-              <LoadError>
-                <Trans>Couldn't load this profile.</Trans>
-              </LoadError>
-            </section>
-          </Show>
-          {/* what they are doing right now, above everything else */}
-          <ProfileActivity user={props.user} />
-          <ProfileSections
-            user={props.user}
-            member={props.member}
-            profile={props.profile}
-            full={props.full}
-            onClose={props.onClose}
-          />
-          <Show when={props.bot}>
-            {/* own boundaries: loading these never suspends the channel; the
-              placeholder keeps Roles below from jumping while they load */}
-            <Suspense fallback={<BotPlaceholder aria-hidden="true" />}>
-              <ProfileBotAbout
-                botId={props.user.id}
-                official={props.user.officialBot}
-              />
-              <ProfileOwner botId={props.user.id} bot={props.bot!} />
-              {/* About and Created by never wait for the commands */}
-              <Suspense>
-                <ProfileCommands
-                  botId={props.user.id}
-                  serverId={props.member?.id.server}
-                />
-              </Suspense>
-            </Suspense>
-          </Show>
-          <ProfileRoles member={props.member} full={props.full} />
-          <Show when={!props.user.self}>
-            <ProfileMutuals
+      <ProfileWidthContext.Provider value={width}>
+        <Show when={!props.loading} fallback={<ProfileSkeleton />}>
+          <ProfileCard ref={measure}>
+            <Show when={props.failed}>
+              <section>
+                <LoadError>
+                  <Trans>Couldn't load this profile.</Trans>
+                </LoadError>
+              </section>
+            </Show>
+            {/* what they are doing right now, above everything else */}
+            <ProfileActivity user={props.user} />
+            <ProfileSections
               user={props.user}
+              member={props.member}
+              profile={props.profile}
               full={props.full}
               onClose={props.onClose}
             />
-          </Show>
-          {props.children}
-        </ProfileCard>
-      </Show>
+            <Show when={props.bot}>
+              {/* own boundaries: loading these never suspends the channel; the
+              placeholder keeps Roles below from jumping while they load */}
+              <Suspense fallback={<BotPlaceholder aria-hidden="true" />}>
+                <ProfileBotAbout
+                  botId={props.user.id}
+                  official={props.user.officialBot}
+                />
+                <ProfileOwner botId={props.user.id} bot={props.bot!} />
+                {/* About and Created by never wait for the commands */}
+                <Suspense>
+                  <ProfileCommands
+                    botId={props.user.id}
+                    serverId={props.member?.id.server}
+                  />
+                </Suspense>
+              </Suspense>
+            </Show>
+            <ProfileRoles member={props.member} full={props.full} />
+            <Show when={!props.user.self}>
+              <ProfileMutuals
+                user={props.user}
+                full={props.full}
+                onClose={props.onClose}
+              />
+            </Show>
+            {props.children}
+          </ProfileCard>
+        </Show>
+      </ProfileWidthContext.Provider>
     </ProfileSizeContext.Provider>
   );
 }

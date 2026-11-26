@@ -7,6 +7,9 @@ import { lazy } from "@revolt/common/lib/lazyPart";
 /** The desktop app's rich presence bridge (`window.native.activity`) */
 export type DesktopActivity = {
   state(): Promise<DesktopActivityState>;
+  /** The system's icons of programs on this computer, by entry id and
+   * `app:<id>` (data URLs; desktop apps since 26.3.0-beta.9) */
+  icons?(): Promise<Record<string, string>>;
   current(): Promise<DesktopActivityUpdate>;
   setSharing(on: boolean): Promise<DesktopActivityState>;
   setDetection(on: boolean): Promise<DesktopActivityState>;
@@ -47,6 +50,12 @@ export type DesktopActivityEntry = {
   off: boolean;
   added: boolean;
   running: boolean;
+  /** The list's picture (`https://`, shown through the image proxy) */
+  icon?: string;
+  /** The program's official page */
+  url?: string;
+  /** A web browser: off until the person turns it on */
+  browser?: boolean;
 };
 
 export type DesktopActivityState = {
@@ -92,6 +101,13 @@ export function richPresenceEnabled(client: Client | undefined): boolean {
  */
 const [sharing, setSharing] = createSignal<boolean | undefined>(undefined);
 export { sharing as activitySharing, setSharing as setActivitySharing };
+
+/**
+ * What the desktop app last said it detects (`ActivityBridge` keeps it), for
+ * the "Detecting now" row of the Activity settings page
+ */
+const [detected, setDetected] = createSignal<DesktopActivityUpdate>();
+export { detected as desktopDetected, setDetected as setDesktopDetected };
 
 /** The desktop app's bridge, downloaded only there (a browser has none) */
 const ActivityBridge = lazy(() => import("./ActivityBridge"));

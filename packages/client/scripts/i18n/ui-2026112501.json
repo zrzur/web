@@ -1,0 +1,562 @@
+{
+  "Content Creator": [
+    "صانع محتوى",
+    "Content Creator"
+  ],
+  "Awarded to established creators of original, high-quality content who meet Zrzur's verification and quality standards.": [
+    "شارة تُمنح لصنّاع المحتوى الأصلي والمتميز الذين يستوفون شروط الجودة والتوثيق المعتمدة لدى زرزور.",
+    "Wird etablierten Creatorn verliehen, die hochwertige, eigene Inhalte erstellen und die Qualitäts- und Verifizierungsanforderungen von Zrzur erfüllen."
+  ],
+  "Apply with one channel or profile that has at least 100,000 real followers on that one platform, 90 days of activity and 5 substantial original works in the last 90 days (or a regular livestream schedule). The team checks the channel is yours and reviews the quality; a second person approves.": [
+    "قدّم بقناة أو ملف واحد لديه 100,000 متابع حقيقي على الأقل على تلك المنصة الواحدة، و90 يوماً من النشاط، و5 أعمال أصلية جوهرية خلال آخر 90 يوماً (أو جدول بث منتظم). يتحقق الفريق من أن القناة لك ويراجع الجودة، ويوافق شخص ثانٍ.",
+    "Bewirb dich mit einem Kanal oder Profil, das auf dieser einen Plattform mindestens 100.000 echte Follower, 90 Tage Aktivität und 5 substanzielle eigene Werke in den letzten 90 Tagen (oder einen regelmäßigen Livestream-Plan) hat. Das Team prüft, ob der Kanal dir gehört, und bewertet die Qualität; eine zweite Person gibt frei."
+  ],
+  "Another platform": [
+    "منصة أخرى",
+    "Andere Plattform"
+  ],
+  "Technology and programming": [
+    "التقنية والبرمجة",
+    "Technik und Programmierung"
+  ],
+  "Livestreaming": [
+    "البث المباشر",
+    "Livestreaming"
+  ],
+  "Creative production": [
+    "الإنتاج الإبداعي",
+    "Kreative Produktion"
+  ],
+  "Comedy and entertainment": [
+    "الكوميديا والترفيه",
+    "Comedy und Unterhaltung"
+  ],
+  "Commentary": [
+    "التعليق",
+    "Kommentar"
+  ],
+  "Your channel, its kind of content and {0} recent works or a livestream schedule are filled in": [
+    "عُبّئت قناتك ونوع محتواها و{0} أعمال حديثة أو جدول بث",
+    "Dein Kanal, die Art der Inhalte und {0} neue Werke oder ein Livestream-Plan sind ausgefüllt"
+  ],
+  "A reviewer found your code on the channel": [
+    "وجد مراجعٌ رمزك على القناة",
+    "Eine prüfende Person hat deinen Code auf dem Kanal gefunden"
+  ],
+  "Your code is in the channel's description or a pinned post": [
+    "رمزك في وصف القناة أو في منشور مثبّت",
+    "Dein Code steht in der Kanalbeschreibung oder einem angehefteten Beitrag"
+  ],
+  "At least {0} real followers on that one platform": [
+    "{0} متابع حقيقي على الأقل على تلك المنصة الواحدة",
+    "Mindestens {0} echte Follower auf dieser einen Plattform"
+  ],
+  "Followers the reviewer saw: {0} of {1}": [
+    "المتابعون الذين رآهم المراجع: {0} من {1}",
+    "Follower, die die prüfende Person gesehen hat: {0} von {1}"
+  ],
+  "At least {needed} days of active publishing": [
+    "{needed} يومًا على الأقل من النشر النشط",
+    "Mindestens {needed} Tage aktive Veröffentlichung"
+  ],
+  "Days active: {value} of {needed}": [
+    "أيام النشاط: {value} من {needed}",
+    "Aktive Tage: {value} von {needed}"
+  ],
+  "At least {needed} substantial original works in the last 90 days, or a regular livestream schedule": [
+    "{needed} أعمال أصلية جوهرية على الأقل خلال آخر 90 يومًا، أو جدول بث منتظم",
+    "Mindestens {needed} substanzielle eigene Werke in den letzten 90 Tagen oder ein regelmäßiger Livestream-Plan"
+  ],
+  "Original works in the last 90 days: {value} of {needed}": [
+    "الأعمال الأصلية خلال آخر 90 يومًا: {value} من {needed}",
+    "Eigene Werke in den letzten 90 Tagen: {value} von {needed}"
+  ],
+  "The team's quality review: originality, effort, consistency, authenticity, safety, honesty, rights": [
+    "مراجعة الفريق للجودة: الأصالة، والجهد، والاستمرارية، والمصداقية، والأمان، والأمانة، والحقوق",
+    "Qualitätsprüfung des Teams: Originalität, Aufwand, Beständigkeit, Echtheit, Sicherheit, Ehrlichkeit, Rechte"
+  ],
+  "Quality criteria met: {value} of {needed}": [
+    "معايير الجودة المستوفاة: {value} من {needed}",
+    "Erfüllte Qualitätskriterien: {value} von {needed}"
+  ],
+  "The follower number the team saw on that one platform is below the published minimum.": [
+    "عدد المتابعين الذي رآه الفريق على تلك المنصة الواحدة أقل من الحد الأدنى المنشور.",
+    "Die Followerzahl, die das Team auf dieser einen Plattform gesehen hat, liegt unter dem veröffentlichten Minimum."
+  ],
+  "The channel has not been active for long enough.": [
+    "لم تكن القناة نشطة مدة كافية.",
+    "Der Kanal ist noch nicht lange genug aktiv."
+  ],
+  "The team did not find enough substantial original works in the last 90 days, or an equivalent regular livestream schedule.": [
+    "لم يجد الفريق عددًا كافيًا من الأعمال الأصلية الجوهرية خلال آخر 90 يومًا، ولا جدول بث منتظمًا يعادلها.",
+    "Das Team hat in den letzten 90 Tagen nicht genug substanzielle eigene Werke oder einen gleichwertigen regelmäßigen Livestream-Plan gefunden."
+  ],
+  "Originality: most of the work is reposted or copied without an original contribution.": [
+    "الأصالة: معظم الأعمال منقولة أو منسوخة دون إضافة أصلية.",
+    "Originalität: Die Inhalte sind überwiegend übernommen oder kopiert, ohne eigenen Beitrag."
+  ],
+  "Effort: the works show little real effort, for example repetitive content made to collect views.": [
+    "الجهد: لا تُظهر الأعمال جهدًا حقيقيًا، مثل محتوى متكرر لجمع المشاهدات.",
+    "Aufwand: Die Werke zeigen wenig echten Aufwand, zum Beispiel wiederholte Inhalte, um Aufrufe zu sammeln."
+  ],
+  "Consistency: the channel rests on one viral upload rather than regular work.": [
+    "الاستمرارية: تعتمد القناة على عمل واحد واسع الانتشار لا على نشر منتظم.",
+    "Beständigkeit: Der Kanal beruht auf einem einzelnen viralen Upload statt auf regelmäßiger Arbeit."
+  ],
+  "Authenticity: the review found signs of bought followers or coordinated fake engagement.": [
+    "المصداقية: وجدت المراجعة علامات على متابعين مشترَين أو تفاعل مزيّف منسَّق.",
+    "Echtheit: Die Prüfung hat Hinweise auf gekaufte Follower oder koordinierte Fake-Interaktion gefunden."
+  ],
+  "Safety and legality: the content breaks the law or Zrzur's rules.": [
+    "الأمان والقانونية: يخالف المحتوى القانون أو قواعد زرزور.",
+    "Sicherheit und Rechtmäßigkeit: Die Inhalte verstoßen gegen Gesetze oder die Regeln von Zrzur."
+  ],
+  "Honesty: systematic misleading clickbait, impersonation or false claims.": [
+    "الأمانة: عناوين مضلِّلة على نحو منهجي أو انتحال هوية أو ادعاءات كاذبة.",
+    "Ehrlichkeit: systematisch irreführender Clickbait, Identitätsmissbrauch oder falsche Behauptungen."
+  ],
+  "Rights: repeated infringement, stolen content or unauthorised reuploads.": [
+    "الحقوق: انتهاك متكرر للحقوق أو محتوى مسروق أو إعادة رفع دون إذن.",
+    "Rechte: wiederholte Rechtsverletzungen, gestohlene Inhalte oder nicht erlaubte Reuploads."
+  ],
+  "The team took the badge away.": [
+    "سحب الفريق الشارة.",
+    "Das Team hat das Abzeichen entzogen."
+  ],
+  "Choose the platform of your channel.": [
+    "اختر منصة قناتك.",
+    "Wähle die Plattform deines Kanals."
+  ],
+  "Write the name of the platform (at most 40 characters).": [
+    "اكتب اسم المنصة (40 حرفًا على الأكثر).",
+    "Schreib den Namen der Plattform (höchstens 40 Zeichen)."
+  ],
+  "Choose the kind of content you make.": [
+    "اختر نوع المحتوى الذي تصنعه.",
+    "Wähle die Art der Inhalte, die du machst."
+  ],
+  "Add at most ten links to works.": [
+    "أضف عشرة روابط أعمال على الأكثر.",
+    "Füge höchstens zehn Links zu Werken hinzu."
+  ],
+  "Describe your livestream schedule in at most 500 characters.": [
+    "صف جدول بثك في 500 حرف على الأكثر.",
+    "Beschreibe deinen Livestream-Plan in höchstens 500 Zeichen."
+  ],
+  "Add the address of your channel first.": [
+    "أضف عنوان قناتك أولًا.",
+    "Gib zuerst die Adresse deines Kanals an."
+  ],
+  "A person on the team looks for the code on your channel after you send the application.": [
+    "يبحث شخص من الفريق عن الرمز في قناتك بعد أن ترسل الطلب.",
+    "Eine Person im Team sucht den Code auf deinem Kanal, nachdem du die Bewerbung gesendet hast."
+  ],
+  "Your channel": [
+    "قناتك",
+    "Dein Kanal"
+  ],
+  "One channel or profile on one platform: followers on different platforms are not added together. Any kind of legitimate content counts; a genre is never a reason to refuse.": [
+    "قناة أو ملف واحد على منصة واحدة: لا يُجمع المتابعون من منصات مختلفة. كل محتوى مشروع يُحسب، والنوع ليس سببًا للرفض أبدًا.",
+    "Ein Kanal oder Profil auf einer Plattform: Follower verschiedener Plattformen werden nicht addiert. Jede Art legitimer Inhalte zählt; ein Genre ist nie ein Ablehnungsgrund."
+  ],
+  "Platform": [
+    "المنصة",
+    "Plattform"
+  ],
+  "Name of the platform": [
+    "اسم المنصة",
+    "Name der Plattform"
+  ],
+  "Kind of content": [
+    "نوع المحتوى",
+    "Art der Inhalte"
+  ],
+  "Address of the channel or profile": [
+    "عنوان القناة أو الملف",
+    "Adresse des Kanals oder Profils"
+  ],
+  "Links to at least 5 original works from the last 90 days, one per line": [
+    "روابط 5 أعمال أصلية على الأقل من آخر 90 يومًا، رابط في كل سطر",
+    "Links zu mindestens 5 eigenen Werken aus den letzten 90 Tagen, einer pro Zeile"
+  ],
+  "Or, if you stream: your regular livestream schedule": [
+    "أو، إن كنت تبث: جدول بثك المنتظم",
+    "Oder, wenn du streamst: dein regelmäßiger Livestream-Plan"
+  ],
+  "What do you make, and for whom?": [
+    "ماذا تصنع، ولمن؟",
+    "Was machst du, und für wen?"
+  ],
+  "This channel is mine and everything I write is true.": [
+    "هذه القناة لي، وكل ما أكتبه صحيح.",
+    "Dieser Kanal gehört mir, und alles, was ich schreibe, ist wahr."
+  ],
+  "Show that the channel is yours": [
+    "أثبت أن القناة لك",
+    "Zeig, dass der Kanal dir gehört"
+  ],
+  "Put the code in your channel's description or a pinned post and leave it there until the team has decided. A person on the team looks for it; Zrzur never connects to the platform or reads your followers itself.": [
+    "ضع الرمز في وصف قناتك أو في منشور مثبّت، واتركه هناك حتى يقرر الفريق. يبحث عنه شخص من الفريق، ولا يتصل زرزور بالمنصة ولا يقرأ متابعيك بنفسه أبدًا.",
+    "Setz den Code in die Beschreibung deines Kanals oder einen angehefteten Beitrag und lass ihn dort, bis das Team entschieden hat. Eine Person im Team sucht ihn; Zrzur verbindet sich nie mit der Plattform und liest deine Follower nicht selbst."
+  ],
+  "Your code:": [
+    "رمزك:",
+    "Dein Code:"
+  ],
+  "You have a code. If you lost it, ask for a new one and replace it on the channel.": [
+    "لديك رمز. إن فقدته فاطلب رمزًا جديدًا واستبدله في القناة.",
+    "Du hast einen Code. Wenn er verloren ist, fordere einen neuen an und ersetze ihn auf dem Kanal."
+  ],
+  "Get a new code": [
+    "احصل على رمز جديد",
+    "Neuen Code holen"
+  ],
+  "How every badge is earned": [
+    "كيف تُنال كل شارة",
+    "Wie man jedes Abzeichen erhält"
+  ],
+  "Zrzur badges": [
+    "شارات زرزور",
+    "Zrzur-Abzeichen"
+  ],
+  "What each badge means and how it is earned.": [
+    "ما تعنيه كل شارة وكيف تُنال.",
+    "Was jedes Abzeichen bedeutet und wie man es erhält."
+  ],
+  "Rules for every badge": [
+    "قواعد لكل الشارات",
+    "Regeln für alle Abzeichen"
+  ],
+  "Where a badge is by application, you apply in Settings → Badges when applications are open.": [
+    "للشارات التي تُنال بطلب، تتقدّم من الإعدادات ← الشارات متى فُتحت الطلبات.",
+    "Für Abzeichen auf Antrag bewirbst du dich unter Einstellungen → Abzeichen, sobald Bewerbungen offen sind."
+  ],
+  "By application": [
+    "بطلب",
+    "Auf Antrag"
+  ],
+  "Given by the team": [
+    "يمنحها الفريق",
+    "Vom Team vergeben"
+  ],
+  "Not obtainable": [
+    "لا يمكن نيلها",
+    "Nicht erhältlich"
+  ],
+  "What it takes": [
+    "ما يلزم",
+    "Was es braucht"
+  ],
+  "Retired badges are not listed here; people who have one keep it.": [
+    "لا تُدرج هنا الشارات المتقاعدة، ويحتفظ بها من يحملها.",
+    "Ausgemusterte Abzeichen stehen hier nicht; wer eines hat, behält es."
+  ],
+  "Criteria last changed on {0}.": [
+    "آخر تغيير للمعايير في {0}.",
+    "Kriterien zuletzt geändert am {0}."
+  ],
+  "Removed when the appointment ends.": [
+    "تُزال عند انتهاء التعيين.",
+    "Entfällt mit dem Ende der Ernennung."
+  ],
+  "Server moderators and server staff do not qualify.": [
+    "لا يستحقها مشرفو السيرفرات ولا طاقمها.",
+    "Server-Moderatoren und Server-Teams zählen nicht."
+  ],
+  "Permanent unless obtained by fraud.": [
+    "دائمة ما لم تُنل بالاحتيال.",
+    "Dauerhaft, außer bei Betrug."
+  ],
+  "Automatic and permanent. Hidden while you hide \"Member since\" on your profile.": [
+    "تلقائية ودائمة. تُخفى ما دمت تخفي «عضو منذ» في ملفك الشخصي.",
+    "Automatisch und dauerhaft. Ausgeblendet, solange du „Mitglied seit“ in deinem Profil ausblendest."
+  ],
+  "Permanent once legitimately earned, even if the server gets smaller.": [
+    "دائمة متى نيلت بحق، حتى لو صغر السيرفر لاحقاً.",
+    "Dauerhaft, sobald rechtmäßig erreicht, auch wenn der Server später schrumpft."
+  ],
+  "Zrzur is built by volunteers. Reviews happen when a volunteer is available; we do not promise a review time.": [
+    "يبني زرزورَ متطوعون. تُراجَع الطلبات حين يتاح متطوّع، ولا نعد بمدة محددة للمراجعة.",
+    "Zrzur wird von Freiwilligen gebaut. Prüfungen erfolgen, sobald eine freiwillige Person Zeit hat; eine Bearbeitungszeit versprechen wir nicht."
+  ],
+  "Requirements are published here and applied the same way to everyone. Nobody on the team can approve their own application.": [
+    "الشروط منشورة هنا وتُطبَّق على الجميع بالطريقة نفسها. لا يستطيع أي عضو في الفريق الموافقة على طلبه بنفسه.",
+    "Die Voraussetzungen stehen hier und gelten für alle gleich. Niemand im Team darf den eigenen Antrag genehmigen."
+  ],
+  "A badge can be removed if it was obtained by fraud, fake members or engagement, impersonation, stolen work, or a serious rule violation.": [
+    "قد تُسحب الشارة إذا نيلت بالاحتيال أو بأعضاء أو تفاعل مزيّف أو بانتحال هوية أو بعمل مسروق أو بمخالفة جسيمة للقواعد.",
+    "Ein Abzeichen kann entzogen werden, wenn es durch Betrug, gefälschte Mitglieder oder Interaktionen, Identitätsmissbrauch, gestohlene Werke oder einen schweren Regelverstoß erlangt wurde."
+  ],
+  "When an application is refused, you are told why and can appeal once within 30 days from your Badges settings. When a badge is suspended or removed for a rule breach, you get a statement of reasons and can appeal as for any other moderation decision.": [
+    "عند رفض طلبك تُبلَّغ بالسبب، ويمكنك الاعتراض مرة واحدة خلال 30 يومًا من إعدادات الشارات. وعند تعليق شارة أو سحبها بسبب مخالفة للقواعد تتلقى بيانًا بالأسباب، ويمكنك الطعن كما في سائر قرارات الإشراف.",
+    "Wird ein Antrag abgelehnt, erfährst du den Grund und kannst innerhalb von 30 Tagen einmal in den Abzeichen-Einstellungen Einspruch einlegen. Wird ein Abzeichen wegen eines Regelverstoßes ausgesetzt oder entzogen, erhältst du eine Begründung und kannst wie bei jeder anderen Moderationsentscheidung Beschwerde einlegen."
+  ],
+  "Bots never count as members, and bot accounts cannot hold profile badges.": [
+    "البوتات لا تُحسب أعضاءً، ولا تحمل حسابات البوتات شارات الملف الشخصي.",
+    "Bots zählen nie als Mitglieder, und Bot-Konten tragen keine Profilabzeichen."
+  ],
+  "A badge means only what this page says. It is not an endorsement and not a guarantee of quality or safety.": [
+    "لا تعني الشارة إلا ما تقوله هذه الصفحة، وليست توصية ولا ضمانًا للجودة أو الأمان.",
+    "Ein Abzeichen bedeutet nur, was auf dieser Seite steht. Es ist keine Empfehlung und keine Garantie für Qualität oder Sicherheit."
+  ],
+  "Zrzur team": [
+    "فريق زرزور",
+    "Zrzur-Team"
+  ],
+  "The one person who started Zrzur. No application, activity or command can give it.": [
+    "الشخص الذي بدأ زرزور. لا يمنحها طلب ولا نشاط ولا أمر.",
+    "Die eine Person, die Zrzur begonnen hat. Kein Antrag, keine Aktivität und kein Befehl verleiht es."
+  ],
+  "Permanent; it cannot be transferred.": [
+    "دائمة ولا تُنقل.",
+    "Dauerhaft; nicht übertragbar."
+  ],
+  "An officially appointed member of the Zrzur team, with a recorded appointment.": [
+    "عضو معيَّن رسميًا في فريق زرزور بتعيين مسجَّل.",
+    "Ein offiziell ernanntes Mitglied des Zrzur-Teams mit dokumentierter Ernennung."
+  ],
+  "A meaningful, verified technical contribution to Zrzur itself, or an approved official development role.": [
+    "مساهمة تقنية حقيقية وموثّقة في زرزور نفسه، أو دور تطوير رسمي معتمد.",
+    "Ein bedeutender, geprüfter technischer Beitrag zu Zrzur selbst oder eine genehmigte offizielle Entwicklerrolle."
+  ],
+  "Building your own bot does not qualify.": [
+    "تطوير بوت خاص بك لا يكفي.",
+    "Ein eigener Bot reicht nicht."
+  ],
+  "Kept as recognition unless obtained by fraud.": [
+    "تبقى تقديرًا ما لم تُنل بالاحتيال.",
+    "Bleibt als Anerkennung, außer bei Betrug."
+  ],
+  "Formally appointed to platform-level moderation, after accepting the moderation rules and the team's conduct requirements.": [
+    "معيَّن رسميًا للإشراف على مستوى المنصة بعد إقرار قواعد الإشراف ومتطلبات سلوك الفريق.",
+    "Offiziell für die Moderation auf Plattformebene ernannt, nach Bestätigung der Moderationsregeln und der Verhaltensanforderungen des Teams."
+  ],
+  "Programs you apply for": [
+    "برامج تتقدّم إليها",
+    "Programme mit Antrag"
+  ],
+  "At least 5,000 genuine human members and a server at least 180 days old.": [
+    "5,000 عضو بشري حقيقي على الأقل، وسيرفر عمره 180 يوماً على الأقل.",
+    "Mindestens 5.000 echte menschliche Mitglieder und ein Server, der mindestens 180 Tage alt ist."
+  ],
+  "Over the last 8 weeks, on average at least 500 weekly active members and 200 weekly contributors, and at least 20% of new members still there after their first week.": [
+    "خلال آخر 8 أسابيع: متوسط 500 عضو نشط أسبوعيًا و200 مساهم أسبوعيًا على الأقل، وبقاء 20% على الأقل من الأعضاء الجدد بعد أسبوعهم الأول.",
+    "In den letzten 8 Wochen im Schnitt mindestens 500 wöchentlich aktive Mitglieder und 200 wöchentlich Beitragende, und mindestens 20 % der neuen Mitglieder sind nach ihrer ersten Woche noch da."
+  ],
+  "A clear purpose, published rules, active moderation and protection against spam and raids; no bought members or fake engagement.": [
+    "هدف واضح وقواعد منشورة وإشراف نشط وحماية من السبام والغارات، ودون أعضاء مشتراة أو تفاعل مزيّف.",
+    "Ein klarer Zweck, veröffentlichte Regeln, aktive Moderation und Schutz vor Spam und Raids; keine gekauften Mitglieder oder gefälschte Interaktion."
+  ],
+  "The numbers only let you apply; two people on the team approve. Checked again every 180 days.": [
+    "الأرقام تتيح التقديم فقط، ويوافق شخصان من الفريق. تُراجَع الشراكة كل 180 يومًا.",
+    "Die Zahlen erlauben nur die Bewerbung; zwei Personen im Team geben frei. Erneute Prüfung alle 180 Tage."
+  ],
+  "Partnership is not verification. It ends if the server changes hands.": [
+    "الشراكة ليست توثيقًا، وتنتهي إذا انتقلت ملكية السيرفر.",
+    "Partnerschaft ist keine Verifizierung. Sie endet, wenn der Server den Besitzer wechselt."
+  ],
+  "Your server is the authentic official home of a real game, developer, company, creator, organisation, brand or established project: authenticity, not popularity.": [
+    "سيرفرك هو الموطن الرسمي الأصلي للعبة أو مطوّر أو شركة أو صانع محتوى أو منظمة أو علامة تجارية أو مشروع راسخ حقيقي: الأصالة لا الشهرة.",
+    "Dein Server ist das echte offizielle Zuhause eines realen Spiels, Entwicklers, Unternehmens, Creators, einer Organisation, Marke oder eines etablierten Projekts: Echtheit, nicht Beliebtheit."
+  ],
+  "At least 10,000 genuine human members and 180 days. A clearly official entity may qualify below these numbers with a senior approval and a second person.": [
+    "10,000 عضو بشري حقيقي على الأقل و180 يوماً. ويمكن لجهة رسمية واضحة أن توثَّق دون هذه الأرقام بموافقة عليا وموافقة شخص ثانٍ.",
+    "Mindestens 10.000 echte menschliche Mitglieder und 180 Tage. Eine eindeutig offizielle Stelle kann mit Freigabe auf höherer Ebene und einer zweiten Person auch darunter verifiziert werden."
+  ],
+  "Control of the official domain, proven with a DNS TXT record or a file on the website. Claiming to be famous is not proof.": [
+    "إثبات السيطرة على النطاق الرسمي بسجل DNS TXT أو بملف على الموقع. ادعاء الشهرة ليس دليلًا.",
+    "Kontrolle über die offizielle Domain, nachgewiesen per DNS-TXT-Eintrag oder Datei auf der Website. Bekanntheit zu behaupten ist kein Beleg."
+  ],
+  "Never automatic. The badge stays while you own the verified server and ends if the server changes hands.": [
+    "لا يتم التوثيق تلقائياً أبداً. تبقى الشارة ما دمت تملك السيرفر الموثّق، وتنتهي إذا انتقلت ملكيته.",
+    "Nie automatisch. Das Abzeichen bleibt, solange dir der verifizierte Server gehört, und endet bei einem Eigentümerwechsel."
+  ],
+  "Your bot is in at least 25 legitimate servers and has run for at least 30 days. Servers of one owner count at most twice, and your own servers never count.": [
+    "بوتك في 25 سيرفراً حقيقياً على الأقل ويعمل منذ 30 يوماً على الأقل. لا تُحسب سيرفرات المالك الواحد أكثر من مرتين، ولا تُحسب سيرفراتك أنت أبداً.",
+    "Dein Bot ist auf mindestens 25 echten Servern und läuft seit mindestens 30 Tagen. Server einer Person zählen höchstens zweimal, deine eigenen nie."
+  ],
+  "A clear and accurate description, at least one working feature, a privacy policy if it handles user data, and permissions that fit what it does.": [
+    "وصف واضح ودقيق، وميزة عاملة واحدة على الأقل، وسياسة خصوصية إن عالج بيانات المستخدمين، وصلاحيات تناسب وظيفته.",
+    "Eine klare und zutreffende Beschreibung, mindestens eine funktionierende Funktion, eine Datenschutzerklärung bei Nutzerdaten und Berechtigungen, die zur Aufgabe passen."
+  ],
+  "No malicious commands, token theft, deception or inflated installs. 25 servers only unlock the application; a review decides.": [
+    "دون أوامر خبيثة أو سرقة رموز أو خداع أو تضخيم للتثبيتات. بلوغ 25 سيرفرًا يتيح التقديم فقط، والمراجعة تقرر.",
+    "Keine schädlichen Befehle, kein Token-Diebstahl, keine Täuschung, keine künstlich erhöhten Installationen. 25 Server schalten nur den Antrag frei; eine Prüfung entscheidet."
+  ],
+  "After approval the bot shows a check in its Bot label. It ends if the bot changes hands, is suspended or is deleted.": [
+    "بعد الموافقة تظهر علامة ✓ داخل شارة «بوت». وتنتهي إذا انتقلت ملكية البوت أو عُلّق أو حُذف.",
+    "Danach zeigt der Bot ein Häkchen im Bot-Label. Es endet, wenn der Bot den Besitzer wechselt, gesperrt oder gelöscht wird."
+  ],
+  "For creators of educational, technology, gaming and livestream, tutorial, creative, comedy, art, film, commentary and other legitimate content, on any platform.": [
+    "لصنّاع المحتوى التعليمي والتقني والألعاب والبث المباشر والشروحات والإنتاج الإبداعي والكوميديا والفن والأفلام والتعليق وغيرها من المحتوى المشروع، على أي منصة.",
+    "Für Creator von Bildungs-, Technik-, Gaming- und Livestream-, Tutorial-, Kreativ-, Comedy-, Kunst-, Film-, Kommentar- und anderen legitimen Inhalten auf jeder Plattform."
+  ],
+  "At least 100,000 real followers or subscribers on ONE platform; platforms are not added together.": [
+    "100,000 متابع أو مشترك حقيقي على الأقل على منصة واحدة؛ لا تُجمع المنصات.",
+    "Mindestens 100.000 echte Follower oder Abonnenten auf EINER Plattform; Plattformen werden nicht addiert."
+  ],
+  "At least 90 days of active publishing, and at least 5 substantial original works in the last 90 days or an equivalent regular livestream schedule.": [
+    "90 يومًا على الأقل من النشر النشط، و5 أعمال أصلية جوهرية على الأقل خلال آخر 90 يومًا أو جدول بث منتظم يعادلها.",
+    "Mindestens 90 Tage aktive Veröffentlichung und mindestens 5 substanzielle eigene Werke in den letzten 90 Tagen oder ein gleichwertiger regelmäßiger Livestream-Plan."
+  ],
+  "You show the channel is yours by placing a code in its description or a pinned post. A person on the team checks it and the follower number by hand; Zrzur does not connect to the platform.": [
+    "تُثبت أن القناة لك بوضع رمز في وصفها أو في منشور مثبّت. يتحقق شخص من الفريق منه ومن عدد المتابعين يدويًا، ولا يتصل زرزور بالمنصة.",
+    "Du zeigst, dass der Kanal dir gehört, mit einem Code in seiner Beschreibung oder einem angehefteten Beitrag. Eine Person im Team prüft ihn und die Followerzahl von Hand; Zrzur verbindet sich nicht mit der Plattform."
+  ],
+  "The first approval always includes a quality review against these criteria: originality, meaningful effort, consistency, authenticity, safety and legality, honesty, rights. Two people approve.": [
+    "تشمل الموافقة الأولى دائمًا مراجعة للجودة وفق هذه المعايير: الأصالة، والجهد الحقيقي، والاستمرارية، والمصداقية، والأمان والقانونية، والأمانة، والحقوق. ويوافق شخصان.",
+    "Die erste Freigabe umfasst immer eine Qualitätsprüfung nach diesen Kriterien: Originalität, echter Aufwand, Beständigkeit, Echtheit, Sicherheit und Rechtmäßigkeit, Ehrlichkeit, Rechte. Zwei Personen geben frei."
+  ],
+  "Not eligible: mass reposts without an original contribution, repetitive low-effort view farming, stolen or impersonated identities, bought followers or coordinated fake engagement, systematically misleading or fraudulent content, serious repeated rule violations. A genre (comedy, gaming, memes) is never a reason to refuse.": [
+    "لا يستحقها: إعادة النشر الجماعي دون إضافة أصلية، والمحتوى المتكرر قليل الجهد لجمع المشاهدات، والهويات المسروقة أو المنتحلة، والمتابعون المشترَون أو التفاعل المزيّف المنسَّق، والمحتوى المضلِّل أو الاحتيالي المنهجي، والمخالفات الجسيمة المتكررة. النوع (كوميديا، ألعاب، ميمز) ليس سببًا للرفض أبدًا.",
+    "Nicht berechtigt: massenhafte Reposts ohne eigenen Beitrag, wiederholte aufwandsarme Inhalte zum Klickfarmen, gestohlene oder vorgetäuschte Identitäten, gekaufte Follower oder koordinierte Fake-Interaktion, systematisch irreführende oder betrügerische Inhalte, schwere wiederholte Regelverstöße. Ein Genre (Comedy, Gaming, Memes) ist nie ein Ablehnungsgrund."
+  ],
+  "Appeal within 30 days; apply again after 90 days, or at once if only information was missing.": [
+    "الاعتراض خلال 30 يومًا؛ وإعادة التقديم بعد 90 يومًا، أو فورًا إن كان النقص في المعلومات فقط.",
+    "Einspruch innerhalb von 30 Tagen; neue Bewerbung nach 90 Tagen oder sofort, wenn nur Angaben fehlten."
+  ],
+  "Designs creators": [
+    "مصممو التصاميم",
+    "Designs-Creator"
+  ],
+  "Accepted into the Zrzur Designs creator program, with a first original, approved, published design.": [
+    "القبول في برنامج مصممي التصاميم في زرزور، ونشر أول تصميم أصلي معتمد.",
+    "Aufnahme ins Creator-Programm von Zrzur Designs, mit einem ersten eigenen, geprüften, veröffentlichten Design."
+  ],
+  "Not for video creators, streamers or bot developers.": [
+    "ليست لصنّاع الفيديو أو البث أو مطوّري البوتات.",
+    "Nicht für Video-Creator, Streamer oder Bot-Entwickler."
+  ],
+  "Permanent unless the work was fraudulent or infringing.": [
+    "دائمة ما لم يكن العمل احتياليًا أو منتهكًا للحقوق.",
+    "Dauerhaft, außer das Werk war betrügerisch oder rechtsverletzend."
+  ],
+  "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program.": [
+    "أن تحمل شارة مصمم، ولك 25 تصميمًا أصليًا معتمدًا منشورًا على الأقل و180 يومًا في برنامج المصممين.",
+    "Creator-Abzeichen, mindestens 25 geprüfte, eigene, veröffentlichte Designs und 180 Tage im Creator-Programm."
+  ],
+  "25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets do not count.": [
+    "الرقم 25 حدّ أدنى فقط، والفريق يختار. لا تُحسب النسخ المكررة ولا تغيير الألوان البسيط ولا الأصول المنسوخة.",
+    "25 ist nur das Minimum; das Team wählt aus. Duplikate, einfache Umfärbungen und kopierte Assets zählen nicht."
+  ],
+  "Permanent unless obtained by fraud or serious misconduct.": [
+    "دائمة ما لم تُنل بالاحتيال أو بسوء سلوك جسيم.",
+    "Dauerhaft, außer bei Betrug oder schwerem Fehlverhalten."
+  ],
+  "Achievements": [
+    "الإنجازات",
+    "Erfolge"
+  ],
+  "You own a server that reached 100 genuine human members.": [
+    "تملك سيرفراً بلغ 100 عضو بشري حقيقي.",
+    "Dir gehört ein Server mit 100 echten menschlichen Mitgliedern."
+  ],
+  "Bots, deleted, banned or suspended accounts, new accounts and manipulated joins do not count.": [
+    "لا تُحسب البوتات ولا الحسابات المحذوفة أو المحظورة أو المعلّقة ولا الحسابات الجديدة ولا الانضمامات المصطنعة.",
+    "Bots, gelöschte, gesperrte oder suspendierte Konten, neue Konten und manipulierte Beitritte zählen nicht."
+  ],
+  "The same as Community Builder, at 1,000 genuine human members.": [
+    "مثل باني المجتمع، عند 1,000 عضو بشري حقيقي.",
+    "Wie Community-Aufbau, ab 1.000 echten menschlichen Mitgliedern."
+  ],
+  "It is not a partnership or a verification.": [
+    "وليست شراكة ولا توثيقًا.",
+    "Es ist weder eine Partnerschaft noch eine Verifizierung."
+  ],
+  "Given by the team to people who help others with constructive support; spam, copied or misleading answers earn nothing.": [
+    "يمنحها الفريق لمن يساعد الآخرين بدعم بنّاء؛ السبام والإجابات المنسوخة أو المضلِّلة لا تُحسب.",
+    "Vom Team vergeben an Menschen, die anderen konstruktiv helfen; Spam, kopierte oder irreführende Antworten zählen nicht."
+  ],
+  "One original, reproducible bug report with enough detail, confirmed by a reviewer.": [
+    "بلاغ أصلي واحد عن خطأ يمكن تكراره بتفاصيل كافية، يؤكده مراجع.",
+    "Ein eigener, reproduzierbarer Fehlerbericht mit ausreichenden Angaben, von einer prüfenden Person bestätigt."
+  ],
+  "Duplicates, invalid or made-up reports do not count; report security issues privately.": [
+    "لا تُحسب البلاغات المكررة أو غير الصحيحة أو المختلقة، وتُبلَّغ الثغرات الأمنية بشكل خاص.",
+    "Duplikate, ungültige oder erfundene Berichte zählen nicht; Sicherheitslücken privat melden."
+  ],
+  "Permanent.": [
+    "دائمة.",
+    "Dauerhaft."
+  ],
+  "Already a Bug Hunter, with at least 10 confirmed reports or one verified serious security vulnerability; the reviewer sets the severity.": [
+    "صائد أخطاء لديه 10 بلاغات مؤكدة على الأقل أو ثغرة أمنية جسيمة موثّقة، ويحدد المراجع خطورتها.",
+    "Bereits Fehlerjagd, mit mindestens 10 bestätigten Berichten oder einer geprüften schweren Sicherheitslücke; den Schweregrad legt die prüfende Person fest."
+  ],
+  "Two people on the team approve. Permanent.": [
+    "يوافق عليها شخصان من الفريق، ودائمة.",
+    "Zwei Personen im Team geben frei. Dauerhaft."
+  ],
+  "Accepted into the closed beta and following its rules and confidentiality.": [
+    "مقبول في النسخة التجريبية المغلقة ويلتزم بقواعدها وسرّيتها.",
+    "In die geschlossene Beta aufgenommen und an ihre Regeln und Vertraulichkeit gebunden."
+  ],
+  "Shown only while you take part.": [
+    "تظهر فقط أثناء المشاركة.",
+    "Nur während der Teilnahme sichtbar."
+  ],
+  "Completed a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle.": [
+    "أتمّ دورة اختبار بثلاثة تقارير ملاحظات مراجَعة على الأقل أو بلاغ خطأ مؤكد واحد، ويوافق الفريق بعد الدورة.",
+    "Einen Beta-Zyklus mit mindestens 3 geprüften Feedbackberichten oder 1 bestätigten Fehlerbericht abgeschlossen; das Team gibt nach dem Zyklus frei."
+  ],
+  "Permanent; it gives no access to future betas.": [
+    "دائمة، ولا تمنح دخولًا لنسخ تجريبية لاحقة.",
+    "Dauerhaft; kein Zugang zu künftigen Betas."
+  ],
+  "Time and support": [
+    "الوقت والدعم",
+    "Zeit und Unterstützung"
+  ],
+  "Your account was created before 1 March 2027, 00:00 UTC.": [
+    "أُنشئ حسابك قبل 1 مارس 2027 الساعة 00:00 بتوقيت UTC.",
+    "Dein Konto wurde vor dem 1. März 2027, 00:00 UTC erstellt."
+  ],
+  "Years on Zrzur": [
+    "سنوات في زرزور",
+    "Jahre auf Zrzur"
+  ],
+  "Your account has existed for full calendar years, counted in UTC from its creation; your profile shows the highest year, up to ten.": [
+    "مضت على حسابك سنوات كاملة تُحسب بتوقيت UTC من وقت إنشائه، ويعرض ملفك أعلى سنة بلغتها حتى عشر سنوات.",
+    "Dein Konto besteht seit vollen Kalenderjahren, in UTC ab der Erstellung gezählt; dein Profil zeigt das höchste erreichte Jahr, bis zehn."
+  ],
+  "Shown while you have an active Feather subscription; you can hide it.": [
+    "تظهر ما دام لديك اشتراك ريشة نشط، ويمكنك إخفاؤها.",
+    "Sichtbar, solange du ein aktives Feather-Abo hast; du kannst es ausblenden."
+  ],
+  "It ends when the subscription ends or after a full refund.": [
+    "تنتهي بانتهاء الاشتراك أو بعد استرداد كامل.",
+    "Endet mit dem Abo oder nach vollständiger Erstattung."
+  ],
+  "Supported Zrzur during its early-support period.": [
+    "دعم زرزور خلال فترة الدعم المبكر.",
+    "Hat Zrzur in der frühen Unterstützungsphase unterstützt."
+  ],
+  "The period, the kinds of support that count and the evidence needed will be published here once decided.": [
+    "ستُنشر هنا الفترة وأنواع الدعم المقبولة والأدلة المطلوبة متى تقررت.",
+    "Zeitraum, anerkannte Unterstützungsarten und Nachweise werden hier veröffentlicht, sobald sie feststehen."
+  ],
+  "Server and bot marks": [
+    "علامات السيرفرات والبوتات",
+    "Server- und Bot-Kennzeichen"
+  ],
+  "A server run by the Zrzur team itself. Set only by Zrzur, never by application.": [
+    "سيرفر يديره فريق زرزور نفسه. يضعه زرزور وحده ولا يُطلب.",
+    "Ein Server, den das Zrzur-Team selbst betreibt. Nur von Zrzur gesetzt, nie auf Antrag."
+  ],
+  "When a server is both official and verified, Official is shown.": [
+    "إن اجتمع الرسمي والموثّق في سيرفر تظهر علامة الرسمي.",
+    "Hat ein Server beides, wird „offiziell“ angezeigt."
+  ],
+  "Shown on a server that passed the Verified Server review (see Verified Server Owner above).": [
+    "تظهر على سيرفر اجتاز مراجعة التوثيق (انظر «مالك سيرفر موثّق» أعلاه).",
+    "Erscheint bei einem Server, der die Prüfung zur Verifizierung bestanden hat (siehe „Verifizierter Serverinhaber“ oben)."
+  ],
+  "Shown next to the person who owns the server now; it follows ownership.": [
+    "يظهر بجانب من يملك السيرفر حاليًا، ويتبع الملكية تلقائيًا.",
+    "Erscheint neben der Person, der der Server gerade gehört; folgt dem Eigentum."
+  ],
+  "A check in the Bot label of a bot that passed the Verified Bot review.": [
+    "علامة ✓ داخل شارة «بوت» لبوت اجتاز مراجعة التوثيق.",
+    "Ein Häkchen im Bot-Label eines Bots, der die Prüfung zur Verifizierung bestanden hat."
+  ]
+}

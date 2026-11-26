@@ -1,5 +1,6 @@
 import { type CommunityKind, artFit } from "../communityApi";
 
+import { type FrameCover } from "./frameCheck";
 import { STUDIO_SPECS } from "./studioModel";
 
 /** What the studio knows about a picked file before it is uploaded */
@@ -15,6 +16,8 @@ export type FileFacts = {
   clear?: number;
   /** decorations: share of the avatar circle the art covers, 0 to 1 */
   overFace?: number;
+  /** profile frames: what is drawn over the card's content */
+  frameCover?: FrameCover;
 };
 
 export type CheckState = "ok" | "warn" | "fail";
@@ -40,7 +43,13 @@ export type FileCheck = {
     | "over-face"
     | "too-solid"
     | "still"
-    | "video";
+    | "video"
+    // profile frames
+    | "frame-size"
+    | "frame-moves"
+    | "covers-banner"
+    | "covers-name"
+    | "covers-text";
 };
 
 /** Art over this share of the avatar hides the face */
@@ -56,6 +65,7 @@ const isVideo = (facts: FileFacts) => facts.type === "video/webm";
  * creator can still fix before sending.
  */
 export function fileChecks(kind: CommunityKind, facts: FileFacts): FileCheck[] {
+  if (kind === "frames") return frameChecks(facts);
   const spec = STUDIO_SPECS[kind];
   const checks: FileCheck[] = [];
 
@@ -115,6 +125,41 @@ export function fileChecks(kind: CommunityKind, facts: FileFacts): FileCheck[] {
       reason: still ? "still" : undefined,
     });
   }
+  return checks;
+}
+
+/**
+ * A profile frame is laid over the card as it is, so the server takes only a
+ * picture of the exact size whose card area is clear in every frame: each of
+ * these fails, never warns. A moving frame is fine; the motion row only says
+ * so.
+ */
+function frameChecks(facts: FileFacts): FileCheck[] {
+  const spec = STUDIO_SPECS.frames;
+  const sized = facts.width === spec.width && facts.height === spec.height;
+  const checks: FileCheck[] = [
+    {
+      id: "size",
+      state: sized ? "ok" : "fail",
+      reason: sized ? undefined : "frame-size",
+    },
+    { id: "format", state: "ok" },
+    { id: "weight", state: "ok" },
+  ];
+  // the pixels are only measured on a file of the right size
+  if (sized && facts.frameCover) {
+    const place = facts.frameCover.place;
+    checks.push({
+      id: "safe",
+      state: place ? "fail" : "ok",
+      reason: place ? (`covers-${place}` as const) : undefined,
+    });
+  }
+  checks.push({
+    id: "motion",
+    state: "ok",
+    reason: facts.animated ? "frame-moves" : undefined,
+  });
   return checks;
 }
 

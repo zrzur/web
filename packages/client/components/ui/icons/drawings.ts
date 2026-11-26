@@ -261,6 +261,8 @@ const table = {
     '<path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="M18.708 6A9 9 0 1 1 3 12c0-2.305.867-4.408 2.292-6M12 3v9"/>',
   prohibit:
     '<path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="m5.25 5 14 14"/><path stroke=currentColor d="M22.25 12c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10Z" class=z-shape />',
+  pulse:
+    '<path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="M12 21c-4.243 0-6.364 0-7.682-1.318S3 16.242 3 12s0-6.364 1.318-7.682S7.758 3 12 3s6.364 0 7.682 1.318S21 7.758 21 12s0 6.364-1.318 7.682S16.242 21 12 21" class=z-shape /><path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="M7 12h.114c.67 0 1.006 0 1.263-.178s.374-.492.61-1.12l.848-2.262a.679.679 0 0 1 1.293.074l1.743 6.972a.679.679 0 0 0 1.294.074l.848-2.262c.236-.628.353-.942.61-1.12S16.216 12 16.886 12H17"/>',
   "push-pin":
     '<path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="m3 21 5-5"/><path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="M13.259 18.871c-3.744-.85-7.28-4.386-8.13-8.13-.135-.592-.202-.888-.007-1.369.194-.48.433-.63.909-.927 1.076-.672 2.242-.886 3.451-.78 1.697.151 2.546.226 2.97.005.423-.22.71-.736 1.286-1.767l.728-1.307c.48-.86.72-1.291 1.285-1.494s.905-.08 1.585.166a5.63 5.63 0 0 1 3.396 3.396c.246.68.369 1.02.166 1.585-.203.564-.633.804-1.494 1.285l-1.337.745c-1.03.574-1.544.862-1.765 1.289-.22.428-.14 1.258.02 2.918.118 1.22-.085 2.394-.766 3.484-.298.476-.447.714-.928.909-.48.194-.777.127-1.37-.008" class=z-shape />',
   question:

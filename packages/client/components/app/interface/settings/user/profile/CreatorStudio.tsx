@@ -22,6 +22,7 @@ import {
   type CommunityKind,
   type CommunityPermissions,
   communityApi,
+  communityFramesOpen,
 } from "./communityApi";
 import { StudioDesign } from "./studio/StudioDesign";
 import { StudioEditor } from "./studio/StudioEditor";
@@ -36,7 +37,12 @@ export type StudioRoute =
   | { view: "design"; id: string }
   | { view: "edit"; id: string; step?: StudioStep };
 
-const KINDS: readonly string[] = ["decorations", "nameplates", "effects"];
+const KINDS: readonly string[] = [
+  "decorations",
+  "nameplates",
+  "effects",
+  "frames",
+];
 
 /** `/designs/studio/...` after "studio", as a place in the studio */
 export function studioRoute(path: readonly string[]): StudioRoute {
@@ -84,6 +90,8 @@ export function CreatorStudio(props: {
   path?: string[];
   /** as a page: go to a place in the studio (what follows "/studio") */
   onNavigate?: (path: string) => void;
+  /** open the guide to designing a profile frame */
+  onFrameGuide?: () => void;
 }) {
   const client = useClient();
   const access = useCommunityPermissions();
@@ -193,6 +201,8 @@ export function CreatorStudio(props: {
             {...shared()}
             kind={(route() as { kind?: CommunityKind }).kind}
             effects={effects()}
+            frames={communityFramesOpen(client())}
+            onFrameGuide={props.onFrameGuide}
             onBack={() => go({ view: "home" })}
             onSaved={(item) => changed(item, item._id)}
             onDone={(item) => {
@@ -218,6 +228,8 @@ export function CreatorStudio(props: {
               item={untrack(() => find(id))}
               step={(route() as { step?: StudioStep }).step}
               effects={effects()}
+              frames={communityFramesOpen(client())}
+              onFrameGuide={props.onFrameGuide}
               onBack={() => go({ view: "design", id })}
               onSaved={(next) => changed(next, next._id)}
               onDone={(next) => {
@@ -283,6 +295,8 @@ export function CreatorStudio(props: {
             perms={props.perms}
             readOnly={readOnly()}
             effects={effects()}
+            frames={communityFramesOpen(client())}
+            onFrameGuide={props.onFrameGuide}
             onNew={() => go({ view: "new" })}
             onOpen={(item) => go({ view: "design", id: item._id })}
             onEdit={(item) => go({ view: "edit", id: item._id })}

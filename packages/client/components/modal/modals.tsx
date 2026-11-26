@@ -234,6 +234,9 @@ const MoveSuperchargeModal = windowPart(() =>
 const PinMessageModal = windowPart(() =>
   import("./modals/PinMessage").then((m) => ({ default: m.PinMessageModal })),
 );
+const StartCallModal = windowPart(() =>
+  import("./modals/StartCall").then((m) => ({ default: m.StartCallModal })),
+);
 const RemindMessageModal = windowPart(() =>
   import("./modals/RemindMessage").then((m) => ({
     default: m.RemindMessageModal,
@@ -553,6 +556,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <RemoveMemberModal {...modalProps} />;
     case "pin_message":
       return <PinMessageModal {...modalProps} />;
+    case "start_call":
+      return <StartCallModal {...modalProps} />;
     case "create_poll":
       return <CreatePollModal {...modalProps} />;
     case "remind_message":

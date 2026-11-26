@@ -1,4 +1,5 @@
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
+import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
 import {
   For,
@@ -446,7 +447,7 @@ function Person(props: {
         />
       </AvatarDecoration>
       <Names>
-        <strong>
+        <strong class={nameRoom} data-name-room="">
           <b style={nameStyle(props.user.style)}>{props.user.displayName}</b>
           <span>{props.user.username}</span>
         </strong>

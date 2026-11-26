@@ -10,7 +10,17 @@ import { FRAME_FACTS, pixelSize } from "./frameRoom";
 import { CRYSTAL_ROOM } from "./pixel/crystalCave";
 
 /** what the backend accepts (USER_STYLE_PROFILE_FRAMES in users.rs) */
-const SERVER_IDS = ["crystal"];
+const SERVER_IDS = [
+  "crystal",
+  "desert-lanterns",
+  "damascus-jasmine",
+  "autumn-maple",
+  "coral-reef",
+  "mushroom-forest",
+  "zrzur-neon",
+  "zrzur-arcade",
+  "zrzur-flock",
+];
 
 /** every rect of a drawing, in card coordinates */
 const rects = (svg: string) =>
@@ -116,7 +126,9 @@ describe("built-in profile frames", () => {
 describe("community frames", () => {
   it("lay the template over the card at its width", () => {
     const style = frameBorderImage("https://cdn.example/f.png", 340);
-    expect(style["border-image-slice"]).toBe("220 80 100 80");
+    // shares of the picture, so the smaller still a viewer without motion
+    // gets cuts the same slices as the 800 x 1020 file
+    expect(style["border-image-slice"]).toBe("21.5686% 10% 9.8039% 10%");
     expect(style["border-image-outset"]).toBe("70px 30px 40px 30px");
     expect(style["border-image-width"]).toBe("110px 40px 50px 40px");
     const big = frameBorderImage("https://cdn.example/f.png", 460);

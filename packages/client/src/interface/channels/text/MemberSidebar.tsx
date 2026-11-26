@@ -35,6 +35,7 @@ import {
 import { ActivityLine } from "@revolt/ui/components/features/activity/ActivityLine";
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
+import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
 
 interface Props {
   /**
@@ -364,14 +365,26 @@ const memberRow = css({
     position: "relative",
     zIndex: 1,
   },
-  "&[data-plated] > :not([data-nameplate]) *": {
-    // the name starts where the plate is still faint, so it takes the
-    // theme's own ink with a halo of the opposite tone: white on dark themes,
-    // dark on light ones, readable on the page and on the art alike
-    color: "var(--z-plate-ink, #fff) !important",
-    WebkitTextFillColor: "var(--z-plate-ink, #fff) !important",
-    textShadow:
-      "var(--z-plate-ink-halo, 0 0 2px rgb(0 0 0 / 60%), 0 1px 4px rgb(0 0 0 / 70%))",
+  // the name starts where the plate is still faint, so it takes the theme's
+  // own ink with a halo of the opposite tone: white on dark themes, dark on
+  // light ones, readable on the page and on the art alike. A name in its
+  // own chosen colour or in a server role colour keeps it. Panda reads only
+  // a written-out key, so these are `PLATE_INK`, `PLATE_NAME_COLOUR` and
+  // `PLATE_OWN_COLOUR` (plateInk.ts) spelt out; plateInk.dom.test checks it.
+  "&[data-plated] > :not([data-nameplate]) *:not([data-own-colour], [data-own-colour] *, [data-role-colour], [data-role-colour] *)":
+    {
+      color: "var(--z-plate-ink, #fff) !important",
+      WebkitTextFillColor: "var(--z-plate-ink, #fff) !important",
+      textShadow:
+        "var(--z-plate-ink-halo, 0 0 2px rgb(0 0 0 / 60%), 0 1px 4px rgb(0 0 0 / 70%))",
+    },
+  // ...and takes back the fill it would inherit from the boxes around it
+  "&[data-plated] :is([data-own-colour], [data-role-colour])": {
+    WebkitTextFillColor: "currentColor",
+  },
+  // an own colour draws its own effect; a role colour keeps the plate's halo
+  "&[data-plated] [data-own-colour]": {
+    textShadow: "none",
   },
 });
 
@@ -517,9 +530,12 @@ function Member(props: {
         }
       >
         <NameStatusStack>
-          <OverflowingText>
-            <Row align gap="xs">
+          {/* each box that cuts the name short leaves room for its glow */}
+          <OverflowingText class={nameRoom} data-name-room="">
+            <Row align gap="xs" class={nameRoom} data-name-room="">
               <span
+                class={nameRoom}
+                data-name-room=""
                 style={{
                   display: "flex",
                   "align-items": "center",

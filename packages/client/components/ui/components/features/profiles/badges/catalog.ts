@@ -25,10 +25,10 @@ export type BadgeId =
   | "big_community"
   | "verified_server_owner"
   | "verified_bot_developer"
-  | "saha_champion"
   | "community_helper"
   | "super_creator"
   | "creator"
+  | "content_creator"
   | "elite_bug_hunter"
   | "bug_hunter"
   | "beta_tester"
@@ -42,6 +42,21 @@ export type BadgeId =
   | "reserved_1"
   | "reserved_2";
 
+/**
+ * The anniversaries past One and Three Years. They have no bit of their own:
+ * the server sets the One Year bit (and Three Years from three), and the app
+ * draws the highest full year from the account's creation time.
+ */
+export type AnniversaryBadgeId =
+  | "years_2"
+  | "years_4"
+  | "years_5"
+  | "years_6"
+  | "years_7"
+  | "years_8"
+  | "years_9"
+  | "years_10";
+
 /** Badges that come from the place you are in, not from `User.badges` */
 export type ContextBadgeId =
   | "server_owner"
@@ -49,7 +64,7 @@ export type ContextBadgeId =
   | "server_verified"
   | "bot_verified";
 
-export type AnyBadgeId = BadgeId | ContextBadgeId;
+export type AnyBadgeId = BadgeId | AnniversaryBadgeId | ContextBadgeId;
 
 /** The one size scale for badge art, in px, on the 4 px grid */
 export const BADGE_SIZES = {
@@ -113,8 +128,9 @@ export const BADGE_BITS = {
   big_community: 8388608,
   verified_server_owner: 16777216,
   verified_bot_developer: 33554432,
-  saha_champion: 67108864,
+  // 67108864 was Saha Champion: retired for good (owner, 2026-11-24); the bit is never shown or reused
   community_helper: 134217728,
+  content_creator: 268435456,
 } as const satisfies Record<BadgeId, number>;
 
 const meta = (
@@ -149,10 +165,15 @@ export const BADGES: BadgeMeta[] = [
   meta("super_creator", 2, 40, "gem", ["#CF7BEB", "#7A52E0"], {
     ring: "#F1DDFF",
   }),
+  // concept B "The take" (owner, 2026-11-23): mint enamel, gold rim
+  meta("content_creator", 1, 44, "hex", ["#6FE0C4", "#16786A"]),
   meta("creator", 1, 45, "hex", ["#A783F0", "#6E4FC9"]),
-  meta("verified_server_owner", 1, 46, "hex", ["#5E86C4", "#3A5F9A"]),
+  // cancelled (owner, 2026-11-24): no longer given out; people who have it
+  // keep it, drawn with the verified seal. The Verified Server mark stays.
+  meta("verified_server_owner", 1, 46, "hex", ["#5E86C4", "#3A5F9A"], {
+    retired: true,
+  }),
   meta("verified_bot_developer", 1, 47, "hex", ["#6FB0C9", "#3F7890"]),
-  meta("saha_champion", 1, 48, "hex", ["#E3B93F", "#A97F1C"]),
   meta("elite_bug_hunter", 2, 50, "banner", ["#E8B04A", "#B0702A"], {
     ring: "#FFE3A6",
   }),
@@ -184,6 +205,79 @@ export const BADGES: BadgeMeta[] = [
   }),
 ];
 
+/** Highest anniversary the app draws */
+export const MAX_ANNIVERSARY_YEARS = 10;
+
+const anniversary = (years: number): BadgeMeta => ({
+  id: `years_${years}` as AnniversaryBadgeId,
+  bit: 0,
+  tier: years >= 3 ? 1 : 0,
+  priority: 82,
+  shape: years >= 3 ? "hex" : "square",
+  colours: years >= 3 ? ["#4F9A7A", "#2C6A4F"] : ["#6FA8A0", "#3D746C"],
+});
+
+/** Two Years and Four to Ten Years on Zrzur */
+export const ANNIVERSARY_BADGES: BadgeMeta[] = [2, 4, 5, 6, 7, 8, 9, 10].map(
+  anniversary,
+);
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+const isLeap = (year: number) =>
+  (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+
+/**
+ * Full calendar years from `createdMs` to `nowMs`, both UTC, as the server
+ * counts them. An account made on 29 February has its day on 28 February in
+ * years without that day.
+ */
+export function fullYears(createdMs: number, nowMs: number): number {
+  if (nowMs <= createdMs) return 0;
+  const made = new Date(createdMs);
+  const now = new Date(nowMs);
+  const month = made.getUTCMonth();
+  let day = made.getUTCDate();
+  if (month === 1 && day === 29 && !isLeap(now.getUTCFullYear())) day = 28;
+  const madeTime = ((createdMs % DAY_MS) + DAY_MS) % DAY_MS;
+  const nowTime = ((nowMs % DAY_MS) + DAY_MS) % DAY_MS;
+  let years = now.getUTCFullYear() - made.getUTCFullYear();
+  const before =
+    now.getUTCMonth() < month ||
+    (now.getUTCMonth() === month &&
+      (now.getUTCDate() < day ||
+        (now.getUTCDate() === day && nowTime < madeTime)));
+  if (before) years -= 1;
+  return Math.max(0, years);
+}
+
+/**
+ * The anniversary to show: 0 without the One Year bit (under a year, a bot
+ * or system account, or "Member since" hidden). The bits bound the count,
+ * so a wrong clock never shows more than the server allows.
+ */
+export function anniversaryYears(
+  bits: number,
+  createdMs?: number,
+  nowMs = Date.now(),
+): number {
+  if (!(bits & BADGE_BITS.one_year)) return 0;
+  const three = (bits & BADGE_BITS.three_years) !== 0;
+  const counted = createdMs === undefined ? 0 : fullYears(createdMs, nowMs);
+  const low = three ? 3 : 1;
+  const high = three ? MAX_ANNIVERSARY_YEARS : 2;
+  return Math.min(high, Math.max(low, counted));
+}
+
+/** The badge for a number of full years (1 to 10) */
+export function anniversaryBadge(years: number): BadgeMeta | undefined {
+  if (years < 1) return undefined;
+  const capped = Math.min(years, MAX_ANNIVERSARY_YEARS);
+  if (capped === 1) return badgeMeta("one_year");
+  if (capped === 3) return badgeMeta("three_years");
+  return badgeMeta(`years_${capped}`);
+}
+
 const context = (
   id: ContextBadgeId,
   priority: number,
@@ -205,13 +299,30 @@ export const CONTEXT_BADGES: BadgeMeta[] = [
 export function badgeMeta(id: string): BadgeMeta | undefined {
   return (
     BADGES.find((badge) => badge.id === id) ??
+    ANNIVERSARY_BADGES.find((badge) => badge.id === id) ??
     CONTEXT_BADGES.find((badge) => badge.id === id)
   );
 }
 
-/** Badges set in a bitfield, in display order */
-export function badgesFromBits(bits: number): BadgeMeta[] {
-  return BADGES.filter((badge) => (bits & badge.bit) !== 0).sort(
-    (a, b) => a.priority - b.priority,
+/** Whether a badge is one of the time-on-Zrzur anniversaries */
+export function isAnniversary(id: string): boolean {
+  return id === "one_year" || id === "three_years" || id.startsWith("years_");
+}
+
+/**
+ * Badges set in a bitfield, in display order. The anniversaries show as one
+ * badge, the highest year reached (`createdMs` is the account's creation
+ * time; without it the bits alone decide).
+ */
+export function badgesFromBits(
+  bits: number,
+  createdMs?: number,
+  nowMs = Date.now(),
+): BadgeMeta[] {
+  const shown = BADGES.filter(
+    (badge) => (bits & badge.bit) !== 0 && !isAnniversary(badge.id),
   );
+  const years = anniversaryBadge(anniversaryYears(bits, createdMs, nowMs));
+  if (years) shown.push(years);
+  return shown.sort((a, b) => a.priority - b.priority);
 }

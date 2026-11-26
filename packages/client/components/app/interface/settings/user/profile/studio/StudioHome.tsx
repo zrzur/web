@@ -16,6 +16,8 @@ import {
 } from "../communityApi";
 import { type TemplateWords, downloadTemplate } from "../studioTemplates";
 
+import { FRAME_MAX_FRAMES } from "./frameCheck";
+import { downloadFrameKit } from "./frameKit";
 import {
   Actions,
   Callout,
@@ -42,7 +44,12 @@ import {
 /** Largest number of designs a creator keeps (`max_items_per_creator`) */
 export const STUDIO_MAX_ITEMS = 50;
 
-const KINDS: CommunityKind[] = ["decorations", "nameplates", "effects"];
+const KINDS: CommunityKind[] = [
+  "decorations",
+  "nameplates",
+  "effects",
+  "frames",
+];
 
 /**
  * The studio's first page: what the creator has, by state, with whatever
@@ -58,6 +65,10 @@ export function StudioHome(props: {
   readOnly: boolean;
   /** this server takes effects */
   effects: boolean;
+  /** this server takes profile frames */
+  frames?: boolean;
+  /** open the guide to designing a profile frame */
+  onFrameGuide?: () => void;
   avatar?: string;
   name: string;
   dialog?: boolean;
@@ -92,7 +103,11 @@ export function StudioHome(props: {
     );
   const kept = () => counts().all - counts().withdrawn;
   const kinds = () =>
-    KINDS.filter((entry) => entry !== "effects" || props.effects);
+    KINDS.filter(
+      (entry) =>
+        (entry !== "effects" || props.effects) &&
+        (entry !== "frames" || props.frames),
+    );
 
   const filterLabel = (id: StudioFilter) =>
     ({
@@ -464,18 +479,47 @@ export function StudioHome(props: {
               <SpecCard>
                 <header>
                   <strong>{words.kind(entry)}</strong>
-                  <Button
-                    variant="tonal"
-                    size="sm"
-                    onPress={() =>
-                      void downloadTemplate(entry, guide(), direction())
+                  <Show
+                    when={entry === "frames"}
+                    fallback={
+                      <Button
+                        variant="tonal"
+                        size="sm"
+                        onPress={() =>
+                          void downloadTemplate(entry, guide(), direction())
+                        }
+                      >
+                        <Icon name="download-simple" size={16} />
+                        <Trans>Template</Trans>
+                      </Button>
                     }
                   >
-                    <Icon name="download-simple" size={16} />
-                    <Trans>Template</Trans>
-                  </Button>
+                    {/* a frame has a whole kit: template, example, palette */}
+                    <Button
+                      variant="tonal"
+                      size="sm"
+                      data-testid="studio-specs-frame-kit"
+                      onPress={() => downloadFrameKit("kit")}
+                    >
+                      <Icon name="download-simple" size={16} />
+                      <Trans>Frame kit</Trans>
+                    </Button>
+                  </Show>
                 </header>
                 <SpecFacts kind={entry} />
+                <Show when={entry === "frames" && props.onFrameGuide}>
+                  <Button
+                    variant="text"
+                    size="sm"
+                    onPress={() => {
+                      setSpecs(false);
+                      props.onFrameGuide?.();
+                    }}
+                  >
+                    <Icon name="books" size={16} />
+                    <Trans>How to design a frame</Trans>
+                  </Button>
+                </Show>
               </SpecCard>
             )}
           </For>
@@ -508,12 +552,19 @@ export function SpecFacts(props: { kind: CommunityKind }) {
           <Trans>Format</Trans>
         </dt>
         <dd>
-          <Show
-            when={spec().mustMove}
-            fallback={<Trans>PNG, animated PNG, GIF, WebP or WebM</Trans>}
-          >
-            <Trans>Animated PNG, GIF, WebP or WebM</Trans>
-          </Show>
+          <Switch>
+            <Match when={props.kind === "frames"}>
+              <Trans>
+                PNG, animated PNG, WebP or GIF, with a transparent background
+              </Trans>
+            </Match>
+            <Match when={spec().mustMove}>
+              <Trans>Animated PNG, GIF, WebP or WebM</Trans>
+            </Match>
+            <Match when={true}>
+              <Trans>PNG, animated PNG, GIF, WebP or WebM</Trans>
+            </Match>
+          </Switch>
         </dd>
       </div>
       <div>
@@ -521,7 +572,12 @@ export function SpecFacts(props: { kind: CommunityKind }) {
           <Trans>File size</Trans>
         </dt>
         <dd>
-          <Trans>Up to {megabytes()} MB (WebM up to 8 MB)</Trans>
+          <Show
+            when={props.kind === "frames"}
+            fallback={<Trans>Up to {megabytes()} MB (WebM up to 8 MB)</Trans>}
+          >
+            <Trans>Up to {megabytes()} MB</Trans>
+          </Show>
         </dd>
       </div>
       <div>
@@ -529,16 +585,22 @@ export function SpecFacts(props: { kind: CommunityKind }) {
           <Trans>Animation</Trans>
         </dt>
         <dd>
-          <Show
-            when={spec().mustMove}
-            fallback={
+          <Switch>
+            <Match when={props.kind === "frames"}>
+              <Trans>
+                Allowed, any length, up to {FRAME_MAX_FRAMES} frames. People who
+                turn motion off see it as a still picture.
+              </Trans>
+            </Match>
+            <Match when={spec().mustMove}>
+              <Trans>
+                Plays once, up to {spec().maxSeconds} seconds, no flashing
+              </Trans>
+            </Match>
+            <Match when={true}>
               <Trans>Optional, up to {spec().maxSeconds} seconds</Trans>
-            }
-          >
-            <Trans>
-              Plays once, up to {spec().maxSeconds} seconds, no flashing
-            </Trans>
-          </Show>
+            </Match>
+          </Switch>
         </dd>
       </div>
       <div>
@@ -552,6 +614,9 @@ export function SpecFacts(props: { kind: CommunityKind }) {
             </Match>
             <Match when={props.kind === "nameplates"}>
               <Trans>16 px are cropped at the top and bottom</Trans>
+            </Match>
+            <Match when={props.kind === "frames"}>
+              <Trans>Keep the card clear 20 px in from its edge</Trans>
             </Match>
             <Match when={true}>
               <Trans>Keep at least half of each frame transparent</Trans>

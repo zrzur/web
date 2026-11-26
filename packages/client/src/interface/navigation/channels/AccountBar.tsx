@@ -1,4 +1,5 @@
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
+import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
 import {
   type JSX,
@@ -33,6 +34,7 @@ import { useState } from "@revolt/state";
 import { Avatar, OverflowingText, UserStatus } from "@revolt/ui";
 import { SignalBars } from "@revolt/ui/components/features/voice/SignalBars";
 import { watchVoiceStrip } from "@revolt/ui/components/features/voice/callCard/voiceStrip";
+import { reopenPhoneCall } from "@revolt/ui/components/features/voice/dmCall/dmCallView";
 import {
   controlsRoom,
   roomControlsOpen,
@@ -149,7 +151,8 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
           <Show when={!props.compact}>
             <Meta>
               <Name>
-                <OverflowingText>
+                {/* room for a styled name's glow inside the cut */}
+                <OverflowingText class={nameRoom} data-name-room="">
                   <span style={nameStyle(user()?.style)}>
                     {user()?.displayName ?? user()?.username ?? ""}
                   </span>
@@ -728,7 +731,9 @@ function PhoneCallStrip() {
         aria-label={t`Return to voice channel`}
         onClick={() => {
           // the address may already be the call's (he is looking at the
-          // lists beside it): the page side has to come on screen too
+          // lists beside it): the page side has to come on screen too.
+          // A call in a conversation opens full screen again.
+          reopenPhoneCall();
           navigate(voice.channel()?.path ?? "");
           state.appDrawer()?.setShown(true);
         }}

@@ -12,13 +12,18 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { useClient } from "@revolt/client";
 import { STAFF_TOOLS_ENABLED } from "@revolt/common/lib/staffTools";
 import { useError } from "@revolt/i18n";
+import { useModals } from "@revolt/modal";
+import { useNavigate } from "@revolt/routing";
 import { Button, SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 import {
   BADGES,
   BADGE_BITS,
   BadgeMeta,
+  anniversaryBadge,
+  anniversaryYears,
   badgeMeta,
+  isAnniversary,
 } from "@revolt/ui/components/features/profiles/badges/catalog";
 import { useBadgeText } from "@revolt/ui/components/features/profiles/badges/useBadgeText";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -29,8 +34,11 @@ import { BadgeAdmin } from "./BadgeAdmin";
 import { BetaAdmin } from "./BetaAdmin";
 import { BugQueue } from "./BugQueue";
 import { BugReportDialog } from "./BugReportDialog";
+import { ApplicationsSection } from "./MyApplications";
+import { ProgramDialog } from "./ProgramDialog";
 import { OwnBadge, badgesApi, betaApi, can } from "./badgesApi";
 import {
+  BadgeName,
   Empty,
   ErrorText,
   Grid,
@@ -49,6 +57,17 @@ import {
   TileText,
   TitleLine,
 } from "./parts";
+import {
+  BadgeApplication,
+  ProgramId,
+  applicationsOpen,
+  programOf,
+  programsApi,
+} from "./programsApi";
+
+/** Days in the creator program Super Creator needs, when the server does
+ * not say (servers from before the rule; the SDK pin moves later) */
+const SUPER_CREATOR_DAYS = 180;
 
 /** A badge shown on the page: from a grant, or from live state (Plus) */
 type Shown = { meta: BadgeMeta; grant?: OwnBadge };
@@ -68,9 +87,24 @@ export function MyBadges() {
   const [data, { refetch }] = createResource(() => badgesApi.mine(client()));
   const [error, setError] = createSignal<string>();
   const [busy, setBusy] = createSignal(false);
+  const navigate = useNavigate();
+  const { pop } = useModals();
   const [dialog, setDialog] = createSignal<
     "admin" | "beta" | "bugs" | "report"
   >();
+  // badge programs people apply for (Partner, Verified Server, Verified
+  // Bot Developer, Content Creator): your applications, and the one being
+  // written. Only while the server lets people apply from the app
+  // (`badge_applications`); the team still reviews older ones either way.
+  const open = () => applicationsOpen(client());
+  const [applications, { refetch: refetchApplications }] = createResource(
+    open,
+    () => programsApi.mine(client()).catch(() => [] as BadgeApplication[]),
+  );
+  const [applying, setApplying] = createSignal<{
+    program: ProgramId;
+    application?: BadgeApplication;
+  }>();
 
   const now = Date.now();
   const heldGrant = (grant: OwnBadge) =>
@@ -81,14 +115,28 @@ export function MyBadges() {
     if (!mine) return [];
     const shown: Shown[] = mine.badges
       .filter(heldGrant)
+      // the anniversaries are computed now: an old stored grant is history
+      .filter((grant) => !isAnniversary(grant.badge))
       .map((grant) => ({ meta: badgeMeta(grant.badge)!, grant }))
       .filter((entry) => entry.meta);
     if (mine.plus) shown.push({ meta: badgeMeta("plus")! });
-    const bits = client()?.user?.badges ?? 0;
+    const self = client()?.user;
+    const bits = self?.badges ?? 0;
     if (bits & BADGE_BITS.early_adopter)
       shown.push({ meta: badgeMeta("early_adopter")! });
+    const years = anniversaryBadge(
+      anniversaryYears(bits, self?.createdAt.getTime()),
+    );
+    if (years) shown.push({ meta: years });
     return shown.sort((a, b) => a.meta.priority - b.meta.priority);
   };
+
+  /** Full years already shown: lower anniversaries are not a goal any more */
+  const yearsHeld = () =>
+    anniversaryYears(
+      client()?.user?.badges ?? 0,
+      client()?.user?.createdAt.getTime(),
+    );
 
   const history = () =>
     (data()?.badges ?? []).filter((grant) => !heldGrant(grant));
@@ -98,7 +146,9 @@ export function MyBadges() {
       (badge) =>
         !badge.retired &&
         badge.id !== "founder" &&
-        !held().some((entry) => entry.meta.id === badge.id),
+        !held().some((entry) => entry.meta.id === badge.id) &&
+        !(badge.id === "one_year" && yearsHeld() >= 1) &&
+        !(badge.id === "three_years" && yearsHeld() >= 3),
     );
 
   async function run(action: () => Promise<unknown>) {
@@ -120,6 +170,12 @@ export function MyBadges() {
       Suspended: t`Suspended`,
       Revoked: t`Revoked`,
     })[data()?.creator.standing ?? "Revoked"];
+
+  /** Days in the creator program Super Creator needs (180; older servers
+   * don't send it) */
+  const superCreatorDays = () =>
+    (data()?.creator as { super_creator_days?: number } | undefined)
+      ?.super_creator_days || SUPER_CREATOR_DAYS;
 
   const betaStatus = () =>
     ({
@@ -204,10 +260,7 @@ export function MyBadges() {
               <Shelf role="list">
                 <For each={held()}>
                   {(entry) => (
-                    <ShelfItem
-                      role="listitem"
-                      title={text(entry.meta.id).name}
-                    >
+                    <ShelfItem role="listitem" title={text(entry.meta.id).name}>
                       <BadgeMark
                         id={entry.meta.id}
                         size="xl"
@@ -234,7 +287,12 @@ export function MyBadges() {
                     icon={<BadgeMark id={entry.meta.id} size="md" />}
                     title={
                       <TitleLine>
-                        {text(entry.meta.id).name}
+                        <BadgeName
+                          title={text(entry.meta.id).name}
+                          data-badge-name
+                        >
+                          {text(entry.meta.id).name}
+                        </BadgeName>
                         <Show when={tierLabel(entry.meta.tier)}>
                           <Pill data-tier={entry.meta.tier}>
                             {tierLabel(entry.meta.tier)}
@@ -337,7 +395,9 @@ export function MyBadges() {
                   >
                     <Trans>
                       Super Creator is chosen by the team after at least{" "}
-                      {data()!.creator.super_creator_designs} published designs.
+                      {data()!.creator.super_creator_designs} approved,
+                      published designs and {superCreatorDays()} days in the
+                      creator program.
                     </Trans>
                   </Show>
                 </Show>
@@ -383,6 +443,13 @@ export function MyBadges() {
                         {data()!.beta!.features.join(", ")}
                       </Trans>
                     </Show>
+                  </Match>
+                  <Match when={data()!.beta?.status === "Completed"}>
+                    <Trans>
+                      You completed the beta. The team approves Beta Veteran
+                      when you sent at least 3 reviewed feedback reports or 1
+                      confirmed bug report during the cycle.
+                    </Trans>
                   </Match>
                   <Match when={data()!.beta}>
                     <Trans>The team will let you know when you are in.</Trans>
@@ -469,27 +536,67 @@ export function MyBadges() {
             <h3 id="my-badges-earn">
               <Trans>Badges you can earn</Trans>
             </h3>
+            <RowActions>
+              <Button
+                size="sm"
+                variant="text"
+                data-badge-guide-link
+                onPress={() => {
+                  // the guide is its own page: settings close first
+                  pop();
+                  navigate("/badges");
+                }}
+              >
+                <Trans>How every badge is earned</Trans>
+              </Button>
+            </RowActions>
             <Grid>
               <For each={earnable()}>
                 {(badge) => (
-                  <Tile>
+                  <Tile data-earn-badge={badge.id}>
                     <BadgeMark id={badge.id} size="lg" state="locked" />
                     <TileText>
                       <TitleLine>
-                        <strong>{text(badge.id).name}</strong>
+                        <strong title={text(badge.id).name} data-badge-name>
+                          {text(badge.id).name}
+                        </strong>
                         <Show when={tierLabel(badge.tier)}>
                           <Pill data-tier={badge.tier}>
                             {tierLabel(badge.tier)}
                           </Pill>
                         </Show>
                       </TitleLine>
-                      <p>{text(badge.id).earn}</p>
+                      <p data-earn-line>{text(badge.id).earn}</p>
+                      <Show when={open() && programOf(badge.id)}>
+                        <RowActions>
+                          <Button
+                            size="sm"
+                            variant="tonal"
+                            data-apply={programOf(badge.id)}
+                            onPress={() =>
+                              setApplying({ program: programOf(badge.id)! })
+                            }
+                          >
+                            <Trans>Check and apply</Trans>
+                          </Button>
+                        </RowActions>
+                      </Show>
                     </TileText>
                   </Tile>
                 )}
               </For>
             </Grid>
           </Section>
+
+          <Show when={open() && applications()?.length}>
+            <ApplicationsSection
+              applications={applications()!}
+              onContinue={(application) =>
+                setApplying({ program: application.program, application })
+              }
+              onChanged={() => void refetchApplications()}
+            />
+          </Show>
 
           <Show when={history().length}>
             <SettingsSection title={<Trans>Past badges</Trans>}>
@@ -580,6 +687,17 @@ export function MyBadges() {
             void refetch();
           }}
           beta={data()?.beta?.status === "Active" ? data()!.beta!.features : []}
+        />
+      </Show>
+      <Show when={applying()}>
+        <ProgramDialog
+          program={applying()!.program}
+          application={applying()!.application}
+          onClose={() => {
+            setApplying(undefined);
+            void refetchApplications();
+            void refetch();
+          }}
         />
       </Show>
       <Show when={data() && dialog() === "admin"}>

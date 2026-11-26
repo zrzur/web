@@ -9,15 +9,21 @@ import { userHandle } from "../../../../../common/lib/userTag";
 // relative, so unit tests run without the app aliases
 import { discoverRequest } from "../../../discover/api";
 
+import {
+  FRAME_FILE,
+  FRAME_TYPES,
+} from "../../../../../ui/components/features/profiles/frames/communityFrame";
+
 import { fetchCommunityPermissions } from "./communityAccess";
 
-export type CommunityKind = "decorations" | "nameplates" | "effects";
-
 /**
- * Every list the gallery reads. Profile frames are listed and worn, but not
- * made in the Creator Studio yet, so its kinds above leave them out.
+ * What a creator can make. Profile frames are made in the Creator Studio only
+ * while the server has them open (`communityFramesOpen`).
  */
-export type CommunityListKind = CommunityKind | "frames";
+export type CommunityKind = "decorations" | "nameplates" | "effects" | "frames";
+
+/** Every list the gallery reads */
+export type CommunityListKind = CommunityKind;
 
 /**
  * Whether creators' profile frames are open on this server (`GET /`
@@ -94,7 +100,17 @@ export type CommunityPermissions =
   WithoutNull__<APITypes__.CommunityPermissions> & {
     /** shown by name to visitors without an account (default off) */
     show_public_name?: boolean;
+    /**
+     * may delete anyone's design for good: a held Founder, Zrzur Staff or
+     * Platform Moderator rank (owner's decision, 2026-11-25) or
+     * `cosmetics.manage_all`; absent on older servers
+     */
+    can_delete_any?: boolean;
   };
+
+/** Whether the server says this person may delete anyone's design */
+export const mayDeleteAny = (perms: CommunityPermissions | undefined) =>
+  perms?.can_delete_any === true;
 
 export type CreatorRecord = WithoutNull__<APITypes__.CreatorRecord>;
 
@@ -149,7 +165,11 @@ export type EffectProblem =
   | "too_long"
   | "too_many_pixels"
   | "webm"
-  | "webm_slow";
+  | "webm_slow"
+  // profile frames: art over the card's content, another size, moving
+  | "covers_content"
+  | "frame_size"
+  | "frame_still";
 
 const EFFECT_PROBLEMS: readonly string[] = [
   "flashing",
@@ -165,6 +185,9 @@ const EFFECT_PROBLEMS: readonly string[] = [
   "too_many_pixels",
   "webm",
   "webm_slow",
+  "covers_content",
+  "frame_size",
+  "frame_still",
 ];
 
 /** The refusal in an upload's error, if it is one an effect can get */
@@ -262,6 +285,12 @@ export function checkCommunityFile(
   kind: CommunityKind = "decorations",
 ) {
   if (!COMMUNITY_TYPES.includes(file.type)) return "type" as const;
+  // a frame is a picture, still or moving: no WebM
+  if (
+    kind === "frames" &&
+    !(FRAME_TYPES as readonly string[]).includes(file.type)
+  )
+    return "type" as const;
   if (file.type === "video/webm")
     return file.size > COMMUNITY_WEBM_MAX_BYTES
       ? ("webm-size" as const)
@@ -277,7 +306,9 @@ export const kindOf = (item: { kind: string }): CommunityKind =>
     ? "nameplates"
     : item.kind === "Effect"
       ? "effects"
-      : "decorations";
+      : item.kind === "Frame"
+        ? "frames"
+        : "decorations";
 
 /**
  * Whether a design's image has the right shape for where it is shown. Only
@@ -290,6 +321,11 @@ export function artFit(kind: CommunityKind, width: number, height: number) {
   // the server refuses anything else for an effect
   if (kind === "effects")
     return Math.abs(ratio - 9 / 16) > 0.012 ? ("tall" as const) : undefined;
+  // the server takes a frame of this size only
+  if (kind === "frames")
+    return width === FRAME_FILE.width && height === FRAME_FILE.height
+      ? undefined
+      : ("frame-size" as const);
   return ratio < 4 || ratio > 7 ? ("wide" as const) : undefined;
 }
 
@@ -436,6 +472,18 @@ export const communityApi = {
   /** Delete a design nobody can see, with its image, for good */
   remove: (client: Client, itemId: string) =>
     discoverRequest<void>(client, "DELETE", `/community/items/${id(itemId)}`),
+
+  /**
+   * Staff (`cosmetics.manage_all`): delete anyone's design for good, in any
+   * state. The reason goes to the creator with a statement they can appeal.
+   */
+  erase: (client: Client, itemId: string, reason: string, version?: number) =>
+    discoverRequest<void>(
+      client,
+      "POST",
+      `/community/items/${id(itemId)}/erase`,
+      { body: { reason: reason.trim(), version } },
+    ),
 
   // reviewers
   queue: (client: Client) =>

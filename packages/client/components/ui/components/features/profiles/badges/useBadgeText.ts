@@ -2,174 +2,244 @@ import { useLingui } from "@lingui/solid/macro";
 
 import { AnyBadgeId } from "./catalog";
 
+/** How a badge is given */
+export type BadgeHow = "automatic" | "application" | "team" | "none";
+
 export type BadgeText = {
   name: string;
+  /** What it means, one short line (tooltips, profile, My Badges, /badges) */
   description: string;
-  /** How to earn it (empty for retired badges) */
+  /**
+   * How it is earned, one line: the "Badges you can earn" tile in My Badges
+   * and the first line under the badge on /badges. Empty for retired badges.
+   * It never tells people to apply: the apply button is shown only while
+   * the server takes applications.
+   */
   earn: string;
+  how: BadgeHow;
 };
 
-/** Translated name, description and how-to-earn of every badge */
+/**
+ * The one source of every badge's name, meaning and how it is earned
+ * (owner, 2026-11-24). The text follows the owner-approved public guide
+ * (badge audit 2026-11-23, section B) and the rules the server applies. It
+ * never promises a review time: Zrzur is run by volunteers. The guide at
+ * /badges adds only further details below the `earn` line
+ * (`src/interface/badgeGuide/useBadgeGuide.ts`).
+ */
 export function useBadgeText(): (id: string) => BadgeText {
   const { t } = useLingui();
   return (id: string) => {
+    const years = t`Your account has existed for full calendar years, counted in UTC from its creation; your profile shows the highest year, up to ten.`;
+    const year = (name: string, description: string): BadgeText => ({
+      name,
+      description,
+      earn: years,
+      how: "automatic",
+    });
+    const retired = (name: string, description: string): BadgeText => ({
+      name,
+      description,
+      earn: "",
+      how: "none",
+    });
     const texts: Record<AnyBadgeId, BadgeText> = {
       founder: {
         name: t`Zrzur Founder`,
         description: t`Founded Zrzur.`,
-        earn: "",
+        earn: t`The one person who started Zrzur. No application, activity or command can give it.`,
+        how: "none",
       },
       staff: {
         name: t`Zrzur Staff`,
         description: t`A member of the official Zrzur team. Server moderators don't get this badge.`,
-        earn: t`Only for the Zrzur team; it is never requested or bought.`,
+        earn: t`An officially appointed member of the Zrzur team, with a recorded appointment.`,
+        how: "team",
       },
       developer: {
         name: t`Zrzur Developer`,
         description: t`Builds Zrzur itself.`,
-        earn: t`Given to Zrzur's own developers.`,
+        earn: t`A meaningful, verified technical contribution to Zrzur itself, or an approved official development role.`,
+        how: "team",
       },
       platform_moderator: {
         name: t`Platform Moderator`,
         description: t`Keeps Zrzur safe for everyone.`,
-        earn: t`Given to Zrzur's platform moderation team.`,
+        earn: t`Formally appointed to platform-level moderation, after accepting the moderation rules and the team's conduct requirements.`,
+        how: "team",
       },
       partner: {
         name: t`Zrzur Partner`,
-        description: t`An approved Zrzur partner or partner community.`,
-        earn: t`Apply as a partner; the Zrzur team reviews every application against the partner criteria.`,
+        description: t`An established community with long-term activity, quality and responsible moderation.`,
+        earn: t`By application, reviewed by the Zrzur team: at least 5,000 genuine human members, a server at least 180 days old and steady weekly activity.`,
+        how: "application",
       },
       super_creator: {
         name: t`Super Creator`,
-        description: t`An outstanding designer of Zrzur profile designs and decorations, chosen by the team.`,
-        earn: t`Publish designs as a Creator; the Zrzur team picks Super Creators by hand.`,
+        description: t`An outstanding Zrzur Designs creator, chosen by the team.`,
+        earn: t`Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program.`,
+        how: "team",
       },
       creator: {
         name: t`Creator`,
-        description: t`Makes profile designs and decorations for Zrzur's community gallery.`,
-        earn: t`Become a Zrzur creator and publish your first decoration, nameplate or effect. Making bots doesn't count.`,
+        description: t`Designs and publishes profile designs in Zrzur Designs.`,
+        earn: t`Accepted into the Zrzur Designs creator program, with a first original, approved, published design.`,
+        how: "automatic",
+      },
+      content_creator: {
+        name: t`Content Creator`,
+        description: t`Awarded to established creators of original, high-quality content who meet Zrzur's verification and quality standards.`,
+        earn: t`By application, reviewed by the Zrzur team: at least 100,000 real followers on one platform, 90 days of activity and regular original work.`,
+        how: "application",
       },
       elite_bug_hunter: {
         name: t`Elite Bug Hunter`,
         description: t`Exceptional bug and security contributions, recognised by the team.`,
-        earn: t`Hold Bug Hunter, then have 10 verified reports or a verified serious security report. The team decides; it is never automatic.`,
+        earn: t`Already a Bug Hunter, with at least 10 confirmed reports or one verified serious security vulnerability; the reviewer sets the severity.`,
+        how: "team",
       },
       bug_hunter: {
         name: t`Bug Hunter`,
         description: t`Found a real bug that the Zrzur team verified.`,
-        earn: t`Report a bug in Feedback. You get it when a reviewer confirms your report, not for sending it.`,
+        earn: t`One original, reproducible bug report with enough detail, confirmed by a reviewer.`,
+        how: "team",
       },
       beta_tester: {
         name: t`Beta Tester`,
         description: t`Tries Zrzur features before everyone else.`,
-        earn: t`Join the closed beta program by invitation or request. It is shown while you are in the program.`,
+        earn: t`Accepted into the closed beta and following its rules and confidentiality.`,
+        how: "automatic",
       },
       beta_veteran: {
         name: t`Beta Veteran`,
-        description: t`Completed a Zrzur beta program.`,
-        earn: t`Complete the beta as an active tester who sent feedback or a bug report. It stays, but gives no beta access.`,
+        description: t`Completed a Zrzur beta cycle with real contributions.`,
+        earn: t`Completed a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle.`,
+        how: "team",
       },
       plus: {
         name: t`Zrzur Feather`,
         description: t`Supports Zrzur with an active Feather subscription.`,
-        earn: t`Shown while your Feather subscription is active. You can hide it.`,
+        earn: t`Shown while you have an active Feather subscription; you can hide it.`,
+        how: "automatic",
       },
       early_supporter: {
         name: t`Early Supporter`,
         description: t`Supported Zrzur in its early days.`,
-        earn: t`Given to people who supported Zrzur during the early supporter period.`,
+        earn: t`Supported Zrzur during its early-support period.`,
+        how: "team",
       },
       early_adopter: {
         name: t`Early Adopter`,
         description: t`Joined Zrzur in its first days.`,
-        earn: t`Accounts created before the early adopter cut-off.`,
+        earn: t`Your account was created before 1 March 2027, 00:00 UTC.`,
+        how: "automatic",
       },
-      one_year: {
-        name: t`One Year on Zrzur`,
-        description: t`Has been on Zrzur for a year.`,
-        earn: t`Given automatically when your account turns one year old.`,
-      },
-      three_years: {
-        name: t`Three Years on Zrzur`,
-        description: t`Has been on Zrzur for three years.`,
-        earn: t`Given automatically when your account turns three years old.`,
-      },
+      one_year: year(t`One Year on Zrzur`, t`Has been on Zrzur for a year.`),
+      years_2: year(
+        t`Two Years on Zrzur`,
+        t`Has been on Zrzur for two years.`,
+      ),
+      three_years: year(
+        t`Three Years on Zrzur`,
+        t`Has been on Zrzur for three years.`,
+      ),
+      years_4: year(
+        t`Four Years on Zrzur`,
+        t`Has been on Zrzur for four years.`,
+      ),
+      years_5: year(
+        t`Five Years on Zrzur`,
+        t`Has been on Zrzur for five years.`,
+      ),
+      years_6: year(
+        t`Six Years on Zrzur`,
+        t`Has been on Zrzur for six years.`,
+      ),
+      years_7: year(
+        t`Seven Years on Zrzur`,
+        t`Has been on Zrzur for seven years.`,
+      ),
+      years_8: year(
+        t`Eight Years on Zrzur`,
+        t`Has been on Zrzur for eight years.`,
+      ),
+      years_9: year(
+        t`Nine Years on Zrzur`,
+        t`Has been on Zrzur for nine years.`,
+      ),
+      years_10: year(
+        t`Ten Years on Zrzur`,
+        t`Has been on Zrzur for ten years.`,
+      ),
       community_builder: {
         name: t`Community Builder`,
-        description: t`Built a server that reached 100 members.`,
-        earn: t`Own a server that reaches 100 members. It stays if the server gets smaller.`,
+        description: t`Owns a server that reached 100 genuine human members.`,
+        earn: t`Automatic when a server you own reaches 100 genuine human members; it stays if the server gets smaller.`,
+        how: "automatic",
       },
       big_community: {
         name: t`Big Community`,
-        description: t`Built a server that reached 1,000 members.`,
-        earn: t`Own a server that reaches 1,000 members. It stays if the server gets smaller.`,
+        description: t`Owns a server that reached 1,000 genuine human members.`,
+        earn: t`Automatic when a server you own reaches 1,000 genuine human members, counted as for Community Builder; it stays if the server gets smaller.`,
+        how: "automatic",
       },
-      verified_server_owner: {
-        name: t`Verified Server Owner`,
-        description: t`Owns a server the Zrzur team verified.`,
-        earn: t`Own a verified server. It is shown while you do.`,
-      },
+      // cancelled (owner, 2026-11-24): named only for people who have it
+      verified_server_owner: retired(
+        t`Verified Server Owner`,
+        t`Owns a server the Zrzur team verified.`,
+      ),
       verified_bot_developer: {
         name: t`Verified Bot Developer`,
-        description: t`Made a bot the Zrzur team verified.`,
-        earn: t`Own a verified bot. It is shown while you do.`,
-      },
-      saha_champion: {
-        name: t`Saha Champion`,
-        description: t`Won a tournament or came first in the games bot.`,
-        earn: t`Win a tournament, or come first in the games bot.`,
+        description: t`Owns or develops a bot that passed Zrzur's verification review.`,
+        earn: t`By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership.`,
+        how: "application",
       },
       community_helper: {
         name: t`Community Helper`,
         description: t`Helped people with support.`,
-        earn: t`Given by the Zrzur team to people who help others with support.`,
+        earn: t`Given by the team to people who help others with constructive support; spam, copied or misleading answers earn nothing.`,
+        how: "team",
       },
-      translator: {
-        name: t`Translator`,
-        description: t`Helped translate Zrzur.`,
-        earn: "",
-      },
-      responsible_disclosure: {
-        name: t`Responsible Disclosure`,
-        description: t`Reported a security issue responsibly.`,
-        earn: "",
-      },
-      supporter: {
-        name: t`Supporter`,
-        description: t`Supported Zrzur.`,
-        earn: "",
-      },
-      reserved_1: {
-        name: t`Special badge`,
-        description: t`A one-off badge.`,
-        earn: "",
-      },
-      reserved_2: {
-        name: t`Special badge`,
-        description: t`A one-off badge.`,
-        earn: "",
-      },
+      translator: retired(t`Translator`, t`Helped translate Zrzur.`),
+      responsible_disclosure: retired(
+        t`Responsible Disclosure`,
+        t`Reported a security issue responsibly.`,
+      ),
+      supporter: retired(t`Supporter`, t`Supported Zrzur.`),
+      reserved_1: retired(t`Special badge`, t`A one-off badge.`),
+      reserved_2: retired(t`Special badge`, t`A one-off badge.`),
       server_owner: {
         name: t`Server owner`,
         description: t`Owns this server.`,
-        earn: "",
+        earn: t`Shown next to the person who owns the server now; it follows ownership.`,
+        how: "automatic",
       },
       server_official: {
         name: t`Official Zrzur server`,
         description: t`Run by the Zrzur team.`,
-        earn: "",
+        earn: t`A server run by the Zrzur team itself. Set only by Zrzur, never by application.`,
+        how: "team",
       },
       server_verified: {
         name: t`Verified server`,
         description: t`The Zrzur team confirmed who runs this server.`,
-        earn: "",
+        earn: t`By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check).`,
+        how: "application",
       },
       bot_verified: {
         name: t`Verified bot`,
         description: t`The Zrzur team reviewed this bot.`,
-        earn: "",
+        earn: t`By application, reviewed by the Zrzur team: a check in the Bot label of a bot that passed the Verified Bot review.`,
+        how: "application",
       },
     };
-    return texts[id as AnyBadgeId] ?? { name: id, description: "", earn: "" };
+    return (
+      texts[id as AnyBadgeId] ?? {
+        name: id,
+        description: "",
+        earn: "",
+        how: "none",
+      }
+    );
   };
 }

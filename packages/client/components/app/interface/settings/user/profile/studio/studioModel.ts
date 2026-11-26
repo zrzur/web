@@ -10,6 +10,9 @@ import {
   kindOf,
 } from "../communityApi";
 
+// relative, so unit tests run without the app aliases
+import { FRAME_FILE } from "../../../../../../ui/components/features/profiles/frames/communityFrame";
+
 /** The tabs of the studio home */
 export type StudioFilter =
   | "all"
@@ -143,8 +146,9 @@ export function actionsOf(item: CommunityItem, readOnly: boolean) {
       shown === "Draft" || shown === "ChangesRequested" || shown === "Rejected",
     withdraw: status !== "Archived" && status !== "Suspended",
     restore: status === "Archived",
-    // the server deletes only what nobody can see
-    remove: status !== "Published" && status !== "Suspended",
+    // anything they publish, they can delete (owner, 2026-11-25); a design
+    // a reviewer took down stays until the review is over
+    remove: status !== "Suspended",
     download: true,
   };
 }
@@ -318,5 +322,13 @@ export const STUDIO_SPECS: Record<
     maxBytes: EFFECT_MAX_BYTES,
     mustMove: true,
     maxSeconds: 4,
+  },
+  // a picture of exactly this size (`FRAME_FILE`), still or moving
+  frames: {
+    width: FRAME_FILE.width,
+    height: FRAME_FILE.height,
+    maxBytes: COMMUNITY_MAX_BYTES,
+    mustMove: false,
+    maxSeconds: 0,
   },
 };

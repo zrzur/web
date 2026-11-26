@@ -1,0 +1,134 @@
+{
+  "Two Years on Zrzur": [
+    "عامان في زرزور",
+    "Zwei Jahre auf Zrzur"
+  ],
+  "Four Years on Zrzur": [
+    "أربعة أعوام في زرزور",
+    "Vier Jahre auf Zrzur"
+  ],
+  "Five Years on Zrzur": [
+    "خمسة أعوام في زرزور",
+    "Fünf Jahre auf Zrzur"
+  ],
+  "Six Years on Zrzur": [
+    "ستة أعوام في زرزور",
+    "Sechs Jahre auf Zrzur"
+  ],
+  "Seven Years on Zrzur": [
+    "سبعة أعوام في زرزور",
+    "Sieben Jahre auf Zrzur"
+  ],
+  "Eight Years on Zrzur": [
+    "ثمانية أعوام في زرزور",
+    "Acht Jahre auf Zrzur"
+  ],
+  "Nine Years on Zrzur": [
+    "تسعة أعوام في زرزور",
+    "Neun Jahre auf Zrzur"
+  ],
+  "Ten Years on Zrzur": [
+    "عشرة أعوام في زرزور",
+    "Zehn Jahre auf Zrzur"
+  ],
+  "Has been on Zrzur for two years.": [
+    "في زرزور منذ عامين.",
+    "Seit zwei Jahren auf Zrzur."
+  ],
+  "Has been on Zrzur for four years.": [
+    "في زرزور منذ أربعة أعوام.",
+    "Seit vier Jahren auf Zrzur."
+  ],
+  "Has been on Zrzur for five years.": [
+    "في زرزور منذ خمسة أعوام.",
+    "Seit fünf Jahren auf Zrzur."
+  ],
+  "Has been on Zrzur for six years.": [
+    "في زرزور منذ ستة أعوام.",
+    "Seit sechs Jahren auf Zrzur."
+  ],
+  "Has been on Zrzur for seven years.": [
+    "في زرزور منذ سبعة أعوام.",
+    "Seit sieben Jahren auf Zrzur."
+  ],
+  "Has been on Zrzur for eight years.": [
+    "في زرزور منذ ثمانية أعوام.",
+    "Seit acht Jahren auf Zrzur."
+  ],
+  "Has been on Zrzur for nine years.": [
+    "في زرزور منذ تسعة أعوام.",
+    "Seit neun Jahren auf Zrzur."
+  ],
+  "Has been on Zrzur for ten years.": [
+    "في زرزور منذ عشرة أعوام.",
+    "Seit zehn Jahren auf Zrzur."
+  ],
+  "Shown automatically for each full year of your account, counted in UTC; your profile shows the highest year. Hidden while you hide \"Member since\" on your profile.": [
+    "تظهر تلقائياً عن كل سنة كاملة من عمر حسابك، محسوبة بتوقيت UTC، ويعرض ملفك أعلى سنة بلغتها. تُخفى ما دمت تخفي قسم «عضو منذ» في ملفك.",
+    "Erscheint automatisch für jedes volle Jahr deines Kontos, gezählt in UTC; dein Profil zeigt das höchste erreichte Jahr. Ausgeblendet, solange du „Mitglied seit“ in deinem Profil ausblendest."
+  ],
+  "Shown for accounts created before 1 March 2027, 00:00 UTC. Hidden while you hide \"Member since\" on your profile.": [
+    "تظهر للحسابات المُنشأة قبل 1 مارس 2027 الساعة 00:00 بتوقيت UTC. تُخفى ما دمت تخفي قسم «عضو منذ» في ملفك.",
+    "Für Konten, die vor dem 1. März 2027, 00:00 UTC erstellt wurden. Ausgeblendet, solange du „Mitglied seit“ in deinem Profil ausblendest."
+  ],
+  "This app may not open a staff session here, or the session ended. Use the admin console.": [
+    "لا يمكن لهذا التطبيق فتح جلسة فريق هنا، أو انتهت الجلسة. استخدم لوحة الإدارة.",
+    "Diese App darf hier keine Team-Sitzung öffnen, oder die Sitzung ist abgelaufen. Nutze die Admin-Konsole."
+  ],
+  "Confirmed. Protected changes are open for five minutes.": [
+    "تم التأكيد. التغييرات المحمية متاحة لخمس دقائق.",
+    "Bestätigt. Geschützte Änderungen sind fünf Minuten lang möglich."
+  ],
+  "Saved as a request: a second staff member must approve it.": [
+    "حُفظ طلبًا: يجب أن يوافق عليه عضو آخر من الفريق.",
+    "Als Anfrage gespeichert: Ein zweites Teammitglied muss zustimmen."
+  ],
+  "Open a staff session": [
+    "افتح جلسة فريق",
+    "Team-Sitzung öffnen"
+  ],
+  "Badges are changed with a staff session, as in the admin console. Enter the code from your authenticator app.": [
+    "تُغيَّر الشارات بجلسة فريق كما في لوحة الإدارة. أدخل الرمز من تطبيق المصادقة.",
+    "Abzeichen werden wie in der Admin-Konsole mit einer Team-Sitzung geändert. Gib den Code aus deiner Authentifizierungs-App ein."
+  ],
+  "Authenticator code": [
+    "رمز تطبيق المصادقة",
+    "Code der Authentifizierungs-App"
+  ],
+  "Open staff session": [
+    "افتح الجلسة",
+    "Sitzung öffnen"
+  ],
+  "Confirm with a fresh code": [
+    "أكّد برمز جديد",
+    "Mit neuem Code bestätigen"
+  ],
+  "This change is protected. Enter a new code from your authenticator app, then try again.": [
+    "هذا التغيير محمي. أدخل رمزًا جديدًا من تطبيق المصادقة، ثم أعد المحاولة.",
+    "Diese Änderung ist geschützt. Gib einen neuen Code aus deiner Authentifizierungs-App ein und versuche es erneut."
+  ],
+  "Waiting for a second staff member": [
+    "بانتظار عضو آخر من الفريق",
+    "Wartet auf ein zweites Teammitglied"
+  ],
+  "No badge changes are waiting.": [
+    "لا توجد تغييرات شارات بانتظار الموافقة.",
+    "Keine Abzeichen-Änderungen warten."
+  ],
+  "Person": [
+    "الشخص",
+    "Person"
+  ],
+  "Asked by": [
+    "طلبه",
+    "Angefragt von"
+  ],
+  "Refuse": [
+    "ارفض",
+    "Ablehnen"
+  ],
+  "No expiry": [
+    "بلا انتهاء",
+    "Kein Ablauf"
+  ]
+}

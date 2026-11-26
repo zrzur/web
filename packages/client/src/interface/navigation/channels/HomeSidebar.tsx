@@ -1,4 +1,5 @@
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
+import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
 import { Match, Show, Switch, createMemo, splitProps } from "solid-js";
 
@@ -521,7 +522,7 @@ function Entry(
             </span>
           </Match>
           <Match when={local.channel.type === "DirectMessage"}>
-            <OverflowingText>
+            <OverflowingText class={nameRoom} data-name-room="">
               <span style={nameStyle(local.channel?.recipient?.style)}>
                 {local.channel?.recipient?.displayName}
               </span>

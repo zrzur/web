@@ -28,6 +28,10 @@ import { FloatingElement, floatingElements } from "../../directives";
 import { backCloses } from "@revolt/common/lib/backCloses";
 import { dismissFloatingElements } from ".";
 import { sheetSwipe } from "../design/sheetSwipe";
+import {
+  framePadding,
+  readFrameRoom,
+} from "../features/profiles/frames/frameRoom";
 import { takesEscape } from "./takesEscape";
 import { TooltipBase } from "./Tooltip";
 
@@ -175,13 +179,17 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
   // the content is often not there at the first measure (profile cards load
   // the first time, menus fill in), so a popup is placed again whenever its
   // size changes; that keeps it inside the window
+  // A profile card's frame reaches past the card: the room it takes is
+  // counted, so the frame stays whole on the screen with 12 px to spare and
+  // does not cover the name the card was opened from.
+  const room = () => readFrameRoom(floating());
   const position = useFloating(element, floating, {
     placement: placement(),
     strategy: "fixed",
     middleware: [
-      offset(5),
-      flip({ padding: 8 }),
-      shift({ padding: 8, crossAxis: true }),
+      offset(() => 5 + room().x),
+      flip(() => ({ padding: framePadding(room()) })),
+      shift(() => ({ padding: framePadding(room()), crossAxis: true })),
     ],
     whileElementsMounted: autoUpdate,
   });
@@ -467,9 +475,29 @@ const SheetPanel = styled("div", {
     "&[data-card]": {
       padding: "0 0 var(--z-safe-bottom)",
       overflowX: "hidden",
-      // a profile frame reaches past the sheet's top and sides; the card
-      // scrolls inside itself, so the sheet needs no scroll of its own then
-      "&:has(> [data-framed])": { overflow: "visible" },
+      // a profile frame reaches past the card's top, sides and foot; the
+      // card scrolls inside itself, so the sheet needs no scroll of its own
+      // then. It stands in from the screen's edges by the frame's room, with
+      // 12 px to spare, so the whole frame shows: a card over the bottom
+      // edge, rounded all round, rather than a sheet on it.
+      "&:has(> [data-framed])": {
+        overflow: "visible",
+        maxHeight: "none",
+        background: "none",
+        boxShadow: "none",
+        paddingBlockEnd: 0,
+        "& > [data-framed]": {
+          width: "auto !important",
+          marginInline: "calc(var(--z-frame-x, 0px) + 12px)",
+          marginBlockEnd:
+            "calc(var(--z-frame-bottom, 0px) + 12px + var(--z-safe-bottom))",
+        },
+        "& > [data-framed] > [role='dialog']": {
+          borderRadius: "14px !important",
+          boxShadow: "var(--z-popover-lift) !important",
+          paddingBlockEnd: 0,
+        },
+      },
       // the card sits one level down, in the box that holds its frame
       "& > [data-frame-host] > [role='dialog']": {
         width: "100% !important",

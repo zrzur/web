@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Zrzur frame template. 800 x 1020 px. Draw on a layer of your own, then hide every
+     layer of this template before you export a PNG or WebP of the whole canvas.
+     Card 60,140 to 740,940. Safe zone (keep fully transparent)
+     80,160 to 720,920, except the crest window
+     240,160 to 560,220. Grid: 8 px blocks from the card's corner. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+  width="800" height="1020" viewBox="0 0 800 1020">
+  <defs>
+    <pattern id="grid" x="60" y="140" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M8 0H0V8" fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <pattern id="hatch" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <rect width="24" height="24" fill="#E0195F" fill-opacity="0.16"/>
+      <rect width="4" height="24" fill="#E0195F" fill-opacity="0.45"/>
+    </pattern>
+  </defs>
+  <g id="reach-area" inkscape:groupmode="layer" inkscape:label="Reach area: art may go here · منطقة الامتداد: يجوز الرسم هنا · Reichweite: hier darf gezeichnet werden">
+    <rect x="0" y="0" width="800" height="1020" fill="#171925"/>
+  </g>
+  <g id="stretch-zones" inkscape:groupmode="layer" inkscape:label="Stretch zones: the sides stretch with the card's height · مناطق التمدد: يتمدد الجانبان مع طول البطاقة · Dehnzonen: die Seiten dehnen sich mit der Kartenhöhe">
+    <rect x="0" y="220" width="80" height="700" fill="#55DCC8" fill-opacity="0.12"/>
+    <rect x="720" y="220" width="80" height="700" fill="#55DCC8" fill-opacity="0.12"/>
+  </g>
+  <g id="card" inkscape:groupmode="layer" inkscape:label="Card (sample content) · البطاقة (محتوى للتوضيح) · Karte (Beispielinhalt)">
+    <rect x="60" y="140" width="680" height="800" fill="#242638"/>
+    <rect x="60" y="140" width="680" height="226" fill="#303348"/>
+    <circle cx="156" cy="366" r="68" fill="#3B3F58"/>
+    <rect x="100" y="456" width="320" height="36" fill="#3B3F58"/>
+    <rect x="100" y="540" width="560" height="16" fill="#3B3F58"/>
+    <rect x="100" y="580" width="560" height="16" fill="#3B3F58"/>
+    <rect x="100" y="620" width="380" height="16" fill="#3B3F58"/>
+    <rect x="100" y="700" width="560" height="16" fill="#3B3F58"/>
+    <rect x="100" y="740" width="560" height="16" fill="#3B3F58"/>
+    <rect x="100" y="780" width="380" height="16" fill="#3B3F58"/>
+    <rect x="100" y="860" width="560" height="16" fill="#3B3F58"/>
+  </g>
+  <g id="grid-4px" inkscape:groupmode="layer" inkscape:label="4 px grid (8 file px from the card's corner) · شبكة 4 بكسل (8 بكسل في الملف من زاوية البطاقة) · 4-px-Raster (8 Datei-px ab der Kartenecke)">
+    <rect x="0" y="0" width="800" height="1020" fill="url(#grid)"/>
+  </g>
+  <g id="safe-zone" inkscape:groupmode="layer" inkscape:label="Safe zone: keep fully transparent · المنطقة الآمنة: اتركها شفافة تمامًا · Schutzzone: vollständig transparent lassen">
+    <path d="M80 160H720V920H80ZM240 160V220H560V160Z" fill="url(#hatch)" fill-rule="evenodd"/>
+    <rect x="80" y="160" width="640" height="760" fill="none" stroke="#E0195F" stroke-width="4" stroke-dasharray="16 16"/>
+  </g>
+  <g id="card-outline" inkscape:groupmode="layer" inkscape:label="Card outline · حدود البطاقة · Kartenrand">
+    <rect x="60" y="140" width="680" height="800" fill="none" stroke="#F7F8FC" stroke-width="2"/>
+  </g>
+  <g id="crest-window" inkscape:groupmode="layer" inkscape:label="Crest window: may be drawn on · نافذة الشعار: يجوز الرسم فيها · Wappenfenster: darf bemalt werden">
+    <rect x="240" y="160" width="320" height="60" fill="none" stroke="#F7F8FC" stroke-width="4"/>
+  </g>
+  <g id="export-area" inkscape:groupmode="layer" inkscape:label="Export area: the whole canvas · منطقة التصدير: اللوحة كلها · Exportbereich: die ganze Fläche">
+    <rect x="2" y="2" width="796" height="1016" fill="none" stroke="#F3B96B" stroke-width="4"/>
+  </g>
+  <g id="labels" inkscape:groupmode="layer" inkscape:label="Labels · التسميات · Beschriftungen" font-family="IBM Plex Sans, IBM Plex Sans Arabic, sans-serif" font-size="22" fill="#F7F8FC">
+    <text x="400" y="44" text-anchor="middle">800 × 1020</text>
+    <text x="400" y="104" text-anchor="middle">140</text>
+    <text x="400" y="990" text-anchor="middle">80</text>
+    <text x="30" y="510" text-anchor="middle">60</text>
+    <text x="770" y="510" text-anchor="middle">60</text>
+    <text x="400" y="202" text-anchor="middle">320 × 60</text>
+    <text x="96" y="900" text-anchor="start">Keep clear · اتركها فارغة · Freihalten</text>
+  </g>
+</svg>

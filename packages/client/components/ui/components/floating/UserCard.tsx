@@ -85,6 +85,7 @@ export function UserCard(
   return (
     <Show when={!isMobile}>
       <FramedCard
+        fit
         frame={style()?.profile_frame}
         file={style()?.profile_frame_file}
       >
@@ -171,7 +172,10 @@ const Card = styled("div", {
     flexDirection: "column",
     width: "360px",
     maxWidth: "calc(100vw - 24px)",
-    maxHeight: "min(640px, calc(100dvh - 32px))",
+    // the card and its frame fit the window with 12 px to spare (the frame's
+    // room is set by FramedCard; without a frame 4 px each, 16 px in all)
+    maxHeight:
+      "min(640px, calc(100dvh - var(--z-frame-top, 4px) - var(--z-frame-bottom, 4px) - 24px))",
     overflow: "hidden",
 
     color: "var(--profile-ink, var(--z-fg-primary))",
@@ -186,6 +190,12 @@ const Card = styled("div", {
       marginInline: "-8px",
       marginBlockEnd: "calc(-12px - var(--z-safe-bottom))",
       maxHeight: "calc(78dvh - 23px)",
+      // framed, the card floats over the bottom edge with its frame whole
+      // round it (FloatingManager's sheet): what is left of the screen
+      "[data-framed] > &": {
+        maxHeight:
+          "min(calc(78dvh - 23px), calc(100dvh - var(--z-frame-top) - var(--z-frame-bottom) - 24px - var(--z-safe-top, 0px) - var(--z-safe-bottom, 0px)))",
+      },
       paddingBlockEnd: "var(--z-safe-bottom)",
       border: "none",
       borderRadius: "14px 14px 0 0",

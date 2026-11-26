@@ -95,23 +95,29 @@ describe("Inventory parts", () => {
     }
   });
 
-  it("publishes the changelog as an RSS feed, up to date", async () => {
-    const { feedFrom } = (await import(
-      // @ts-expect-error -- a plain Node script without types
-      "../../../../scripts/bot-api/changelog-feed.mjs"
-    )) as { feedFrom: (markdown: string) => string };
-    const page = PAGES.find((p) => p.id === "changelog")!.source!;
-    const feed = readFileSync(
-      join(here, "../../../../public/developers/api-changelog.xml"),
-      "utf8",
-    );
-    expect(feed, "run node scripts/bot-api/changelog-feed.mjs").toBe(
-      feedFrom(page),
-    );
-    expect(feed).toContain("#v26-0-0</link>");
-    expect(feed).not.toContain("#upcoming");
-    expect(linksOf(page)).toContain("/developers/api-changelog.xml");
-  });
+  // the first import of the feed script is transformed on demand and can take
+  // over 5 s on a busy CI runner; the same budget as the page tests below
+  it(
+    "publishes the changelog as an RSS feed, up to date",
+    { timeout: 30_000 },
+    async () => {
+      const { feedFrom } = (await import(
+        // @ts-expect-error -- a plain Node script without types
+        "../../../../scripts/bot-api/changelog-feed.mjs"
+      )) as { feedFrom: (markdown: string) => string };
+      const page = PAGES.find((p) => p.id === "changelog")!.source!;
+      const feed = readFileSync(
+        join(here, "../../../../public/developers/api-changelog.xml"),
+        "utf8",
+      );
+      expect(feed, "run node scripts/bot-api/changelog-feed.mjs").toBe(
+        feedFrom(page),
+      );
+      expect(feed).toContain("#v26-0-0</link>");
+      expect(feed).not.toContain("#upcoming");
+      expect(linksOf(page)).toContain("/developers/api-changelog.xml");
+    },
+  );
 
   it("a page loads only the parts its blocks show", () => {
     expect(partsForMarkdown("# Hi\n\nText only.")).toEqual([]);

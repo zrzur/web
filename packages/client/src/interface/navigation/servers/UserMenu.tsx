@@ -13,6 +13,7 @@ import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { Avatar, UserStatus } from "@revolt/ui";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
+import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { useFloating } from "solid-floating-ui";
@@ -269,7 +270,11 @@ export function UserMenu(props: Props) {
               />
             </AvatarDecoration>
             <Identity>
-              <strong style={nameStyle(user()?.style)}>
+              <strong
+                class={nameRoom}
+                data-name-room=""
+                style={nameStyle(user()?.style)}
+              >
                 {user()?.displayName ?? user()?.username}
               </strong>
               <span>

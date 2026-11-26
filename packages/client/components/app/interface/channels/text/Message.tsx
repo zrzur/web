@@ -52,6 +52,7 @@ import {
 } from "../../../menus/UserContextMenu";
 
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
+import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
 import { EditMessage } from "./EditMessage";
 import { ForwardedFrame } from "./ForwardedFrame";
 import { InteractionHeader } from "./interactions/InteractionHeader";
@@ -196,7 +197,11 @@ export function Message(props: Props) {
         ref={msgRef}
         onHover={setIsHovering}
         username={
-          <div use:floating={floatingUserMenusFromMessage(props.message)}>
+          <div
+            class={nameRoom}
+            data-name-room=""
+            use:floating={floatingUserMenusFromMessage(props.message)}
+          >
             <Username
               username={
                 props.message.masquerade?.name ??

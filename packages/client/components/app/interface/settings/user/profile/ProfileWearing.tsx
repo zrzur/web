@@ -2,33 +2,34 @@ import { Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
-import { useQuery } from "@tanstack/solid-query";
-import { User } from "@zrzur/sdk/solid";
+import { useQuery, useQueryClient } from "@tanstack/solid-query";
+import { User, UserProfile } from "@zrzur/sdk/solid";
 
 import { useClient } from "@revolt/client";
-import { useInstance } from "@revolt/instance";
-import { Avatar } from "@revolt/ui";
-import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
-import { useDesignMotion } from "@revolt/ui/components/features/profiles/NameplateMotion";
 import { ProfileSection } from "@revolt/ui/components/features/profiles/ProfileCard";
 import {
   type ProfileTile,
   ProfileTiles,
   ProfileTilesMore,
-  TilePlate,
 } from "@revolt/ui/components/features/profiles/ProfileTiles";
-import { EffectStill } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
-import { isEffectId } from "@revolt/ui/components/features/profiles/effects/effectIds";
+import {
+  WornDecoration,
+  WornEffect,
+  WornFrame,
+  WornName,
+  WornPlate,
+  communityId,
+  wearsNameStyle,
+} from "@revolt/ui/components/features/profiles/WornPreviews";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
+import { useTilesShown } from "@revolt/ui/components/features/profiles/profileSize";
 import {
   isCommunityRef,
-  nameplateBackground,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
-import { effectStillUrl } from "@revolt/ui/components/features/profiles/userStyleExtras";
 
-import { useStyleLabels } from "./StyleEditors";
 import { communityApi } from "./communityApi";
+import { useNameFontLabel, useStyleLabels } from "./styleLabels";
 
 /** The real name of a design someone wears, once it is known */
 function useDesignName(ref: () => string | undefined) {
@@ -50,9 +51,10 @@ const designPage = (kind: "decoration" | "nameplate", ref: string) =>
   isCommunityRef(ref) ? `/designs/${ref.slice(2)}` : `/designs/${kind}-${ref}`;
 
 /**
- * What a creator has on, in the same tiles as their creations: the real item,
- * its name and its kind. The profile's `creator` field decides whether it
- * shows.
+ * What a creator has on, each design drawn as it really looks on them (see
+ * WornPreviews): the nameplate as a row of its own behind their name, then
+ * the square designs side by side. Each keeps its name and kind and opens
+ * its design. The profile's `creator` field decides whether it shows.
  */
 export default function ProfileWearing(props: {
   user: User;
@@ -61,89 +63,88 @@ export default function ProfileWearing(props: {
 }) {
   const { t } = useLingui();
   const navigate = useNavigate();
-  const instance = useInstance();
-  const motion = useDesignMotion();
+  const queries = useQueryClient();
   const labels = useStyleLabels();
+  const fontLabel = useNameFontLabel();
   const effect = useEffectLabels();
+  const perRow = useTilesShown();
 
   const style = () => userStyleOf(props.user);
   const decorationName = useDesignName(() => style()?.decoration);
   const nameplateName = useDesignName(() => style()?.nameplate);
   const effectName = useDesignName(() => style()?.effect);
+  const frameName = useDesignName(() => style()?.profile_frame);
+
+  const wearer = () => ({
+    name: props.user.displayName ?? props.user.username,
+    avatar: props.user.animatedAvatarURL,
+  });
+  // the banner of the profile this is drawn in, already loaded with it
+  const banner = () =>
+    queries.getQueryData<UserProfile>(["profile", props.user.id])
+      ?.animatedBannerURL;
 
   const [all, setAll] = createSignal(false);
 
   const worn = createMemo(() => {
     const current = style();
-    const plate = nameplateBackground(current, instance.mediaUrl, {
-      moving: motion(),
-    });
-    const effectId = current?.effect;
     const items: (Omit<ProfileTile, "key" | "onPress" | "note"> & {
       kind: string;
       path: string;
     })[] = [];
+    if (!current) return items;
 
-    if (current?.decoration) {
-      items.push({
-        kind: t`Decoration`,
-        name: decorationName() ?? labels.decoration(current.decoration),
-        path: designPage("decoration", current.decoration),
-        picture: (
-          <AvatarDecoration
-            decoration={current.decoration}
-            file={current.decoration_file}
-            size={40}
-          >
-            <Avatar
-              src={props.user.animatedAvatarURL}
-              fallback={props.user.displayName}
-              size={40}
-            />
-          </AvatarDecoration>
-        ),
-      });
-    }
-    if (current?.nameplate) {
+    if (current.nameplate) {
       items.push({
         kind: t`Nameplate`,
         name: nameplateName() ?? labels.nameplate(current.nameplate),
         path: designPage("nameplate", current.nameplate),
+        wide: true,
+        picture: <WornPlate look={current} wearer={wearer()} />,
+      });
+    }
+    if (current.decoration) {
+      items.push({
+        kind: t`Decoration`,
+        name: decorationName() ?? labels.decoration(current.decoration),
+        path: designPage("decoration", current.decoration),
+        picture: <WornDecoration look={current} wearer={wearer()} />,
+      });
+    }
+    if (current.profile_frame) {
+      const id = communityId(current.profile_frame);
+      items.push({
+        kind: t`Profile frame`,
+        name: frameName() ?? labels.frame(current.profile_frame),
+        path: id ? `/designs/${id}` : "/designs/frames",
         picture: (
-          <TilePlate
-            class="z-plate z-plate-tile"
-            style={{ "--plate": plate }}
-          />
+          <WornFrame look={current} wearer={wearer()} banner={banner()} />
         ),
       });
     }
-    if (effectId) {
+    if (current.effect) {
+      const id = communityId(current.effect);
       items.push({
         kind: t`Effect`,
-        name: effectName() ?? effect(effectId),
-        path: isCommunityRef(effectId)
-          ? `/designs/${effectId.slice(2)}`
-          : "/designs/effects",
-        picture: (
-          <Show
-            when={isEffectId(effectId)}
-            fallback={
-              <Show when={current?.effect_file}>
-                {(file) => (
-                  <img
-                    src={effectStillUrl(instance.mediaUrl, file())}
-                    alt=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer"
-                    draggable={false}
-                  />
-                )}
-              </Show>
-            }
-          >
-            <EffectStill effect={effectId as never} />
-          </Show>
-        ),
+        name: effectName() ?? effect(current.effect),
+        path: id ? `/designs/${id}` : "/designs/effects",
+        picture: <WornEffect look={current} />,
+      });
+    }
+    if (wearsNameStyle(current)) {
+      const font =
+        current.name_font && current.name_font !== "default"
+          ? current.name_font
+          : undefined;
+      items.push({
+        kind: t`Name style`,
+        name: font
+          ? fontLabel(font)
+          : current.name_colour?.length
+            ? t`Colours`
+            : fontLabel("default"),
+        path: font ? "/designs/name" : "/designs/colours",
+        picture: <WornName look={current} wearer={wearer()} />,
       });
     }
     return items;
@@ -154,6 +155,7 @@ export default function ProfileWearing(props: {
       key: item.kind,
       name: item.name,
       note: item.kind,
+      wide: item.wide,
       picture: item.picture,
       onPress: () => {
         navigate(item.path);
@@ -161,19 +163,22 @@ export default function ProfileWearing(props: {
       },
     }));
 
+  // Show more counts the square designs: a wide one always has its own row
+  const square = () => worn().filter((item) => !item.wide).length;
+
   return (
     <Show when={worn().length}>
       <ProfileSection
         title={<Trans>Wearing</Trans>}
         action={
           <ProfileTilesMore
-            count={worn().length}
+            count={square()}
             open={all()}
             onPress={() => setAll(!all())}
           />
         }
       >
-        <ProfileTiles tiles={tiles()} all={all()} />
+        <ProfileTiles tiles={tiles()} all={all() || square() <= perRow()} />
       </ProfileSection>
     </Show>
   );

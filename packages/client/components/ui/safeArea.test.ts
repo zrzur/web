@@ -24,7 +24,9 @@ function sources(dir: string, out: string[] = []) {
   return out;
 }
 
-describe("safe-area insets", () => {
+// these tests read every source file from disk; on a busy CI runner or next to
+// a backend build that can take over 5 s, so the file gets 30 s like docs.test.ts
+describe("safe-area insets", { timeout: 30_000 }, () => {
   it("index.html lets the page reach under the notch (viewport-fit=cover)", () => {
     const html = read("index.html");
     expect(html).toMatch(/name="viewport"[^>]*viewport-fit=cover/);

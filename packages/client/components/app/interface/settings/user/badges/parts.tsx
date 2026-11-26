@@ -70,13 +70,28 @@ export const TileText = styled("div", {
     gap: "3px",
     minWidth: 0,
     flex: 1,
-    "& strong": { fontSize: "14px", overflowWrap: "anywhere" },
+    "& strong": {
+      fontSize: "14px",
+      lineHeight: "20px",
+      // a badge name stays on one line, never broken inside a word
+      // («مختبر مخضرم» split in two); a name too long ends in "…" and the
+      // tile's title says it whole
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      minWidth: 0,
+      maxWidth: "100%",
+      // Arabic marks above and below the letters (the kasra of «مختبِر
+      // مخضرم») need room: WebKit drew them over the next line
+      "&:lang(ar)": { lineHeight: "24px" },
+    },
     "& p": {
       margin: 0,
       fontSize: "13px",
       lineHeight: "17px",
       color: "var(--z-fg-secondary)",
       overflowWrap: "anywhere",
+      "&:lang(ar)": { lineHeight: "22px" },
     },
     "& small": { fontSize: "12px", color: "var(--z-fg-muted)" },
   },
@@ -297,6 +312,18 @@ export const TitleLine = styled("span", {
   },
 });
 
+/** a badge name in a row title: one line, "…" when too long, never broken
+ * inside a word */
+export const BadgeName = styled("span", {
+  base: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    minWidth: 0,
+    maxWidth: "100%",
+  },
+});
+
 /** small second line under a row description (dates) */
 export const Meta = styled("span", {
   base: {
@@ -394,7 +421,12 @@ export const ShelfItem = styled("div", {
       fontWeight: 600,
       lineHeight: "15px",
       color: "var(--z-fg-secondary)",
-      overflowWrap: "anywhere",
+      // two lines at most, broken between words only, never inside a name
+      overflowWrap: "normal",
+      lineClamp: 2,
+      maxWidth: "100%",
+      // Arabic marks need room between lines (WebKit overlap)
+      "&:lang(ar)": { lineHeight: "20px" },
     },
   },
 });
@@ -473,5 +505,89 @@ export const Log = styled("ol", {
     fontSize: "13px",
     "& li": { display: "flex", flexWrap: "wrap", gap: "6px" },
     "& time": { color: "var(--z-fg-muted)" },
+  },
+});
+
+/** a quiet line of help, with an optional picture before it */
+export const Hint = styled("p", {
+  base: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "12px",
+    margin: 0,
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--z-fg-secondary)",
+    overflowWrap: "anywhere",
+    // tanween over an alef («أبداً») reached the line above in WebKit
+    "&:lang(ar)": { lineHeight: "24px" },
+    "& > *:first-child:not(:only-child)": { flexShrink: 0 },
+  },
+});
+
+/** the measured lines of a program: met, not met, or checked by a person */
+export const Checklist = styled("ul", {
+  base: {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    "& li": {
+      display: "flex",
+      alignItems: "flex-start",
+      gap: "8px",
+      fontSize: "13px",
+      lineHeight: "20px",
+      color: "var(--z-fg-primary)",
+      overflowWrap: "anywhere",
+      "&:lang(ar)": { lineHeight: "22px" },
+    },
+    "& li > span:first-child": {
+      flexShrink: 0,
+      width: "20px",
+      height: "20px",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: "999px",
+      fontSize: "12px",
+      fontWeight: 700,
+      background: "var(--z-bg-input)",
+      color: "var(--z-fg-secondary)",
+    },
+    "& li[data-met='true'] > span:first-child": {
+      background:
+        "color-mix(in srgb, var(--z-status-success) 18%, transparent)",
+      color: "var(--z-status-success)",
+    },
+    "& li[data-met='false'] > span:first-child": {
+      background: "color-mix(in srgb, var(--z-danger) 18%, transparent)",
+      color: "var(--z-danger)",
+    },
+  },
+});
+
+/** a value to copy (an ownership code), in its own box */
+export const CodeBox = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    marginBlock: "12px",
+    padding: "12px",
+    borderRadius: "var(--z-radius, 10px)",
+    background: "var(--z-bg-input)",
+    fontSize: "13px",
+    lineHeight: "20px",
+    overflowWrap: "anywhere",
+    "& code": {
+      fontFamily: "var(--fonts-mono, 'IBM Plex Mono'), monospace",
+      fontSize: "13px",
+      userSelect: "all",
+      textAlign: "start",
+    },
+    "& small": { fontSize: "12px", color: "var(--z-fg-muted)" },
   },
 });

@@ -2,6 +2,131 @@
 
 ## Unreleased
 
+## 26.3.0 (2026-11-25)
+
+The official release of everything tested in 26.3.0-beta.1 to 26.3.0-beta.11, for everyone.
+
+
+- **Wearing on a profile shows each design as it really looks** (owner, 2026-11-25). A nameplate takes a row of its own at its real shape, with the person's avatar and name on it as in the member list, moving when it moves. The square designs sit side by side under it (three on the card, four on the full profile): the decoration on the person's own avatar, the profile frame round a small copy of their card, the effect playing over a piece of their card (once when it comes into view, and again while the pointer or keyboard rests on it), and their name in its own font and colours. Under reduced motion, Save data or with profile effects off, each shows a still. Every tile keeps its name, its kind and the click that opens the design; right-to-left is mirrored. Everything new loads with Wearing itself, not with the app.
+
+- **Creators delete their own designs, published ones too (owner, 2026-11-25):** Creator Studio shows Delete on every design you made except one a reviewer took down, which says why instead. The dialog says it is for good, the image goes, everyone wearing it loses it and how many people have used it; after it the list updates without a reload. Needs the backend from this release.
+- **Delete for everyone (owner's ranks):** for Founder, Zrzur Staff and Platform Moderator (the owner decided these ranks may delete any design) and design admins (`cosmetics.manage_all`), as the server says in `can_delete_any`, a design's page, its quick view in Designs and the review queue show **Delete for everyone**. The dialog says the design and its image go for good, from everyone wearing it, and that the creator is told why with a statement they can appeal; a reason is required. Refusals show in plain words with the technical part under "Details". Needs the backend's `POST /community/items/{id}/erase` (owner, 2026-11-25).
+
+### Profile frames may move (2026-11-25, owner's request)
+
+* **Animated GIF, animated WebP and animated PNG frames are accepted** in Creator Studio, at the same exact 800 x 1020 px and up to 2.5 MB. There is no length limit; the server allows up to 240 frames.
+* **The safe-zone check runs on every frame of the animation**, not only the first, so the art cannot pass over the name later in its loop. The browser's own decoder (`ImageDecoder`) reads the frames; a browser without it checks the first frame and the server checks them all on upload.
+* The File check's Animation row says "Moves, allowed" in a neutral tone, with "People who turn motion off see it as a still picture." Specs, the frame guide (`/designs/frame-guide`) and the kit README (en, ar, de) say a frame may be still or moving.
+* **Showing them:** a moving frame plays on the profile card, the full profile, the frame picker, Designs and Creator Studio. With reduced motion, Save data or profile effects off it is the media server's still of the file, and the moving file is never fetched. The frame's slices are now given as shares of the picture, so the smaller still is cut in the same places. Nothing is added to the precache.
+* Needs the backend from this release; an older one refuses a moving frame (`frame_still`, now explained as "Moving frames are not open yet").
+
+- The small profile card shows every badge on a row under the name, the same as the full profile, instead of the first three at the far end of the name row (owner, 2026-11-25).
+
+### Profile frames: a design guide, a frame kit and uploads in Creator Studio (2026-11-25)
+
+* **Creators make profile frames in Creator Studio**, the same way as other designs: New design → Profile frame, shown only while the server has community frames on (`features.community_frames`). The file must be one still PNG, WebP or GIF of exactly 800 × 1020 px, up to 2.5 MB, with the card's content clear: the app checks every pixel the way the server does (alpha above 16 of 255 inside the card less 10 px, except the crest window over the banner) before anything is uploaded.
+* **Errors say what to fix:** "The art covers the name area" (or the banner, or the text area), "A frame file is exactly 800 × 1020 px", "A frame is one still picture", and the file limits, in the same panel. The server's own refusals (`covers_content`, `frame_size`, `frame_still`) get the same plain words.
+* **Preview on your real profile card:** the picked file is laid round your own card exactly as others will see it, on a dark or light ground, with a "Show guides" switch that draws how far the art may reach, the safe zone and the crest window, and says what each means.
+* **"How to design a profile frame"** at `/designs/frame-guide`, reachable from the Designs home (while frames are on), the frame type in Creator Studio, its file step and Specs and templates: the canvas and the card's place in it, the safe zone, the room on each side in pixels, what stretches, the 4 px grid and how a frame scales, the file rules, light and dark checks, do's and don'ts, the review rules and how to submit. Its pictures are drawn from the same numbers the upload checks.
+* **The frame kit** (`/frame-kit/zrzur-frame-kit.zip`): `template.svg` with named layers (export area, reach area, stretch zones, 4 px grid, card outline, safe zone, crest window, labels), `template.png` at the exact size, `example-frame.png` (a finished frame that passes every check), a Zrzur palette as JSON and ASE, and a README in English, Arabic and German. The files are made by `scripts/designs/frame-kit.mjs`; a test keeps them equal to its output and to the upload's numbers. They are static files, not in the service worker's precache.
+
+- Opening the app on a computer shows one loading screen, the logo alone, and then the whole app at once, instead of an empty rail and list with the greeting first (owner report 2026-11-25). Phones keep their quiet frame.
+
+### Profile frames: eight more of Zrzur's own (2026-11-25, owner's request)
+
+* **Eight new frames next to Crystal cave,** hand-made pixel art like it: Desert lanterns, Damascus jasmine, Autumn maple, Coral reef, Mushroom forest, and three Zrzur frames with the Zrzur logo as it is: Zrzur neon, Zrzur arcade and Zrzur flock (a starling murmuration). They are in Settings → Profile → Look → Profile frame and in Designs → Frames, with names in Arabic, English and German. Each is drawn round two opposite corners of the card in the same room as Crystal cave, turns round in right-to-left languages, never covers the name, the buttons or what you wrote, and its sparkles, bubbles, fireflies and neon glow twinkle except under reduced motion, Save data or with profile effects off (Autumn maple and Zrzur flock stay still).
+* **Loaded only when shown:** each new frame is its own small file (5–9 KB compressed), fetched the first time someone wearing it is on screen; nothing of them is in the app's first load or in what the service worker installs, apart from their ids and names. They are drawn ahead of time (`frames/pixel/set/`, written by the internal design kit) and placed round a card of any size; on a very short card a corner is cut at the edge of the frame's room.
+* Needs the backend from this release, which accepts the eight new ids (`USER_STYLE_PROFILE_FRAMES`); an older backend refuses to save them.
+
+### Activity: real pictures, links and a short settings page (2026-11-25, owner's report)
+
+* **Real pictures everywhere:** the profile card, the full profile and the member and DM line show each game's or app's own picture loaded only through Zrzur's image proxy or file server. A logo stands by itself, with no tile, background or frame; a Steam game's tall cover is the picture with a small rounded corner, centred in the same square so names line up. A hairline shadow in the text colour keeps a dark logo visible on a dark panel and a light one on a light panel. Without a picture, the first letter in a soft circle; never the generic laptop or controller icon. A picture that fails to load turns into the letter.
+* **Links:** a program the desktop app saw shows its official page as one link with the site's name; an app's own buttons show as before. Both open through the link warning. On phones every link is a 44 px row.
+* **The activity panel reads in layers:** "Playing" over the name, then the game's details and state on their own lines, then the time. Where it comes from moved into the time's tooltip, so the card stays short; the Steam credit stays.
+* **Settings → Activity, much less text:** one short line per row instead of paragraphs. The legal privacy words (the same as the privacy policy) are one tap away under "Details", with `aria-expanded`. Each program in the list shows its real picture (the desktop app's list picture through the image proxy, or the program's own icon from your computer, which never leaves it), its name, "Running now" in the success colour, Rename and its switch. Browsers say "Browser · off until you turn it on". Connected apps show their own icon too.
+* Needs the desktop app from this release for pictures, pages, local icons and browsers off; an older desktop app keeps working with letter tiles.
+
+### Early Adopter is a ticket now, not the Zrzur mark (2026-11-25, owner's decision)
+
+* **Early Adopter has a new drawing:** a cream admission ticket printed "01" in coral, with a torn-off stub, in the same enamel-pin style with a silver rim. Before, it was the Zrzur mark in pink-red, the same shape as Founder and Staff, so people took early members for Zrzur staff.
+* The "01" and the stub are drawn bold so the ticket reads at 16 px in the member list, and none of Founder's gold is used.
+
+### Badges: one text for every badge, Verified Bot Developer drawn, Verified Server Owner cancelled (2026-11-24, owner's report)
+
+* **One source for badge texts.** A badge's name, what it means and how it is earned now come from one place and read the same in My Badges ("Badges you can earn"), the badge tooltip and profile row, and the public guide at `/badges`, which adds only the details below that line. Before, My Badges still said "Own a verified server. It is shown while you do." while the guide said something else.
+* The texts follow the approved badge policy. **Verified Bot Developer:** by application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership. **Verified Server** (the mark on a server): by application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check). Partner, Content Creator, Community Builder, Big Community, Creator, Super Creator, Beta Veteran, Early Adopter, the years on Zrzur and the team badges are aligned the same way. No line tells you to apply while applications are closed, and none promises a review time.
+* **Verified Bot Developer has its own drawing:** the `</>` of code inside a gear, in the same enamel-pin style; before, it was the same verified seal as Verified Server Owner and the two looked identical in My Badges.
+* **Verified Server Owner is no longer given out** (owner's decision): it is gone from "Badges you can earn" and from `/badges`. People who already have it keep it, still drawn with the verified seal. The Verified Server mark on servers stays as it is.
+* On `/badges`, the section "Programs you apply for" is now "Programs by application".
+* **Verified Server is applied for in Server settings** (owner's decision): Overview → Verified Server, shown to the server's owner only and only while the server takes badge applications (otherwise nothing is shown). It gives the Verified Server line, the checklist the server measured for this server in your language, "Check and apply" with the domain check (a DNS TXT record or a file on the website), and the application's status with continue, withdraw and appeal. Before, the only way in was the Verified Server Owner tile in My Badges, which is gone.
+* **Arabic on the badge screens:** badge names no longer break inside a word («مختبر مخضرم» on two lines); a name too long for its place ends in "…" with the whole name on hover. The tanween is written before the alif («يومًا») and «مختبر» without its kasra, because WebKit drew the mark torn off the alif or above the letter.
+
+### Role colours show on nameplates in the member list (2026-11-24, owner's report)
+
+* A member with a server role colour and a nameplate shows the role colour in the member list, plain or gradient. Before, the plate's ink drew every name on a plate white (dark themes) or dark (light themes), so the role colour never showed there.
+* One rule everywhere: your own chosen name colour wins; otherwise the role colour shows, on a nameplate too; with "Show name styles" off, role colours still show. A plain role colour on a plate keeps the plate's soft halo so it reads on the art; a gradient role colour is no longer covered by that halo.
+
+### Two-factor sign-in no longer loops (2026-11-24, owner's report)
+
+* **The sign-in dialog sends the code itself and says what went wrong**, in the same dialog, with the server's answer under "Details". Before, a refused code closed the dialog and opened it again empty, with no message, and every later code went to the same used-up ticket, so even the right code never worked.
+* **A refused code gets a new sign-in step at once**, made with the password already given, so the next code always counts: "This code didn't work. Wait for the next code and enter it once." A wrong recovery code says so in its own words.
+* **Too many wrong codes:** the dialog closes and the password form says "Too many wrong codes. Wait 15 minutes and try again." When no new step can be had, it says "The sign-in step ran out. Please sign in again."
+* The code field opens the number pad on phones, takes the code from the phone's suggestion (`one-time-code`) and drops spaces and line breaks, so `123 456` works. Confirm shows that it is busy and sends once.
+
+### Profile frames fit the window (2026-11-24, owner's report)
+
+* A profile frame (Crystal cave) shows whole on the card opened from the member list and on the full profile, at any window height: the card and the profile keep the frame's room from the window's edges, and the frame's pixels get smaller (3 px, then 2 px) on lower windows and phones.
+* On a phone, a framed card and a framed full profile sit as a rounded card inset from the screen's edges; their Wearing tiles give a name and its line two lines instead of cutting them short ("Moon h…").
+* Four rarely shown parts load the first time they are needed, so the files the app installs up front stay under their limit: the age gate of channels marked as mature, the banner of the conversation with Zrzur's official account, the voice message recorder and the cards of files waiting to be sent.
+
+### Activity: says where it is detected, and its own icons (2026-11-24, owner's report)
+
+* **Settings → Activity says where activity is detected**, in a new row at the top ("On this device"): in a browser, that the Zrzur desktop app detects it and to open Zrzur there; in a desktop app from before rich presence (26.2.0 and older), to update it; in a current desktop app, what it detects right now ("Detecting now: Playing Rust", or "nothing running"), live; with sharing off, that nothing is detected. Where the server reads Steam, the row says Steam works without the desktop app. Before, a browser or an old desktop app showed nothing at all once sharing was on.
+* The desktop-only sections (games and apps on this computer, connected apps) show only in a desktop app that can detect; the row above explains the rest.
+* **Icons:** Connections (linked accounts) shows a link and Activity a pulse, drawn like the entries around them; both used to show a game controller. The "Share what you are doing" row shows the pulse too. Games keep the controller.
+
+### Badges: Content Creator and the public badge guide (2026-11-24, badge plan phase 5)
+
+* **Zrzur badges** (`/badges`), open to everyone signed in or not: every badge given out today with its art, what it means, how it is earned (automatic, by application, given by the team) and the published criteria; no promised review dates. Reached from My Badges ("How every badge is earned").
+* **Content Creator** badge (art: concept B "The take") and its application: name one channel, its kind of content and recent works, put the code you get in the channel's description or a pinned post, and send; a person on the team checks the channel by hand.
+* "Check and apply" and "Your applications" show only while the server reports `badge_applications`.
+
+### Badges: apply for Partner, Verified Server and Verified Bot Developer (2026-11-24, badge plan phase 4)
+
+* **Check and apply** on the Partner, Verified Server Owner and Verified Bot Developer badges in My Badges: pick your server or bot, read the checklist the server measured, write what it is, prove control of your domain (Verified Server: a DNS TXT record or a file on the website) and send it. Reviews have no promised date.
+* **Your applications** in My Badges: status, the reasons of a decision in your language, continue a draft, withdraw, and appeal a refusal once within 30 days.
+* Arabic badge names and descriptions get more line height, so marks such as the kasra in «مختبِر مخضرم» no longer touch the next line (WebKit).
+
+### Badges: community and creator rules (2026-11-24, badge plan phase 3)
+
+* **Community Builder and Big Community** say what counts: genuine human members (no bots, deleted, banned or suspended accounts, accounts under 7 days or without a confirmed e-mail, members under a day), counted a few times a day, kept when the server shrinks.
+* **Creator** stays for good once earned; **Super Creator** names its minimum of 25 approved designs and 180 days in the creator program, on the badge and in My Badges.
+* **Beta Veteran:** the team approves it after a completed cycle with 3 reviewed feedback reports or 1 confirmed bug report; My Badges says so to a tester who completed the beta.
+
+### Badges: one anniversary, Saha Champion retired, Discover bot marks (2026-11-24, badge plan phases 1 and 2)
+
+* **One time-on-Zrzur badge:** profiles and My Badges show only the highest full year reached (One Year up to Ten Years, counted in UTC); Two and Four to Ten Years appear for the first time. Early Adopter and the anniversaries are hidden while "Member since" is hidden on the profile, and their texts say so.
+* **Saha Champion retired:** no badge, art or text in the app; nobody held it.
+* **Discover:** a verified bot shows the check inside its Bot label and no seal beside it; an official bot that is not verified never shows a verified mark.
+* **Staff badge panel** (staff tools, still hidden): uses the admin console's routes with a staff session opened by an authenticator code, shows the changes waiting for a second staff member with Approve and Refuse, and picks an expiry with the app's date field.
+
+### Your chosen name colour shows everywhere (2026-11-24, owner's report)
+
+* **Fixed:** a name colour chosen in Settings → Profile → Name style did not show in a server's member list or on the profile. One rule now holds in every place: your own name colour (and its effect) wins over a server role colour; the role colour shows only when you chose none; with Settings → Advanced → Show name styles off every name is plain (role colours still show, they are the server's).
+* **On a nameplate** in the member list, a name in its own chosen colour keeps it; the plate's white or dark ink is only for names without one and for the status line.
+* **On a themed profile card** a colour that does not read on the theme is lightened, same hue, until it reads at 4.5:1 (a blue stays blue); it gave way to the card's white before. The card's ink is used only when no shade of a colour reads.
+* **No grey box, no cut letters:** the boxes that cut a long name short with "…" were as tall as the line, so a Halo, Edge or Lifted effect was cut into a hard-edged grey block and slanted fonts (Script) lost the end of their last letter. Every box that clips a name now has 6 px of room on each side, pulled back by as much, so nothing moves: member list, message header, account bar, direct messages (desktop and phone), friends, the You menu, the user card and the full profile.
+
+### Calls in direct messages and groups keep the chat visible (2026-11-23, owner's request)
+
+* **Fixed:** calling someone in a DM hid the conversation. The call was the floating card laid over the top 40 % of the message list (or over all of it when expanded), and the messages did not move. The call is now a block above the messages, in the page itself: the conversation scrolls below it and the composer works during the call.
+* **Desktop and tablet:** both people large and centred, with a ring that pulses while someone talks, microphone-off and deafened marks, and the other person's tile saying "Ringing…" until they answer. Cameras and shared screens use the call tiles. Under them: microphone and camera with a device menu each, share screen, More (deafen, full screen, fold, voice settings) and hang up. Drag the line under the call to make it taller or shorter (Arrow Up/Down, Home, End on the keyboard); Enter or a double-click folds it to a bar with the time, microphone and hang up.
+* **Others are in the call, you are not:** a bar above the messages shows who, for how long, and Join or Join with video.
+* **Phones:** the call fills the screen: minimise, the conversation's name and the call time, speaker, add people (groups); big tiles; a floating bar with camera, microphone, chat, more and hang up. Chat brings the conversation up under a short call strip; its handle goes back. Minimise returns to the app, and the floating call card opens the call again.
+* **Asks before ringing (2026-11-24):** starting a call in a DM or group opens a short dialog titled with the person or group: "No one is here yet. Start the call and others can join.", with Start a call (or Start a video call) and Cancel. Joining a call that is already on, the Join bar and answering a ring do not ask.
+* **Alone in the call (2026-11-24):** once connected with nobody else in, your own tile is large; the other members' faces sit under it at half strength until they join (up to five, else four and +N), with "Only you are here. The others can join while you stay in the call." and "Calling…" while they are rung. Same wording as the phone app.
+* Reduced motion keeps the rings still. The call parts load the first time a call shows (precache shell 2,044,994 bytes).
+
 ### Name styles (2026-11-22, owner's request)
 
 * **More ways to write your name:** a spectrum of three to five colours that runs round the name, and four effects on top of any colour: Halo, Edge, Lifted and Sheen. With a role colour in a server, your font and effect stay. Settings → Profile → Look → Name style; the dialog is laid out for phones first, with the preview pinned on top and drawn in the theme you use.

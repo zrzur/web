@@ -9,8 +9,10 @@ import { BadgeMeta, BadgeShape } from "./catalog";
  * Every badge is an enamel pin: the rim metal shows the tier (silver regular,
  * gold rare, a double platinum rim on the top tier) and the enamel colour
  * shows the family. Founder, Staff and Official Server are the Zrzur mark on
- * its own, with no frame. Verified Server, Verified Bot and Verified Bot
- * Developer share one verification mark.
+ * its own, with no frame. Verified Server, Verified Bot and the cancelled
+ * Verified Server Owner (drawn only for people who have it) share one
+ * verification mark; Verified Bot Developer is the </> in a gear (owner,
+ * 2026-11-24).
  *
  * The art (`badgeArt.ts`, generated, static, no user input) loads on its own
  * the first time a badge is drawn, so it stays out of the app shell. Until it
@@ -536,27 +538,6 @@ const EMBLEMS: Partial<Record<string, Emblem>> = {
           stroke="#fff"
           stroke-width="1.8"
           stroke-linecap="round"
-        />
-      </>
-    ),
-  },
-
-  // a trophy with a 1, first place
-  saha_champion: {
-    body: "M6.4 2.4h11.2v1.8h3.8v2.6c0 3-1.9 5.2-4.7 5.8a5.9 5.9 0 0 1-3.5 2.9v2.9h3.2a1.2 1.2 0 0 1 1.2 1.2v1.6H6.4v-1.6a1.2 1.2 0 0 1 1.2-1.2h3.2v-2.9a5.9 5.9 0 0 1-3.5-2.9C4.5 12 2.6 9.8 2.6 6.8V4.2h3.8Z",
-    details: (c) => (
-      <>
-        <path
-          d="M6.4 6.2H4.8v.6c0 1.5.7 2.7 1.8 3.3a9.6 9.6 0 0 1-.2-2ZM17.6 6.2h1.6v.6c0 1.5-.7 2.7-1.8 3.3.1-.6.2-1.3.2-2Z"
-          fill={c.deep}
-        />
-        <path
-          d="m10.8 7.4 1.6-1.2v5.8"
-          fill="none"
-          stroke="#fff"
-          stroke-width="1.9"
-          stroke-linecap="round"
-          stroke-linejoin="round"
         />
       </>
     ),

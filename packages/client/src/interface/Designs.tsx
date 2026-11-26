@@ -27,12 +27,15 @@ import {
   useDate,
   useWearDesign,
 } from "@revolt/app/interface/settings/user/profile/CommunityParts";
+import { StaffEraseDialog } from "@revolt/app/interface/settings/user/profile/StaffErase";
 import {
   CommunityItem,
   can,
   communityApi,
+  communityFramesOpen,
   creatorName,
   hasOpenPage,
+  mayDeleteAny,
   maySeeStudio,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useCreatorAccess } from "@revolt/app/interface/settings/user/profile/creatorAccess";
@@ -92,6 +95,10 @@ const ReviewQueue = lazy(() =>
     (m) => ({ default: m.ReviewQueue }),
   ),
 );
+// read by creators and the curious, rarely: it downloads when opened
+const FrameGuide = lazy(() =>
+  import("./designs/FrameGuide").then((m) => ({ default: m.FrameGuide })),
+);
 const CreatorsAdmin = lazy(() =>
   import("@revolt/app/interface/settings/user/profile/CreatorsAdmin").then(
     (m) => ({ default: m.CreatorsAdmin }),
@@ -110,6 +117,7 @@ const CreatorsAdmin = lazy(() =>
  *   /designs/favourites      the designs you saved
  *   /designs/creators        everyone who published something
  *   /designs/creator/:id     one creator and their work
+ *   /designs/frame-guide     how to design a profile frame, and its kit
  */
 
 type View =
@@ -119,6 +127,7 @@ type View =
   | { page: "favourites" }
   | { page: "creators" }
   | { page: "creator"; id: string }
+  | { page: "guide" }
   | { page: "design"; slug: string };
 
 export function Designs() {
@@ -162,6 +171,7 @@ function Gallery() {
     if (first === "studio")
       return { page: "studio", path: second ? [second, ...more] : [] };
     if (first === "creators") return { page: "creators" };
+    if (first === "frame-guide") return { page: "guide" };
     if (first === "creator" && second) return { page: "creator", id: second };
     return { page: "home" };
   });
@@ -202,6 +212,8 @@ function Gallery() {
   /** the way to Creator Studio, for creators only */
   const creating = () => !isDesignsSite() && access();
   const studio = () => (creating() ? () => go("/studio") : undefined);
+  /** creators' profile frames are open on this server */
+  const framesOpen = () => communityFramesOpen(client());
   /** a suspended creator looks at their designs and changes nothing */
   const readOnly = () => !!perms()?.creator && perms()?.creator !== "Active";
   // the address alone opens nothing: without the rank it leads to Designs
@@ -384,6 +396,9 @@ function Gallery() {
                 onOpen={setOpen}
                 onDesign={(slug) => go(`/${slug}`)}
                 onMaker={(id) => go(`/creator/${id}`)}
+                onFrameGuide={
+                  framesOpen() ? () => go("/frame-guide") : undefined
+                }
               />
             </Match>
 
@@ -432,6 +447,20 @@ function Gallery() {
                   name={wearer.name()}
                   path={(view() as { path: string[] }).path}
                   onNavigate={(path) => go(`/studio${path}`)}
+                  onFrameGuide={() => go("/frame-guide")}
+                />
+              </Suspense>
+            </Match>
+
+            <Match when={view().page === "guide"}>
+              <Suspense>
+                <FrameGuide
+                  onBack={() => go("")}
+                  onUpload={
+                    creating() && !readOnly() && framesOpen()
+                      ? () => go("/studio/new/frames")
+                      : undefined
+                  }
                 />
               </Suspense>
             </Match>
@@ -496,6 +525,11 @@ function Gallery() {
             item={item()}
             onClose={() => setOpen(undefined)}
             onChanged={() => setVersion((v) => v + 1)}
+            mayErase={mayDeleteAny(perms())}
+            onErased={() => {
+              setOpen(undefined);
+              setVersion((v) => v + 1);
+            }}
             onCreator={(id) => {
               setOpen(undefined);
               go(`/creator/${id}`);
@@ -605,8 +639,12 @@ function DesignDialog(props: {
   onClose: () => void;
   onChanged: () => void;
   onCreator: (id: string) => void;
+  /** Zrzur staff delete anyone's design; the server checks again */
+  mayErase?: boolean;
+  onErased?: () => void;
 }) {
   const { t, i18n } = useLingui();
+  const [erasing, setErasing] = createSignal(false);
   const client = useClient();
   const { isLoggedIn } = useClientLifecycle();
   const { openModal } = useModals();
@@ -794,6 +832,31 @@ function DesignDialog(props: {
                 <Icon name="flag" size={14} />
                 <Trans>Report</Trans>
               </button>
+            </Show>
+            <Show when={props.mayErase && !isDesignsSite()}>
+              <button
+                type="button"
+                data-quiet
+                data-danger="true"
+                data-testid="staff-erase"
+                onClick={() => setErasing(true)}
+              >
+                <Icon name="trash" size={14} />
+                <Trans>Delete for everyone</Trans>
+              </button>
+              <StaffEraseDialog
+                show={erasing()}
+                item={{
+                  _id: item()._id,
+                  name: item().name,
+                  version: details()?.item.version,
+                }}
+                onClose={() => setErasing(false)}
+                onErased={() => {
+                  setErasing(false);
+                  props.onErased?.();
+                }}
+              />
             </Show>
           </Buttons>
           <Show when={wearing()}>

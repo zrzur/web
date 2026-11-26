@@ -7,11 +7,12 @@ import {
   createSignal,
 } from "solid-js";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
+import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
+import { TranslatedError } from "@revolt/i18n/errors";
 import { Button, Dialog } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -23,6 +24,7 @@ import {
   isRankRefusal,
   kindOf,
 } from "../communityApi";
+import { parsedFailure } from "../StaffErase";
 
 import {
   Actions,
@@ -72,6 +74,8 @@ export function StudioDesign(props: {
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<string>();
   const [asking, setAsking] = createSignal<"withdraw" | "delete">();
+  /** why the server refused a deletion, shown in its dialog */
+  const [failure, setFailure] = createSignal<unknown>();
 
   const can = () => actionsOf(props.item, props.readOnly);
   /**
@@ -185,7 +189,10 @@ export function StudioDesign(props: {
               variant="tonal"
               data-testid="studio-delete"
               isDisabled={busy()}
-              onPress={() => setAsking("delete")}
+              onPress={() => {
+                setFailure(undefined);
+                setAsking("delete");
+              }}
             >
               <Icon name="trash" size={16} />
               <Trans>Delete</Trans>
@@ -283,6 +290,14 @@ export function StudioDesign(props: {
                 }
               >
                 {reviewNote(props.item) ?? <Trans>No note was left.</Trans>}
+                <Show when={props.item.status === "Suspended"}>
+                  <SuspendedNote data-testid="studio-no-delete">
+                    <Trans>
+                      You can't delete it while the review is on. It stays until
+                      a reviewer decides.
+                    </Trans>
+                  </SuspendedNote>
+                </Show>
               </Callout>
             </Match>
             <Match when={status() === "PendingReview"}>
@@ -550,8 +565,14 @@ export function StudioDesign(props: {
             text: <Trans>Delete</Trans>,
             onClick: () => {
               const id = props.item._id;
+              setFailure(undefined);
               void run(
-                () => communityApi.remove(client(), id),
+                () =>
+                  communityApi.remove(client(), id).catch((thrown: unknown) => {
+                    // plain words here, the server's answer under "Details"
+                    setFailure(parsedFailure(thrown));
+                    throw thrown;
+                  }),
                 () => props.onChanged(undefined, id),
               );
               return false;
@@ -560,12 +581,28 @@ export function StudioDesign(props: {
         ]}
         isDisabled={busy()}
       >
-        <Trans>
-          The design and its image are deleted. This can't be undone; download
-          your copy first if you want to keep it.
-        </Trans>
-        <Show when={error()}>
-          <DialogError role="alert">{error()}</DialogError>
+        <DeleteText>
+          <p>
+            <Trans>
+              The design and its image are deleted for good. It leaves Designs,
+              and everyone wearing it loses it. This can't be undone; download
+              your copy first if you want to keep it.
+            </Trans>
+          </p>
+          <Show when={props.item.popularity > 0}>
+            <p data-testid="studio-delete-count">
+              <Plural
+                value={props.item.popularity}
+                one="# person has used this design."
+                other="# people have used this design."
+              />
+            </p>
+          </Show>
+        </DeleteText>
+        <Show when={failure() !== undefined}>
+          <DialogError role="alert" data-testid="studio-delete-error">
+            <TranslatedError error={failure()} />
+          </DialogError>
         </Show>
       </Dialog>
     </Page>
@@ -698,7 +735,20 @@ const StaffReason = styled("q", {
   },
 });
 
-const DialogError = styled("p", {
+const DeleteText = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    "& p": { margin: 0, overflowWrap: "anywhere" },
+  },
+});
+
+const SuspendedNote = styled("span", {
+  base: { display: "block", marginBlockStart: "8px" },
+});
+
+const DialogError = styled("div", {
   base: {
     margin: "12px 0 0",
     fontSize: "13px",
