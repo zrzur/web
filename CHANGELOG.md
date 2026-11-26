@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 26.3.1 (2026-11-26)
+
+The designs that were built into the app leave it (owner, 2026-11-26): only designs uploaded through Designs remain. The owner uploads the former built-in designs himself.
+
 ### Built-in designs leave the app; they come back as community designs (owner, 2026-11-26)
 
 - Zrzur's own avatar decorations (149), nameplates (284: flags, themes, zodiac signs and the design pack), profile effects (88) and profile frames (9: Crystal cave and the set of 2026-11-25) are no longer part of the app. Each was exported as a file the Creator Studio takes; the owner uploads them as community designs (`c:<id>`), so they can be edited or deleted like any other.

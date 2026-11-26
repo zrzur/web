@@ -40,7 +40,7 @@
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "e3bd7c04a24b5b57360667806f1c31376f757f91f16b2b46ea0c239121c8cf1e",
+      "sha256": "e642e6f78a9fb0d3a22c290374d9d191794bd250e31599dedf1746be5cb7c96b",
       "bytes": 952,
       "category": "reviewed-build-and-ci"
     },
@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0431d5a198ec9ef15bff8f4a7624fed181bccc6a7b951be8aaf7386f6d94ef32",
-      "bytes": 255299,
+      "sha256": "0df2f7525c862d4783342c845e6817a97fa3c1748cc1321721b1828caae6d757",
+      "bytes": 255496,
       "category": "public-documentation"
     },
     {
@@ -328,7 +328,7 @@
     },
     {
       "path": "RELEASE.json",
-      "sha256": "779ba10276e6dfe57935b76695ba585184d72a62075c3c7b77590d7130663828",
+      "sha256": "9fc28a89c6897da5f95936f39eaa83b95e8c45b9216c2112886c5452f4ca5651",
       "bytes": 281,
       "category": "product-source-or-build-manifest"
     },
@@ -346,8 +346,8 @@
     },
     {
       "path": "ZRZUR_RELEASE.md",
-      "sha256": "bbae20dd25ccb00b7bd59c4f844c428287ecddf16efd12ec221d3517dca43659",
-      "bytes": 1488,
+      "sha256": "baef7cf5c36403bc157674c4529811a3b48e6c768c2005e63f1c2c4acd1e843d",
+      "bytes": 1417,
       "category": "public-documentation"
     },
     {
@@ -586,7 +586,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "a14b30650708d80ea5a515526ca0d68d5872509c687d446a5693d0008b0c04d3",
+      "sha256": "786779830e5ac232b6b8143434badd842503df853318d860342ccf5f967f14de",
       "bytes": 728,
       "category": "product-source-or-build-manifest"
     },
@@ -2716,8 +2716,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/StyleEditors.tsx",
-      "sha256": "b83a85fba013e918ab2374f70d62db6316a3e1a307835a0026302efb3d559b48",
-      "bytes": 56620,
+      "sha256": "61eefbc3b77015eda7f901b3dfcc67c3bed280c5772ad1cabac850fe152681b7",
+      "bytes": 56617,
       "category": "product-source-or-build-manifest"
     },
     {
