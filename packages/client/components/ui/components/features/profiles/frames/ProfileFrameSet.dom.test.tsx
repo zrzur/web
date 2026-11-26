@@ -45,19 +45,26 @@ describe("a frame drawn ahead of time", () => {
       () => <ProfileFrame frame={frame()} />,
       document.getElementById("root")!,
     );
-    await vi.waitFor(() =>
-      expect(layer().querySelectorAll("svg path").length).toBeGreaterThan(20),
+    // each frame is its own lazy file: on a busy machine the import takes
+    // longer than waitFor's default second
+    await vi.waitFor(
+      () =>
+        expect(layer().querySelectorAll("svg path").length).toBeGreaterThan(20),
+      { timeout: 10_000 },
     );
     // the starlings have nothing that twinkles
     expect(layer().dataset.moving).toBeUndefined();
     const flock = layer().innerHTML;
 
     setFrame("coral-reef");
-    await vi.waitFor(() => {
-      expect(layer().dataset.profileFrame).toBe("coral-reef");
-      expect(layer().innerHTML).not.toBe(flock);
-      expect(layer().querySelector(".z-frame-twinkle")).not.toBeNull();
-    });
+    await vi.waitFor(
+      () => {
+        expect(layer().dataset.profileFrame).toBe("coral-reef");
+        expect(layer().innerHTML).not.toBe(flock);
+        expect(layer().querySelector(".z-frame-twinkle")).not.toBeNull();
+      },
+      { timeout: 10_000 },
+    );
     // bubbles twinkle while the viewer sees motion
     expect(layer().dataset.moving).toBe("");
     const art = layer().querySelector<HTMLElement>("svg")!.parentElement!;

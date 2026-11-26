@@ -7822,8 +7822,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/ProfileFrameSet.dom.test.tsx",
-      "sha256": "053c3531ec2ace939a665b132b57a31a5923961bf051809c18aebc82bf37a448",
-      "bytes": 2210,
+      "sha256": "85c973b1b1d843de4fbda05643134e0bc69ea13b0f646edd55b2d204201dbdc4",
+      "bytes": 2413,
       "category": "synthetic-test-source-or-fixture"
     },
     {
