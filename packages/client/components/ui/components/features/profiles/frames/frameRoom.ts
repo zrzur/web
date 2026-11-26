@@ -1,88 +1,34 @@
 /**
- * What is known about each built-in frame without its drawing: the room it
- * takes round the card and whether it moves.
+ * The room a profile frame takes round the card. Every frame is a creator's
+ * picture on the community template (`communityFrame.ts`): 30 px at the
+ * sides, 70 above and 40 below a 340 px card, scaled with the card's width.
  */
-import {
-  type ProfileFrameId,
-  isProfileFrameId,
-  PROFILE_FRAME_IDS,
-} from "./frameIds";
+import { FRAME_TEMPLATE } from "./communityFrame";
 
-/** Room round the card a drawing uses, in css px */
+/** Room round the card a frame uses, in css px */
 export type FrameRoom = { x: number; top: number; bottom: number };
 
-/**
- * The room every built-in frame needs round the card, in cells: Crystal cave
- * (pixel/crystalCave.ts CRYSTAL_ROOM, a test keeps them equal) and the set
- * of 2026-11-25 (pixel/set/) were drawn for the same room
- */
-const ROOM: FrameRoom = { x: 14, top: 24, bottom: 18 };
-
-/** frames with nothing that twinkles */
-const STILL: readonly string[] = ["autumn-maple", "zrzur-flock"];
-
-/** What each frame's drawing needs round the card, in cells, and its motion */
-export const FRAME_FACTS = Object.fromEntries(
-  PROFILE_FRAME_IDS.map((id) => [
-    id,
-    { room: ROOM, moves: !STILL.includes(id) },
-  ]),
-) as Record<ProfileFrameId, { room: FrameRoom; moves: boolean }>;
-
-/**
- * The pixel size for a box this wide: 4 px on a card or a full profile,
- * 3 px on a phone, smaller on the little preview cards, so the drawing keeps
- * its proportions everywhere.
- */
-export function pixelSize(width: number, phone = false) {
-  const cell = Math.min(4, Math.max(2, Math.round(width / 90)));
-  return phone ? Math.min(cell, 3) : cell;
-}
-
-/** The room a built-in frame uses at a pixel size, without drawing it */
-export function frameRoomAt(id: ProfileFrameId, cell: number): FrameRoom {
-  const room = FRAME_FACTS[id].room;
-  return { x: room.x * cell, top: room.top * cell, bottom: room.bottom * cell };
-}
+const CARD_WIDTH = FRAME_TEMPLATE.card.right - FRAME_TEMPLATE.card.left;
 
 /** Least room left between a framed profile and the window's edges, css px */
 export const FRAME_EDGE = 12;
 
 /**
- * The pixel size of a frame round a profile shown in the window (the card
- * beside a name, the full profile), so the profile and its whole frame fit:
- * 4 px on a tall window, 3 px below 1080 px, 2 px below 640 px and on a
- * phone, where the profile takes the screen's width. Whole pixels only, so
- * the pixel art stays crisp.
- */
-export function fitCell(
-  width: number,
-  options: { phone?: boolean; windowHeight?: number } = {},
-) {
-  const cell = pixelSize(width, options.phone);
-  if (options.phone) return Math.min(cell, 2);
-  const tall = options.windowHeight ?? Infinity;
-  if (tall < 640) return Math.min(cell, 2);
-  if (tall < 1080) return Math.min(cell, 3);
-  return cell;
-}
-
-/**
- * The room any frame takes round a box `width` px wide: a built-in one at
- * pixel size `cell`, a community one by its template (30 px at the sides,
- * 70 above, 40 below a 340 px card, `communityFrame.ts`), none without one.
+ * The room a frame takes round a box `width` px wide: a community one
+ * (`c:<id>`) by its template, none without one. A value that is not a
+ * community frame (a built-in id Zrzur no longer ships) takes none.
  */
 export function frameRoomOf(
   frame: string | undefined,
   width: number,
-  cell: number,
 ): FrameRoom {
-  if (isProfileFrameId(frame)) return frameRoomAt(frame, cell);
-  if (frame?.startsWith("c:")) {
-    const s = width / 340;
-    return { x: 30 * s, top: 70 * s, bottom: 40 * s };
-  }
-  return { x: 0, top: 0, bottom: 0 };
+  if (!frame?.startsWith("c:")) return { x: 0, top: 0, bottom: 0 };
+  const s = width / CARD_WIDTH;
+  return {
+    x: FRAME_TEMPLATE.card.left * s,
+    top: FRAME_TEMPLATE.card.top * s,
+    bottom: (FRAME_TEMPLATE.height - FRAME_TEMPLATE.card.bottom) * s,
+  };
 }
 
 /**

@@ -9,28 +9,16 @@ import { useClient } from "@revolt/client";
 import { Profile } from "..";
 import { fetchFullProfile } from "../linkedGames";
 import { createProfileTheme } from "../profileTheme";
-import { type UserStyle, isCommunityRef, themeColours } from "../userStyle";
+import { type UserStyle, themeColours } from "../userStyle";
 
 import { FrameGuides } from "./FrameGuides";
 import { FramedCard } from "./ProfileFrame";
-import { isProfileFrameId } from "./frameIds";
-import { type FrameRoom, frameRoomAt, pixelSize } from "./frameRoom";
+import { frameRoomOf } from "./frameRoom";
 
 /** The profile card's own width (UserCard) */
 const CARD_WIDTH = 360;
 /** Tallest the card is shown here; it scrolls in the real one */
 const CARD_HEIGHT = 560;
-
-/** Room a frame takes round a card of this width */
-function frameRoom(frame: string | undefined, width: number): FrameRoom {
-  if (isProfileFrameId(frame)) return frameRoomAt(frame, pixelSize(width));
-  if (isCommunityRef(frame)) {
-    // the community template: 30 px at the sides, 70 above, 40 below a 340 px card
-    const s = width / 340;
-    return { x: 30 * s, top: 70 * s, bottom: 40 * s };
-  }
-  return { x: 0, top: 0, bottom: 0 };
-}
 
 /**
  * Someone's real profile card, as others see it, wearing `style` (a look
@@ -77,7 +65,7 @@ export function ProfilePreview(props: {
   );
 
   const room = () =>
-    frameRoom(props.sizeAs ?? props.style.profile_frame, CARD_WIDTH);
+    frameRoomOf(props.sizeAs ?? props.style.profile_frame, CARD_WIDTH);
   const natural = () => CARD_WIDTH + 2 * room().x;
   const [space, setSpace] = createSignal(natural());
   const [tall, setTall] = createSignal(0);

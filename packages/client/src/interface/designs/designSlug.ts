@@ -2,8 +2,12 @@
  * The address of one design: designs.zrzur.com/<slug> on the public site,
  * /designs/<slug> in the app.
  *
- *   look-<id>, decoration-<id>, nameplate-<id>, colours-<id>   built in
- *   <26-character id>                                         community
+ *   look-<id>, colours-<id>     built in
+ *   <26-character id>           community
+ *
+ * decoration-<id> and nameplate-<id> were built-in designs until 2026-11-26,
+ * when they became creators' designs. Their addresses are still read, so an
+ * old link opens a page that says the design isn't available.
  */
 export type DesignRef =
   | { kind: "look" | "decoration" | "nameplate" | "colours"; id: string }

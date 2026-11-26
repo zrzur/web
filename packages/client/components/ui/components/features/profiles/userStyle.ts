@@ -1,13 +1,5 @@
 import { type JSX, createSignal } from "solid-js";
 
-import { isEffectId } from "./effects/effectIds";
-import { isProfileFrameId } from "./frames/frameIds";
-import {
-  PACK_DECORATIONS,
-  PACK_NAMEPLATES,
-  PACK_PLATE_DRIFT,
-} from "./pack/designs.generated";
-
 /**
  * A user's chosen look, as stored by the API on the user object
  * (`style`). The server only accepts the ids and `#rrggbb` colours below,
@@ -19,19 +11,19 @@ export type UserStyle = {
   name_colour?: string[];
   /** one of `NAME_EFFECTS`, drawn on top of the colour */
   name_effect?: string;
-  /** built-in id, or `c:<id>` for a community decoration */
+  /** `c:<id>` of a community decoration */
   decoration?: string;
   /** image of a community decoration (filled in by the server) */
   decoration_file?: string;
-  /** built-in id, or `c:<id>` for a community nameplate */
+  /** `c:<id>` of a community nameplate */
   nameplate?: string;
   /** image of a community nameplate (filled in by the server) */
   nameplate_file?: string;
-  /** one of Zrzur's own effects, or `c:<id>` of a community effect */
+  /** `c:<id>` of a community effect */
   effect?: string;
   /** file of a community effect (filled in by the server) */
   effect_file?: string;
-  /** frame around the whole profile card: built-in id, or `c:<id>` */
+  /** frame around the whole profile card: `c:<id>` of a community frame */
   profile_frame?: string;
   /** image of a community frame (filled in by the server) */
   profile_frame_file?: string;
@@ -41,21 +33,16 @@ export type UserStyle = {
 export function userStyleOf(user: unknown): UserStyle | undefined {
   const style = (user as { style?: UserStyle } | undefined)?.style;
   if (!style || typeof style !== "object") return undefined;
-  // a design we no longer ship counts as none, so saving still works
+  // Every design is a community one (`c:<id>`). Anything else is a design
+  // Zrzur no longer ships (the built-in ones were removed on 2026-11-26):
+  // it counts as none, so it draws nothing and saving still works.
   const { decoration, nameplate, effect, profile_frame } = style;
-  const staleDecoration =
-    decoration &&
-    !isCommunityRef(decoration) &&
-    !(DECORATIONS as readonly string[]).includes(decoration);
-  const stalePlate =
-    nameplate &&
-    !isCommunityRef(nameplate) &&
-    !NAMEPLATES.some((plate) => plate.id === nameplate);
-  const staleEffect = effect && !isCommunityRef(effect) && !isEffectId(effect);
-  const staleFrame =
-    profile_frame &&
-    !isCommunityRef(profile_frame) &&
-    !isProfileFrameId(profile_frame);
+  const stale = (value: string | undefined) =>
+    !!value && !isCommunityRef(value);
+  const staleDecoration = stale(decoration);
+  const stalePlate = stale(nameplate);
+  const staleEffect = stale(effect);
+  const staleFrame = stale(profile_frame);
   if (!staleDecoration && !stalePlate && !staleEffect && !staleFrame)
     return style;
   const rest = { ...style };
@@ -157,8 +144,8 @@ const ARABIC = "'IBM Plex Sans Arabic'";
 
 /**
  * Display-name fonts: what ships with the system, and open fonts already in
- * the app (all SIL OFL 1.1, see `public/decorations/SOURCES.md`), each loaded
- * the first time a name uses it.
+ * the app (all SIL OFL 1.1, `@fontsource/*` in THIRD-PARTY-LICENSES.md), each
+ * loaded the first time a name uses it.
  */
 export const NAME_FONTS: {
   id: string;
@@ -286,37 +273,6 @@ function loadNameFont(font: (typeof NAME_FONTS)[number]) {
   loadedFonts.add(font.id);
   void font.load().catch(() => loadedFonts.delete(font.id));
 }
-
-/** Zrzur's first decorations */
-const BASE_DECORATIONS = [
-  "laurel",
-  "light-crown",
-  "rings",
-  "ivy",
-  "thorn-roses",
-  "ice-crystal",
-  "flame-ring",
-  "lightning",
-  "moon-halo",
-  "sun-rays",
-  "star-orbit",
-  "sakura-branch",
-  "geometric-hex",
-  "neon",
-  "wings",
-  "feathers",
-  "gear",
-  "circuit",
-  "waves",
-  "leaves",
-  "snow",
-  "hearts",
-  "music-notes",
-  "shield-frame",
-] as const;
-
-/** Built-in avatar decorations (same ids as the API's allow-list) */
-export const DECORATIONS = [...BASE_DECORATIONS, ...PACK_DECORATIONS] as const;
 
 /**
  * Inline style for a display name in this user's chosen font, colours and
@@ -469,278 +425,6 @@ export function themeColours(style: UserStyle | undefined) {
   return { top: list[0], bottom: list[1] ?? list[0] };
 }
 
-const PLATE_THEMES = [
-  "aurora",
-  "autumn",
-  "sakura",
-  "ocean",
-  "clouds",
-  "sunset",
-  "midnight",
-  "mint",
-];
-const PLATE_SIGNS = [
-  "aries",
-  "taurus",
-  "gemini",
-  "cancer",
-  "leo",
-  "virgo",
-  "libra",
-  "scorpio",
-  "sagittarius",
-  "capricorn",
-  "aquarius",
-  "pisces",
-];
-/** Arab League members: the first group everywhere */
-const PLATE_ARAB = [
-  "dz",
-  "bh",
-  "km",
-  "dj",
-  "eg",
-  "iq",
-  "jo",
-  "kw",
-  "lb",
-  "ly",
-  "mr",
-  "ma",
-  "om",
-  "ps",
-  "qa",
-  "sa",
-  "so",
-  "sd",
-  "sy",
-  "tn",
-  "ae",
-  "ye",
-];
-/** UN members and observers, and three home flags people asked for */
-const PLATE_WORLD = [
-  "ad",
-  "af",
-  "ag",
-  "al",
-  "am",
-  "ao",
-  "ar",
-  "at",
-  "au",
-  "az",
-  "ba",
-  "bb",
-  "bd",
-  "be",
-  "bf",
-  "bg",
-  "bi",
-  "bj",
-  "bn",
-  "bo",
-  "br",
-  "bs",
-  "bt",
-  "bw",
-  "by",
-  "bz",
-  "ca",
-  "cd",
-  "cf",
-  "cg",
-  "ch",
-  "ci",
-  "cl",
-  "cm",
-  "cn",
-  "co",
-  "cr",
-  "cu",
-  "cv",
-  "cy",
-  "cz",
-  "de",
-  "dk",
-  "dm",
-  "do",
-  "ec",
-  "ee",
-  "er",
-  "es",
-  "et",
-  "fi",
-  "fj",
-  "fm",
-  "fr",
-  "ga",
-  "gb",
-  "gb-eng",
-  "gb-sct",
-  "gd",
-  "ge",
-  "gh",
-  "gm",
-  "gn",
-  "gq",
-  "gr",
-  "gt",
-  "gw",
-  "gy",
-  "hn",
-  "hr",
-  "ht",
-  "hu",
-  "id",
-  "ie",
-  "in",
-  "ir",
-  "is",
-  "it",
-  "jm",
-  "jp",
-  "ke",
-  "kg",
-  "kh",
-  "ki",
-  "kn",
-  "kp",
-  "kr",
-  "kurdistan",
-  "kz",
-  "la",
-  "lc",
-  "li",
-  "lk",
-  "lr",
-  "ls",
-  "lt",
-  "lu",
-  "lv",
-  "mc",
-  "md",
-  "me",
-  "mg",
-  "mh",
-  "mk",
-  "ml",
-  "mm",
-  "mn",
-  "mt",
-  "mu",
-  "mv",
-  "mw",
-  "mx",
-  "my",
-  "mz",
-  "na",
-  "ne",
-  "ng",
-  "ni",
-  "nl",
-  "no",
-  "np",
-  "nr",
-  "nz",
-  "pa",
-  "pe",
-  "pg",
-  "ph",
-  "pk",
-  "pl",
-  "pt",
-  "pw",
-  "py",
-  "ro",
-  "rs",
-  "ru",
-  "rw",
-  "sb",
-  "sc",
-  "se",
-  "sg",
-  "si",
-  "sk",
-  "sl",
-  "sm",
-  "sn",
-  "sr",
-  "ss",
-  "st",
-  "sv",
-  "sz",
-  "td",
-  "tg",
-  "th",
-  "tj",
-  "tl",
-  "tm",
-  "to",
-  "tr",
-  "tt",
-  "tv",
-  "tz",
-  "ua",
-  "ug",
-  "us",
-  "uy",
-  "uz",
-  "va",
-  "vc",
-  "ve",
-  "vn",
-  "vu",
-  "ws",
-  "za",
-  "zm",
-  "zw",
-];
-
-export type NameplateGroup = "arab" | "flag" | "theme" | "zodiac";
-
-/** Art is a small file, fetched only when a plate is on screen */
-const plateFile = (id: string) =>
-  `${import.meta.env.BASE_URL}nameplates/${id}.svg`;
-
-/**
- * A plate's art. `#rtl` puts its emblem at the other end, see `decorations.css`.
- * The right-to-left copy has its own address (?rtl): browsers keep one copy of
- * an SVG image per address and ignore the fragment, so `#rtl` alone could show
- * the copy already loaded for left-to-right.
- */
-const plateArt = (id: string) => {
-  const url = plateFile(id);
-  return `var(--z-plate-ltr, url("${url}")) var(--z-plate-rtl, url("${url}?rtl#rtl")) center / 100% 100% no-repeat`;
-};
-
-const plateEntry = (id: string, group: NameplateGroup) => ({
-  id,
-  group,
-  background: plateArt(id),
-});
-
-/** Built-in nameplates (same ids as the API): backgrounds behind a name */
-export const NAMEPLATES: {
-  id: string;
-  group: NameplateGroup;
-  background: string;
-}[] = [
-  ...PLATE_ARAB.map((id) => plateEntry(`flag-${id}`, "arab")),
-  ...PLATE_WORLD.map((id) => plateEntry(`flag-${id}`, "flag")),
-  ...PLATE_THEMES.map((id) => plateEntry(id, "theme")),
-  ...PLATE_SIGNS.map((id) => plateEntry(`zodiac-${id}`, "zodiac")),
-  ...PACK_NAMEPLATES.map((id) => plateEntry(id, "theme")),
-];
-
-const DRIFTING = new Set<string>([...PLATE_THEMES, ...PACK_PLATE_DRIFT]);
-
-/** A plain theme's slow layer, loaded when it starts to move */
-export const nameplateDrift = (id: string | undefined) =>
-  id && DRIFTING.has(id)
-    ? `${import.meta.env.BASE_URL}nameplates/motion/${id}.svg`
-    : undefined;
-
 /**
  * Shape of every nameplate, in every place. Put this `aspect-ratio` on the
  * element that shows one, so the art is seen whole and nothing is cropped.
@@ -772,9 +456,10 @@ export function communityStillUrl(
 }
 
 /**
- * The nameplate's art, for `--plate` on a `.z-plate` element, or undefined. Community nameplates are images; built-in ones are our own SVGs.
- * A community image is a still unless `moving` is set, which a caller does only
- * when this viewer sees motion: on hover in a list, always in a preview.
+ * The nameplate's art, for `--plate` on a `.z-plate` element, or undefined.
+ * Every nameplate is a community image: a still unless `moving` is set, which
+ * a caller does only when this viewer sees motion: on hover in a list, always
+ * in a preview.
  */
 export function nameplateBackground(
   style: UserStyle | undefined,
@@ -782,16 +467,10 @@ export function nameplateBackground(
   options: { moving?: boolean } = {},
 ): string | undefined {
   const id = style?.nameplate;
-  if (!id) return;
-  let art: string | undefined;
-  if (isCommunityRef(id)) {
-    const file = style?.nameplate_file;
-    const url = options.moving
-      ? communityFileUrl(mediaUrl, file)
-      : communityStillUrl(mediaUrl, file);
-    art = url ? `url("${url}") center / 100% 100% no-repeat` : undefined;
-  } else {
-    art = NAMEPLATES.find((n) => n.id === id)?.background;
-  }
-  return art;
+  if (!isCommunityRef(id)) return;
+  const file = style?.nameplate_file;
+  const url = options.moving
+    ? communityFileUrl(mediaUrl, file)
+    : communityStillUrl(mediaUrl, file);
+  return url ? `url("${url}") center / 100% 100% no-repeat` : undefined;
 }
