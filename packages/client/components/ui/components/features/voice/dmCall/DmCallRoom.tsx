@@ -196,8 +196,9 @@ function DesktopStage(props: { channel: Channel }) {
           style={{ height: `${height()}px` }}
         >
           <Tiles channel={props.channel} />
-          <DesktopControls
-            channel={props.channel}
+          {/* mic, camera, screen share and hang up are in the voice panel
+              of the sidebar: the stage keeps only what it alone does */}
+          <StageCorner
             fullscreen={fullscreen()}
             toggleFullscreen={toggleFullscreen}
           />
@@ -274,83 +275,41 @@ function FoldedBar(props: { channel: Channel }) {
   );
 }
 
-function DesktopControls(props: {
-  channel: Channel;
+/** Full screen and fold: two quiet buttons in the stage's corner, on hover */
+function StageCorner(props: {
   fullscreen: boolean;
   toggleFullscreen: () => void;
 }) {
   const { t } = useLingui();
-  const { limits } = useInstance();
-
   return (
-    <div
-      class="z-dmcall-controls"
-      data-voice-controls
-      data-dm-call-controls
-      role="toolbar"
-      aria-label={t`Call controls`}
-    >
-      <span class="z-dmcall-split">
-        <MicButton size="sm" />
-        <MenuChevron
-          label={t`Microphone and speaker`}
-          data-dm-call-devices="audio"
-          menu={() => (
-            <ContextMenu>
-              <DeviceList kind="audioinput" />
-              <ContextMenuDivider />
-              <DeviceList kind="audiooutput" />
-            </ContextMenu>
-          )}
-        />
-      </span>
-      <Show when={limits().video}>
-        <span class="z-dmcall-split">
-          <CameraButton size="sm" />
-          <MenuChevron
-            label={t`Camera`}
-            data-dm-call-devices="video"
-            menu={() => (
-              <ContextMenu>
-                <DeviceList kind="videoinput" />
-              </ContextMenu>
-            )}
-          />
-        </span>
+    <div class="z-dmcall-corner" data-dm-call-corner>
+      <button
+        type="button"
+        aria-label={props.fullscreen ? t`Exit full screen` : t`Full screen`}
+        data-dm-call-fullscreen
+        onClick={() => props.toggleFullscreen()}
+        use:floating={{
+          tooltip: {
+            placement: "bottom",
+            content: props.fullscreen ? t`Exit full screen` : t`Full screen`,
+          },
+        }}
+      >
+        <Icon name={props.fullscreen ? "arrows-in" : "arrows-out"} size={18} />
+      </button>
+      <Show when={!props.fullscreen}>
+        <button
+          type="button"
+          aria-label={t`Fold the call`}
+          data-dm-call-fold
+          onClick={() => setStageFolded(true)}
+          use:floating={{
+            tooltip: { placement: "bottom", content: t`Fold the call` },
+          }}
+        >
+          <Icon name="caret-up" size={18} />
+        </button>
       </Show>
-      <Show when={canShareScreen && limits().video}>
-        <ShareButton />
-      </Show>
-      <MoreButton
-        size="sm"
-        menu={() => (
-          <ContextMenu>
-            <DeafenItem />
-            <ContextMenuButton
-              icon={
-                <Icon
-                  name={props.fullscreen ? "arrows-in" : "arrows-out"}
-                  size={18}
-                />
-              }
-              onClick={props.toggleFullscreen}
-              data-dm-call-fullscreen
-            >
-              {props.fullscreen ? t`Exit full screen` : t`Full screen`}
-            </ContextMenuButton>
-            <ContextMenuButton
-              icon={<Icon name="caret-up" size={18} />}
-              onClick={() => setStageFolded(true)}
-              data-dm-call-fold
-            >
-              {t`Fold the call`}
-            </ContextMenuButton>
-            <ContextMenuDivider />
-            <VoiceSettingsItem />
-          </ContextMenu>
-        )}
-      />
-      <HangUp size="sm" />
     </div>
   );
 }
@@ -851,28 +810,6 @@ function CameraButton(props: { size: Size }) {
   );
 }
 
-function ShareButton() {
-  const { t } = useLingui();
-  const voice = useVoice();
-
-  return (
-    <ControlButton
-      size="sm"
-      tone={voice.screenshare() ? "on" : "neutral"}
-      data-voice-control="screenshare"
-      aria-pressed={!!voice.screenshare()}
-      disabled={
-        voice.state() !== "CONNECTED" ||
-        (!voice.videoPermission && !voice.screenshare())
-      }
-      label={voice.screenshare() ? t`Stop sharing` : t`Share screen`}
-      onClick={() => voice.toggleScreenshare()}
-    >
-      <Icon name="monitor-arrow-up" size={22} />
-    </ControlButton>
-  );
-}
-
 function HangUp(props: { size: Size }) {
   const { t } = useLingui();
   const voice = useVoice();
@@ -915,34 +852,6 @@ function MoreButton(props: { size: Size; menu: () => JSX.Element }) {
       >
         <Icon name="dots-three" size={22} />
       </ControlButton>
-    </span>
-  );
-}
-
-/** The small arrow beside a control: which device it uses */
-function MenuChevron(props: {
-  label: string;
-  menu: () => JSX.Element;
-  [data: `data-${string}`]: unknown;
-}) {
-  return (
-    <span
-      style={{ display: "contents" }}
-      use:floating={{
-        contextMenu: props.menu,
-        contextMenuHandler: "click",
-        tooltip: { placement: "top", content: props.label },
-      }}
-    >
-      <button
-        type="button"
-        class="z-dmcall-chevron"
-        aria-label={props.label}
-        aria-haspopup="menu"
-        data-dm-call-devices={props["data-dm-call-devices"] as string}
-      >
-        <Icon name="caret-up" size={16} />
-      </button>
     </span>
   );
 }

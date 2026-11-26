@@ -74,10 +74,54 @@
   flex-shrink: 0;
   gap: 12px;
   min-height: 0;
-  padding: 16px 16px 12px;
-  background: var(--z-bg-frame, var(--z-bg-app));
+  padding: 16px;
+  /* the chat's own ground: the call reads as part of the conversation */
+  background: var(--z-bg-chat, var(--z-bg-app));
   color: var(--z-fg-primary);
   overflow: hidden;
+}
+
+/* full screen and fold: quiet, in the corner, shown on hover or focus */
+.z-dmcall-corner {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+}
+.z-dmcall-stage:hover .z-dmcall-corner,
+.z-dmcall-corner:focus-within,
+.z-dmcall-stage:fullscreen .z-dmcall-corner {
+  opacity: 1;
+}
+.z-dmcall-corner button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--z-border-subtle);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--z-bg-raised) 88%, transparent);
+  color: var(--z-fg-secondary);
+  cursor: pointer;
+  --z-icon-color: currentColor;
+}
+.z-dmcall-corner button:hover {
+  color: var(--z-fg-primary);
+  background: var(--z-bg-raised);
+}
+.z-dmcall-corner button:focus-visible {
+  outline: 2px solid var(--z-focus);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-dmcall-corner {
+    transition: none;
+  }
 }
 
 .z-dmcall-stage:fullscreen {
