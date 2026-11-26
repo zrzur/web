@@ -7162,8 +7162,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/VoiceRecorder.tsx",
-      "sha256": "613b73b4d11d039c20427f429deb26bf2c7a0df1e86e1f3cd25e537d1147ad49",
-      "bytes": 5415,
+      "sha256": "f9e0ca99e5abd94278778e7b4bffe2e851dcdb1baa77a5a4417015b0e26e3863",
+      "bytes": 5600,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7420,8 +7420,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/voice.css",
-      "sha256": "02d4971c4503f058260a4f65dda8a14b40ebfba841333cfdd2b3ff35764925e8",
-      "bytes": 4958,
+      "sha256": "ce71e248d7fc50179ca57ca39c45c8bd8189e8dd99d800db42a1bd87a253b520",
+      "bytes": 5887,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40606,8 +40606,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "fe8983d5113bcf665499bc7fa77c1e2b0aac3622730b2d4d582d33d8a08876df",
-      "bytes": 37643,
+      "sha256": "d4b0ab873cbad5650ee664b90384b28b76aef7db74ac040679c105d487e4e497",
+      "bytes": 38665,
       "category": "product-source-or-build-manifest"
     },
     {
