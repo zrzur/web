@@ -1330,8 +1330,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/Settings.tsx",
-      "sha256": "00c86ed843e9b4281794560e540a7f9baef4202573cf226416dca30b59932b47",
-      "bytes": 8772,
+      "sha256": "c46b81f67dc29e3b7872927c43ec31bf9b2e0b73fbab2cff587291535f69117a",
+      "bytes": 9125,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6256,14 +6256,14 @@
     },
     {
       "path": "packages/client/components/rtc/screenShare.test.ts",
-      "sha256": "9f957d114fd2c73b46cafb427d984a5695dad6b234c37f7ce7d723f021ab8e64",
-      "bytes": 11626,
+      "sha256": "b3cd85572070023aef1186fc1a33e95762f859b8d003f7d59fae3fde87caa346",
+      "bytes": 11672,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/rtc/screenShare.ts",
-      "sha256": "226cf68a924bce5abf2d4590bbff68f711e82c5bc0ad5832673223cdd8cef99b",
-      "bytes": 14018,
+      "sha256": "551d3a8d274519b6c23d96a046db1dc75a9fdd4b2cc2efd7410740d25be66660",
+      "bytes": 14398,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8050,8 +8050,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/LiveVoiceChannelPreview.tsx",
-      "sha256": "1fdf7ef3fd025256a04da1ec2bc66e2ca98c09b5863f4256f2998132c9ffd8f0",
-      "bytes": 1735,
+      "sha256": "edefaa165cc4077f789f91e4d76bff3b00a3e7219b8ef0b8f09e6899936181d1",
+      "bytes": 2948,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8104,8 +8104,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/ParticipantTile.tsx",
-      "sha256": "745b6dc1cf42d0e4421fdfa9d77b13f6bffe81749642329519d9eb5c05060b54",
-      "bytes": 17756,
+      "sha256": "152e1b1ba2c2a1261953d2556408f6b53bf391b927e2a95a36fcec9b93158b17",
+      "bytes": 17797,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8506,8 +8506,8 @@
     },
     {
       "path": "packages/client/components/ui/components/utils/Draggable.tsx",
-      "sha256": "4f30a64b5b31eb0b9a3320781b238ce292c0fe616b7e08a4b64e1bae5c6205cd",
-      "bytes": 12849,
+      "sha256": "94c65dbf0d86c49626330be84fd97faa5d1c59e409a2b1923336150ed629e177",
+      "bytes": 13510,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42178,8 +42178,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/ServerSidebar.tsx",
-      "sha256": "d7ea067a0cb0490ca03d643520127181b312e44c6caba8ab7dcceea54063e485",
-      "bytes": 44097,
+      "sha256": "57ed2bc55c307efa21ee963dc79aca808de2b9c4db1fc8c40c5c52218f2c4d78",
+      "bytes": 44198,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42970,14 +42970,14 @@
     },
     {
       "path": "packages/solid-livekit-components/package.json",
-      "sha256": "c4f4c5b1950b66d11b00bcf72154bdb4ad13fefbb3e10b83f7c483b5fbfad8c4",
-      "bytes": 2603,
+      "sha256": "2ed9f543be7510a1e1aa380e45438290e9212586227fb3883591b76621ce1708",
+      "bytes": 2602,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/solid-livekit-components/pnpm-lock.yaml",
-      "sha256": "2f374d841576816cdccafd9c715e3314dad523257b4cc0fc961aa5454570f5c5",
-      "bytes": 111425,
+      "sha256": "c37562928b105ec9ae463c1c6c1e1a77e2f9aec2cc8837e0e423cce5c5f82c45",
+      "bytes": 119739,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43132,8 +43132,8 @@
     },
     {
       "path": "pnpm-lock.yaml",
-      "sha256": "454402e4526f50ef624a36bdedebc672f2adec16684bb6b6df45e909e6789a71",
-      "bytes": 503388,
+      "sha256": "18c640401ac5742d7367d3109d34e4025986cf42344d86c421489b469a9b2be2",
+      "bytes": 511830,
       "category": "product-source-or-build-manifest"
     },
     {
