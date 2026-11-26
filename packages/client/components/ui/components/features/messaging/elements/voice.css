@@ -107,6 +107,39 @@
   background: var(--z-bg-raised);
   color: var(--z-fg-primary);
 }
+/* In the message box's place: the same card (height, colour, radius, lift
+   and distance from the window bottom), so the box seems to turn into the
+   recorder instead of a second box opening above it */
+.z-recorder[data-docked] {
+  box-sizing: border-box;
+  min-height: var(--z-dock-height, 56px);
+  margin: 0 0 var(--z-dock-gap, 8px) 0;
+  padding: 7px 12px 7px 7px;
+  border-radius: var(--z-dock-radius, 12px);
+  border: 1px solid var(--z-dock-border);
+  box-shadow: var(--z-dock-lift);
+  background: var(--z-dock-bg);
+  gap: 12px;
+  animation: z-recorder-in 0.14s ease-out;
+}
+[dir="rtl"] .z-recorder[data-docked] {
+  padding: 7px 7px 7px 12px;
+}
+.z-recorder[data-docked] .z-recorder-cancel,
+.z-recorder[data-docked] .z-recorder-send {
+  width: 40px;
+  height: 40px;
+}
+@keyframes z-recorder-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-recorder[data-docked] {
+    animation: none;
+  }
+}
 .z-recorder-cancel {
   flex-shrink: 0;
   display: grid;

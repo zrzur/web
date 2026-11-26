@@ -12,11 +12,13 @@ import {
 import "../elements/voice.css";
 
 /**
- * Recording bar shown above the message box: live level meter, timer,
- * cancel and send. Recording starts as soon as it opens; the microphone is
+ * Recording bar: live level meter, timer, cancel and send. Docked, it takes
+ * the message box's place and looks like it. Recording starts as soon as it opens; the microphone is
  * released whenever it closes.
  */
 export function VoiceRecorder(props: {
+  /** In the message box's place, with its size and look */
+  docked?: boolean;
   onSend: (file: File) => void;
   onClose: () => void;
 }) {
@@ -121,7 +123,12 @@ export function VoiceRecorder(props: {
   }
 
   return (
-    <div class="z-recorder" role="group" aria-label={t`Voice message`}>
+    <div
+      class="z-recorder"
+      data-docked={props.docked ? "" : undefined}
+      role="group"
+      aria-label={t`Voice message`}
+    >
       <button
         type="button"
         class="z-recorder-cancel"

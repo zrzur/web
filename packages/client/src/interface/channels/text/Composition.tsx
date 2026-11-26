@@ -711,9 +711,6 @@ export function MessageComposition(props: Props) {
           );
         }}
       </For>
-      <Show when={recording()}>
-        <VoiceRecorder onSend={sendVoice} onClose={() => setRecording(false)} />
-      </Show>
       <CommandPicker
         channel={props.channel}
         content={draft()?.content ?? ""}
@@ -734,336 +731,349 @@ export function MessageComposition(props: Props) {
           <TooLongText>{tooLongText()}</TooLongText>
         </TooLong>
       </Show>
-      <MessageBox
-        initialValue={initialValue()}
-        nodeReplacement={nodeReplacement()}
-        onSendMessage={() => sendMessage()}
-        onTyping={delayedStopTyping}
-        onEditLastMessage={() => state.draft.setEditingMessage(true)}
-        content={draft()?.content ?? ""}
-        setContent={setContent}
-        actionsStart={
-          <Show
-            when={
-              props.channel.havePermission("UploadFiles") ||
-              (phone && canPoll()) ||
-              (!phone && compact() && (canPoll() || canGif()))
-            }
-            fallback={<MessageBox.InlineIcon size="short" />}
-          >
-            <MessageBox.InlineIcon>
-              {/* phones: the plus opens a sheet of things to add; wider
-                  screens upload a file with one click, and a right-click
-                  offers a file or a poll where polls can be posted. In a
-                  narrow box (MessageBox COMPOSER_COMPACT_WIDTH) the poll,
-                  GIF and voice buttons are hidden and the plus opens a
-                  menu with them on a click */}
-              <div
-                ref={addButton}
-                // a box of its own (not display: contents): the "+" menu and
-                // the GIF picker opened from it are placed against it
-                style={{ display: "flex" }}
-                use:floating={
-                  !phone && (canPoll() || compact())
-                    ? {
-                        contextMenu: () => {
-                          onMount(() => setMenuOpen(true));
-                          onCleanup(() => setMenuOpen(false));
-                          return (
-                            <ContextMenu>
-                              {/* one order with the phone sheet: files, GIF,
-                                  voice, poll */}
-                              <Show when={canUploadFiles()}>
-                                <ContextMenuButton
-                                  icon={<Icon name="file" size={20} />}
-                                  onClick={() => addFile()}
+      {/* a voice message is recorded in the message box's own place, not
+          in a second box above it; the box stays mounted (draft, focus,
+          pickers) and comes back when the recording is sent or discarded */}
+      <Show when={recording()}>
+        <VoiceRecorder
+          docked
+          onSend={sendVoice}
+          onClose={() => setRecording(false)}
+        />
+      </Show>
+      <div style={{ display: recording() ? "none" : "contents" }}>
+        <MessageBox
+          initialValue={initialValue()}
+          nodeReplacement={nodeReplacement()}
+          onSendMessage={() => sendMessage()}
+          onTyping={delayedStopTyping}
+          onEditLastMessage={() => state.draft.setEditingMessage(true)}
+          content={draft()?.content ?? ""}
+          setContent={setContent}
+          actionsStart={
+            <Show
+              when={
+                props.channel.havePermission("UploadFiles") ||
+                (phone && canPoll()) ||
+                (!phone && compact() && (canPoll() || canGif()))
+              }
+              fallback={<MessageBox.InlineIcon size="short" />}
+            >
+              <MessageBox.InlineIcon>
+                {/* phones: the plus opens a sheet of things to add; wider
+                    screens upload a file with one click, and a right-click
+                    offers a file or a poll where polls can be posted. In a
+                    narrow box (MessageBox COMPOSER_COMPACT_WIDTH) the poll,
+                    GIF and voice buttons are hidden and the plus opens a
+                    menu with them on a click */}
+                <div
+                  ref={addButton}
+                  // a box of its own (not display: contents): the "+" menu and
+                  // the GIF picker opened from it are placed against it
+                  style={{ display: "flex" }}
+                  use:floating={
+                    !phone && (canPoll() || compact())
+                      ? {
+                          contextMenu: () => {
+                            onMount(() => setMenuOpen(true));
+                            onCleanup(() => setMenuOpen(false));
+                            return (
+                              <ContextMenu>
+                                {/* one order with the phone sheet: files, GIF,
+                                    voice, poll */}
+                                <Show when={canUploadFiles()}>
+                                  <ContextMenuButton
+                                    icon={<Icon name="file" size={20} />}
+                                    onClick={() => addFile()}
+                                  >
+                                    {t`Upload file`}
+                                  </ContextMenuButton>
+                                </Show>
+                                <Show
+                                  when={compact() && canGif() && draftEmpty()}
                                 >
-                                  {t`Upload file`}
-                                </ContextMenuButton>
-                              </Show>
-                              <Show
-                                when={compact() && canGif() && draftEmpty()}
-                              >
-                                <ContextMenuButton
-                                  icon={<Icon name="gif" size={20} />}
-                                  onClick={() => {
-                                    // the real "+" button is the anchor and
-                                    // the trigger: Escape gives focus back to it
-                                    const plus =
-                                      addButton?.querySelector("button") ??
-                                      undefined;
-                                    // start side: grows from the "+" over
-                                    // the text, in Arabic too (floating-ui
-                                    // reads start in the writing direction)
-                                    pickerTriggers?.onClickGif(
-                                      { currentTarget: plus },
-                                      plus,
-                                      "top-start",
-                                    );
-                                  }}
+                                  <ContextMenuButton
+                                    icon={<Icon name="gif" size={20} />}
+                                    onClick={() => {
+                                      // the real "+" button is the anchor and
+                                      // the trigger: Escape gives focus back to it
+                                      const plus =
+                                        addButton?.querySelector("button") ??
+                                        undefined;
+                                      // start side: grows from the "+" over
+                                      // the text, in Arabic too (floating-ui
+                                      // reads start in the writing direction)
+                                      pickerTriggers?.onClickGif(
+                                        { currentTarget: plus },
+                                        plus,
+                                        "top-start",
+                                      );
+                                    }}
+                                  >
+                                    {t`GIF picker`}
+                                  </ContextMenuButton>
+                                </Show>
+                                <Show
+                                  when={
+                                    compact() &&
+                                    draftEmpty() &&
+                                    canUploadFiles() &&
+                                    !recording()
+                                  }
                                 >
-                                  {t`GIF picker`}
-                                </ContextMenuButton>
-                              </Show>
-                              <Show
-                                when={
-                                  compact() &&
-                                  draftEmpty() &&
-                                  canUploadFiles() &&
-                                  !recording()
-                                }
-                              >
-                                <ContextMenuButton
-                                  icon={<Icon name="microphone" size={20} />}
-                                  onClick={() => setRecording(true)}
-                                >
-                                  {t`Voice message`}
-                                </ContextMenuButton>
-                              </Show>
-                              <Show when={canPoll()}>
-                                <ContextMenuButton
-                                  icon={<Icon name="poll" size={20} />}
-                                  onClick={createPoll}
-                                  data-testid="composer-create-poll"
-                                >
-                                  {t`Create poll`}
-                                </ContextMenuButton>
-                              </Show>
-                            </ContextMenu>
-                          );
-                        },
-                        // narrow box: a click opens it above the "+", towards
-                        // the text (never over the account panel in Arabic)
-                        ...(compact()
-                          ? {
-                              contextMenuHandler: "click" as const,
-                              // floating-ui reads "start" in the writing
-                              // direction: the right edge in Arabic
-                              contextMenuPlacement: "top-start" as const,
-                            }
-                          : {}),
-                      }
-                    : {}
-                }
-              >
-                <IconButton
-                  aria-label={
-                    phone
-                      ? adding()
-                        ? t`Close`
-                        : t`Add`
-                      : compact()
-                        ? t`Add`
-                        : t`Upload file`
+                                  <ContextMenuButton
+                                    icon={<Icon name="microphone" size={20} />}
+                                    onClick={() => setRecording(true)}
+                                  >
+                                    {t`Voice message`}
+                                  </ContextMenuButton>
+                                </Show>
+                                <Show when={canPoll()}>
+                                  <ContextMenuButton
+                                    icon={<Icon name="poll" size={20} />}
+                                    onClick={createPoll}
+                                    data-testid="composer-create-poll"
+                                  >
+                                    {t`Create poll`}
+                                  </ContextMenuButton>
+                                </Show>
+                              </ContextMenu>
+                            );
+                          },
+                          // narrow box: a click opens it above the "+", towards
+                          // the text (never over the account panel in Arabic)
+                          ...(compact()
+                            ? {
+                                contextMenuHandler: "click" as const,
+                                // floating-ui reads "start" in the writing
+                                // direction: the right edge in Arabic
+                                contextMenuPlacement: "top-start" as const,
+                              }
+                            : {}),
+                        }
+                      : {}
                   }
-                  aria-haspopup={
-                    phone ? "dialog" : compact() ? "menu" : undefined
-                  }
-                  aria-expanded={
-                    phone ? adding() : compact() ? menuOpen() : undefined
-                  }
-                  data-testid="composer-add"
-                  aria-keyshortcuts={keysFor("upload_file")}
-                  onPress={(event) => {
-                    if (phone) pickerTriggers?.onClickAdd(event, addButton);
-                    // narrow box: a click opens the menu (use:floating on
-                    // the wrapper). Enter and Space press the button without
-                    // a native click, so give the wrapper one
-                    else if (compact()) {
-                      if (
-                        (event as { pointerType?: string }).pointerType ===
-                        "keyboard"
-                      )
-                        addButton?.dispatchEvent(
-                          new MouseEvent("click", { bubbles: true }),
-                        );
-                    } else if (canUploadFiles()) addFile();
-                  }}
                 >
-                  <span
-                    class="z-add-turn"
-                    data-open={adding() ? "" : undefined}
+                  <IconButton
+                    aria-label={
+                      phone
+                        ? adding()
+                          ? t`Close`
+                          : t`Add`
+                        : compact()
+                          ? t`Add`
+                          : t`Upload file`
+                    }
+                    aria-haspopup={
+                      phone ? "dialog" : compact() ? "menu" : undefined
+                    }
+                    aria-expanded={
+                      phone ? adding() : compact() ? menuOpen() : undefined
+                    }
+                    data-testid="composer-add"
+                    aria-keyshortcuts={keysFor("upload_file")}
+                    onPress={(event) => {
+                      if (phone) pickerTriggers?.onClickAdd(event, addButton);
+                      // narrow box: a click opens the menu (use:floating on
+                      // the wrapper). Enter and Space press the button without
+                      // a native click, so give the wrapper one
+                      else if (compact()) {
+                        if (
+                          (event as { pointerType?: string }).pointerType ===
+                          "keyboard"
+                        )
+                          addButton?.dispatchEvent(
+                            new MouseEvent("click", { bubbles: true }),
+                          );
+                      } else if (canUploadFiles()) addFile();
+                    }}
                   >
-                    <Symbol type="outlined" size={22}>
-                      add
-                    </Symbol>
-                  </span>
-                </IconButton>
-              </div>
-            </MessageBox.InlineIcon>
-          </Show>
-        }
-        actionsEnd={
-          <MessageBox.ActionContainer column>
-            <Show when={isAlmostTooLong()}>
-              <MessageBox.FloatingAction
-                size="normal"
-                error={messageLength() > maxMessageLength()}
-                data-composer-counter
-              >
-                {wayTooLong() ? (
-                  t`Too long`
-                ) : (
-                  // the sign stays on the left of the number in Arabic too
-                  <bdi dir="ltr">
-                    {String(maxMessageLength() - messageLength()).replace(
-                      "-",
-                      "−",
-                    )}
-                  </bdi>
-                )}
-              </MessageBox.FloatingAction>
-            </Show>
-            <MessageBox.ActionContainer>
-              <CompositionMediaPicker
-                onMessage={sendMessage}
-                onTextReplacement={(text) => setNodeReplacement([text])}
-                channel={props.channel}
-                add={
-                  phone
-                    ? (panel) => (
-                        <Suspense>
-                          <ComposerAddPanel choices={addChoices(panel)} />
-                        </Suspense>
-                      )
-                    : undefined
-                }
-                onShown={(shown) => setAdding(shown === "add")}
-              >
-                {(triggerProps) => (
-                  <>
-                    {/* phones with the "+" sheet: GIF lives there, so the
-                        row keeps room for the message */}
-                    {void (pickerTriggers = triggerProps)}
-                    {/* polls: their own button where they can be posted
-                        (phones have it in the "+" sheet) */}
-                    <Show when={canPoll() && draftEmpty() && !phone}>
-                      <MessageBox.InlineIcon data-composer-extra>
-                        <IconButton
-                          aria-label={t`Create poll`}
-                          data-testid="composer-create-poll"
-                          use:floating={{
-                            tooltip: {
-                              placement: "top",
-                              content: t`Create poll`,
-                            },
-                          }}
-                          onPress={createPoll}
-                        >
-                          <Icon name="poll" size={22} />
-                        </IconButton>
-                      </MessageBox.InlineIcon>
-                    </Show>
-                    <Show
-                      when={
-                        draftEmpty() &&
-                        props.channel.havePermission("SendEmbeds") &&
-                        !(phone && canUploadFiles())
-                      }
+                    <span
+                      class="z-add-turn"
+                      data-open={adding() ? "" : undefined}
                     >
-                      <MessageBox.InlineIcon
-                        data-composer-extra={phone ? undefined : ""}
+                      <Symbol type="outlined" size={22}>
+                        add
+                      </Symbol>
+                    </span>
+                  </IconButton>
+                </div>
+              </MessageBox.InlineIcon>
+            </Show>
+          }
+          actionsEnd={
+            <MessageBox.ActionContainer column>
+              <Show when={isAlmostTooLong()}>
+                <MessageBox.FloatingAction
+                  size="normal"
+                  error={messageLength() > maxMessageLength()}
+                  data-composer-counter
+                >
+                  {wayTooLong() ? (
+                    t`Too long`
+                  ) : (
+                    // the sign stays on the left of the number in Arabic too
+                    <bdi dir="ltr">
+                      {String(maxMessageLength() - messageLength()).replace(
+                        "-",
+                        "−",
+                      )}
+                    </bdi>
+                  )}
+                </MessageBox.FloatingAction>
+              </Show>
+              <MessageBox.ActionContainer>
+                <CompositionMediaPicker
+                  onMessage={sendMessage}
+                  onTextReplacement={(text) => setNodeReplacement([text])}
+                  channel={props.channel}
+                  add={
+                    phone
+                      ? (panel) => (
+                          <Suspense>
+                            <ComposerAddPanel choices={addChoices(panel)} />
+                          </Suspense>
+                        )
+                      : undefined
+                  }
+                  onShown={(shown) => setAdding(shown === "add")}
+                >
+                  {(triggerProps) => (
+                    <>
+                      {/* phones with the "+" sheet: GIF lives there, so the
+                          row keeps room for the message */}
+                      {void (pickerTriggers = triggerProps)}
+                      {/* polls: their own button where they can be posted
+                          (phones have it in the "+" sheet) */}
+                      <Show when={canPoll() && draftEmpty() && !phone}>
+                        <MessageBox.InlineIcon data-composer-extra>
+                          <IconButton
+                            aria-label={t`Create poll`}
+                            data-testid="composer-create-poll"
+                            use:floating={{
+                              tooltip: {
+                                placement: "top",
+                                content: t`Create poll`,
+                              },
+                            }}
+                            onPress={createPoll}
+                          >
+                            <Icon name="poll" size={22} />
+                          </IconButton>
+                        </MessageBox.InlineIcon>
+                      </Show>
+                      <Show
+                        when={
+                          draftEmpty() &&
+                          props.channel.havePermission("SendEmbeds") &&
+                          !(phone && canUploadFiles())
+                        }
                       >
-                        <IconButton
-                          aria-label={t`Open GIF picker`}
-                          onPress={triggerProps.onClickGif}
+                        <MessageBox.InlineIcon
+                          data-composer-extra={phone ? undefined : ""}
                         >
-                          <Icon name="gif" size={22} />
-                        </IconButton>
-                      </MessageBox.InlineIcon>
-                    </Show>
-                    {/* a DM with a bot: its commands, one tap away */}
-                    <Show when={botDms() && dmBot(props.channel)}>
+                          <IconButton
+                            aria-label={t`Open GIF picker`}
+                            onPress={triggerProps.onClickGif}
+                          >
+                            <Icon name="gif" size={22} />
+                          </IconButton>
+                        </MessageBox.InlineIcon>
+                      </Show>
+                      {/* a DM with a bot: its commands, one tap away */}
+                      <Show when={botDms() && dmBot(props.channel)}>
+                        <MessageBox.InlineIcon>
+                          <IconButton
+                            aria-label={t`Commands`}
+                            data-testid="composer-commands"
+                            use:floating={{
+                              tooltip: {
+                                placement: "top",
+                                content: t`Commands`,
+                              },
+                            }}
+                            onPress={openCommands}
+                          >
+                            <Icon name="terminal" size={22} />
+                          </IconButton>
+                        </MessageBox.InlineIcon>
+                      </Show>
                       <MessageBox.InlineIcon>
                         <IconButton
-                          aria-label={t`Commands`}
-                          data-testid="composer-commands"
-                          use:floating={{
-                            tooltip: {
-                              placement: "top",
-                              content: t`Commands`,
-                            },
-                          }}
-                          onPress={openCommands}
+                          aria-label={t`Open emoji picker`}
+                          aria-keyshortcuts={keysFor("open_emoji_picker")}
+                          data-shortcut-target="emoji"
+                          data-composer={composerKey}
+                          onPress={triggerProps.onClickEmoji}
                         >
-                          <Icon name="terminal" size={22} />
+                          <Symbol type="outlined" size={22}>
+                            mood
+                          </Symbol>
                         </IconButton>
                       </MessageBox.InlineIcon>
-                    </Show>
-                    <MessageBox.InlineIcon>
-                      <IconButton
-                        aria-label={t`Open emoji picker`}
-                        aria-keyshortcuts={keysFor("open_emoji_picker")}
-                        data-shortcut-target="emoji"
-                        data-composer={composerKey}
-                        onPress={triggerProps.onClickEmoji}
-                      >
-                        <Symbol type="outlined" size={22}>
-                          mood
-                        </Symbol>
-                      </IconButton>
-                    </MessageBox.InlineIcon>
-                    <div ref={triggerProps.ref} />
-                  </>
-                )}
-              </CompositionMediaPicker>
-              <Show
-                when={
-                  draftEmpty() && canUploadFiles() && !recording() && !phone
-                }
-              >
-                <MessageBox.InlineIcon data-composer-extra>
-                  <IconButton
-                    aria-label={t`Record a voice message`}
-                    onPress={() => setRecording(true)}
-                  >
-                    <Icon name="microphone" size={22} />
-                  </IconButton>
-                </MessageBox.InlineIcon>
-              </Show>
+                      <div ref={triggerProps.ref} />
+                    </>
+                  )}
+                </CompositionMediaPicker>
+                <Show
+                  when={
+                    draftEmpty() && canUploadFiles() && !recording() && !phone
+                  }
+                >
+                  <MessageBox.InlineIcon data-composer-extra>
+                    <IconButton
+                      aria-label={t`Record a voice message`}
+                      onPress={() => setRecording(true)}
+                    >
+                      <Icon name="microphone" size={22} />
+                    </IconButton>
+                  </MessageBox.InlineIcon>
+                </Show>
+              </MessageBox.ActionContainer>
             </MessageBox.ActionContainer>
-          </MessageBox.ActionContainer>
-        }
-        placeholder={
-          props.channel.type === "SavedMessages"
-            ? t`Save to your notes`
-            : props.channel.type === "DirectMessage"
-              ? t`Message ${props.channel.recipient?.displayName ?? props.channel.recipient?.username}`
-              : t`Message ${props.channel.name}`
-        }
-        sendingAllowed={
-          props.channel.havePermission("SendMessage") &&
-          !isTimedOut() &&
-          !announcementOnly()
-        }
-        announcementOnly={announcementOnly()}
-        timeoutActive={isTimedOut()}
-        autoCompleteSearchSpace={searchSpace}
-        updateDraftSelection={(start, end) =>
-          state.draft.setSelection(props.channel.id, start, end)
-        }
-        hasActionsAppend={
-          state.settings.getValue("appearance:show_send_button") || false
-        }
-        onCompact={phone ? undefined : setCompact}
-        crowded={
-          (draft().files?.length ?? 0) > 0 || (draft().replies?.length ?? 0) > 0
-        }
-        actionsAppend={
-          <Show when={state.settings.getValue("appearance:show_send_button")}>
-            <MessageBox.InlineIcon ready={canSend()}>
-              <IconButton
-                aria-label={t`Send message`}
-                onPress={() => canSend() && sendMessage()}
-              >
-                <Symbol type="outlined" size={22}>
-                  send
-                </Symbol>
-              </IconButton>
-            </MessageBox.InlineIcon>
-          </Show>
-        }
-      />
+          }
+          placeholder={
+            props.channel.type === "SavedMessages"
+              ? t`Save to your notes`
+              : props.channel.type === "DirectMessage"
+                ? t`Message ${props.channel.recipient?.displayName ?? props.channel.recipient?.username}`
+                : t`Message ${props.channel.name}`
+          }
+          sendingAllowed={
+            props.channel.havePermission("SendMessage") &&
+            !isTimedOut() &&
+            !announcementOnly()
+          }
+          announcementOnly={announcementOnly()}
+          timeoutActive={isTimedOut()}
+          autoCompleteSearchSpace={searchSpace}
+          updateDraftSelection={(start, end) =>
+            state.draft.setSelection(props.channel.id, start, end)
+          }
+          hasActionsAppend={
+            state.settings.getValue("appearance:show_send_button") || false
+          }
+          onCompact={phone ? undefined : setCompact}
+          crowded={
+            (draft().files?.length ?? 0) > 0 ||
+            (draft().replies?.length ?? 0) > 0
+          }
+          actionsAppend={
+            <Show when={state.settings.getValue("appearance:show_send_button")}>
+              <MessageBox.InlineIcon ready={canSend()}>
+                <IconButton
+                  aria-label={t`Send message`}
+                  onPress={() => canSend() && sendMessage()}
+                >
+                  <Symbol type="outlined" size={22}>
+                    send
+                  </Symbol>
+                </IconButton>
+              </MessageBox.InlineIcon>
+            </Show>
+          }
+        />
+      </div>
       <Show when={canUploadFiles()}>
         <FilePasteCollector onFiles={onFiles} />
         <FileDropAnywhereCollector onFiles={onFiles} />
