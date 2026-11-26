@@ -8218,8 +8218,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/dmCall/DmCallRoom.tsx",
-      "sha256": "519ed55d91a1bc4de792831bc4182e98fdd10204c9fe4042bd906706a24f8e05",
-      "bytes": 31102,
+      "sha256": "4ed68afad2a8653032226c5744acd331c21e898f01a6b62028a1a471a0cfbf67",
+      "bytes": 31352,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8230,8 +8230,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/dmCall/dmCall.css",
-      "sha256": "80ba7aba98756b0683c71bafe4483a0cb9e8f73021c2a8516f0e4b937cf3ca8b",
-      "bytes": 13369,
+      "sha256": "9f1860e92bc1d97541b666bc271fab333f7915640c4f442298ccc3d7ff89a6f6",
+      "bytes": 13604,
       "category": "product-source-or-build-manifest"
     },
     {
