@@ -19,39 +19,57 @@ export type ProfileTile = {
   note: JSX.Element;
   picture: JSX.Element;
   onPress: () => void;
+  /**
+   * A wide design (a nameplate): a row of its own at the full width, above
+   * the square ones, so it is seen at its real shape
+   */
+  wide?: boolean;
 };
 
 /**
  * Equal tiles side by side: the real picture on top, the name, a muted line.
  * Their creations and Wearing both draw through this, on the card and the
- * full profile, so the two can never differ.
+ * full profile, so the two can never differ. Wide tiles come first, one
+ * under the other at the full width; the square ones share a row after them
+ * (`useTilesShown` of them before Show more).
  */
 export function ProfileTiles(props: { tiles: ProfileTile[]; all?: boolean }) {
   const perRow = useTilesShown();
   const size = useProfileSize();
   const width = useContext(ProfileWidthContext);
-  return (
-    <Grid
-      style={{ "--tiles": perRow() }}
-      data-narrow={narrowProfile(size(), width()) || undefined}
+  const wide = () => props.tiles.filter((tile) => tile.wide);
+  const square = () => props.tiles.filter((tile) => !tile.wide);
+  const tile = (item: ProfileTile, isWide?: boolean) => (
+    <button
+      class={itemBox({ tile: true, press: true })}
+      type="button"
+      title={item.name}
+      data-wide={isWide || undefined}
+      onClick={item.onPress}
     >
-      <For each={props.all ? props.tiles : props.tiles.slice(0, perRow())}>
-        {(tile) => (
-          <button
-            class={itemBox({ tile: true, press: true })}
-            type="button"
-            title={tile.name}
-            onClick={tile.onPress}
-          >
-            <Picture>{tile.picture}</Picture>
-            <span class={caption()}>
-              <bdi>{tile.name}</bdi>
-              <span>{tile.note}</span>
-            </span>
-          </button>
-        )}
-      </For>
-    </Grid>
+      <Show when={isWide} fallback={<Picture>{item.picture}</Picture>}>
+        {item.picture}
+      </Show>
+      <span class={caption({ wide: isWide })}>
+        <bdi>{item.name}</bdi>
+        <span>{item.note}</span>
+      </span>
+    </button>
+  );
+  return (
+    <Tiles>
+      <For each={wide()}>{(item) => tile(item, true)}</For>
+      <Show when={square().length}>
+        <Grid
+          style={{ "--tiles": perRow() }}
+          data-narrow={narrowProfile(size(), width()) || undefined}
+        >
+          <For each={props.all ? square() : square().slice(0, perRow())}>
+            {(item) => tile(item)}
+          </For>
+        </Grid>
+      </Show>
+    </Tiles>
   );
 }
 
@@ -114,6 +132,15 @@ const More = styled("button", {
   },
 });
 
+const Tiles = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    minWidth: 0,
+  },
+});
+
 const Grid = styled("div", {
   base: {
     display: "grid",
@@ -135,6 +162,8 @@ const Picture = styled("span", {
       height: "100%",
       objectFit: "contain",
     },
+    // a design drawn as it really looks (WornPreviews) takes its own square
+    "&:has(> [data-worn])": { height: "auto" },
   },
 });
 
@@ -177,6 +206,18 @@ const caption = cva({
         whiteSpace: "normal",
         overflowWrap: "normal",
         wordBreak: "normal",
+      },
+    },
+  },
+  variants: {
+    // under a wide design: the name at the start, its kind at the end
+    wide: {
+      true: {
+        flexDirection: "row",
+        alignItems: "baseline",
+        gap: "8px",
+        textAlign: "start",
+        "& > span": { flexShrink: 0 },
       },
     },
   },

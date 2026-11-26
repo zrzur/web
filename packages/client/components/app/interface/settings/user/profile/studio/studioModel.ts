@@ -146,8 +146,9 @@ export function actionsOf(item: CommunityItem, readOnly: boolean) {
       shown === "Draft" || shown === "ChangesRequested" || shown === "Rejected",
     withdraw: status !== "Archived" && status !== "Suspended",
     restore: status === "Archived",
-    // the server deletes only what nobody can see
-    remove: status !== "Published" && status !== "Suspended",
+    // anything they publish, they can delete (owner, 2026-11-25); a design
+    // a reviewer took down stays until the review is over
+    remove: status !== "Suspended",
     download: true,
   };
 }
@@ -322,7 +323,7 @@ export const STUDIO_SPECS: Record<
     mustMove: true,
     maxSeconds: 4,
   },
-  // one still picture of exactly this size (`FRAME_FILE`)
+  // a picture of exactly this size (`FRAME_FILE`), still or moving
   frames: {
     width: FRAME_FILE.width,
     height: FRAME_FILE.height,

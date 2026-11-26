@@ -11,6 +11,7 @@ import {
 import { Button } from "@revolt/ui";
 import {
   FRAME_FILE,
+  FRAME_MAX_FRAMES,
   FRAME_TEMPLATE,
   frameBorderImage,
 } from "@revolt/ui/components/features/profiles/frames/communityFrame";
@@ -88,9 +89,9 @@ export function FrameGuide(props: {
         </h1>
         <p>
           <Trans>
-            A frame is one still picture laid round your profile card. Draw it
-            on our template, keep the card clear, and upload it in Creator
-            Studio.
+            A frame is a picture laid round your profile card, still or moving.
+            Draw it on our template, keep the card clear, and upload it in
+            Creator Studio.
           </Trans>
         </p>
         <Actions>
@@ -143,7 +144,8 @@ export function FrameGuide(props: {
         <p>
           <Trans>
             The frame lies over the card as it is. The avatar, the name and the
-            text area must stay fully transparent, or the upload is refused.
+            text area must stay fully transparent in every frame of an
+            animation, or the upload is refused.
           </Trans>
         </p>
         <Facts>
@@ -225,7 +227,7 @@ export function FrameGuide(props: {
       <Section id="file" title={<Trans>The file</Trans>}>
         <Facts>
           <Fact label={<Trans>Format</Trans>}>
-            <Trans>PNG, WebP or GIF</Trans>
+            <Trans>PNG, animated PNG, WebP or GIF</Trans>
           </Fact>
           <Fact label={<Trans>Size</Trans>}>
             <Trans>
@@ -239,7 +241,10 @@ export function FrameGuide(props: {
             <Trans>Transparent</Trans>
           </Fact>
           <Fact label={<Trans>Animation</Trans>}>
-            <Trans>None: one still picture</Trans>
+            <Trans>
+              Allowed, any length, up to {FRAME_MAX_FRAMES} frames. People who
+              turn motion off see it as a still picture.
+            </Trans>
           </Fact>
           <Fact label={<Trans>File name</Trans>}>
             <Trans>

@@ -66,8 +66,14 @@ import {
   needsRedraw,
   renderFit,
 } from "./fit";
-import { frameCover, isFrameSize } from "./frameCheck";
+import {
+  FRAME_MAX_FRAMES,
+  frameCover,
+  frameCoverOfFrames,
+  isFrameSize,
+} from "./frameCheck";
 import { downloadFrameKit } from "./frameKit";
+import { framePictures } from "./framePictures";
 import {
   Actions,
   Callout,
@@ -168,7 +174,7 @@ export function StudioEditor(props: {
   let uploaded: { key: string; id: string } | undefined;
 
   const isEffect = () => kind() === "effects";
-  /** a profile frame: one still picture on a fixed template, never refitted */
+  /** a profile frame: a still or moving picture on a fixed template, never refitted */
   const isFrame = () => kind() === "frames";
   const isVideo = () => file()?.type === "video/webm";
   const animated = () => !!facts()?.animated || isVideo();
@@ -323,7 +329,7 @@ export function StudioEditor(props: {
     if (issue === "type") {
       setProblem(
         type === "frames"
-          ? t`Use a PNG, WebP or GIF file. A frame is one still picture.`
+          ? t`Use a PNG, animated PNG, WebP or GIF file.`
           : t`Use a PNG, animated PNG, GIF, WebP or WebM file.`,
       );
       return;
@@ -374,10 +380,8 @@ export function StudioEditor(props: {
         );
         return;
       }
-      const moves = isAnimated(
-        new Uint8Array(await picked.arrayBuffer()),
-        picked.type,
-      );
+      const bytes = await picked.arrayBuffer();
+      const moves = isAnimated(new Uint8Array(bytes), picked.type);
       picture = image;
       // fit starts fresh for the new file, so measure after accepting it
       accept(picked, url, {
@@ -395,6 +399,27 @@ export function StudioEditor(props: {
           : known,
       );
       if (fileRefused(checks())) setStep("file");
+      // a moving frame: every picture keeps the card clear, not only the first
+      if (
+        moves &&
+        kind() === "frames" &&
+        isFrameSize(image.naturalWidth, image.naturalHeight)
+      ) {
+        const cover = await frameCoverOfFrames(
+          framePictures(
+            bytes,
+            picked.type,
+            image.naturalWidth,
+            image.naturalHeight,
+          ),
+          image.naturalWidth,
+          image.naturalHeight,
+        ).catch(() => undefined);
+        // another file picked meanwhile
+        if (!cover?.pixels || file() !== picked) return;
+        setFacts((known) => (known ? { ...known, frameCover: cover } : known));
+        if (fileRefused(checks())) setStep("file");
+      }
     };
     image.onerror = () => {
       URL.revokeObjectURL(url);
@@ -466,7 +491,9 @@ export function StudioEditor(props: {
       case "shape":
         return t`An effect has the shape of a profile: 9 by 16, such as 576 × 1024 px.`;
       case "too_many_frames":
-        return t`This effect has too many frames. The limit is 120.`;
+        return isFrame()
+          ? t`This frame has too many pictures. The limit is ${number(FRAME_MAX_FRAMES)}.`
+          : t`This effect has too many frames. The limit is 120.`;
       case "too_long":
         return t`This effect is too long. The limit is 4 seconds.`;
       case "too_many_pixels":
@@ -480,7 +507,8 @@ export function StudioEditor(props: {
       case "frame_size":
         return t`A frame file is exactly 800 × 1020 px. Start from the template in the frame kit.`;
       case "frame_still":
-        return t`A frame is one still picture. Export a single frame as PNG or WebP.`;
+        // a server from before moving frames were allowed
+        return t`Moving frames are not open yet. Export one picture as PNG or WebP.`;
       default:
         return undefined;
     }
@@ -670,10 +698,10 @@ export function StudioEditor(props: {
         );
       case "motion":
         return isFrame() ? (
-          check.state === "ok" ? (
-            <Trans>Still picture</Trans>
+          check.reason === "frame-moves" ? (
+            <Trans>Moves, allowed</Trans>
           ) : (
-            <Trans>Moves</Trans>
+            <Trans>Still picture</Trans>
           )
         ) : check.reason === "video" ? (
           <Trans>Made on upload</Trans>
@@ -696,6 +724,8 @@ export function StudioEditor(props: {
   /** what to do about the first check that is not ok */
   const advice = () => {
     const check = checks().find((entry) => entry.state !== "ok");
+    if (!check && checks().some((entry) => entry.reason === "frame-moves"))
+      return t`People who turn motion off see it as a still picture.`;
     switch (check?.reason) {
       case "square":
         return t`This image is not square. It is cropped to the frame; move it with the fit controls, or use 1024 × 1024 px.`;
@@ -715,8 +745,8 @@ export function StudioEditor(props: {
         return t`An effect has to move. This file has only one frame.`;
       case "frame-size":
         return t`A frame file is exactly 800 × 1020 px. Start from the template in the frame kit.`;
-      case "frame-still":
-        return t`A frame is one still picture. Export a single frame as PNG or WebP.`;
+      case "frame-moves":
+        return undefined;
       case "covers-banner":
         return t`The art covers the banner. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on.`;
       case "covers-name":
@@ -1607,11 +1637,19 @@ export function StudioEditor(props: {
             {(check) => (
               <div data-check={check.id}>
                 <dt>{checkLabel(check.id)}</dt>
-                <dd data-state={check.state}>
+                <dd
+                  data-state={
+                    check.reason === "frame-moves" ? "info" : check.state
+                  }
+                >
                   {checkWords(check)}
                   <Icon
                     name={
-                      check.state === "ok" ? "check-circle" : "warning-circle"
+                      check.reason === "frame-moves"
+                        ? "info"
+                        : check.state === "ok"
+                          ? "check-circle"
+                          : "warning-circle"
                     }
                     size={16}
                   />

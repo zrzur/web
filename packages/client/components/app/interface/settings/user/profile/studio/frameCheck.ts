@@ -2,6 +2,7 @@
 import {
   FRAME_ALPHA_LIMIT,
   FRAME_FILE,
+  FRAME_MAX_FRAMES,
   FRAME_TEMPLATE,
 } from "../../../../../../ui/components/features/profiles/frames/communityFrame";
 
@@ -27,7 +28,36 @@ export type FrameCover = {
   place?: FrameCoverPlace;
   /** the drawn box inside the safe zone, in file pixels */
   box?: { left: number; top: number; right: number; bottom: number };
+  /** a moving frame: the first picture (from 0) that covers the card */
+  frame?: number;
 };
+
+/**
+ * The most pictures of a moving frame that are checked, the server's frame
+ * limit: a file with more is refused there anyway.
+ */
+export { FRAME_MAX_FRAMES };
+
+/**
+ * The safe-area rule on every picture of a moving frame, as the server checks
+ * it: the art may not pass over the name later in its loop. Stops at the
+ * first picture that covers the card, and after `FRAME_MAX_FRAMES` pictures.
+ */
+export async function frameCoverOfFrames(
+  frames:
+    | Iterable<Uint8ClampedArray | Uint8Array>
+    | AsyncIterable<Uint8ClampedArray | Uint8Array>,
+  width: number,
+  height: number,
+): Promise<FrameCover> {
+  let frame = 0;
+  for await (const data of frames) {
+    const cover = frameCover(data, width, height);
+    if (cover.pixels) return { ...cover, frame };
+    if (++frame >= FRAME_MAX_FRAMES) break;
+  }
+  return { pixels: 0 };
+}
 
 /**
  * The backend's safe-area rule (autumn `check_frame_safe_area`): inside the

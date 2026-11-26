@@ -122,7 +122,8 @@ describe("studio tabs", () => {
       edit: true,
       publish: false,
       withdraw: true,
-      remove: false,
+      // owner, 2026-11-25: anything they publish, they can delete
+      remove: true,
     });
     expect(actionsOf(item({ status: "PendingReview" }), false).publish).toBe(
       false,
