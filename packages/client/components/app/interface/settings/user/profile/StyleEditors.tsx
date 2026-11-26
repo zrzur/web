@@ -648,6 +648,12 @@ export function DecorationDialog(props: {
               </For>
             </Chips>
           </GalleryToolbar>
+          <GalleryNote>
+            <Trans>
+              More designs by creators are in Designs. Put one on there and it
+              shows here.
+            </Trans>
+          </GalleryNote>
           <Switch>
             <Match
               when={category() === "favourites" || category() === "recent"}
@@ -723,12 +729,6 @@ export function DecorationDialog(props: {
               </DecoGrid>
             </Match>
           </Switch>
-          <GalleryNote>
-            <Trans>
-              More designs by creators are in Designs. Put one on there and it
-              shows here.
-            </Trans>
-          </GalleryNote>
         </div>
 
         <PreviewStack>
@@ -950,6 +950,12 @@ export function NameplateDialog(props: {
             value={search()}
             onInput={(e) => setSearch(e.currentTarget.value)}
           />
+          <GalleryNote>
+            <Trans>
+              More designs by creators are in Designs. Put one on there and it
+              shows here.
+            </Trans>
+          </GalleryNote>
           <PlateGrid>
             <PlateTile
               type="button"
@@ -988,12 +994,6 @@ export function NameplateDialog(props: {
               )}
             </Show>
           </PlateGrid>
-          <GalleryNote>
-            <Trans>
-              More designs by creators are in Designs. Put one on there and it
-              shows here.
-            </Trans>
-          </GalleryNote>
         </div>
 
         <PreviewStack>
@@ -1877,11 +1877,11 @@ const GalleryEmpty = styled("p", {
   },
 });
 
-/** Where the rest of the designs are, under a gallery */
+/** Where the rest of the designs are, above a gallery */
 const GalleryNote = styled("p", {
   base: {
     margin: 0,
-    marginBlockStart: "12px",
+    marginBlockEnd: "8px",
     fontSize: "13px",
     lineHeight: "20px",
     color: "var(--z-fg-muted)",
