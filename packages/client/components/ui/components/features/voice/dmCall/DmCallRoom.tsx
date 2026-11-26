@@ -557,7 +557,10 @@ function Tiles(props: { channel: Channel; phone?: boolean }) {
 
   return (
     <Show
-      when={!alone()}
+      // someone to show beside you (the other side of a DM, or whoever is
+      // being rung): a tile of their own next to yours, "Ringing…" on it,
+      // not a small dimmed face under your tile with its name over yours
+      when={!alone() || waiting().length > 0}
       fallback={<AloneView channel={props.channel} tracks={tracks} />}
     >
       <div

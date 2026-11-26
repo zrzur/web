@@ -137,7 +137,10 @@
   box-shadow: 0 0 0 2px var(--z-focus);
 }
 
-.z-dmcall-tile[data-waiting] {
+/* not in the call and not being rung: an empty outline. Being rung, the
+   card is a full one like the people in the call (only the face is dimmed
+   and pulses), so a ringing call shows both sides side by side */
+.z-dmcall-tile[data-waiting]:not([data-ringing]) {
   background: transparent;
   border-style: dashed;
 }
