@@ -24296,3 +24296,135 @@ msgstr "Zrzur, diretamente no <0>seu computador.<\\0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Animated PNG, GIF or WebP"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Can't be read"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Choose another"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Drop your ZIP file here"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "For files outside a type folder"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Format not allowed"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Include {0}"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Larger than {COMMUNITY_MAX_DIMENSION} px"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Made today"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Must be 800 × 1020 px"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Must be 9:16"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Name needs 2 to 32 characters"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "No designs in this ZIP. Use PNG, GIF or WebP files."
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "No limits"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Only the first {PACK_MAX_ITEMS} designs are listed."
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "PNG, animated PNG, GIF or WebP"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Pack"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Preview {0}"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Send as"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Sending {0} of {1}…"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Templates are guides: draw on a copy, then export without the guide marks."
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "That decoration suits you. Is it new?"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "That isn't a ZIP file."
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "This ZIP can't be read. It may be damaged."
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "This type isn't open yet"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Upload pack"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Your designs show up here"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0, plural, one {# needs fixing} other {# need fixing}}"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0, plural, one {# over your limit} other {# over your limit}}"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0, plural, one {Publish # design} other {Publish # designs}}"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0, plural, one {Save # draft} other {Save # drafts}}"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0} sent, {1} failed"
+msgstr ""
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Your name and avatar on your designs at designs.zrzur.com, with a page of all your work. Your #tag never shows."
+msgstr ""

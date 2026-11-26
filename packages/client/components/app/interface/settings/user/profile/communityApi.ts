@@ -106,7 +106,22 @@ export type CommunityPermissions =
      * `cosmetics.manage_all`; absent on older servers
      */
     can_delete_any?: boolean;
+    /**
+     * a top rank (Founder, Zrzur Staff, Developer, Platform Moderator): no
+     * design limit and no daily limit; absent on older servers
+     */
+    unlimited_designs?: boolean;
+    /** designs one may keep; absent when unlimited */
+    max_designs?: number | null;
+    /** new designs one may make in 24 hours; absent without a daily limit */
+    max_designs_per_day?: number | null;
+    /** new designs made in the last 24 hours, with `max_designs_per_day` */
+    designs_today?: number | null;
   };
+
+/** The server refused a new design: today's are used up */
+export const isDailyLimit = (error: unknown) =>
+  communityErrorType(error) === "CommunityDailyLimit";
 
 /** Whether the server says this person may delete anyone's design */
 export const mayDeleteAny = (perms: CommunityPermissions | undefined) =>
@@ -125,7 +140,6 @@ export const COMMUNITY_TYPES = [
   "image/apng",
   "image/gif",
   "image/webp",
-  "video/webm",
 ];
 
 /** Largest WebM going in; the server makes an image of it */

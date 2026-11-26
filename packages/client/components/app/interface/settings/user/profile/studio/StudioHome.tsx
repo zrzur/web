@@ -74,6 +74,10 @@ export function StudioHome(props: {
   dialog?: boolean;
   onLeave: () => void;
   onNew: () => void;
+  /** upload a ZIP of ready designs */
+  onPack?: () => void;
+  /** the latest answer about limits (today's count changes as one works) */
+  limits?: CommunityPermissions;
   onOpen: (item: CommunityItem) => void;
   onEdit: (item: CommunityItem) => void;
   /** set by the shell so "/" style shortcuts can reach the search box */
@@ -91,6 +95,7 @@ export function StudioHome(props: {
   const [specs, setSpecs] = createSignal(false);
 
   const counts = createMemo(() => studioCounts(props.items));
+  const limits = () => props.limits ?? props.perms;
   const list = createMemo(() =>
     studioList(props.items, filter(), kind(), query()),
   );
@@ -156,23 +161,22 @@ export function StudioHome(props: {
           <h1>
             <Trans>Creator Studio</Trans>
           </h1>
-          <p>
-            <Show
-              when={!props.readOnly}
-              fallback={<Trans>The designs you made, kept here.</Trans>}
-            >
-              <Trans>
-                Make your designs, upload them and follow their status in one
-                place.
-              </Trans>
-            </Show>
-          </p>
         </div>
         <Actions>
           <Button variant="tonal" onPress={() => setSpecs(true)}>
             <Icon name="download-simple" size={16} />
             <Trans>Specs and templates</Trans>
           </Button>
+          <Show when={!props.readOnly && props.onPack}>
+            <Button
+              variant="tonal"
+              data-testid="studio-pack"
+              onPress={() => props.onPack?.()}
+            >
+              <Icon name="archive" size={16} />
+              <Trans>Upload pack</Trans>
+            </Button>
+          </Show>
           <Show when={!props.readOnly}>
             <Button
               variant="filled"
@@ -208,17 +212,42 @@ export function StudioHome(props: {
         <div>
           <strong>{number(wornBy())}</strong>
           <span>
-            <Trans>People wearing your designs</Trans>
+            <Trans>Worn by</Trans>
           </span>
         </div>
-        <div>
-          <strong dir="ltr">
-            {number(kept())} / {number(STUDIO_MAX_ITEMS)}
-          </strong>
-          <span>
-            <Trans>Of your design limit</Trans>
-          </span>
-        </div>
+        <Show
+          when={!limits()?.unlimited_designs}
+          fallback={
+            <div data-testid="studio-limit">
+              <strong>∞</strong>
+              <span>
+                <Trans>No limits</Trans>
+              </span>
+            </div>
+          }
+        >
+          <div data-testid="studio-limit">
+            <strong dir="ltr">
+              {number(kept())} /{" "}
+              {number(limits()?.max_designs ?? STUDIO_MAX_ITEMS)}
+            </strong>
+            <span>
+              <Trans>Of your design limit</Trans>
+            </span>
+          </div>
+          <Show when={limits()?.max_designs_per_day}>
+            {(perDay) => (
+              <div data-testid="studio-today">
+                <strong dir="ltr">
+                  {number(limits()?.designs_today ?? 0)} / {number(perDay())}
+                </strong>
+                <span>
+                  <Trans>Made today</Trans>
+                </span>
+              </div>
+            )}
+          </Show>
+        </Show>
       </Stats>
 
       <For each={attention().slice(0, 3)}>
@@ -245,9 +274,7 @@ export function StudioHome(props: {
               </Button>
             }
           >
-            {reviewNote(item) ?? (
-              <Trans>Open it to see what happened and what you can do.</Trans>
-            )}
+            {reviewNote(item) ?? ""}
           </Callout>
         )}
       </For>
@@ -334,11 +361,6 @@ export function StudioHome(props: {
               <strong>
                 <Trans>No designs yet</Trans>
               </strong>
-              <p>
-                <Trans>
-                  Start with a template, draw your design, then upload it here.
-                </Trans>
-              </p>
               <Show when={!props.readOnly}>
                 <Button variant="tonal" onPress={() => props.onNew()}>
                   <Trans>New design</Trans>
@@ -446,20 +468,6 @@ export function StudioHome(props: {
         <CreatorPublicName initial={!!props.perms.show_public_name} />
       </Show>
 
-      <Show when={!props.readOnly}>
-        <Keys aria-label={t`Keyboard shortcuts`}>
-          <span>
-            <kbd>N</kbd> <Trans>New design</Trans>
-          </span>
-          <span>
-            <kbd>F</kbd> <Trans>Search your designs</Trans>
-          </span>
-          <span>
-            <kbd>Ctrl</kbd> <kbd>/</kbd> <Trans>All shortcuts</Trans>
-          </span>
-        </Keys>
-      </Show>
-
       <Dialog
         show={specs()}
         onClose={() => setSpecs(false)}
@@ -470,8 +478,7 @@ export function StudioHome(props: {
           <p>
             <Trans>
               Templates are guides: draw on a copy, then export without the
-              guide marks. A WebM becomes an animated image when you upload it:
-              its transparency stays and its sound is dropped.
+              guide marks.
             </Trans>
           </p>
           <For each={kinds()}>
@@ -559,10 +566,10 @@ export function SpecFacts(props: { kind: CommunityKind }) {
               </Trans>
             </Match>
             <Match when={spec().mustMove}>
-              <Trans>Animated PNG, GIF, WebP or WebM</Trans>
+              <Trans>Animated PNG, GIF or WebP</Trans>
             </Match>
             <Match when={true}>
-              <Trans>PNG, animated PNG, GIF, WebP or WebM</Trans>
+              <Trans>PNG, animated PNG, GIF or WebP</Trans>
             </Match>
           </Switch>
         </dd>
@@ -572,12 +579,7 @@ export function SpecFacts(props: { kind: CommunityKind }) {
           <Trans>File size</Trans>
         </dt>
         <dd>
-          <Show
-            when={props.kind === "frames"}
-            fallback={<Trans>Up to {megabytes()} MB (WebM up to 8 MB)</Trans>}
-          >
-            <Trans>Up to {megabytes()} MB</Trans>
-          </Show>
+          <Trans>Up to {megabytes()} MB</Trans>
         </dd>
       </div>
       <div>
@@ -631,7 +633,9 @@ export function SpecFacts(props: { kind: CommunityKind }) {
 const Stats = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+    // one column per figure: five, or six with today's count
+    gridAutoFlow: "column",
+    gridAutoColumns: "minmax(0, 1fr)",
     borderRadius: "var(--z-box-radius)",
     border: "var(--z-box-border)",
     background: "var(--z-box-bg)",
@@ -655,6 +659,7 @@ const Stats = styled("div", {
       color: "var(--z-fg-muted)",
     },
     "@container (max-width: 760px)": {
+      gridAutoFlow: "row",
       gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
       "& > div": {
         padding: "16px",
@@ -974,28 +979,6 @@ const Empty = styled("div", {
       color: "var(--z-fg-secondary)",
     },
     _phone: { "& button": { minHeight: "44px" } },
-  },
-});
-
-const Keys = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px 20px",
-    fontSize: "13px",
-    lineHeight: "24px",
-    color: "var(--z-fg-muted)",
-    "& kbd": {
-      fontFamily: "var(--z-font-mono, monospace)",
-      fontSize: "12px",
-      paddingInline: "6px",
-      borderRadius: "var(--z-radius-xs, 6px)",
-      border: "1px solid var(--z-border-subtle)",
-      background: "var(--z-bg-raised)",
-      color: "var(--z-fg-secondary)",
-    },
-    // a phone has no keys to press
-    _phone: { display: "none" },
   },
 });
 

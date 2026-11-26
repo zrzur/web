@@ -7,6 +7,7 @@ import {
   type UserStyle,
   communityFileUrl,
   communityStillUrl,
+  localDesignUrl,
 } from "./userStyle";
 
 /**
@@ -82,6 +83,8 @@ export const THEME_PRESETS: { id: string; colours: [string, string] }[] = [
 
 /** URL of an effect's file: what plays */
 export function effectFileUrl(mediaUrl: string, fileId: string | undefined) {
+  const local = localDesignUrl(fileId);
+  if (local) return local;
   return fileId && /^[\w-]+$/.test(fileId)
     ? `${mediaUrl}/effects/${fileId}/original`
     : undefined;
@@ -89,6 +92,8 @@ export function effectFileUrl(mediaUrl: string, fileId: string | undefined) {
 
 /** URL of one still frame of an effect, drawn by the media server for tiles */
 export function effectStillUrl(mediaUrl: string, fileId: string | undefined) {
+  const local = localDesignUrl(fileId);
+  if (local) return local;
   return fileId && /^[\w-]+$/.test(fileId)
     ? `${mediaUrl}/effects/${fileId}`
     : undefined;

@@ -27,12 +27,14 @@ import {
 import { StudioDesign } from "./studio/StudioDesign";
 import { StudioEditor } from "./studio/StudioEditor";
 import { StudioHome } from "./studio/StudioHome";
+import { StudioPack } from "./studio/StudioPack";
 import { Callout } from "./studio/parts";
 import type { StudioStep } from "./studio/studioModel";
 
 /** Where the creator is inside the studio */
 export type StudioRoute =
   | { view: "home" }
+  | { view: "pack" }
   | { view: "new"; kind?: CommunityKind }
   | { view: "design"; id: string }
   | { view: "edit"; id: string; step?: StudioStep };
@@ -48,6 +50,7 @@ const KINDS: readonly string[] = [
 export function studioRoute(path: readonly string[]): StudioRoute {
   const [first, second] = path;
   if (!first) return { view: "home" };
+  if (first === "pack") return { view: "pack" };
   if (first === "new")
     return {
       view: "new",
@@ -63,6 +66,8 @@ export function studioPath(route: StudioRoute): string {
   switch (route.view) {
     case "home":
       return "";
+    case "pack":
+      return "/pack";
     case "new":
       return route.kind ? `/new/${route.kind}` : "/new";
     case "design":
@@ -113,6 +118,11 @@ export function CreatorStudio(props: {
   );
   const items = () => (mine.error ? [] : (mine() ?? []));
   const find = (id: string) => items().find((item) => item._id === id);
+  /** designs that count towards the limit: everything not withdrawn */
+  const kept = () =>
+    items().filter(
+      (item) => item.status !== "Archived" && item.status !== "Rejected",
+    ).length;
 
   // suspended: they see their designs and change nothing (owner, 2026-11-06)
   const readOnly = () =>
@@ -196,6 +206,22 @@ export function CreatorStudio(props: {
       </Show>
 
       <Switch>
+        <Match when={route().view === "pack" && !readOnly()}>
+          <StudioPack
+            {...shared()}
+            perms={access.perms() ?? props.perms}
+            kept={kept()}
+            effects={effects()}
+            frames={communityFramesOpen(client())}
+            onBack={() => go({ view: "home" })}
+            onSent={(made) => {
+              mutate((list) => [...made, ...(list ?? [])]);
+              // today's count changed
+              access.refresh();
+            }}
+          />
+        </Match>
+
         <Match when={route().view === "new" && !readOnly()}>
           <StudioEditor
             {...shared()}
@@ -264,7 +290,10 @@ export function CreatorStudio(props: {
 
         <Match
           when={
-            route().view !== "home" && route().view !== "new" && mine.loading
+            route().view !== "home" &&
+            route().view !== "new" &&
+            route().view !== "pack" &&
+            mine.loading
           }
         >
           <Callout tone="info">
@@ -277,6 +306,7 @@ export function CreatorStudio(props: {
             when={
               route().view !== "home" &&
               route().view !== "new" &&
+              route().view !== "pack" &&
               missing((route() as { id: string }).id)
             }
           >
@@ -298,6 +328,8 @@ export function CreatorStudio(props: {
             frames={communityFramesOpen(client())}
             onFrameGuide={props.onFrameGuide}
             onNew={() => go({ view: "new" })}
+            onPack={() => go({ view: "pack" })}
+            limits={access.perms() ?? props.perms}
             onOpen={(item) => go({ view: "design", id: item._id })}
             onEdit={(item) => go({ view: "edit", id: item._id })}
             searchRef={(input) => (search = input)}

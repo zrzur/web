@@ -46,11 +46,8 @@ export function CreatorPublicName(props: { initial: boolean }) {
         title={<Trans>Show my name on the public Designs site</Trans>}
         description={
           <Trans>
-            Off by default. Designs.zrzur.com is open to everyone and search
-            engines, without an account. Switched on, your name and avatar
-            appear on your designs there, and anyone can open a page of all your
-            work. Switched off, visitors see the designs without any name and
-            nobody gets that page. Your #tag never shows.
+            Your name and avatar on your designs at designs.zrzur.com, with a
+            page of all your work. Your #tag never shows.
           </Trans>
         }
         control={(ids) => (

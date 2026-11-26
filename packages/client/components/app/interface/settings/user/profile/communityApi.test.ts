@@ -335,14 +335,15 @@ describe("effects", () => {
 describe("a WebM", () => {
   const type = "video/webm";
 
-  it("has its own limit going in, for every kind", () => {
-    for (const kind of ["decorations", "nameplates", "effects"] as const) {
-      expect(
-        checkCommunityFile({ type, size: 7_900_000 }, kind),
-      ).toBeUndefined();
-      expect(checkCommunityFile({ type, size: 8_100_000 }, kind)).toBe(
-        "webm-size",
-      );
+  it("is not taken any more, for any kind", () => {
+    // turning a WebM into an image failed too often (owner, 2026-11-26)
+    for (const kind of [
+      "decorations",
+      "nameplates",
+      "effects",
+      "frames",
+    ] as const) {
+      expect(checkCommunityFile({ type, size: 1_000 }, kind)).toBe("type");
     }
   });
 

@@ -33988,3 +33988,135 @@ msgstr "بنفسجي ووردي، عريض ومشرق."
 #: src/interface/designs/Looks.tsx
 msgid "Warm sunset colours and a golden name."
 msgstr "ألوان الغروب الدافئة واسم ذهبي."
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Animated PNG, GIF or WebP"
+msgstr "PNG متحرك أو GIF أو WebP"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Can't be read"
+msgstr "تعذّرت قراءته"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Choose another"
+msgstr "اختر ملفًا آخر"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Drop your ZIP file here"
+msgstr "أفلت ملف ZIP هنا"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "For files outside a type folder"
+msgstr "للملفات خارج مجلد نوع"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Format not allowed"
+msgstr "الصيغة غير مسموحة"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Include {0}"
+msgstr "تضمين {0}"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Larger than {COMMUNITY_MAX_DIMENSION} px"
+msgstr "أكبر من {COMMUNITY_MAX_DIMENSION} بكسل"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Made today"
+msgstr "اليوم"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Must be 800 × 1020 px"
+msgstr "يجب أن يكون 800 × 1020 بكسل"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Must be 9:16"
+msgstr "يجب أن تكون النسبة 9:16"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Name needs 2 to 32 characters"
+msgstr "الاسم من 2 إلى 32 حرفًا"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "No designs in this ZIP. Use PNG, GIF or WebP files."
+msgstr "لا توجد تصاميم في ملف ZIP هذا. استخدم ملفات PNG أو GIF أو WebP."
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "No limits"
+msgstr "بلا حدود"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Only the first {PACK_MAX_ITEMS} designs are listed."
+msgstr "تظهر أول {PACK_MAX_ITEMS} تصميم فقط."
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "PNG, animated PNG, GIF or WebP"
+msgstr "PNG أو PNG متحرك أو GIF أو WebP"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Pack"
+msgstr "الحزمة"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Preview {0}"
+msgstr "معاينة {0}"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Send as"
+msgstr "إرسال كـ"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Sending {0} of {1}…"
+msgstr "جارٍ إرسال {0} من {1}…"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Templates are guides: draw on a copy, then export without the guide marks."
+msgstr "القوالب للإرشاد فقط: ارسم على نسخة، ثم صدّرها بدون علامات الإرشاد."
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "That decoration suits you. Is it new?"
+msgstr "الزينة لابقة عليك. جديدة؟"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "That isn't a ZIP file."
+msgstr "هذا ليس ملف ZIP."
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "This ZIP can't be read. It may be damaged."
+msgstr "تعذّرت قراءة ملف ZIP هذا، ربما يكون تالفًا."
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "This type isn't open yet"
+msgstr "هذا النوع غير متاح بعد"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Upload pack"
+msgstr "رفع حزمة"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Your designs show up here"
+msgstr "تظهر تصاميمك هنا"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0, plural, one {# needs fixing} other {# need fixing}}"
+msgstr "{0, plural, zero {لا شيء يحتاج إلى إصلاح} one {واحد يحتاج إلى إصلاح} two {اثنان يحتاجان إلى إصلاح} few {# تحتاج إلى إصلاح} many {# تحتاج إلى إصلاح} other {# تحتاج إلى إصلاح}}"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0, plural, one {# over your limit} other {# over your limit}}"
+msgstr "{0, plural, zero {لا شيء فوق حدّك} one {واحد فوق حدّك} two {اثنان فوق حدّك} few {# فوق حدّك} many {# فوق حدّك} other {# فوق حدّك}}"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0, plural, one {Publish # design} other {Publish # designs}}"
+msgstr "{0, plural, zero {نشر لا تصاميم} one {نشر تصميم واحد} two {نشر تصميمين} few {نشر # تصاميم} many {نشر # تصميمًا} other {نشر # تصميم}}"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0, plural, one {Save # draft} other {Save # drafts}}"
+msgstr "{0, plural, zero {حفظ لا مسودات} one {حفظ مسودة واحدة} two {حفظ مسودتين} few {حفظ # مسودات} many {حفظ # مسودة} other {حفظ # مسودة}}"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "{0} sent, {1} failed"
+msgstr "أُرسل {0}، وفشل {1}"
+
+#: components/app/interface/settings/user/profile/studio/StudioPack.tsx
+msgid "Your name and avatar on your designs at designs.zrzur.com, with a page of all your work. Your #tag never shows."
+msgstr "اسمك وصورتك على تصاميمك في designs.zrzur.com، مع صفحة لكل أعمالك. لا يظهر #tag الخاص بك أبدًا."

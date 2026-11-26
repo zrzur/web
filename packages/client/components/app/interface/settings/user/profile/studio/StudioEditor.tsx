@@ -327,11 +327,8 @@ export function StudioEditor(props: {
     if (!picked || !type) return;
     const issue = checkCommunityFile(picked, type);
     if (issue === "type") {
-      setProblem(
-        type === "frames"
-          ? t`Use a PNG, animated PNG, WebP or GIF file.`
-          : t`Use a PNG, animated PNG, GIF, WebP or WebM file.`,
-      );
+      // WebM is not taken: turning it into an image failed too often
+      setProblem(t`Use a PNG, animated PNG, WebP or GIF file.`);
       return;
     }
     if (issue === "webm-size") {
@@ -1833,7 +1830,7 @@ const Steps = styled("ol", {
   },
 });
 
-const Split = styled("div", {
+export const Split = styled("div", {
   base: {
     display: "grid",
     gridTemplateColumns: "minmax(0, 1fr) 380px",
@@ -1843,11 +1840,11 @@ const Split = styled("div", {
   },
 });
 
-const Side = styled("div", {
+export const Side = styled("div", {
   base: { display: "flex", flexDirection: "column", gap: "16px", minWidth: 0 },
 });
 
-const StageBox = styled("section", {
+export const StageBox = styled("section", {
   base: {
     display: "flex",
     flexDirection: "column",
@@ -1861,7 +1858,7 @@ const StageBox = styled("section", {
   },
 });
 
-const StageBar = styled("div", {
+export const StageBar = styled("div", {
   base: {
     display: "flex",
     flexWrap: "wrap",
@@ -1874,7 +1871,7 @@ const StageBar = styled("div", {
   },
 });
 
-const StageFoot = styled("div", {
+export const StageFoot = styled("div", {
   base: {
     display: "flex",
     flexWrap: "wrap",
@@ -1903,7 +1900,7 @@ const GuideSwitch = styled("div", {
   },
 });
 
-const Drop = styled("button", {
+export const Drop = styled("button", {
   base: {
     display: "flex",
     flexDirection: "column",
@@ -2047,7 +2044,7 @@ const Option = styled("div", {
   },
 });
 
-const Bar = styled("div", {
+export const Bar = styled("div", {
   base: {
     position: "sticky",
     bottom: "12px",

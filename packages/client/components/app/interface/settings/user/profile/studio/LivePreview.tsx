@@ -1,17 +1,24 @@
-import { For, Match, Show, Switch } from "solid-js";
+import { For, Match, Show, Switch, createMemo, onCleanup } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { Avatar } from "@revolt/ui";
+import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import { useEffectsAllowed } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
 import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
 import { sampleAvatar } from "@revolt/ui/components/features/profiles/sampleAvatars";
-import { userStyleOf } from "@revolt/ui/components/features/profiles/userStyle";
+import {
+  type UserStyle,
+  lendLocalDesign,
+  nameStyle,
+  userStyleOf,
+} from "@revolt/ui/components/features/profiles/userStyle";
+import { WornPlate } from "@revolt/ui/components/features/profiles/WornPreviews";
 
-import { DecorationArt, EffectArt, NameplateArt } from "../CommunityParts";
 import type { CommunityKind } from "../communityApi";
+import { EffectArt, NameplateArt } from "../CommunityParts";
 import { plateMarks } from "../studioTemplates";
 
 /** Where a design is shown before it is sent */
@@ -56,13 +63,38 @@ export function LivePreview(props: {
     { name: t`Sara`, avatar: sampleAvatar(2) },
   ];
 
+  // the file is lent to the app's own parts (the profile card, the member
+  // list), so they draw it exactly as they will once it is uploaded
+  const lent = createMemo(() => {
+    const loan = lendLocalDesign(props.url);
+    onCleanup(loan.release);
+    return loan.id;
+  });
+  const me = () => client().user;
+  /** the person's own look (name font and colours, banner), wearing this */
+  const wearing = (): UserStyle => {
+    const own = { ...(userStyleOf(me()) ?? {}) };
+    if (props.kind === "decorations")
+      return { ...own, decoration: "c:preview", decoration_file: lent() };
+    if (props.kind === "nameplates")
+      return { ...own, nameplate: "c:preview", nameplate_file: lent() };
+    return own;
+  };
+  const ownName = () =>
+    nameStyle(userStyleOf(me()), {
+      surface: props.ground,
+      always: true,
+    });
+  const time = (minutesAgo: number) =>
+    new Intl.DateTimeFormat(document.documentElement.lang || undefined, {
+      hour: "numeric",
+      minute: "2-digit",
+    }).format(Date.now() - minutesAgo * 60_000);
+
   const decorated = (size: number) => (
-    <DecorationArt
-      url={props.url}
-      avatar={props.avatar}
-      name={props.name}
-      size={size}
-    />
+    <AvatarDecoration decoration="c:preview" file={lent()} size={size} live>
+      <Avatar size={size} src={props.avatar} fallback={props.name} />
+    </AvatarDecoration>
   );
 
   return (
@@ -146,6 +178,16 @@ export function LivePreview(props: {
           </GuidePlate>
         </Match>
 
+        {/* your own profile card, as others open it, with the effect
+            playing over it */}
+        <Match when={props.kind === "effects" && me()}>
+          <RealCard data-place="profile">
+            <ProfilePreview user={me()!} style={wearing()} />
+            <EffectLayer>
+              <EffectArt url={props.url} label={props.name} />
+            </EffectLayer>
+          </RealCard>
+        </Match>
         <Match when={props.kind === "effects"}>
           <ProfileCard data-place="profile">
             <Banner />
@@ -164,6 +206,12 @@ export function LivePreview(props: {
           </ProfileCard>
         </Match>
 
+        {/* the decoration on your own profile card, as others see it */}
+        <Match when={props.place === "profile" && me()}>
+          <RealCard data-place="profile">
+            <ProfilePreview user={me()!} style={wearing()} />
+          </RealCard>
+        </Match>
         <Match when={props.place === "profile"}>
           <ProfileCard data-place="profile">
             <Banner />
@@ -181,10 +229,11 @@ export function LivePreview(props: {
 
         <Match when={props.place === "members" && props.kind === "nameplates"}>
           <Members data-place="members">
-            <NameplateArt
-              url={props.url}
-              avatar={props.avatar}
-              name={props.name}
+            {/* you, as the member list draws you: your plate, your name
+                in its own font and colours */}
+            <WornPlate
+              look={wearing()}
+              wearer={{ name: props.name, avatar: props.avatar }}
             />
             {/* both directions: the fade follows the name's language */}
             <div dir="rtl">
@@ -201,14 +250,10 @@ export function LivePreview(props: {
                 name="Sara Hassan"
               />
             </div>
-            <For each={others()}>
-              {(member) => (
-                <MemberRow>
-                  <Avatar size={30} src={member.avatar} />
-                  <span>{member.name}</span>
-                </MemberRow>
-              )}
-            </For>
+            <MemberRow>
+              <Avatar size={30} src={others()[0].avatar} />
+              <span>{others()[0].name}</span>
+            </MemberRow>
           </Members>
         </Match>
 
@@ -216,7 +261,7 @@ export function LivePreview(props: {
           <Members data-place="members">
             <MemberRow>
               {decorated(32)}
-              <span>
+              <span style={ownName()}>
                 <bdi>{props.name}</bdi>
               </span>
             </MemberRow>
@@ -236,9 +281,12 @@ export function LivePreview(props: {
             <MessageRow>
               {decorated(40)}
               <div>
-                <strong>
-                  <bdi>{props.name}</bdi>
-                </strong>
+                <header>
+                  <strong style={ownName()}>
+                    <bdi>{props.name}</bdi>
+                  </strong>
+                  <time dir="ltr">{time(2)}</time>
+                </header>
                 <p>
                   <Trans>Good evening, everyone.</Trans>
                 </p>
@@ -247,9 +295,12 @@ export function LivePreview(props: {
             <MessageRow>
               <Avatar size={40} src={others()[0].avatar} />
               <div>
-                <strong>{others()[0].name}</strong>
+                <header>
+                  <strong>{others()[0].name}</strong>
+                  <time dir="ltr">{time(1)}</time>
+                </header>
                 <p>
-                  <Trans>Nice frame. Is it new?</Trans>
+                  <Trans>That decoration suits you. Is it new?</Trans>
                 </p>
               </div>
             </MessageRow>
@@ -353,6 +404,18 @@ const Video = styled("video", {
   base: { display: "block", maxWidth: "100%", maxHeight: "360px" },
 });
 
+/** the app's own profile card, at the size the column gives it */
+const RealCard = styled("div", {
+  base: {
+    position: "relative",
+    width: "100%",
+    maxWidth: "360px",
+    marginInline: "auto",
+    // a picture of the card: nothing in it takes a click
+    pointerEvents: "none",
+  },
+});
+
 const ProfileCard = styled("div", {
   base: {
     position: "relative",
@@ -447,12 +510,19 @@ const MessageRow = styled("div", {
     display: "flex",
     alignItems: "flex-start",
     gap: "16px",
+    // as a chat message: name and time on one line, the text under it
+    "& header": {
+      display: "flex",
+      alignItems: "baseline",
+      gap: "8px",
+    },
     "& strong": { fontSize: "15px", lineHeight: "22px", fontWeight: 600 },
+    "& time": { fontSize: "12px", color: "var(--studio-soft)" },
     "& p": {
       margin: 0,
       fontSize: "15px",
       lineHeight: "22px",
-      color: "var(--studio-soft)",
+      color: "inherit",
     },
   },
 });

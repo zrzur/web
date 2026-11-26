@@ -437,6 +437,8 @@ export const isCommunityRef = (value: string | undefined) =>
 
 /** URL of a community image on the media server (animated original) */
 export function communityFileUrl(mediaUrl: string, fileId: string | undefined) {
+  const local = localDesignUrl(fileId);
+  if (local) return local;
   return fileId && /^[\w-]+$/.test(fileId)
     ? `${mediaUrl}/decorations/${fileId}/original`
     : undefined;
@@ -450,6 +452,8 @@ export function communityStillUrl(
   mediaUrl: string,
   fileId: string | undefined,
 ) {
+  const local = localDesignUrl(fileId);
+  if (local) return local;
   return fileId && /^[\w-]+$/.test(fileId)
     ? `${mediaUrl}/decorations/${fileId}`
     : undefined;
@@ -474,3 +478,22 @@ export function nameplateBackground(
     : communityStillUrl(mediaUrl, file);
   return url ? `url("${url}") center / 100% 100% no-repeat` : undefined;
 }
+
+/**
+ * Designs being made in the Creator Studio: files not uploaded yet, by a
+ * made-up file id, so the app's own parts (the profile card, the member
+ * list) can wear them in a preview exactly as they will look
+ */
+const localDesigns = new Map<string, string>();
+let localCount = 0;
+
+/** Lend a picked file to the app's parts: the id to put in a style */
+export function lendLocalDesign(url: string) {
+  const id = `local-${++localCount}`;
+  localDesigns.set(id, url);
+  return { id, release: () => localDesigns.delete(id) };
+}
+
+/** The address of a lent file, if this id is one */
+export const localDesignUrl = (fileId: string | undefined) =>
+  fileId ? localDesigns.get(fileId) : undefined;
