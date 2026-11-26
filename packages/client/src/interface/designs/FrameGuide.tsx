@@ -215,13 +215,6 @@ export function FrameGuide(props: {
             <Trans>About 3 px a block</Trans>
           </Fact>
         </Facts>
-        <p>
-          <Trans>
-            Zrzur's own pixel frames are drawn at 4 px on tall windows, 3 px
-            below 1080 px and 2 px below 640 px and on phones. At 4 px they
-            reach 96 px above the card, 72 px below and 56 px beside it.
-          </Trans>
-        </p>
       </Section>
 
       <Section id="file" title={<Trans>The file</Trans>}>

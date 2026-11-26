@@ -33949,3 +33949,46 @@ msgstr "Moving frames are not open yet. Export one picture as PNG or WebP."
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Use a PNG, animated PNG, WebP or GIF file."
 msgstr "Use a PNG, animated PNG, WebP or GIF file."
+
+#: src/interface/designs/Looks.tsx
+msgid "A clean mono name on night blue."
+msgstr "A clean mono name on night blue."
+
+#: src/interface/designs/Looks.tsx
+msgid "A pixel name on deep teal."
+msgstr "A pixel name on deep teal."
+
+#: src/interface/designs/Looks.tsx
+msgid "Bold reds and a wide name."
+msgstr "Bold reds and a wide name."
+
+#: src/interface/designs/Looks.tsx
+msgid "Bright blue and a bold white name."
+msgstr "Bright blue and a bold white name."
+
+#: src/interface/designs/Looks.tsx
+msgid "Calm blue and a soft white name."
+msgstr "Calm blue and a soft white name."
+
+#: src/interface/designs/Looks.tsx
+msgid "Gold on gold for winners."
+msgstr "Gold on gold for winners."
+
+#: components/app/interface/settings/user/profile/EffectDialog.tsx
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "More designs by creators are in Designs. Put one on there and it shows here."
+msgstr "More designs by creators are in Designs. Put one on there and it shows here."
+
+#: src/interface/designs/Looks.tsx
+msgid "Soft pink and a handwritten name."
+msgstr "Soft pink and a handwritten name."
+
+#: src/interface/designs/Looks.tsx
+msgid "Violet and pink, wide and bright."
+msgstr "Violet and pink, wide and bright."
+
+#: src/interface/designs/Looks.tsx
+msgid "Warm sunset colours and a golden name."
+msgstr "Warm sunset colours and a golden name."
+

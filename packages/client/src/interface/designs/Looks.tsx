@@ -4,21 +4,13 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
-import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";
-import { Avatar } from "@revolt/ui";
-import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import { FramedCard } from "@revolt/ui/components/features/profiles/frames/ProfileFrame";
-import {
-  NameplateMotion,
-  useDesignMotion,
-} from "@revolt/ui/components/features/profiles/NameplateMotion";
+import { useDesignMotion } from "@revolt/ui/components/features/profiles/NameplateMotion";
 import {
   type UserStyle,
-  DECORATIONS,
-  NAMEPLATES,
   nameStyle,
   nameplateBackground,
   userStyleOf,
@@ -29,22 +21,15 @@ import { useAccountGate } from "../../DesignsSite";
 
 import { type Person, Face, WornAvatar, useWearer } from "./Scenes";
 
-/** pink, the one accent of Designs */
-const PINK = "var(--z-designs-pink)";
-
 /**
- * Ready-made looks: a profile theme, a name font and colour, a decoration
- * and a nameplate that go together. Everything is built in, so a look is
- * worn in one tap and works for everyone.
+ * Ready-made looks: a profile theme and a name font and colour that go
+ * together. Everything in a look is part of the app, so it is worn in one
+ * tap and works for everyone. (Looks had a decoration and a nameplate too,
+ * until the built-in designs became community designs on 2026-11-26.)
  */
 export type Look = {
   id: string;
-  style: Required<
-    Pick<
-      UserStyle,
-      "theme" | "name_font" | "name_colour" | "decoration" | "nameplate"
-    >
-  >;
+  style: Required<Pick<UserStyle, "theme" | "name_font" | "name_colour">>;
 };
 
 export const LOOKS: Look[] = [
@@ -54,8 +39,6 @@ export const LOOKS: Look[] = [
       theme: ["#3d1e6d", "#035aa6"],
       name_font: "bold",
       name_colour: ["#8e2de2", "#e100ff"],
-      decoration: "star-orbit",
-      nameplate: "midnight",
     },
   },
   {
@@ -64,8 +47,6 @@ export const LOOKS: Look[] = [
       theme: ["#ff6b4a", "#ffb347"],
       name_font: "serif",
       name_colour: ["#ff9a44", "#ffcc33"],
-      decoration: "sun-rays",
-      nameplate: "sunset",
     },
   },
   {
@@ -74,8 +55,6 @@ export const LOOKS: Look[] = [
       theme: ["#1e9bb8", "#6fd3e8"],
       name_font: "rounded",
       name_colour: ["#2193b0", "#6dd5ed"],
-      decoration: "ice-crystal",
-      nameplate: "ocean",
     },
   },
   {
@@ -84,8 +63,6 @@ export const LOOKS: Look[] = [
       theme: ["#11998e", "#38ef7d"],
       name_font: "rounded",
       name_colour: ["#38d39f"],
-      decoration: "ivy",
-      nameplate: "mint",
     },
   },
   {
@@ -94,8 +71,6 @@ export const LOOKS: Look[] = [
       theme: ["#ff9a9e", "#fecfef"],
       name_font: "script",
       name_colour: ["#ff5c8a"],
-      decoration: "hearts",
-      nameplate: "sakura",
     },
   },
   {
@@ -104,8 +79,6 @@ export const LOOKS: Look[] = [
       theme: ["#eb3349", "#f45c43"],
       name_font: "wide",
       name_colour: ["#ff6b4a", "#a66bff"],
-      decoration: "flame-ring",
-      nameplate: "autumn",
     },
   },
   {
@@ -114,8 +87,6 @@ export const LOOKS: Look[] = [
       theme: ["#0f2027", "#2c5364"],
       name_font: "pixel",
       name_colour: ["#3ec6e0"],
-      decoration: "neon",
-      nameplate: "midnight",
     },
   },
   {
@@ -124,8 +95,6 @@ export const LOOKS: Look[] = [
       theme: ["#00c6ff", "#0072ff"],
       name_font: "bold",
       name_colour: ["#ffffff"],
-      decoration: "lightning",
-      nameplate: "aurora",
     },
   },
   {
@@ -134,8 +103,6 @@ export const LOOKS: Look[] = [
       theme: ["#8b2be2", "#e0218a"],
       name_font: "wide",
       name_colour: ["#a66bff"],
-      decoration: "moon-halo",
-      nameplate: "zodiac-pisces",
     },
   },
   {
@@ -144,8 +111,6 @@ export const LOOKS: Look[] = [
       theme: ["#0f2027", "#2c5364"],
       name_font: "mono",
       name_colour: ["#ffffff"],
-      decoration: "music-notes",
-      nameplate: "midnight",
     },
   },
   {
@@ -154,8 +119,6 @@ export const LOOKS: Look[] = [
       theme: ["#f7971e", "#ffd200"],
       name_font: "serif",
       name_colour: ["#ffd200"],
-      decoration: "laurel",
-      nameplate: "sunset",
     },
   },
   {
@@ -164,8 +127,6 @@ export const LOOKS: Look[] = [
       theme: ["#2193b0", "#6dd5ed"],
       name_font: "rounded",
       name_colour: ["#ffffff"],
-      decoration: "snow",
-      nameplate: "clouds",
     },
   },
 ];
@@ -208,17 +169,17 @@ export function useLookText() {
   const { t } = useLingui();
   const text: Record<string, [string, string]> = {
     "night-glow": [t`Night glow`, t`Violet light for late talks.`],
-    "golden-hour": [t`Golden hour`, t`Warm sunset colours and a gold ring.`],
+    "golden-hour": [t`Golden hour`, t`Warm sunset colours and a golden name.`],
     "deep-sea": [t`Deep sea`, t`Cool blues with a touch of ice.`],
     "fresh-mint": [t`Fresh mint`, t`Light, green and full of sparkle.`],
-    blossom: [t`Blossom`, t`Soft pink with hearts.`],
-    ember: [t`Ember`, t`Bold reds and flames.`],
-    arcade: [t`Arcade`, t`Pixel name and a neon ring.`],
-    storm: [t`Storm`, t`Bright blue with lightning.`],
-    cosmos: [t`Cosmos`, t`A galaxy around you.`],
-    studio: [t`Studio`, t`Headphones on, music up.`],
-    victory: [t`Victory`, t`Gold laurel for winners.`],
-    winter: [t`Winter`, t`Snow and calm blue.`],
+    blossom: [t`Blossom`, t`Soft pink and a handwritten name.`],
+    ember: [t`Ember`, t`Bold reds and a wide name.`],
+    arcade: [t`Arcade`, t`A pixel name on deep teal.`],
+    storm: [t`Storm`, t`Bright blue and a bold white name.`],
+    cosmos: [t`Cosmos`, t`Violet and pink, wide and bright.`],
+    studio: [t`Studio`, t`A clean mono name on night blue.`],
+    victory: [t`Victory`, t`Gold on gold for winners.`],
+    winter: [t`Winter`, t`Calm blue and a soft white name.`],
   };
   return (id: string) => text[id] ?? [id, ""];
 }
@@ -232,9 +193,7 @@ export function isWearing(style: UserStyle | undefined, look: Look) {
     !!style &&
     sameList(style.theme, look.style.theme) &&
     style.name_font === look.style.name_font &&
-    sameList(style.name_colour, look.style.name_colour) &&
-    style.decoration === look.style.decoration &&
-    style.nameplate === look.style.nameplate
+    sameList(style.name_colour, look.style.name_colour)
   );
 }
 
@@ -372,8 +331,8 @@ export function StyleCard(props: {
 }
 
 /**
- * Room round the card for its frame. A preview card is drawn with 2 or 3 px
- * pixels, so the frame uses at most 42 px at the sides, 72 above and 54 below.
+ * Room round the card for its frame. A creator's frame reaches past a 340 px
+ * card by 30 px at the sides, 70 above and 40 below; this leaves a little more.
  */
 const framedRoom = cva({
   base: { margin: "72px 42px 54px" },
@@ -435,116 +394,6 @@ export function LookGrid(props: { looks?: Look[]; limit?: number }) {
           }}
         </For>
       </Grid>
-    </>
-  );
-}
-
-/** Included decorations, each tried on the user's own avatar */
-export function IncludedDecorations(props: { limit?: number }) {
-  const wearer = useWearer();
-  const wear = useWear();
-  const labels = useStyleLabels();
-  const list = () => DECORATIONS.slice(0, props.limit ?? DECORATIONS.length);
-
-  return (
-    <>
-      <WearBar
-        error={wear.error()}
-        undo={wear.canUndo() ? wear.undo : undefined}
-      />
-      <SmallGrid>
-        <For each={list()}>
-          {(id) => {
-            const wearing = () => wear.current()?.decoration === id;
-            return (
-              <PartTile
-                type="button"
-                aria-pressed={wearing()}
-                disabled={!!wear.busy()}
-                onClick={() =>
-                  void wear.part(`d:${id}`, {
-                    decoration: wearing() ? undefined : id,
-                  })
-                }
-              >
-                <PartStage>
-                  <AvatarDecoration decoration={id} size={64}>
-                    <Avatar size={64} src={wearer.avatar()} />
-                  </AvatarDecoration>
-                </PartStage>
-                <span>{labels.decoration(id)}</span>
-                <Show when={wearing()}>
-                  <Worn>
-                    <Icon name="check" size={12} />
-                    <Trans>On</Trans>
-                  </Worn>
-                </Show>
-              </PartTile>
-            );
-          }}
-        </For>
-      </SmallGrid>
-    </>
-  );
-}
-
-/** Included nameplates behind the user's own name */
-export function IncludedNameplates(props: { limit?: number }) {
-  const wearer = useWearer();
-  const instance = useInstance();
-  const wear = useWear();
-  const labels = useStyleLabels();
-  const list = () => NAMEPLATES.slice(0, props.limit ?? NAMEPLATES.length);
-
-  return (
-    <>
-      <WearBar
-        error={wear.error()}
-        undo={wear.canUndo() ? wear.undo : undefined}
-      />
-      <PlateGrid>
-        <For each={list()}>
-          {(plate) => {
-            const wearing = () => wear.current()?.nameplate === plate.id;
-            return (
-              <PlateTile
-                type="button"
-                aria-pressed={wearing()}
-                disabled={!!wear.busy()}
-                onClick={() =>
-                  void wear.part(`n:${plate.id}`, {
-                    nameplate: wearing() ? undefined : plate.id,
-                  })
-                }
-              >
-                <Plate
-                  class="z-plate"
-                  data-large
-                  style={{
-                    "--plate": nameplateBackground(
-                      { nameplate: plate.id },
-                      instance.mediaUrl,
-                    ),
-                  }}
-                >
-                  <NameplateMotion plate={plate.id} />
-                  <Avatar size={28} src={wearer.avatar()} />
-                  <span dir="auto">{wearer.name()}</span>
-                </Plate>
-                <PlateLabel>
-                  <span>{labels.nameplate(plate.id)}</span>
-                  <Show when={wearing()}>
-                    <Worn>
-                      <Icon name="check" size={12} />
-                      <Trans>On</Trans>
-                    </Worn>
-                  </Show>
-                </PlateLabel>
-              </PlateTile>
-            );
-          }}
-        </For>
-      </PlateGrid>
     </>
   );
 }
@@ -743,111 +592,6 @@ const WearButton = styled("button", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",
     },
-  },
-});
-
-const SmallGrid = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(132px, 1fr))",
-    gap: "12px",
-  },
-});
-
-const PartTile = styled("button", {
-  base: {
-    ...tileSurface,
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "10px",
-    padding: "16px 10px 12px",
-    color: "var(--z-fg-primary)",
-    font: "inherit",
-    fontSize: "14px",
-    fontWeight: 600,
-    cursor: "pointer",
-    transition: "border-color 120ms ease, transform 150ms ease",
-    _hover: {
-      borderColor: "color-mix(in srgb, #FF5BA8 45%, var(--z-border-strong))",
-      transform: "translateY(-1px)",
-    },
-    "&[aria-pressed='true']": { borderColor: PINK },
-    _disabled: { cursor: "progress" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    _motionReduce: { transition: "none", _hover: { transform: "none" } },
-  },
-});
-
-const PartStage = styled("div", {
-  base: {
-    display: "grid",
-    placeItems: "center",
-    width: "100px",
-    height: "100px",
-  },
-});
-
-const PlateGrid = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-    gap: "12px",
-  },
-});
-
-const PlateTile = styled("button", {
-  base: {
-    ...tileSurface,
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    padding: "10px",
-    font: "inherit",
-    textAlign: "start",
-    cursor: "pointer",
-    transition: "border-color 120ms ease",
-    _hover: {
-      borderColor: "color-mix(in srgb, #FF5BA8 45%, var(--z-border-strong))",
-    },
-    "&[aria-pressed='true']": { borderColor: PINK },
-    _disabled: { cursor: "progress" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-  },
-});
-
-const PlateLabel = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingInline: "2px",
-    fontSize: "14px",
-    fontWeight: 600,
-    color: "var(--z-fg-primary)",
-  },
-});
-
-const Worn = styled("span", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "4px",
-    height: "22px",
-    paddingInline: "8px",
-    borderRadius: "var(--z-shape-pill, 9999px)",
-    fontSize: "12px",
-    fontWeight: 700,
-    color: "#fff",
-    background: "var(--z-designs-fill)",
-    "--z-icon-color": "currentColor",
   },
 });
 

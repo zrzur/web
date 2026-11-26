@@ -7,15 +7,11 @@ import { type CommunityItem } from "@revolt/app/interface/settings/user/profile/
 import { useNameFontLabel } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient } from "@revolt/client";
 import { Button, Segmented } from "@revolt/ui";
-import {
-  DECORATIONS,
-  userStyleOf,
-} from "@revolt/ui/components/features/profiles/userStyle";
+import { userStyleOf } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { FlockStage } from "./FlockStage";
 import { StyleCard, useVibeText } from "./Looks";
-import { MemberRow, WornAvatar } from "./Scenes";
 import {
   Wall,
   WallEmpty,
@@ -62,8 +58,8 @@ export function DesignsHome(props: {
     community,
   });
   // the wall waits for the first page from the server (its shapes show
-  // meanwhile): drawn from the built-in designs first, it was drawn a second
-  // time, reshuffled, when the community's arrived
+  // meanwhile): drawn from the looks first, it was drawn a second time,
+  // reshuffled, when the community's arrived
   const firstPage = createMemo<boolean>(
     (seen) => seen || !community.loading(),
     false,
@@ -190,7 +186,9 @@ export function DesignsHome(props: {
               <Show when={!community.loading()} fallback={<WallHolders />}>
                 <WallEmpty
                   failed={community.failed()}
-                  waiting={props.filter === "community" && !props.query.trim()}
+                  waiting={
+                    CREATORS_ONLY.includes(props.filter) && !props.query.trim()
+                  }
                   onRetry={community.retry}
                   onClear={() => {
                     props.onQuery("");
@@ -229,30 +227,16 @@ export function WornCard() {
 }
 
 /**
- * Real designs on a sample avatar, for places that have nothing of their own
- * yet: three frames you could save, or what a creator makes
+ * The kinds that only creators make: with nothing published, their wall says
+ * the first one could be yours
  */
-export function Samples(props: { kind: "saved" | "made" }) {
-  return (
-    <SampleRow aria-hidden="true">
-      <Show
-        when={props.kind === "saved"}
-        fallback={
-          <>
-            <WornAvatar size={64} style={{ decoration: DECORATIONS[1] }} />
-            <SamplePlate>
-              <MemberRow style={{ nameplate: "ocean" }} />
-            </SamplePlate>
-          </>
-        }
-      >
-        <For each={[DECORATIONS[0], DECORATIONS[4], DECORATIONS[6]]}>
-          {(decoration) => <WornAvatar size={64} style={{ decoration }} />}
-        </For>
-      </Show>
-    </SampleRow>
-  );
-}
+const CREATORS_ONLY: readonly WallFilter[] = [
+  "community",
+  "decorations",
+  "nameplates",
+  "effects",
+  "frames",
+];
 
 const Hidden = styled("h1", {
   base: {
@@ -379,14 +363,3 @@ const MakeFrame = styled("aside", {
     },
   },
 });
-
-const SampleRow = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "32px",
-  },
-});
-
-const SamplePlate = styled("div", { base: { width: "220px", minWidth: 0 } });

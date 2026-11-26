@@ -1,25 +1,23 @@
-import { For, Show, createMemo, createSignal } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
+import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { useInstance } from "@revolt/instance";
 import { Dialog } from "@revolt/ui";
 import {
-  EffectStill,
   ProfileEffect,
   useEffectsAllowed,
 } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
-import {
-  EFFECT_IDS,
-  EffectId,
-  isEffectId,
-} from "@revolt/ui/components/features/profiles/effects/effectIds";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
+import { isCommunityRef } from "@revolt/ui/components/features/profiles/userStyle";
+import { effectStillUrl } from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 /**
- * Choose a profile effect. Tiles are still pictures; only the one you point
- * at, focus or pick plays in the preview, once, one at a time.
+ * Choose a profile effect: the creator's effect you wear, or none. Every
+ * effect is a creator's, put on from Designs. Tiles are still pictures; the
+ * one you point at, focus or pick plays in the preview, once.
  */
 export function EffectDialog(props: {
   show: boolean;
@@ -29,24 +27,25 @@ export function EffectDialog(props: {
   file?: string;
   onApply: (effect: string | undefined) => void;
 }) {
-  const { t } = useLingui();
   const label = useEffectLabels();
   const allowed = useEffectsAllowed();
-  // eslint-disable-next-line solid/reactivity
+  const instance = useInstance();
+  /* eslint-disable solid/reactivity */
   const [choice, setChoice] = createSignal<string | undefined>(props.value);
   const [playing, setPlaying] = createSignal<string | undefined>(props.value);
+  /* eslint-enable solid/reactivity */
   const [play, setPlay] = createSignal(0);
-  const [search, setSearch] = createSignal("");
 
-  const matches = createMemo(() => {
-    const words = search().trim().toLowerCase();
-    return EFFECT_IDS.filter(
-      (id) =>
-        !words || label(id).toLowerCase().includes(words) || id.includes(words),
-    );
-  });
+  /** the creator's effect you wear: kept, or taken off with None */
+  const worn = () => (isCommunityRef(props.value) ? props.value : undefined);
+  const still = () => {
+    const url = effectStillUrl(instance.mediaUrl, props.file);
+    return url ? (
+      <StillPicture src={url} alt="" draggable={false} />
+    ) : undefined;
+  };
 
-  function preview(id: EffectId) {
+  function preview(id: string) {
     setPlaying(id);
     setPlay((n) => n + 1);
   }
@@ -67,13 +66,6 @@ export function EffectDialog(props: {
     >
       <Layout>
         <Picker>
-          <Search
-            type="search"
-            placeholder={t`Search effects`}
-            aria-label={t`Search effects`}
-            value={search()}
-            onInput={(e) => setSearch(e.currentTarget.value)}
-          />
           <Grid>
             <Tile
               type="button"
@@ -90,32 +82,31 @@ export function EffectDialog(props: {
                 <Trans>No effect</Trans>
               </span>
             </Tile>
-            <For each={matches()}>
+            <Show when={worn()}>
               {(id) => (
                 <Tile
                   type="button"
-                  data-testid={`effect-${id}`}
-                  aria-pressed={choice() === id}
+                  data-testid="effect-worn"
+                  aria-pressed={choice() === id()}
                   onClick={() => {
-                    setChoice(id);
-                    preview(id);
+                    setChoice(id());
+                    preview(id());
                   }}
-                  onMouseEnter={() => preview(id)}
-                  onFocus={() => preview(id)}
+                  onMouseEnter={() => preview(id())}
+                  onFocus={() => preview(id())}
                 >
-                  <Art>
-                    <EffectStill effect={id} />
-                  </Art>
-                  <span>{label(id)}</span>
+                  <Art>{still()}</Art>
+                  <span>{label(id())}</span>
                 </Tile>
               )}
-            </For>
+            </Show>
           </Grid>
-          <Show when={!matches().length}>
-            <Empty>
-              <Trans>No effects match your search.</Trans>
-            </Empty>
-          </Show>
+          <Note>
+            <Trans>
+              More designs by creators are in Designs. Put one on there and it
+              shows here.
+            </Trans>
+          </Note>
         </Picker>
         <Preview>
           <Stage data-testid="effect-preview">
@@ -123,11 +114,7 @@ export function EffectDialog(props: {
               effect={playing()}
               file={props.file}
               play={play()}
-              idle={
-                isEffectId(playing()) ? (
-                  <EffectStill effect={playing() as EffectId} />
-                ) : undefined
-              }
+              idle={playing() ? still() : undefined}
             />
           </Stage>
           <strong>{label(choice())}</strong>
@@ -154,6 +141,25 @@ export function EffectDialog(props: {
   );
 }
 
+const Note = styled("p", {
+  base: {
+    margin: 0,
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--z-fg-muted)",
+  },
+});
+
+const StillPicture = styled("img", {
+  base: {
+    display: "block",
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    pointerEvents: "none",
+  },
+});
+
 const Layout = styled("div", {
   base: {
     display: "grid",
@@ -169,23 +175,6 @@ const Picker = styled("div", {
     flexDirection: "column",
     gap: "12px",
     minWidth: 0,
-  },
-});
-
-const Search = styled("input", {
-  base: {
-    height: "40px",
-    paddingInline: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-    font: "inherit",
-    fontSize: "13px",
-    color: "var(--z-fg-primary)",
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "1px",
-    },
   },
 });
 
@@ -258,15 +247,5 @@ const Stage = styled("div", {
     overflow: "hidden",
     background: "var(--z-bg-app)",
     "@media (max-width: 600px)": { height: "160px" },
-  },
-});
-
-const Empty = styled("p", {
-  base: {
-    margin: 0,
-    padding: "24px 0",
-    textAlign: "center",
-    fontSize: "13px",
-    color: "var(--z-fg-muted)",
   },
 });
