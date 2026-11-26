@@ -7,16 +7,11 @@ import { useInstance } from "@revolt/instance";
 import { Avatar } from "../../design";
 
 import { AvatarDecoration } from "./AvatarDecoration";
-import { NameplateMotion, useDesignMotion } from "./NameplateMotion";
-import { EffectStill, ProfileEffect } from "./effects/ProfileEffect";
-import {
-  type EffectId,
-  EFFECT_DURATION_MS,
-  isEffectId,
-} from "./effects/effectIds";
+import { useDesignMotion } from "./NameplateMotion";
+import { ProfileEffect } from "./effects/ProfileEffect";
+import { EFFECT_DURATION_MS } from "./effects/effectIds";
 import { FramedCard } from "./frames/ProfileFrame";
-import { isProfileFrameId } from "./frames/frameIds";
-import { frameRoomAt } from "./frames/frameRoom";
+import { frameRoomOf } from "./frames/frameRoom";
 import { profileNameStyle } from "./profileNameStyle";
 import {
   type UserStyle,
@@ -57,9 +52,8 @@ function useWidth() {
 /**
  * The nameplate as the member list draws it, at the tile's full width: the
  * person's avatar in its decoration and their name on the plate's art, in
- * the plate's ink unless they chose a colour of their own. The plate moves
- * (its light and drift, or a community plate's animated file) whenever this
- * viewer sees motion.
+ * the plate's ink unless they chose a colour of their own. A community
+ * plate's animated file moves whenever this viewer sees motion.
  */
 export function WornPlate(props: { look: UserStyle; wearer: Wearer }) {
   const instance = useInstance();
@@ -74,7 +68,6 @@ export function WornPlate(props: { look: UserStyle; wearer: Wearer }) {
       aria-hidden="true"
       style={{ "--plate": plate() }}
     >
-      <NameplateMotion plate={props.look.nameplate} live />
       <AvatarDecoration
         decoration={props.look.decoration}
         file={props.look.decoration_file}
@@ -190,8 +183,6 @@ export function WornEffect(props: { look: UserStyle }) {
   });
 
   const still = () => {
-    const id = props.look.effect;
-    if (isEffectId(id)) return <EffectStill effect={id as EffectId} />;
     const url = effectStillUrl(instance.mediaUrl, props.look.effect_file);
     return (
       <Show when={url}>
@@ -221,22 +212,11 @@ export function WornEffect(props: { look: UserStyle }) {
 
 /** The width of the small card a frame goes round */
 const MINI_CARD = 180;
-/** A built-in frame round it is drawn with 2 px pixels: the real card's
- * proportions (360 px with 4 px pixels) */
-const MINI_CELL = 2;
-
-/** The room a frame takes round the small card */
-function miniRoom(frame: string | undefined) {
-  if (isProfileFrameId(frame)) return frameRoomAt(frame, MINI_CELL);
-  // the community template: 30 px at the sides, 70 above, 40 below 340 px
-  const s = MINI_CARD / 340;
-  return { x: 30 * s, top: 70 * s, bottom: 40 * s };
-}
 
 /**
  * The frame round a small copy of the person's card (their banner, their
  * avatar in its decoration, their name), the whole of it shrunk to fit the
- * tile. Twinkling frames twinkle when this viewer sees motion.
+ * tile. A moving frame moves when this viewer sees motion.
  */
 export function WornFrame(props: {
   look: UserStyle;
@@ -246,7 +226,7 @@ export function WornFrame(props: {
 }) {
   const [width, ref] = useWidth();
   const [tall, setTall] = createSignal(0);
-  const room = () => miniRoom(props.look.profile_frame);
+  const room = () => frameRoomOf(props.look.profile_frame, MINI_CARD);
   const natural = () => MINI_CARD + 2 * room().x;
   const naturalTall = () => tall() + room().top + room().bottom;
   // fits the square stage both ways

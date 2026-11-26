@@ -8,7 +8,7 @@ import { useDesignMotion } from "../NameplateMotion";
 import { isCommunityRef } from "../userStyle";
 import { effectFileUrl } from "../userStyleExtras";
 
-import { EFFECT_DURATION_MS, EffectId, isEffectId } from "./effectIds";
+import { EFFECT_DURATION_MS } from "./effectIds";
 
 /** Files fetched this session, so a second play asks for nothing */
 const files = new Map<string, Promise<Blob | undefined>>();
@@ -36,27 +36,17 @@ function effectFile(url: string) {
   return file;
 }
 
-/** Sharp on high-density screens, without drawing more than needed */
-function fit(canvas: HTMLCanvasElement) {
-  const ratio = Math.min(window.devicePixelRatio || 1, 2);
-  const { width, height } = canvas.getBoundingClientRect();
-  canvas.width = Math.max(1, Math.round(width * ratio));
-  canvas.height = Math.max(1, Math.round(height * ratio));
-  return { width: canvas.width, height: canvas.height };
-}
-
 /** Whether this viewer sees effects at all, here and now */
 export const useEffectsAllowed = useDesignMotion;
 
 /**
- * One play of a profile effect over its parent, which must be positioned:
- * one of Zrzur's own, drawn here, or an uploaded one, shown from its file.
- * Nothing is logged. Under reduced motion, or with the viewer's own setting
+ * One play of a profile effect over its parent, which must be positioned: a
+ * creator's uploaded effect, shown from its file. Nothing is logged. Under reduced motion, or with the viewer's own setting
  * off, nothing is fetched or mounted. It takes no clicks, screen readers skip
  * it, and it removes itself when done.
  */
 export function ProfileEffect(props: {
-  /** One of Zrzur's own, or `c:<id>` of an uploaded effect */
+  /** `c:<id>` of an uploaded effect; anything else shows nothing */
   effect?: string;
   /** File of an uploaded effect (`style.effect_file`) */
   file?: string;
@@ -74,16 +64,7 @@ export function ProfileEffect(props: {
       ? effectFileUrl(instance.mediaUrl, props.file)
       : undefined);
   return (
-    <Show
-      when={uploaded()}
-      fallback={
-        <DrawnEffect
-          effect={props.effect}
-          play={props.play}
-          idle={props.idle}
-        />
-      }
-    >
+    <Show when={uploaded()} fallback={props.idle}>
       {(url) => <FileEffect url={url()} play={props.play} idle={props.idle} />}
     </Show>
   );
@@ -147,125 +128,6 @@ function FileEffect(props: { url: string; play?: number; idle?: JSX.Element }) {
   );
 }
 
-/** One of Zrzur's own effects, drawn on a canvas */
-function DrawnEffect(props: {
-  effect?: string;
-  play?: number;
-  idle?: JSX.Element;
-}) {
-  const allowed = useEffectsAllowed();
-  // one value per play: a new one replaces the running canvas, so two effects
-  // never run together and pointing at another tile starts that one
-  const [running, setRunning] = createSignal<string>();
-
-  createEffect(
-    on(
-      () => [props.effect, props.play, allowed()],
-      () =>
-        setRunning(
-          allowed() && isEffectId(props.effect)
-            ? `${props.effect}:${props.play ?? 0}`
-            : undefined,
-        ),
-    ),
-  );
-
-  function start(canvas: HTMLCanvasElement) {
-    const id = props.effect as EffectId;
-    let frame = 0;
-    let first: number | undefined;
-    let gone = false;
-    let draw: typeof import("./effects").drawEffect | undefined;
-
-    const step = (now: number) => {
-      // `ref` runs before the canvas is in the page: only from the first frame
-      // on does it have a size
-      if (first === undefined) {
-        first = now;
-        fit(canvas);
-      }
-      const context = canvas.getContext("2d");
-      const elapsed = now - first;
-      if (!context || !draw || elapsed >= EFFECT_DURATION_MS) {
-        setRunning(undefined);
-        return;
-      }
-      const size = { width: canvas.width, height: canvas.height };
-      draw(context, id, elapsed, size.width, size.height);
-      frame = requestAnimationFrame(step);
-    };
-
-    // the drawings load with the first effect anyone sees
-    void import("./effects").then((effects) => {
-      if (gone) return;
-      draw = effects.drawEffect;
-      frame = requestAnimationFrame(step);
-    });
-    onCleanup(() => {
-      gone = true;
-      cancelAnimationFrame(frame);
-    });
-  }
-
-  return (
-    <Show when={running()} keyed fallback={props.idle}>
-      <Overlay ref={start} aria-hidden="true" data-testid="profile-effect" />
-    </Show>
-  );
-}
-
-/** A still picture of an effect, for picker tiles. Never moves. */
-export function EffectStill(props: { effect: EffectId }) {
-  return (
-    <Still
-      aria-hidden="true"
-      ref={(canvas: HTMLCanvasElement) => {
-        // drawn once the canvas has a size (a tile may be built before it is
-        // in the page, and a canvas without a size stays blank) and is near
-        // the screen: a picker holds about a hundred, and drawing them all at
-        // once held up slow phones
-        let sized = false;
-        let seen = typeof IntersectionObserver === "undefined";
-        const draw = () => {
-          const context = canvas.getContext("2d");
-          if (!sized || !seen || !context) return;
-          resize.disconnect();
-          view?.disconnect();
-          void import("./effects").then(({ drawEffectStill }) => {
-            const size = fit(canvas);
-            drawEffectStill(
-              context,
-              props.effect,
-              size.width,
-              size.height,
-              Math.min(window.devicePixelRatio || 1, 2),
-            );
-          });
-        };
-        const resize = new ResizeObserver(() => {
-          sized = !!canvas.getBoundingClientRect().width;
-          draw();
-        });
-        const view = seen
-          ? undefined
-          : new IntersectionObserver(
-              (entries) => {
-                seen = entries.some((entry) => entry.isIntersecting);
-                draw();
-              },
-              { rootMargin: "200px" },
-            );
-        resize.observe(canvas);
-        view?.observe(canvas);
-        onCleanup(() => {
-          resize.disconnect();
-          view?.disconnect();
-        });
-      }}
-    />
-  );
-}
-
 const FileOverlay = styled("img", {
   base: {
     position: "absolute",
@@ -277,19 +139,4 @@ const FileOverlay = styled("img", {
     userSelect: "none",
     zIndex: 1,
   },
-});
-
-const Overlay = styled("canvas", {
-  base: {
-    position: "absolute",
-    inset: 0,
-    width: "100%",
-    height: "100%",
-    pointerEvents: "none",
-    zIndex: 1,
-  },
-});
-
-const Still = styled("canvas", {
-  base: { display: "block", width: "100%", height: "100%" },
 });

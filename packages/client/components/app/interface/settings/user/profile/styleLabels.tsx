@@ -1,56 +1,16 @@
 import { useLingui } from "@lingui/solid/macro";
 
-import { usePackLabels } from "@revolt/ui/components/features/profiles/pack/labels.generated";
-import { useCountryNames } from "@revolt/ui/components/features/profiles/plateNames";
-
 /*
- * The names of the built-in designs, apart from the editors in
- * StyleEditors.tsx: the Designs pages show these names and would otherwise
- * download every editor dialog with them.
+ * The names of what you wear, apart from the editors in StyleEditors.tsx:
+ * the Designs pages show these names and would otherwise download every
+ * editor dialog with them. Decorations, nameplates and frames are all
+ * creators' designs (`c:<id>`); a value that is not, such as a built-in
+ * design Zrzur no longer ships, is none.
  */
 
 /** Translated names for decorations and theme presets */
 export function useStyleLabels() {
   const { t } = useLingui();
-  const frames: Record<string, string> = {
-    crystal: t`Crystal cave`,
-    "desert-lanterns": t`Desert lanterns`,
-    "damascus-jasmine": t`Damascus jasmine`,
-    "autumn-maple": t`Autumn maple`,
-    "coral-reef": t`Coral reef`,
-    "mushroom-forest": t`Mushroom forest`,
-    "zrzur-neon": t`Zrzur neon`,
-    "zrzur-arcade": t`Zrzur arcade`,
-    "zrzur-flock": t`Zrzur flock`,
-  };
-  const pack = usePackLabels();
-  const decorations: Record<string, string> = {
-    ...pack.decorations,
-    laurel: t`Laurel`,
-    "light-crown": t`Crown of light`,
-    rings: t`Rings`,
-    ivy: t`Ivy`,
-    "thorn-roses": t`Thorn roses`,
-    "ice-crystal": t`Ice crystal`,
-    "flame-ring": t`Flame ring`,
-    lightning: t`Lightning`,
-    "moon-halo": t`Moon halo`,
-    "sun-rays": t`Sun rays`,
-    "star-orbit": t`Stars in orbit`,
-    "sakura-branch": t`Cherry branch`,
-    "geometric-hex": t`Hexagon`,
-    neon: t`Neon`,
-    wings: t`Wing frame`,
-    feathers: t`Feathers`,
-    gear: t`Gears`,
-    circuit: t`Circuit`,
-    waves: t`Waves`,
-    leaves: t`Autumn wreath`,
-    snow: t`Snow`,
-    hearts: t`Hearts`,
-    "music-notes": t`Music notes`,
-    "shield-frame": t`Shield`,
-  };
   const themes: Record<string, string> = {
     Sunset: t`Sunset`,
     Ocean: t`Ocean`,
@@ -65,46 +25,14 @@ export function useStyleLabels() {
     Neon: t`Neon`,
     Candy: t`Candy`,
   };
-  const nameplates: Record<string, string> = {
-    aurora: t`Aurora`,
-    autumn: t`Autumn`,
-    sakura: t`Cherry blossoms`,
-    ocean: t`Ocean`,
-    clouds: t`Clouds`,
-    sunset: t`Sunset`,
-    midnight: t`Midnight`,
-    mint: t`Mint`,
-    "zodiac-aries": t`Aries`,
-    "zodiac-taurus": t`Taurus`,
-    "zodiac-gemini": t`Gemini`,
-    "zodiac-cancer": t`Cancer`,
-    "zodiac-leo": t`Leo`,
-    "zodiac-virgo": t`Virgo`,
-    "zodiac-libra": t`Libra`,
-    "zodiac-scorpio": t`Scorpio`,
-    "zodiac-sagittarius": t`Sagittarius`,
-    "zodiac-capricorn": t`Capricorn`,
-    "zodiac-aquarius": t`Aquarius`,
-    "zodiac-pisces": t`Pisces`,
-    ...useCountryNames(),
-    ...pack.nameplates,
-  };
+  const community = (id: string | undefined, name: string) =>
+    id?.startsWith("c:") ? name : t`None`;
   return {
-    decoration: (id?: string) => (id ? (decorations[id] ?? id) : t`None`),
+    decoration: (id?: string) => community(id, t`Community decoration`),
     theme: (id: string) => themes[id] ?? id,
-    /** a profile frame: built-in name, or a creator's frame */
-    frame: (id: string | undefined) =>
-      !id
-        ? t`None`
-        : id.startsWith("c:")
-          ? t`Community frame`
-          : (frames[id] ?? id),
-    nameplate: (id?: string) =>
-      id?.startsWith("c:")
-        ? t`Community nameplate`
-        : id
-          ? (nameplates[id] ?? id)
-          : t`None`,
+    /** a profile frame: a creator's frame, or none */
+    frame: (id: string | undefined) => community(id, t`Community frame`),
+    nameplate: (id?: string) => community(id, t`Community nameplate`),
   };
 }
 

@@ -8,10 +8,7 @@ import type { CollectibleRef } from "@revolt/state/stores/Collectibles";
 import { Avatar, Dialog, UserStatus } from "@revolt/ui";
 import { ColourWell } from "@revolt/ui/components/design/ColourWell";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
-import {
-  NameplateMotion,
-  useDesignMotion,
-} from "@revolt/ui/components/features/profiles/NameplateMotion";
+import { useDesignMotion } from "@revolt/ui/components/features/profiles/NameplateMotion";
 import {
   NAME_GRADIENTS,
   NAME_SOLIDS,
@@ -19,9 +16,6 @@ import {
 } from "@revolt/ui/components/features/profiles/nameStyles";
 import {
   type NameEffect,
-  type NameplateGroup,
-  DECORATIONS,
-  NAMEPLATES,
   NAME_EFFECTS,
   NAME_FONTS,
   NAME_MAX_COLOURS,
@@ -475,17 +469,11 @@ export function NameStyleDialog(props: {
   );
 }
 
-/** Included decorations grouped for the gallery's category filter */
-const DECORATION_CATEGORIES: Record<string, string[]> = {
-  rings: ["glow", "gold", "neon", "galaxy", "sparkle", "heartbeat"],
-  elements: ["flames", "fire", "ice", "lightning", "snow", "toxic"],
-  fun: ["hearts", "stars", "headphones", "laurel"],
-};
-
 /**
- * Avatar decoration library: categories, search, favourites and recently
- * worn items, with a live preview on the user's own card, message and
- * member row.
+ * Avatar decorations you have: the one you wear, your favourites and the ones
+ * you wore lately (every decoration is a creator's, put on from Designs),
+ * with search and a live preview on the user's own card, message and member
+ * row.
  */
 export function DecorationDialog(props: {
   show: boolean;
@@ -525,37 +513,32 @@ export function DecorationDialog(props: {
     { id: "all", label: t`All` },
     { id: "favourites", label: t`Favourites`, icon: "heart" },
     { id: "recent", label: t`Recent`, icon: "clock-counter-clockwise" },
-    { id: "rings", label: t`Rings` },
-    { id: "elements", label: t`Elements` },
-    { id: "fun", label: t`Fun` },
   ];
 
   const matches = (label: string) =>
     label.toLocaleLowerCase().includes(search().trim().toLocaleLowerCase());
 
-  const included = () =>
-    DECORATIONS.filter(
-      (id) =>
-        (category() === "all" ||
-          DECORATION_CATEGORIES[category()]?.includes(id)) &&
-        matches(labels.decoration(id)),
-    );
+  const refLabel = (ref: CollectibleRef) => labels.decoration(ref.id);
 
-  const refLabel = (ref: CollectibleRef) =>
-    isCommunityRef(ref.id)
-      ? t`Community decoration`
-      : labels.decoration(ref.id);
-
+  /** creators' decorations only: a built-in one saved before is gone */
   const saved = (list: CollectibleRef[]) =>
-    list.filter(
-      (ref) =>
-        (isCommunityRef(ref.id) ||
-          (DECORATIONS as readonly string[]).includes(ref.id)) &&
-        matches(refLabel(ref)),
-    );
+    list.filter((ref) => isCommunityRef(ref.id) && matches(refLabel(ref)));
 
   const favourites = () => saved(state.collectibles.favourites("decorations"));
   const recent = () => saved(state.collectibles.recent("decorations"));
+
+  /** the one you wear, then your favourites and the ones you wore lately */
+  const included = () => {
+    const worn: CollectibleRef[] = isCommunityRef(props.value)
+      ? [{ id: props.value!, file: props.file }]
+      : [];
+    const seen = new Set<string>();
+    return saved([...worn, ...favourites(), ...recent()]).filter((ref) => {
+      if (seen.has(ref.id)) return false;
+      seen.add(ref.id);
+      return true;
+    });
+  };
 
   /** the user's look with the decoration being tried on */
   const draft = (): UserStyle => ({
@@ -665,6 +648,12 @@ export function DecorationDialog(props: {
               </For>
             </Chips>
           </GalleryToolbar>
+          <GalleryNote>
+            <Trans>
+              More designs by creators are in Designs. Put one on there and it
+              shows here.
+            </Trans>
+          </GalleryNote>
           <Switch>
             <Match
               when={category() === "favourites" || category() === "recent"}
@@ -726,12 +715,16 @@ export function DecorationDialog(props: {
                 <For
                   each={included()}
                   fallback={
-                    <GalleryEmpty>
-                      <Trans>No decorations match your search.</Trans>
-                    </GalleryEmpty>
+                    <Show when={search().trim()}>
+                      <GalleryEmpty>
+                        <Trans>No decorations match your search.</Trans>
+                      </GalleryEmpty>
+                    </Show>
                   }
                 >
-                  {(id) => <Tile id={id} label={labels.decoration(id)} />}
+                  {(ref) => (
+                    <Tile id={ref.id} file={ref.file} label={refLabel(ref)} />
+                  )}
                 </For>
               </DecoGrid>
             </Match>
@@ -825,11 +818,7 @@ export function DecorationDialog(props: {
             <small>
               <Trans>Selected</Trans>
             </small>
-            <strong>
-              {choice()?.startsWith("c:")
-                ? t`Community decoration`
-                : labels.decoration(choice())}
-            </strong>
+            <strong>{labels.decoration(choice())}</strong>
           </Current>
         </PreviewStack>
       </Split>
@@ -902,42 +891,23 @@ export function NameplateDialog(props: {
       instance.mediaUrl,
       { moving: motion() },
     );
-  const groups = () => {
-    const words = search().trim().toLocaleLowerCase(i18n().locale);
-    const sorted = (group: NameplateGroup) =>
-      NAMEPLATES.filter(
-        (plate) =>
-          plate.group === group &&
-          labels
-            .nameplate(plate.id)
-            .toLocaleLowerCase(i18n().locale)
-            .includes(words),
-      ).sort((a, b) =>
-        labels
-          .nameplate(a.id)
-          .localeCompare(labels.nameplate(b.id), i18n().locale),
-      );
-    return [
-      { name: t`Arab countries`, plates: sorted("arab") },
-      { name: t`Countries`, plates: sorted("flag") },
-      { name: t`Themes`, plates: sorted("theme") },
-      { name: t`Zodiac`, plates: sorted("zodiac") },
-    ].filter((group) => group.plates.length);
-  };
+  /** the creator's nameplate you wear: kept, or taken off with None */
+  const worn = () =>
+    isCommunityRef(props.value) &&
+    labels
+      .nameplate(props.value)
+      .toLocaleLowerCase(i18n().locale)
+      .includes(search().trim().toLocaleLowerCase(i18n().locale))
+      ? props.value
+      : undefined;
 
   /** a member-list row with a nameplate behind it */
-  const Plate = (plate: {
-    id?: string;
-    background?: string;
-    size?: "small";
-    live?: boolean;
-  }) => (
+  const Plate = (plate: { background?: string; size?: "small" }) => (
     <PlateRow
       class="z-plate"
       data-size={plate.size}
       style={plate.background ? { "--plate": plate.background } : undefined}
     >
-      <NameplateMotion plate={plate.id} live={plate.live} />
       <Avatar
         size={plate.size === "small" ? 22 : 30}
         src={props.avatar}
@@ -980,6 +950,12 @@ export function NameplateDialog(props: {
             value={search()}
             onInput={(e) => setSearch(e.currentTarget.value)}
           />
+          <GalleryNote>
+            <Trans>
+              More designs by creators are in Designs. Put one on there and it
+              shows here.
+            </Trans>
+          </GalleryNote>
           <PlateGrid>
             <PlateTile
               type="button"
@@ -994,43 +970,35 @@ export function NameplateDialog(props: {
                 </CheckBadge>
               </Show>
             </PlateTile>
-            <For each={groups()}>
-              {(group) => (
-                <>
-                  <PlateHeading>{group.name}</PlateHeading>
-                  <For each={group.plates}>
-                    {(plate) => (
-                      <PlateTile
-                        type="button"
-                        aria-pressed={choice() === plate.id}
-                        onClick={() => pick(plate.id)}
-                      >
-                        <Plate
-                          id={plate.id}
-                          size="small"
-                          background={nameplateBackground(
-                            { nameplate: plate.id },
-                            instance.mediaUrl,
-                          )}
-                        />
-                        <span>{labels.nameplate(plate.id)}</span>
-                        <Show when={choice() === plate.id}>
-                          <CheckBadge>
-                            <Icon name="check" size={12} />
-                          </CheckBadge>
-                        </Show>
-                      </PlateTile>
+            <Show when={worn()}>
+              {(id) => (
+                <PlateTile
+                  type="button"
+                  aria-pressed={choice() === id()}
+                  onClick={() => pick(id(), props.file)}
+                >
+                  <Plate
+                    size="small"
+                    background={nameplateBackground(
+                      { nameplate: id(), nameplate_file: props.file },
+                      instance.mediaUrl,
                     )}
-                  </For>
-                </>
+                  />
+                  <span>{labels.nameplate(id())}</span>
+                  <Show when={choice() === id()}>
+                    <CheckBadge>
+                      <Icon name="check" size={12} />
+                    </CheckBadge>
+                  </Show>
+                </PlateTile>
               )}
-            </For>
+            </Show>
           </PlateGrid>
         </div>
 
         <PreviewStack>
           <PreviewProfile>
-            <Plate id={choice()} background={background()} live />
+            <Plate background={background()} />
           </PreviewProfile>
           <Note>
             <Trans>
@@ -1099,16 +1067,6 @@ const PlateSearch = styled("input", {
       outline: "none",
       boxShadow: "var(--z-field-focus-shadow)",
     },
-  },
-});
-
-const PlateHeading = styled("div", {
-  base: {
-    gridColumn: "1 / -1",
-    fontSize: "12px",
-    fontWeight: 600,
-    color: "var(--z-fg-secondary)",
-    marginBlockStart: "4px",
   },
 });
 
@@ -1915,6 +1873,17 @@ const GalleryEmpty = styled("p", {
     padding: "32px 8px",
     textAlign: "center",
     fontSize: "14px",
+    color: "var(--z-fg-muted)",
+  },
+});
+
+/** Where the rest of the designs are, above a gallery */
+const GalleryNote = styled("p", {
+  base: {
+    margin: 0,
+    marginBlockEnd: "8px",
+    fontSize: "13px",
+    lineHeight: "20px",
     color: "var(--z-fg-muted)",
   },
 });

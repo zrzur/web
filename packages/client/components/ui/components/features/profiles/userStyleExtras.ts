@@ -20,13 +20,29 @@ export function sendableStyle(style: UserStyle): UserStyle {
   for (const key of Object.keys(STYLE_FIELDS) as (keyof UserStyle)[]) {
     const value = style[key];
     if (Array.isArray(value) ? !value.length : !value) continue;
+    // a design is a creator's (`c:<id>`); the server refuses anything else,
+    // such as a built-in design Zrzur no longer ships
+    if (DESIGN_FIELDS.includes(key) && !String(value).startsWith("c:"))
+      continue;
     const kind = STYLE_FIELDS[key];
     // a creator's effect keeps its file so it plays at once
-    if (kind === "server" && !(key === "effect_file" && style.effect)) continue;
+    if (
+      kind === "server" &&
+      !(key === "effect_file" && style.effect?.startsWith("c:"))
+    )
+      continue;
     sent[key] = value;
   }
   return sent as UserStyle;
 }
+
+/** The fields that name a design: each holds `c:<id>` of a creator's design */
+const DESIGN_FIELDS: readonly (keyof UserStyle)[] = [
+  "decoration",
+  "nameplate",
+  "effect",
+  "profile_frame",
+];
 
 /**
  * Every field of `UserStyle`: a choice the person makes (always sent), or a

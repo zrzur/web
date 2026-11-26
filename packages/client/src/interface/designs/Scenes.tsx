@@ -7,10 +7,7 @@ import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import { Avatar } from "@revolt/ui";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
-import {
-  NameplateMotion,
-  useDesignMotion,
-} from "@revolt/ui/components/features/profiles/NameplateMotion";
+import { useDesignMotion } from "@revolt/ui/components/features/profiles/NameplateMotion";
 import {
   sampleAvatar,
   sampleAvatarFor,
@@ -195,7 +192,6 @@ export function MemberRow(props: { style: UserStyle; person?: Person }) {
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
     >
-      <NameplateMotion plate={props.style.nameplate} />
       <RowAvatar>
         <WornAvatar size={32} style={props.style} person={props.person} />
         <i aria-hidden="true" />

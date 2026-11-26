@@ -1,50 +1,13 @@
 import { useLingui } from "@lingui/solid/macro";
 
-import { usePackLabels } from "./pack/labels.generated";
-
-/** Names of Zrzur's own effects. Plain words, no film or game names. */
+/**
+ * The name of a worn effect. Every effect is a creator's (`c:<id>`); a value
+ * that is not, such as a built-in effect Zrzur no longer ships, is none.
+ */
 export function useEffectLabels() {
   const { t } = useLingui();
-  const pack = usePackLabels();
-  const labels: Record<string, string> = {
-    ...pack.effects,
-    snow: t`Snow`,
-    rain: t`Rain`,
-    confetti: t`Confetti`,
-    sparks: t`Sparks`,
-    petals: t`Petals`,
-    bubbles: t`Bubbles`,
-    leaves: t`Leaves`,
-    fireflies: t`Fireflies`,
-    ripples: t`Ripples`,
-    kites: t`Kites`,
-    aurora: t`Aurora`,
-    starfall: t`Falling stars`,
-    lanterns: t`Lanterns`,
-    sakura: t`Cherry petals`,
-    embers: t`Embers`,
-    planes: t`Paper planes`,
-    butterflies: t`Butterflies`,
-    ink: t`Ink drops`,
-    shards: t`Crystal shards`,
-    comet: t`Comet`,
-    "glass-rain": t`Rain on glass`,
-    dust: t`Sparkle dust`,
-    sunrays: t`Sun rays`,
-    moons: t`Moon phases`,
-    bloom: t`Geometric bloom`,
-    waves: t`Wave lines`,
-    burst: t`Confetti burst`,
-    feathers: t`Feathers`,
-    dandelions: t`Dandelion seeds`,
-    hearts: t`Rising hearts`,
-  };
   return (id: string | undefined) =>
-    id?.startsWith("c:")
-      ? t`Community effect`
-      : id
-        ? (labels[id] ?? id)
-        : t`No effect`;
+    id?.startsWith("c:") ? t`Community effect` : t`No effect`;
 }
 
 /** Names of the profile sections */
