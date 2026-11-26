@@ -33946,3 +33946,45 @@ msgstr "الإطارات المتحركة غير متاحة بعد. صدّر ص�
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Use a PNG, animated PNG, WebP or GIF file."
 msgstr "استخدم ملفًا بصيغة PNG أو PNG متحرك أو WebP أو GIF."
+
+#: src/interface/designs/Looks.tsx
+msgid "A clean mono name on night blue."
+msgstr "اسم واضح بخط أحادي المسافة على أزرق ليلي."
+
+#: src/interface/designs/Looks.tsx
+msgid "A pixel name on deep teal."
+msgstr "اسم بخط البكسل على أزرق مخضرّ داكن."
+
+#: src/interface/designs/Looks.tsx
+msgid "Bold reds and a wide name."
+msgstr "درجات حمراء جريئة واسم عريض."
+
+#: src/interface/designs/Looks.tsx
+msgid "Bright blue and a bold white name."
+msgstr "أزرق ساطع واسم أبيض عريض الخط."
+
+#: src/interface/designs/Looks.tsx
+msgid "Calm blue and a soft white name."
+msgstr "أزرق هادئ واسم أبيض ناعم."
+
+#: src/interface/designs/Looks.tsx
+msgid "Gold on gold for winners."
+msgstr "ذهبي على ذهبي للفائزين."
+
+#: components/app/interface/settings/user/profile/EffectDialog.tsx
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "More designs by creators are in Designs. Put one on there and it shows here."
+msgstr "تجد تصاميم أخرى من صنع المصممين في «التصاميم». ارتدِ أحدها هناك فيظهر هنا."
+
+#: src/interface/designs/Looks.tsx
+msgid "Soft pink and a handwritten name."
+msgstr "وردي ناعم واسم بخط يدوي."
+
+#: src/interface/designs/Looks.tsx
+msgid "Violet and pink, wide and bright."
+msgstr "بنفسجي ووردي، عريض ومشرق."
+
+#: src/interface/designs/Looks.tsx
+msgid "Warm sunset colours and a golden name."
+msgstr "ألوان الغروب الدافئة واسم ذهبي."

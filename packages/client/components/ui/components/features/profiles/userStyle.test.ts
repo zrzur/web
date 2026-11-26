@@ -1,14 +1,8 @@
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
-
 import { describe, expect, it } from "vitest";
 
 import { NAME_GRADIENTS, NAME_SOLIDS, NAME_SPECTRA } from "./nameStyles";
-import { PACK_DECORATIONS, PACK_NAMEPLATES } from "./pack/designs.generated";
 import {
   type UserStyle,
-  DECORATIONS,
-  NAMEPLATES,
   NAME_EFFECTS,
   NAME_FONTS,
   nameColourForLight,
@@ -25,8 +19,6 @@ import {
   effectStillUrl,
   sendableStyle,
 } from "./userStyleExtras";
-
-const PUBLIC = join(__dirname, "../../../../../public");
 
 /** WCAG contrast of two `#rrggbb` colours */
 function contrast(a: string, b: string) {
@@ -84,122 +76,63 @@ describe("user style", () => {
     expect(nameStyle({ name_font: "comic-sans" })).toEqual({});
     expect(nameStyle(undefined)).toEqual({});
     expect(userStyleOf({})).toBeUndefined();
-    expect(
-      userStyleOf({ style: { decoration: "lightning" } })?.decoration,
-    ).toBe("lightning");
     expect(userStyleOf({ style: { decoration: "c:01ABC" } })?.decoration).toBe(
       "c:01ABC",
     );
   });
 
-  it("treats removed designs as none", () => {
+  it("treats a built-in design still stored on a user as none", () => {
+    // the built-in designs became creators' designs on 2026-11-26; a value
+    // saved before then draws nothing, and saving must not send it back
     const style = userStyleOf({
       style: {
-        decoration: "headphones",
+        decoration: "lightning",
         decoration_file: "x",
-        nameplate: "galaxy",
+        nameplate: "flag-sy",
         nameplate_file: "y",
+        effect: "snow",
+        effect_file: "z",
+        profile_frame: "crystal",
+        profile_frame_file: "w",
         name_font: "serif",
+        name_colour: ["#ff0000"],
+        theme: ["#112233"],
       },
     });
-    expect(style?.decoration).toBeUndefined();
-    expect(style?.decoration_file).toBeUndefined();
-    expect(style?.nameplate).toBeUndefined();
-    expect(style?.nameplate_file).toBeUndefined();
-    expect(style?.name_font).toBe("serif");
-    // an effect that was cut from the pack: saving must not send it back
-    const cut = userStyleOf({
-      style: { effect: "no-such-effect", effect_file: "z", name_font: "serif" },
+    expect(style).toEqual({
+      name_font: "serif",
+      name_colour: ["#ff0000"],
+      theme: ["#112233"],
     });
-    expect(cut?.effect).toBeUndefined();
-    expect(cut?.effect_file).toBeUndefined();
-    expect(cut?.name_font).toBe("serif");
-    expect(userStyleOf({ style: { effect: "snow" } })?.effect).toBe("snow");
-    expect(userStyleOf({ style: { effect: "c:01ABC" } })?.effect).toBe(
-      "c:01ABC",
-    );
-    expect(userStyleOf({ style: { nameplate: "aurora" } })?.nameplate).toBe(
-      "aurora",
-    );
-    expect(userStyleOf({ style: { nameplate: "flag-sy" } })?.nameplate).toBe(
-      "flag-sy",
-    );
-    expect(userStyleOf({ style: { nameplate: "c:01ABC" } })?.nameplate).toBe(
-      "c:01ABC",
-    );
+    for (const old of ["headphones", "galaxy", "aurora", "rank-gold", "khatam"])
+      expect(userStyleOf({ style: { decoration: old } })?.decoration).toBe(
+        undefined,
+      );
+  });
+
+  it("keeps every creator's design", () => {
+    const worn = {
+      decoration: "c:01ABC",
+      decoration_file: "a",
+      nameplate: "c:01ABD",
+      nameplate_file: "b",
+      effect: "c:01ABE",
+      effect_file: "c",
+      profile_frame: "c:01ABF",
+      profile_frame_file: "d",
+    };
+    expect(userStyleOf({ style: worn })).toEqual(worn);
+  });
+
+  it("has no art for a built-in nameplate", () => {
+    for (const nameplate of ["flag-sy", "aurora", "zodiac-leo", "arcade-night"])
+      expect(nameplateBackground({ nameplate }, "https://cdn")).toBeUndefined();
   });
 
   it("matches the server's allow-lists", () => {
-    // keep in sync with USER_STYLE_FONTS / USER_STYLE_DECORATIONS (Rust)
+    // keep in sync with USER_STYLE_FONTS (Rust)
     expect(NAME_FONTS).toHaveLength(20);
     expect(new Set(NAME_FONTS.map((f) => f.id)).size).toBe(20);
-    // Zrzur's first designs, then the design pack's
-    expect(DECORATIONS).toHaveLength(24 + PACK_DECORATIONS.length);
-    expect(NAMEPLATES).toHaveLength(217 + PACK_NAMEPLATES.length);
-    expect(new Set(NAMEPLATES.map((p) => p.id)).size).toBe(
-      217 + PACK_NAMEPLATES.length,
-    );
-    for (const removed of ["crown", "halo", "horns", "cat-ears", "rainbow"])
-      expect(DECORATIONS).not.toContain(removed);
-  });
-
-  it("ships a file for every design", () => {
-    for (const id of DECORATIONS) {
-      expect(existsSync(join(PUBLIC, `decorations/${id}.svg`))).toBe(true);
-    }
-    for (const plate of NAMEPLATES) {
-      expect(existsSync(join(PUBLIC, `nameplates/${plate.id}.svg`))).toBe(true);
-    }
-  });
-
-  it("moves only when a frame is asked to", () => {
-    for (const id of DECORATIONS) {
-      const art = readFileSync(join(PUBLIC, `decorations/${id}.svg`), "utf8");
-      // a plain scan: a pattern here backtracked for seconds on long paths
-      for (const rule of art.split("}")) {
-        const at = rule.indexOf("{animation:");
-        if (at < 0) continue;
-        const selector = rule.slice(rule.lastIndexOf("{", at - 1) + 1, at);
-        expect(selector).toContain(":target");
-      }
-    }
-  });
-
-  it("puts the Arab countries first, with Syria's current flag", () => {
-    expect(NAMEPLATES.slice(0, 22).every((p) => p.group === "arab")).toBe(true);
-    expect(NAMEPLATES[22].group).toBe("flag");
-    const syria = readFileSync(join(PUBLIC, "nameplates/flag-sy.svg"), "utf8");
-    expect(syria).toMatch(/#007a3d/i);
-    expect(syria).toMatch(/#ce1126/i);
-  });
-
-  it("makes every flag exactly 448 x 84, with no fade of its own", () => {
-    for (const plate of NAMEPLATES) {
-      const art = readFileSync(
-        join(PUBLIC, `nameplates/${plate.id}.svg`),
-        "utf8",
-      );
-      expect(art).toMatch(/^<svg[^>]* width="448" height="84"/);
-      expect(art).not.toContain('id="zv"');
-    }
-    const plain = nameplateBackground({ nameplate: "flag-sy" }, "https://cdn");
-    expect(plain).toContain("flag-sy.svg");
-    // no wash in the art or over it: the mask in decorations.css does the fade
-    expect(plain).not.toContain("linear-gradient");
-    // its own address, so the left-to-right copy is never reused for it
-    expect(plain).toContain("flag-sy.svg?rtl#rtl");
-    expect(plain).not.toContain("cover");
-  });
-
-  it("stands the true flag at the end, at full height, never stretched", () => {
-    for (const plate of NAMEPLATES.filter((p) => p.id.startsWith("flag-"))) {
-      const art = readFileSync(
-        join(PUBLIC, `nameplates/${plate.id}.svg`),
-        "utf8",
-      );
-      expect(art).toContain('<use href="#zf" width="112" height="84"/>');
-      expect(art).toContain("translate(336)");
-    }
   });
 
   it("keeps every name colour readable on dark surfaces", () => {
@@ -378,11 +311,11 @@ describe("a style sent to be saved", () => {
       name_effect: "sheen",
       decoration: "c:01M5TGZFE80SKMC8JVGJKBHS2A",
       decoration_file: "dfile",
-      nameplate: "aurora",
+      nameplate: "c:01M5TGZFE80SKMC8JVGJKBHS2C",
       nameplate_file: "pfile",
       effect: "c:01M5TGZFE80SKMC8JVGJKBHS2B",
       effect_file: "efile",
-      profile_frame: "crystal",
+      profile_frame: "c:01M5TGZFE80SKMC8JVGJKBHS2D",
       profile_frame_file: "ffile",
     };
     // the test's style names every field the type has
@@ -397,6 +330,22 @@ describe("a style sent to be saved", () => {
     expect(sent.decoration_file).toBeUndefined();
     expect(sent.nameplate_file).toBeUndefined();
     expect(sent.profile_frame_file).toBeUndefined();
+  });
+
+  it("never sends a built-in design", () => {
+    expect(
+      sendableStyle({
+        decoration: "laurel",
+        nameplate: "flag-sy",
+        effect: "snow",
+        effect_file: "z",
+        profile_frame: "crystal",
+        name_font: "serif",
+      }),
+    ).toEqual({ name_font: "serif" });
+    expect(
+      sendableStyle({ decoration: "c:01ABC", profile_frame: "c:01ABD" }),
+    ).toEqual({ decoration: "c:01ABC", profile_frame: "c:01ABD" });
   });
 
   it("leaves out empty parts", () => {

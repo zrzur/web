@@ -1,4 +1,4 @@
-import { For, Show, createSignal } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { User } from "@zrzur/sdk/solid";
@@ -7,7 +7,6 @@ import { styled } from "styled-system/jsx";
 import { useClient } from "@revolt/client";
 import { Dialog } from "@revolt/ui";
 import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
-import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/frameIds";
 import {
   type UserStyle,
   isCommunityRef,
@@ -19,9 +18,9 @@ import { useStyleLabels } from "./styleLabels";
 
 /**
  * Choose the frame drawn around your whole profile card. Every choice is
- * your own whole profile card, as people will see it, wearing that frame. Zrzur's
- * own frames are here; a creator's frame is put on from Designs and shows
- * here as the one you wear.
+ * your own whole profile card, as people will see it, wearing that frame.
+ * Every frame is a creator's: it is put on from Designs and shows here as
+ * the one you wear.
  */
 export function FrameDialog(props: {
   show: boolean;
@@ -50,8 +49,8 @@ export function FrameDialog(props: {
   const Card = (card: { frame?: string; file?: string }) => (
     <ProfilePreview
       user={props.user}
-      // every choice at the same size, "None" too
-      sizeAs={PROFILE_FRAME_IDS[0]}
+      // every choice at the same size, "None" too: a creator's frame's
+      sizeAs="c:"
       style={{
         ...props.style,
         profile_frame: card.frame,
@@ -128,31 +127,17 @@ export function FrameDialog(props: {
               </Item>
             )}
           </Show>
-          <For each={PROFILE_FRAME_IDS}>
-            {(id) => (
-              <Item role="listitem">
-                <Tile
-                  type="button"
-                  aria-pressed={choice() === id}
-                  data-testid={`profile-frame-${id}`}
-                  onClick={() => pick(id)}
-                >
-                  <Card frame={id} />
-                  <span>{labels.frame(id)}</span>
-                  <Show when={choice() === id}>
-                    <Check>
-                      <Icon name="check" size={12} />
-                    </Check>
-                  </Show>
-                </Tile>
-              </Item>
-            )}
-          </For>
         </Grid>
         <Note>
           <Trans>
             The frame goes round your card and your full profile. It never
             covers your name, your buttons or what you wrote.
+          </Trans>
+        </Note>
+        <Note>
+          <Trans>
+            More designs by creators are in Designs. Put one on there and it
+            shows here.
           </Trans>
         </Note>
       </Stack>

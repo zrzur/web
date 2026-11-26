@@ -25,8 +25,9 @@ import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { Avatar, Button } from "@revolt/ui";
 import { Sky } from "@revolt/ui/components/design/Sky";
-import { DECORATIONS } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
+
+import { LOOKS } from "./Looks";
 
 import { MemberRow, WornAvatar, useCast } from "./Scenes";
 import { ShowMore, usePaged } from "./ShowMore";
@@ -215,10 +216,10 @@ export function CreatorsScene(props: {
         </For>
         <Nest
           first={!ranked().length}
-          face={<WornAvatar size={112} style={{ decoration: "laurel" }} />}
+          face={<WornAvatar size={112} style={{}} />}
           name={<Trans>The Zrzur team</Trans>}
           line={<Trans>Everything that ships with Zrzur</Trans>}
-          works={DECORATIONS.slice(0, 6).map((decoration) => ({ decoration }))}
+          works={LOOKS.slice(0, 6).map((look) => look.style)}
           onClick={() => props.onGallery()}
         />
         {/* the place held for the next one */}

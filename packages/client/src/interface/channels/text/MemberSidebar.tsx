@@ -4,10 +4,7 @@ import { useLingui } from "@lingui/solid/macro";
 import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { useInstance } from "@revolt/instance";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
-import {
-  NameplateMotion,
-  useDesignMotion,
-} from "@revolt/ui/components/features/profiles/NameplateMotion";
+import { useDesignMotion } from "@revolt/ui/components/features/profiles/NameplateMotion";
 import { nameplateBackground } from "@revolt/ui/components/features/profiles/userStyle";
 import { Channel, ServerMember, User } from "@zrzur/sdk/solid";
 import { css } from "styled-system/css";
@@ -492,11 +489,7 @@ function Member(props: {
             aria-hidden="true"
             class={`${nameplateLayer} z-plate`}
             style={{ "--plate": background() }}
-          >
-            <NameplateMotion
-              plate={(props.user ?? props.member?.user)?.style?.nameplate}
-            />
-          </div>
+          />
         )}
       </Show>
       <MenuButton

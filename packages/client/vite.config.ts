@@ -19,8 +19,8 @@ import { polyfillGate } from "./scripts/polyfillGate.mjs";
 import { precacheShell } from "./scripts/precacheShell.mjs";
 import { preconnectApi } from "./scripts/preconnectApi.mjs";
 import { preloadApp } from "./scripts/preloadApp.mjs";
-import { siteCatalogs } from "./scripts/siteCatalogs.mjs";
 import { buildDefine, readReleaseInfo } from "./scripts/release-info.mjs";
+import { siteCatalogs } from "./scripts/siteCatalogs.mjs";
 import { thirdPartyNotices } from "./scripts/third-party-notices.mjs";
 import { localisedManifests, webManifest } from "./scripts/webManifest.mjs";
 
@@ -54,7 +54,10 @@ export default defineConfig(({ command }) => {
         // shipped but never in the module graph: workspace packages, the
         // service worker (workbox) and the legacy plugin's polyfills
         packages: [
-          { name: "solid-livekit-components", dir: resolve(__dirname, "../solid-livekit-components") },
+          {
+            name: "solid-livekit-components",
+            dir: resolve(__dirname, "../solid-livekit-components"),
+          },
           { name: "@zrzur/sdk", dir: resolve(__dirname, "../stoat.js") },
           { name: "workbox-precaching" },
           { name: "workbox-core" },
@@ -66,13 +69,6 @@ export default defineConfig(({ command }) => {
           { name: "@fontsource/ibm-plex-sans-arabic" },
         ],
         extras: [
-          {
-            name: "flag-icons (country nameplates)",
-            dir: resolve(__dirname, "public/nameplates"),
-            license: "MIT",
-            source: "https://github.com/lipis/flag-icons",
-            files: ["LICENSE-flag-icons.txt", "SOURCES.md"],
-          },
           {
             // served at /assets/rnnoise/ instead of from jsDelivr
             name: "livekit-rnnoise-processor worklet with RNNoise (WebAssembly)",
@@ -193,8 +189,9 @@ export default defineConfig(({ command }) => {
           // needs its top-level code run by a bare `import "x"` goes in
           // sideEffectModules.
           moduleSideEffects: (id) =>
-            !/\/(katex\/dist|micromark-extension-math\/lib\/html\.js)/.test(id) &&
-            !isPureSource(id),
+            !/\/(katex\/dist|micromark-extension-math\/lib\/html\.js)/.test(
+              id,
+            ) && !isPureSource(id),
         },
         output: {
           // the Markdown parser in its own chunk (it changes less often than
@@ -223,7 +220,10 @@ export default defineConfig(({ command }) => {
           __dirname,
           "../stoat.js/src/solid/voiceExtras.ts",
         ),
-        "@zrzur/sdk/solid": resolve(__dirname, "../stoat.js/src/solid/index.ts"),
+        "@zrzur/sdk/solid": resolve(
+          __dirname,
+          "../stoat.js/src/solid/index.ts",
+        ),
         "@zrzur/sdk/bot": resolve(__dirname, "../stoat.js/src/bot/index.ts"),
         "@zrzur/sdk": resolve(__dirname, "../stoat.js/src/index.ts"),
         "styled-system": resolve(__dirname, "styled-system"),

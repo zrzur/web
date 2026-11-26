@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 26.3.1 (2026-11-26)
+
+The designs that were built into the app leave it (owner, 2026-11-26): only designs uploaded through Designs remain. The owner uploads the former built-in designs himself.
+
+### Built-in designs leave the app; they come back as community designs (owner, 2026-11-26)
+
+- Zrzur's own avatar decorations (149), nameplates (284: flags, themes, zodiac signs and the design pack), profile effects (88) and profile frames (9: Crystal cave and the set of 2026-11-25) are no longer part of the app. Each was exported as a file the Creator Studio takes; the owner uploads them as community designs (`c:<id>`), so they can be edited or deleted like any other.
+- A built-in id still stored on a user draws nothing, everywhere (`userStyleOf`, the avatar, nameplate, effect and frame components): no tile, no broken image, no error. Saving never sends one back (`sendableStyle` sends only `c:<id>` for the four design fields, and an effect's file only with a creator's effect).
+- The decoration, nameplate, effect and frame dialogs in Profile settings show None, the creator's design you wear, and (decorations) your favourites and recent ones, with one line saying more designs by creators are in Designs (new string in en, ar, de). The decoration categories Rings, Elements and Fun are gone with the built-in list.
+- Designs: the Decorations, Nameplates, Effects and Frames walls show creators' designs only, and say the first one could be yours while there are none. Ready-made looks keep their theme, name font and colours (their decoration and nameplate are gone, and nine one-line descriptions were rewritten in en, ar, de). An old `decoration-<id>` or `nameplate-<id>` link says the design isn't available. "The Zrzur team" shows its looks; Favourites' empty notices show a heart instead of sample decorations. The frame guide no longer describes the built-in pixel frames.
+- Name fonts, name colours and name effects, profile colours and looks stay: the Creator Studio has no upload type for them.
+- Removed from the build and the precache: the 149 decoration SVGs, the 284 nameplate SVGs and 65 drift layers, the effect drawings, the pixel frames, the design pack's ids and names, and the nameplate light and drift. The source files were moved out of the repository for review, not deleted. The flag-icons notice left the third-party list with the flags.
+- Needs the backend from this change: it refuses built-in ids and clears stored ones (`PENDING_CLEAR_BUILTIN_STYLE`).
+
 ## 26.3.0 (2026-11-25)
 
 The official release of everything tested in 26.3.0-beta.1 to 26.3.0-beta.11, for everyone.

@@ -38,8 +38,6 @@ import { useModals } from "@revolt/modal";
 import { ProfileEffect } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
 import {
   type UserStyle,
-  DECORATIONS,
-  NAMEPLATES,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
 import {
@@ -113,24 +111,11 @@ export function DesignPage(props: {
             tab: "looks",
           };
         }
+        // the built-in decorations and nameplates became creators' designs
+        // on 2026-11-26: an old link to one says it isn't available
         case "decoration":
-          if (!(DECORATIONS as readonly string[]).includes(ref.id)) return null;
-          return {
-            ref,
-            kind: t`Avatar decoration`,
-            name: labels.decoration(ref.id),
-            style: { decoration: ref.id },
-            tab: "decorations",
-          };
         case "nameplate":
-          if (!NAMEPLATES.some((entry) => entry.id === ref.id)) return null;
-          return {
-            ref,
-            kind: t`Nameplate`,
-            name: labels.nameplate(ref.id),
-            style: { nameplate: ref.id },
-            tab: "nameplates",
-          };
+          return null;
         case "colours": {
           const preset = THEME_PRESETS.find((entry) => entry.id === ref.id);
           if (!preset) return null;
@@ -293,7 +278,7 @@ export function DesignPage(props: {
       })
       .catch(() => undefined);
 
-  /** a few more of the same kind (built-in designs) */
+  /** a few more of the same kind (looks and colours, which ship with Zrzur) */
   const similar = () => {
     const item = design();
     if (!item) return [];
@@ -308,40 +293,32 @@ export function DesignPage(props: {
           "look",
           LOOKS.map((look) => look.id),
         );
-      case "nameplate":
-        return pick(
-          "nameplate",
-          NAMEPLATES.map((plate) => plate.id),
-        );
       case "colours":
         return pick(
           "colours",
           THEME_PRESETS.map((preset) => preset.id),
         );
       default:
-        return pick("decoration", [...DECORATIONS]);
+        return [];
     }
   };
 
   const styleOf = (ref: DesignRef): UserStyle => {
     if (ref.kind === "look")
       return LOOKS.find((look) => look.id === ref.id)?.style ?? {};
-    if (ref.kind === "nameplate") return { nameplate: ref.id };
     if (ref.kind === "colours")
       return {
         theme: THEME_PRESETS.find((preset) => preset.id === ref.id)?.colours,
       };
-    return { decoration: ref.id };
+    return {};
   };
 
   const nameOf = (ref: DesignRef) =>
     ref.kind === "look"
       ? lookText(ref.id)[0]
-      : ref.kind === "nameplate"
-        ? labels.nameplate(ref.id)
-        : ref.kind === "colours"
-          ? labels.theme(ref.id)
-          : labels.decoration(ref.id);
+      : ref.kind === "colours"
+        ? labels.theme(ref.id)
+        : "";
 
   return (
     <Page>

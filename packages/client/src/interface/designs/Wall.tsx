@@ -26,24 +26,13 @@ import {
 import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
-import {
-  EffectStill,
-  ProfileEffect,
-} from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
-import {
-  EFFECT_IDS,
-  EffectId,
-} from "@revolt/ui/components/features/profiles/effects/effectIds";
+import { ProfileEffect } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
 import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
-import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/frameIds";
-import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 import {
   NAME_GRADIENTS,
   NAME_SOLIDS,
 } from "@revolt/ui/components/features/profiles/nameStyles";
 import {
-  DECORATIONS,
-  NAMEPLATES,
   NAME_FONTS,
   nameStyle,
   userStyleOf,
@@ -266,11 +255,13 @@ export function useCommunityTiles() {
     });
 }
 
-/** Everything that ships with Zrzur, made by its own team */
+/**
+ * What ships with Zrzur, made by its own team: ready-made looks, name fonts
+ * and colours. Decorations, nameplates, effects and frames are all creators'
+ * designs (the built-in ones became community designs on 2026-11-26).
+ */
 export function useBuiltInTiles() {
   const { t } = useLingui();
-  const labels = useStyleLabels();
-  const effectLabel = useEffectLabels();
   const lookText = useLookText();
   const fontLabel = useFontLabel();
   const cast = useCast();
@@ -287,51 +278,6 @@ export function useBuiltInTiles() {
         wear: look.style,
         person: at(i + 3),
         slug: `look-${look.id}`,
-      })),
-    frames: (): Tile[] =>
-      DECORATIONS.map((id, i) => ({
-        key: `decoration-${id}`,
-        kind: "frame",
-        name: labels.decoration(id),
-        maker: team(),
-        wear: { decoration: id, decoration_file: undefined },
-        person: at(i),
-        slug: `decoration-${id}`,
-      })),
-    plates: (): Tile[] =>
-      // drawn plates first, then the signs, then the flags: two hundred flags
-      // ahead of them left the drawn ones nine pages down
-      [
-        ...NAMEPLATES.filter((plate) => plate.group === "theme"),
-        ...NAMEPLATES.filter((plate) => plate.group === "zodiac"),
-        ...NAMEPLATES.filter(
-          (plate) => plate.group !== "theme" && plate.group !== "zodiac",
-        ),
-      ].map((plate, i) => ({
-        key: `nameplate-${plate.id}`,
-        kind: "plate",
-        name: labels.nameplate(plate.id),
-        maker: team(),
-        wear: { nameplate: plate.id, nameplate_file: undefined },
-        person: at(i + 5),
-        slug: `nameplate-${plate.id}`,
-      })),
-    effects: (): Tile[] =>
-      EFFECT_IDS.map((id) => ({
-        key: `effect-${id}`,
-        kind: "effect",
-        name: effectLabel(id),
-        maker: team(),
-        wear: { effect: id },
-      })),
-    cards: (): Tile[] =>
-      PROFILE_FRAME_IDS.map((id, i) => ({
-        key: `profile-frame-${id}`,
-        kind: "card",
-        name: labels.frame(id),
-        maker: team(),
-        wear: { profile_frame: id, profile_frame_file: undefined },
-        person: at(i + 4),
       })),
     types: (): Tile[] =>
       NAME_FONTS.filter((font) => font.id !== "default").map((font, i) => ({
@@ -559,14 +505,7 @@ function DesignTile(props: {
                 file={props.tile.wear!.effect_file}
                 play={play()}
                 idle={
-                  <Show
-                    when={props.tile.item}
-                    fallback={
-                      <EffectStill
-                        effect={props.tile.wear!.effect as EffectId}
-                      />
-                    }
-                  >
+                  <Show when={props.tile.item}>
                     <FileStill
                       src={effectStillUrl(
                         instance.mediaUrl,
@@ -785,23 +724,13 @@ export function useGalleryTiles(input: {
     const large = (list: Tile[], test: (i: number) => boolean) =>
       list.map((tile, i) => ({ ...tile, big: test(i) }));
     const frames = large(
-      [...mine.filter((t) => t.kind === "frame"), ...built.frames()].filter(
-        has,
-      ),
+      mine.filter((t) => t.kind === "frame").filter(has),
       isGiantFrame,
     );
-    const plates = [
-      ...mine.filter((t) => t.kind === "plate"),
-      ...built.plates(),
-    ].filter(has);
-    const effects = [
-      ...mine.filter((tile) => tile.kind === "effect"),
-      ...built.effects(),
-    ].filter(has);
-    const cards = [
-      ...mine.filter((tile) => tile.kind === "card"),
-      ...built.cards(),
-    ]
+    const plates = mine.filter((t) => t.kind === "plate").filter(has);
+    const effects = mine.filter((tile) => tile.kind === "effect").filter(has);
+    const cards = mine
+      .filter((tile) => tile.kind === "card")
       .filter(has)
       .map((tile, i) => (i < LIVE_CARDS ? tile : { ...tile, sample: true }));
     const looks = built.looks(ids).filter(has);

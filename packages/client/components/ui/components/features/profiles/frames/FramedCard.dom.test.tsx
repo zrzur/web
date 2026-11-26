@@ -8,20 +8,15 @@ vi.mock("@revolt/instance", () => ({
   useInstance: () => ({ mediaUrl: "http://media.test" }),
 }));
 vi.mock("../NameplateMotion", () => ({ useDesignMotion: () => () => false }));
-// the drawing itself is not under test here
-vi.mock("./builtinFrames", () => ({
-  loadFrameArt: async () => {},
-  profileFrameSvg: () => ({ svg: "", room: { x: 0, top: 0, bottom: 0 } }),
-}));
+
+const FRAME = "c:01M5TGZFE80SKMC8JVGJKBHS2A";
 
 let dispose: (() => void) | undefined;
-let phone = false;
 
 beforeEach(() => {
   document.body.innerHTML = '<div id="root"></div>';
-  phone = false;
   window.matchMedia = (() => ({
-    matches: phone,
+    matches: false,
     addEventListener() {},
     removeEventListener() {},
   })) as never;
@@ -33,19 +28,15 @@ beforeEach(() => {
 });
 afterEach(() => dispose?.());
 
-function mount(props: { frame?: string; fit?: boolean }, tall: number) {
-  Object.defineProperty(window, "innerHeight", {
-    value: tall,
-    configurable: true,
-  });
-  // jsdom lays nothing out: the card is 360 px wide
+function mount(props: { frame?: string; file?: string; fit?: boolean }) {
+  // jsdom lays nothing out: the card is 340 px wide
   Object.defineProperty(HTMLElement.prototype, "clientWidth", {
     configurable: true,
-    get: () => 360,
+    get: () => 340,
   });
   dispose = render(
     () => (
-      <FramedCard frame={props.frame} fit={props.fit}>
+      <FramedCard frame={props.frame} file={props.file} fit={props.fit}>
         <div role="dialog" />
       </FramedCard>
     ),
@@ -55,37 +46,33 @@ function mount(props: { frame?: string; fit?: boolean }, tall: number) {
 }
 
 describe("a framed profile says the room its frame takes", () => {
-  it("on a 1200 px window: 4 px pixels, the full room", () => {
-    const host = mount({ frame: "crystal", fit: true }, 1200);
-    expect(host.dataset.frameCell).toBe("4");
-    expect(readFrameRoom(host)).toEqual({ x: 56, top: 96, bottom: 72 });
-    expect(host.style.getPropertyValue("--z-frame-top")).toBe("96px");
-  });
-
-  it("on an 800 px window: 3 px pixels, and popups keep that clear", () => {
-    const host = mount({ frame: "crystal", fit: true }, 800);
-    expect(host.dataset.frameCell).toBe("3");
-    expect(readFrameRoom(host)).toEqual({ x: 42, top: 72, bottom: 54 });
+  it("a creator's frame: the template's room, and popups keep it clear", () => {
+    const host = mount({ frame: FRAME, file: "f1", fit: true });
+    expect(host.hasAttribute("data-framed")).toBe(true);
+    expect(readFrameRoom(host)).toEqual({ x: 30, top: 70, bottom: 40 });
+    expect(host.style.getPropertyValue("--z-frame-top")).toBe("70px");
     // what FloatingManager reads off the popup that holds the card
     const popup = host.parentElement!;
     expect(framePadding(readFrameRoom(popup))).toEqual({
-      top: 84,
-      bottom: 66,
-      left: 54,
-      right: 54,
+      top: 82,
+      bottom: 52,
+      left: 42,
+      right: 42,
     });
-    expect(host.style.getPropertyValue("--z-frame-bottom")).toBe("54px");
   });
 
-  it("on a phone: 2 px pixels", () => {
-    phone = true;
-    const host = mount({ frame: "crystal", fit: true }, 812);
-    expect(host.dataset.frameCell).toBe("2");
-    expect(readFrameRoom(host)).toEqual({ x: 28, top: 48, bottom: 36 });
+  it("a built-in frame no longer shipped: no frame at all", () => {
+    for (const frame of ["crystal", "zrzur-neon"]) {
+      const host = mount({ frame, fit: true });
+      expect(host.hasAttribute("data-framed")).toBe(false);
+      expect(host.hasAttribute("data-frame-room")).toBe(false);
+      expect(host.querySelector("[data-profile-frame]")).toBeNull();
+      dispose?.();
+    }
   });
 
   it("says nothing without a frame, or outside the window (previews)", () => {
-    let host = mount({ fit: true }, 700);
+    let host = mount({ fit: true });
     expect(host.hasAttribute("data-frame-room")).toBe(false);
     expect(readFrameRoom(host)).toEqual({ x: 0, top: 0, bottom: 0 });
     expect(framePadding(readFrameRoom(host))).toEqual({
@@ -95,7 +82,7 @@ describe("a framed profile says the room its frame takes", () => {
       right: 8,
     });
     dispose?.();
-    host = mount({ frame: "crystal" }, 700);
+    host = mount({ frame: FRAME });
     expect(host.hasAttribute("data-frame-room")).toBe(false);
     expect(host.style.getPropertyValue("--z-frame-top")).toBe("");
   });

@@ -59,7 +59,7 @@ import {
 } from "../DesignsSite";
 import { DesignPage } from "./designs/DesignPage";
 import { Dock } from "./designs/Dock";
-import { DesignsHome, Samples, WornCard } from "./designs/Home";
+import { DesignsHome, WornCard } from "./designs/Home";
 import { CreatorPage, CreatorsScene } from "./designs/Makers";
 import { Mirror } from "./designs/Mirror";
 import { Preview } from "./designs/Preview";
@@ -589,7 +589,7 @@ function Favourites(props: {
     <Switch>
       <Match when={!isLoggedIn()}>
         <Notice
-          art={<Samples kind="saved" />}
+          icon="heart"
           title={<Trans>Keep the designs you love</Trans>}
           action={{
             label: <Trans>Log in</Trans>,
@@ -608,7 +608,7 @@ function Favourites(props: {
       </Match>
       <Match when={!tiles().length}>
         <Notice
-          art={<Samples kind="saved" />}
+          icon="heart"
           title={<Trans>No favourites yet</Trans>}
           action={{
             label: <Trans>Browse designs</Trans>,

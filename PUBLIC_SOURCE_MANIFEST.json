@@ -40,7 +40,7 @@
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "e3bd7c04a24b5b57360667806f1c31376f757f91f16b2b46ea0c239121c8cf1e",
+      "sha256": "e642e6f78a9fb0d3a22c290374d9d191794bd250e31599dedf1746be5cb7c96b",
       "bytes": 952,
       "category": "reviewed-build-and-ci"
     },
@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ae0301c67445ebf8f046a856c3a5644575c51b4df3eb7c947bbe272d21a33ce1",
-      "bytes": 253005,
+      "sha256": "0df2f7525c862d4783342c845e6817a97fa3c1748cc1321721b1828caae6d757",
+      "bytes": 255496,
       "category": "public-documentation"
     },
     {
@@ -328,7 +328,7 @@
     },
     {
       "path": "RELEASE.json",
-      "sha256": "779ba10276e6dfe57935b76695ba585184d72a62075c3c7b77590d7130663828",
+      "sha256": "9fc28a89c6897da5f95936f39eaa83b95e8c45b9216c2112886c5452f4ca5651",
       "bytes": 281,
       "category": "product-source-or-build-manifest"
     },
@@ -346,8 +346,8 @@
     },
     {
       "path": "ZRZUR_RELEASE.md",
-      "sha256": "bbae20dd25ccb00b7bd59c4f844c428287ecddf16efd12ec221d3517dca43659",
-      "bytes": 1488,
+      "sha256": "baef7cf5c36403bc157674c4529811a3b48e6c768c2005e63f1c2c4acd1e843d",
+      "bytes": 1417,
       "category": "public-documentation"
     },
     {
@@ -586,7 +586,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "a14b30650708d80ea5a515526ca0d68d5872509c687d446a5693d0008b0c04d3",
+      "sha256": "786779830e5ac232b6b8143434badd842503df853318d860342ccf5f967f14de",
       "bytes": 728,
       "category": "product-source-or-build-manifest"
     },
@@ -2674,14 +2674,14 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/EffectDialog.tsx",
-      "sha256": "be9bef936811f414acf1a8ae05c1def5ceff69f1659d4466f4a3d18d7095463f",
-      "bytes": 7026,
+      "sha256": "e161c9786b54310bea110291e51ea939f4de286f6baf89c18eecd67d3443e1ad",
+      "bytes": 6614,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/FrameDialog.tsx",
-      "sha256": "f1c7b4a4478d3dd937e5a259fc419d9e5a25827d8d55a2fd1c9b9efe6b98d488",
-      "bytes": 7055,
+      "sha256": "e383024d51d1d9ad2ac09b482a3cefb36f93e5079bef71e9db0860cd862b1e08",
+      "bytes": 6443,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2692,8 +2692,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/ProfileWearing.tsx",
-      "sha256": "b376d774e913f54641d756c169989442cbb4161aec76bc5636b2c6f8b7bd0159",
-      "bytes": 5991,
+      "sha256": "81e0025bf1b56523fc1b3b94cb7b55ed0fb82421ab8d4aece166108cbe4f884e",
+      "bytes": 5883,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2716,8 +2716,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/StyleEditors.tsx",
-      "sha256": "d717dedf951bd91fa5e831da2258b1e302cf366896b91266652c56180a2995e3",
-      "bytes": 57393,
+      "sha256": "61eefbc3b77015eda7f901b3dfcc67c3bed280c5772ad1cabac850fe152681b7",
+      "bytes": 56617,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2860,8 +2860,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/styleLabels.tsx",
-      "sha256": "210c3c201f19ebbdd7b4010119cf7b4b3aa3b29edef88d8f31e598d1af869244",
-      "bytes": 3876,
+      "sha256": "86460fe04d3c6fc79c1e58fe0ac74742fd9d0fc67fd01d23f226b9a117099da6",
+      "bytes": 1906,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3850,8 +3850,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "413c01d8f5be02e48c1914c44cdc591106a27dfae988261af936d2011e8a349a",
-      "bytes": 1407228,
+      "sha256": "566e8d349d97ccdf43be094c54c94d7490ac5c1cb4657617b25bcdb4a04b1334",
+      "bytes": 1408907,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3994,8 +3994,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "ffc5826bf56ab292e380c2beaf93a931d35d0dfcba4830b765fb06af1b14cd37",
-      "bytes": 1298351,
+      "sha256": "71fbe451afcb324866d796360745e086b3e552feaad83373b64d5f3daad5c4cf",
+      "bytes": 1299860,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4030,8 +4030,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "7a1101d1ede2e72ea94fabd020e26830b7c2d750efca7a310415cfe2161b6015",
-      "bytes": 1249575,
+      "sha256": "52337d9c6bc872df5a1ed05f13d5ba1bba3f20d93ec7f997d4df6bf2c3873fd0",
+      "bytes": 1251001,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7462,8 +7462,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/AvatarDecoration.tsx",
-      "sha256": "fd9dbb6e21e31fa4bc9dda88129fa087257942b49adcc54fa579f5a71e3c6d30",
-      "bytes": 3833,
+      "sha256": "9f0cf61ef2744f56863a30c9ed04fbc73f1fba72f2d12fe7a3c211c21eca39d5",
+      "bytes": 3283,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7474,8 +7474,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/NameplateMotion.tsx",
-      "sha256": "af391ffde9bef6289b9fab11b28953bf90f4618b4bee036c4ceafd3a19dc0524",
-      "bytes": 2893,
+      "sha256": "8a15e108d9c6ec3cf00f6956b4b0b3d3acb50770355b6785df73ec3617ff2ac8",
+      "bytes": 441,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7648,14 +7648,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/WornPreviews.dom.test.tsx",
-      "sha256": "cf1b497959d517bc4fd3105bd1fb6e7f1f61a5d07532a55625f0700881503c3d",
-      "bytes": 4399,
+      "sha256": "3b17c1c30cfdd4e36531f0f6f5dfbea086fc55c508617b3b412d40e90ddb443e",
+      "bytes": 4404,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/WornPreviews.tsx",
-      "sha256": "315291c74c0c1c39dc917c3d010f2895cfc5bd590d7ad361c0338a733848cca1",
-      "bytes": 14490,
+      "sha256": "a301ab396072e259cc2105a6bb97ec6bdef32d4c51e69c609ae70d26c8e1eab2",
+      "bytes": 13712,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7732,68 +7732,20 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/decorations.css",
-      "sha256": "3224c44f1494c0b47177ced3b3eb6c11282d68b1ff6d839d31f97ade3ddcc85b",
-      "bytes": 4732,
+      "sha256": "46a31583d32574c4ea25244ab584ade932510426a4efa0b0e95152be2ee36d4a",
+      "bytes": 2701,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/effects/ProfileEffect.tsx",
-      "sha256": "c75985a3df1ddcf3302f8e8afdd23f26691d9ccfff511507e1d992af05597a07",
-      "bytes": 8722,
+      "sha256": "0642dcbe79783c94efccfe6ba0e1c0b3495fec09e599eaf475b1cf09b0739529",
+      "bytes": 4200,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/effects/effectIds.ts",
-      "sha256": "7de2ebc30b9725bf50bba5827fb09a37320b4cc4a4d673d6030171d9e62a0974",
-      "bytes": 1261,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/effects/effects.test.ts",
-      "sha256": "30702ad0bb9ddb855647f5573341e060a3a1d810dddf9dcb4841365271e72ea6",
-      "bytes": 5467,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/effects/effects.ts",
-      "sha256": "9e12ef44e515a3e06ec9edab1acd66c761934211222024486745963e06184eac",
-      "bytes": 30194,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/effects/flash.ts",
-      "sha256": "ef007f73789544caf7ebe6c59d004df45bda449a3b27a9626771cbd0d2e5d2f7",
-      "bytes": 3627,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/effects/pack/engine.ts",
-      "sha256": "814d1f8e481e33e3eb723c6f763fbcda8e99201f5c1683763246eece65fa6cbd",
-      "bytes": 2011,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/effects/pack/kit.ts",
-      "sha256": "66c70a1036e15789cd0ee95cc7fcbb1c0055ee2a61b8130e9c1db6c786d8b5bb",
-      "bytes": 6282,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/effects/pack/specs.generated.ts",
-      "sha256": "03f5aad974c23d91fe8471004be705d380682e55d08568820828a27479c1417c",
-      "bytes": 99428,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/effects/packIds.generated.ts",
-      "sha256": "e1d005a911a06e0559730ba40082eb4ccf64e6336562006daf739440e82b5a73",
-      "bytes": 1124,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/effects/shapes.ts",
-      "sha256": "689dffe8dc7fa7589934e293ce1686eec8e8e663c0b49d24e9b594add28b21ee",
-      "bytes": 28231,
+      "sha256": "37c6ed1465035d5b4ceeeb5287a2bcc9780aa9596a02529742601ac1d82ad805",
+      "bytes": 330,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7810,38 +7762,20 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/FramedCard.dom.test.tsx",
-      "sha256": "62592d9db3eca054083ea865aee5759b192af3b3b9f8fae2e410428d678159bf",
-      "bytes": 3398,
+      "sha256": "46bb05f1a8b083e550a020fa9b9b5bc2441dd52bcc772a54ec4bcdac79c2295b",
+      "bytes": 2964,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/ProfileFrame.tsx",
-      "sha256": "affaa734de982f19923d48bd4f7f52007f394d8475f959d0f99ac63629ddcd4c",
-      "bytes": 8760,
+      "sha256": "0aa8b72197d8e88ff33ff4ab4ab45e6069c798d37a9378dac8049d4643d6ea89",
+      "bytes": 5945,
       "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/ProfileFrameSet.dom.test.tsx",
-      "sha256": "85c973b1b1d843de4fbda05643134e0bc69ea13b0f646edd55b2d204201dbdc4",
-      "bytes": 2413,
-      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/ProfilePreview.tsx",
-      "sha256": "e1260e1afd83acea9dcfcf5a8e59fad18de4a69e32bd52a28a8a6347964b3be9",
-      "bytes": 5996,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/builtinFrames.test.ts",
-      "sha256": "890d92265ea5cb7beeaaee56ba828de7d5b57d0ec1796e73d1887785c810a311",
-      "bytes": 6568,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/builtinFrames.ts",
-      "sha256": "f65a7f6ab6d525753578394c41b603d9dbd9db94e07c2b9e7421846fc9989599",
-      "bytes": 3900,
+      "sha256": "b913ad29e44c99c8c294bff8390442d63c2af58efbc5327264b4c51f1da2a2ed",
+      "bytes": 5463,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7851,94 +7785,16 @@
       "category": "product-source-or-build-manifest"
     },
     {
-      "path": "packages/client/components/ui/components/features/profiles/frames/frameFit.test.ts",
-      "sha256": "78bb9b12b4b1b1b6453cbee435a8a7d35e8a33de9eb9ff682b15cb744d9fa554",
-      "bytes": 3419,
+      "path": "packages/client/components/ui/components/features/profiles/frames/frameRoom.test.ts",
+      "sha256": "af8a66810287b812fcf0f5af998f2ac63c2693ea000c35663313315321db0302",
+      "bytes": 1255,
       "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/frameIds.ts",
-      "sha256": "ef86e7d5f53f8842f6685cb8416cf404e0fe4e76f39460d5e703a3b5dc738348",
-      "bytes": 732,
-      "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/frameRoom.ts",
-      "sha256": "0e87c0dc95934985b3d6cf92737d6cca49205ff0ee4c12940b1b8af18b4a6b85",
-      "bytes": 4118,
+      "sha256": "963d6d2c5c762d52f29bd5a0d86f26a4762cf5f1fd62ea2205aa2cdc24843337",
+      "bytes": 2259,
       "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/frames.css",
-      "sha256": "31798735214307c8baa561a0e00bb5ccea98afc2ae2eaca7f040cc6800f56889",
-      "bytes": 478,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/crystalCave.ts",
-      "sha256": "e9324257c0eb4033dc9e670706a8ad84612fc3f771ea4f44d2be76a101acbb31",
-      "bytes": 14001,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/pieces.ts",
-      "sha256": "7543f2740b6094eafc346da615e2c1c64e9b2890ab0f7952d89f5730a374a033",
-      "bytes": 1930,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/autumnMaple.ts",
-      "sha256": "ef337697534c0c0979d110239244c00c78be4df35810ff06e3fc27ff8a69f7b0",
-      "bytes": 24498,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/coralReef.ts",
-      "sha256": "608af0ea5635709ab47f773258c66a933681e5aae5a986f5f16fd7ad9ce1f4bd",
-      "bytes": 32855,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/damascusJasmine.ts",
-      "sha256": "637f2c95644f26d9357b2954c0f2cb9d9088146d9c1ee2072e7a67f5a246dddc",
-      "bytes": 31676,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/desertLanterns.ts",
-      "sha256": "696c9bf920f222f57e6b162fb44b67bf89118e261ad0dbb2ea7cf7dd9ea25b31",
-      "bytes": 25764,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/mushroomForest.ts",
-      "sha256": "2db61974d73eccb5b881e56fc48e9718d2be0bf00a53058a598d20c21fc770f2",
-      "bytes": 26931,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/zrzurArcade.ts",
-      "sha256": "66ec4fbce93af7d03a7cccb6c3276cea1fd8b7c75674e5cf2a00b31c65e622e5",
-      "bytes": 24546,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/zrzurFlock.ts",
-      "sha256": "21b76b6457ceb632864ff0fa3e9673cc36b4784e49bdd0a94db950be36c80769",
-      "bytes": 21495,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/zrzurNeon.ts",
-      "sha256": "0ab29500ee13ecaeff5a7d480cc5368ca6a25b0e1225b5ae71887b3a9454a9ef",
-      "bytes": 34675,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/frames/setFrames.test.ts",
-      "sha256": "58c967135b09c0fa4af09e9f370e7f344a921e706096f29be4e961e3a29c6545",
-      "bytes": 6533,
-      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/index.ts",
@@ -7948,8 +7804,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/labels.ts",
-      "sha256": "c1ac2ae56a7fe633580192ae602d70769e3ec17cfd630422e9493f3da5f84195",
-      "bytes": 1696,
+      "sha256": "80e8321c903a17bf1bdf31dfdf7b9c3d49c5275faeaf8849fe30d41c76beead7",
+      "bytes": 768,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8004,30 +7860,6 @@
       "path": "packages/client/components/ui/components/features/profiles/nameStyles.ts",
       "sha256": "a294be1cf48e3e425ee898a0642858bc8042b02a131455fde0dde363d90998c8",
       "bytes": 2822,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/pack/designs.generated.ts",
-      "sha256": "0646c93dfc6ef51176074766b0ead522a607f285be7527653ddb028fac18c2cd",
-      "bytes": 4750,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/pack/designs.test.ts",
-      "sha256": "51c28e4379562b927913e72835077f3714db41ef7249651b251ebdc3c0f98a8c",
-      "bytes": 2814,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/pack/labels.generated.ts",
-      "sha256": "d88dd8ac1ff32b1068b09b6872ceb76b79c7f476092000abb9cfcb7b0b25bca2",
-      "bytes": 9425,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/ui/components/features/profiles/plateNames.ts",
-      "sha256": "4150d89017ec4763186b2c96b7bd5630cf5913c76bf1d20442eb32cdbce58707",
-      "bytes": 5835,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8092,20 +7924,20 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/userStyle.test.ts",
-      "sha256": "0b772737a4c2bda0edca9c3e682c0bb868ee92098408bbcc2dd70f10a49f789b",
-      "bytes": 14432,
+      "sha256": "507e6ceb6a57bbe2d9c7773cca94ad21f1fe31f2e0c76c4eea187b05c3d22aa7",
+      "bytes": 11993,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/userStyle.ts",
-      "sha256": "b4f59ef0ada4668e7769cbe9f8223669a77974a1e5707ddcc01d87b522fb2d0b",
-      "bytes": 20523,
+      "sha256": "4eab7b0bc81c2dbc9980f7edc073a97578b62b59f7327d95f4cfd31024f9a452",
+      "bytes": 15783,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/userStyleExtras.ts",
-      "sha256": "6eb52152ee952573f0fd0e057afddbf56f3220a0bdce6b863ec334918c5aa683",
-      "bytes": 3490,
+      "sha256": "c4235a27227e22a9e035d823a5198289b161b094f4b651cd265801a796bc2ec1",
+      "bytes": 3952,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -10710,906 +10542,6 @@
       "path": "packages/client/public/brand/zrzur-mark.svg",
       "sha256": "57b8b7122acaa1d82ebc4b99376d67b1d1febbb1a159b0177419be26006efb2c",
       "bytes": 743,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/SOURCES.md",
-      "sha256": "1dad6ad0d6ef7cb49fb01679a9448fe833f0fc917cd1823979cbcbc833b39ede",
-      "bytes": 3469,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/ablaq-arch.svg",
-      "sha256": "e8ce0970eb4ac023aa37f32ff4aa7098632e0be9b4bd38f5795583f4e81bc758",
-      "bytes": 3974,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/anchor-rope.svg",
-      "sha256": "e1c597903695c099cf52c77406c82d4ab6547c0837955062434a615c58d04a91",
-      "bytes": 1900,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/apricot-ring.svg",
-      "sha256": "dd8fd33b7afcd9fac27bda0ac59b88ff0731b6184d3538cb589a450174cf84a0",
-      "bytes": 6393,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/arena-hud.svg",
-      "sha256": "9a5cdb21c5c91901a4325753b2d79dbdd6868c5bc856f915f6a546cb68a36af0",
-      "bytes": 3692,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/astro-helmet.svg",
-      "sha256": "abe97af7a4699c94274e021a81e2ced3cede955f8a1171fe19483ed09a395f06",
-      "bytes": 2781,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/baklava-ring.svg",
-      "sha256": "7f372dfca03df377dc71e7f15e6e78baaba210a034daa895734960b06aa60ab5",
-      "bytes": 9434,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/bamboo-ring.svg",
-      "sha256": "9a0cdd0f38e6964de47a5a35beec05c7fdb79ac92f7b2ce1476c79637f755176",
-      "bytes": 9648,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/big-leaves.svg",
-      "sha256": "316a526d260d1d9e421daf0b1009b977b5345de92452614a8a01e0736ed8f40a",
-      "bytes": 7619,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/bloom-frame.svg",
-      "sha256": "ac3a1e0f6dee6fbdd3c5b17c356c4b934c126a9a16e0ad299f3dfc26040f04d8",
-      "bytes": 7491,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/campfire-ring.svg",
-      "sha256": "1721b5c8abe429066a15f92813c2470db4edabc5ee0d67864be991f3e3986d66",
-      "bytes": 3377,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/caravan.svg",
-      "sha256": "68d5673325efdb0d16db1329433aaf21101bac7ca017b0d7aaadaaf20949e751",
-      "bytes": 2347,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/cat-ears-black.svg",
-      "sha256": "6c4d53b820b9eb9572542025b5a9673d7f79d611bec2bc523e39000ea680d980",
-      "bytes": 1266,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/cat-ears-ginger.svg",
-      "sha256": "e9f410605a3463b75589fbfab4cc73050088dbaa4e3568da0c775d0d41a61e77",
-      "bytes": 1266,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/cat-ears-snow.svg",
-      "sha256": "81e00ff55d6f366a0d417b3af717d9a60188c54777a3ce85d4a6a3edf15148a5",
-      "bytes": 1266,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/cat-frame.svg",
-      "sha256": "fc859668e1a915bd5757690694142b037ff86958a2c38d711a8ff1714a0e261f",
-      "bytes": 5268,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/checker-ring.svg",
-      "sha256": "8e33cd458e05c140a76626e02ce75d5fc20791d4ad662062a3deb9b43f6da9d1",
-      "bytes": 6157,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/circuit.svg",
-      "sha256": "6877c9e8c89d93253e8a863af11d8eee4ae16f5a4cd1d96bbf60028ed97505de",
-      "bytes": 3679,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/citadel-frame.svg",
-      "sha256": "f8309952f1afe8050d64e3d068e1d1a84d5fc10ff1305197859533339a5ee49a",
-      "bytes": 6766,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/citrus-slice.svg",
-      "sha256": "a532ad4cd3db1e7b21282ba19202fb75725c9b9081c0dd40cdbbeee0a9a3ac4f",
-      "bytes": 7676,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/city-frame.svg",
-      "sha256": "e0593d5bb782f5f23099b96cdc0a34361c16573fb229875fd11f6cacd657170a",
-      "bytes": 5932,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/coast-frame.svg",
-      "sha256": "f2a7e011152a88f206bee7a191bb39a7017a145fe9b8eb1a6fdc6e1fdebacb42",
-      "bytes": 4333,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/colonnade-ring.svg",
-      "sha256": "1da6da56c7af8c9172d8edac67689ea8ab12e8a5d4dc46a100e2f24610f88f81",
-      "bytes": 3812,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/compass-ring.svg",
-      "sha256": "26c59e9a406c1d8473e57ac93880bdd3360f782785d1f5d5e7760aab13554444",
-      "bytes": 10553,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/crescent-seat.svg",
-      "sha256": "9a472ae6283b51fc48339faa2f61d1571acdb06d47adc051313755d0054469ee",
-      "bytes": 2707,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/crossed-blades.svg",
-      "sha256": "3173ffdc7818abed4568c5091e5272c44d671bfabcc005be6a2244ef4f69d07a",
-      "bytes": 3510,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/daisy-chain.svg",
-      "sha256": "1829d5775d9c2881cab3224dd7d69cfc09d2202d9c380c64597f773b92b4e1bb",
-      "bytes": 3776,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/damascus-sword.svg",
-      "sha256": "1b1b75474f55ac2a36e86ff0acb4b8b40b2cb9ddab479d9deb3c16e65fd25d79",
-      "bytes": 4840,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/damask-rose.svg",
-      "sha256": "b8f1b130c5912291cafd0652e3b974cbd6dff76ba1ae475c2cde8c3d43ecbb2e",
-      "bytes": 4188,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/damask-roses.svg",
-      "sha256": "d7b31aa6ee6b17108e52c2967645b954fa4a1da74aff44fd2451551961c7f3be",
-      "bytes": 8205,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/dino-frame.svg",
-      "sha256": "c3f733ab837a4b7eaaa56c4d143e91f48797a9a22c324c96c4bb64b68e35c132",
-      "bytes": 6294,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/dune-moon.svg",
-      "sha256": "c931560da455cdbd80f0acf310b57e4a310cda5c4614146aa25012224569f02d",
-      "bytes": 3213,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/edelweiss-ring.svg",
-      "sha256": "a03cd6647348c342d3dbaeea04f488a381a78b3bdc7844e211fb68cc2b2554e9",
-      "bytes": 5936,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/equaliser-ring.svg",
-      "sha256": "b51b65f94044961b4b9dea2b032231c83710094198455b2f0a8ce12d977cef1c",
-      "bytes": 9510,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/feathers.svg",
-      "sha256": "8c12b329279e5de38b4f1d9d49925e72f5eca3ea0de73517002d22b9eb62b2d7",
-      "bytes": 3764,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/firefly-ring.svg",
-      "sha256": "f39654f6d57249906b24d0f29599f4cea74fd5455b0399b0daebd38fd4f3633f",
-      "bytes": 4198,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/flame-ring.svg",
-      "sha256": "8ab13a22eb15911521d921bf8d08ca69725026f0bd6c916eaaf056c993bca1c6",
-      "bytes": 3784,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/floating-halo.svg",
-      "sha256": "db346625f3d609ad2cffa7ecbce1ca907dc51507591cad6bcb8f6b487fa1412e",
-      "bytes": 1018,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/flower-crown.svg",
-      "sha256": "da7f58921292c5459c4effca8fab77456a45630caee1bacf97b3c9ba21baf257",
-      "bytes": 6259,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/gamer-headset.svg",
-      "sha256": "4173b7a76e885a5b9c395ed6f7240a77569f8861e0f1ffb73a52e8b866442aac",
-      "bytes": 2466,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/gear.svg",
-      "sha256": "e932b99b7ab5addf949cc8c58cfbd0203028f3325870deefe44af7eaacc908e0",
-      "bytes": 2571,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/geometric-hex.svg",
-      "sha256": "daa6ec23b3d64b1c9fae6a384d40b46a596297ec3b92a6ec92e4ded202c9ecc3",
-      "bytes": 1471,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/ghost-pals.svg",
-      "sha256": "398924291bd44eb1b450441c3f8aedd99ae5dc1bf6bd2ed04753c4c94c798dab",
-      "bytes": 2955,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/ghouta-grapevine.svg",
-      "sha256": "296dc45547038a3bb1219c1eec6c32b6434bb141e2da2333427f4db7177d9371",
-      "bytes": 5549,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/ghouta-orchard.svg",
-      "sha256": "9526b6d3e6e06b206edab4ba17e2fd4b560760aa1490953710e4a98da885330f",
-      "bytes": 6026,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/headphones-cloud.svg",
-      "sha256": "72280b7e4da09dfe452d0d1689d7d5698840b6c2637451a92c7c057de286a20b",
-      "bytes": 2010,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/headphones-midnight.svg",
-      "sha256": "026b118e3625c7c612efbbeaecce880eaf70a855b9b4c202cc5013c9302d52b7",
-      "bytes": 2010,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/headphones-pink.svg",
-      "sha256": "746f2d85b40735ab50e85a58ebc6fb2944aa95b526e022accd32ebc4c8b8e635",
-      "bytes": 2010,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/health-bar.svg",
-      "sha256": "cfb6b73ccc68728165d0d6d36973655ac08da41a379d75f81697878494da5ee2",
-      "bytes": 3108,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/heart-chain.svg",
-      "sha256": "dc717b643c5bdafb01adb69e8e1dadda77feec1ee5bc9209554325625e5a2d99",
-      "bytes": 8083,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/heart-orbit.svg",
-      "sha256": "de2732bd78233b09e16b1877fcc39991a5a0a04401049a9bdac620a8e9e138c4",
-      "bytes": 1960,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/hearts.svg",
-      "sha256": "33fbecac8b6930055746d34e3e391dc313509ad39f037db2056f425f6df03335",
-      "bytes": 3328,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/helm-wheel.svg",
-      "sha256": "11d722954e7c05d1a4841d585ed446c36d65f0e0d6a144ec11f88c70c0a49031",
-      "bytes": 4951,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/hibiscus-ring.svg",
-      "sha256": "5a14b2d0240d721560051827d5c72376229349f7d9d0bed518359f960083c12d",
-      "bytes": 11376,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/hud-crosshair.svg",
-      "sha256": "9de1680c2459f139ccabe5fd7490bd5892de55a55c447da7cb41d994e2e0eb9d",
-      "bytes": 2694,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/hud-radar.svg",
-      "sha256": "545552949065890d81a7f0157369e083aebe1d7b3f29e04341932d918133f76a",
-      "bytes": 6652,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/hud-vitals.svg",
-      "sha256": "936f64eebd1d278f4f0457bba628ee1f3c4da1fba8ee26ecd57ee5f29b38638b",
-      "bytes": 2611,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/ice-crystal.svg",
-      "sha256": "004d49e827a7b69d9e11fa7ca370d2f2e20b66ef9ce562771ee7ee56d54718a4",
-      "bytes": 5451,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/ivy.svg",
-      "sha256": "74a99dc2c576d68c01b36b39f6cce81e6d19a3eb648614fad93950d50ab735af",
-      "bytes": 4179,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/jasmine-ring.svg",
-      "sha256": "1c5dc4ece4950d3d5c2185ac5ce083b1af4232a447a4bb4b5a18f5b102865c8d",
-      "bytes": 4227,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/koi-pond.svg",
-      "sha256": "e07a2d5ce092794e9ed8cefb734d135c6c4fa1668e7638b0e628e45793920775",
-      "bytes": 2933,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/lantern-pair.svg",
-      "sha256": "1690e93a216adfcd3c1069c1f0ec3842cae7d77c282e5ee4a342a2cb99bcce91",
-      "bytes": 4096,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/laurel.svg",
-      "sha256": "83c3e1587b61a92a2d1fdeb6c97c08c8d9cb9eddd2b0f8f1bf5d496f2dee5df6",
-      "bytes": 7551,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/lavender-wreath.svg",
-      "sha256": "9a5f8ba61980eaa8d5f1d183589dec80e0d5eabc3503fa183822c6e8713f4a99",
-      "bytes": 2811,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/leaves.svg",
-      "sha256": "248cf66d8764d9e24fbdcef6a658a276dfaf7c820ce472e5ef3d62d1df24f975",
-      "bytes": 3694,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/light-crown.svg",
-      "sha256": "303fedc6778abcbead9496dbe3e4bed00ba1927dbd1e13d175ceb2c2d828d23c",
-      "bytes": 3313,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/lightning.svg",
-      "sha256": "4c8fe3c2b17b62a3800d43801d68dc3e8a421d3f6740e1de565f046543ff6c89",
-      "bytes": 1994,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/loot-ring.svg",
-      "sha256": "ca44f0bdaf3afb84423ca7f9a1926fa053f579576eeaa1fa0747e5de8302fda3",
-      "bytes": 4417,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/lop-bunny-ears.svg",
-      "sha256": "9a6103769abd7d03ca568c8c823888dbc75d4de343a0d526e9b617f626c99a21",
-      "bytes": 1237,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/love-frame.svg",
-      "sha256": "c4ed47267940586333e0f5784d08a14eb12c1640aa80f2f12ba0e32684533b92",
-      "bytes": 7920,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/marquee-bulbs.svg",
-      "sha256": "218f371adb97feccf9cbc8d5db17586999f6decfee9711c121f250dfd23105fe",
-      "bytes": 3754,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/mixtape-frame.svg",
-      "sha256": "3b7b7355e9c2e0d544199a7be7ec8deda1b7cb906b2a3349a86753484c0c1f34",
-      "bytes": 4714,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/moon-halo.svg",
-      "sha256": "47a7e648eef34e2f91122f24c1c0f9316e3bc232a0456cbaea80b50a5265a756",
-      "bytes": 1809,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/music-notes.svg",
-      "sha256": "129d540cb5038055f8b68ef6f472dfa4c9184772d76a191aebf964200ddf07b5",
-      "bytes": 2730,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/neon-flicker.svg",
-      "sha256": "c5aba3043a900b84b1ebe7c48cbf4e3707a2aa3f634cf7d626ebf87ab3767cac",
-      "bytes": 3742,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/neon.svg",
-      "sha256": "8485ed621b753dfc5e2f5a373b5b153cc6e1bdcfc183fc6a519b0734907e8651",
-      "bytes": 1171,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/note-orbit.svg",
-      "sha256": "ff7a8edcbb5b139b5a3d54e7be65dfe5606f6217b7a6700aa7d0186856501b3f",
-      "bytes": 2152,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/old-city-lanterns.svg",
-      "sha256": "f3816ba1ef8b352d1a9d2dfb9d6c5aa6604a26b03718863d70377c5c79075dfa",
-      "bytes": 5408,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/olive-wreath.svg",
-      "sha256": "fdf05448f9beff59f63f486f564edae383bd8ca9e0be51817206dd5af096a207",
-      "bytes": 5755,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/orontes-ring.svg",
-      "sha256": "a2adfdc56a54d69656b2cbfa186a70925e65833b694d902aeb65860c8572021b",
-      "bytes": 7141,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pad-ring.svg",
-      "sha256": "e63785e2c5264952bf640a5056e27362f02cdaedb6886dc31335e46234e089ed",
-      "bytes": 2957,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/palmyra-arch.svg",
-      "sha256": "27ec014ca84aae5fbb6eba9c19f0b38e03c7aff584a0f9725580a107de1c596c",
-      "bytes": 4851,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/paw-ring.svg",
-      "sha256": "c2d1383314fa678740b4b1377fa6209a4956bd2dc3235372b1f3f2b517e6c6b9",
-      "bytes": 4322,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pet-parade.svg",
-      "sha256": "9b512510e4876d2b60973b83534b3b161fc6002eaca7ae9fd72032ff11740791",
-      "bytes": 6201,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/picnic-ring.svg",
-      "sha256": "31296ea62e0d67faa261223c889c1043703d8564ade91cf0aa8aa15fa7d2184a",
-      "bytes": 4646,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pistachio-ring.svg",
-      "sha256": "ec8bfea5d3891a9033373aabf3d1446844f784b193afa4030d48cbfc4e690868",
-      "bytes": 5103,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pitch-ring.svg",
-      "sha256": "866ca9cf59fbc7ab43c96dae896b6d7f0a9738368beef9c75eec1e754a6dadc6",
-      "bytes": 4097,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pixel-frame.svg",
-      "sha256": "48ba6dd2a859569e4ce7c00dc696d83f550d13dcc29f6807d1a595076f27aa9a",
-      "bytes": 5779,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pixel-noria.svg",
-      "sha256": "100f11f408c4ee520d167274cd558a5d89ddec5c6a4dbbc62bf37af3afcc72c4",
-      "bytes": 5398,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pixel-zrzur-badge.svg",
-      "sha256": "a425d145a59d227422cab33058cd61fd6a75614e26878f59c0d5122559511ea2",
-      "bytes": 4897,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pixel-zrzur-crew.svg",
-      "sha256": "2f9ae60312b54bded0dada5cfff62d067dc0b9ae1f5ed6471559366277d477c2",
-      "bytes": 3688,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/planet-rings.svg",
-      "sha256": "33bd8547d50cca46da16b183573cdb84ec3ef1d7ce88b94704360a402cda5593",
-      "bytes": 2045,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pocket-frame.svg",
-      "sha256": "bab24d9a52514bd37550647261c7de9172dbf834ae8038661322042cb66381e0",
-      "bytes": 6336,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pointed-fox-ears.svg",
-      "sha256": "a7e2e39f12506bfacb8fcb6be9372bd78109ab01c7754db2900fa4a7255b7dc7",
-      "bytes": 1337,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/pulse-ring.svg",
-      "sha256": "4d960a1e72f4adf04444c215764acfa9328b0a4f22e2dff505f07c94be86387e",
-      "bytes": 1661,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/quest-frame.svg",
-      "sha256": "df3e2f143bdb8e39fc86f375ffbe964d21ae53fde281c640125e6183f24eeb3a",
-      "bytes": 7580,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/race-track.svg",
-      "sha256": "a35dc573472d4a546349dfa9e7f60a5479c616f39f81ea4040629aba7fa46ed6",
-      "bytes": 10982,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rain-and-sun.svg",
-      "sha256": "3f90522a35de727c615512b88b124228cac77f42def3ed2209a74f824735391e",
-      "bytes": 4635,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rainbow-arc.svg",
-      "sha256": "1715e75b0b16665dff56da1af8c457596846d7501d20fb3efc221bf0bf579c0b",
-      "bytes": 3161,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rainbow-ring.svg",
-      "sha256": "68e20fd660c72ef71b4447ef06ebcba37fa4b82fc5e78f9030afb3a66d641f4f",
-      "bytes": 11499,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rank-bronze.svg",
-      "sha256": "6f8ff641aac2a861debbc14904ba65da513eddb04d1411a659ca9b690e3b110f",
-      "bytes": 2841,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rank-diamond.svg",
-      "sha256": "9ea7f86745ac0b5e1663d100b6e0f2f3f10ce82e73aab38affa2f74973d7e5a4",
-      "bytes": 6314,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rank-gold.svg",
-      "sha256": "225732730ec35e4280096e23711c748f24f601946f657511953e3b4d2eed6d4f",
-      "bytes": 4785,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rank-master.svg",
-      "sha256": "22873161630405c2bd171f8ac0cbc9d794f843e139e431f885be757bff31ffdb",
-      "bytes": 6314,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rank-platinum.svg",
-      "sha256": "c7de061584a7b6458336ab87f47898f9694098ce966208c7cd1704c466e1f442",
-      "bytes": 4785,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rank-silver.svg",
-      "sha256": "6ad17e1f60ab5275591edc27b6ce74e346623911067a537b6911ec2cfcb7e693",
-      "bytes": 3797,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/reef-frame.svg",
-      "sha256": "30a5f5a55ced5b057b2337a5f61ff78e353e8af1996c866df3f1a44bb9bc575d",
-      "bytes": 6233,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/reef-ring.svg",
-      "sha256": "9747049aaea6f02687445da8e39944490372cfe965a057f9af822e36aee63b6b",
-      "bytes": 3689,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rev-gauge.svg",
-      "sha256": "39021d1e2f8167232d554c186677c918ba11f27d78efb0c5fb067419038965c6",
-      "bytes": 4940,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/ribbon-bow.svg",
-      "sha256": "83dc4009561746d92f08fc524bfee2cdd94127ac94bfcefa6f5085c08ec09e28",
-      "bytes": 1801,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/ring-road.svg",
-      "sha256": "b74968a8891a69a8c98023338efbcd2b504068ac40861dd2395626120dd8b04e",
-      "bytes": 5089,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rings.svg",
-      "sha256": "9d181bd568ea874c387e3bf5ada24b03f221a59dbe9c125cc22b915435744787",
-      "bytes": 1383,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/rune-circle.svg",
-      "sha256": "699fdcc221a05f1f91fade9b4c9f5628246b1a923102b6b8ce9c97419908a075",
-      "bytes": 4302,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/sadu-ring.svg",
-      "sha256": "adbab702e60edd780386c5337491dc90d49489f50b68a307c45b68bf7da2ae44",
-      "bytes": 5407,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/sakura-branch.svg",
-      "sha256": "e25029164ab3c745ca8732cd9ff12982ba713660cd25cbf7bebc62053a96d464",
-      "bytes": 7050,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/scarf-ring.svg",
-      "sha256": "641ea0b582929d017cc608335ee57e91632118f6c7262735664d1757dcdbdaf5",
-      "bytes": 4071,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/shield-frame.svg",
-      "sha256": "f8bac2eb61b7e1d46ee8100514c711c6f7c5124a47d06db17d4823f3b2b4c38e",
-      "bytes": 1661,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/silver-tiara.svg",
-      "sha256": "9d0a893064068a1c18f83731d13aa637f18b095f0baf84e2f3835aed1304ed91",
-      "bytes": 2327,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/sleepy-moon.svg",
-      "sha256": "2904b02e07586b92246c0e3f6ea92ab5ebe7e0f73861abb849e3776392b8e995",
-      "bytes": 1236,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/snack-frame.svg",
-      "sha256": "5488575f1b18ec23e01a6b65134d36697a694f49fb20bfb31c90272e0e265c95",
-      "bytes": 6707,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/snow-cap.svg",
-      "sha256": "306a211402f4f74d71b3a84489177b8870e90cd0f3b118a2362f63d58bd22937",
-      "bytes": 4375,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/snow-frame.svg",
-      "sha256": "89fb3d3976d776d23f3d2548aa7503eb65bcccea1d17fa992b7aebba35019c21",
-      "bytes": 5690,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/snow-peaks.svg",
-      "sha256": "36086c03849a00041eadbd4c43db970d78c689b7283975552bf1d0f3b59ee25f",
-      "bytes": 3317,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/snow.svg",
-      "sha256": "6c39f344828262d729bc5b5d31251b750db52f521fa94c6b9ac5dad41a6880d1",
-      "bytes": 7480,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/speedometer.svg",
-      "sha256": "6b16a178827a3f2b8b1fa95bf56239f39d3c9df6406b7482912d0683ff722ac4",
-      "bytes": 4483,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/sprinkle-ring.svg",
-      "sha256": "cdc487889fd2de4f8e56b0b11fee97e71063298a263fb6cdc0f7684de16cdcb5",
-      "bytes": 6256,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/star-fighter.svg",
-      "sha256": "f651cd679f1d77a37161f361988a75bdf87307447409765a564b391c98755b74",
-      "bytes": 6629,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/star-orbit.svg",
-      "sha256": "634c1156536482eac82ef935fe32cb8cb5f401a50267b615c13ca5f191cac789",
-      "bytes": 1921,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/stitch-ring.svg",
-      "sha256": "d40e69ce138c58b438f5b0d069d3c1748461d1ae37bfbdc1ef9287b48793d5d2",
-      "bytes": 6182,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/sufra-frame.svg",
-      "sha256": "1d07d8065ca59fe420ccd93c56a378c784fb292790351e34ef1eecfe6045ec12",
-      "bytes": 6055,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/sun-rays.svg",
-      "sha256": "c2c647a544695cf465120b0d9454484cf8a5fe82f6b96f6a538f161b0d888d23",
-      "bytes": 2147,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/sunflower.svg",
-      "sha256": "6d056d08e2691d07fc1b3933d5401064d22027c795d7eadcee3b274d1f120c5f",
-      "bytes": 4221,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/sweet-frame.svg",
-      "sha256": "1ef14158d3e118392d9234c161a20f43515ed012cf9386da9f0f91f0f3c1b64e",
-      "bytes": 6128,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/syria-flag-ring.svg",
-      "sha256": "7d29ca016d0484b35acb71f4185b8d35a9548162ab78df54dcb594584574446f",
-      "bytes": 3816,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/syria-hearts.svg",
-      "sha256": "ddb74eecf5f2f5910c637ab8f122f2bd67a54dfd90c82071cf490327fa162027",
-      "bytes": 5518,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/syria-jasmine.svg",
-      "sha256": "2537fa7c00828568fad5541d12d8af89f9cb2e53c362e55f014120327b64361b",
-      "bytes": 6788,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/teddy-ears.svg",
-      "sha256": "66138c85ae0df921a4e385dc604fb48a649ebe2702bbfdb8e0ed8735f7557cca",
-      "bytes": 904,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/thorn-roses.svg",
-      "sha256": "78e37f43e4d8941af7ad26fdfdca4280b6fbdce561b7dbd747b02c7487bf2bde",
-      "bytes": 3949,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/tilted-crown.svg",
-      "sha256": "32e27871edac0be7ad8dd6b3b28f469fdb48c1e6c51dec2b8b36e33ccdba254c",
-      "bytes": 1647,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/tulip-crown.svg",
-      "sha256": "92f8f86fd35ae526c027c3c8b12704c0e3886e537f97ab237ba06c94028932ef",
-      "bytes": 6323,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/tulip-ring.svg",
-      "sha256": "53393178243e6db3377edbbd75acd8d2990f00ca0d6253088054cbaaa1661921",
-      "bytes": 4273,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/tyre-ring.svg",
-      "sha256": "d1089a2c3ba8355d252a1251ea93cb38e06c7c0d2009adbec4f1bdc6c45699cb",
-      "bytes": 7124,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/warp-ring.svg",
-      "sha256": "d6150c15922e0b537636e07edbf369afc377dfd9fa32e1b66f57df7147bdf7bd",
-      "bytes": 5086,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/water-wheel.svg",
-      "sha256": "5c5216552a05a6893a83456ff888913cb8d469be32cf3af720fa9b2560040e5b",
-      "bytes": 8185,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/waves.svg",
-      "sha256": "7e165a62c475e355428829507d6f508398cb8101eb124bbd4f24cd70a361ded5",
-      "bytes": 5897,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/wings.svg",
-      "sha256": "0577228675ef943992cd1f3e628595f166495fa88a07f06c598af2b5d1e8f86c",
-      "bytes": 4080,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/winners-cup.svg",
-      "sha256": "3716cd53fa430ff31323061b4279b9aef6a331244748f4de930b0a1d158db49d",
-      "bytes": 3945,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/woods-frame.svg",
-      "sha256": "776cf97dd6376a5c5778033159c192f27e9bb5bc3ca4beaeae11ffd5f99cfb18",
-      "bytes": 5524,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/xp-ring.svg",
-      "sha256": "26fb70a5446d8d7178b2cee386f16d461404a625366656b9bbcf33dcbdb6eef5",
-      "bytes": 4403,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/decorations/zrzur-crest.svg",
-      "sha256": "9ec31e46c5c1bad4b479d5b662eb888383d71b3e71fcdc0748e4aebef2609ce2",
-      "bytes": 1855,
       "category": "reviewed-product-asset"
     },
     {
@@ -38901,2112 +37833,6 @@
       "category": "reviewed-product-asset"
     },
     {
-      "path": "packages/client/public/nameplates/LICENSE-flag-icons.txt",
-      "sha256": "8f1195d55a2fd315a07d812328470ca9ba2abb78c8d317ff19619d5125e00cea",
-      "bytes": 1087,
-      "category": "license-and-attribution"
-    },
-    {
-      "path": "packages/client/public/nameplates/SOURCES.md",
-      "sha256": "419009c0561333bd683ba35fb4cb52fec63b027453719918f4fee3e630f9c39a",
-      "bytes": 2327,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/after-rain.svg",
-      "sha256": "a07439800576b4fbd0dd34ef3e7791d8a6e25789fe538d715a7ebd1d101ec497",
-      "bytes": 7868,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/aleppo-citadel.svg",
-      "sha256": "183e3a91a2658f860b7fc9188ef4b86a57bab3b66869d596e72032e52eec34c7",
-      "bytes": 7035,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/alpine-lake.svg",
-      "sha256": "1de35d488cac4b7512f7d57ea1df4f1a3cea53cff153db15ca45ee60c5b6ff78",
-      "bytes": 4468,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/apricot-season.svg",
-      "sha256": "ffab04dfdc8ea9ff058eb5542bf327784d2bfe051a2ca86919ff70ed904ebd91",
-      "bytes": 4319,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/arcade-night.svg",
-      "sha256": "4d2fe4b243315eb9a1f4383bca047f0f15c6324133bf6a0ec31d7303540d6981",
-      "bytes": 8665,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/arcade-row.svg",
-      "sha256": "bddfa6411c8b00cb717735d1eddb7547475c0cd4628ab7e51e16deb61b26856b",
-      "bytes": 12524,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/arena-lights.svg",
-      "sha256": "6220a6021f0b0c51aa56ac424a4453a09114bf42bc2a06c80cfe885ca1484f53",
-      "bytes": 5599,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/aurora.svg",
-      "sha256": "093251792cad752ed04780b1d1e491cab3ef6663348683dc30484e8e1ca45789",
-      "bytes": 3924,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/autumn.svg",
-      "sha256": "1bee8d6e944203b028de4bc98ed8166aa4cb637baaaeea60c136428a659a27f1",
-      "bytes": 3954,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/balloon-sky.svg",
-      "sha256": "400de57a284ef7c6660f7c3f1d4fb5ea7706023ea3bfdd7b0d37b56f214786d6",
-      "bytes": 3895,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/bamboo-mist.svg",
-      "sha256": "8606f7b5a2b4cb8b8276cbe1ccf3cfb8c479e04d67518ee65b43365ff8562200",
-      "bytes": 8547,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/beach-day.svg",
-      "sha256": "f2ccd6ff35876ce601c3c8562a93d42d4c3dfa54c7a8e060c444b90d8a6e88c7",
-      "bytes": 2968,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/boombox-night.svg",
-      "sha256": "805a9733071a168cef5e7f1edaa209260035a1155e087c350ce8e393f1c11dd9",
-      "bytes": 10033,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/camp-night.svg",
-      "sha256": "bda3dc66829d5d7d12e78f855d0736f027cd69ffc28da6c3a26a80f96accd3d1",
-      "bytes": 6937,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/campfire-night.svg",
-      "sha256": "90786847c8573253aadc623796ae3397a874f3892a5b1fef7902f6d3adf15fbd",
-      "bytes": 12490,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/castle-moon.svg",
-      "sha256": "8bbe8d25960331d703684ebb5ff6057a44718eb10b65c8570ec5c71538093620",
-      "bytes": 4766,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/cat-rooftops.svg",
-      "sha256": "ee26d0df7603e3cc1a9c40b839c21e612edfe647b31282a54abdb2c5ceb1ec85",
-      "bytes": 9567,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/citadel-night.svg",
-      "sha256": "efe051b016b57777bcdfcfae3a671a2bbcc792585051f01872a8b19d23902ca5",
-      "bytes": 12896,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/clouds.svg",
-      "sha256": "dda7794fb7d6b6546cc1abaf7dc6e804df3fe785ec5515703e46e93fca34cc59",
-      "bytes": 1459,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/coast-drive.svg",
-      "sha256": "91911336fbd87a79199c7971115735eab419be8bc4307190694bbb76bffd06c3",
-      "bytes": 10313,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/columns-dusk.svg",
-      "sha256": "97bbadaf4db71fe46ace31acf1a977dc0c2c68db07145feae2af6d62d36eae47",
-      "bytes": 4262,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/damascus-night.svg",
-      "sha256": "94e276680a75784450dbc5639b4c3c1f81e53cc5dad52c7b1c9e808ce065a426",
-      "bytes": 14623,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/deep-blue.svg",
-      "sha256": "56418edaf84d040091b71e9e3c3d2c43419461d68f1f9a81bc0d30bb854c6492",
-      "bytes": 4018,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/deep-glow.svg",
-      "sha256": "d0d73662aa71ae9fdd7e301f3f2661be20960c28fa5da93117ad5c0b18f4e23c",
-      "bytes": 11103,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/desert-night.svg",
-      "sha256": "4508f7353fec2332b2a82c46733d4b82e35a15ea5652554e168ced97519be5b1",
-      "bytes": 5806,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/drift-night.svg",
-      "sha256": "ead30bdcaaa6eafed74e7ec2d7e704978d6a94049ed795db45930063ff649d4e",
-      "bytes": 6431,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/dungeon-hall.svg",
-      "sha256": "4a118c7b4e0ca38d712569d637fdfa1dd5f10ac082b78e6387b9d23d03415656",
-      "bytes": 6996,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/fanous-night.svg",
-      "sha256": "91047acee638de90db2e110f453ea8c9207025349a8b8972d6cc9925bb8a188c",
-      "bytes": 6954,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/far-orbit.svg",
-      "sha256": "b666b715fbb942ce4c46ee3e564ad9d986dd8cc45b852d90ed2dbc1786be6faa",
-      "bytes": 5966,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ad.svg",
-      "sha256": "37a4160093f119165cd2ecd3265a8d8aad2a1d771d736003a0f4f418118ed9d5",
-      "bytes": 30672,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ae.svg",
-      "sha256": "55c612703ed3f1e2ac4cb23013674b627cafba1edce5100aa66bb7c577c1806f",
-      "bytes": 1328,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-af.svg",
-      "sha256": "7fe662d3ca9ca69f29d8c12559538db5f45f488997db6a99b5d48eea5b9dcff2",
-      "bytes": 19765,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ag.svg",
-      "sha256": "2428b20f3be6eaba991f99734f2ec32a7c9222df22e5183c4292fa1dc59fb686",
-      "bytes": 1757,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-al.svg",
-      "sha256": "dff51a34fd27f1d26a4b4bc36db2672235a168ce30064a032dd55234f1d65e73",
-      "bytes": 4185,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-am.svg",
-      "sha256": "27fe64b3704b564f63e22576cec6f215f043313b104fbed8c95a528bf0ce6c73",
-      "bytes": 1293,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ao.svg",
-      "sha256": "59774e099dd1d056013a75902315f925b0bbd031b9dd7203e623ad1c9de4adf6",
-      "bytes": 2639,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ar.svg",
-      "sha256": "48a6d900813b6d00b2b24cd26a0808cf9003b5b6fb5bba69173890780dab051f",
-      "bytes": 4363,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-at.svg",
-      "sha256": "a19be39ff8ad79f4ccc8cf3327ff69c2b0d70b6f84e55d4936548c0f28909ad0",
-      "bytes": 1263,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-au.svg",
-      "sha256": "914b513ff98fd15719b3f3d352dc39da755028d1d7b3ad832c4af7402b558998",
-      "bytes": 2352,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-az.svg",
-      "sha256": "c44e0fa3cc61e48bdf2e1b6775a50bf7f798b14fb274d6c1ab48baa87bb2be4e",
-      "bytes": 1557,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ba.svg",
-      "sha256": "f07bd6e6f1678c9bc4556bcc4630643efdc59a1906e6ae4126220982e74ec998",
-      "bytes": 2264,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bb.svg",
-      "sha256": "57a55129c58eb33f4cfbd45ecc43d186930fad3bac83fbb5497907c2aff6c163",
-      "bytes": 1684,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bd.svg",
-      "sha256": "d33c15fea51715e303692bec0c0fa2bc3c3bb02955c87fa9f96d6774c0407db0",
-      "bytes": 1255,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-be.svg",
-      "sha256": "900c218af5b3f1b2384e916acbbaf01ff0d554dbea6780852cca01109a1fcbee",
-      "bytes": 1353,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bf.svg",
-      "sha256": "baad9849067c495b1db1fe93c053acd84c66d72394ec27935446d77df3630343",
-      "bytes": 1395,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bg.svg",
-      "sha256": "900df558333fa2101e4b7afba6d837738a81970b9e47a7f509295569961f55f0",
-      "bytes": 1290,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bh.svg",
-      "sha256": "319bcbc8a766b6b639d22d6f414810271fb8bcfacf016858219c3d833acfd696",
-      "bytes": 1320,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bi.svg",
-      "sha256": "da3adbff6e233ce7c06cef1abafb5ebab8cbe32fd09486fc4703ab5bd4895882",
-      "bytes": 2087,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bj.svg",
-      "sha256": "c970e8cdb8101170ba51a6dc30c8de2ebe3e9e22f76329bbc7ed1ee9ac43aff6",
-      "bytes": 1507,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bn.svg",
-      "sha256": "0a32b71311dd97b6cbc0f8ed329689fadd6ff3aa800fbdb6755d84930c5c4e48",
-      "bytes": 14238,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bo.svg",
-      "sha256": "6fc2d0443a2997ab7d6e6c028e7e4205604219ff14345964b0d5712fd79185a9",
-      "bytes": 101941,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-br.svg",
-      "sha256": "5371e853463be4c77273d119f61972159008274e8a054dc2aed671a2feffccae",
-      "bytes": 7971,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bs.svg",
-      "sha256": "dcae51a71d7ab210dbde4d0338e8f6530114e1577abcd104bcf3a0262fd6de1c",
-      "bytes": 1576,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bt.svg",
-      "sha256": "9be0420df45d79d3821ef3edace287cf643086b174798464396ab6c242cd9d40",
-      "bytes": 25275,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bw.svg",
-      "sha256": "5fb83d74bdd28062b5858a8be5974110add4c1e8ceecf3e9ceaca0c9d44d7bc8",
-      "bytes": 1317,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-by.svg",
-      "sha256": "1fa9a9782bf5512c035791c1530f523b4db13084b7dd7313e7ce5120e56b1143",
-      "bytes": 3037,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-bz.svg",
-      "sha256": "66bdba4cc619b3d19eb47c48ddd1b7b6584cd6c67b71ae852226aad8bb8dfd0c",
-      "bytes": 42820,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ca.svg",
-      "sha256": "cf156a37392f8f7c5db9751c7fa153903cf6e9f007f1107bc7c87f548a93278c",
-      "bytes": 1691,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cd.svg",
-      "sha256": "2ffe08996bfb8ebf899cc59343d0f939f360d309321b374aa1b927411b0fb820",
-      "bytes": 1399,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cf.svg",
-      "sha256": "280eb2f8a4b1b4ef75b1b703fb4d0fafdfca5b060a3fb5588de59d500cf9bf12",
-      "bytes": 1696,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cg.svg",
-      "sha256": "390d48a18ace9dbf3e22fc56d16b390de4d574be2d78f2883b34032455347416",
-      "bytes": 1494,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ch.svg",
-      "sha256": "826921aa3dc84adc529f3a4715f4a1ef09d339cef10fe401d26044b6aec0a4bf",
-      "bytes": 1329,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ci.svg",
-      "sha256": "23d6018185d5cc80b0bf6e26f3861ae2758e94768bea44e55a5261f850f812b2",
-      "bytes": 1328,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cl.svg",
-      "sha256": "261ac1a6d9313cf8446cd7b2bc0672c112ebfd92dd7e3f0c530db42fb029ed1a",
-      "bytes": 1571,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cm.svg",
-      "sha256": "6b6dbbf2a62d8f0407b9288293cfa7e845d92fb0e743f444943ea8a0829d34c3",
-      "bytes": 1832,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cn.svg",
-      "sha256": "607019b9da2db287a4f152a88edba6bb300a238b95bebc821dc5a82353efff2b",
-      "bytes": 1840,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-co.svg",
-      "sha256": "1a9b6e91192835e2004742e287a033590c72a99853f6e5a5016f54ee3ba51ae8",
-      "bytes": 1339,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cr.svg",
-      "sha256": "4bd466f84b100b39c553da204a5535790ad440ef6db3721e80a0169d6466d401",
-      "bytes": 1343,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cu.svg",
-      "sha256": "6487c9b398c1e7b699f462cd0a79ce816a1c6eefb27205c14ab0f9513d5b9dbf",
-      "bytes": 1629,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cv.svg",
-      "sha256": "c355be87d128ac1c2581a87c72f07515a6ddb7f88c5cbcbc9bf49a1d0c3b8bf2",
-      "bytes": 2430,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cy.svg",
-      "sha256": "0eb5a447896e6c4665bf5604f114160c50bb7d2704f475d257b63a1d10dd89be",
-      "bytes": 6522,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-cz.svg",
-      "sha256": "b34bbfd6c051f918873ce82297952286ace753ff477d8c9ba062090681f23628",
-      "bytes": 1290,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-de.svg",
-      "sha256": "15e9a54120ee89a3448ffcf6fa477b77982f5400704be2c42835eb9ec106f5e4",
-      "bytes": 1286,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-dj.svg",
-      "sha256": "78a5d7544d950d106837b1ff236953490593a386db72ac3a17425cf1f3c93ec0",
-      "bytes": 1604,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-dk.svg",
-      "sha256": "b8bdf19f7cbf76d10e70362b9157cffa8d7173affa8b73c84ec166eb049cc60d",
-      "bytes": 1301,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-dm.svg",
-      "sha256": "d3d1b618fd169a1f0f66c09096c03d926d4fc65c9ecd038b4a82ded86a39cb08",
-      "bytes": 15755,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-do.svg",
-      "sha256": "8390affb3d5081dfe1a852518f5d30a99b8dcafd337b22631163392e65b67491",
-      "bytes": 40692,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-dz.svg",
-      "sha256": "3b8e3eb01a6043bc80669aa69a8bb48a8a8d150d19754a3c3ada0afde2f4c624",
-      "bytes": 1357,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ec.svg",
-      "sha256": "0445def9ba199866b60c9698d33cd021349fae4f6dc4fbb1c67d3a5510a415ee",
-      "bytes": 29251,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ee.svg",
-      "sha256": "9cdd10218eef410b70c503718cb15ea92dfd9ed34a6dbac4f2b43bcb8da0ce1c",
-      "bytes": 1290,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-eg.svg",
-      "sha256": "9f05ad4e0264b5b4727674963ed037c4c4eec3bd1316a4d67aa990a6d0cc2a45",
-      "bytes": 9571,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-er.svg",
-      "sha256": "9aacf2e4e5fd20fc6bbfa52980629726dce1ef53ac487abe5aadbc0fff7211c0",
-      "bytes": 4206,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-es.svg",
-      "sha256": "7b5c29c4144771f2fc478e9f8fb5b4e74905e204849998a9377d42837bd5da98",
-      "bytes": 80406,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-et.svg",
-      "sha256": "8b353a5bb0c9f32abf101ced3ba30c2e4cd25dfafd3cf3f691977fa178b85088",
-      "bytes": 2139,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-fi.svg",
-      "sha256": "df63cce2768f19f44e5eb8b884a3555f3be524a2cd40d50a51aaa534c308094f",
-      "bytes": 1299,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-fj.svg",
-      "sha256": "cbbba3e3470231972d9bd5ad86eff3a2307748961b8c4bc66f9e1c532463f328",
-      "bytes": 24404,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-fm.svg",
-      "sha256": "51ccd592607232c5665ff8acebea2eb975e925e459d4ad25d67d506d10967923",
-      "bytes": 1800,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-fr.svg",
-      "sha256": "390abde415c7712b59e021a729d55cb5a166076cd6dd259542e1ab4f82bfdb47",
-      "bytes": 1304,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ga.svg",
-      "sha256": "24b9472a73ad494253f12e407977fec09793f3a8f456fb5a9602cb48a00bd040",
-      "bytes": 1324,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gb-eng.svg",
-      "sha256": "a6e90e29cf66c56a3ed3b237be8305e8b0db0087909cc7675fb1df3df34e3dfe",
-      "bytes": 1300,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gb-sct.svg",
-      "sha256": "e72d93ad5f2474c045da557689a21347ba8683851c93ec3c4115950cc9ab751a",
-      "bytes": 1292,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gb.svg",
-      "sha256": "e35c0611fb748b3ad61397c5be9a17c3c2b385a54290dd70251c694ed6ae4aab",
-      "bytes": 1563,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gd.svg",
-      "sha256": "ba325557269a8e02175e626c24ac92e40e3aa0007ef271c4d66e1ce84e0b8576",
-      "bytes": 2623,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ge.svg",
-      "sha256": "00ef1a3e9d95a6629cd18729d70e6caaaba82cea45a1885cafa818a858a185bd",
-      "bytes": 2375,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gh.svg",
-      "sha256": "df57a184c2ee4dbfcba985a8bedc3f9ae9ae1ec2843a71d6ad28ec9c7452953b",
-      "bytes": 1355,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gm.svg",
-      "sha256": "12c5b69d76d3be1cc36c1a7be7c6e91afda5fe16c498f3ff9d2d2eefab0b04f7",
-      "bytes": 1557,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gn.svg",
-      "sha256": "c1cd4fde13c96f1a55a35da1e87b6494208fadbd18338506b8b6b29557b1357a",
-      "bytes": 1343,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gq.svg",
-      "sha256": "df4fd1d5ad82f290894bfb49b663a5a574a86b17be775369d256550fe189a8dd",
-      "bytes": 5914,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gr.svg",
-      "sha256": "d58b86b67f69d1b8070ad2b92908963dee7da70438c49150964d7edc287a4856",
-      "bytes": 1896,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gt.svg",
-      "sha256": "8a75e874706017c32a5ad3ca93fe5318ec17d8f8c3ec0286ae55a8c1f4c2e3a1",
-      "bytes": 30844,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gw.svg",
-      "sha256": "6a020a4a231a341e24b6023eb7f3e00f71b6a20b9969fd5c28cc91928d7442ae",
-      "bytes": 1862,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-gy.svg",
-      "sha256": "567698b83a7db1722b37fa4c8dff058ccaf47c990972545ed24f85c0ad1f8fde",
-      "bytes": 1536,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-hn.svg",
-      "sha256": "d405cfd3acd78f70b86127fb41884e93f2691445a8c059c4942eb15e5202b5d8",
-      "bytes": 2114,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-hr.svg",
-      "sha256": "bd1330c828e98826995099dd02d585f79788ffe63abb5f8fea4ed900b2c31e51",
-      "bytes": 31548,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ht.svg",
-      "sha256": "5f47867bd2e08e7c4492f5774422542f113454821c5bc1e13ee65e82b81c7f18",
-      "bytes": 13473,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-hu.svg",
-      "sha256": "8019ce6e79fa50e5893da23dc71208f18e7fbfcb664fc153712f6486bcd60c8a",
-      "bytes": 1317,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-id.svg",
-      "sha256": "fd98b3a80e49a1454b81914f61aacf7f008e177cd83fa64e87b9f2ec2f485cbc",
-      "bytes": 1246,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ie.svg",
-      "sha256": "484167c639df8479cf527e2455805ba5a839a835bb789d316f72d52e42f75bf5",
-      "bytes": 1340,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-in.svg",
-      "sha256": "73f79dba52e56df76de9704df0f06ae2116d13050a8bd0249187c203818b4365",
-      "bytes": 1980,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-iq.svg",
-      "sha256": "d23ac90df720c759a8cf74e4626877cdfa7a8292ac786c79b9361855fedc5abe",
-      "bytes": 2464,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ir.svg",
-      "sha256": "a204a2c1d63d8e8deaac5abb0fe9f133f969d6c0017005b4f79dcdedba0ba4e0",
-      "bytes": 15106,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-is.svg",
-      "sha256": "d9e270b03362d98c559514d8ab9017e2e27eeb0f47d31d3f38eb74a0eb5abdcc",
-      "bytes": 1533,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-it.svg",
-      "sha256": "744e11941efe86f846028d1cee99205734fbc700bbc72f4c2ae66e6bddbc084e",
-      "bytes": 1340,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-jm.svg",
-      "sha256": "c4167a7ce0ccd9a7fb6275dd616d8345b61441bd6266703a08af3d2df71614f2",
-      "bytes": 1449,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-jo.svg",
-      "sha256": "96909082bb4d7b3f928d6a2e5ea1e6b2eaf4f7ca7e04e6e0ace896f14b22122e",
-      "bytes": 1721,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-jp.svg",
-      "sha256": "e67678d1fd709766306f41d7e447af81c6b35a64414c6188a6484bbd211b8e6b",
-      "bytes": 1499,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ke.svg",
-      "sha256": "ea581ed482b071e3c41665d2a24d38bfe1d642d21b4a0f5bcd07ae2060ec0c88",
-      "bytes": 2383,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-kg.svg",
-      "sha256": "e575aa40548ce08b1254d939d594e54db04ebeef68c39dbdc92dd5a5f9490804",
-      "bytes": 5790,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-kh.svg",
-      "sha256": "a656b665c6a67c06e7bccc899052d9fe60ae86ae8b464b73e6bb3df98227806a",
-      "bytes": 7855,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ki.svg",
-      "sha256": "7b485d51e0da3d527b865da53d1690f530b9365eb1c152cbf1e5f2b1c0ebdf2f",
-      "bytes": 6531,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-km.svg",
-      "sha256": "96326e8ab9ae2eb32e034ee4d4edebdfad99816c53bda153fee6edc1f0b20a3f",
-      "bytes": 2057,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-kn.svg",
-      "sha256": "febaae1e49eb59d5a35760f87541b4786897b52cfbd2aad7aca849c805afb7dc",
-      "bytes": 1810,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-kp.svg",
-      "sha256": "d8e0c17299443c2c9a45d122c12916ca301719cb5a33eb57b0b8f7cd6b5b4e16",
-      "bytes": 1792,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-kr.svg",
-      "sha256": "4d319a3441a9a661105763124d8ac1676418abd8616f1b3818199daa2249c2e5",
-      "bytes": 1989,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-kurdistan.svg",
-      "sha256": "88f14aeca8233c246e19b0fc3ac7b718c0e75ca8e8df276bb4174db1c5bd6577",
-      "bytes": 1871,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-kw.svg",
-      "sha256": "5a47880591ce24b9d1bc8aeb8cff3f68667061f691194be90dca32f079660b1f",
-      "bytes": 1536,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-kz.svg",
-      "sha256": "8307fbb5ec57fbe3889fe8ca645b21e8b701a09b3bfc1775b4e7bd3abf220b48",
-      "bytes": 7862,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-la.svg",
-      "sha256": "890c726625969ca950fe8998765a61033004d59b4914c2fb42d10bf6f28098ea",
-      "bytes": 1480,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-lb.svg",
-      "sha256": "b0006fe50df75dcd3058bca0985c1c18a1af556e5435a9c722416eefd0e3d870",
-      "bytes": 3775,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-lc.svg",
-      "sha256": "756beb0b2615c2a81e9791ae9a98b902f9d343b5e6819a9454f10a0685b2662c",
-      "bytes": 1400,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-li.svg",
-      "sha256": "98cff234954a99e37bb51ada28d1f87db549582198d08fb43edfad74a5873146",
-      "bytes": 8133,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-lk.svg",
-      "sha256": "417b3d98178553f4be1e076c0d9af6cc1d2fdbda3aca73929a067f026a82a8af",
-      "bytes": 11686,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-lr.svg",
-      "sha256": "165fbe73f3d97dfb2b31aef26ae691162684468eddc3bf920707550f44b7f7ac",
-      "bytes": 1727,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ls.svg",
-      "sha256": "57d515ffda16fee5ddda644116f63756fc89cb1e7c66e152ab3bcf8e1d5b047e",
-      "bytes": 2189,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-lt.svg",
-      "sha256": "30aeab81254ee8471372d26a8fbf78eed8e4ead5c583e9ea14da19629a777783",
-      "bytes": 1492,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-lu.svg",
-      "sha256": "6cfb4c5965440bfd5ffb98e8dbfd79353dab4ebafdd809bca274b3c473594ebe",
-      "bytes": 1290,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-lv.svg",
-      "sha256": "e375704eb07442b6c43d6010ecb014ad33aff063c9772b3f261070704f9d6345",
-      "bytes": 1316,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ly.svg",
-      "sha256": "6f4d237a92c263f4a96520792585686afdc829f890b03817813bb28370260e8d",
-      "bytes": 1568,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ma.svg",
-      "sha256": "214016f9c0dcd137bd94da774d59e084d6a4832a8f9accbca1cff93800d043fc",
-      "bytes": 1315,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mc.svg",
-      "sha256": "b6c9c019c3527884317e62260aed877061d7e465b239e5e3edc8d271818a5b4b",
-      "bytes": 1292,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-md.svg",
-      "sha256": "1dec37ba4f850b5e6fc7e60ae674b826d656a463363ea1869f7fe43d88749c8f",
-      "bytes": 11940,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-me.svg",
-      "sha256": "655af96c39192f311cc48066221e8620b8f3a48d19ac7ebc76f47f3a25856608",
-      "bytes": 57104,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mg.svg",
-      "sha256": "0c2f5c6b94c5fb707bfa19c7009ba364575f4e1d22bfab6198254972849fa94f",
-      "bytes": 1352,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mh.svg",
-      "sha256": "565c146ff5fbd55816ed46115f0401e00697f51b4102a0cf9c0f62422d12a6d4",
-      "bytes": 1782,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mk.svg",
-      "sha256": "ed63dead32cd37e42136dee108d4ede36907e5ddc497ad2f60c913f6a09d8367",
-      "bytes": 1444,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ml.svg",
-      "sha256": "3de71998c2b4cc3b2da13d9daf57e239c1b8573aa44e7ce6f68f776252c0a561",
-      "bytes": 1324,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mm.svg",
-      "sha256": "f16ccb45812094f175652123e37686ada8f15988dcc92b13123c307631257a51",
-      "bytes": 1729,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mn.svg",
-      "sha256": "69e58033f5c938c765132b2875713787c18342492149971b993dba9b356c1487",
-      "bytes": 2414,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mr.svg",
-      "sha256": "3845ea7993281e7f01064425c2d83cf961d7550efeebd904580eaaf0a79ea225",
-      "bytes": 1499,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mt.svg",
-      "sha256": "b518b2578de8faf02d866190a0840f4949078bd3d0a81e5d1364d71f011d8c81",
-      "bytes": 14719,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mu.svg",
-      "sha256": "df3bf61b8ac72fefea960cb5b37786da3eaad453e1dc9fe9f419908e30708e96",
-      "bytes": 1364,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mv.svg",
-      "sha256": "a107f2718e809f511edee559fa5cfb8afe8a232321b0cee232919c3bee900864",
-      "bytes": 1348,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mw.svg",
-      "sha256": "e8d9ae45758b82d0bf33001f3585617ed77aaa22ee0f5ab6c3c18ec96f417adf",
-      "bytes": 4601,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mx.svg",
-      "sha256": "5dac781572d76c59ad0df5173dba3928044519ada446e170ca2fda98bcf8421c",
-      "bytes": 84637,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-my.svg",
-      "sha256": "857c4ef350c7f31ba9ed2954bf016690beb65ad18f1ca37ecb3f366127c977cb",
-      "bytes": 2332,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-mz.svg",
-      "sha256": "f19306c76a3e170912228915ca7a745716c61d826d52f16f5343648fc408cc19",
-      "bytes": 3542,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-na.svg",
-      "sha256": "064a8f5f738284221e10efeefeebed9b9f53946f56d1f14dce70a876527d7ca0",
-      "bytes": 1997,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ne.svg",
-      "sha256": "c080d8bee7387882aa992ae88ba097a8820657a94f91b770f12e4f65f1167ef1",
-      "bytes": 1335,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ng.svg",
-      "sha256": "a0af2ee87157e094d70c5c2ddc8ed76550f4dd3930875134eeec55d595dc38cf",
-      "bytes": 1313,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ni.svg",
-      "sha256": "23889ac8f5a30b9681256ba00dfeb1448c8ee5b0a058b0ffb04c36463459f7cf",
-      "bytes": 17302,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-nl.svg",
-      "sha256": "50d8082edc0da292dc51e0c8dd12e7ffee648a2736a61fdd43f5be94135b4abc",
-      "bytes": 1290,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-no.svg",
-      "sha256": "f86e3e180b6e4216ba9c3634bfa0112f2007920e62a72dfca0c3530990f19296",
-      "bytes": 1377,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-np.svg",
-      "sha256": "6c0a81e5dd809cb83fed70258c6f69d85b431f37a8a04c2480bc80809b1e6b86",
-      "bytes": 1948,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-nr.svg",
-      "sha256": "78f992f174b851fb513cb362ebc16a288cc05bce53f00010d784bab4637c0781",
-      "bytes": 1670,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-nz.svg",
-      "sha256": "15edeb2ed9d9ac8b5850fe4cc6fdecc9dcaf0e6043944c384535f3929856484b",
-      "bytes": 3046,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-om.svg",
-      "sha256": "9589a66853415640cfc5bbda877798f5b0ca3448c8912c8eaa2e3e34f007b8a7",
-      "bytes": 22392,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-pa.svg",
-      "sha256": "011487587e6ce4fbebcb563819bbc68bbda30088b1c0a45095dc8fdd9479b69a",
-      "bytes": 1580,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-pe.svg",
-      "sha256": "0a96b674fbffa816e006802251a9bd33ae76afc8a72c04ef11b3d1f37b07a9c4",
-      "bytes": 1252,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-pg.svg",
-      "sha256": "ac7780cef4ebf3061757e4a1d93e747e146948c3da215ed05cd7d8368beb404c",
-      "bytes": 2657,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ph.svg",
-      "sha256": "e6f75e6b77abe929d58d7be1e14cfe959a3a04c4d4aa3b22085b7c527301105d",
-      "bytes": 2444,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-pk.svg",
-      "sha256": "40871615ee208c655f23b07201b6f0e9f27f29dfa2d134258f9ce9cc25fd5391",
-      "bytes": 1730,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-pl.svg",
-      "sha256": "45e4868e70a74f40482747a17ca3968006843d6f7f5935d30d6c1d9f2dbeaeb7",
-      "bytes": 1273,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ps.svg",
-      "sha256": "1d734b6c3f6394952908e1f32116d25f3fdf6721872a0c6417e7007ff3d0ee33",
-      "bytes": 1317,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-pt.svg",
-      "sha256": "22bd3b40f6466e2c7b7f58b7b6dafad9aa4e0dff3504cbb9d53378d1c25b7c1f",
-      "bytes": 8701,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-pw.svg",
-      "sha256": "7b4ede0adb3e3647b71fbfd6193a481866e011a4042d5d31cd43803429f39da2",
-      "bytes": 1495,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-py.svg",
-      "sha256": "571c3fdd7c3f5c04cd816de84cf63c83a7f1fc43d6a6e01a968c5ee81b065f4d",
-      "bytes": 16501,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-qa.svg",
-      "sha256": "e84bdf1418c1b5f85ab6156f8319a28eb3a1da9303d77d7a4bf4dda7e7e60bad",
-      "bytes": 1422,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ro.svg",
-      "sha256": "bb2e244d5260a5a77b064a09957cad147b26a3089a892752760b12e46dda1422",
-      "bytes": 1353,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-rs.svg",
-      "sha256": "9ddb13aedb135bddc4eebf5d0939f873ee9b943679008e126bb9d3eeccae6f54",
-      "bytes": 180468,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ru.svg",
-      "sha256": "869518635e836685b3b4b05f805222208a5e6b72722aeceaf977dddad2c74abd",
-      "bytes": 1290,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-rw.svg",
-      "sha256": "7c1972be4c7ba39c1cae9faafcfc234ccd0dd983cbc58f7a8916406d0df1dad5",
-      "bytes": 1768,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sa.svg",
-      "sha256": "e391b08ed40788b407d73448ccecd9d686c1b673ccd4ef0dd1933c58bd67b1a9",
-      "bytes": 10927,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sb.svg",
-      "sha256": "bb30182db8c349d86a36ac9a81b55fe29ed69efa74cd9d2567e943e13d5804e4",
-      "bytes": 1959,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sc.svg",
-      "sha256": "56c407f364b8a445876c991b75a64e7653d6f4fefb071e4768536e57147f205c",
-      "bytes": 1376,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sd.svg",
-      "sha256": "3fc30b37434d1d971e4114d90deaf32b86446f130ded5e9d3e302fe2c7b11034",
-      "bytes": 1524,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-se.svg",
-      "sha256": "f3b6e5073103aa7c5687a2b35958ca9303e632205b7f4c8ed7297e47a68d39a8",
-      "bytes": 1277,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sg.svg",
-      "sha256": "6d40ec623ae303629dcda5ca3eef52780d5e8c3bd4e92a3fa08776b06ffaf421",
-      "bytes": 1908,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-si.svg",
-      "sha256": "37c80e18365d7f1303c258ba0d86a7574829ea5b6acd66ac31d17c7d5a02e4a3",
-      "bytes": 2987,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sk.svg",
-      "sha256": "fc1b969b666bebfc2b51a8669e477030bfeb301477a0985e835e9b5d2ec94a55",
-      "bytes": 2235,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sl.svg",
-      "sha256": "b70f26383b1aa767c31cc9e6876fd2d3ea422ef548c61f5f414e8e34e4e25a22",
-      "bytes": 1325,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sm.svg",
-      "sha256": "4981e26444d0fbdb42c0ed273d96bf2997bc5367f3b4cd1b5cb4618a3772b8e4",
-      "bytes": 16470,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sn.svg",
-      "sha256": "c913772791659b8d007fb3ed9b1fda557e03de3b6c22bd460fac76d5915391c8",
-      "bytes": 1469,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-so.svg",
-      "sha256": "b22e32599a687fee304d5fa6b1d9364db5cddb84134b992caf7877b802d95fe3",
-      "bytes": 1512,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sr.svg",
-      "sha256": "7fd8ff5e085b56a6a585622be2717fd814c0a73997c20d6b57b5b6d9318cddbd",
-      "bytes": 1374,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ss.svg",
-      "sha256": "6e64fd59b3e0e379c9572c529d10f4ffa7c71098ae0dde2c731bb08629aef1c5",
-      "bytes": 1454,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-st.svg",
-      "sha256": "b19d8806495401ccabdc3358570aa2623655afbfd66964d26dd0a6b1de2f2ded",
-      "bytes": 1939,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sv.svg",
-      "sha256": "22b0d356f933041ebec402b2cce1d209d2a92ec841e03f56356b52e606cd18e9",
-      "bytes": 74098,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sy.svg",
-      "sha256": "ff3d5f9a99555042c2e9fdb3c14ea269d27bbb2fc8d176fcd874fd7c9931a344",
-      "bytes": 1407,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-sz.svg",
-      "sha256": "66bfa53641f05191fa2b4df1a5b2d062d73a227170559ef7f6fed5f6ee1d5bea",
-      "bytes": 5557,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-td.svg",
-      "sha256": "a38bae3d7f752c6e0638d43507bee630c15efd0df820ee5a3e29fd9a8627e19a",
-      "bytes": 1322,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tg.svg",
-      "sha256": "f744f99df143852e8b6e8d8a391b40b5aec58fae124f840793a0a5f1d8967b42",
-      "bytes": 1722,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-th.svg",
-      "sha256": "4044c3804a8fc3fe2ba13ecf9b6807276928219fa6caa704b97c77090e17218f",
-      "bytes": 1337,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tj.svg",
-      "sha256": "6e7904bc1f0a43f5653e79640aa045787e2c8b76d32c6e2cd03fce528a19d59c",
-      "bytes": 2816,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tl.svg",
-      "sha256": "f2cc0bacf22cbf2ebf32fb5d4f14a936f5ba3b47fd1721787fd37d5f87b684e8",
-      "bytes": 1630,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tm.svg",
-      "sha256": "c9b0df6f298291bf251b2b9af1f40cdbd606cdcd68bb898f9d47d183870e4cdd",
-      "bytes": 38611,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tn.svg",
-      "sha256": "1b46d621794c3bcff2e90d73801075aa450b79db40956b4fe23ae267f8e7e4a2",
-      "bytes": 1411,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-to.svg",
-      "sha256": "496608fd9c21a55651e08eff68710e484ab9af96e85f4e6a3f9a1261424d3023",
-      "bytes": 1386,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tr.svg",
-      "sha256": "4d605d86597d7ffacbeafb8cf5a85f0e1dbcee995dde0c469cedc23a84e31146",
-      "bytes": 1597,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tt.svg",
-      "sha256": "bc2efcebf1b68cfeb369f7174766fa61b92b86638f784ebdaa861f259a3ee092",
-      "bytes": 1369,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tv.svg",
-      "sha256": "3bbed1e6b76f4310db56cd087724f9579c75492092e3644a3b80c2dcf3c842d7",
-      "bytes": 2480,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-tz.svg",
-      "sha256": "35daac1dd57a9efe2e8f535c726c2527db42fb60a2593d57fecbf7043cdc7aa0",
-      "bytes": 1567,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ua.svg",
-      "sha256": "636da33c1806cb34abb8abe4495f457c72533a81c4587d0142beb6f722e1bf91",
-      "bytes": 1292,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ug.svg",
-      "sha256": "08871e11e0bddad3460cdb50aa4048b4bcb5de330425df53e57b4ff7e485e75c",
-      "bytes": 4863,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-us.svg",
-      "sha256": "96b6afbc0c4e5217430b4a521058ff7e5f5f95d945cd35775f9d5b229b5062ed",
-      "bytes": 1693,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-uy.svg",
-      "sha256": "47108825f17b91e75be89ee0c057aca8ffff74a1220bf211940323e3d3cf398a",
-      "bytes": 2614,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-uz.svg",
-      "sha256": "f22b9431fd32e74f881a9a742c7b74c90cf1681594456883309bb15fb8570131",
-      "bytes": 2342,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-va.svg",
-      "sha256": "090b80baa863474a19c23c17e11bab4cf7d5a494e7dd50456ad7f1a9735707f1",
-      "bytes": 28129,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-vc.svg",
-      "sha256": "e9ba67206a7eb4745243313d87f6f63062fc01abf782d45292898abef3daa95d",
-      "bytes": 1477,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ve.svg",
-      "sha256": "b2955f0225e53889b43a6765a87b89dec2c4bddcaa98b9dc84e346d951683a5a",
-      "bytes": 2098,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-vn.svg",
-      "sha256": "6984e736453dd92402159040615e6ad1dee18a4147e0048c9a7a6fbdf9fe0d63",
-      "bytes": 1519,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-vu.svg",
-      "sha256": "a77583f04eabc8fb42de2461582ae2a2ee97ccdfc2a7e9da23201c3f2732835c",
-      "bytes": 2798,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ws.svg",
-      "sha256": "be722e36bb775bb2e2327152b2df4e5b509cb3ff5eeb4e80759f2e8ae9201e97",
-      "bytes": 1740,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-ye.svg",
-      "sha256": "6121b6ced785001de832902f8d4c8e40cda6dcba1ced5c69f91aa237f19e7c47",
-      "bytes": 1334,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-za.svg",
-      "sha256": "7d1cea1d104105e56f0332c4bb0065b6fd6003efed6e35f52ea193900bfe85ac",
-      "bytes": 1847,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-zm.svg",
-      "sha256": "6c0b4cf33a3725699942d0e8ba78a20d87be61cb8076ae8d4d23ab00fc573517",
-      "bytes": 6344,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/flag-zw.svg",
-      "sha256": "8971debbfaa60d3ee0a5c842fbf24ba5c5b29283f880a5c25b86c8fec0a2b555",
-      "bytes": 7159,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/frost-pines.svg",
-      "sha256": "4276d0ddc0fd949ec4a86026ddd4ac377595ae51ccd37cb0e1b2870e3fac9d36",
-      "bytes": 6265,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/game-shelf.svg",
-      "sha256": "cf5e23c754ea8b443039bcfb7391381565ca6ab3b297b6eb00b4d2c7d83fa4fe",
-      "bytes": 12935,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/ghouta-spring.svg",
-      "sha256": "fa1e3af187b487a434ad4a5584311c5a45c193aa941fab5ca9f7b965e3d46b16",
-      "bytes": 11180,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/goal-net.svg",
-      "sha256": "921a596f3a1f96b0a59097905340a35b38c3812b4f7a974ed1d5e65870ee165c",
-      "bytes": 4413,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/hama-wheels.svg",
-      "sha256": "fc5363ff85aec0b0d33d266e969dbed42402a72199cf5436d5da883824169669",
-      "bytes": 9277,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/haunted-hill.svg",
-      "sha256": "4c5229940125ec4203ffbdcb8dc75ef44e0a9a561ac12f42f5e7ab9e9d78a407",
-      "bytes": 5826,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/hud-overlay.svg",
-      "sha256": "05b96522a55852d3719f7e917f277a1944ab8c57b1003512f885e67f07ade574",
-      "bytes": 6296,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/jungle-dusk.svg",
-      "sha256": "28fea2cab6ea719ba04c88260ce3a0e482664323ca189a5b5adeade2484e8a31",
-      "bytes": 5486,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/lavender-field.svg",
-      "sha256": "5001d4dc6f368dde51129737fee05cc8d6b88e88ff6d4c40d5f3676886e81dd4",
-      "bytes": 8144,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/level-up.svg",
-      "sha256": "7ab927f1a760d1256f93afbd1c6c0e527298b1819e244153649572e987d5ae10",
-      "bytes": 4212,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/love-letter.svg",
-      "sha256": "7c44859d1d101da455da337d3e12dd07f2439b9f1b9fe285c7245368eff9c52f",
-      "bytes": 13868,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/magma-flow.svg",
-      "sha256": "ce3905b2e9ee7a9c143ac13392c7ca002d8f20f33da3f140e3e336aa1b0e131b",
-      "bytes": 5985,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/majlis-night.svg",
-      "sha256": "00769eece066f0a77709ca42f7030d956b532784f091acea47eb6e67ef5ad138",
-      "bytes": 4481,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/midnight-pulse.svg",
-      "sha256": "d4e6b27abb1f3f1835eec1b989653f479104a7ab6e0c98555c7cab53ed459732",
-      "bytes": 6123,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/midnight.svg",
-      "sha256": "d69f5ffcf14f89227a840877b03d6b71afbd6a6814da8b84fac1bb40b1d259df",
-      "bytes": 5243,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/mint.svg",
-      "sha256": "0c2a2bb675ad988d7e5ee4b68c7e17791cb677698f066b2c00694eed4219ee7f",
-      "bytes": 2550,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/moon-roofs.svg",
-      "sha256": "9777d2fc2d4a026638f06b4c3712488a26e342c0298a1d0ef4cc5732cccbc7ac",
-      "bytes": 5603,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/after-rain.svg",
-      "sha256": "fdf119badcaf9b171919b63b4b8b3ce43e39907faa47fa65e315b8b94354f3b3",
-      "bytes": 1671,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/aleppo-citadel.svg",
-      "sha256": "8a740b6a4c749ea8357fb360c9440001e298144350436fd4ae04ff0624d3daf0",
-      "bytes": 4833,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/alpine-lake.svg",
-      "sha256": "3de7e84ab72332f5baf83929079f620bf136a6e1cc6ac98a2f8df4b1b3ac813a",
-      "bytes": 1348,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/arcade-night.svg",
-      "sha256": "d067a5c398a362b8895b2cd99eb74db72888bcdd24d8ac7de8b549416114d123",
-      "bytes": 1953,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/arcade-row.svg",
-      "sha256": "048a000e2d867252b2c95af4cf109105ebbe87ae59897f658068fae6de8caca6",
-      "bytes": 1669,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/arena-lights.svg",
-      "sha256": "0cdaa52fce49b9646e2674625ade24ae26255e13a393b17e37a8c6663d5de074",
-      "bytes": 2892,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/aurora.svg",
-      "sha256": "18b053aa1afb5ac10628dd8aed68fde18d9725a402df700c8e05b8e46894d3e9",
-      "bytes": 1030,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/autumn.svg",
-      "sha256": "7cb90cbcc25e6d6a5c8d76ed9d7c77236e919f60072261dd004f6bbd74873066",
-      "bytes": 1388,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/balloon-sky.svg",
-      "sha256": "57b57a429fb7774f4678b73cc77b244d9f63720a2554adcd5129afaba8a3d57c",
-      "bytes": 1087,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/bamboo-mist.svg",
-      "sha256": "82a0c2544a20c40c49eea736fe74656e6c740272d4cb1a5cf34385d06c7d81fc",
-      "bytes": 1532,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/beach-day.svg",
-      "sha256": "410f116ff6e62c638cfc3eda285c0e0ff420c36be60b8e783f3b608b73d9fcbb",
-      "bytes": 1020,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/boombox-night.svg",
-      "sha256": "bc6019f7ce10143022fde6c501ef381506008f2925b7665606a1c6ee248772f1",
-      "bytes": 1673,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/camp-night.svg",
-      "sha256": "8ab57bef4f5c47d9da4498fce9059af3f1b4fca5d8df9e1fbdb6cca3414d3b14",
-      "bytes": 1152,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/campfire-night.svg",
-      "sha256": "bb2d078e3e09613da9aa42b3ac74e9af754d66d1fac264d31dccd9108cf3645f",
-      "bytes": 1669,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/castle-moon.svg",
-      "sha256": "c9778dd24bfafe0e5d4a0cac615f3899364dffc829669add49c7b4cad91d023b",
-      "bytes": 1147,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/cat-rooftops.svg",
-      "sha256": "36de84a03a8975aecdbc2b2a8450e00ff8fbaf2c6b10eeb721bb894f201c7642",
-      "bytes": 3974,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/clouds.svg",
-      "sha256": "dd2c3ac4950213b5313520e88136d2c6cfe6ef1edac3a146bed3ebd2c8a2ece4",
-      "bytes": 831,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/coast-drive.svg",
-      "sha256": "50522ed21fc2fe811e191a7b7e4cd8227d3232f65468cc11a817071b59efbb62",
-      "bytes": 1682,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/columns-dusk.svg",
-      "sha256": "8e5ac31a29b13c7f82e75ad1107f20560295817d41e801d10e09b96bed4be698",
-      "bytes": 1563,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/damascus-night.svg",
-      "sha256": "1d74ecb58b59473ffc63c321968d2f1e475194ef3bb32baeadb95b39cd8cde1a",
-      "bytes": 6333,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/deep-blue.svg",
-      "sha256": "b8f2a6edded74c07c914ed1dfce82c79cacd2ad90709740c443b43da075c640a",
-      "bytes": 1877,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/deep-glow.svg",
-      "sha256": "ba2264f94e924a30852f9002763117472854924ace774eee902c359b91a47cfb",
-      "bytes": 1550,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/desert-night.svg",
-      "sha256": "87dd0d7e9ad9e19ff199567287d37aa85eae01ab103470435eecc52c8c47cf14",
-      "bytes": 2702,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/drift-night.svg",
-      "sha256": "1e7ef088defe806e46d882811a521cebfd304df698d0c39e6fc3294c9d2d4efe",
-      "bytes": 3094,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/dungeon-hall.svg",
-      "sha256": "2e612bf99924d7db0abd2140cda9b2090cfacc9f1bbd007b6d2bc64fe91ff3e1",
-      "bytes": 1667,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/fanous-night.svg",
-      "sha256": "28fccafbbe50f3d6ea3904f6a39754f6ceea63f6327cadc4b2eb397eb03daeaa",
-      "bytes": 1414,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/far-orbit.svg",
-      "sha256": "690e20266a4902a45702843a707a1d186454b464968d08f71af7da9ab8f978d5",
-      "bytes": 1476,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/frost-pines.svg",
-      "sha256": "fc524b341d22649199789e745f4690be908bb801e3af0d5de3817df8a9035d58",
-      "bytes": 1733,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/game-shelf.svg",
-      "sha256": "d9027e179836d04356dd44d7655484518f60cdbe1c0587e8f528b214d2fb964b",
-      "bytes": 2336,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/ghouta-spring.svg",
-      "sha256": "cd8f37baf106685457eafaa48e082943391661beff25dcce8a7875a2230ec97e",
-      "bytes": 3972,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/goal-net.svg",
-      "sha256": "f94f5a62525bbb2e4a29023dec10d4d0e96d029bc75dc5b8c09d984404810618",
-      "bytes": 1527,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/hama-wheels.svg",
-      "sha256": "4d29f3466d5ef46b3dcaf5ccf4279b59dd3acb9501ace8bf5a3434516ab8e929",
-      "bytes": 2612,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/haunted-hill.svg",
-      "sha256": "f5b424ede2949ac680961d24e38d02faafd8e3a5bf27188b7d325435009786d2",
-      "bytes": 3396,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/jungle-dusk.svg",
-      "sha256": "e3172ca8f52eae5df656dff8a4d2ed8a116618b0d14a067a5b5ef361a6f4aec1",
-      "bytes": 3281,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/lavender-field.svg",
-      "sha256": "f86de884553559f1fed5d444b83bf080c59f8cef5a8cde14e916771db764c932",
-      "bytes": 2432,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/level-up.svg",
-      "sha256": "8587aa5ec338e4b752f489070907f433f5a4f95dbaa8efcb4399b58e7708469a",
-      "bytes": 2594,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/love-letter.svg",
-      "sha256": "d71779eabb9c452d30b26df44121f815ade45081fd763bf98d3c5b27213cb83b",
-      "bytes": 9784,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/magma-flow.svg",
-      "sha256": "7c85c949f199c03be6958cc2a4fc42a2183e67a6146e2889a33470d01f18d95c",
-      "bytes": 1541,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/midnight-pulse.svg",
-      "sha256": "946dd413a5c6bbd51ee7a8d8ccce8ed9ae49247e9bf4818de2d3f432fae40d8a",
-      "bytes": 1991,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/midnight.svg",
-      "sha256": "e7587eac9edfa00f5d59039ace58e6ea48f8ad4539f928481597063b9f4e226a",
-      "bytes": 1738,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/mint.svg",
-      "sha256": "7c36ccf2787b0544e97f9c050086d10671bbbf6f02c8ca4a6b0d8b4ac5e6907e",
-      "bytes": 948,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/moon-roofs.svg",
-      "sha256": "78070b5f03286ad77e8ae41187e1f7b920c50e50a689920a36f520cbb83600a2",
-      "bytes": 1610,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/ocean.svg",
-      "sha256": "9da8f59739e83d8b1b46d87bff227fcc2918139bd319fb88f2cb14340700aebc",
-      "bytes": 915,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/old-walls.svg",
-      "sha256": "0f008d94ff4117e9081d5c23dd8bb8106f6b1b23126e6c2470e29f311f19f9e8",
-      "bytes": 2036,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/oud-night.svg",
-      "sha256": "334af5fb2e5454496578c72dce2319d14a8f9ba546912a6d3d4358909bfbb402",
-      "bytes": 2215,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/palmyra-sunset.svg",
-      "sha256": "33e58f99e5b020bd8538bd53823df0bbb5d3c07c37bf11638b0d0f7d6796351b",
-      "bytes": 1958,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/pixel-diner.svg",
-      "sha256": "e501917764e34871e2c44de94501f2f36b69d72d41e29b483a64b71d30a8f348",
-      "bytes": 1668,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/pixel-garden.svg",
-      "sha256": "18cea842e44736f1fecc81d5b9e1f18d63cac7367c7d8d8366205444e60f9706",
-      "bytes": 1667,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/pixel-meadow.svg",
-      "sha256": "81ed234ee71c0794af9a10847a0d5e05e8bfe8c6e5b533bc5d001f24207ce1b1",
-      "bytes": 5189,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/pixel-orbit.svg",
-      "sha256": "7fc17d03ba4a49bd0fd43734f361efaf5aa12046f95faa8930a183a0c2d9a0f4",
-      "bytes": 1953,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/pixel-reef.svg",
-      "sha256": "2310fd139816c027938d41eefc46d132c05993bdec06a498a1695a0e2d2a35d0",
-      "bytes": 3262,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/pixel-skyline.svg",
-      "sha256": "539e9b1065a9af9f72eef754f4424a5123f01aa12a23f52c7216ae995c8b70aa",
-      "bytes": 1671,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/pixel-valley.svg",
-      "sha256": "b86162ec4d2957c97cb004499a45f3d5cd4188022924e3aad12483ed40dfdee5",
-      "bytes": 1530,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/pixel-zrzur-home.svg",
-      "sha256": "db9e7a966860ea2c02ece35004844bc9475bbb4120a71f4a6f77d718895fd98d",
-      "bytes": 1383,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/qasioun-night.svg",
-      "sha256": "92c90c0ac18b81ec9c455eb96c50952e8e012e52d3e5c4d64837b343ddb3a960",
-      "bytes": 4047,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/rain-street.svg",
-      "sha256": "b0a5ffc2d5bcf023851d11a57d9cb1e372eb6ce7d25a448785c3bacd373baada",
-      "bytes": 3638,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/sakura.svg",
-      "sha256": "21fb535b5bd7f07574034dcf0126a2b37f331a79445ff41866352d0e21cbcaeb",
-      "bytes": 1910,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/saucer-night.svg",
-      "sha256": "be6a446ecd1fc8a49a25d79c146e030d2888563cf0a915049e3129d31d8ab692",
-      "bytes": 1150,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/sham-table.svg",
-      "sha256": "e35926f64f82c6474a275efa8d6bf029c1476ef2f2eab402277f7fc46a1a28fd",
-      "bytes": 10467,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/snowy-village.svg",
-      "sha256": "f82a746e0167b90e78ace3c54392bdf6338b5f05243b77af91477db8c7066d8a",
-      "bytes": 2244,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/spring-meadow.svg",
-      "sha256": "910990dd2e543d8397760a88f9542d5cbf617b93716f48145cf3409906c6f189",
-      "bytes": 1548,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/start-grid.svg",
-      "sha256": "c1f188b4b9f013d337299f82da777b5c8479f9ace5712e2c6a29c714cdd10cca",
-      "bytes": 1625,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/sunset-boulevard.svg",
-      "sha256": "3da6d0aecd3c47b00bbea7275dd5372fd20d2662a1057c674a4ad2757d83feb9",
-      "bytes": 1384,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/sunset.svg",
-      "sha256": "0a79a24a39c50bbfb6f5beb5cc948ef2425ea5cfcb90a55e1e096cd7ff4e9423",
-      "bytes": 913,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/motion/umayyad-square.svg",
-      "sha256": "4b4b31b9c659a58b4a5df4c85fc26f7a5283e37aa9de910efeb1cd9b0c606c48",
-      "bytes": 2501,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/ocean.svg",
-      "sha256": "301ef4628782ceb23aff908615a3f6096b4283f11c5e0a5562a961c69a06bc62",
-      "bytes": 2528,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/old-walls.svg",
-      "sha256": "165215e933d5a26ee03f23797f00451b602635bc737d7cf7a2ecadc412fa0344",
-      "bytes": 9694,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/oud-night.svg",
-      "sha256": "0a82b71ed3cfea15fb9c66abf483c005d3a02bac963160d3ae316c38dc1fafd1",
-      "bytes": 5312,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/palmyra-sunset.svg",
-      "sha256": "d44d5957ea4dcd7077c60b9cac5ec7c78e719c8ebc15d999bf6531e50725329d",
-      "bytes": 11569,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pixel-diner.svg",
-      "sha256": "26713bea94e2310e14bd4fbb9ef96a5b2ab0902a58eb2d3082e834c22ede37f8",
-      "bytes": 13168,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pixel-garden.svg",
-      "sha256": "4d6d3fc395b3ab55caf9de5c0bde64a3b17fc8e02aba6a41c0c5b3b5010b3779",
-      "bytes": 10510,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pixel-meadow.svg",
-      "sha256": "2a8148d157e800b4525060abf6823ee6d8349f8a5b1a67ab0c465c4ae5a988db",
-      "bytes": 11615,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pixel-orbit.svg",
-      "sha256": "61335bb4e843baa9b725f50e91a940fe613f68dfe85a4ab2a1543d5784973e02",
-      "bytes": 10748,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pixel-reef.svg",
-      "sha256": "3baa4107128f2da42d726664972b03fd1d07bf417c7f7f5c6b4481f5171a8156",
-      "bytes": 10557,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pixel-skyline.svg",
-      "sha256": "6be3f6f4062867c268e404d830b9d59352e18b1da7bbeef9a1f183ae55575800",
-      "bytes": 10109,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pixel-valley.svg",
-      "sha256": "9694726aeb3d5563b2610283f4c090b96bd75cad4caae9789cc5503207a175d1",
-      "bytes": 11946,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pixel-zrzur-home.svg",
-      "sha256": "30a000bcf939df03bbe20609cffbb9183c820e7c57d4953c3079726313aba667",
-      "bytes": 4974,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/pulse-wave.svg",
-      "sha256": "5a0b6f718e1f827d48aff3353f15e8c79b2e977544f85fdbc6c23eae3befbd6c",
-      "bytes": 1458,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/qasioun-night.svg",
-      "sha256": "abb378b1532c0fcc9569c38a12254d7f64a0b203924da61d51752570913f1da1",
-      "bytes": 11747,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/rain-street.svg",
-      "sha256": "101a6b7329aeb4227ae52c99417cf8f6de9b75c2e041a264c458f2a22c3fb8dd",
-      "bytes": 11206,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/rank-diamond-plate.svg",
-      "sha256": "59b9eb6fe90b3bffd39be1a7ffc49edfb514a3310d0b782ac159f10c37a77344",
-      "bytes": 5186,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/rank-gold-plate.svg",
-      "sha256": "094ffd203c9a69042f80c6d2d1d8394439cee2af863d99af0cdc933c2c23807c",
-      "bytes": 5052,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/rank-master-plate.svg",
-      "sha256": "efa9c824b6cc25d8abb528b252e495c3e6514e19ae6fac990dfd3d1ab3a90738",
-      "bytes": 5186,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/sadu-weave.svg",
-      "sha256": "0357a9a5da2dcb44542ea785c90740d824e98840b6065595e39e4584e9ddb10b",
-      "bytes": 6065,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/sakura.svg",
-      "sha256": "f34563a4fdfc549dc1a2afd880c276091cb2a6b4a88173ef0290cfd50422a610",
-      "bytes": 10654,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/saucer-night.svg",
-      "sha256": "0ff74e8b3b62d504779c4fe546b086cbdbad68daf2c40c0279cb7746a5768133",
-      "bytes": 6251,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/sham-table.svg",
-      "sha256": "053f75175bf5e034404fb586408ced9e548c49574bf3826146c03807238f10d5",
-      "bytes": 7827,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/snowy-village.svg",
-      "sha256": "c69309a95339a67b4d2c38dc1e5cf27fb41c85ad2baa69d6a579f650dd0be45d",
-      "bytes": 13643,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/spring-meadow.svg",
-      "sha256": "102a4111e2563a94f99174d6dbdaafae022f47258ca800f1a3aa9027250f0af7",
-      "bytes": 12439,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/start-grid.svg",
-      "sha256": "292451827376e8f41febce79fdd88926e6694886afe2874de1f6379c81449561",
-      "bytes": 5677,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/sunset-boulevard.svg",
-      "sha256": "e1be57b415a66448a2c690c70f9b0f0984f3493411c28a2a2429f56604caa983",
-      "bytes": 5790,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/sunset.svg",
-      "sha256": "5bc8ee71e3690486dfe4e2b72a589f5b1768edd40f64d605f12adddff58b967e",
-      "bytes": 1456,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/syria-flag-plate.svg",
-      "sha256": "722323a0a565a56ac76d90a7c9481d27cb25399295ac99681c3e1e25f0c7e29c",
-      "bytes": 3304,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/umayyad-square.svg",
-      "sha256": "3eb824986f50885e847287bfee7358c0d393dc40aed0d4cc9eca9c749d9bd556",
-      "bytes": 14966,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-aquarius.svg",
-      "sha256": "fcef6ee6b311d39d0f88fd77a489e03f35dd4383499d54c0a517ea0f896c59f4",
-      "bytes": 4540,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-aries.svg",
-      "sha256": "110ea3c8a61b35deb841a4e2197af16f469e4bf23b02209b7906c4be84ff8269",
-      "bytes": 4575,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-cancer.svg",
-      "sha256": "bfed61364fa321892f3c02e386f5431be3bb55f02504db8590ad0af0f514a361",
-      "bytes": 4645,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-capricorn.svg",
-      "sha256": "986e1bc931c88e7e693f6863af4188b28d92cd1c9bb5c7dad35b2db23c773566",
-      "bytes": 4582,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-gemini.svg",
-      "sha256": "56caa49aa136c5bafb51c1145f12792025c29bc79a2578149ab1a932323e2ea4",
-      "bytes": 4558,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-leo.svg",
-      "sha256": "6602233b3f4ae6d36953ab1da0f7b035edc818f271a7697b9d8fd8a340724344",
-      "bytes": 4599,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-libra.svg",
-      "sha256": "6c34be96e970fadd2f1164b5eb1de25a8b5934c939f6e1cfa0eac8bbaa44577b",
-      "bytes": 4537,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-pisces.svg",
-      "sha256": "0589cbc047a2b2e9be032b404f63c324912145522425c25aee2e84f3f38ff964",
-      "bytes": 4528,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-sagittarius.svg",
-      "sha256": "f23097c5dd658b4272a765fc0425ac935533c13d57aa7776fc9da81c99dbfdc0",
-      "bytes": 4519,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-scorpio.svg",
-      "sha256": "a81114c9554197ade7f9581a11c773c0d9d4a36f4aac38539af0793f97d5992d",
-      "bytes": 4609,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-taurus.svg",
-      "sha256": "b216b5e63e441ac560bd6cc2a831f8bcb04393ccfb5ada1d3774a7f6aa7e9ae9",
-      "bytes": 4592,
-      "category": "reviewed-product-asset"
-    },
-    {
-      "path": "packages/client/public/nameplates/zodiac-virgo.svg",
-      "sha256": "020ef2fbbb5586e803cc60830d48b42af739fdca46f3e14ad7ba071e06a1b5eb",
-      "bytes": 4635,
-      "category": "reviewed-product-asset"
-    },
-    {
       "path": "packages/client/public/third-party/phosphor/LICENSE",
       "sha256": "6e5137e8f51cc955fc8e0861f89e7430b8b33d6d2e13d9c9ac8a7ed935b8b8d4",
       "bytes": 1072,
@@ -41613,24 +38439,6 @@
       "category": "product-source-or-build-manifest"
     },
     {
-      "path": "packages/client/scripts/designs/contact-sheet.mjs",
-      "sha256": "32a7ef3621fd976cc72e747511a87eeda959a2712cf8363e4fb60b3f2534d0fe",
-      "bytes": 9521,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/scripts/designs/decorations.mjs",
-      "sha256": "3c2f6a54c2a70187b2b70e514154f92c715fea0406c5c7a4f66974da7b9242b1",
-      "bytes": 29409,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/scripts/designs/flags.mjs",
-      "sha256": "2cd755eb1fd5ce61f99ca4793413ec2067f6ff199ebafb459d56ce17f2dcea59",
-      "bytes": 11877,
-      "category": "product-source-or-build-manifest"
-    },
-    {
       "path": "packages/client/scripts/designs/frame-kit.d.mts",
       "sha256": "ad66c5b439ffa7999d360f640ec16f97f07a4904ac45db211b1d9a93d61f5489",
       "bytes": 1141,
@@ -41647,12 +38455,6 @@
       "sha256": "47d3605b698f6c11b242f3fbaea41df2cf8f90d410e89a1dd250ba87a3ac0936",
       "bytes": 6148,
       "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "packages/client/scripts/designs/nameplates.mjs",
-      "sha256": "691da55506c1c6e705e543dba067fae80524302ce579b6ec81adefad6ae6030d",
-      "bytes": 15181,
-      "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/directive-misuse.d.mts",
@@ -41701,12 +38503,6 @@
       "sha256": "443badac2539e0c476ec2d0411818ae1bae1978fcacef79b24731c54dbeb4536",
       "bytes": 2597,
       "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "packages/client/scripts/generate-decorations.mjs",
-      "sha256": "eb343d10057f60c5834c80a12684498a91f02a41d9bad6a07989f61618602dcb",
-      "bytes": 7325,
-      "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/generate-hugeicons.mjs",
@@ -42783,6 +39579,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-2026112602.json",
+      "sha256": "f556e09f2bbedb72c0687ca1a85876c7a00e5256cdf803f399bfd391710fdffc",
+      "bytes": 1685,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-210.json",
       "sha256": "a2000336a3928f21687a94a1262b2adbd34f017573f3d1b9b342b3ca93df6d09",
       "bytes": 644,
@@ -43630,8 +40432,8 @@
     },
     {
       "path": "packages/client/src/interface/Designs.tsx",
-      "sha256": "d652a53a0c24f4de27db84f1603ba4b7adc7b459c10eb3817092580ac82a89f0",
-      "bytes": 35575,
+      "sha256": "4a643d1919fd17d40a788af363046f23e1dbec6192a6430fcc35a0a076d17821",
+      "bytes": 35530,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43810,8 +40612,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/MemberSidebar.tsx",
-      "sha256": "338dd38d9bfe65d775ed33b63f83f9c033c0b80357f10f42e58106ce6a0cfdd8",
-      "bytes": 18136,
+      "sha256": "de27ea5320940ab160e61d9b85616e8be850d21e3ce1e30feddc1678ecb30a1c",
+      "bytes": 17979,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43948,8 +40750,8 @@
     },
     {
       "path": "packages/client/src/interface/designs/DesignPage.tsx",
-      "sha256": "5409ee8253a29829717367c42b4c38222b1ce1f3709697cfb5c428d7c38a0f8d",
-      "bytes": 27097,
+      "sha256": "6be1fbd077c14272b52de21f854d46eb4b37622fbb5ab18282d7032bbb7ff8c5",
+      "bytes": 26354,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43972,26 +40774,26 @@
     },
     {
       "path": "packages/client/src/interface/designs/FrameGuide.tsx",
-      "sha256": "359318df137efc8e1bd0b47f13a6f720272f07c1d4121b61a148c3dca3739c16",
-      "bytes": 32255,
+      "sha256": "9312f05ceee67b92c6ca9981bc2fca7bb8124f92a4f25ba406c014cb978cfad5",
+      "bytes": 31967,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/designs/Home.tsx",
-      "sha256": "52a9656a602d606e87e2567eac00f3a55fc5c1a1b13d3e52bf3d3e1355c00e90",
-      "bytes": 11396,
+      "sha256": "36048b39723573b2effe132d8afb21ebd4cd4ec4ec7b0e877027bf12de279160",
+      "bytes": 10624,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/designs/Looks.tsx",
-      "sha256": "43183ccd34f843c4e9ca4550c4cdf57591066bd52cb11acee6b062edf7f9d960",
-      "bytes": 24273,
+      "sha256": "fbc9be2b073c10b4ee0fce3a5dd84c535a884c7ea4c31a2054828e3d8d0b1075",
+      "bytes": 17412,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/designs/Makers.tsx",
-      "sha256": "a6d0cdfb9090a698fb586bd6f5597723a49c997be6b6ded96510b572baf05906",
-      "bytes": 17844,
+      "sha256": "df2a2c87a54ae952b07618f40dc531fdce62d7e313c92f47b1096b6b1675550e",
+      "bytes": 17757,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44008,8 +40810,8 @@
     },
     {
       "path": "packages/client/src/interface/designs/Scenes.tsx",
-      "sha256": "ccfe32cd42f0e4a6e90fb621dc08cedc20bffbc68158a1538fed17f73aba61b0",
-      "bytes": 11532,
+      "sha256": "e917db9e1798b264331bc696a60f533c876f493c509092824b574a1d1b9e95a1",
+      "bytes": 11454,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44044,8 +40846,8 @@
     },
     {
       "path": "packages/client/src/interface/designs/Wall.tsx",
-      "sha256": "0a86356548ae97951253568e31ca39723c5d4d3f57bc5ffa1b709243f006e8ee",
-      "bytes": 38811,
+      "sha256": "52090dc4f0957442f22841e62bc7587a39fbaef6aa56a9f170b6e49a0de533cc",
+      "bytes": 36679,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44056,8 +40858,8 @@
     },
     {
       "path": "packages/client/src/interface/designs/designSlug.ts",
-      "sha256": "102cdfd896a4dc36eea4afb656f367cbeab70967a7d5e4616de1e19ddc1a81dd",
-      "bytes": 1191,
+      "sha256": "824eea9da7603b4217b2a47cfa11a6e07c76dadb209708b53cf13b38e54b0fab",
+      "bytes": 1351,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45778,8 +42580,8 @@
     },
     {
       "path": "packages/client/vite.config.ts",
-      "sha256": "9c49980978faa2c5982b50e13d8a78d7878f1c54ed12ba9007336c93add7d116",
-      "bytes": 9740,
+      "sha256": "bc754bea204997652eeb67c964298349dea3fc7b2a7255f46b32fdc38c100940",
+      "bytes": 9539,
       "category": "product-source-or-build-manifest"
     },
     {

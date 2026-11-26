@@ -11,7 +11,6 @@ vi.mock("@revolt/instance", () => ({
 }));
 vi.mock("./NameplateMotion", () => ({
   useDesignMotion: () => () => motion,
-  NameplateMotion: () => null,
 }));
 vi.mock("../../design", () => ({
   Avatar: (props: { fallback?: string }) => <i data-avatar>{props.fallback}</i>,
@@ -22,7 +21,7 @@ vi.mock("./AvatarDecoration", () => ({
 vi.mock("./frames/ProfileFrame", () => ({
   FramedCard: (props: { children: JSX.Element }) => <>{props.children}</>,
 }));
-// a canvas cannot be drawn in jsdom: the play and the still are marked only
+// an animated file is not played in jsdom: the play is marked only
 vi.mock("./effects/ProfileEffect", async () => {
   const { Show } = await import("solid-js");
   return {
@@ -30,9 +29,6 @@ vi.mock("./effects/ProfileEffect", async () => {
       <Show when={motion && props.effect} fallback={props.idle as never}>
         <i data-testid="profile-effect" data-effect={props.effect} />
       </Show>
-    ),
-    EffectStill: (props: { effect: string }) => (
-      <i data-testid="still" data-effect={props.effect} />
     ),
   };
 });
@@ -62,7 +58,9 @@ function mountEffect() {
   dispose = render(
     () => (
       <button type="button">
-        <WornEffect look={{ effect: "starfall" }} />
+        <WornEffect
+          look={{ effect: "c:01ARZ3NDEKTSV4RRFFQ69G5FAV", effect_file: "e1" }}
+        />
       </button>
     ),
     document.getElementById("root")!,
@@ -71,7 +69,10 @@ function mountEffect() {
   return {
     tile,
     playing: () => !!tile.querySelector("[data-testid='profile-effect']"),
-    still: () => !!tile.querySelector("[data-testid='still']"),
+    // the media server's still of the creator's effect
+    still: () =>
+      tile.querySelector("img")?.getAttribute("src") ===
+      "http://media.test/effects/e1",
   };
 }
 

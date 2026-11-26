@@ -46,9 +46,8 @@ function useDesignName(ref: () => string | undefined) {
   return () => query.data ?? undefined;
 }
 
-/** The page of a worn design: its own, or the built-in one's */
-const designPage = (kind: "decoration" | "nameplate", ref: string) =>
-  isCommunityRef(ref) ? `/designs/${ref.slice(2)}` : `/designs/${kind}-${ref}`;
+/** The page of a worn design (every one is a creator's, `c:<id>`) */
+const designPage = (ref: string) => `/designs/${ref.slice(2)}`;
 
 /**
  * What a creator has on, each design drawn as it really looks on them (see
@@ -98,7 +97,7 @@ export default function ProfileWearing(props: {
       items.push({
         kind: t`Nameplate`,
         name: nameplateName() ?? labels.nameplate(current.nameplate),
-        path: designPage("nameplate", current.nameplate),
+        path: designPage(current.nameplate),
         wide: true,
         picture: <WornPlate look={current} wearer={wearer()} />,
       });
@@ -107,7 +106,7 @@ export default function ProfileWearing(props: {
       items.push({
         kind: t`Decoration`,
         name: decorationName() ?? labels.decoration(current.decoration),
-        path: designPage("decoration", current.decoration),
+        path: designPage(current.decoration),
         picture: <WornDecoration look={current} wearer={wearer()} />,
       });
     }
