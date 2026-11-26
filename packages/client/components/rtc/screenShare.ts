@@ -64,11 +64,15 @@ export const SCREEN_SHARE_QUALITY_NAMES: ScreenShareQualityName[] = [
   "1080p60",
 ];
 
-/** 360p at 15 FPS: the layer every share offers to weak connections */
+/**
+ * 360p at 30 FPS: the layer every share offers to weak connections. Viewers
+ * also get it for a small tile (adaptive stream picks the layer by the size
+ * shown), so at 15 FPS most of a call watched shares at half speed.
+ */
 const LAYER_360: ScreenShareLayer = {
   width: 640,
   height: 360,
-  encoding: { maxBitrate: 400_000, maxFramerate: 15 },
+  encoding: { maxBitrate: 600_000, maxFramerate: 30 },
 };
 
 /**
@@ -85,12 +89,13 @@ export function screenShareQualities(
   const fps60 = limits.framerate >= 60;
   const allows1080 =
     (maxW === 0 || maxW >= 1920) && (maxH === 0 || maxH >= 1080);
-  const sharp = content === "detail";
   const base = {
     contentHint: content,
-    degradationPreference: (sharp
-      ? "maintain-resolution"
-      : "balanced") as RTCDegradationPreference,
+    // Short of CPU or bandwidth, the encoder lowers the size and keeps the
+    // frame rate. "maintain-resolution" (the old choice for sharp shares)
+    // dropped frames instead, so a share fell well below 30 FPS whenever
+    // the sender was busy; the "detail" hint still keeps text crisp.
+    degradationPreference: "maintain-framerate" as RTCDegradationPreference,
   };
 
   const qualities: Partial<Record<ScreenShareQualityName, ScreenShareQuality>> =

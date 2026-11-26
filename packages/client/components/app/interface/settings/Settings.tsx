@@ -108,6 +108,9 @@ export function Settings(props: SettingsProps & SettingsConfiguration<SettingsCo
   };
   const changeTo = (id: string | undefined) => {
     if (id !== page() && holdBack()) return;
+    // a page picked from the sidebar comes in plainly, not with the sideways
+    // slide left over from the last breadcrumb or sub-page
+    setTransition("normal");
     setPage(id);
   };
   const close = () => {
@@ -257,7 +260,10 @@ export function Settings(props: SettingsProps & SettingsConfiguration<SettingsCo
 // the page is being disposed, i.e. outside any owner, which leaked a
 // computation on every page switch.
 function initialFor(transition: SettingsTransition) {
-  if (transition === "normal") return { opacity: 0, y: 6 };
+  // the content column already glides in on every page change (Content.tsx,
+  // the "settings" motion area): a second rise here moved the page twice,
+  // so opening a page made its content jump
+  if (transition === "normal") return undefined;
   return { x: transition === "to-child" ? "100vw" : "-100vw" };
 }
 

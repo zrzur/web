@@ -579,8 +579,8 @@ const OverlayInner = styled("div", {
     fontSize: "13px",
     fontWeight: 600,
     color: "#fff",
-    background: "rgba(0, 0, 0, .55)",
-    backdropFilter: "blur(6px)",
+    // no backdrop blur: over a playing video it is redone on every frame
+    background: "rgba(0, 0, 0, .65)",
     "--z-icon-color": "currentColor",
   },
 });

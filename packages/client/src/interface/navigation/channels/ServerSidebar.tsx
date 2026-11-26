@@ -1029,14 +1029,15 @@ function Entry(
       }),
     };
   };
-  const canDrop = () => {
+  // worked out once per drag, not on every dragover (many per second)
+  const canDrop = createMemo(() => {
     const dragged = draggedMember();
     return (
       !!dragged?.source &&
       props.channel.isVoice &&
       canDropVoiceParticipant(dragged.source, props.channel, dragged.member)
     );
-  };
+  });
   const dropHandlers = {
     onDragOver(event: DragEvent) {
       if (!canDrop()) return;
@@ -1044,7 +1045,7 @@ function Entry(
       event.preventDefault();
       event.stopPropagation();
       if (event.dataTransfer) event.dataTransfer.dropEffect = "move";
-      setDropHover(true);
+      if (!dropHover()) setDropHover(true);
     },
     onDragLeave(event: DragEvent) {
       const current = event.currentTarget as HTMLElement;

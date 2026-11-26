@@ -7,7 +7,6 @@ import {
   Setter,
   createEffect,
   createSignal,
-  on,
   onCleanup,
   onMount,
   untrack,
@@ -111,12 +110,12 @@ export function Draggable<T>(props: Props<T>) {
       next.some((wrapper, index) => wrapper !== current[index])
     ) {
       setContainerItems(next);
+      // only a new list from outside needs the zone set up again; a drag's
+      // own reorders (every "consider") used to do this too, and each time
+      // the zone went over every row again, twice, which made drags stutter
+      forceRender((revision) => revision + 1);
     }
   });
-
-  createEffect(
-    on(containerItems, () => forceRender((revision) => revision + 1)),
-  );
 
   /**
    * Handle DND event from solid-dnd-directive
@@ -286,6 +285,8 @@ export function Draggable<T>(props: Props<T>) {
 
     element.dataset.dragged = "true";
     element.style.transition = "none";
+    // its own layer: following the pointer repaints nothing else
+    element.style.willChange = "transform";
 
     element.style.marginLeft = `${grabbedAt.x - 3}px`;
     element.style.marginTop = `${grabbedAt.y - 3}px`;
@@ -316,7 +317,11 @@ export function Draggable<T>(props: Props<T>) {
         type: props.type,
         items: containerItems,
         dragDisabled: isDisabled,
-        flipDurationMs: 0,
+        // rows slide to their new place instead of jumping there. The zone
+        // also checks where the pointer is at this pace (never faster than
+        // the slide, or rows bounce): 0 made it measure every row of every
+        // list 50 times a second while dragging
+        flipDurationMs: FLIP_MS,
         morphDisabled: props.dropIndicator,
         useCursorForDetection: true,
         dropAnimationDisabled: true,
@@ -349,6 +354,9 @@ export function Draggable<T>(props: Props<T>) {
     </div>
   );
 }
+
+/** How long a row takes to slide to its new place while dragging */
+const FLIP_MS = 150;
 
 /** Presses a list's finger hold has taken (the inner list of two wins) */
 const pressedHere = new WeakSet<Event>();

@@ -7,8 +7,10 @@ import {
   useTracks,
 } from "solid-livekit-components";
 
+import { createSignal, onCleanup } from "solid-js";
+
 import type { Channel } from "@zrzur/sdk/solid";
-import { Track } from "livekit-client";
+import { type Participant, ParticipantEvent, Track } from "livekit-client";
 
 import { useVoice } from "@revolt/rtc";
 
@@ -55,6 +57,7 @@ function ParticipantLive(props: { channel: Channel }) {
   });
 
   const isSpeaking = useIsSpeaking(participant);
+  const media = usePublishedMedia(participant);
 
   return (
     <CommonUser
@@ -67,9 +70,40 @@ function ParticipantLive(props: { channel: Channel }) {
           .get(participant.identity)
           ?.isReceiving() === false
       }
-      camera={participant.isCameraEnabled}
-      screenshare={participant.isScreenShareEnabled}
+      camera={media().camera}
+      screenshare={media().screenshare}
       isLive
     />
   );
+}
+
+/** Track (un)publish and (un)mute events that change what a participant sends */
+const MEDIA_EVENTS = [
+  ParticipantEvent.TrackPublished,
+  ParticipantEvent.TrackUnpublished,
+  ParticipantEvent.LocalTrackPublished,
+  ParticipantEvent.LocalTrackUnpublished,
+  ParticipantEvent.TrackMuted,
+  ParticipantEvent.TrackUnmuted,
+] as const;
+
+/**
+ * Camera and screen share state of a participant, kept up to date.
+ * `isCameraEnabled` and `isScreenShareEnabled` are plain getters: read once,
+ * they never change, so a stopped screen share kept its icon in the list.
+ */
+function usePublishedMedia(participant: Participant) {
+  const read = () => ({
+    camera: participant.isCameraEnabled,
+    screenshare: participant.isScreenShareEnabled,
+  });
+  const [media, setMedia] = createSignal(read(), {
+    equals: (a, b) => a.camera === b.camera && a.screenshare === b.screenshare,
+  });
+  const update = () => setMedia(read());
+  for (const event of MEDIA_EVENTS) participant.on(event, update);
+  onCleanup(() => {
+    for (const event of MEDIA_EVENTS) participant.off(event, update);
+  });
+  return media;
 }

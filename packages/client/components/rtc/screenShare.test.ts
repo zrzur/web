@@ -60,13 +60,13 @@ describe("screenShareQualities", () => {
     });
   });
 
-  it("text and slides stay sharp, video and games stay smooth", () => {
+  it("text and slides stay sharp, and every share keeps its frame rate", () => {
     const sharp = screenShareQualities(plus, "detail")["1080p60"]!;
     expect(sharp.contentHint).toBe("detail");
-    expect(sharp.degradationPreference).toBe("maintain-resolution");
+    expect(sharp.degradationPreference).toBe("maintain-framerate");
     const smooth = screenShareQualities(plus, "motion")["1080p60"]!;
     expect(smooth.contentHint).toBe("motion");
-    expect(smooth.degradationPreference).toBe("balanced");
+    expect(smooth.degradationPreference).toBe("maintain-framerate");
     // sharp is the default
     expect(screenShareQualities(plus)["720p30"]!.contentHint).toBe("detail");
   });
@@ -126,7 +126,7 @@ describe("capture and publish options", () => {
       screenShareEncoding: { maxBitrate: 5_000_000, maxFramerate: 30 },
       simulcast: true,
       screenShareSimulcastLayers: high.layers,
-      degradationPreference: "maintain-resolution",
+      degradationPreference: "maintain-framerate",
     });
   });
 
@@ -222,7 +222,10 @@ describe("applyQuality", () => {
       { videoTrack: track } as unknown as Parameters<typeof applyQuality>[0],
       motion,
     );
-    expect(calls).toEqual(["apply dims=undefined", "degradation balanced"]);
+    expect(calls).toEqual([
+      "apply dims=undefined",
+      "degradation maintain-framerate",
+    ]);
     expect(track.applyScreenShareConstraints).toHaveBeenCalledWith(
       {
         resolution: { width: 1920, height: 1080, frameRate: 60 },
