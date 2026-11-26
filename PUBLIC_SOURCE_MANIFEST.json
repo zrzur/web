@@ -2716,8 +2716,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/StyleEditors.tsx",
-      "sha256": "b83a85fba013e918ab2374f70d62db6316a3e1a307835a0026302efb3d559b48",
-      "bytes": 56620,
+      "sha256": "61eefbc3b77015eda7f901b3dfcc67c3bed280c5772ad1cabac850fe152681b7",
+      "bytes": 56617,
       "category": "product-source-or-build-manifest"
     },
     {
