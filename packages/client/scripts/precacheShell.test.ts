@@ -101,20 +101,20 @@ describe("precache shell", () => {
     );
   });
 
-  // 2,050,000 for 26.2.0-beta.1 only (scripts/precacheShell.mjs)
-  it("stops the build when the shell grows past 2,050,000 bytes", () => {
+  // 2,060,000 for the 26.3.0 beta only (scripts/precacheShell.mjs)
+  it("stops the build when the shell grows past 2,060,000 bytes", () => {
     const { plugin, manifestTransform } = precacheShell();
     plugin.generateBundle({}, bundle);
     expect(() =>
       manifestTransform([
         { url: "assets/index.js", revision: null, size: 1_550_000 },
-        { url: "assets/shared.js", revision: null, size: 500_001 },
+        { url: "assets/shared.js", revision: null, size: 510_001 },
       ]),
-    ).toThrow(/2,050,001 bytes/);
+    ).toThrow(/2,060,001 bytes/);
     expect(
       manifestTransform([
         { url: "assets/index.js", revision: null, size: 1_550_000 },
-        { url: "assets/shared.js", revision: null, size: 500_000 },
+        { url: "assets/shared.js", revision: null, size: 510_000 },
         // outside the shell: not counted
         { url: "assets/messages-ar.js", revision: null, size: 900_000 },
       ]).manifest,

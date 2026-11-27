@@ -19,7 +19,11 @@ const POLYFILLS = /(^|\/)polyfills-[^/]+\.js$/;
 // 26.1.0-beta.5: the merged release came to 2,016,360 bytes (+16 KB from eight new features,
 // spread thin: no single import to make lazy). Raised for this test release only; bring it
 // back under 2,000,000 in 26.1.1 (owner's decision, listed in the release report).
-const MAX_SHELL_BYTES = 2_050_000;
+// 26.3.0 beta (2026-11-27): the shell measured 2,050,009 bytes after Discord-style formatting,
+// built-in commands and @here; raised by 10 KB for this beta (owner's decision). The
+// measurement leaves out src/Interface.tsx (a dynamic entry with no facade chunk, about
+// 250 KB with its imports): counting it and setting the limit from the real size is open.
+const MAX_SHELL_BYTES = 2_060_000;
 
 /** Output files of the shell, from a Rollup output bundle */
 export function shellFiles(bundle) {
