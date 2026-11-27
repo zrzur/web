@@ -7,13 +7,9 @@ import { unified } from "unified";
 import { describe, expect, it } from "vitest";
 
 import { remarkInsertBreaks, sanitise } from "../sanitise";
+import { ansiRuns, rehypeCodeTones } from "./codeTones";
 import { remarkHtmlToText } from "./htmlToText";
-import {
-  ansiRuns,
-  remarkCodeTones,
-  remarkSubtext,
-  remarkUnderline,
-} from "./textMarks";
+import { remarkSubtext, remarkUnderline } from "./textMarks";
 
 // the message pipeline, in the order the app uses it
 const pipeline = unified()
@@ -22,9 +18,9 @@ const pipeline = unified()
   .use(remarkGfm)
   .use(remarkUnderline)
   .use(remarkSubtext)
-  .use(remarkCodeTones)
   .use(remarkHtmlToText)
   .use(remarkRehype)
+  .use(rehypeCodeTones)
   .use(remarkInsertBreaks)
   .use(rehypeStringify);
 

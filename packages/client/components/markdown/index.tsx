@@ -36,11 +36,7 @@ import {
   remarkSpoiler,
   spoilerHandler,
 } from "./plugins/spoiler";
-import {
-  remarkCodeTones,
-  remarkSubtext,
-  remarkUnderline,
-} from "./plugins/textMarks";
+import { remarkSubtext, remarkUnderline } from "./plugins/textMarks";
 import {
   RenderTimestamp,
   remarkTimestamps,
@@ -251,7 +247,6 @@ export const UNIFIED_PLUGINS = [
 const HTML_UNIFIED_PLUGINS = [
   remarkUnderline,
   remarkSubtext,
-  remarkCodeTones,
   remarkMentions,
   remarkTimestamps,
   remarkCommandMentions,
@@ -293,29 +288,40 @@ let richLoading: Promise<void> | undefined;
  */
 function loadRichMarkdown() {
   richLoading ??= import("./richPlugins")
-    .then(({ common, rehypeHighlight, rehypeKatex, remarkMath }) => {
-      richPipeline = htmlPipeline
-        .copy()
-        // a parser extension: it takes effect at parse time whatever its place
-        .use(remarkMath, {
-          // TODO: fork for \[\] support
-          singleDollarTextMath: false,
-        })
-        .use(rehypeKatex, {
-          maxSize: 10,
-          maxExpand: 2,
-          trust: false,
-          strict: false,
-          output: "html",
-          errorColor: "var(--md-sys-color-error)",
-        })
-        .use(rehypeHighlight, {
-          // ~37 everyday languages instead of all ~190: "all" added 1.5 MB.
-          // Anything else still shows as a plain code block.
-          languages: common,
-        }) as unknown as typeof htmlPipeline;
-      setRichReady(true);
-    })
+    .then(
+      ({
+        common,
+        rehypeCodeTones,
+        rehypeHighlight,
+        rehypeKatex,
+        remarkMath,
+      }) => {
+        richPipeline = htmlPipeline
+          .copy()
+          // a parser extension: it takes effect at parse time whatever its place
+          .use(remarkMath, {
+            // TODO: fork for \[\] support
+            singleDollarTextMath: false,
+          })
+          .use(rehypeKatex, {
+            maxSize: 10,
+            maxExpand: 2,
+            trust: false,
+            strict: false,
+            output: "html",
+            errorColor: "var(--md-sys-color-error)",
+          })
+          // ansi and fix blocks are coloured here; the highlighter knows
+          // neither language and leaves them as they are
+          .use(rehypeCodeTones)
+          .use(rehypeHighlight, {
+            // ~37 everyday languages instead of all ~190: "all" added 1.5 MB.
+            // Anything else still shows as a plain code block.
+            languages: common,
+          }) as unknown as typeof htmlPipeline;
+        setRichReady(true);
+      },
+    )
     .catch(() => {
       // offline: shown without maths and highlighting, tried again later
       richLoading = undefined;
