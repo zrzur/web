@@ -36430,14 +36430,14 @@
     },
     {
       "path": "packages/client/scripts/precacheShell.mjs",
-      "sha256": "3fd6971d3405602682e41e7ad8a246006a95c6c689ae43a3588e0dd2c16957af",
-      "bytes": 3071,
+      "sha256": "7a129b9afe558d12eecdb1b70db7813326cdb503df0b6d317b6c20ae874c8fba",
+      "bytes": 3433,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/precacheShell.test.ts",
-      "sha256": "d69ceee3eab65b48f6d8db4591381eba9c03968cba736f09885649385bd8b87f",
-      "bytes": 3870,
+      "sha256": "7919f28462ab9366aa4068e5264a0afbb7d57135d63397162f40461b276833f7",
+      "bytes": 3872,
       "category": "synthetic-test-source-or-fixture"
     },
     {
