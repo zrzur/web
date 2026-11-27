@@ -4930,8 +4930,8 @@
     },
     {
       "path": "packages/client/components/markdown/index.tsx",
-      "sha256": "3209336854f3c894e8882e2082c70c1c034c16379cd71e04b94837cecf7b0ba8",
-      "bytes": 12415,
+      "sha256": "16d98aaa52ab845b28d9b8a0e92e892a9fa29fdec87497639fe9f25f00f1e72a",
+      "bytes": 12657,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4968,6 +4968,12 @@
       "path": "packages/client/components/markdown/plugins/channels.tsx",
       "sha256": "04ed425db81156466cb6b089057ff3ddf277759a68b028bd11217bedebfeb8ca",
       "bytes": 902,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/markdown/plugins/codeTones.ts",
+      "sha256": "722c620b66d686bdcc0e60663c8c45ad595212334cbed02740e60b26f7254c03",
+      "bytes": 3529,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5038,14 +5044,14 @@
     },
     {
       "path": "packages/client/components/markdown/plugins/textMarks.test.ts",
-      "sha256": "74422c8f2b6c1a357f9423d908a22124683af7221af5de6c953667947562fe34",
-      "bytes": 4092,
+      "sha256": "353983a025f4f70608209238a77e5dd1a7915b1d79e2e75715b686ce77da8fb4",
+      "bytes": 4113,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/markdown/plugins/textMarks.ts",
-      "sha256": "d9eca06421c9c192062c5152018c05c7798492d04f342fc2efc77f4c8db9735c",
-      "bytes": 5578,
+      "sha256": "e174fde67ca0639bdda8bab04d8c2c1f5c2e90db0fa982407376054950539a20",
+      "bytes": 2886,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5104,8 +5110,8 @@
     },
     {
       "path": "packages/client/components/markdown/richPlugins.ts",
-      "sha256": "11d98223e8456f8ef0c7abd3a85d02d1b88d4758c8481f5acf3bf8bcd21d07cd",
-      "bytes": 393,
+      "sha256": "e7391e5ab70e870ea4c1d80198a60f8547dd5f58387810c807ca094a94b8e5f2",
+      "bytes": 470,
       "category": "product-source-or-build-manifest"
     },
     {
