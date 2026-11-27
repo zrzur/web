@@ -43,6 +43,7 @@ import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import {
+  applyBuiltin,
   CommandPicker,
   runActiveCommand,
 } from "@revolt/app/interface/channels/text/interactions";
@@ -322,6 +323,13 @@ export function MessageComposition(props: Props) {
     } else if (props.channel.userSlowmode()) {
       return;
     }
+    // the app's own commands (/shrug, /me…) change the text first; one
+    // that needs text and has none sends nothing
+    const own =
+      typeof useContent === "string"
+        ? undefined
+        : applyBuiltin(draft()?.content ?? "");
+    if (own === "") return;
     stopTyping();
     props.onMessageSend?.();
     // writing to a bot first works like Start: the Start screen goes
@@ -349,6 +357,9 @@ export function MessageComposition(props: Props) {
       });
     }
 
+    if (own !== undefined) {
+      state.draft.setDraft(props.channel.id, { ...draft(), content: own });
+    }
     state.draft.sendDraft(client(), props.channel);
   }
 

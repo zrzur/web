@@ -1,4 +1,4 @@
-import { For, JSX, Match, Show, Switch } from "solid-js";
+import { For, JSX, Match, Show, Switch, createMemo } from "solid-js";
 
 import { styled } from "styled-system/jsx";
 
@@ -17,41 +17,45 @@ interface Props {
  * Inspired by Windows Fluent settings menus
  */
 export function Breadcrumbs(props: Props) {
+  // one step per part of the address that has a name of its own: a part
+  // that only groups others (`apps/bot/{id}`: "bot") is left out, or it
+  // showed as an empty step between two arrows
+  const steps = createMemo(() =>
+    props.elements
+      .map((_, index) => {
+        const key = props.elements.slice(0, index + 1).join("/");
+        return { key, label: props.renderElement(key) };
+      })
+      .filter(
+        (step, index) =>
+          index === props.elements.length - 1 ||
+          (step.label !== "" &&
+            step.label !== undefined &&
+            step.label !== null),
+      ),
+  );
+
   return (
     <Base wrap align>
-      <For each={props.elements}>
-        {(element, index) => {
-          /**
-           * Segments of path
-           */
-          const segments = () => props.elements.slice(0, index() + 1);
-
-          /**
-           * Navigate to page
-           */
-          const navigate = () => props.navigate(segments());
-
-          return (
-            <>
-              <Show when={index() !== 0}>
-                <Icon name="caret-right" size={12} />
-              </Show>
-              <Switch
-                fallback={
-                  <Unselected onClick={navigate}>
-                    {props.renderElement(segments().join("/"))}
-                  </Unselected>
-                }
-              >
-                <Match when={index() === props.elements.length - 1}>
-                  <Selected>
-                    {props.renderElement(segments().join("/"))}
-                  </Selected>
-                </Match>
-              </Switch>
-            </>
-          );
-        }}
+      <For each={steps()}>
+        {(step, index) => (
+          <>
+            <Show when={index() !== 0}>
+              <Icon name="caret-right" size={12} />
+            </Show>
+            <Switch
+              fallback={
+                <Unselected onClick={() => props.navigate(step.key.split("/"))}>
+                  {step.label}
+                </Unselected>
+              }
+            >
+              <Match when={index() === steps().length - 1}>
+                <Selected>{step.label}</Selected>
+              </Match>
+            </Switch>
+          </>
+        )}
       </For>
     </Base>
   );

@@ -42,6 +42,8 @@ The header `X-Audit-Log-Reason` puts a reason in the audit log. It works on ever
 
 `GET /servers/{target}/audit_logs` lists who did what. Actions done by your bot appear with the bot as the actor.
 
+Filter it with `user` (who acted), `target` (who or what it was done to), `type` (the action), `before` and `after` (entry ids) and `limit`. Page backwards with `before` set to the oldest id you got.
+
 ## Bans {#bans}
 
 `GET /servers/{target}/bans` lists the bans with the banned users; `DELETE /servers/{target}/bans/{user_id}` lifts one. Bans need Ban Members. A banned user cannot join again until the ban is lifted.
@@ -49,10 +51,6 @@ The header `X-Audit-Log-Reason` puts a reason in the audit log. It works on ever
 ## Join requests {#join-requests}
 
 A server that lets people in only after a look (`access`) keeps their requests. With Manage Join Requests a bot can work through them: `GET /servers/{target}/join_requests` lists the pending ones, oldest first, with the lobby answers; `POST /servers/{target}/join_requests/{applicant}/approve` makes the person a member, `.../reject` refuses them. Approving fails when someone else decided already, or when the person can't join (banned, a full server, age). The applicant's own routes (`GET` and `DELETE /servers/{target}/join_requests/@me`) are for people.
-
-## Audit log {#audit-log-filters}
-
-`GET /servers/{target}/audit_logs` takes `user` (who acted), `target` (who or what it was done to), `type` (the action), `before` and `after` (entry ids) and `limit`. Page backwards with `before` set to the oldest id you got.
 
 ## Keeping a server safe {#safety}
 

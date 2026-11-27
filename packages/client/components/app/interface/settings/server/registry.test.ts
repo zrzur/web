@@ -12,9 +12,15 @@ import {
 
 describe("server settings registry", () => {
   it("opens the new page and section for every old id", () => {
-    expect(resolvePage("discover")).toBe("overview#discovery");
-    expect(resolvePage("lobby")).toBe("joining/lobby");
+    expect(resolvePage("discover")).toBe("discovery");
+    expect(resolvePage("joining/lobby")).toBe("lobby");
     expect(resolvePage("access/requests")).toBe("joining/requests");
+    expect(resolvePage("danger")).toBe("overview#danger");
+    expect(resolvePage("filters")).toBe("safety#filters");
+    expect(resolvePage("bans")).toBe("members#bans");
+    expect(resolvePage("emoji#soundboard")).toBe("soundboard");
+    expect(resolvePage("sounds")).toBe("soundboard");
+    expect(resolvePage("newcomers#questions")).toBe("joining#questions");
     expect(resolvePage("log")).toBe("log");
     for (const target of Object.values(ALIASES)) {
       const { page, section } = splitAddress(target);
@@ -32,9 +38,9 @@ describe("server settings registry", () => {
       SECTIONS.filter((s) => matchesSearch(sectionKeywords(s), query)).map(
         (s) => `${s.page}#${s.id}`,
       );
-    expect(find("custom invite")).toContain("overview#invites");
-    expect(find("رابط دعوة")).toContain("overview#invites");
-    expect(find("einladungslink")).toContain("overview#invites");
+    expect(find("custom invite")).toContain("invites#invites");
+    expect(find("رابط دعوة")).toContain("invites#invites");
+    expect(find("einladungslink")).toContain("invites#invites");
     expect(find("verification")).toContain("joining#verification");
     expect(find("التحقق")).toContain("joining#verification");
     expect(find("überprüfung")).toContain("joining#verification");
@@ -50,6 +56,6 @@ describe("server settings registry", () => {
   it("matches a page by anything in it", () => {
     expect(matchesSearch(pageKeywords("safety"), "automod")).toBe(true);
     expect(matchesSearch(pageKeywords("apps"), "webhooks")).toBe(true);
-    expect(matchesSearch(pageKeywords("bans"), "automod")).toBe(false);
+    expect(matchesSearch(pageKeywords("members"), "automod")).toBe(false);
   });
 });

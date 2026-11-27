@@ -52,7 +52,7 @@ The first message follows the rules of every message your bot sends:
 
 - It takes `content` (up to 2000 characters), `embeds` and `components`. Other message fields, such as `attachments`, are ignored without an error. Embeds need Send Embeds. A forum post still needs `content`.
 - Send Messages and the mention rules apply. A role mention without Mention Roles, or `@everyone` without Mention Everyone, refuses the whole call with `403 MissingPermission`, and no thread is kept. The thread is made first and removed again, so your bot can get `ChannelCreate` and then `ChannelDelete` for it. Start the thread without the ping, then ping in a second message.
-- On a self-hosted server whose operator set `mass_mentions_enabled = false`, role, `@everyone` and `@online` mentions are not refused: the message is sent and nobody is notified.
+- On a self-hosted server whose operator set `mass_mentions_enabled = false`, role, `@everyone` and `@here` mentions are not refused: the message is sent and nobody is notified.
 
 A card with buttons can be the first message of a thread:
 

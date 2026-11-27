@@ -32,6 +32,7 @@ import { Markdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { Navigate, useNavigate, useParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
+import type { LobbyStep } from "@revolt/state/stores/LobbySteps";
 import { Avatar, Header, UserStatus } from "@revolt/ui";
 import { SlideState } from "@revolt/ui/components/navigation/SlideDrawer";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -45,30 +46,33 @@ const WEEK = 7 * 24 * 60 * 60 * 1000;
 /** Sections about people and right now, beside the reading column */
 const SIDE: LobbySection[] = ["Live", "Newcomers", "Team"];
 
-type StepId = "rules" | "hello" | "voice" | "profile";
+type StepId = LobbyStep;
 
-/** Steps this member finished, kept on this device only */
+/**
+ * Steps this member finished in a server: kept with the account (synced
+ * settings), so they stay done on every device and after signing in again.
+ * What this device had saved before (on its own) is carried over once.
+ */
 function useSteps(serverId: string) {
-  const key = `zrzur:lobby-steps:${serverId}`;
-  const read = (): StepId[] => {
-    try {
-      return JSON.parse(localStorage.getItem(key) ?? "[]");
-    } catch {
-      return [];
-    }
+  const state = useState();
+  const store = state["lobby-steps"];
+
+  // the old place: this device only
+  const legacyKey = `zrzur:lobby-steps:${serverId}`;
+  try {
+    const legacy = JSON.parse(
+      localStorage.getItem(legacyKey) ?? "[]",
+    ) as StepId[];
+    for (const step of legacy) store.mark(serverId, step);
+    localStorage.removeItem(legacyKey);
+  } catch {
+    // nothing kept here, or storage is off
+  }
+
+  return {
+    done: () => store.done(serverId),
+    mark: (step: StepId) => store.mark(serverId, step),
   };
-  const [done, setDone] = createSignal<StepId[]>(read());
-  const mark = (step: StepId) => {
-    if (done().includes(step)) return;
-    const next = [...done(), step];
-    setDone(next);
-    try {
-      localStorage.setItem(key, JSON.stringify(next));
-    } catch {
-      // private mode: the tick lasts for this visit
-    }
-  };
-  return { done, mark };
 }
 
 /**
@@ -290,10 +294,10 @@ function Lobby(props: { server: Server }) {
         .catch(() => undefined),
   );
 
-  // members: for the team and this week's arrivals
+  // every member: only for the team (who holds the staff roles)
   const [members] = createResource(
     () =>
-      (shows("Team") && lobby().staff_roles?.length) || shows("Newcomers")
+      shows("Team") && lobby().staff_roles?.length
         ? props.server.id
         : undefined,
     () =>
@@ -302,11 +306,21 @@ function Lobby(props: { server: Server }) {
         .then((r) => r.members)
         .catch(() => [] as ServerMember[]),
   );
+  // this week's arrivals: the newest members alone, one request however
+  // big the server (it used to load every member for this)
+  const [newest] = createResource(
+    () => (shows("Newcomers") ? props.server.id : undefined),
+    () =>
+      props.server
+        .fetchNewestMembers(100)
+        .then((r) => r.members)
+        .catch(() => [] as ServerMember[]),
+  );
   // the server's count is a snapshot from load; the fetched list is current
   const memberCount = () =>
     Math.max(props.server.approximateMemberCount, members()?.length ?? 0);
   const newcomers = createMemo(() =>
-    (members() ?? [])
+    (newest() ?? [])
       .filter((m) => now() - m.joinedAt.getTime() < WEEK && !m.user?.bot)
       .sort((a, b) => b.joinedAt.getTime() - a.joinedAt.getTime()),
   );
@@ -1047,16 +1061,23 @@ const Hero = styled("header", {
   },
 });
 
-/** A shallow banner crop keeps the community content above the fold. */
+/**
+ * The server's banner as a wide strip: more of it than the old 208 px crop
+ * showed, never the whole page (owner, 2026-11-27: whole was far too big).
+ * A height chosen in the lobby design wins.
+ */
 const BannerFrame = styled("div", {
   base: {
     position: "relative",
-    height: "var(--lobby-banner-height, 208px)",
+    aspectRatio: "3 / 1",
+    maxHeight: "320px",
+    height: "var(--lobby-banner-height, auto)",
     width: "100%",
     borderRadius: "var(--lobby-radius, 14px)",
     overflow: "hidden",
     background: "var(--z-bg-chat)",
     boxShadow: "var(--z-card-lift)",
+
     "& img": {
       display: "block",
       width: "100%",
@@ -1064,7 +1085,6 @@ const BannerFrame = styled("div", {
       objectFit: "cover",
       objectPosition: "center",
     },
-    _phone: { height: "clamp(100px, var(--lobby-banner-height), 180px)" },
   },
 });
 

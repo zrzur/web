@@ -545,19 +545,17 @@ const IconBtn = styled("button", {
   base: {
     display: "grid",
     placeItems: "center",
-    width: "36px",
-    height: "36px",
+    // the settings' one quiet icon button: colour only, no shape behind
+    width: "32px",
+    height: "32px",
     padding: 0,
     border: "none",
-    borderRadius: "8px",
+    borderRadius: "6px",
     background: "transparent",
     color: "var(--z-fg-muted)",
     "--z-icon-color": "currentColor",
     cursor: "pointer",
-    _hover: {
-      color: "var(--z-fg-primary)",
-      background: "var(--z-nav-hover)",
-    },
+    _hover: { color: "var(--z-fg-primary)" },
     _focusVisible: {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",

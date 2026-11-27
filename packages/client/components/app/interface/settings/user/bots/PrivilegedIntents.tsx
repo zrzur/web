@@ -122,10 +122,8 @@ export function PrivilegedIntents(props: {
       title={<Trans>Privileged intents</Trans>}
       description={
         <Trans>
-          Turn these on only if your bot needs them. Without them it still works
-          with commands, buttons and messages that mention it. A switch is saved
-          at once and applies from the bot's next connection to the gateway:
-          restart or reconnect your bot.
+          Turn on only what your bot needs. A change applies from the bot's next
+          connection.
         </Trans>
       }
     >

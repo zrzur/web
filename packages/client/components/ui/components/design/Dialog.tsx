@@ -51,6 +51,11 @@ export interface DialogAction {
     | "text"
     // a secondary button with a warning label (Report)
     | "warning";
+  /**
+   * "start": the action stands apart at the row's start (Report), the rest
+   * keep together at its end
+   */
+  placement?: "start";
 }
 
 /**
@@ -70,26 +75,12 @@ export type DialogTone =
   | "info"
   | "premium";
 
-/** Default icon of each tone (iconName overrides it) */
-const TONE_ICON: Record<DialogTone, IconName> = {
-  danger: "trash",
-  create: "plus",
-  invite: "user-plus",
-  edit: "pencil-simple",
-  settings: "sliders-horizontal",
-  security: "shield-check",
-  warning: "warning",
-  success: "check-circle",
-  info: "info",
-  premium: "sparkle",
-};
-
 type Props = DialogProps & {
   /** @deprecated dialogs show no header icon any more; use `tone` */
   icon?: JSX.Element;
-  /** What the dialog is about: sets the icon in the main action */
+  /** What the dialog is about: a danger dialog's main action is red */
   tone?: DialogTone;
-  /** A more specific icon for the tone (e.g. "sign-out" for leaving) */
+  /** @deprecated buttons show no icon any more */
   iconName?: IconName;
   title?: JSX.Element;
   /** Short supporting copy under the title */
@@ -315,25 +306,9 @@ export function Dialog(props: Props) {
     return "text" as const;
   };
 
-  /*
-   * The tone's icon rides inside the dialog's main action (the last
-   * primary / destructive / success button), next to its label: the
-   * trash in Delete, the plus in Create, the person in Invite.
-   */
-  const actionIcon = (action: DialogAction, index: number) => {
-    if (!props.tone || action.isLoading) return;
-    if (index !== actions().length - 1) return;
-    const variant = actionVariant(action, index);
-    if (variant === "text" || variant === "secondary" || variant === "warning")
-      return;
-    return (
-      <Icon
-        name={props.iconName ?? TONE_ICON[props.tone]}
-        size={16}
-        styleVariant="outline"
-      />
-    );
-  };
+  // The buttons carry words only, as a system dialog's do: the tone still
+  // makes a danger dialog's main action red (owner, 2026-11-27: icons in
+  // the buttons looked machine-made)
 
   /** The buttons of the actions, in the order given */
   const actionButtons = () => (
@@ -343,6 +318,7 @@ export function Dialog(props: Props) {
           variant={buttonVariant(actionVariant(action, index()))}
           size="md"
           shape="square"
+          data-start={action.placement === "start" || undefined}
           aria-busy={action.isLoading || undefined}
           onPress={() => {
             if (action.isDisabled || action.isLoading) return;
@@ -360,7 +336,6 @@ export function Dialog(props: Props) {
           <Show when={action.isLoading}>
             <Spinner aria-hidden="true" />
           </Show>
-          {actionIcon(action, index())}
           <Show when={action.variant === "warning"} fallback={action.text}>
             <WarningLabel>{action.text}</WarningLabel>
           </Show>
@@ -607,6 +582,17 @@ const Container = styled("div", {
 
     display: "flex",
     flexDirection: "column",
+    // a body that fits the window (data-dialog-fill): its own parts share the
+    // height instead of the whole body scrolling
+    "& > [data-dialog-body]:has(> [data-dialog-fill])": {
+      display: "flex",
+      flexDirection: "column",
+    },
+    // and the dialog follows the window's height, up to a size that still
+    // reads as a dialog (the whole height of a tall screen was too much)
+    "&:has(> [data-dialog-body] > [data-dialog-fill])": {
+      maxHeight: "min(calc(100dvh - 96px), 680px)",
+    },
 
     color: "var(--z-fg-primary)",
     background:
@@ -928,8 +914,12 @@ const Actions = styled("div", {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
-    flexWrap: "wrap",
+    // one row, never two: a dialog with more to offer puts it in its body
+    flexWrap: "nowrap",
     marginBlockStart: "20px",
+    "& > button": { flexShrink: 0, whiteSpace: "nowrap" },
+    // an action that stands apart (Report) keeps to the row's start
+    "& > button[data-start]": { marginInlineEnd: "auto" },
     // phones: full-width buttons, the primary on top of the others
     _phone: {
       flexDirection: "column-reverse",

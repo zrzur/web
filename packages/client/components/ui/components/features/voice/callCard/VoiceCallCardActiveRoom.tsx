@@ -229,10 +229,7 @@ function Participants() {
     return `max(${TILE_MIN_WIDTH}, ${vidWidth}% - var(--gap-md))`;
   };
 
-  // Clear out any focus when the track that was focused is no longer available.
-  createEffect(() => {
-    if (!voice.focusTrack()) voice.toggleFocus();
-  });
+  // a focus whose track left ends by itself (rtc/state.tsx: focusId)
 
   onMount(() => {
     createResizeObserver(callRef, ({ width, height }, el) => {

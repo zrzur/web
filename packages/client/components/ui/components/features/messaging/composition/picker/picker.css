@@ -284,6 +284,12 @@
 .z-gif-tile:focus-visible .z-gif-send-label {
   opacity: 1;
 }
+/* touch: say that a tap sends it */
+@media (hover: none) {
+  .z-gif-send-label {
+    opacity: 1;
+  }
+}
 .z-gif-preview-failed {
   min-height: 120px;
   display: flex;

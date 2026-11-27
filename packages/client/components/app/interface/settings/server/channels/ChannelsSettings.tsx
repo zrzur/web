@@ -123,12 +123,7 @@ export function ChannelsSettings(props: { server: Server; voice?: boolean }) {
             <Trans>
               How many people fit in each room and who is talking right now.
             </Trans>
-          ) : (
-            <Trans>
-              Every channel by category. Change slow mode and room size here;
-              the gear opens all settings of a channel.
-            </Trans>
-          )
+          ) : undefined
         }
         aside={
           <Show when={canManage()}>

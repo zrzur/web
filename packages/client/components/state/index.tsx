@@ -26,6 +26,7 @@ import { Experiments } from "./stores/Experiments";
 import { Keybinds } from "./stores/Keybinds";
 import { Layout } from "./stores/Layout";
 import { LinkSafety } from "./stores/LinkSafety";
+import { LobbySteps } from "./stores/LobbySteps";
 import { Locale } from "./stores/Locale";
 import { Motion } from "./stores/Motion";
 import { NotificationOptions } from "./stores/NotificationOptions";
@@ -87,6 +88,7 @@ export class State {
   keybinds = new Keybinds(this);
   layout = new Layout(this);
   collectibles = new Collectibles(this);
+  "lobby-steps" = new LobbySteps(this);
   linkSafety = new LinkSafety(this);
   locale = new Locale(this);
   motion = new Motion(this);
@@ -248,7 +250,10 @@ export class State {
         (await diskGet(store.getKey()));
 
       if (pending) {
-        this.write(store.getKey(), store.clean(pending as Parameters<typeof store.clean>[0]));
+        this.write(
+          store.getKey(),
+          store.clean(pending as Parameters<typeof store.clean>[0]),
+        );
       } else if (data) {
         // validated; a cleaned copy is saved here only, never sent to sync
         applySaved(

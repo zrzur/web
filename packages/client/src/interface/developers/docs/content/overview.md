@@ -2,7 +2,7 @@
 
 A bot is a Zrzur account that a program controls. It sits in servers like a member, reads and sends messages, answers slash commands, shows buttons and forms, moderates, posts files and can join voice channels. People install it; your code runs on your own computer or server.
 
-These pages are all you need. Start with [Start your bot](/developers/docs/getting-started), then build the [complete bot](/developers/docs/tutorial-full-bot).
+Start with [Start your bot](/developers/docs/getting-started), then build the [complete bot](/developers/docs/tutorial-full-bot).
 
 ## How a bot works {#how-a-bot-works}
 
@@ -20,14 +20,26 @@ These pages are all you need. Start with [Start your bot](/developers/docs/getti
 5. [Messages](/developers/docs/messages), [Roles and permissions](/developers/docs/roles), [Moderation](/developers/docs/moderation).
 6. [Errors](/developers/docs/errors), [Rate limits](/developers/docs/rate-limits), [Keeping tokens safe](/developers/docs/security), [Running in production](/developers/docs/production).
 
+## Everything you need {#resources}
+
+| What             | For                                                                      | Where                                                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Developer Portal | Make the application, get the token, install the bot                     | [My applications](/developers)                                                                                                                        |
+| `@zrzur/sdk`     | Bots in JavaScript or TypeScript: commands, buttons, the gateway         | `npm install @zrzur/sdk` · [npm](https://www.npmjs.com/package/@zrzur/sdk) · [source](https://github.com/zrzur/sdk-js) · [SDKs](/developers/docs/sdk) |
+| Bot API document | Every route a bot can use, as OpenAPI 3.0: make a client in any language | [bot-api.openapi.json](/developers/bot-api.openapi.json) · [Other languages](/developers/docs/sdk#other-languages)                                    |
+| Gateway schema   | Every event and what a bot can send, as JSON Schema                      | `GET /gateway/schema` · [Event reference](/developers/docs/events)                                                                                    |
+| Whole API        | Every route, the app's own too                                           | `GET /openapi.json`                                                                                                                                   |
+| Changes          | What changed and what is coming, dated                                   | [API changelog](/developers/docs/changelog) · [RSS feed](/developers/api-changelog.xml)                                                               |
+| Status           | What bots can and cannot use yet                                         | [Status and coverage](/developers/docs/coverage)                                                                                                      |
+
 ## Base URLs {#base-urls}
 
-| Service             | URL                     |
-| ------------------- | ----------------------- |
-| REST API            | `https://api.zrzur.com` |
-| Gateway (WebSocket) | `wss://events.zrzur.com`    |
-| Files               | `https://cdn.zrzur.com` |
-| Voice (LiveKit)     | `wss://voice.zrzur.com` |
+| Service             | URL                      |
+| ------------------- | ------------------------ |
+| REST API            | `https://api.zrzur.com`  |
+| Gateway (WebSocket) | `wss://events.zrzur.com` |
+| Files               | `https://cdn.zrzur.com`  |
+| Voice (LiveKit)     | `wss://voice.zrzur.com`  |
 
 Self-hosted servers use their own addresses. `GET /` on the API returns them, with the limits of that server. Read these fields (the answer has more; this one is shortened):
 
@@ -41,29 +53,40 @@ Self-hosted servers use their own addresses. `GET /` on the API returns them, wi
     "january": { "enabled": true, "url": "https://api.zrzur.com/january" },
     "livekit": {
       "enabled": true,
-      "nodes": [{ "name": "fra", "lat": 50.11, "lon": 8.68, "public_url": "wss://voice.zrzur.com" }]
+      "nodes": [
+        {
+          "name": "fra",
+          "lat": 50.11,
+          "lon": 8.68,
+          "public_url": "wss://voice.zrzur.com"
+        }
+      ]
     },
     "webhooks": false,
     "forwarding": false,
     "polls": false,
     "server_events": false,
     "limits": {
-      "default": { "message_length": 2000, "message_attachments": 5, "file_upload_size_limits": { "attachments": 20000000 } }
+      "default": {
+        "message_length": 2000,
+        "message_attachments": 5,
+        "file_upload_size_limits": { "attachments": 20000000 }
+      }
     }
   }
 }
 ```
 
-| Field                              | What it is                                   |
-| ---------------------------------- | -------------------------------------------- |
-| `zrzur`                            | Version of the server; see the [API changelog](/developers/docs/changelog) |
-| `ws`                               | Gateway address                              |
-| `features.autumn.url`              | File server: uploads and downloads           |
-| `features.january.url`             | Media proxy for link previews                |
-| `features.livekit.nodes[].public_url` | Voice server                              |
-| `features.limits.default`          | Limits of an account, such as message length |
+| Field                                                                                  | What it is                                                                                                                                                                                        |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `zrzur`                                                                                | Version of the server; see the [API changelog](/developers/docs/changelog)                                                                                                                        |
+| `ws`                                                                                   | Gateway address                                                                                                                                                                                   |
+| `features.autumn.url`                                                                  | File server: uploads and downloads                                                                                                                                                                |
+| `features.january.url`                                                                 | Media proxy for link previews                                                                                                                                                                     |
+| `features.livekit.nodes[].public_url`                                                  | Voice server                                                                                                                                                                                      |
+| `features.limits.default`                                                              | Limits of an account, such as message length                                                                                                                                                      |
 | `features.webhooks`, `features.forwarding`, `features.polls`, `features.server_events` | Whether this installation has webhooks, message forwarding, polls and scheduled events switched on. Where one is `false`, its routes answer `FeatureDisabled` (webhook addresses: `404 NotFound`) |
-| `app`                              | Web app, for links you show people           |
+| `app`                                                                                  | Web app, for links you show people                                                                                                                                                                |
 
 ```endpoints getting-started
 

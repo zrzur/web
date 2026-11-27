@@ -121,6 +121,21 @@ export const Sidebar = (props: {
   // it reloads the page)
   const updateRow = () => !!pendingUpdate() && !voice.channel();
 
+  // Worked out once per change: as plain props they ran again on every
+  // read (the unread list three times), each time over every channel
+  const orderedServers = createMemo(() =>
+    state.ordering.orderedServers(client()),
+  );
+  const orderedEntries = createMemo(() =>
+    state.ordering.orderedEntries(client()),
+  );
+  const unreadConversations = createMemo(() =>
+    // TODO: muting channels
+    state.ordering
+      .orderedConversations(client())
+      .filter((channel) => channel.unread),
+  );
+
   return (
     <MainBar
       class="main_bar"
@@ -131,15 +146,10 @@ export const Sidebar = (props: {
       }}
     >
       <ServerList
-        orderedServers={state.ordering.orderedServers(client())}
-        orderedEntries={state.ordering.orderedEntries(client())}
+        orderedServers={orderedServers()}
+        orderedEntries={orderedEntries()}
         setServerOrder={state.ordering.setServerOrder}
-        unreadConversations={state.ordering
-          .orderedConversations(client())
-          .filter(
-            // TODO: muting channels
-            (channel) => channel.unread,
-          )}
+        unreadConversations={unreadConversations()}
         user={user()!}
         selectedServer={() => params.server}
         onCreateOrJoinServer={() =>

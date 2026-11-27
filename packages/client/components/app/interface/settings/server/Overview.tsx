@@ -197,6 +197,7 @@ export default function ServerOverview(
                 control={editGroup.controls.icon}
                 accept="image/*"
                 label={t`Change server icon`}
+                removeCorner
                 removeLabel={t`Remove server icon`}
                 imageJustify={false}
                 imageHeight={96}
@@ -239,7 +240,6 @@ export default function ServerOverview(
               control={editGroup.controls.description}
               label={t`Description`}
               placeholder={t`This server is about...`}
-              helper={t`Shown in the server info and invites. Markdown is supported.`}
             />
           </SettingsIdentityPanel>
           <SettingsMediaRow
@@ -248,6 +248,7 @@ export default function ServerOverview(
                 control={editGroup.controls.banner}
                 accept="image/*"
                 label={t`Change server banner`}
+                removeCorner
                 removeLabel={t`Remove server banner`}
                 imageAspect="16/9"
                 imageRounded={false}
@@ -271,12 +272,10 @@ export default function ServerOverview(
             title={<Trans>Server banner</Trans>}
             description={
               <Trans>
-                Recommended: 1920 × 1080 px (16:9) or larger. Up to{" "}
+                1920 × 1080 px · up to{" "}
                 {humanFileSize(
                   instance.limits().file_upload_size_limits["banners"],
                 )}
-                . Edges may be cropped above the channel list; keep important
-                details in the center.
               </Trans>
             }
           />

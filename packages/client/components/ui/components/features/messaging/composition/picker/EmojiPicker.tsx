@@ -17,9 +17,8 @@ import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { CustomEmoji, UnicodeEmoji } from "@revolt/markdown/emoji";
 import {
-  UNICODE_EMOJI_PACK_PUA,
+  DEFAULT_EMOJI_PACK,
   UNICODE_ZWNJ,
-  isEmojiPackAvailable,
   isRegionalIndicator,
   unicodeEmojiUrl,
 } from "@revolt/markdown/emoji/UnicodeEmoji";
@@ -27,6 +26,7 @@ import { useModals } from "@revolt/modal";
 import { useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { Avatar } from "@revolt/ui/components/design";
+import { addLongPressListener } from "@revolt/ui/directives/longPress";
 import { searchEmoji } from "@revolt/ui/emojis";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -90,13 +90,13 @@ export function EmojiPicker() {
   const [favourites, setFavourites] = createSignal(loadFavourites());
   let scroller: HTMLDivElement | undefined;
 
-  const pack = () => settings.getValue("appearance:unicode_emoji");
+  const pack = () =>
+    settings.getValue("appearance:unicode_emoji") ?? DEFAULT_EMOJI_PACK;
 
-  /** whether this emoji has an image in the chosen pack */
+  /** whether this emoji can be drawn in the chosen style: the device's own
+   * emoji always (as text), Twemoji when it has an image for it */
   const drawable = (text: string) =>
-    pack() === "system" ||
-    !isEmojiPackAvailable(pack()!) ||
-    unicodeEmojiUrl(pack(), text) !== "";
+    pack() !== "twemoji" || unicodeEmojiUrl(pack(), text) !== "";
 
   const categories = createMemo(() =>
     EMOJI_CATEGORIES.map((category) => ({
@@ -160,7 +160,7 @@ export function EmojiPicker() {
       onTextReplacement(`:${entry.id}:`);
     } else {
       onTextReplacement(
-        `${UNICODE_EMOJI_PACK_PUA[pack()!] ?? ""}${isRegionalIndicator(entry.text) ? UNICODE_ZWNJ + entry.text : entry.text}`,
+        `${isRegionalIndicator(entry.text) ? UNICODE_ZWNJ + entry.text : entry.text}`,
       );
     }
   }
@@ -182,6 +182,13 @@ export function EmojiPicker() {
     <button
       type="button"
       class="z-emoji-cell"
+      // iPhone never sends contextmenu for a touch: a long press adds the
+      // emoji to favourites there too
+      ref={(element) =>
+        onCleanup(
+          addLongPressListener(element, () => toggleFavourite(props.entry)),
+        )
+      }
       title={`:${props.entry.name}:`}
       aria-label={props.entry.name}
       onClick={() => insert(props.entry)}
@@ -248,17 +255,32 @@ export function EmojiPicker() {
     return list;
   });
 
+  // The rows on screen, by their place in the list. Numbers keep their
+  // identity between scroll steps, so a row that stays on screen is kept
+  // as it is; new row objects on every step made <For> rebuild every cell
+  // and image while scrolling, which is what made the picker stutter.
   const visibleRows = createMemo(() => {
     const first = Math.max(0, Math.floor(scrollTop() / ROW) - OVERSCAN);
     const last = Math.min(
       rows().length,
       Math.ceil((scrollTop() + viewport()) / ROW) + OVERSCAN,
     );
-    const all = rows();
-    const out: { row: Row; index: number }[] = [];
-    for (let i = first; i < last; i++) out.push({ row: all[i], index: i });
+    const out: number[] = [];
+    for (let i = first; i < last; i++) out.push(i);
     return out;
   });
+
+  // one update per frame, however fast the wheel or finger moves
+  let frame = 0;
+  const onScroll = (event: Event) => {
+    const target = event.currentTarget as HTMLDivElement;
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      setScrollTop(target.scrollTop);
+    });
+  };
+  onCleanup(() => cancelAnimationFrame(frame));
 
   /** the section whose rows are at the top, shown as a pinned title */
   const pinnedHeading = createMemo(() => {
@@ -338,7 +360,7 @@ export function EmojiPicker() {
         ref={scroller}
         class="z-emoji-results"
         aria-label={t`Emoji results`}
-        onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
+        onScroll={onScroll}
       >
         <Show
           when={filter().trim()}
@@ -354,44 +376,48 @@ export function EmojiPicker() {
                 style={{ height: `${rows().length * ROW}px` }}
               >
                 <For each={visibleRows()}>
-                  {(item) => (
-                    <div
-                      class="z-emoji-row"
-                      style={{
-                        transform: `translateY(${item.index * ROW}px)`,
-                        "grid-template-columns": `repeat(${columns()}, 1fr)`,
-                      }}
-                    >
-                      <Switch>
-                        <Match when={item.row.kind === "tip"}>
-                          <p class="z-emoji-tip">
-                            {/* a finger has no right button */}
-                            <Show
-                              when={COARSE}
-                              fallback={
+                  {(index) => {
+                    const row = () => rows()[index];
+                    return (
+                      <div
+                        class="z-emoji-row"
+                        style={{
+                          transform: `translateY(${index * ROW}px)`,
+                          "grid-template-columns": `repeat(${columns()}, 1fr)`,
+                        }}
+                      >
+                        <Switch>
+                          <Match when={row().kind === "tip"}>
+                            <p class="z-emoji-tip">
+                              {/* a finger has no right button */}
+                              <Show
+                                when={COARSE}
+                                fallback={
+                                  <Trans>
+                                    Tip: right-click (or hold) any emoji to add
+                                    it to your favorites.
+                                  </Trans>
+                                }
+                              >
                                 <Trans>
-                                  Tip: right-click (or hold) any emoji to add it
-                                  to your favorites.
+                                  Tip: hold any emoji to add it to your
+                                  favorites.
                                 </Trans>
-                              }
-                            >
-                              <Trans>
-                                Tip: hold any emoji to add it to your favorites.
-                              </Trans>
-                            </Show>
-                          </p>
-                        </Match>
-                        <Match when={item.row.kind === "heading"}>
-                          <Heading row={item.row as HeadingRow} />
-                        </Match>
-                        <Match when={item.row.kind === "cells"}>
-                          <For each={(item.row as CellsRow).entries}>
-                            {(entry) => <Cell entry={entry} />}
-                          </For>
-                        </Match>
-                      </Switch>
-                    </div>
-                  )}
+                              </Show>
+                            </p>
+                          </Match>
+                          <Match when={row().kind === "heading"}>
+                            <Heading row={row() as HeadingRow} />
+                          </Match>
+                          <Match when={row().kind === "cells"}>
+                            <For each={(row() as CellsRow).entries}>
+                              {(entry) => <Cell entry={entry} />}
+                            </For>
+                          </Match>
+                        </Switch>
+                      </div>
+                    );
+                  }}
                 </For>
               </div>
             </>

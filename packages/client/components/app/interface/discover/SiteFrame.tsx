@@ -142,6 +142,16 @@ export function LanguageSwitch() {
   );
 }
 
+/**
+ * The official server of each site: Designs, Discover and the developer
+ * docs each have one, for questions about that part of Zrzur
+ */
+const OFFICIAL_SERVER: Record<SiteId | "docs", string> = {
+  designs: "https://zrzur.cc/designs",
+  discover: "https://zrzur.cc/discover",
+  docs: "https://zrzur.cc/developers",
+};
+
 export function SiteFooter(props: { site: SiteId | "docs" }) {
   const { t, i18n } = useLingui();
   // the website has every legal page in the site languages, under /<language>
@@ -159,6 +169,16 @@ export function SiteFooter(props: { site: SiteId | "docs" }) {
         ]
       : []),
     { href: SOURCE_CODE_URL, label: t`Source code` },
+    // each site has its own official server, for questions about it
+    {
+      href: OFFICIAL_SERVER[props.site],
+      label:
+        props.site === "designs"
+          ? t`Zrzur Designs server`
+          : props.site === "discover"
+            ? t`Zrzur Discover server`
+            : t`Zrzur Developers server`,
+    },
   ];
 
   return (

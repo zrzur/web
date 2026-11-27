@@ -157,6 +157,7 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
                   control={editGroup.controls.icon}
                   accept="image/*"
                   label={t`Change channel icon`}
+                  removeCorner
                   removeLabel={t`Remove channel icon`}
                   imageJustify={false}
                   imageHeight={96}
@@ -217,9 +218,7 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
                 </SettingsFormPanel>
                 {/* not for a stage, nor for a room a room maker made */}
                 <Show
-                  when={
-                    !props.channel.isStage && !props.channel.temporaryForId
-                  }
+                  when={!props.channel.isStage && !props.channel.temporaryForId}
                 >
                   <SettingsRow
                     icon={<Icon name="speaker-plus" size={20} />}

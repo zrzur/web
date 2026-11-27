@@ -20,10 +20,10 @@ import {
   Toggle,
 } from "@revolt/ui";
 import {
-  playerProvider,
   allowedMediaPlayers,
   alwaysLoadMediaPlayers,
   forgetMediaPlayers,
+  playerProvider,
   setAlwaysLoadMediaPlayers,
 } from "@revolt/ui/components/features/messaging/elements/embedSettings";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -83,20 +83,12 @@ export function PrivacySection() {
         icon={<Icon name="chat-circle" size={20} />}
         title={<Trans>Who can message you</Trans>}
         description={
-          <Show
-            when={directMessagesFriendsOnly()}
-            fallback={
-              <Trans>
-                Friends can always message you, and blocked people never can.
-                Anyone you write to first can reply.
-              </Trans>
-            }
-          >
+          directMessagesFriendsOnly() ? (
             <Trans>
               Under 18, only friends can start a direct message with you. Anyone
               you write to first can reply.
             </Trans>
-          </Show>
+          ) : undefined
         }
         disabled={unavailable()}
         control={(ids) => (
@@ -132,12 +124,6 @@ export function PrivacySection() {
       <SettingsRow
         icon={<Icon name="users-three" size={20} />}
         title={<Trans>Who can add you to group chats</Trans>}
-        description={
-          <Trans>
-            With Nobody, no one can put you in a group chat, not even friends.
-            You can still make your own.
-          </Trans>
-        }
         disabled={unavailable()}
         control={(ids) => (
           <SelectWidth>
@@ -168,7 +154,7 @@ export function PrivacySection() {
       <SettingsRow
         icon={<Icon name="play" size={20} />}
         title={t`Always load media players from other sites`}
-        description={t`Off: each site like YouTube or Spotify asks you once. On: every player loads at once and the site learns your IP address.`}
+        description={t`Players load right away, and their sites see your IP address.`}
         onClick={() => setAlwaysLoadMediaPlayers(!alwaysLoadMediaPlayers())}
         control={(ids) => (
           <Toggle

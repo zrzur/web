@@ -41,6 +41,7 @@ import {
   THEME_PRESETS,
   effectStillUrl,
 } from "@revolt/ui/components/features/profiles/userStyleExtras";
+import type { DesignEvent } from "@zrzur/sdk";
 import { withoutNull } from "@zrzur/sdk/solid";
 
 import { isDesignsSite } from "../../DesignsSite";
@@ -69,10 +70,13 @@ import {
   type TileKind,
   type WallFilter,
   type Wear,
+  composeLooks,
   isGiantFrame,
+  keepSame,
   watchMotion,
   weave,
 } from "./gallery";
+import { appendPage, applyDesignEvent } from "./live";
 import { LoadError, Notice } from "./parts";
 import { rankCreators } from "./rank";
 
@@ -107,12 +111,17 @@ export type Tile = {
  */
 const LIVE_CARDS = 6;
 
+/** Ready looks put together from the designs there are */
+const READY_LOOKS = 6;
+
 /** Community designs, a page at a time, for any list on the site */
 export function useCommunity(
   source: () => {
     query?: string;
     sort?: "popular" | "new";
     favourites?: boolean;
+    /** a change to ask again for (your favourites: only you change them);
+     * designs joining, changing and leaving arrive live without it */
     version?: number;
     /** nothing to ask for, e.g. a visitor's favourites */
     off?: boolean;
@@ -129,6 +138,8 @@ export function useCommunity(
   const [failed, setFailed] = createSignal(false);
   let offset = 0;
   let asked = 0;
+  /** the kinds the last load asked for */
+  let kinds: readonly CommunityItem["kind"][] = [];
 
   async function load(reset: boolean) {
     const now = source();
@@ -143,11 +154,11 @@ export function useCommunity(
     setFailed(false);
     try {
       // creators' frames only where the server has them open
-      const kinds = communityFramesOpen(client())
+      const kinds_ = communityFramesOpen(client())
         ? (["decorations", "nameplates", "effects", "frames"] as const)
         : (["decorations", "nameplates", "effects"] as const);
       const pages = await Promise.all(
-        kinds.map((kind) => {
+        kinds_.map((kind) => {
           const ask = () =>
             communityApi.list(client(), kind, {
               query: now.query || undefined,
@@ -176,8 +187,9 @@ export function useCommunity(
         }),
       );
       if (ask !== asked) return;
+      kinds = kindNames(kinds_);
       const fresh = pages.flatMap((page) => page.items);
-      setItems((list) => (reset ? fresh : [...list, ...fresh]));
+      setItems((list) => (reset ? fresh : appendPage(list, fresh)));
       setCreators((known) => {
         const next = reset ? {} : { ...known };
         for (const page of pages)
@@ -201,6 +213,43 @@ export function useCommunity(
     ),
   );
 
+  // designs joining, changing and leaving the gallery, in place: only the
+  // tile that changed redraws, and nothing is fetched again
+  const live = (event: DesignEvent) => {
+    const now = source();
+    if (now.off) return;
+    setItems((list) =>
+      applyDesignEvent(list, event, {
+        kinds,
+        sort: now.sort === "new" ? "new" : "popular",
+        query: now.query,
+        favourites: now.favourites,
+        complete: !more(),
+      }),
+    );
+    // a maker new to this list: just theirs, once
+    if (event.type === "CommunityItemCreate") {
+      const maker = event.creator_id;
+      if (
+        maker &&
+        !creators()[maker] &&
+        items().some((item) => item._id === event._id)
+      )
+        void communityApi
+          .details(client(), event._id)
+          .then(({ creator }) => {
+            if (creator)
+              setCreators((known) => ({ ...known, [creator._id]: creator }));
+          })
+          .catch(() => undefined);
+    }
+  };
+  createEffect(() => {
+    const current = client();
+    current.on("designEvent", live);
+    onCleanup(() => current.removeListener("designEvent", live));
+  });
+
   return {
     items,
     creators,
@@ -213,6 +262,27 @@ export function useCommunity(
 }
 
 export type Community = ReturnType<typeof useCommunity>;
+
+const kindOfPath = {
+  decorations: "Decoration",
+  nameplates: "Nameplate",
+  effects: "Effect",
+  frames: "Frame",
+} as const;
+
+/** The kinds of designs a load asked for, as designs name them */
+function kindNames(
+  paths: readonly (keyof typeof kindOfPath)[],
+): CommunityItem["kind"][] {
+  return paths.map((path) => kindOfPath[path]);
+}
+
+/** The same small number for the same design, wherever it is in a list */
+function steady(id: string, size: number) {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) | 0;
+  return Math.abs(hash) % Math.max(size, 1);
+}
 
 const tileKinds = {
   Decoration: "frame",
@@ -241,14 +311,16 @@ export function useCommunityTiles() {
   const { t } = useLingui();
   const cast = useCast();
   return (items: CommunityItem[], creators: Record<string, CommunityCreator>) =>
-    items.map((item, i): Tile => {
+    items.map((item): Tile => {
       return {
         key: item._id,
         kind: tileKinds[item.kind],
         name: item.name,
         maker: creatorName(creators[item.creator_id]) || t`A verified maker`,
         wear: wearOf(item),
-        person: cast.all()[i % cast.all().length],
+        // by the design, not its place: a design arriving live above it
+        // leaves every other tile as it was
+        person: cast.all()[steady(item._id, cast.all().length)],
         slug: item._id,
         item,
       };
@@ -453,7 +525,8 @@ function DesignTile(props: {
     () => props.tile.wear,
     () => props.tile.name,
   );
-  const size = () => (props.tile.big ? 208 : 72);
+  // big enough to see the decoration's detail in a tile of the wall
+  const size = () => (props.tile.big ? 208 : 96);
   // an effect plays while the pointer or the keyboard rests on its tile
   const [playing, setPlaying] = createSignal(false);
   const [play, setPlay] = createSignal(0);
@@ -465,7 +538,10 @@ function DesignTile(props: {
   };
   return (
     <TileBase
-      ref={(el) => onCleanup(watchMotion(el))}
+      ref={(el) => {
+        onCleanup(watchMotion(el));
+        onCleanup(fitRows(el));
+      }}
       data-kind={props.tile.kind}
       data-big={props.tile.big}
       data-on={act.pressed()}
@@ -523,18 +599,45 @@ function DesignTile(props: {
             </EffectStage>
           </Match>
           <Match when={props.tile.kind === "look"}>
-            <StyleCard
-              style={props.tile.wear!}
-              person={props.tile.person}
-              compact
-            />
+            {/* signed in: your own profile, small, wearing the look; a
+                visitor sees the sample card */}
+            <Show
+              when={client().user}
+              fallback={
+                <StyleCard
+                  style={props.tile.wear!}
+                  person={props.tile.person}
+                  compact
+                />
+              }
+            >
+              {(me) => (
+                <LookStack>
+                  <ProfilePreview
+                    user={me()}
+                    style={{ ...userStyleOf(me()), ...props.tile.wear }}
+                  />
+                  {/* a whole set: its nameplate too, as a member list
+                      shows it (the card shows the rest) */}
+                  <Show when={props.tile.wear?.nameplate}>
+                    <MemberRow
+                      style={{ ...userStyleOf(me()), ...props.tile.wear }}
+                    />
+                  </Show>
+                </LookStack>
+              )}
+            </Show>
           </Match>
           <Match when={props.tile.kind === "frame"}>
-            <WornAvatar
-              size={size()}
-              style={props.tile.wear!}
-              person={props.tile.person}
-            />
+            {/* a decoration reaches half the picture again past it: the
+                tile holds all of it, never cut at the top */}
+            <DecoRoom style={{ "--room": `${size() * 1.5}px` }}>
+              <WornAvatar
+                size={size()}
+                style={props.tile.wear!}
+                person={props.tile.person}
+              />
+            </DecoRoom>
           </Match>
           <Match when={props.tile.kind === "plate"}>
             <MemberRow style={props.tile.wear!} person={props.tile.person} />
@@ -587,6 +690,43 @@ function DesignTile(props: {
     </TileBase>
   );
 }
+
+/** The wall's row step and gap (Grid spells them out for Panda) */
+const ROW_PX = 2;
+const GAP_PX = 8;
+
+/**
+ * Give a tile the rows its content needs, and again whenever that changes
+ * (a picture loads, a card is drawn): no tile is taller than what is in it
+ * @returns stop watching
+ */
+function fitRows(el: HTMLElement) {
+  const fit = () => {
+    const height = el.getBoundingClientRect().height;
+    if (!height) return;
+    const rows = Math.max(1, Math.ceil((height + GAP_PX) / (ROW_PX + GAP_PX)));
+    el.style.gridRowEnd = `span ${rows}`;
+  };
+  const observer = new ResizeObserver(fit);
+  observer.observe(el);
+  return () => observer.disconnect();
+}
+
+/** A look: your card and, for a set, your nameplate under it */
+const LookStack = styled("div", {
+  base: { display: "flex", flexDirection: "column", gap: "8px", width: "100%" },
+});
+
+/** The whole of a decoration: the picture and the art round it */
+const DecoRoom = styled("span", {
+  base: {
+    display: "grid",
+    placeItems: "center",
+    width: "var(--room)",
+    height: "var(--room)",
+    maxWidth: "100%",
+  },
+});
 
 const FileStill = styled("img", {
   base: {
@@ -712,8 +852,13 @@ export function useGalleryTiles(input: {
   const openSlot = useOpenTile();
   const avatar = useCreatorAvatar();
   const cast = useCast();
+  const { t } = useLingui();
+  const lookText = useLookText();
 
-  return createMemo(() => {
+  // tiles that did not change stay the same objects, so new data redraws
+  // only the tiles it changed, never the whole wall (no "refresh")
+  const known = new Map<string, { sign: string; entry: Tile }>();
+  const tiles = createMemo(() => {
     const q = input.query().trim().toLocaleLowerCase();
     const has = (tile: Tile) => !q || tile.name.toLocaleLowerCase().includes(q);
     const mine = fromCommunity(
@@ -733,7 +878,31 @@ export function useGalleryTiles(input: {
       .filter((tile) => tile.kind === "card")
       .filter(has)
       .map((tile, i) => (i < LIVE_CARDS ? tile : { ...tile, sample: true }));
-    const looks = built.looks(ids).filter(has);
+    // whole looks put together from the designs there are, before the
+    // team's own; a mood shows only its own looks
+    const sets: Tile[] = ids
+      ? []
+      : composeLooks(
+          LOOKS.map((look) => look.style),
+          {
+            decorations: frames.map((tile) => tile.wear!),
+            nameplates: plates.map((tile) => tile.wear!),
+            frames: cards.map((tile) => tile.wear!),
+            effects: effects.map((tile) => tile.wear!),
+          },
+          READY_LOOKS,
+        ).map((wear, i) => {
+          const name = lookText(LOOKS[i % LOOKS.length].id)[0];
+          return {
+            key: `set-${i}`,
+            kind: "look",
+            name: t`${name} set`,
+            maker: t`The Zrzur team`,
+            wear,
+            person: cast.all()[(i + 5) % cast.all().length],
+          };
+        });
+    const looks = [...sets.filter(has), ...built.looks(ids).filter(has)];
     const types = built.types().filter(has);
     const inks = built.inks();
     const paint: Tile = { key: "paint", kind: "paint", name: "" };
@@ -806,6 +975,7 @@ export function useGalleryTiles(input: {
         });
     }
   });
+  return createMemo(() => keepSame(known, tiles()));
 }
 
 function useOpenTile() {
@@ -885,7 +1055,7 @@ const OpenRing = styled("span", {
 const Maker = styled("button", {
   base: {
     gridColumn: "span 3",
-    gridRow: "span 2",
+    gridRow: "span 20",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
@@ -927,7 +1097,9 @@ const Grid = styled("div", {
   base: {
     display: "grid",
     gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
-    gridAutoRows: "92px",
+    // fine steps: a design's tile takes exactly the height of what is in
+    // it (fitRows); a fixed piece spans whole steps of 10 px (2 + the gap)
+    gridAutoRows: "2px",
     gridAutoFlow: "dense",
     gap: "8px",
     "@media (max-width: 899px)": {
@@ -955,43 +1127,22 @@ const TileBase = styled("div", {
     "&[data-awake] .z-deco-ring": {
       animationPlayState: "running !important",
     },
-    contentVisibility: "auto",
-    containIntrinsicSize: "auto 196px",
+    // as tall as what is in it: fitRows gives it its rows
+    alignSelf: "start",
     gridColumn: "span 3",
-    gridRow: "span 2",
     "&[data-on='true']": { outlineColor: "var(--z-focus)" },
-    "&[data-kind='look']": { gridColumn: "span 3", gridRow: "span 3" },
-    // as tall as a profile card, so the tile shows how the effect will look
-    "&[data-kind='effect']": { gridRow: "span 4" },
+    // one width for every design, so the wall packs like a brick wall
+    // with no holes; only a giant frame takes two
+    "&[data-kind='look']": { gridColumn: "span 3" },
     // a whole profile card in its frame: a poster of a tile, with room
     // round the card for the frame that reaches past it
-    "&[data-kind='card']": { gridColumn: "span 4", gridRow: "span 6" },
-    "&[data-kind='frame'][data-big='true']": {
-      gridColumn: "span 6",
-      gridRow: "span 4",
-    },
-    "&[data-kind='plate']": {
-      gridColumn: "span 4",
-      // the plate at its one shape and its caption need more than one row
-      gridRow: "span 2",
-      justifyContent: "center",
-      "& > button:last-child, & > div:last-child": { paddingBlock: "2px" },
-    },
-    "&[data-kind='type']": { gridColumn: "span 4", gridRow: "span 1" },
-    "&[data-kind='ink']": { gridColumn: "span 3", gridRow: "span 1" },
+    "&[data-kind='card']": { gridColumn: "span 3" },
+    "&[data-kind='frame'][data-big='true']": { gridColumn: "span 6" },
+    "&[data-kind='plate']": { gridColumn: "span 3" },
+    "&[data-kind='type']": { gridColumn: "span 3" },
+    "&[data-kind='ink']": { gridColumn: "span 3" },
     "@media (max-width: 899px)": {
-      "&[data-kind='look']": { gridColumn: "span 6", gridRow: "span 3" },
-      "&[data-kind='frame'][data-big='true']": {
-        gridColumn: "span 6",
-        gridRow: "span 4",
-      },
-      "&[data-kind='plate']": { gridColumn: "span 6", gridRow: "span 2" },
-      "&[data-kind='type']": {
-        gridColumn: "span 6",
-        gridRow: "span 1",
-        "& > button:last-child, & > div:last-child": { paddingBlock: "4px" },
-      },
-      "&[data-kind='ink']": { gridColumn: "span 3", gridRow: "span 1" },
+      "&[data-kind='frame'][data-big='true']": { gridColumn: "span 6" },
     },
     // Phones: every card is the width of the page, one under the other
     // (owner, 2026-11-17: all the same size, as the search field is). Two
@@ -1009,7 +1160,8 @@ const Art = styled("button", {
     placeItems: "center",
     minHeight: 0,
     width: "100%",
-    padding: "8px",
+    // room above what is in a tile, as below it before the caption
+    padding: "12px 12px 4px",
     overflow: "hidden",
     border: "none",
     background: "none",
@@ -1019,10 +1171,15 @@ const Art = styled("button", {
     "& > *": { transition: "transform 200ms cubic-bezier(0.2, 0, 0, 1)" },
     "&:hover > *": { transform: "scale(1.05)" },
     _motionReduce: { "&:hover > *": { transform: "none" } },
-    "[data-kind='look'] > &": { "& > div": { width: "100%" } },
+    // a small profile card: from the top, and it does not grow on hover
+    "[data-kind='look'] > &": {
+      alignItems: "start",
+      "& > div": { width: "100%" },
+      "&:hover > *": { transform: "none" },
+    },
     "[data-kind='plate'] > &": {
       "& > div": { width: "100%" },
-      padding: "0 8px",
+      padding: "12px 12px 0",
       minHeight: "48px",
     },
     // the whole name fits: its size is worked out from this box
@@ -1050,8 +1207,8 @@ const EffectStage = styled("div", {
   base: {
     position: "relative",
     width: "100%",
-    height: "100%",
-    minHeight: "120px",
+    // the shape of a profile card, so the tile shows how the effect will look
+    aspectRatio: "5 / 8",
     overflow: "hidden",
   },
 });
@@ -1130,7 +1287,7 @@ const Word = styled("span", {
 const Paint = styled("div", {
   base: {
     gridColumn: "1 / -1",
-    gridRow: "span 3",
+    gridRow: "span 30",
     overflow: "hidden",
     borderRadius: "var(--z-shape-card, 14px)",
     display: "flex",
@@ -1186,8 +1343,9 @@ const Paint = styled("div", {
 const Deck = styled("button", {
   base: {
     position: "relative",
-    gridColumn: "span 6",
-    gridRow: "span 3",
+    // one tile wide, like every design beside it
+    gridColumn: "span 3",
+    gridRow: "span 28",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
@@ -1207,17 +1365,18 @@ const Deck = styled("button", {
     },
     "& > div": {
       position: "absolute",
-      insetBlockStart: "-24px",
-      insetInlineEnd: "8%",
-      width: "44%",
+      insetBlockStart: "-12px",
+      insetInlineStart: "50%",
+      width: "140px",
+      marginInlineStart: "-70px",
       height: "100%",
       pointerEvents: "none",
     },
     "& > div > div": {
       position: "absolute",
-      insetBlockStart: "32px",
+      insetBlockStart: "28px",
       insetInlineStart: 0,
-      width: "160px",
+      width: "140px",
       transformOrigin: "50% 130%",
       transition: "transform 320ms cubic-bezier(0.2, 0, 0, 1)",
       _motionReduce: { transition: "none" },
@@ -1235,13 +1394,13 @@ const Deck = styled("button", {
     // the card's own words only: the sample cards hold spans of their own
     "& > strong": {
       position: "relative",
-      fontSize: "clamp(40px, 6cqw, 72px)",
+      fontSize: "28px",
       lineHeight: 1.2,
       fontWeight: 700,
     },
     "& > span": {
       position: "relative",
-      maxWidth: "50%",
+      maxWidth: "100%",
       marginBlockStart: "8px",
       fontSize: "13px",
       lineHeight: "20px",
@@ -1255,10 +1414,10 @@ const Holder = styled("div", {
     borderRadius: "var(--z-shape-card, 14px)",
     background: "var(--z-designs-surface)",
     gridColumn: "span 3",
-    gridRow: "span 2",
+    gridRow: "span 20",
     animation: "skeletonPulse 1.4s ease-in-out infinite",
     _motionReduce: { animation: "none" },
-    "&[data-shape='big']": { gridColumn: "span 6", gridRow: "span 4" },
-    "&[data-shape='wide']": { gridColumn: "span 6", gridRow: "span 1" },
+    "&[data-shape='big']": { gridColumn: "span 6", gridRow: "span 40" },
+    "&[data-shape='wide']": { gridColumn: "span 6", gridRow: "span 10" },
   },
 });

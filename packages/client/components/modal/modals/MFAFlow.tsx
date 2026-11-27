@@ -2,6 +2,7 @@ import { createFormControl, createFormGroup } from "solid-forms";
 import {
   For,
   Match,
+  Show,
   Switch,
   createEffect,
   createSignal,
@@ -209,27 +210,18 @@ export function MFAFlowModal(
       error={
         error() === undefined ? undefined : <TranslatedError error={error()} />
       }
-      title={<Trans>Confirm action</Trans>}
+      title={<Trans>Confirm it's you</Trans>}
       actions={getActions()}
       isDisabled={group.isPending}
     >
       <form onSubmit={submit}>
         <Column>
-          <Text>
-            <Switch
-              fallback={
-                <Trans>
-                  Please select a method to authenticate your request.
-                </Trans>
-              }
-            >
-              <Match when={selectedMethod()}>
-                <Trans>
-                  Please confirm this action using the selected method.
-                </Trans>
-              </Match>
-            </Switch>
-          </Text>
+          {/* the field says what to type; only the choice needs a word */}
+          <Show when={!selectedMethod()}>
+            <Text>
+              <Trans>How do you want to confirm?</Trans>
+            </Text>
+          </Show>
 
           <Switch fallback={<CircularProgress />}>
             <Match when={selectedMethod()}>
@@ -250,7 +242,8 @@ export function MFAFlowModal(
                     inputmode="numeric"
                     autocomplete="one-time-code"
                     autoFocus
-                    label={t`Authenticator app`}
+                    label={t`Code from your authenticator app`}
+                    placeholder="000000"
                   />
                 </Match>
                 <Match when={selectedMethod() === "Recovery"}>

@@ -70,7 +70,7 @@ afterEach(() => dispose?.());
 describe("streamer mode switch", () => {
   it("is off by default and turns on with its switch", () => {
     mount(() => <StreamerModeSection />);
-    const toggle = switchNamed("Streamer mode");
+    const toggle = switchNamed("Hide private details");
     expect(toggle.getAttribute("aria-checked")).toBe("false");
     toggle.click();
     expect(state.settings.streamerMode).toBe(true);

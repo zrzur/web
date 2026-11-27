@@ -57,6 +57,8 @@ function LinkLanguage() {
   return null;
 }
 
+import { LiveProfiles } from "@revolt/client/LiveProfiles";
+
 export function MountContext(props: { children?: JSX.Element }) {
   const client = new QueryClient();
 
@@ -70,6 +72,7 @@ export function MountContext(props: { children?: JSX.Element }) {
             <SoundContext>
               <VoiceContext>
                 <QueryClientProvider client={client}>
+                  <LiveProfiles />
                   {/* the app, a page or a sign-in step is still loading */}
                   <Suspense fallback={<FirstScreen />}>
                     {props.children}

@@ -1,11 +1,19 @@
-import { For, JSX, Show, createSignal } from "solid-js";
+import { JSX, Show, createSignal } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
-import { Avatar } from "@revolt/ui";
+import {
+  Avatar,
+  MenuButton,
+  MessageContainer,
+  OverflowingText,
+  UserStatus,
+  Username,
+} from "@revolt/ui";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import { useDesignMotion } from "@revolt/ui/components/features/profiles/NameplateMotion";
 import {
@@ -18,6 +26,12 @@ import {
   nameplateBackground,
 } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
+
+import {
+  NameStatusStack,
+  memberRow,
+  nameplateLayer,
+} from "../channels/text/memberRowLook";
 
 /** a person in a preview: a name, a picture and a profile colour */
 export type Person = { name: string; colour: string; avatar: string };
@@ -78,6 +92,8 @@ export function useWearer() {
     real: () => !!me(),
     name: () => name() ?? cast.sara().name,
     handle: () => me()?.username ?? cast.sara().name,
+    /** your pronouns, as your profile shows them beside your username */
+    pronouns: () => me()?.pronouns ?? undefined,
     avatar: () => me()?.animatedAvatarURL ?? cast.sara().avatar,
     colour: () => cast.sara().colour,
     who: (person?: Person): Person & { handle: string } => {
@@ -145,7 +161,10 @@ export function WornAvatar(props: {
   );
 }
 
-/** One message as it looks in a channel, wearing a style */
+/**
+ * One message as it looks in a channel, wearing a style: drawn by the
+ * channel's own message parts (MessageContainer, Username), not a copy
+ */
 export function ChatLine(props: {
   style: UserStyle;
   /** someone else in the conversation; the wearer when left out */
@@ -155,26 +174,99 @@ export function ChatLine(props: {
 }) {
   const wearer = useWearer();
   return (
-    <Line>
-      <LineAvatar>
-        <WornAvatar size={40} style={props.style} other={props.person} />
-      </LineAvatar>
-      <div>
-        <LineHead>
-          <strong dir="auto" style={nameStyle(props.style)}>
-            {props.person?.name ?? wearer.name()}
-          </strong>
-          <Show when={props.time}>
-            <time>{props.time}</time>
-          </Show>
-        </LineHead>
-        <p dir="auto">{props.children}</p>
-      </div>
-    </Line>
+    <div class={sceneRow} inert>
+      <MessageContainer
+        avatar={
+          // as the channel holds it: as tall as the picture, never stretched
+          // by the message beside it (Message.tsx, avatarContainer)
+          <div class={messageAvatar}>
+            <WornAvatar size={36} style={props.style} other={props.person} />
+          </div>
+        }
+        username={
+          <Username
+            username={props.person?.name ?? wearer.name()}
+            userStyle={props.style}
+          />
+        }
+        timestamp={<span>{props.time ?? ""}</span>}
+      >
+        <span dir="auto">{props.children}</span>
+      </MessageContainer>
+    </div>
   );
 }
 
-/** One row of a member list, on the style's nameplate */
+/**
+ * One row of a member list, on the style's nameplate: drawn with the member
+ * list's own row (memberRowLook), so it is exactly what a server shows
+ */
+export function ListMember(props: {
+  style: UserStyle;
+  /** who wears it for someone signed out */
+  person?: Person;
+  /** someone else in the list: themselves, whoever is looking */
+  other?: Person;
+}) {
+  const instance = useInstance();
+  const wearer = useWearer();
+  const motion = useDesignMotion();
+  const [hovered, setHovered] = createSignal(false);
+  const who = () => props.other ?? wearer.who(props.person);
+  const plate = () =>
+    nameplateBackground(props.style, instance.mediaUrl, {
+      moving: hovered() && motion(),
+    });
+  return (
+    <div
+      class={`${memberRow} ${sceneRow}`}
+      data-plated={plate() ? "" : undefined}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+    >
+      <Show when={plate()}>
+        {(background) => (
+          <div
+            data-nameplate
+            aria-hidden="true"
+            class={`${nameplateLayer} z-plate`}
+            style={{ "--plate": background() }}
+          />
+        )}
+      </Show>
+      <MenuButton
+        size="normal"
+        attention="active"
+        noDrawer
+        icon={
+          <AvatarDecoration
+            decoration={props.style.decoration}
+            file={props.style.decoration_file}
+            size={32}
+          >
+            <Avatar
+              src={who().avatar}
+              size={32}
+              holepunch="bottom-right"
+              overlay={<UserStatus.Graphic status="Online" />}
+            />
+          </AvatarDecoration>
+        }
+      >
+        <NameStatusStack>
+          <OverflowingText>
+            <Username username={who().name} userStyle={props.style} />
+          </OverflowingText>
+        </NameStatusStack>
+      </MenuButton>
+    </div>
+  );
+}
+
+/**
+ * A design's nameplate as a gallery tile shows it: one row, large, the
+ * name on the plate (the previews use the real member row, ListMember)
+ */
 export function MemberRow(props: { style: UserStyle; person?: Person }) {
   const instance = useInstance();
   const wearer = useWearer();
@@ -202,6 +294,17 @@ export function MemberRow(props: { style: UserStyle; person?: Person }) {
     </Row>
   );
 }
+
+const messageAvatar = css({
+  height: "fit-content",
+  borderRadius: "var(--borderRadius-circle)",
+});
+
+/** a preview of a real row: it looks like one, it does not act like one */
+const sceneRow = css({
+  pointerEvents: "none",
+  "& > *": { cursor: "default" },
+});
 
 /** Times in the sample conversation, in the page's language */
 export function useSampleTime() {
@@ -247,10 +350,9 @@ export function ChatScene(props: { style: UserStyle }) {
   );
 }
 
-/** What a style looks like between other people in a member list */
+/** What a style looks like in a member list: your own row, on its own */
 export function MembersScene(props: { style: UserStyle }) {
   const { t } = useLingui();
-  const cast = useCast();
   return (
     <Panel>
       <PanelBar>
@@ -258,13 +360,7 @@ export function MembersScene(props: { style: UserStyle }) {
         <span>{t`Online`}</span>
       </PanelBar>
       <Rows>
-        <For each={[cast.noor(), cast.karim()]}>
-          {(person) => <MemberRow style={{}} person={person} />}
-        </For>
-        <MemberRow style={props.style} />
-        <For each={[cast.omar(), cast.yusuf()]}>
-          {(person) => <MemberRow style={{}} person={person} />}
-        </For>
+        <ListMember style={props.style} />
       </Rows>
     </Panel>
   );
@@ -326,53 +422,6 @@ const Lines = styled("div", {
   },
 });
 
-const Line = styled("div", {
-  base: {
-    display: "flex",
-    gap: "12px",
-    minWidth: 0,
-    textAlign: "start",
-    "& > div:last-child": { flex: 1, minWidth: 0 },
-    "& p": {
-      margin: 0,
-      fontSize: "14px",
-      lineHeight: "20px",
-      color: "var(--z-fg-primary)",
-      textAlign: "start",
-    },
-  },
-});
-
-/** decoration art reaches past the avatar: keep its room */
-const LineAvatar = styled("div", {
-  base: {
-    flexShrink: 0,
-    display: "grid",
-    placeItems: "center",
-    width: "48px",
-    height: "48px",
-  },
-});
-
-const LineHead = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "baseline",
-    gap: "8px",
-    minWidth: 0,
-    "& strong": {
-      minWidth: 0,
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-      fontSize: "14px",
-      fontWeight: 600,
-      color: "var(--z-fg-primary)",
-    },
-    "& time": { flexShrink: 0, fontSize: "12px", color: "var(--z-fg-muted)" },
-  },
-});
-
 const Rows = styled("div", {
   base: {
     display: "flex",
@@ -411,7 +460,6 @@ const Row = styled("div", {
   },
 });
 
-/** the avatar with its online dot, cut out of what is behind it */
 const RowAvatar = styled("span", {
   base: {
     position: "relative",

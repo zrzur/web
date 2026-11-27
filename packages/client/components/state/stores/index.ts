@@ -10,6 +10,7 @@ import { TypeExperiments } from "./Experiments";
 import { TypeKeybinds } from "./Keybinds";
 import { TypeLayout } from "./Layout";
 import { TypeLinkSafety } from "./LinkSafety";
+import { TypeLobbySteps } from "./LobbySteps";
 import { TypeLocale } from "./Locale";
 import { TypeMotion } from "./Motion";
 import { TypeNotificationOptions } from "./NotificationOptions";
@@ -42,6 +43,7 @@ export type UnsyncedStore = {
 export type SyncedStore = {
   collectibles: TypeCollectibles;
   keybinds: TypeKeybinds;
+  "lobby-steps": TypeLobbySteps;
   notifications: TypeNotificationOptions;
   ordering: TypeOrdering;
   "release-notes": TypeReleaseNotes;
@@ -55,6 +57,7 @@ export type SyncedStore = {
 export const SYNCED_KEYS: (keyof SyncedStore)[] = [
   "collectibles",
   "keybinds",
+  "lobby-steps",
   "notifications",
   "ordering",
   "release-notes",

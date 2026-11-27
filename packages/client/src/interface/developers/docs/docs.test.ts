@@ -119,6 +119,35 @@ describe("Inventory parts", () => {
     },
   );
 
+  it(
+    "publishes the Bot API document, up to date and linked",
+    { timeout: 30_000 },
+    async () => {
+      const { botDocumentText } = (await import(
+        // @ts-expect-error -- a plain Node script without types
+        "../../../../scripts/bot-api/bot-openapi.mjs"
+      )) as {
+        botDocumentText: (spec: unknown, inventory: unknown) => string;
+      };
+      const read = (path: string) =>
+        readFileSync(join(here, "../../../..", path), "utf8");
+      const published = read("public/developers/bot-api.openapi.json");
+      expect(published, "run node scripts/bot-api/bot-openapi.mjs").toBe(
+        botDocumentText(
+          JSON.parse(read("scripts/bot-api/openapi.snapshot.json")),
+          JSON.parse(read("src/interface/developers/data/botApi.json")),
+        ),
+      );
+      // a bot's routes only, signed in with its token
+      const doc = JSON.parse(published);
+      expect(Object.keys(doc.components.securitySchemes)).toEqual(["BotToken"]);
+      expect(doc.paths["/auth/session/login"]).toBeUndefined();
+      expect(doc.paths["/channels/{target}/messages"]?.post).toBeDefined();
+      const page = PAGES.find((p) => p.id === "sdk")!.source!;
+      expect(linksOf(page)).toContain("/developers/bot-api.openapi.json");
+    },
+  );
+
   it("a page loads only the parts its blocks show", () => {
     expect(partsForMarkdown("# Hi\n\nText only.")).toEqual([]);
     expect(
@@ -377,8 +406,9 @@ describe("Documentation pages", { timeout: 30_000 }, () => {
           true,
         );
         if (link === "/developers") continue;
-        // a static file served from public/ (the changelog feed)
-        if (/.xml$/.test(link)) {
+        // a static file served from public/ (the changelog feed, the Bot
+        // API document)
+        if (/\.(xml|json)$/.test(link)) {
           expect(
             readdirSync(join(here, "../../../../public/developers")),
             `${page.id}: ${link}`,

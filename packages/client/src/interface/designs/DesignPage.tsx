@@ -51,6 +51,7 @@ import { Mirror } from "./Mirror";
 import { useTryOn } from "./TryOn";
 import { type DesignRef, designSlug, parseDesignSlug } from "./designSlug";
 import type { WallFilter } from "./gallery";
+import { placeOf } from "./gallery";
 
 type Resolved = {
   ref: DesignRef;
@@ -371,6 +372,10 @@ export function DesignPage(props: {
                           ...item().style,
                           ...communityFile(item()),
                         }}
+                        place={placeOf({
+                          ...item().style,
+                          ...communityFile(item()),
+                        })}
                       />
                     }
                   >

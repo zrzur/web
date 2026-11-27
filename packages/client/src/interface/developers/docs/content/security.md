@@ -22,7 +22,7 @@ node --env-file=.env full-bot.mjs
 
 ## If a token leaks {#leak}
 
-1. Open your application in the [Developer Portal](/developers), tab **Overview**, and choose **Reset token**.
+1. Open your application in the [Developer Portal](/developers), tab **Bot**, and choose **Reset token**.
 2. Confirm your identity. The old token stops at once, and open connections end.
 3. Put the new token in your secret store and restart the bot.
 4. Read the server's audit log for what the bot did. Actions of your bot show the bot as the actor.

@@ -48,55 +48,6 @@ export function ServerInfoModal(
       onClose={props.onClose}
       size="md"
       title={<Trans>Server information</Trans>}
-      actions={[
-        ...(canOpenSettings()
-          ? [
-              {
-                text: <Trans>Settings</Trans>,
-                onClick() {
-                  openModal({
-                    type: "settings",
-                    config: "server",
-                    context: props.server,
-                  });
-                },
-              },
-            ]
-          : []),
-        ...(props.server.member
-          ? [
-              {
-                text: <Trans>Edit identity</Trans>,
-                onClick() {
-                  openModal({
-                    type: "server_identity",
-                    member: props.server.member!,
-                  });
-                },
-              },
-            ]
-          : []),
-        {
-          text: <Trans>Report</Trans>,
-          variant: "warning",
-          onClick() {
-            openModal({
-              type: "report_content",
-              client: client(),
-              target: props.server,
-            });
-          },
-        },
-        // on a phone's sheet closing is not the main action, so it is not
-        // the filled button (owner review, 2026-11-17); the computer's
-        // dialog keeps the filled Close (owner, 2026-11-20: "it was nice")
-        {
-          text: <Trans>Close</Trans>,
-          variant: window.matchMedia?.("(max-width: 600px)").matches
-            ? "secondary"
-            : undefined,
-        },
-      ]}
     >
       <Column gap="lg">
         <Identity>
@@ -159,11 +110,6 @@ export function ServerInfoModal(
             control={() => <Value>{visibleChannels().length}</Value>}
           />
           <SettingsRow
-            icon={<Icon name="shield-check" size={20} />}
-            title={<Trans>Roles</Trans>}
-            control={() => <Value>{props.server.roles.size}</Value>}
-          />
-          <SettingsRow
             icon={<Icon name="users" size={20} />}
             title={<Trans>Server owner</Trans>}
             control={() => (
@@ -203,6 +149,54 @@ export function ServerInfoModal(
               title={<Trans>Age-restricted server</Trans>}
             />
           </Show>
+        </SettingsSection>
+
+        {/* what you can do here: rows, not a row of buttons. No footer:
+            the X (and Escape) closes, a second Close said it twice */}
+        <SettingsSection>
+          <Show when={props.server.member}>
+            <SettingsRow
+              icon={<Icon name="user-edit" size={20} />}
+              title={<Trans>Edit identity</Trans>}
+              navigational
+              onClick={() => {
+                props.onClose();
+                openModal({
+                  type: "server_identity",
+                  member: props.server.member!,
+                });
+              }}
+            />
+          </Show>
+          <Show when={canOpenSettings()}>
+            <SettingsRow
+              icon={<Icon name="gear-six" size={20} />}
+              title={<Trans>Server settings</Trans>}
+              navigational
+              onClick={() => {
+                props.onClose();
+                openModal({
+                  type: "settings",
+                  config: "server",
+                  context: props.server,
+                });
+              }}
+            />
+          </Show>
+          <SettingsRow
+            icon={<Icon name="flag" size={20} />}
+            title={<Trans>Report server</Trans>}
+            danger
+            navigational
+            onClick={() => {
+              props.onClose();
+              openModal({
+                type: "report_content",
+                client: client(),
+                target: props.server,
+              });
+            }}
+          />
         </SettingsSection>
 
         <Show when={props.server.orderedRoles.length}>

@@ -25,6 +25,7 @@ import { toBirthMonth } from "@revolt/client/age";
 import { brandMarkSrc } from "@revolt/common/lib/brandMark";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { useInstance } from "@revolt/instance";
+import { Markdown } from "@revolt/markdown";
 import { isInviteCode } from "@revolt/modal/modals/inviteLink";
 import { A, useNavigate, useParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
@@ -339,7 +340,10 @@ export default function InvitePage() {
                       </Meta>
                     </Head>
                     <Show when={data().server_description}>
-                      <Description>{data().server_description}</Description>
+                      {/* written in Markdown, as everywhere else it shows */}
+                      <Description dir="auto">
+                        <Markdown content={data().server_description!} />
+                      </Description>
                     </Show>
                     <Show when={asksFirst() && step().at === "server"}>
                       <Inside>
@@ -583,9 +587,13 @@ const Page = styled("main", {
   base: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "100dvh",
+    // the window's height, scrolling inside: the app's root does not
+    // scroll, so a page taller than the window could not be read to the end
+    height: "100dvh",
+    minHeight: 0,
     width: "100%",
     overflowY: "auto",
+    overscrollBehavior: "contain",
     color: "var(--z-fg-primary)",
     background: "var(--z-bg-frame)",
     [PHONE]: { background: "var(--z-bg-nav)" },
@@ -741,13 +749,13 @@ const Meta = styled("div", {
   },
 });
 
-const Description = styled("p", {
+const Description = styled("div", {
   base: {
     margin: 0,
     fontSize: "15px",
     color: "var(--z-fg-secondary)",
-    whiteSpace: "pre-line",
     overflowWrap: "anywhere",
+    "& p": { margin: 0 },
     // a long description never pushes the button away
     lineClamp: 5,
   },

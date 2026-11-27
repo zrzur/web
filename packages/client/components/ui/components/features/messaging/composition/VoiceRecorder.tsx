@@ -1,6 +1,6 @@
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Icon } from "@revolt/ui/icons/Icon";
-import { For, Show, createSignal, onCleanup, onMount } from "solid-js";
+import { Index, Show, createSignal, onCleanup, onMount } from "solid-js";
 
 import { mediaTime } from "../elements/MediaPlayer";
 import {
@@ -162,11 +162,18 @@ export function VoiceRecorder(props: {
           {mediaTime(seconds())}
         </span>
         <div class="z-recorder-wave" aria-hidden="true">
-          <For each={levels()}>
+          {/* by place, not by value: each bar stays and only scales (the
+              list of numbers re-keyed and moved every bar ten times a
+              second) */}
+          <Index each={levels()}>
             {(level) => (
-              <span style={{ height: `${Math.round(level * 100)}%` }} />
+              <span
+                style={{
+                  transform: `scaleY(${Math.max(0.04, level()).toFixed(3)})`,
+                }}
+              />
             )}
-          </For>
+          </Index>
         </div>
         <Show when={state() === "limit"}>
           <span class="z-recorder-note">

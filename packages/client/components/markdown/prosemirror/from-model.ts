@@ -4,7 +4,6 @@ import { Node } from "prosemirror-model";
 import remarkStringify from "remark-stringify";
 
 import { unifiedPipeline } from "..";
-import { UNICODE_EMOJI_PACK_PUA } from "../emoji/UnicodeEmoji";
 
 import { schema } from "./schema";
 
@@ -20,16 +19,12 @@ function map(node: Node): RootContent {
       case "strong":
         return {
           type: "strong",
-          children: [
-            map(node.mark(node.marks.slice(1))) as PhrasingContent,
-          ],
+          children: [map(node.mark(node.marks.slice(1))) as PhrasingContent],
         };
       case "em":
         return {
           type: "emphasis",
-          children: [
-            map(node.mark(node.marks.slice(1))) as PhrasingContent,
-          ],
+          children: [map(node.mark(node.marks.slice(1))) as PhrasingContent],
         };
       // todo: enable the gfm delete plugin ONLY
       // case "strikethrough":
@@ -44,9 +39,7 @@ function map(node: Node): RootContent {
           type: "link",
           url: node.attrs.href,
           title: node.attrs.title ?? node.attrs.href,
-          children: [
-            map(node.mark(node.marks.slice(1))) as PhrasingContent,
-          ],
+          children: [map(node.mark(node.marks.slice(1))) as PhrasingContent],
         };
       case "code":
         return {
@@ -109,9 +102,8 @@ function map(node: Node): RootContent {
     case "rfm_unicode_emoji":
       return {
         type: "text",
-        value: `${UNICODE_EMOJI_PACK_PUA[
-          node.attrs.pack as keyof typeof UNICODE_EMOJI_PACK_PUA
-        ] ?? ""}${node.attrs.id}`,
+        // no style mark: every reader sees their own style
+        value: node.attrs.id,
       };
     case "rfm_user_mention":
       return {

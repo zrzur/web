@@ -6,7 +6,7 @@ import { styled } from "styled-system/jsx";
 import { type CommunityItem } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useNameFontLabel } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient } from "@revolt/client";
-import { Button, Segmented } from "@revolt/ui";
+import { Button, LineTabs } from "@revolt/ui";
 import { userStyleOf } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -46,10 +46,10 @@ export function DesignsHome(props: {
 
   const [mood, setMood] = createSignal<string>();
   const [sort, setSort] = createSignal<"popular" | "new">("popular");
+  // designs joining, changing and leaving arrive live: no asking again
   const community = useCommunity(() => ({
     query: props.query,
     sort: sort(),
-    version: props.version,
   }));
   const tiles = useGalleryTiles({
     filter: () => props.filter,
@@ -134,7 +134,7 @@ export function DesignsHome(props: {
             </Show>
             <Show when={community.items().length > 1}>
               <SortSpot>
-                <Segmented
+                <LineTabs
                   aria-label={t`Sort`}
                   value={sort()}
                   onChange={setSort}

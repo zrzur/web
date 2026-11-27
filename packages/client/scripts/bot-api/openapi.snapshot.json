@@ -2,7 +2,7 @@
  "openapi": "3.0.0",
  "info": {
   "title": "Zrzur API",
-  "description": "Zrzur 26 chat platform API (fork of Stoat/AGPL — see LICENSE).",
+  "description": "The API of Zrzur, the chat and voice platform. A fork of Stoat, under the AGPL (see the license).",
   "contact": {
    "name": "Zrzur",
    "url": "https://zrzur.com",
@@ -16,12 +16,12 @@
  },
  "servers": [
   {
-   "url": "http://127.0.0.1:14702",
-   "description": "Zrzur local development"
+   "url": "https://api.zrzur.com",
+   "description": "Zrzur"
   },
   {
-   "url": "https://api.zrzur.com",
-   "description": "Zrzur planned production (require owner DNS + deploy)"
+   "url": "http://127.0.0.1:14702",
+   "description": "A server running on this computer"
   }
  ],
  "paths": {
@@ -89,10 +89,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -139,10 +139,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -197,10 +197,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -289,10 +289,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -372,10 +372,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -423,10 +423,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -492,10 +492,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -542,10 +542,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -583,10 +583,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -623,10 +623,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -671,10 +671,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -714,10 +714,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -772,10 +772,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -863,10 +863,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -903,10 +903,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -951,10 +951,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -991,10 +991,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1041,10 +1041,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1091,10 +1091,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1124,10 +1124,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -1172,10 +1172,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1212,10 +1212,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1272,10 +1272,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1332,10 +1332,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1375,10 +1375,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -1433,10 +1433,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1483,10 +1483,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1526,10 +1526,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1576,10 +1576,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1626,10 +1626,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1676,10 +1676,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -1724,10 +1724,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1774,10 +1774,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -1822,10 +1822,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1872,10 +1872,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1915,10 +1915,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -1975,10 +1975,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -2025,10 +2025,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -2075,10 +2075,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -2143,10 +2143,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -2193,8 +2193,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -2241,8 +2241,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -2299,8 +2299,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    },
@@ -2345,10 +2345,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -2398,10 +2398,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -2448,10 +2448,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -2489,8 +2489,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    },
@@ -2545,8 +2545,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -2583,10 +2583,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -2633,10 +2633,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -2690,10 +2690,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -2731,10 +2731,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -2789,10 +2789,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -2839,10 +2839,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -2897,10 +2897,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -2950,10 +2950,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -3014,10 +3014,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -3072,10 +3072,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -3129,12 +3129,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "One global command of this application, by its id."
    },
    "delete": {
     "tags": [
@@ -3177,12 +3178,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "Remove one global command from every server the bot is in."
    },
    "patch": {
     "tags": [
@@ -3242,12 +3244,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "Change one global command: only the fields sent change. The command keeps its id and gets a new version; servers refetch it."
    }
   },
   "/applications/{application_id}/servers/{server_id}/commands": {
@@ -3303,10 +3306,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -3374,12 +3377,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "Replace every command of this application in one server with the given list, matched by type and name. The list is validated as a whole before anything changes."
    },
    "post": {
     "tags": [
@@ -3439,12 +3443,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "Register a new command in one server only. A command with the same type and name there is a conflict."
    }
   },
   "/applications/{application_id}/servers/{server_id}/commands/{command_id}": {
@@ -3504,12 +3509,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "One command of this application in one server, by its id."
    },
    "delete": {
     "tags": [
@@ -3560,12 +3566,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "Remove one command from one server."
    },
    "patch": {
     "tags": [
@@ -3633,12 +3640,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "Change one command of one server: only the fields sent change. The command keeps its id and gets a new version."
    }
   },
   "/applications/{application_id}/oauth": {
@@ -3682,12 +3690,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "The application's OAuth2 redirect URIs, and whether it has a client secret (the secret itself is never shown again)."
    },
    "patch": {
     "tags": [
@@ -3740,10 +3749,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -3790,8 +3799,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -3838,10 +3847,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -3888,10 +3897,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -3988,7 +3997,8 @@
        }
       }
      }
-    }
+    },
+    "description": "Delete the first reply to an interaction, private or public. Needs no bot token: the interaction's token is the key. Fails with `UnknownMessage` when nothing was sent yet."
    },
    "patch": {
     "tags": [
@@ -4311,10 +4321,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -4359,10 +4369,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -4469,10 +4479,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -4512,10 +4522,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -4563,10 +4573,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -4613,10 +4623,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -4672,10 +4682,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -4738,10 +4748,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -4791,10 +4801,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -4858,10 +4868,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -4977,10 +4987,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -5043,10 +5053,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5111,10 +5121,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5171,10 +5181,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5214,10 +5224,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5265,10 +5275,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5324,10 +5334,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -5381,10 +5391,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5439,10 +5449,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -5496,10 +5506,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -5562,10 +5572,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5623,10 +5633,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5673,10 +5683,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5724,10 +5734,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -5773,10 +5783,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5833,10 +5843,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5883,10 +5893,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -5943,10 +5953,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6001,10 +6011,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -6057,10 +6067,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6108,10 +6118,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6161,10 +6171,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6212,10 +6222,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6265,10 +6275,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6323,10 +6333,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6373,10 +6383,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6433,10 +6443,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -6491,10 +6501,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6551,10 +6561,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6611,10 +6621,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -6659,10 +6669,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6719,10 +6729,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6772,10 +6782,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6823,10 +6833,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -6873,10 +6883,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -6929,10 +6939,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -6987,10 +6997,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7037,10 +7047,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7095,10 +7105,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7153,10 +7163,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -7209,10 +7219,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7285,10 +7295,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7361,10 +7371,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7429,10 +7439,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7479,10 +7489,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7557,10 +7567,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -7615,10 +7625,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7675,10 +7685,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7734,10 +7744,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -7811,10 +7821,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7862,10 +7872,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -7930,10 +7940,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -7996,10 +8006,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8086,10 +8096,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8144,10 +8154,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8197,10 +8207,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -8263,10 +8273,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8316,10 +8326,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8366,10 +8376,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8416,10 +8426,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8466,10 +8476,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8524,10 +8534,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8577,10 +8587,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8636,10 +8646,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8697,10 +8707,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -8771,10 +8781,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8832,10 +8842,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8916,10 +8926,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -8976,10 +8986,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -9027,8 +9037,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    },
@@ -9091,8 +9101,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -9132,10 +9142,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9200,10 +9210,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9255,6 +9265,15 @@
        "type": "string",
        "nullable": true
       }
+     },
+     {
+      "name": "newest",
+      "in": "query",
+      "description": "The members who joined last, newest first (`limit` of them, default 100); `after` is not used with it",
+      "schema": {
+       "type": "boolean",
+       "nullable": true
+      }
      }
     ],
     "responses": {
@@ -9281,10 +9300,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9347,10 +9366,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -9404,10 +9423,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -9478,10 +9497,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9546,10 +9565,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9596,10 +9615,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9646,10 +9665,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -9712,10 +9731,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9762,10 +9781,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -9820,10 +9839,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9880,10 +9899,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -9947,10 +9966,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10005,10 +10024,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10063,10 +10082,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -10119,10 +10138,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10179,10 +10198,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10245,10 +10264,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10305,10 +10324,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -10346,10 +10365,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10416,10 +10435,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10492,10 +10511,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -10549,10 +10568,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10599,10 +10618,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10683,10 +10702,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -10749,10 +10768,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -10807,10 +10826,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -10874,10 +10893,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -10948,10 +10967,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11014,10 +11033,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11080,10 +11099,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11156,10 +11175,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11239,10 +11258,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -11295,10 +11314,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -11351,10 +11370,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11417,10 +11436,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11483,10 +11502,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11551,10 +11570,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -11607,10 +11626,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11710,10 +11729,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11777,10 +11796,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11861,10 +11880,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -11971,10 +11990,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12029,10 +12048,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12097,10 +12116,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12173,10 +12192,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -12237,10 +12256,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12295,10 +12314,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -12369,10 +12388,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12436,10 +12455,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12523,10 +12542,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12573,10 +12592,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12624,10 +12643,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12674,12 +12693,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "Refuse someone who asked to join: they do not become a member. Needs Manage Join Requests. Fails with `InvalidOperation` when the request was already decided."
    }
   },
   "/servers/{target}/join_requests/@me": {
@@ -12724,10 +12744,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -12764,12 +12784,13 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
-    ]
+    ],
+    "description": "Withdraw your own request to join this server, while it waits for a decision (afterwards: `InvalidOperation`)."
    }
   },
   "/servers/{target}/invites": {
@@ -12817,10 +12838,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12885,10 +12906,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -12943,10 +12964,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -13000,10 +13021,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -13074,10 +13095,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13150,10 +13171,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13218,10 +13239,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13294,10 +13315,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13378,10 +13399,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13454,10 +13475,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13507,10 +13528,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13557,10 +13578,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13633,10 +13654,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -13690,10 +13711,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -13756,10 +13777,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13832,10 +13853,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -13900,10 +13921,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14024,10 +14045,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14084,10 +14105,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14134,10 +14155,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -14191,10 +14212,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -14232,10 +14253,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -14290,10 +14311,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14320,10 +14341,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14461,10 +14482,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -14510,10 +14531,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14560,10 +14581,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14610,10 +14631,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14751,10 +14772,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14801,10 +14822,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14841,10 +14862,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -14894,10 +14915,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15035,10 +15056,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15085,10 +15106,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15125,10 +15146,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15178,10 +15199,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15221,10 +15242,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15282,10 +15303,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15322,10 +15343,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15365,10 +15386,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15405,10 +15426,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15519,10 +15540,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -15577,10 +15598,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15620,10 +15641,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15660,10 +15681,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15710,10 +15731,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15763,10 +15784,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15813,10 +15834,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -15854,10 +15875,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -15912,10 +15933,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -15962,10 +15983,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16012,10 +16033,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16071,10 +16092,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16130,10 +16151,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16189,10 +16210,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16248,10 +16269,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16307,10 +16328,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16357,10 +16378,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16417,10 +16438,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16460,10 +16481,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -16500,10 +16521,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16543,10 +16564,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16582,10 +16603,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16597,7 +16618,7 @@
     ],
     "summary": "List plugins in the store",
     "description": "Only listed plugins with an approved release.",
-    "operationId": "list",
+    "operationId": "get_plugins",
     "parameters": [
      {
       "name": "query",
@@ -16664,10 +16685,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -16677,7 +16698,7 @@
     ],
     "summary": "Create a plugin project",
     "description": "Creates a draft owned by you. Nothing is installable until a reviewer approves a release.",
-    "operationId": "create",
+    "operationId": "post_plugins",
     "requestBody": {
      "content": {
       "application/json": {
@@ -16712,10 +16733,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16726,7 +16747,7 @@
      "Plugins"
     ],
     "summary": "Fetch a plugin",
-    "operationId": "details",
+    "operationId": "get_plugins_id",
     "parameters": [
      {
       "name": "id",
@@ -16761,10 +16782,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16814,10 +16835,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16864,10 +16885,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16906,10 +16927,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -16921,7 +16942,7 @@
     ],
     "summary": "Submit a release for review",
     "description": "The package is validated and scanned. Invalid packages are refused with every problem listed; valid ones wait for a reviewer.",
-    "operationId": "submit",
+    "operationId": "post_plugins_id_releases",
     "parameters": [
      {
       "name": "id",
@@ -16966,10 +16987,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17008,10 +17029,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17022,7 +17043,7 @@
      "Plugins"
     ],
     "summary": "Review queue",
-    "operationId": "review_queue",
+    "operationId": "get_plugins_review_queue",
     "responses": {
      "200": {
       "description": "",
@@ -17050,10 +17071,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17064,7 +17085,7 @@
      "Plugins"
     ],
     "summary": "Approve a release",
-    "operationId": "approve",
+    "operationId": "post_plugins_releases_id_approve",
     "parameters": [
      {
       "name": "id",
@@ -17109,10 +17130,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17123,7 +17144,7 @@
      "Plugins"
     ],
     "summary": "Reject a release",
-    "operationId": "reject",
+    "operationId": "post_plugins_releases_id_reject",
     "parameters": [
      {
       "name": "id",
@@ -17161,10 +17182,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17214,10 +17235,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17229,7 +17250,7 @@
     ],
     "summary": "Suspend a plugin",
     "description": "Out of the store, and installs stop running, until reinstated.",
-    "operationId": "suspend",
+    "operationId": "post_plugins_id_suspend",
     "parameters": [
      {
       "name": "id",
@@ -17274,10 +17295,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17333,10 +17354,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17386,10 +17407,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17401,7 +17422,7 @@
     ],
     "summary": "Report a plugin",
     "description": "Once per user. Enough reports from different users suspend it until a reviewer looks at it.",
-    "operationId": "report",
+    "operationId": "post_plugins_id_report",
     "parameters": [
      {
       "name": "id",
@@ -17439,10 +17460,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17481,10 +17502,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17534,10 +17555,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17576,10 +17597,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17618,10 +17639,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17677,10 +17698,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -17718,10 +17739,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -17775,10 +17796,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17833,10 +17854,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17889,10 +17910,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -17937,10 +17958,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -17990,10 +18011,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18040,10 +18061,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18080,7 +18101,7 @@
     ],
     "summary": "My badges",
     "description": "Your badges (held, expired and revoked) and how close you are to the ones you can earn.",
-    "operationId": "mine",
+    "operationId": "get_badges_me",
     "responses": {
      "200": {
       "description": "",
@@ -18105,10 +18126,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18158,10 +18179,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18211,10 +18232,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18274,10 +18295,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18324,10 +18345,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18374,10 +18395,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18423,10 +18444,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18463,10 +18484,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18478,7 +18499,7 @@
     ],
     "summary": "Ask to join the beta",
     "description": "The program is closed: this only puts you on the list for staff to approve.",
-    "operationId": "request",
+    "operationId": "post_beta_me_request",
     "responses": {
      "200": {
       "description": "",
@@ -18503,10 +18524,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18542,10 +18563,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18582,10 +18603,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18597,7 +18618,7 @@
     ],
     "summary": "Can I use a beta feature?",
     "description": "Checked against your membership and the feature flag; this is the same check the server uses.",
-    "operationId": "access",
+    "operationId": "get_beta_features_feature",
     "parameters": [
      {
       "name": "feature",
@@ -18632,10 +18653,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18674,10 +18695,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -18722,10 +18743,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18774,10 +18795,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -18822,10 +18843,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18837,7 +18858,7 @@
     ],
     "summary": "Report a bug",
     "description": "`bug`, `security` (private: only you and security reviewers see it) or `feedback` (beta testers, about a beta feature). Up to four screenshots uploaded to `attachments`.",
-    "operationId": "submit",
+    "operationId": "post_bugs",
     "requestBody": {
      "content": {
       "application/json": {
@@ -18872,10 +18893,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18886,7 +18907,7 @@
      "Bug Reports"
     ],
     "summary": "My reports",
-    "operationId": "mine",
+    "operationId": "get_bugs_me",
     "responses": {
      "200": {
       "description": "",
@@ -18914,10 +18935,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -18964,10 +18985,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19029,10 +19050,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19089,10 +19110,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19132,10 +19153,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -19180,10 +19201,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19230,10 +19251,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19288,10 +19309,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -19336,10 +19357,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19376,10 +19397,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19426,10 +19447,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19476,10 +19497,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19516,10 +19537,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19611,10 +19632,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19660,10 +19681,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19729,10 +19750,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19789,8 +19810,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -19837,10 +19858,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19898,10 +19919,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19947,10 +19968,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -19990,10 +20011,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20051,10 +20072,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20066,7 +20087,7 @@
     ],
     "summary": "Grant Plus (staff, MFA)",
     "description": "Gives Plus for some days without payment, recorded in the billing audit log with the reason. Needs `X-MFA-Ticket`.",
-    "operationId": "admin_grant",
+    "operationId": "post_billing_admin_grants",
     "requestBody": {
      "content": {
       "application/json": {
@@ -20101,8 +20122,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -20139,10 +20160,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20179,10 +20200,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20229,10 +20250,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20279,10 +20300,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20339,10 +20360,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20389,10 +20410,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20497,10 +20518,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -20546,10 +20567,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -20612,10 +20633,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20655,10 +20676,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20750,10 +20771,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20793,10 +20814,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -20841,10 +20862,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20890,10 +20911,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20950,10 +20971,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -20990,10 +21011,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21050,10 +21071,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21090,10 +21111,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21105,7 +21126,7 @@
     ],
     "summary": "Review queue",
     "description": "Cases, newest first (or oldest first with `oldest=true`). Filters take comma separated values; `assignee` is `me`, `none` or a user id.",
-    "operationId": "review_queue",
+    "operationId": "get_safety_admin_reports",
     "parameters": [
      {
       "name": "status",
@@ -21206,10 +21227,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21256,10 +21277,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -21314,10 +21335,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21374,10 +21395,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21434,10 +21455,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21484,10 +21505,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21534,10 +21555,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21594,10 +21615,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21654,10 +21675,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21724,10 +21745,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21784,10 +21805,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -21962,8 +21983,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -22000,7 +22021,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -22030,8 +22051,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -22071,8 +22092,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -22112,8 +22133,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -22160,7 +22181,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -22197,7 +22218,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    },
@@ -22232,8 +22253,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -22556,7 +22577,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -22593,7 +22614,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -22633,7 +22654,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    },
@@ -22671,8 +22692,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -22712,8 +22733,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    },
@@ -22768,7 +22789,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -22815,8 +22836,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Unvalidated MFA Ticket": []
+      "SessionToken": [],
+      "UnvalidatedMFATicket": []
      }
     ]
    }
@@ -22853,7 +22874,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -22893,8 +22914,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    },
@@ -22932,8 +22953,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -22963,7 +22984,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -23003,7 +23024,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    },
@@ -23038,8 +23059,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    },
@@ -23067,8 +23088,8 @@
     },
     "security": [
      {
-      "Session Token": [],
-      "Valid MFA Ticket": []
+      "SessionToken": [],
+      "ValidMFATicket": []
      }
     ]
    }
@@ -23105,7 +23126,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -23152,10 +23173,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23185,10 +23206,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23228,7 +23249,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -23258,7 +23279,7 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      }
     ]
    }
@@ -23298,10 +23319,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -23346,10 +23367,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23395,10 +23416,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23455,10 +23476,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23504,10 +23525,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23554,10 +23575,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23597,10 +23618,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23639,10 +23660,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23682,10 +23703,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23717,15 +23738,17 @@
          "type": "object",
          "additionalProperties": {
           "type": "array",
-          "items": [
-           {
-            "type": "integer",
-            "format": "int64"
-           },
-           {
-            "type": "string"
-           }
-          ],
+          "items": {
+           "oneOf": [
+            {
+             "type": "integer",
+             "format": "int64"
+            },
+            {
+             "type": "string"
+            }
+           ]
+          },
           "maxItems": 2,
           "minItems": 2
          }
@@ -23746,10 +23769,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23805,10 +23828,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -23848,10 +23871,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -24140,10 +24163,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -24189,10 +24212,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    },
@@ -24255,10 +24278,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -24754,10 +24777,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -24814,10 +24837,10 @@
     },
     "security": [
      {
-      "Session Token": []
+      "SessionToken": []
      },
      {
-      "Bot Token": []
+      "BotToken": []
      }
     ]
    }
@@ -28445,57 +28468,16 @@
     }
    },
    "RelationshipStatus": {
-    "description": "User's relationship with another user (or themselves)",
-    "oneOf": [
-     {
-      "description": "No relationship with other user",
-      "type": "string",
-      "enum": [
-       "None"
-      ]
-     },
-     {
-      "description": "Other user is us",
-      "type": "string",
-      "enum": [
-       "User"
-      ]
-     },
-     {
-      "description": "Friends with the other user",
-      "type": "string",
-      "enum": [
-       "Friend"
-      ]
-     },
-     {
-      "description": "Pending friend request to user",
-      "type": "string",
-      "enum": [
-       "Outgoing"
-      ]
-     },
-     {
-      "description": "Incoming friend request from user",
-      "type": "string",
-      "enum": [
-       "Incoming"
-      ]
-     },
-     {
-      "description": "Blocked this user",
-      "type": "string",
-      "enum": [
-       "Blocked"
-      ]
-     },
-     {
-      "description": "Blocked by this user",
-      "type": "string",
-      "enum": [
-       "BlockedOther"
-      ]
-     }
+    "description": "User's relationship with another user (or themselves)\n\n- `None`: No relationship with other user\n- `User`: Other user is us\n- `Friend`: Friends with the other user\n- `Outgoing`: Pending friend request to user\n- `Incoming`: Incoming friend request from user\n- `Blocked`: Blocked this user\n- `BlockedOther`: Blocked by this user",
+    "type": "string",
+    "enum": [
+     "None",
+     "User",
+     "Friend",
+     "Outgoing",
+     "Incoming",
+     "Blocked",
+     "BlockedOther"
     ]
    },
    "UserStatus": {
@@ -28520,7 +28502,7 @@
       "description": "When the status text (and its emoji) is cleared by the server",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -28536,50 +28518,21 @@
      }
     }
    },
-   "ISO8601 Timestamp": {
+   "ISO8601Timestamp": {
     "description": "ISO8601 formatted timestamp",
     "type": "string",
     "format": "date-time",
     "example": "1970-01-01T00:00:00Z"
    },
    "Presence": {
-    "description": "Presence status",
-    "oneOf": [
-     {
-      "description": "User is online",
-      "type": "string",
-      "enum": [
-       "Online"
-      ]
-     },
-     {
-      "description": "User is not currently available",
-      "type": "string",
-      "enum": [
-       "Idle"
-      ]
-     },
-     {
-      "description": "User is focusing / will only receive mentions",
-      "type": "string",
-      "enum": [
-       "Focus"
-      ]
-     },
-     {
-      "description": "User is busy / will not receive any notifications",
-      "type": "string",
-      "enum": [
-       "Busy"
-      ]
-     },
-     {
-      "description": "User appears to be offline",
-      "type": "string",
-      "enum": [
-       "Invisible"
-      ]
-     }
+    "description": "Presence status\n\n- `Online`: User is online\n- `Idle`: User is not currently available\n- `Focus`: User is focusing / will only receive mentions\n- `Busy`: User is busy / will not receive any notifications\n- `Invisible`: User appears to be offline",
+    "type": "string",
+    "enum": [
+     "Online",
+     "Idle",
+     "Focus",
+     "Busy",
+     "Invisible"
     ]
    },
    "BotInformation": {
@@ -28796,28 +28749,18 @@
     }
    },
    "FieldsUser": {
-    "description": "Optional fields on user object",
-    "oneOf": [
-     {
-      "type": "string",
-      "enum": [
-       "Avatar",
-       "StatusText",
-       "StatusPresence",
-       "ProfileContent",
-       "ProfileBackground",
-       "DisplayName",
-       "Pronouns",
-       "Style"
-      ]
-     },
-     {
-      "description": "Internal field, ignore this.",
-      "type": "string",
-      "enum": [
-       "Internal"
-      ]
-     }
+    "description": "Optional fields on user object\n\n- `Internal`: Internal field, ignore this.",
+    "type": "string",
+    "enum": [
+     "Avatar",
+     "StatusText",
+     "StatusPresence",
+     "ProfileContent",
+     "ProfileBackground",
+     "DisplayName",
+     "Pronouns",
+     "Style",
+     "Internal"
     ]
    },
    "DataChangeUsername": {
@@ -29302,7 +29245,7 @@
       "description": "Time at which this message was last edited",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -29435,7 +29378,7 @@
       "description": "Time at which this user joined the server",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -29469,7 +29412,7 @@
       "description": "Timestamp this member is timed out until",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -29486,7 +29429,7 @@
       "description": "When the member accepted the server rules (rules screening)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -29807,7 +29750,7 @@
        "finished_at": {
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ],
         "nullable": true
@@ -30191,7 +30134,7 @@
         "description": "Time shown next to the footer",
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ],
         "nullable": true
@@ -30626,22 +30569,11 @@
     }
    },
    "ImageSize": {
-    "description": "Image positioning and size",
-    "oneOf": [
-     {
-      "description": "Show large preview at the bottom of the embed",
-      "type": "string",
-      "enum": [
-       "Large"
-      ]
-     },
-     {
-      "description": "Show small preview to the side of the embed",
-      "type": "string",
-      "enum": [
-       "Preview"
-      ]
-     }
+    "description": "Image positioning and size\n\n- `Large`: Show large preview at the bottom of the embed\n- `Preview`: Show small preview to the side of the embed",
+    "type": "string",
+    "enum": [
+     "Large",
+     "Preview"
     ]
    },
    "Video": {
@@ -31469,24 +31401,14 @@
     ]
    },
    "ButtonStyle": {
-    "description": "Visual style of a button",
-    "oneOf": [
-     {
-      "type": "string",
-      "enum": [
-       "Primary",
-       "Secondary",
-       "Success",
-       "Danger"
-      ]
-     },
-     {
-      "description": "Opens `url`; produces no interaction",
-      "type": "string",
-      "enum": [
-       "Link"
-      ]
-     }
+    "description": "Visual style of a button\n\n- `Link`: Opens `url`; produces no interaction",
+    "type": "string",
+    "enum": [
+     "Primary",
+     "Secondary",
+     "Success",
+     "Danger",
+     "Link"
     ]
    },
    "ComponentRestriction": {
@@ -31544,22 +31466,11 @@
     ]
    },
    "TextInputStyle": {
-    "description": "Size of a text input",
-    "oneOf": [
-     {
-      "description": "One line",
-      "type": "string",
-      "enum": [
-       "Short"
-      ]
-     },
-     {
-      "description": "Several lines",
-      "type": "string",
-      "enum": [
-       "Paragraph"
-      ]
-     }
+    "description": "Size of a text input\n\n- `Short`: One line\n- `Paragraph`: Several lines",
+    "type": "string",
+    "enum": [
+     "Short",
+     "Paragraph"
     ]
    },
    "MediaItem": {
@@ -31627,36 +31538,13 @@
     }
    },
    "InteractionType": {
-    "description": "Kind of interaction",
-    "oneOf": [
-     {
-      "description": "Slash command, user or message context command",
-      "type": "string",
-      "enum": [
-       "Command"
-      ]
-     },
-     {
-      "description": "Button click or select choice on a bot's message",
-      "type": "string",
-      "enum": [
-       "Component"
-      ]
-     },
-     {
-      "description": "A form the bot opened was submitted",
-      "type": "string",
-      "enum": [
-       "ModalSubmit"
-      ]
-     },
-     {
-      "description": "The user is typing into an option with `autocomplete`",
-      "type": "string",
-      "enum": [
-       "Autocomplete"
-      ]
-     }
+    "description": "Kind of interaction\n\n- `Command`: Slash command, user or message context command\n- `Component`: Button click or select choice on a bot's message\n- `ModalSubmit`: A form the bot opened was submitted\n- `Autocomplete`: The user is typing into an option with `autocomplete`",
+    "type": "string",
+    "enum": [
+     "Command",
+     "Component",
+     "ModalSubmit",
+     "Autocomplete"
     ]
    },
    "Masquerade": {
@@ -31713,7 +31601,7 @@
       "description": "When the original message was sent",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -31752,7 +31640,7 @@
       "description": "When voting closes",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -32070,7 +31958,7 @@
       "description": "When it starts",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -32078,7 +31966,7 @@
       "description": "When it ends, if set",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -32208,7 +32096,7 @@
       "description": "When it really started",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -32217,7 +32105,7 @@
       "description": "When it really ended",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -32226,7 +32114,7 @@
       "description": "Set once the event's retention time ran out (12 months after it ended): who answered is no longer kept, only the counts",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -32319,43 +32207,14 @@
     ]
    },
    "ServerEventStatus": {
-    "description": "Where an event stands",
-    "oneOf": [
-     {
-      "description": "Waiting for its start time",
-      "type": "string",
-      "enum": [
-       "Scheduled"
-      ]
-     },
-     {
-      "description": "Happening now",
-      "type": "string",
-      "enum": [
-       "Active"
-      ]
-     },
-     {
-      "description": "Over",
-      "type": "string",
-      "enum": [
-       "Completed"
-      ]
-     },
-     {
-      "description": "Called off before or while it ran",
-      "type": "string",
-      "enum": [
-       "Cancelled"
-      ]
-     },
-     {
-      "description": "Not published yet: only its organisers see it and nothing starts it",
-      "type": "string",
-      "enum": [
-       "Draft"
-      ]
-     }
+    "description": "Where an event stands\n\n- `Scheduled`: Waiting for its start time\n- `Active`: Happening now\n- `Completed`: Over\n- `Cancelled`: Called off before or while it ran\n- `Draft`: Not published yet: only its organisers see it and nothing starts it",
+    "type": "string",
+    "enum": [
+     "Scheduled",
+     "Active",
+     "Completed",
+     "Cancelled",
+     "Draft"
     ]
    },
    "ServerEventRepeat": {
@@ -32405,55 +32264,21 @@
     }
    },
    "ServerEventVisibility": {
-    "description": "Who may see an event, on top of being a member of the server and (for a channel place) seeing that channel",
-    "oneOf": [
-     {
-      "description": "Everyone who can see the place",
-      "type": "string",
-      "enum": [
-       "Place"
-      ]
-     },
-     {
-      "description": "Only members with one of `visible_roles`",
-      "type": "string",
-      "enum": [
-       "Roles"
-      ]
-     },
-     {
-      "description": "Only the invited people",
-      "type": "string",
-      "enum": [
-       "Invited"
-      ]
-     }
+    "description": "Who may see an event, on top of being a member of the server and (for a channel place) seeing that channel\n\n- `Place`: Everyone who can see the place\n- `Roles`: Only members with one of `visible_roles`\n- `Invited`: Only the invited people",
+    "type": "string",
+    "enum": [
+     "Place",
+     "Roles",
+     "Invited"
     ]
    },
    "ServerEventAttendeeList": {
-    "description": "Who may read the list of people taking part",
-    "oneOf": [
-     {
-      "description": "Only the organisers",
-      "type": "string",
-      "enum": [
-       "Organisers"
-      ]
-     },
-     {
-      "description": "People who answered \"going\" or \"maybe\", and the organisers",
-      "type": "string",
-      "enum": [
-       "Participants"
-      ]
-     },
-     {
-      "description": "Everyone who can see the event",
-      "type": "string",
-      "enum": [
-       "Everyone"
-      ]
-     }
+    "description": "Who may read the list of people taking part\n\n- `Organisers`: Only the organisers\n- `Participants`: People who answered \"going\" or \"maybe\", and the organisers\n- `Everyone`: Everyone who can see the event",
+    "type": "string",
+    "enum": [
+     "Organisers",
+     "Participants",
+     "Everyone"
     ]
    },
    "ServerEventLink": {
@@ -32530,55 +32355,21 @@
     }
    },
    "DirectMessagePrivacy": {
-    "description": "Who can start a direct message with a user\n\nFriends always can, blocked users never can, and anyone the user wrote to first can reply.",
-    "oneOf": [
-     {
-      "description": "Anyone",
-      "type": "string",
-      "enum": [
-       "Everyone"
-      ]
-     },
-     {
-      "description": "Friends and people sharing a server or group with the user",
-      "type": "string",
-      "enum": [
-       "Mutual"
-      ]
-     },
-     {
-      "description": "Friends only",
-      "type": "string",
-      "enum": [
-       "Friends"
-      ]
-     }
+    "description": "Who can start a direct message with a user\n\nFriends always can, blocked users never can, and anyone the user wrote to first can reply.\n\n- `Everyone`: Anyone\n- `Mutual`: Friends and people sharing a server or group with the user\n- `Friends`: Friends only",
+    "type": "string",
+    "enum": [
+     "Everyone",
+     "Mutual",
+     "Friends"
     ]
    },
    "GroupInvitePrivacy": {
-    "description": "Who can add a user to group chats",
-    "oneOf": [
-     {
-      "description": "Anyone who can invite people to the group",
-      "type": "string",
-      "enum": [
-       "Everyone"
-      ]
-     },
-     {
-      "description": "Friends only",
-      "type": "string",
-      "enum": [
-       "Friends"
-      ]
-     },
-     {
-      "description": "Nobody, not even friends",
-      "type": "string",
-      "enum": [
-       "Nobody"
-      ]
-     }
+    "description": "Who can add a user to group chats\n\n- `Everyone`: Anyone who can invite people to the group\n- `Friends`: Friends only\n- `Nobody`: Nobody, not even friends",
+    "type": "string",
+    "enum": [
+     "Everyone",
+     "Friends",
+     "Nobody"
     ]
    },
    "DataEditPrivacy": {
@@ -33913,6 +33704,10 @@
       "description": "Profile Avatar",
       "type": "string"
      },
+     "banner": {
+      "description": "Profile banner (a GIF or animated WebP plays)",
+      "type": "string"
+     },
      "description": {
       "description": "Profile Description",
       "type": "string"
@@ -33953,12 +33748,17 @@
     }
    },
    "PublicBotCreator": {
-    "description": "The person who made a public bot, shown only when the owner chose so (never their id)",
+    "description": "The person who made a public bot, shown only when the owner chose so (`show_creator`): then their profile opens from the bot's",
     "type": "object",
     "required": [
+     "_id",
      "username"
     ],
     "properties": {
+     "_id": {
+      "description": "Their user id, to open their profile",
+      "type": "string"
+     },
      "username": {
       "description": "Username",
       "type": "string"
@@ -33967,6 +33767,10 @@
       "description": "Display name",
       "type": "string",
       "nullable": true
+     },
+     "avatar": {
+      "description": "Their avatar (a file id)",
+      "type": "string"
      }
     }
    },
@@ -34040,29 +33844,12 @@
     }
    },
    "ApplicationCommandType": {
-    "description": "Kind of application command",
-    "oneOf": [
-     {
-      "description": "Typed in the message box as `/name`",
-      "type": "string",
-      "enum": [
-       "ChatInput"
-      ]
-     },
-     {
-      "description": "Shown in a user's context menu",
-      "type": "string",
-      "enum": [
-       "User"
-      ]
-     },
-     {
-      "description": "Shown in a message's context menu",
-      "type": "string",
-      "enum": [
-       "Message"
-      ]
-     }
+    "description": "Kind of application command\n\n- `ChatInput`: Typed in the message box as `/name`\n- `User`: Shown in a user's context menu\n- `Message`: Shown in a message's context menu",
+    "type": "string",
+    "enum": [
+     "ChatInput",
+     "User",
+     "Message"
     ]
    },
    "ApplicationCommandOption": {
@@ -34445,7 +34232,6 @@
     "properties": {
      "tags": {
       "description": "Up to five short tags",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -34454,13 +34240,11 @@
      },
      "category": {
       "description": "Category id, see the Discover category lists",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "language": {
       "description": "ISO 639-1 language code",
-      "default": null,
       "type": "string",
       "nullable": true
      }
@@ -34490,6 +34274,13 @@
       "type": "integer",
       "format": "int64",
       "nullable": true
+     },
+     "checks": {
+      "description": "What the team looks at, line by line (the program's checklist). Only `owner`, `bot_active`, `email` and `adult` stop a request; the bot's servers and age never do",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ProgramCheck"
+      }
      }
     }
    },
@@ -34593,7 +34384,6 @@
      },
      "intents": {
       "description": "Privileged gateway intents the bot needs (see [`GatewayIntents`]); approving the request approves them",
-      "default": null,
       "type": "integer",
       "format": "int64",
       "nullable": true
@@ -34619,7 +34409,6 @@
       "type": "string"
      },
      "name_localizations": {
-      "default": null,
       "type": "object",
       "additionalProperties": {
        "type": "string"
@@ -34631,7 +34420,6 @@
       "type": "string"
      },
      "description_localizations": {
-      "default": null,
       "type": "object",
       "additionalProperties": {
        "type": "string"
@@ -34646,7 +34434,6 @@
       }
      },
      "default_member_permissions": {
-      "default": null,
       "type": "integer",
       "format": "int64",
       "nullable": true
@@ -34727,7 +34514,7 @@
      "secret_created_at": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -34782,10 +34569,10 @@
       "type": "string"
      },
      "respond_by": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      },
      "expires_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      }
     }
    },
@@ -34803,7 +34590,6 @@
      },
      "application_id": {
       "description": "Required for commands; components and modals take it from their message or form",
-      "default": null,
       "type": "string",
       "nullable": true
      },
@@ -34812,13 +34598,11 @@
      },
      "command_id": {
       "description": "Commands and autocomplete",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "command_version": {
       "description": "Revision the user picked; rejected when the command changed since",
-      "default": null,
       "type": "string",
       "nullable": true
      },
@@ -34830,31 +34614,26 @@
       }
      },
      "target_id": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "focused": {
       "description": "Autocomplete: name of the option being typed into",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "message_id": {
       "description": "Components: message the component is on (public or ephemeral)",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "custom_id": {
       "description": "Components: which component; modal submits: which form",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "values": {
       "description": "Selects: chosen values",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -34863,13 +34642,11 @@
      },
      "parent_id": {
       "description": "Modal submits: the interaction that opened the form",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "fields": {
       "description": "Modal submits: field values",
-      "default": null,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/ModalFieldValue"
@@ -34881,7 +34658,6 @@
       "type": "string"
      },
      "locale": {
-      "default": null,
       "type": "string",
       "nullable": true
      }
@@ -34951,13 +34727,11 @@
      },
      "value": {
       "description": "Text of a text input, or the choice of a radio group",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "values": {
       "description": "Chosen values of a select or checkbox group, or uploaded file ids",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -34982,7 +34756,6 @@
       "$ref": "#/components/schemas/InteractionCallbackType"
      },
      "data": {
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/InteractionResponseData"
@@ -34992,7 +34765,6 @@
      },
      "modal": {
       "description": "For `Modal`",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/Modal"
@@ -35002,7 +34774,6 @@
      },
      "choices": {
       "description": "For `AutocompleteResult`",
-      "default": null,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/CommandOptionChoice"
@@ -35012,50 +34783,15 @@
     }
    },
    "InteractionCallbackType": {
-    "description": "How the bot answers",
-    "oneOf": [
-     {
-      "description": "Reply with a new message now",
-      "type": "string",
-      "enum": [
-       "Message"
-      ]
-     },
-     {
-      "description": "\"Thinking...\" now, the message follows by editing the original",
-      "type": "string",
-      "enum": [
-       "DeferredMessage"
-      ]
-     },
-     {
-      "description": "Components only: change the message the component is on",
-      "type": "string",
-      "enum": [
-       "UpdateMessage"
-      ]
-     },
-     {
-      "description": "Components only: acknowledge now, change the message later by editing the original",
-      "type": "string",
-      "enum": [
-       "DeferredUpdate"
-      ]
-     },
-     {
-      "description": "Open a form (not as an answer to a form or an autocomplete)",
-      "type": "string",
-      "enum": [
-       "Modal"
-      ]
-     },
-     {
-      "description": "Autocomplete only: suggestions",
-      "type": "string",
-      "enum": [
-       "AutocompleteResult"
-      ]
-     }
+    "description": "How the bot answers\n\n- `Message`: Reply with a new message now\n- `DeferredMessage`: \"Thinking...\" now, the message follows by editing the original\n- `UpdateMessage`: Components only: change the message the component is on\n- `DeferredUpdate`: Components only: acknowledge now, change the message later by editing the original\n- `Modal`: Open a form (not as an answer to a form or an autocomplete)\n- `AutocompleteResult`: Autocomplete only: suggestions",
+    "type": "string",
+    "enum": [
+     "Message",
+     "DeferredMessage",
+     "UpdateMessage",
+     "DeferredUpdate",
+     "Modal",
+     "AutocompleteResult"
     ]
    },
    "InteractionResponseData": {
@@ -35063,12 +34799,10 @@
     "type": "object",
     "properties": {
      "content": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "embeds": {
-      "default": null,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/SendableEmbed"
@@ -35077,7 +34811,6 @@
      },
      "components": {
       "description": "Replaces the components; an empty list removes them",
-      "default": null,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/ComponentBlock"
@@ -35132,7 +34865,6 @@
      },
      "author": {
       "description": "Author line above the title",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/EmbedAuthor"
@@ -35142,7 +34874,6 @@
      },
      "fields": {
       "description": "Name / value pairs (up to 25)",
-      "default": null,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/EmbedField"
@@ -35151,13 +34882,11 @@
      },
      "thumbnail": {
       "description": "Id of an uploaded file shown small at the top end",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "footer": {
       "description": "Footer below everything",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/EmbedFooter"
@@ -35167,23 +34896,20 @@
      },
      "timestamp": {
       "description": "Time shown next to the footer",
-      "default": null,
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
      },
      "image_url": {
       "description": "Large image by web address, loaded through the media proxy",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "thumbnail_url": {
       "description": "Small image by web address, loaded through the media proxy",
-      "default": null,
       "type": "string",
       "nullable": true
      }
@@ -35375,12 +35101,10 @@
      },
      "server_id": {
       "description": "Server to install the bot into (`bot.install`)",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "permissions": {
-      "default": null,
       "type": "integer",
       "format": "int64",
       "nullable": true
@@ -35441,7 +35165,7 @@
       }
      },
      "authorized_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      }
     }
    },
@@ -35625,7 +35349,7 @@
         "description": "Timestamp at which this invite expires",
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ],
         "nullable": true
@@ -35678,7 +35402,7 @@
         "description": "Timestamp at which this invite expires",
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ],
         "nullable": true
@@ -35703,7 +35427,7 @@
       "description": "When this invite expires; left out, it expires after the server's default (7 days) unless `never_expires` is set",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -35784,7 +35508,6 @@
      },
      "poll": {
       "description": "Poll to attach (needs Send Embeds as well as Send Messages)",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/DataPoll"
@@ -35905,29 +35628,12 @@
     }
    },
    "MessageSort": {
-    "description": "Message Sort\n\nSort used for retrieving messages",
-    "oneOf": [
-     {
-      "description": "Sort by the most relevant messages",
-      "type": "string",
-      "enum": [
-       "Relevance"
-      ]
-     },
-     {
-      "description": "Sort by the newest messages first",
-      "type": "string",
-      "enum": [
-       "Latest"
-      ]
-     },
-     {
-      "description": "Sort by the oldest messages first",
-      "type": "string",
-      "enum": [
-       "Oldest"
-      ]
-     }
+    "description": "Message Sort\n\nSort used for retrieving messages\n\n- `Relevance`: Sort by the most relevant messages\n- `Latest`: Sort by the newest messages first\n- `Oldest`: Sort by the oldest messages first",
+    "type": "string",
+    "enum": [
+     "Relevance",
+     "Latest",
+     "Oldest"
     ]
    },
    "DataMessageSearch": {
@@ -35984,7 +35690,7 @@
       "description": "Messages sent before this moment (works together with `before`)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -35993,7 +35699,7 @@
       "description": "Messages sent after this moment (works together with `after`)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -36047,50 +35753,15 @@
     }
    },
    "MessageHas": {
-    "description": "Something a message has, for search",
-    "oneOf": [
-     {
-      "description": "A web address in the text",
-      "type": "string",
-      "enum": [
-       "link"
-      ]
-     },
-     {
-      "description": "Any attachment",
-      "type": "string",
-      "enum": [
-       "file"
-      ]
-     },
-     {
-      "description": "An image attachment",
-      "type": "string",
-      "enum": [
-       "image"
-      ]
-     },
-     {
-      "description": "A video attachment",
-      "type": "string",
-      "enum": [
-       "video"
-      ]
-     },
-     {
-      "description": "An embed (a link preview or a bot embed)",
-      "type": "string",
-      "enum": [
-       "embed"
-      ]
-     },
-     {
-      "description": "An audio attachment, voice messages included",
-      "type": "string",
-      "enum": [
-       "sound"
-      ]
-     }
+    "description": "Something a message has, for search\n\n- `link`: A web address in the text\n- `file`: Any attachment\n- `image`: An image attachment\n- `video`: A video attachment\n- `embed`: An embed (a link preview or a bot embed)\n- `sound`: An audio attachment, voice messages included",
+    "type": "string",
+    "enum": [
+     "link",
+     "file",
+     "image",
+     "video",
+     "embed",
+     "sound"
     ]
    },
    "DataEditMessage": {
@@ -36522,22 +36193,11 @@
     }
    },
    "VoiceCaptureKind": {
-    "description": "What a saved piece of a voice room is",
-    "oneOf": [
-     {
-      "description": "The last seconds of a room, saved by someone in it",
-      "type": "string",
-      "enum": [
-       "Clip"
-      ]
-     },
-     {
-      "description": "A recorded room that members can hear later",
-      "type": "string",
-      "enum": [
-       "Episode"
-      ]
-     }
+    "description": "What a saved piece of a voice room is\n\n- `Clip`: The last seconds of a room, saved by someone in it\n- `Episode`: A recorded room that members can hear later",
+    "type": "string",
+    "enum": [
+     "Clip",
+     "Episode"
     ]
    },
    "DataVoiceClip": {
@@ -36911,7 +36571,7 @@
       "description": "When the webhook last sent something",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -37086,7 +36746,7 @@
       "description": "Every invite and Discover join is refused until then",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -37095,7 +36755,7 @@
       "description": "Members who aren't friends can't DM each other until then",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -37104,7 +36764,7 @@
       "description": "Rules screening: members who joined since then accept the rules (`rules_channel`) before they can talk",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -37323,62 +36983,22 @@
     }
    },
    "ServerAccess": {
-    "description": "Who can become a member of a server. Discover listing is a separate, explicit setting (`discoverable`) and is only allowed for `Open`.",
-    "oneOf": [
-     {
-      "description": "Anyone with a join link or invite joins right away",
-      "type": "string",
-      "enum": [
-       "Open"
-      ]
-     },
-     {
-      "description": "Join links create a request; someone with Manage Join Requests approves it before the person becomes a member",
-      "type": "string",
-      "enum": [
-       "Approval"
-      ]
-     },
-     {
-      "description": "No requests and no vanity-link joins: only invites made by people allowed to invite let someone in",
-      "type": "string",
-      "enum": [
-       "Locked"
-      ]
-     }
+    "description": "Who can become a member of a server. Discover listing is a separate, explicit setting (`discoverable`) and is only allowed for `Open`.\n\n- `Open`: Anyone with a join link or invite joins right away\n- `Approval`: Join links create a request; someone with Manage Join Requests approves it before the person becomes a member\n- `Locked`: No requests and no vanity-link joins: only invites made by people allowed to invite let someone in",
+    "type": "string",
+    "enum": [
+     "Open",
+     "Approval",
+     "Locked"
     ]
    },
    "ServerVerificationLevel": {
-    "description": "What members without a role need before they can send messages, react or speak (members with any role, bots and the owner are exempt)",
-    "oneOf": [
-     {
-      "description": "Nothing",
-      "type": "string",
-      "enum": [
-       "None"
-      ]
-     },
-     {
-      "description": "A verified email address",
-      "type": "string",
-      "enum": [
-       "Low"
-      ]
-     },
-     {
-      "description": "Low, and an account older than 5 minutes",
-      "type": "string",
-      "enum": [
-       "Medium"
-      ]
-     },
-     {
-      "description": "Medium, and a member of the server for 10 minutes",
-      "type": "string",
-      "enum": [
-       "High"
-      ]
-     }
+    "description": "What members without a role need before they can send messages, react or speak (members with any role, bots and the owner are exempt)\n\n- `None`: Nothing\n- `Low`: A verified email address\n- `Medium`: Low, and an account older than 5 minutes\n- `High`: Medium, and a member of the server for 10 minutes",
+    "type": "string",
+    "enum": [
+     "None",
+     "Low",
+     "Medium",
+     "High"
     ]
    },
    "ServerSupercharge": {
@@ -37421,13 +37041,13 @@
       "type": "string"
      },
      "claimed_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      },
      "below_level_since": {
       "description": "When the server fell below the required level (none while it holds it)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -37435,36 +37055,13 @@
     }
    },
    "ServerStat": {
-    "description": "A live counter shown at the top of a server's channel list",
-    "oneOf": [
-     {
-      "description": "Members of the server",
-      "type": "string",
-      "enum": [
-       "Members"
-      ]
-     },
-     {
-      "description": "Channels in the server",
-      "type": "string",
-      "enum": [
-       "Channels"
-      ]
-     },
-     {
-      "description": "Roles in the server",
-      "type": "string",
-      "enum": [
-       "Roles"
-      ]
-     },
-     {
-      "description": "Wings given to the server",
-      "type": "string",
-      "enum": [
-       "Wings"
-      ]
-     }
+    "description": "A live counter shown at the top of a server's channel list\n\n- `Members`: Members of the server\n- `Channels`: Channels in the server\n- `Roles`: Roles in the server\n- `Wings`: Wings given to the server",
+    "type": "string",
+    "enum": [
+     "Members",
+     "Channels",
+     "Roles",
+     "Wings"
     ]
    },
    "ServerLobby": {
@@ -37564,55 +37161,46 @@
     "type": "object",
     "properties": {
      "secondary": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "background": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "surface": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "text": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "banner_height": {
-      "default": null,
       "type": "integer",
       "format": "uint16",
       "minimum": 0,
       "nullable": true
      },
      "radius": {
-      "default": null,
       "type": "integer",
       "format": "uint16",
       "minimum": 0,
       "nullable": true
      },
      "blend": {
-      "default": null,
       "type": "integer",
       "format": "uint16",
       "minimum": 0,
       "nullable": true
      },
      "angle": {
-      "default": null,
       "type": "integer",
       "format": "uint16",
       "minimum": 0,
       "nullable": true
      },
      "layout": {
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/LobbyLayout"
@@ -37621,7 +37209,6 @@
       "nullable": true
      },
      "density": {
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/LobbyDensity"
@@ -37630,7 +37217,6 @@
       "nullable": true
      },
      "banner_mode": {
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/LobbyBannerMode"
@@ -37639,34 +37225,28 @@
       "nullable": true
      },
      "show_greeting": {
-      "default": null,
       "type": "boolean",
       "nullable": true
      },
      "show_member_count": {
-      "default": null,
       "type": "boolean",
       "nullable": true
      },
      "show_chat": {
-      "default": null,
       "type": "boolean",
       "nullable": true
      },
      "show_invite": {
-      "default": null,
       "type": "boolean",
       "nullable": true
      },
      "channel_limit": {
-      "default": null,
       "type": "integer",
       "format": "uint16",
       "minimum": 0,
       "nullable": true
      },
      "newcomer_limit": {
-      "default": null,
       "type": "integer",
       "format": "uint16",
       "minimum": 0,
@@ -37712,7 +37292,6 @@
       "type": "string"
      },
      "description": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
@@ -37781,64 +37360,17 @@
     }
    },
    "LobbySection": {
-    "description": "A part of the lobby page",
-    "oneOf": [
-     {
-      "description": "Steps for new members: rules, hello, voice, profile",
-      "type": "string",
-      "enum": [
-       "Start"
-      ]
-     },
-     {
-      "description": "The newest announcement",
-      "type": "string",
-      "enum": [
-       "News"
-      ]
-     },
-     {
-      "description": "The managers' welcome text",
-      "type": "string",
-      "enum": [
-       "About"
-      ]
-     },
-     {
-      "description": "Voice rooms with people in them",
-      "type": "string",
-      "enum": [
-       "Live"
-      ]
-     },
-     {
-      "description": "Main channels",
-      "type": "string",
-      "enum": [
-       "Channels"
-      ]
-     },
-     {
-      "description": "Questions and answers",
-      "type": "string",
-      "enum": [
-       "Questions"
-      ]
-     },
-     {
-      "description": "Members who joined this week",
-      "type": "string",
-      "enum": [
-       "Newcomers"
-      ]
-     },
-     {
-      "description": "Who runs the server",
-      "type": "string",
-      "enum": [
-       "Team"
-      ]
-     }
+    "description": "A part of the lobby page\n\n- `Start`: Steps for new members: rules, hello, voice, profile\n- `News`: The newest announcement\n- `About`: The managers' welcome text\n- `Live`: Voice rooms with people in them\n- `Channels`: Main channels\n- `Questions`: Questions and answers\n- `Newcomers`: Members who joined this week\n- `Team`: Who runs the server",
+    "type": "string",
+    "enum": [
+     "Start",
+     "News",
+     "About",
+     "Live",
+     "Channels",
+     "Questions",
+     "Newcomers",
+     "Team"
     ]
    },
    "ServerTickets": {
@@ -37914,22 +37446,11 @@
     }
    },
    "ServerNotificationLevel": {
-    "description": "What a member who never chose a level for a server is notified about",
-    "oneOf": [
-     {
-      "description": "Every message",
-      "type": "string",
-      "enum": [
-       "All"
-      ]
-     },
-     {
-      "description": "Only messages that mention them",
-      "type": "string",
-      "enum": [
-       "Mentions"
-      ]
-     }
+    "description": "What a member who never chose a level for a server is notified about\n\n- `All`: Every message\n- `Mentions`: Only messages that mention them",
+    "type": "string",
+    "enum": [
+     "All",
+     "Mentions"
     ]
    },
    "DataCreateServer": {
@@ -38053,29 +37574,12 @@
     }
    },
    "LegacyServerChannelType": {
-    "description": "Server Channel Type",
-    "oneOf": [
-     {
-      "description": "Text Channel",
-      "type": "string",
-      "enum": [
-       "Text"
-      ]
-     },
-     {
-      "description": "Voice Channel",
-      "type": "string",
-      "enum": [
-       "Voice"
-      ]
-     },
-     {
-      "description": "Forum Channel: every post is a thread",
-      "type": "string",
-      "enum": [
-       "Forum"
-      ]
-     }
+    "description": "Server Channel Type\n\n- `Text`: Text Channel\n- `Voice`: Voice Channel\n- `Forum`: Forum Channel: every post is a thread",
+    "type": "string",
+    "enum": [
+     "Text",
+     "Voice",
+     "Forum"
     ]
    },
    "BlueprintCategory": {
@@ -38595,7 +38099,7 @@
       "type": "string"
      },
      "installed_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      }
     }
    },
@@ -38655,29 +38159,12 @@
     }
    },
    "CommandPermissionType": {
-    "description": "What a command permission rule targets",
-    "oneOf": [
-     {
-      "description": "A role; the server id means everyone",
-      "type": "string",
-      "enum": [
-       "Role"
-      ]
-     },
-     {
-      "description": "One member",
-      "type": "string",
-      "enum": [
-       "Member"
-      ]
-     },
-     {
-      "description": "A channel; the server id means every channel",
-      "type": "string",
-      "enum": [
-       "Channel"
-      ]
-     }
+    "description": "What a command permission rule targets\n\n- `Role`: A role; the server id means everyone\n- `Member`: One member\n- `Channel`: A channel; the server id means every channel",
+    "type": "string",
+    "enum": [
+     "Role",
+     "Member",
+     "Channel"
     ]
    },
    "DataEditCommandPermissions": {
@@ -38824,7 +38311,7 @@
         "description": "Every invite and Discover join is refused until then",
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ],
         "nullable": true
@@ -38833,7 +38320,7 @@
         "description": "Members who aren't friends can't DM each other until then",
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ],
         "nullable": true
@@ -38842,7 +38329,7 @@
         "description": "Rules screening: members who joined since then accept the rules (`rules_channel`) before they can talk",
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ],
         "nullable": true
@@ -39144,7 +38631,6 @@
      },
      "announcement": {
       "description": "Make it an announcement channel (text channels only)",
-      "default": null,
       "type": "boolean",
       "nullable": true
      },
@@ -39250,7 +38736,7 @@
       "description": "Timestamp this member is timed out until",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -39300,14 +38786,12 @@
     "type": "object",
     "properties": {
      "invites_hours": {
-      "default": null,
       "type": "integer",
       "format": "uint8",
       "minimum": 0,
       "nullable": true
      },
      "dms_hours": {
-      "default": null,
       "type": "integer",
       "format": "uint8",
       "minimum": 0,
@@ -39454,7 +38938,6 @@
         ]
        },
        "new_member_minutes": {
-        "default": null,
         "type": "integer",
         "format": "uint32",
         "minimum": 0,
@@ -39509,13 +38992,11 @@
      },
      "alert_channel": {
       "description": "Tell moderators in this channel",
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "timeout_minutes": {
       "description": "Time the member out for this many minutes",
-      "default": null,
       "type": "integer",
       "format": "uint32",
       "minimum": 0,
@@ -39577,7 +39058,6 @@
      },
      "welcome": {
       "description": "The welcome message; leave out to switch it off",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/ServerWelcomeMessage"
@@ -39651,7 +39131,6 @@
       "type": "string"
      },
      "channel": {
-      "default": null,
       "type": "string",
       "nullable": true
      }
@@ -39829,7 +39308,6 @@
      },
      "description": {
       "description": "Description in Markdown",
-      "default": null,
       "type": "string",
       "maxLength": 1000,
       "minLength": 0,
@@ -39839,16 +39317,15 @@
       "description": "When it starts (not in the past)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
      "ends_at": {
       "description": "When it ends (after the start)",
-      "default": null,
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -39863,7 +39340,6 @@
      },
      "cover": {
       "description": "Id of an uploaded cover image (tag `banners`)",
-      "default": null,
       "type": "string",
       "maxLength": 128,
       "minLength": 1,
@@ -39871,7 +39347,6 @@
      },
      "repeat": {
       "description": "How it repeats",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/ServerEventRepeat"
@@ -39881,7 +39356,6 @@
      },
      "time_zone": {
       "description": "Your IANA time zone (e.g. `Europe/Vienna`): repeats keep the same local time across daylight saving changes",
-      "default": null,
       "type": "string",
       "maxLength": 64,
       "minLength": 1,
@@ -39889,13 +39363,11 @@
      },
      "draft": {
       "description": "Save it as a draft: only organisers see it and nothing starts it until it is published",
-      "default": null,
       "type": "boolean",
       "nullable": true
      },
      "visibility": {
       "description": "Who may see it (default: everyone who can see the place)",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/ServerEventVisibility"
@@ -39905,7 +39377,6 @@
      },
      "visible_roles": {
       "description": "Roles that see it (visibility `Roles`, 1 to 20)",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -39914,7 +39385,6 @@
      },
      "invited": {
       "description": "Members who are invited (visibility `Invited`, up to 200)",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -39923,7 +39393,6 @@
      },
      "attendee_list": {
       "description": "Who may read the list of people taking part (default: organisers) An event stored before this setting existed keeps its open list.",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/ServerEventAttendeeList"
@@ -39933,7 +39402,6 @@
      },
      "capacity": {
       "description": "Seats (1 to 10000); absent: no limit",
-      "default": null,
       "type": "integer",
       "format": "uint32",
       "minimum": 0,
@@ -39941,13 +39409,11 @@
      },
      "waitlist": {
       "description": "Let people wait for a seat when all are taken (default: yes)",
-      "default": null,
       "type": "boolean",
       "nullable": true
      },
      "co_organisers": {
       "description": "Members who help manage this event (up to 10)",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -39956,7 +39422,6 @@
      },
      "reminders": {
       "description": "Reminders, in minutes before the start (up to 3, each from 5 minutes to a week). People who are going or maybe going get them",
-      "default": null,
       "type": "array",
       "items": {
        "type": "integer",
@@ -40033,7 +39498,6 @@
     "properties": {
      "title": {
       "description": "Title",
-      "default": null,
       "type": "string",
       "maxLength": 100,
       "minLength": 1,
@@ -40041,7 +39505,6 @@
      },
      "description": {
       "description": "Description in Markdown",
-      "default": null,
       "type": "string",
       "maxLength": 1000,
       "minLength": 0,
@@ -40049,27 +39512,24 @@
      },
      "starts_at": {
       "description": "When it starts (only while scheduled)",
-      "default": null,
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
      },
      "ends_at": {
       "description": "When it ends",
-      "default": null,
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
      },
      "place": {
       "description": "Where it takes place",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/ServerEventPlace"
@@ -40079,7 +39539,6 @@
      },
      "cover": {
       "description": "Id of an uploaded cover image (tag `banners`)",
-      "default": null,
       "type": "string",
       "maxLength": 128,
       "minLength": 1,
@@ -40087,7 +39546,6 @@
      },
      "repeat": {
       "description": "How it repeats",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/ServerEventRepeat"
@@ -40097,7 +39555,6 @@
      },
      "visibility": {
       "description": "Who may see it",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/ServerEventVisibility"
@@ -40107,7 +39564,6 @@
      },
      "visible_roles": {
       "description": "Roles that see it (visibility `Roles`, 1 to 20)",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -40116,7 +39572,6 @@
      },
      "invited": {
       "description": "Members who are invited (visibility `Invited`, up to 200)",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -40125,7 +39580,6 @@
      },
      "attendee_list": {
       "description": "Who may read the list of people taking part",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/ServerEventAttendeeList"
@@ -40135,7 +39589,6 @@
      },
      "capacity": {
       "description": "Seats (1 to 10000); absent: no limit",
-      "default": null,
       "type": "integer",
       "format": "uint32",
       "minimum": 0,
@@ -40143,13 +39596,11 @@
      },
      "waitlist": {
       "description": "Let people wait for a seat when all are taken",
-      "default": null,
       "type": "boolean",
       "nullable": true
      },
      "co_organisers": {
       "description": "Members who help manage this event (up to 10)",
-      "default": null,
       "type": "array",
       "items": {
        "type": "string"
@@ -40158,7 +39609,6 @@
      },
      "reminders": {
       "description": "Reminders, in minutes before the start (up to 3, each from 5 minutes to a week). People who are going or maybe going get them",
-      "default": null,
       "type": "array",
       "items": {
        "type": "integer",
@@ -40180,24 +39630,14 @@
     }
    },
    "FieldsServerEvent": {
-    "description": "Optional fields of an event that can be cleared",
-    "oneOf": [
-     {
-      "type": "string",
-      "enum": [
-       "Description",
-       "EndsAt",
-       "Cover",
-       "Repeat"
-      ]
-     },
-     {
-      "description": "No seat limit any more: everyone waiting gets a seat",
-      "type": "string",
-      "enum": [
-       "Capacity"
-      ]
-     }
+    "description": "Optional fields of an event that can be cleared\n\n- `Capacity`: No seat limit any more: everyone waiting gets a seat",
+    "type": "string",
+    "enum": [
+     "Description",
+     "EndsAt",
+     "Cover",
+     "Repeat",
+     "Capacity"
     ]
    },
    "ServerEventInterestedPage": {
@@ -40277,7 +39717,7 @@
       "description": "When they first answered (organisers only)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -40340,7 +39780,7 @@
       "description": "When it really started",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -40349,7 +39789,7 @@
       "description": "When it really ended",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -40406,7 +39846,6 @@
     "properties": {
      "name": {
       "description": "A name in the link (1 to 40 characters; kept as lower-case letters, digits and `-`). Absent: the name stays as it is; empty: no name",
-      "default": null,
       "type": "string",
       "maxLength": 40,
       "minLength": 0,
@@ -40414,7 +39853,6 @@
      },
      "public": {
       "description": "Let people outside the server see the title, the time, the cover and the server's name through the link",
-      "default": null,
       "type": "boolean",
       "nullable": true
      }
@@ -40452,13 +39890,13 @@
      "expires_at": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
      },
      "created_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      }
     }
    },
@@ -40468,7 +39906,6 @@
     "properties": {
      "max_uses": {
       "description": "How many people can use it (1 to 200); absent: until the event has its 200 invited people",
-      "default": null,
       "type": "integer",
       "format": "uint32",
       "maximum": 200,
@@ -40477,7 +39914,6 @@
      },
      "expires_in": {
       "description": "Seconds until it stops working (5 minutes to 30 days); absent: it works until the event is over",
-      "default": null,
       "type": "integer",
       "format": "uint64",
       "maximum": 2592000,
@@ -40764,7 +40200,7 @@
       "description": "When the request was made (or last renewed)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -40777,7 +40213,7 @@
       "description": "When it was approved or rejected",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -42502,7 +41938,7 @@
      "joined_at": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -42533,7 +41969,7 @@
      "timeout": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -42549,7 +41985,7 @@
      "accepted_rules_at": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -42662,7 +42098,7 @@
      "invites_paused_until": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -42670,7 +42106,7 @@
      "dms_paused_until": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -42678,7 +42114,7 @@
      "rules_screening_since": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -43199,12 +42635,12 @@
       "type": "string"
      },
      "starts_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      },
      "ends_at": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -43558,7 +42994,6 @@
     "properties": {
      "decision": {
       "description": "Outcome; omit to only change `featured`",
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/DiscoverDecision"
@@ -43568,7 +43003,6 @@
      },
      "reason": {
       "description": "Reason shown to the owner",
-      "default": null,
       "type": "string",
       "maxLength": 512,
       "minLength": 1,
@@ -43576,43 +43010,19 @@
      },
      "featured": {
       "description": "Feature or unfeature an approved listing",
-      "default": null,
       "type": "boolean",
       "nullable": true
      }
     }
    },
    "DiscoverDecision": {
-    "description": "Moderation outcome for a Discover request",
-    "oneOf": [
-     {
-      "description": "Mark as being reviewed",
-      "type": "string",
-      "enum": [
-       "Review"
-      ]
-     },
-     {
-      "description": "List the item on Discover",
-      "type": "string",
-      "enum": [
-       "Approve"
-      ]
-     },
-     {
-      "description": "Reject the request; the owner may apply again",
-      "type": "string",
-      "enum": [
-       "Deny"
-      ]
-     },
-     {
-      "description": "Remove the item from Discover; the owner must contact support",
-      "type": "string",
-      "enum": [
-       "Remove"
-      ]
-     }
+    "description": "Moderation outcome for a Discover request\n\n- `Review`: Mark as being reviewed\n- `Approve`: List the item on Discover\n- `Deny`: Reject the request; the owner may apply again\n- `Remove`: Remove the item from Discover; the owner must contact support",
+    "type": "string",
+    "enum": [
+     "Review",
+     "Approve",
+     "Deny",
+     "Remove"
     ]
    },
    "CommunityPermissions": {
@@ -43850,29 +43260,12 @@
     }
    },
    "CommunityItemKind": {
-    "description": "What a community item is",
-    "oneOf": [
-     {
-      "description": "Frame drawn around an avatar",
-      "type": "string",
-      "enum": [
-       "Decoration"
-      ]
-     },
-     {
-      "description": "Background drawn behind a name in member lists",
-      "type": "string",
-      "enum": [
-       "Nameplate"
-      ]
-     },
-     {
-      "description": "Transparent animation that plays once over a profile",
-      "type": "string",
-      "enum": [
-       "Effect"
-      ]
-     }
+    "description": "What a community item is\n\n- `Decoration`: Frame drawn around an avatar\n- `Nameplate`: Background drawn behind a name in member lists\n- `Effect`: Transparent animation that plays once over a profile",
+    "type": "string",
+    "enum": [
+     "Decoration",
+     "Nameplate",
+     "Effect"
     ]
    },
    "CommunityItemStatus": {
@@ -44685,7 +44078,6 @@
       "type": "string"
      },
      "summary": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
@@ -44737,12 +44129,10 @@
     "properties": {
      "manifest": {},
      "code": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
      "changelog": {
-      "default": null,
       "type": "string",
       "nullable": true
      }
@@ -44818,7 +44208,6 @@
     "type": "object",
     "properties": {
      "reason": {
-      "default": null,
       "type": "string",
       "nullable": true
      },
@@ -44952,7 +44341,6 @@
       }
      },
      "enabled": {
-      "default": null,
       "type": "boolean",
       "nullable": true
      }
@@ -46103,12 +45491,12 @@
       "type": "string"
      },
      "created_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      },
      "paid_at": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -46145,7 +45533,7 @@
       "description": "Unpaid checkout closes at this time",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -46322,97 +45710,27 @@
     ]
    },
    "OrderKind": {
-    "description": "Why an order exists",
-    "oneOf": [
-     {
-      "description": "Bought by the member",
-      "type": "string",
-      "enum": [
-       "Purchase"
-      ]
-     },
-     {
-      "description": "A monthly renewal of a subscription",
-      "type": "string",
-      "enum": [
-       "Renewal"
-      ]
-     }
+    "description": "Why an order exists\n\n- `Purchase`: Bought by the member\n- `Renewal`: A monthly renewal of a subscription",
+    "type": "string",
+    "enum": [
+     "Purchase",
+     "Renewal"
     ]
    },
    "OrderStatus": {
-    "description": "Where an order is. Allowed moves are in `OrderStatus::can_move_to`.",
-    "oneOf": [
-     {
-      "description": "Made, checkout not opened yet",
-      "type": "string",
-      "enum": [
-       "Created"
-      ]
-     },
-     {
-      "description": "Waiting for payment (checkout open)",
-      "type": "string",
-      "enum": [
-       "Pending"
-      ]
-     },
-     {
-      "description": "The payer has to act (e.g. 3-D Secure)",
-      "type": "string",
-      "enum": [
-       "RequiresAction"
-      ]
-     },
-     {
-      "description": "Payment submitted, the provider is confirming it",
-      "type": "string",
-      "enum": [
-       "Processing"
-      ]
-     },
-     {
-      "description": "Paid (and delivered, or being delivered)",
-      "type": "string",
-      "enum": [
-       "Paid"
-      ]
-     },
-     {
-      "description": "Payment failed for good",
-      "type": "string",
-      "enum": [
-       "Failed"
-      ]
-     },
-     {
-      "description": "Not paid in time or cancelled",
-      "type": "string",
-      "enum": [
-       "Cancelled"
-      ]
-     },
-     {
-      "description": "All money given back",
-      "type": "string",
-      "enum": [
-       "Refunded"
-      ]
-     },
-     {
-      "description": "Some money given back",
-      "type": "string",
-      "enum": [
-       "PartiallyRefunded"
-      ]
-     },
-     {
-      "description": "The payer disputed the payment with their bank",
-      "type": "string",
-      "enum": [
-       "Disputed"
-      ]
-     }
+    "description": "Where an order is. Allowed moves are in `OrderStatus::can_move_to`.\n\n- `Created`: Made, checkout not opened yet\n- `Pending`: Waiting for payment (checkout open)\n- `RequiresAction`: The payer has to act (e.g. 3-D Secure)\n- `Processing`: Payment submitted, the provider is confirming it\n- `Paid`: Paid (and delivered, or being delivered)\n- `Failed`: Payment failed for good\n- `Cancelled`: Not paid in time or cancelled\n- `Refunded`: All money given back\n- `PartiallyRefunded`: Some money given back\n- `Disputed`: The payer disputed the payment with their bank",
+    "type": "string",
+    "enum": [
+     "Created",
+     "Pending",
+     "RequiresAction",
+     "Processing",
+     "Paid",
+     "Failed",
+     "Cancelled",
+     "Refunded",
+     "PartiallyRefunded",
+     "Disputed"
     ]
    },
    "DataCreateOrder": {
@@ -46597,7 +45915,7 @@
       "type": "string"
      },
      "ends_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      }
     }
    },
@@ -46675,10 +45993,10 @@
     ],
     "properties": {
      "started_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      },
      "ends_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      },
      "views": {
       "description": "People who saw it in the top row (once a day each)",
@@ -46860,7 +46178,7 @@
       "nullable": true
      },
      "created_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      }
     }
    },
@@ -46927,12 +46245,12 @@
       "minimum": 0
      },
      "received_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      },
      "processed_at": {
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -46982,7 +46300,7 @@
       "type": "boolean"
      },
      "found_at": {
-      "$ref": "#/components/schemas/ISO8601 Timestamp"
+      "$ref": "#/components/schemas/ISO8601Timestamp"
      },
      "resolved": {
       "type": "boolean"
@@ -47037,7 +46355,7 @@
       "description": "When Plus started",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -47045,7 +46363,7 @@
       "description": "When the current period ends (renewal or expiry)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -47142,36 +46460,13 @@
     ]
    },
    "SubscriptionStatus": {
-    "description": "State of a subscription at the payment provider",
-    "oneOf": [
-     {
-      "description": "Paid up",
-      "type": "string",
-      "enum": [
-       "Active"
-      ]
-     },
-     {
-      "description": "A renewal payment failed and is being retried; perks continue for the grace period",
-      "type": "string",
-      "enum": [
-       "PastDue"
-      ]
-     },
-     {
-      "description": "Payment needs the member (e.g. 3-D Secure) before it can go on",
-      "type": "string",
-      "enum": [
-       "Incomplete"
-      ]
-     },
-     {
-      "description": "Ended",
-      "type": "string",
-      "enum": [
-       "Canceled"
-      ]
-     }
+    "description": "State of a subscription at the payment provider\n\n- `Active`: Paid up\n- `PastDue`: A renewal payment failed and is being retried; perks continue for the grace period\n- `Incomplete`: Payment needs the member (e.g. 3-D Secure) before it can go on\n- `Canceled`: Ended",
+    "type": "string",
+    "enum": [
+     "Active",
+     "PastDue",
+     "Incomplete",
+     "Canceled"
     ]
    },
    "Supercharge": {
@@ -47211,7 +46506,7 @@
       "description": "When it was made",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -47219,7 +46514,7 @@
       "description": "When the current period ends (bought ones only)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -47245,22 +46540,11 @@
     }
    },
    "SuperchargeSource": {
-    "description": "Where a supercharge comes from",
-    "oneOf": [
-     {
-      "description": "Included with Plus, lasts as long as Plus does",
-      "type": "string",
-      "enum": [
-       "Plus"
-      ]
-     },
-     {
-      "description": "Bought on its own, renews monthly until cancelled",
-      "type": "string",
-      "enum": [
-       "Purchase"
-      ]
-     }
+    "description": "Where a supercharge comes from\n\n- `Plus`: Included with Plus, lasts as long as Plus does\n- `Purchase`: Bought on its own, renews monthly until cancelled",
+    "type": "string",
+    "enum": [
+     "Plus",
+     "Purchase"
     ]
    },
    "DataGrantPlus": {
@@ -47450,22 +46734,11 @@
     }
    },
    "ProductBilling": {
-    "description": "How a product is paid for",
-    "oneOf": [
-     {
-      "description": "Renews every month until cancelled",
-      "type": "string",
-      "enum": [
-       "Monthly"
-      ]
-     },
-     {
-      "description": "Paid once for a fixed time",
-      "type": "string",
-      "enum": [
-       "OneTime"
-      ]
-     }
+    "description": "How a product is paid for\n\n- `Monthly`: Renews every month until cancelled\n- `OneTime`: Paid once for a fixed time",
+    "type": "string",
+    "enum": [
+     "Monthly",
+     "OneTime"
     ]
    },
    "PlanLimits": {
@@ -47681,7 +46954,7 @@
       "description": "Earliest supercharge still active",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      }
@@ -47853,160 +47126,36 @@
     ]
    },
    "ContentReportReason": {
-    "description": "Reason for reporting content (message or server)",
-    "oneOf": [
-     {
-      "description": "No reason has been specified",
-      "type": "string",
-      "enum": [
-       "NoneSpecified"
-      ]
-     },
-     {
-      "description": "Illegal content catch-all reason",
-      "type": "string",
-      "enum": [
-       "Illegal"
-      ]
-     },
-     {
-      "description": "Selling or facilitating use of drugs or other illegal goods",
-      "type": "string",
-      "enum": [
-       "IllegalGoods"
-      ]
-     },
-     {
-      "description": "Extortion or blackmail",
-      "type": "string",
-      "enum": [
-       "IllegalExtortion"
-      ]
-     },
-     {
-      "description": "Revenge or child pornography",
-      "type": "string",
-      "enum": [
-       "IllegalPornography"
-      ]
-     },
-     {
-      "description": "Illegal hacking activity",
-      "type": "string",
-      "enum": [
-       "IllegalHacking"
-      ]
-     },
-     {
-      "description": "Extreme violence, gore, or animal cruelty With exception to violence potrayed in media / creative arts",
-      "type": "string",
-      "enum": [
-       "ExtremeViolence"
-      ]
-     },
-     {
-      "description": "Content that promotes harm to others / self",
-      "type": "string",
-      "enum": [
-       "PromotesHarm"
-      ]
-     },
-     {
-      "description": "Unsolicited advertisements",
-      "type": "string",
-      "enum": [
-       "UnsolicitedSpam"
-      ]
-     },
-     {
-      "description": "This is a raid",
-      "type": "string",
-      "enum": [
-       "Raid"
-      ]
-     },
-     {
-      "description": "Spam or platform abuse",
-      "type": "string",
-      "enum": [
-       "SpamAbuse"
-      ]
-     },
-     {
-      "description": "Scams or fraud",
-      "type": "string",
-      "enum": [
-       "ScamsFraud"
-      ]
-     },
-     {
-      "description": "Distribution of malware or malicious links",
-      "type": "string",
-      "enum": [
-       "Malware"
-      ]
-     },
-     {
-      "description": "Harassment or abuse targeted at another user",
-      "type": "string",
-      "enum": [
-       "Harassment"
-      ]
-     }
+    "description": "Reason for reporting content (message or server)\n\n- `NoneSpecified`: No reason has been specified\n- `Illegal`: Illegal content catch-all reason\n- `IllegalGoods`: Selling or facilitating use of drugs or other illegal goods\n- `IllegalExtortion`: Extortion or blackmail\n- `IllegalPornography`: Revenge or child pornography\n- `IllegalHacking`: Illegal hacking activity\n- `ExtremeViolence`: Extreme violence, gore, or animal cruelty With exception to violence potrayed in media / creative arts\n- `PromotesHarm`: Content that promotes harm to others / self\n- `UnsolicitedSpam`: Unsolicited advertisements\n- `Raid`: This is a raid\n- `SpamAbuse`: Spam or platform abuse\n- `ScamsFraud`: Scams or fraud\n- `Malware`: Distribution of malware or malicious links\n- `Harassment`: Harassment or abuse targeted at another user",
+    "type": "string",
+    "enum": [
+     "NoneSpecified",
+     "Illegal",
+     "IllegalGoods",
+     "IllegalExtortion",
+     "IllegalPornography",
+     "IllegalHacking",
+     "ExtremeViolence",
+     "PromotesHarm",
+     "UnsolicitedSpam",
+     "Raid",
+     "SpamAbuse",
+     "ScamsFraud",
+     "Malware",
+     "Harassment"
     ]
    },
    "UserReportReason": {
-    "description": "Reason for reporting a user",
-    "oneOf": [
-     {
-      "description": "No reason has been specified",
-      "type": "string",
-      "enum": [
-       "NoneSpecified"
-      ]
-     },
-     {
-      "description": "Unsolicited advertisements",
-      "type": "string",
-      "enum": [
-       "UnsolicitedSpam"
-      ]
-     },
-     {
-      "description": "User is sending spam or otherwise abusing the platform",
-      "type": "string",
-      "enum": [
-       "SpamAbuse"
-      ]
-     },
-     {
-      "description": "User's profile contains inappropriate content for a general audience",
-      "type": "string",
-      "enum": [
-       "InappropriateProfile"
-      ]
-     },
-     {
-      "description": "User is impersonating another user",
-      "type": "string",
-      "enum": [
-       "Impersonation"
-      ]
-     },
-     {
-      "description": "User is evading a ban",
-      "type": "string",
-      "enum": [
-       "BanEvasion"
-      ]
-     },
-     {
-      "description": "User is not of minimum age to use the platform",
-      "type": "string",
-      "enum": [
-       "Underage"
-      ]
-     }
+    "description": "Reason for reporting a user\n\n- `NoneSpecified`: No reason has been specified\n- `UnsolicitedSpam`: Unsolicited advertisements\n- `SpamAbuse`: User is sending spam or otherwise abusing the platform\n- `InappropriateProfile`: User's profile contains inappropriate content for a general audience\n- `Impersonation`: User is impersonating another user\n- `BanEvasion`: User is evading a ban\n- `Underage`: User is not of minimum age to use the platform",
+    "type": "string",
+    "enum": [
+     "NoneSpecified",
+     "UnsolicitedSpam",
+     "SpamAbuse",
+     "InappropriateProfile",
+     "Impersonation",
+     "BanEvasion",
+     "Underage"
     ]
    },
    "SafetyReceipt": {
@@ -48062,92 +47211,21 @@
     }
    },
    "SafetyTargetKind": {
-    "description": "What is being reported",
-    "oneOf": [
-     {
-      "description": "A user account or part of its profile",
-      "type": "string",
-      "enum": [
-       "User"
-      ]
-     },
-     {
-      "description": "A message in a server channel, DM or group",
-      "type": "string",
-      "enum": [
-       "Message"
-      ]
-     },
-     {
-      "description": "A server",
-      "type": "string",
-      "enum": [
-       "Server"
-      ]
-     },
-     {
-      "description": "A server channel",
-      "type": "string",
-      "enum": [
-       "Channel"
-      ]
-     },
-     {
-      "description": "A bot account",
-      "type": "string",
-      "enum": [
-       "Bot"
-      ]
-     },
-     {
-      "description": "A developer application (its id is the bot's id)",
-      "type": "string",
-      "enum": [
-       "Application"
-      ]
-     },
-     {
-      "description": "A community design (decoration or nameplate)",
-      "type": "string",
-      "enum": [
-       "CommunityItem"
-      ]
-     },
-     {
-      "description": "A file attached to a message",
-      "type": "string",
-      "enum": [
-       "Attachment"
-      ]
-     },
-     {
-      "description": "An invite code",
-      "type": "string",
-      "enum": [
-       "Invite"
-      ]
-     },
-     {
-      "description": "A webhook that posted a message",
-      "type": "string",
-      "enum": [
-       "Webhook"
-      ]
-     },
-     {
-      "description": "A server's Discover listing",
-      "type": "string",
-      "enum": [
-       "DiscoverServer"
-      ]
-     },
-     {
-      "description": "A bot's Discover listing",
-      "type": "string",
-      "enum": [
-       "DiscoverBot"
-      ]
-     }
+    "description": "What is being reported\n\n- `User`: A user account or part of its profile\n- `Message`: A message in a server channel, DM or group\n- `Server`: A server\n- `Channel`: A server channel\n- `Bot`: A bot account\n- `Application`: A developer application (its id is the bot's id)\n- `CommunityItem`: A community design (decoration or nameplate)\n- `Attachment`: A file attached to a message\n- `Invite`: An invite code\n- `Webhook`: A webhook that posted a message\n- `DiscoverServer`: A server's Discover listing\n- `DiscoverBot`: A bot's Discover listing",
+    "type": "string",
+    "enum": [
+     "User",
+     "Message",
+     "Server",
+     "Channel",
+     "Bot",
+     "Application",
+     "CommunityItem",
+     "Attachment",
+     "Invite",
+     "Webhook",
+     "DiscoverServer",
+     "DiscoverBot"
     ]
    },
    "SafetyCategory": {
@@ -48305,7 +47383,6 @@
       "nullable": true
      },
      "description": {
-      "default": null,
       "type": "string",
       "maxLength": 1000,
       "nullable": true
@@ -48516,64 +47593,17 @@
     }
    },
    "SafetyActionKind": {
-    "description": "Kind of moderation action",
-    "oneOf": [
-     {
-      "description": "Recorded on the account's standing, nothing else changes",
-      "type": "string",
-      "enum": [
-       "Warning"
-      ]
-     },
-     {
-      "description": "The reported message is removed from its channel",
-      "type": "string",
-      "enum": [
-       "RemoveMessage"
-      ]
-     },
-     {
-      "description": "Account suspended for a number of days",
-      "type": "string",
-      "enum": [
-       "SuspendAccount"
-      ]
-     },
-     {
-      "description": "Account banned from the platform",
-      "type": "string",
-      "enum": [
-       "BanAccount"
-      ]
-     },
-     {
-      "description": "Bot / application can no longer sign in and is unlisted",
-      "type": "string",
-      "enum": [
-       "DisableBot"
-      ]
-     },
-     {
-      "description": "Server or bot removed from Discover",
-      "type": "string",
-      "enum": [
-       "RemoveDiscoverListing"
-      ]
-     },
-     {
-      "description": "Community design taken out of the gallery",
-      "type": "string",
-      "enum": [
-       "SuspendCommunityItem"
-      ]
-     },
-     {
-      "description": "Creator paused: their designs are hidden until they are reinstated",
-      "type": "string",
-      "enum": [
-       "SuspendCreator"
-      ]
-     }
+    "description": "Kind of moderation action\n\n- `Warning`: Recorded on the account's standing, nothing else changes\n- `RemoveMessage`: The reported message is removed from its channel\n- `SuspendAccount`: Account suspended for a number of days\n- `BanAccount`: Account banned from the platform\n- `DisableBot`: Bot / application can no longer sign in and is unlisted\n- `RemoveDiscoverListing`: Server or bot removed from Discover\n- `SuspendCommunityItem`: Community design taken out of the gallery\n- `SuspendCreator`: Creator paused: their designs are hidden until they are reinstated",
+    "type": "string",
+    "enum": [
+     "Warning",
+     "RemoveMessage",
+     "SuspendAccount",
+     "BanAccount",
+     "DisableBot",
+     "RemoveDiscoverListing",
+     "SuspendCommunityItem",
+     "SuspendCreator"
     ]
    },
    "SafetyGround": {
@@ -48599,7 +47629,7 @@
         "type": "string"
        },
        "provision": {
-        "description": "The provision, e.g. \"§ 130\"",
+        "description": "The provision, e.g. \"\u00a7 130\"",
         "type": "string"
        }
       }
@@ -48627,36 +47657,13 @@
     ]
    },
    "SafetyActionBasis": {
-    "description": "What an action followed (DSA Art. 17(3)(b))",
-    "oneOf": [
-     {
-      "description": "Not recorded (actions older than statements of reasons): not shown",
-      "type": "string",
-      "enum": [
-       "Unknown"
-      ]
-     },
-     {
-      "description": "A report from another person",
-      "type": "string",
-      "enum": [
-       "Report"
-      ]
-     },
-     {
-      "description": "A notice of illegal content, or a legal order",
-      "type": "string",
-      "enum": [
-       "Notice"
-      ]
-     },
-     {
-      "description": "Zrzur's own review",
-      "type": "string",
-      "enum": [
-       "OwnInitiative"
-      ]
-     }
+    "description": "What an action followed (DSA Art. 17(3)(b))\n\n- `Unknown`: Not recorded (actions older than statements of reasons): not shown\n- `Report`: A report from another person\n- `Notice`: A notice of illegal content, or a legal order\n- `OwnInitiative`: Zrzur's own review",
+    "type": "string",
+    "enum": [
+     "Unknown",
+     "Report",
+     "Notice",
+     "OwnInitiative"
     ]
    },
    "SafetyAppeal": {
@@ -48966,15 +47973,10 @@
     }
    },
    "SafetyRoute": {
-    "description": "Who handles a report",
-    "oneOf": [
-     {
-      "description": "Zrzur's Trust & Safety team. Security vulnerabilities go through the confidential bug-report flow (`bugs.security`), and server-rule reports to a server's moderators are not offered yet.",
-      "type": "string",
-      "enum": [
-       "Platform"
-      ]
-     }
+    "description": "Who handles a report\n\n- `Platform`: Zrzur's Trust & Safety team. Security vulnerabilities go through the confidential bug-report flow (`bugs.security`), and server-rule reports to a server's moderators are not offered yet.",
+    "type": "string",
+    "enum": [
+     "Platform"
     ]
    },
    "SafetyStatus": {
@@ -49482,7 +48484,7 @@
       }
      },
      "failed": {
-      "description": "Case id → error type",
+      "description": "Case id \u2192 error type",
       "type": "object",
       "additionalProperties": {
        "type": "string"
@@ -49574,7 +48576,6 @@
     ],
     "properties": {
      "statement": {
-      "default": null,
       "allOf": [
        {
         "$ref": "#/components/schemas/DataSafetyStatement"
@@ -49777,7 +48778,7 @@
         "description": "When the account is removed unless its e-mail is confirmed",
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ]
        }
@@ -49830,7 +48831,7 @@
       "description": "When the session was last used, to within about an hour",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      },
@@ -49961,7 +48962,7 @@
       "description": "When the account is removed unless its e-mail is confirmed (only on an account made from an invite link, until confirmed)",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -50007,70 +49008,25 @@
    },
    "AgeBand": {
     "title": "Age group",
-    "description": "Worked out on the server from the year and month of birth, each time it is needed, so it moves on as time passes",
-    "oneOf": [
-     {
-      "description": "No age on record (accounts made before ages were asked)",
-      "type": "string",
-      "enum": [
-       "unknown"
-      ]
-     },
-     {
-      "description": "Below the minimum age for an account",
-      "type": "string",
-      "enum": [
-       "under_minimum"
-      ]
-     },
-     {
-      "description": "At least the minimum age, not yet 18",
-      "type": "string",
-      "enum": [
-       "teen"
-      ]
-     },
-     {
-      "description": "18 or older by the user's own statement (not verified)",
-      "type": "string",
-      "enum": [
-       "adult_declared"
-      ]
-     }
+    "description": "Worked out on the server from the year and month of birth, each time it is needed, so it moves on as time passes\n\n- `unknown`: No age on record (accounts made before ages were asked)\n- `under_minimum`: Below the minimum age for an account\n- `teen`: At least the minimum age, not yet 18\n- `adult_declared`: 18 or older by the user's own statement (not verified)",
+    "type": "string",
+    "enum": [
+     "unknown",
+     "under_minimum",
+     "teen",
+     "adult_declared"
     ]
    },
    "MatureAccess": {
     "title": "Access to mature content",
-    "oneOf": [
-     {
-      "description": "Channels and Servers marked as mature may be opened",
-      "type": "string",
-      "enum": [
-       "allowed"
-      ]
-     },
-     {
-      "description": "No age on record",
-      "type": "string",
-      "enum": [
-       "age_unknown"
-      ]
-     },
-     {
-      "description": "Under 18",
-      "type": "string",
-      "enum": [
-       "minor"
-      ]
-     },
-     {
-      "description": "Needs an age check that this instance does not offer",
-      "type": "string",
-      "enum": [
-       "verification_required"
-      ]
-     }
-    ]
+    "type": "string",
+    "enum": [
+     "allowed",
+     "age_unknown",
+     "minor",
+     "verification_required"
+    ],
+    "description": "- `allowed`: Channels and Servers marked as mature may be opened\n- `age_unknown`: No age on record\n- `minor`: Under 18\n- `verification_required`: Needs an age check that this instance does not offer"
    },
    "DataChangePassword": {
     "title": "Change Data",
@@ -50168,27 +49124,21 @@
     }
    },
    "ResponseVerify": {
-    "anyOf": [
-     {
-      "type": "null"
-     },
-     {
-      "type": "object",
-      "required": [
-       "ticket"
-      ],
-      "properties": {
-       "ticket": {
-        "description": "Authorised MFA ticket, can be used to log in",
-        "allOf": [
-         {
-          "$ref": "#/components/schemas/MFATicket"
-         }
-        ]
+    "type": "object",
+    "required": [
+     "ticket"
+    ],
+    "properties": {
+     "ticket": {
+      "description": "Authorised MFA ticket, can be used to log in",
+      "allOf": [
+       {
+        "$ref": "#/components/schemas/MFATicket"
        }
-      }
+      ]
      }
-    ]
+    },
+    "nullable": true
    },
    "MFATicket": {
     "type": "object",
@@ -50364,7 +49314,7 @@
         "description": "When the session was last used, to within about an hour",
         "allOf": [
          {
-          "$ref": "#/components/schemas/ISO8601 Timestamp"
+          "$ref": "#/components/schemas/ISO8601Timestamp"
          }
         ]
        },
@@ -50570,7 +49520,7 @@
       "description": "When the session was last used, to within about an hour",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ]
      }
@@ -50751,7 +49701,6 @@
      },
      "related": {
       "description": "What it is about, e.g. an order or server id",
-      "default": null,
       "type": "string",
       "nullable": true
      }
@@ -51100,7 +50049,7 @@
       "description": "Time shown next to the footer",
       "allOf": [
        {
-        "$ref": "#/components/schemas/ISO8601 Timestamp"
+        "$ref": "#/components/schemas/ISO8601Timestamp"
        }
       ],
       "nullable": true
@@ -51242,7 +50191,6 @@
       "type": "object",
       "properties": {
        "filename": {
-        "default": null,
         "type": "string",
         "nullable": true
        }
@@ -51298,28 +50246,55 @@
       "type": "string"
      }
     }
+   },
+   "ProgramCheck": {
+    "description": "One line of a program's checklist. `met` is missing when the server can't measure it (a reviewer checks it by hand). Clients show the `code` in the reader's language.",
+    "type": "object",
+    "required": [
+     "code"
+    ],
+    "properties": {
+     "code": {
+      "description": "`owner`, `members`, `age`, `no_burst`, `activity_weeks`, `weekly_active`, `weekly_contributors`, `retention`, `ownership`, `bot_active`, `bot_age`, `legit_servers`, `email`, `adult`, `target`",
+      "type": "string"
+     },
+     "met": {
+      "type": "boolean",
+      "nullable": true
+     },
+     "value": {
+      "type": "integer",
+      "format": "int64",
+      "nullable": true
+     },
+     "needed": {
+      "type": "integer",
+      "format": "int64",
+      "nullable": true
+     }
+    }
    }
   },
   "securitySchemes": {
-   "Unvalidated MFA Ticket": {
+   "UnvalidatedMFATicket": {
     "description": "Used to authorise a request.",
     "type": "apiKey",
     "name": "x-mfa-ticket",
     "in": "header"
    },
-   "Session Token": {
+   "SessionToken": {
     "description": "Used to authenticate as a user.",
     "type": "apiKey",
     "name": "x-session-token",
     "in": "header"
    },
-   "Valid MFA Ticket": {
+   "ValidMFATicket": {
     "description": "Used to authorise a request.",
     "type": "apiKey",
     "name": "x-mfa-ticket",
     "in": "header"
    },
-   "Bot Token": {
+   "BotToken": {
     "description": "Used to authenticate as a bot: the token from the bot's settings.",
     "type": "apiKey",
     "name": "x-bot-token",
@@ -51328,8 +50303,8 @@
   }
  },
  "externalDocs": {
-  "description": "Zrzur documentation (planned)",
-  "url": "https://zrzur.com"
+  "url": "https://app.zrzur.com/developers/docs",
+  "description": "Zrzur developer documentation"
  },
  "x-logo": {
   "url": "https://zrzur.com/header.png",

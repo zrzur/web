@@ -33,7 +33,7 @@ Embeds take `title` (256), `description` (4096), `url`, `color` (a number) or `c
 
 To send files, use `multipart/form-data` with `files[0]`, `files[1]`, ... and the JSON body in `payload_json`. Each file passes the same checks as a member's upload. Up to 5 files of 20 MB; refer to one from an embed with `attachment://name.png`. A webhook without Upload Files gets `403`, never a message without its files.
 
-`@everyone`, `@online` and role mentions notify people only if the webhook has the matching permission and `allowed_mentions` allows them. New webhooks have neither permission, and the text is still posted. Edits never notify anyone.
+`@everyone`, `@here` and role mentions notify people only if the webhook has the matching permission and `allowed_mentions` allows them. New webhooks have neither permission, and the text is still posted. Edits never notify anyone.
 
 Interactive components work only on webhooks a bot created, and clicks go to that bot. Other webhooks can post links, text and media.
 

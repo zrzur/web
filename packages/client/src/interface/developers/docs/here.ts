@@ -11,6 +11,7 @@ import { resolveDocsHref } from "./links";
 export const hrefHere = (href: string) =>
   resolveDocsHref(href, { base: docsBase(), appOrigin: appUrl() });
 
-/** Links that leave this site (another origin, or a file) */
+/** Links that leave this site (another origin, or a file: a feed, the
+ * Bot API document) */
 export const leavesHere = (href: string) =>
-  /^https?:\/\//.test(href) || /\.xml$/.test(href);
+  /^https?:\/\//.test(href) || /\.(xml|json)$/.test(href);

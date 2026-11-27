@@ -75,9 +75,6 @@ export function ScreenShareOptions() {
       <SettingsRow
         icon={<Icon name="question" size={20} />}
         title={<Trans>Ask every time</Trans>}
-        description={
-          <Trans>Choose the quality each time you start a stream.</Trans>
-        }
         onClick={() =>
           (voice.screenShareQualityAsk = !voice.screenShareQualityAsk)
         }

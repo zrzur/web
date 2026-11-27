@@ -22,11 +22,19 @@ export function SteamTile(props: {
   fill?: boolean;
   /** An address already through the media proxy (another service's picture) */
   src?: string;
+  /**
+   * A wide tile without its header (none, or it failed): the game's small
+   * icon, drawn large on a blurred copy of itself, before a bare letter
+   */
+  icon?: string;
 }) {
   const client = useClient();
   const [failed, setFailed] = createSignal(false);
+  const [iconFailed, setIconFailed] = createSignal(false);
   const src = () =>
     failed() ? undefined : (props.src ?? steamImage(client(), props.url));
+  const icon = () =>
+    props.wide && !iconFailed() ? steamImage(client(), props.icon) : undefined;
   const letter = () => Array.from(props.name.trim())[0]?.toUpperCase() ?? "?";
 
   return (
@@ -44,15 +52,38 @@ export function SteamTile(props: {
       <Show
         when={src()}
         fallback={
-          <Letter
-            style={{
-              "font-size": props.wide
-                ? "28px"
-                : `${Math.round((props.size ?? 32) * 0.45)}px`,
-            }}
+          <Show
+            when={icon()}
+            fallback={
+              <Letter
+                style={{
+                  "font-size": props.wide
+                    ? "28px"
+                    : `${Math.round((props.size ?? 32) * 0.45)}px`,
+                }}
+              >
+                {letter()}
+              </Letter>
+            }
           >
-            {letter()}
-          </Letter>
+            {(url) => (
+              <IconStage>
+                <img
+                  class="backdrop"
+                  src={url()}
+                  alt=""
+                  referrerPolicy="no-referrer"
+                />
+                <img
+                  class="icon"
+                  src={url()}
+                  alt=""
+                  referrerPolicy="no-referrer"
+                  onError={() => setIconFailed(true)}
+                />
+              </IconStage>
+            )}
+          </Show>
         }
       >
         {(url) => (
@@ -95,6 +126,35 @@ const Box = styled("span", {
       height: "100%",
       objectFit: "cover",
       display: "block",
+    },
+  },
+});
+
+/** a game's small icon, large, on a blurred copy of itself */
+const IconStage = styled("span", {
+  base: {
+    position: "relative",
+    display: "grid",
+    placeItems: "center",
+    width: "100%",
+    height: "100%",
+    overflow: "hidden",
+    "& .backdrop": {
+      position: "absolute",
+      inset: "-20%",
+      width: "140% !important",
+      height: "140% !important",
+      objectFit: "cover",
+      filter: "blur(18px) saturate(1.4)",
+      opacity: 0.55,
+    },
+    "& .icon": {
+      position: "relative",
+      width: "64px !important",
+      height: "64px !important",
+      borderRadius: "var(--z-radius-sm)",
+      boxShadow: "0 6px 18px rgb(0 0 0 / 0.45)",
+      objectFit: "cover",
     },
   },
 });

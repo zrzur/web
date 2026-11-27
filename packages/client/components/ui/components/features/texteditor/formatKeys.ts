@@ -1,13 +1,13 @@
 /**
  * Ctrl+B bold and Ctrl+I italic in the message box (Command on a Mac),
  * matched by key position (`event.code`) so they work on Arabic and German
- * layouts. Markdown has no underline, so there is no Ctrl+U. Listed in
+ * layouts; Ctrl+U underlines (`__text__`, as in Discord). Listed in
  * Ctrl+/.
  */
 import { EditorSelection, Prec } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
 
-export type FormatMark = "**" | "*";
+export type FormatMark = "**" | "*" | "__";
 
 type KeyLike = Pick<
   KeyboardEvent,
@@ -26,6 +26,7 @@ export function formatFor(
   if (!mod || other) return;
   if (event.code === "KeyB") return "**";
   if (event.code === "KeyI") return "*";
+  if (event.code === "KeyU") return "__";
 }
 
 /**
@@ -42,6 +43,27 @@ export function toggleMark(
 ): { from: number; to: number; insert: string; anchor: number; head: number } {
   const n = mark.length;
   const inside = doc.slice(from, to);
+  // underline: two underscores around it or not, apart from the stars
+  if (mark === "__") {
+    const has =
+      doc.slice(Math.max(0, from - 2), from) === "__" &&
+      doc.slice(to, to + 2) === "__";
+    return has
+      ? {
+          from: from - 2,
+          to: to + 2,
+          insert: inside,
+          anchor: from - 2,
+          head: to - 2,
+        }
+      : {
+          from,
+          to,
+          insert: `__${inside}__`,
+          anchor: from + 2,
+          head: to + 2,
+        };
+  }
   // stars right around the selection: 1 italic, 2 bold, 3 both
   const starsBefore = /\**$/.exec(doc.slice(Math.max(0, from - 3), from))![0]
     .length;

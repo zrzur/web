@@ -256,22 +256,13 @@ function ConnectLine(props: { service: ServiceId }): JSX.Element {
   return (
     <Switch>
       <Match when={props.service === "twitch"}>
-        <Trans>
-          Show your Twitch channel on your profile, and when you are live. You
-          sign in on Twitch's own page.
-        </Trans>
+        <Trans>Your Twitch channel, and when you are live.</Trans>
       </Match>
       <Match when={props.service === "github"}>
-        <Trans>
-          Show your GitHub account and your best public repositories on your
-          profile. You sign in on GitHub's own page.
-        </Trans>
+        <Trans>Your GitHub account and your best public repositories.</Trans>
       </Match>
       <Match when={props.service === "battlenet"}>
-        <Trans>
-          Show your BattleTag on your profile so friends can add you. You sign
-          in on Battle.net's own page.
-        </Trans>
+        <Trans>Your BattleTag, so friends can add you.</Trans>
       </Match>
     </Switch>
   );
@@ -312,8 +303,8 @@ function ServiceConnect(props: { service: ServiceId; available: boolean }) {
   return (
     <SettingsSection title={name()}>
       <SettingsRow
-        icon={<Icon name={ICONS[props.service]} size={24} />}
-        title={t`Connect ${name()}`}
+        icon={<Icon name={ICONS[props.service]} size={20} />}
+        title={t`Not linked`}
         description={
           <Show
             when={props.available}
@@ -499,7 +490,7 @@ function ServiceLinked(props: {
       }
     >
       <SettingsRow
-        icon={<Icon name={ICONS[service()]} size={24} />}
+        icon={<Icon name={ICONS[service()]} size={20} />}
         title={<bdi>{props.account.display_name || name()}</bdi>}
         description={
           <Switch>

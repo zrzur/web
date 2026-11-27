@@ -265,28 +265,14 @@ export function ActivitySettings() {
           icon={<Icon name="pulse" size={20} />}
           title={<Trans>Share what you are doing</Trans>}
           description={
-            <Lines>
-              <span>
+            friendsOnly() ? (
+              <span data-testid="activity-friends-only">
                 <Trans>
-                  Friends and people in your servers see the game or app you
-                  use.
+                  Only your friends see this, because you are under 18 or have
+                  not given your age.
                 </Trans>
               </span>
-              <Show when={friendsOnly()}>
-                <span data-testid="activity-friends-only">
-                  <Trans>
-                    Only your friends see this, because you are under 18 or have
-                    not given your age.
-                  </Trans>
-                </span>
-              </Show>
-              <span>
-                <Trans>
-                  App names can say private things about you. Turn off or rename
-                  any.
-                </Trans>
-              </span>
-            </Lines>
+            ) : undefined
           }
           disabled={!privacy()}
           onClick={() => change({ share_activity: !shares() })}
@@ -341,10 +327,7 @@ export function ActivitySettings() {
                 <Switch>
                   <Match when={status() === "browser"}>
                     <span data-testid="activity-browser-note">
-                      <Trans>
-                        Activity is detected by the Zrzur desktop app. Open
-                        Zrzur in the desktop app to share games and apps.
-                      </Trans>
+                      <Trans>Only in the Zrzur desktop app.</Trans>
                     </span>
                   </Match>
                   <Match when={status() === "update"}>

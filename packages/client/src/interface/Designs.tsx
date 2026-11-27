@@ -57,6 +57,7 @@ import {
   isDesignsSite,
   useAccountGate,
 } from "../DesignsSite";
+import { OfficialServerLink } from "./OfficialServerLink";
 import { DesignPage } from "./designs/DesignPage";
 import { Dock } from "./designs/Dock";
 import { DesignsHome, WornCard } from "./designs/Home";
@@ -79,6 +80,7 @@ import {
 } from "./designs/Wall";
 import { isDesignSlug } from "./designs/designSlug";
 import type { WallFilter } from "./designs/gallery";
+import { placeOf } from "./designs/gallery";
 import { designsTokens } from "./designs/palette";
 import { LoadError, Notice } from "./designs/parts";
 import { mergePages as merge } from "./designs/rank";
@@ -322,6 +324,10 @@ function Gallery() {
     (can(perms(), "cosmetics.review") ||
       can(perms(), "cosmetics.manage_creators"));
 
+  /** you, wherever designs are on show */
+  const lookShown = () =>
+    !isDesignsSite() && !active("studio") && !active("design");
+
   return (
     <Base
       style={{
@@ -385,137 +391,145 @@ function Gallery() {
             </CreatorTools>
           </Show>
 
-          <Switch>
-            <Match when={view().page === "home" || view().page === "wall"}>
-              <DesignsHome
-                filter={filter()}
-                onFilter={(next) => go(next === "all" ? "" : `/${next}`)}
-                query={query()}
-                onQuery={setTyped}
-                version={version()}
-                onOpen={setOpen}
-                onDesign={(slug) => go(`/${slug}`)}
-                onMaker={(id) => go(`/creator/${id}`)}
-                onFrameGuide={
-                  framesOpen() ? () => go("/frame-guide") : undefined
-                }
-              />
-            </Match>
+          {/* the pages and, beside them on a wide screen (under them on a
+              narrow one), you in what you try on */}
+          <WithLook data-look={lookShown() ? "" : undefined}>
+            <Pages>
+              <Switch>
+                <Match when={view().page === "home" || view().page === "wall"}>
+                  <DesignsHome
+                    filter={filter()}
+                    onFilter={(next) => go(next === "all" ? "" : `/${next}`)}
+                    query={query()}
+                    onQuery={setTyped}
+                    version={version()}
+                    onOpen={setOpen}
+                    onDesign={(slug) => go(`/${slug}`)}
+                    onMaker={(id) => go(`/creator/${id}`)}
+                    onFrameGuide={
+                      framesOpen() ? () => go("/frame-guide") : undefined
+                    }
+                  />
+                </Match>
 
-            <Match
-              when={
-                view().page === "studio" &&
-                !isDesignsSite() &&
-                permissions.failed()
-              }
-            >
-              <Notice
-                role="alert"
-                icon="warning-circle"
-                title={<Trans>Creator Studio couldn't be opened</Trans>}
-                action={{
-                  label: <Trans>Try again</Trans>,
-                  onClick: permissions.retry,
-                  disabled: permissions.retrying(),
-                }}
-              >
-                <Trans>
-                  We couldn't check your creator rank. Try again in a moment.
-                </Trans>
-              </Notice>
-            </Match>
-
-            <Match
-              when={view().page === "studio" && !isDesignsSite() && !perms()}
-            >
-              <Notice role="status" title={<Trans>Loading…</Trans>} />
-            </Match>
-
-            <Match
-              when={
-                view().page === "studio" && creating() && maySeeStudio(perms())
-              }
-            >
-              {/* a workplace: no sky and no big title, the studio has its own */}
-              <Suspense>
-                <CreatorStudio
-                  page
-                  show
-                  onClose={() => go("")}
-                  perms={perms()!}
-                  avatar={wearer.avatar()}
-                  name={wearer.name()}
-                  path={(view() as { path: string[] }).path}
-                  onNavigate={(path) => go(`/studio${path}`)}
-                  onFrameGuide={() => go("/frame-guide")}
-                />
-              </Suspense>
-            </Match>
-
-            <Match when={view().page === "guide"}>
-              <Suspense>
-                <FrameGuide
-                  onBack={() => go("")}
-                  onUpload={
-                    creating() && !readOnly() && framesOpen()
-                      ? () => go("/studio/new/frames")
-                      : undefined
+                <Match
+                  when={
+                    view().page === "studio" &&
+                    !isDesignsSite() &&
+                    permissions.failed()
                   }
-                />
-              </Suspense>
-            </Match>
+                >
+                  <Notice
+                    role="alert"
+                    icon="warning-circle"
+                    title={<Trans>Creator Studio couldn't be opened</Trans>}
+                    action={{
+                      label: <Trans>Try again</Trans>,
+                      onClick: permissions.retry,
+                      disabled: permissions.retrying(),
+                    }}
+                  >
+                    <Trans>
+                      We couldn't check your creator rank. Try again in a
+                      moment.
+                    </Trans>
+                  </Notice>
+                </Match>
 
-            <Match when={view().page === "favourites"}>
-              <Favourites
-                version={version()}
-                onOpen={setOpen}
-                onDesign={(slug) => go(`/${slug}`)}
-                onBrowse={() => go("")}
-                onSignIn={() => signedIn()}
-              />
-            </Match>
+                <Match
+                  when={
+                    view().page === "studio" && !isDesignsSite() && !perms()
+                  }
+                >
+                  <Notice role="status" title={<Trans>Loading…</Trans>} />
+                </Match>
 
-            <Match when={view().page === "creators"}>
-              <CreatorsScene
-                version={version()}
-                onStudio={studio()}
-                paused={readOnly()}
-                onGallery={() => go("")}
-                onCreator={(id) => go(`/creator/${id}`)}
-              />
-            </Match>
+                <Match
+                  when={
+                    view().page === "studio" &&
+                    creating() &&
+                    maySeeStudio(perms())
+                  }
+                >
+                  {/* a workplace: no sky and no big title, the studio has its own */}
+                  <Suspense>
+                    <CreatorStudio
+                      page
+                      show
+                      onClose={() => go("")}
+                      perms={perms()!}
+                      avatar={wearer.avatar()}
+                      name={wearer.name()}
+                      path={(view() as { path: string[] }).path}
+                      onNavigate={(path) => go(`/studio${path}`)}
+                      onFrameGuide={() => go("/frame-guide")}
+                    />
+                  </Suspense>
+                </Match>
 
-            <Match when={view().page === "creator" && view()}>
-              {(current) => (
-                <CreatorPage
-                  id={(current() as { id: string }).id}
-                  version={version()}
-                  onOpen={setOpen}
-                  onDesign={(slug) => go(`/${slug}`)}
-                  onBack={() => go("/creators")}
-                />
-              )}
-            </Match>
+                <Match when={view().page === "guide"}>
+                  <Suspense>
+                    <FrameGuide
+                      onBack={() => go("")}
+                      onUpload={
+                        creating() && !readOnly() && framesOpen()
+                          ? () => go("/studio/new/frames")
+                          : undefined
+                      }
+                    />
+                  </Suspense>
+                </Match>
 
-            <Match when={view().page === "design" && view()}>
-              {(current) => (
-                <DesignPage
-                  slug={(current() as { slug: string }).slug}
-                  site={isDesignsSite()}
-                  base={base}
-                  onRoom={(tab) => go(`/${tab}`)}
-                  onCreator={(id) => go(`/creator/${id}`)}
-                />
-              )}
-            </Match>
-          </Switch>
+                <Match when={view().page === "favourites"}>
+                  <Favourites
+                    version={version()}
+                    onOpen={setOpen}
+                    onDesign={(slug) => go(`/${slug}`)}
+                    onBrowse={() => go("")}
+                    onSignIn={() => signedIn()}
+                  />
+                </Match>
 
-          {/* you, wherever designs are on show */}
-          <Show
-            when={!isDesignsSite() && !active("studio") && !active("design")}
-          >
-            <Dock />
-          </Show>
+                <Match when={view().page === "creators"}>
+                  <CreatorsScene
+                    version={version()}
+                    onStudio={studio()}
+                    paused={readOnly()}
+                    onGallery={() => go("")}
+                    onCreator={(id) => go(`/creator/${id}`)}
+                  />
+                </Match>
+
+                <Match when={view().page === "creator" && view()}>
+                  {(current) => (
+                    <CreatorPage
+                      id={(current() as { id: string }).id}
+                      version={version()}
+                      onOpen={setOpen}
+                      onDesign={(slug) => go(`/${slug}`)}
+                      onBack={() => go("/creators")}
+                    />
+                  )}
+                </Match>
+
+                <Match when={view().page === "design" && view()}>
+                  {(current) => (
+                    <DesignPage
+                      slug={(current() as { slug: string }).slug}
+                      site={isDesignsSite()}
+                      base={base}
+                      onRoom={(tab) => go(`/${tab}`)}
+                      onCreator={(id) => go(`/creator/${id}`)}
+                    />
+                  )}
+                </Match>
+              </Switch>
+            </Pages>
+            <OfficialServerLink server="designs" />
+            <Show when={lookShown()}>
+              <Dock />
+            </Show>
+          </WithLook>
         </Content>
       </Scroll>
 
@@ -716,7 +730,11 @@ function DesignDialog(props: {
       error={error()}
     >
       <DetailBody>
-        <Mirror style={worn()} />
+        {/* opens where this kind of design is seen */}
+        <Mirror
+          style={worn()}
+          place={placeOf({ [field()]: `c:${item()._id}` })}
+        />
 
         <Info>
           {/* a creator who is not public has no name and no page to open */}
@@ -918,7 +936,49 @@ const Content = styled("div", {
     display: "flex",
     flexDirection: "column",
     gap: "24px",
+    // with you beside the pages, the page takes the room for both
+    "@container (min-width: 1100px)": {
+      "&:has(> [data-look])": { maxWidth: "1680px" },
+    },
     _phone: { padding: "8px 16px 24px", gap: "16px" },
+  },
+});
+
+/**
+ * The pages and the panel with you in what you try on: beside them once the
+ * page is wide enough for both, else the panel is the bar along the bottom
+ */
+const WithLook = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1fr)",
+    gap: "24px",
+    alignItems: "start",
+    // the same width the dock checks (LOOK_SIDE_PX)
+    "@container (min-width: 1100px)": {
+      "&[data-look]": {
+        // the panel grows with the screen: a bigger screen, a bigger you
+        // at least the width of a profile card at its real size and the room
+        // its frame needs round it
+        "--dz-look-width": "clamp(440px, 30cqw, 520px)",
+        gridTemplateColumns: "minmax(0, 1fr) var(--dz-look-width)",
+        gap: "32px",
+        // half the panel and its gap: what full-width banners in the pages
+        // move by to stay on the page's middle
+        "--dz-look-shift": "calc((var(--dz-look-width) + 32px) / 2)",
+      },
+    },
+  },
+});
+
+/** one page: its parts one under another, as Content lays them out */
+const Pages = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "24px",
+    minWidth: 0,
+    _phone: { gap: "16px" },
   },
 });
 

@@ -144,26 +144,15 @@ export function MyData() {
 
   return (
     <Column gap="xl">
-      <SettingsSection
-        title={<Trans>My data</Trans>}
-        description={
-          <Trans>
-            Get a ZIP file with your account, profile, messages you sent, files
-            you uploaded, servers, purchases, reports you filed, support
-            requests and settings.
-          </Trans>
-        }
-      >
+      {/* the page's own title says "My data" */}
+      <SettingsSection>
         <SettingsRow
           icon={<Icon name="download-simple" size={20} />}
-          title={<Trans>Request a copy</Trans>}
+          title={<Trans>A copy of your data</Trans>}
           description={
             <Switch
               fallback={
-                <Trans>
-                  We prepare it in the background and e-mail you when it's
-                  ready. You can ask once every 24 hours.
-                </Trans>
+                <Trans>A ZIP file, sent by e-mail. Once every 24 hours.</Trans>
               }
             >
               <Match when={info()?.status === "pending"}>
@@ -197,9 +186,7 @@ export function MyData() {
           <SettingsRow
             icon={<Icon name="warning" size={20} />}
             title={<Trans>This page couldn't load</Trans>}
-            description={
-              <Trans>Check your connection and try again.</Trans>
-            }
+            description={<Trans>Check your connection and try again.</Trans>}
             control={() => (
               <Button size="sm" variant="outlined" onPress={() => refetch()}>
                 <Trans>Try again</Trans>

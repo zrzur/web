@@ -189,7 +189,7 @@ export function ServerPage(props: {
         );
 
   return (
-    <Page data-page>
+    <Page data-page data-app={!props.site}>
       <Switch>
         <Match when={server.loading && !server()}>
           <BannerArea data-loading />
@@ -297,16 +297,6 @@ export function ServerPage(props: {
                         <For each={similar()}>
                           {(other) => (
                             <a href={`${props.base}/${pageSlug(other)}`}>
-                              <i>
-                                <ListingArt
-                                  kind="servers"
-                                  id={other.id}
-                                  category={other.category}
-                                  count={other.count}
-                                  online={other.online}
-                                  banner={fileUrl(other.banner)}
-                                />
-                              </i>
                               <Avatar
                                 size={44}
                                 src={fileUrl(other.icon)}
@@ -503,7 +493,7 @@ export function ServerPage(props: {
   );
 }
 
-const Page = styled("article", {
+export const Page = styled("article", {
   base: {
     width: "100%",
     display: "flex",
@@ -513,7 +503,7 @@ const Page = styled("article", {
 });
 
 /** Edge to edge on a phone, a wide picture with corners above that */
-const BannerArea = styled("div", {
+export const BannerArea = styled("div", {
   base: {
     position: "relative",
     overflow: "hidden",
@@ -531,7 +521,7 @@ const BannerArea = styled("div", {
   },
 });
 
-const Columns = styled("div", {
+export const Columns = styled("div", {
   base: {
     width: "100%",
     maxWidth: "1200px",
@@ -552,7 +542,7 @@ const Columns = styled("div", {
   },
 });
 
-const Main = styled("div", {
+export const Main = styled("div", {
   base: {
     minWidth: 0,
     display: "flex",
@@ -569,7 +559,7 @@ const Main = styled("div", {
   },
 });
 
-const Identity = styled("div", {
+export const Identity = styled("div", {
   base: {
     // above the banner it overlaps
     position: "relative",
@@ -602,17 +592,19 @@ const Identity = styled("div", {
   },
 });
 
-const IconFrame = styled("div", {
+export const IconFrame = styled("div", {
   base: {
     flexShrink: 0,
     padding: "6px",
     borderRadius: "28px",
     background: "var(--dz-page)",
     lineHeight: 0,
+    // a bot's picture is round
+    "&[data-round='true']": { borderRadius: "50%" },
   },
 });
 
-const Muted = styled("p", {
+export const Muted = styled("p", {
   base: { margin: 0, fontSize: "15px", color: "var(--z-fg-muted)" },
 });
 
@@ -622,10 +614,7 @@ const Similar = styled("div", {
     gridTemplateColumns: "repeat(auto-fill, minmax(232px, 1fr))",
     gap: "8px",
     "& a": {
-      position: "relative",
-      overflow: "hidden",
       padding: "12px",
-      paddingInlineStart: "40px",
       borderRadius: "var(--z-shape-card)",
       border: "1px solid var(--dz-edge)",
       background: "var(--z-card-bg)",
@@ -636,13 +625,6 @@ const Similar = styled("div", {
       textDecoration: "none",
       "&:hover": { background: "var(--z-nav-selected)" },
       "&:focus-visible": { outline: "2px solid var(--z-focus)" },
-    },
-    // a sliver of its picture along the edge
-    "& a > i": {
-      position: "absolute",
-      insetBlock: 0,
-      insetInlineStart: 0,
-      width: "28px",
     },
     "& span": {
       minWidth: 0,
@@ -661,7 +643,7 @@ const Similar = styled("div", {
 });
 
 /** The side column: one frame, its parts split by hairlines */
-const Aside = styled("aside", {
+export const Aside = styled("aside", {
   base: {
     marginTop: "24px",
     minWidth: 0,
@@ -680,7 +662,7 @@ const Aside = styled("aside", {
   },
 });
 
-const SidePart = styled("section", {
+export const SidePart = styled("section", {
   base: {
     padding: "20px 24px",
     display: "flex",
@@ -725,7 +707,7 @@ const State = styled("p", {
 });
 
 /** The server's facts: a label and its value per row */
-const Facts = styled("dl", {
+export const Facts = styled("dl", {
   base: {
     margin: 0,
     "& > div": {
@@ -775,7 +757,7 @@ const Facts = styled("dl", {
   },
 });
 
-const Tags = styled("div", {
+export const Tags = styled("div", {
   base: {
     display: "flex",
     flexWrap: "wrap",
@@ -791,9 +773,9 @@ const Tags = styled("div", {
       fontWeight: 500,
       display: "inline-flex",
       alignItems: "center",
-      gap: "4px",
       textDecoration: "none",
-      "& > b": { color: "var(--z-fg-muted)" },
+      // "#tag" as one word, as on the cards
+      "& > b": { color: "var(--dz-mark)", fontWeight: 700 },
       _hover: { background: "var(--z-border-strong)" },
       _focusVisible: { outline: "2px solid var(--z-focus)" },
     },
@@ -801,7 +783,7 @@ const Tags = styled("div", {
 });
 
 /** Report: a quiet line at the foot of the frame */
-const QuietButton = styled("button", {
+export const QuietButton = styled("button", {
   base: {
     alignSelf: "flex-start",
     minHeight: "24px",
@@ -847,7 +829,7 @@ const buttonBase = {
   "&:disabled": { cursor: "default" },
 } as const;
 
-const PrimaryButton = styled("button", {
+export const PrimaryButton = styled("button", {
   base: {
     ...buttonBase,
     minHeight: "48px",
@@ -873,10 +855,12 @@ const PrimaryButton = styled("button", {
       zIndex: 10,
       boxShadow: "0 12px 32px rgb(0 0 0 / 0.45)",
     },
+    // in the app the phone's tab bar floats at the bottom: stand above it
+    _phone: { "[data-app='true'] &": { bottom: "76px" } },
   },
 });
 
-const SecondaryButton = styled("button", {
+export const SecondaryButton = styled("button", {
   base: {
     ...buttonBase,
     flex: 1,
@@ -911,7 +895,7 @@ const Message = styled("div", {
   },
 });
 
-const SkeletonLine = styled("div", {
+export const SkeletonLine = styled("div", {
   base: {
     height: "16px",
     width: "70%",

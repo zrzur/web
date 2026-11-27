@@ -8,11 +8,8 @@ import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { TextWithEmoji } from "@revolt/markdown";
 import {
-  addLibrarySound,
-  fetchSoundLibrary,
   followVoiceEvents,
   playSound,
-  soundLibraryName,
   soundboardOf,
 } from "@revolt/rtc/voiceExtrasStore";
 import { IconButton } from "@revolt/ui/components/design";
@@ -35,7 +32,7 @@ export default function SoundboardPicker(props: {
   /** "dock": floats over the call above the voice card, in its colours */
   placement?: "call" | "dock";
 }) {
-  const { t, i18n } = useLingui();
+  const { t } = useLingui();
   const describeError = useError();
   const client = useClient();
   const server = () => props.channel.server;
@@ -53,46 +50,6 @@ export default function SoundboardPicker(props: {
   const [playing, setPlaying] = createSignal<string>();
   const [all, setAll] = createSignal(false);
   const shown = () => (all() ? sounds() : sounds().slice(0, SOUNDBOARD_FIRST));
-
-  // a server without sounds yet: whoever may add sounds sees a few from the
-  // library, and pressing one adds it to the server and plays it
-  const canAdd = () => !!server()?.havePermission("ManageSoundboard");
-  const [library] = createResource(
-    () =>
-      !loaded.loading && !loaded.error && !sounds().length && canAdd()
-        ? client()
-        : undefined,
-    (current) => fetchSoundLibrary(current),
-  );
-  const suggestions = () => {
-    // read only once it has arrived: reading a list that is still on its way
-    // hands the wait to the loading boundary above, which hid the picker
-    // (and, before it had its own boundary, the whole app)
-    const list =
-      library.loading || library.error ? [] : (library()?.sounds ?? []);
-    const reactions = list.filter((sound) => sound.category === "reactions");
-    return (reactions.length >= SOUNDBOARD_FIRST ? reactions : list).slice(
-      0,
-      SOUNDBOARD_FIRST,
-    );
-  };
-
-  async function addAndPlay(libraryId: string) {
-    const current = server();
-    if (playing() || !current) return;
-    setError(undefined);
-    setPlaying(libraryId);
-    try {
-      // the server names it in the adder's language
-      const created = await addLibrarySound(client(), current, libraryId);
-      board()?.sounds.set(created._id, created);
-      await playSound(client(), props.channel, created._id);
-    } catch (err) {
-      setError(describeError(err));
-    } finally {
-      setPlaying(undefined);
-    }
-  }
 
   async function play(id: string) {
     if (playing()) return;
@@ -162,40 +119,12 @@ export default function SoundboardPicker(props: {
           <Show
             when={sounds().length}
             fallback={
-              <Show
-                when={suggestions().length}
-                fallback={
-                  <Muted data-soundboard-empty>
-                    <Trans>
-                      No sounds yet. People who manage the soundboard add them
-                      in Server settings, Soundboard.
-                    </Trans>
-                  </Muted>
-                }
-              >
-                <Grid data-placement={props.placement ?? "call"}>
-                  <For each={suggestions()}>
-                    {(sound) => (
-                      <Tile
-                        type="button"
-                        data-suggested-sound={sound.id}
-                        data-playing={playing() === sound.id || undefined}
-                        aria-disabled={!!playing() || undefined}
-                        title={soundLibraryName(
-                          sound.names,
-                          i18n().locale || "en",
-                        )}
-                        onClick={() => void addAndPlay(sound.id)}
-                      >
-                        <TileIcon aria-hidden="true">{sound.emoji}</TileIcon>
-                        <SoundName>
-                          {soundLibraryName(sound.names, i18n().locale || "en")}
-                        </SoundName>
-                      </Tile>
-                    )}
-                  </For>
-                </Grid>
-              </Show>
+              <Muted data-soundboard-empty>
+                <Trans>
+                  No sounds yet. People who manage the soundboard upload them in
+                  Server settings, Soundboard.
+                </Trans>
+              </Muted>
             }
           >
             <Grid
@@ -263,7 +192,7 @@ const Card = styled("section", {
         "color-mix(in srgb, var(--z-fg-primary) 7%, transparent)",
       // the tiles act like the card's own buttons below (Camera, Screen):
       // a lighter grey on hover, the accent fill while a sound plays
-      "& [data-sound], & [data-suggested-sound]": {
+      "& [data-sound]": {
         borderColor: "transparent",
         // the corner of the card's own buttons
         borderRadius: "8px",

@@ -1,13 +1,4 @@
-import { lazy } from "@revolt/common/lib/lazyPart";
-import {
-  For,
-  Show,
-  Suspense,
-  createResource,
-  createSignal,
-  onCleanup,
-  onMount,
-} from "solid-js";
+import { For, Show, createResource, createSignal, onCleanup } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Server } from "@zrzur/sdk/solid";
@@ -21,7 +12,6 @@ import {
   SoundboardPlayer,
   createSound,
   deleteSound,
-  fetchSoundLibrary,
   followVoiceEvents,
   soundGain,
   soundUrl,
@@ -31,12 +21,10 @@ import {
   Button,
   Column,
   IconButton,
-  Segmented,
   SettingsRow,
   SettingsSection,
   TextField,
 } from "@revolt/ui";
-import { PageBoundary } from "@revolt/ui/components/utils/PageBoundary";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import {
@@ -48,16 +36,12 @@ import {
   nameFromFile,
 } from "./soundFile";
 
-// the library is its own chunk, fetched when its tab first opens
-const SoundLibrary = lazy(() => import("./SoundLibrary"));
-
 /**
- * Soundboard settings: add a short sound (an upload or one from the
- * library), listen to it, remove it
+ * Soundboard settings: upload a short sound, listen to it, remove it. The
+ * server's sounds are the ones its people upload; there is no ready-made
+ * library (owner, 2026-11-27).
  */
 export function SoundboardList(props: { server: Server }) {
-  const [source, setSource] = createSignal<"upload" | "library">("upload");
-  const canManage = () => props.server.havePermission("ManageSoundboard");
   const { t, i18n } = useLingui();
   const client = useClient();
   // 5.2 written the way this language writes numbers
@@ -162,15 +146,6 @@ export function SoundboardList(props: { server: Server }) {
   }
   onCleanup(() => player?.stopAll());
 
-  // The Library tab opens at once: its list and its chunk are fetched while
-  // the page opens, and again on hover or focus if that failed (both are
-  // kept once fetched, so asking twice costs nothing)
-  const warmLibrary = () => {
-    fetchSoundLibrary(client()).catch(() => undefined);
-    SoundLibrary.preload().catch(() => undefined);
-  };
-  onMount(warmLibrary);
-
   // removing asks once more, in the row itself
   const [confirming, setConfirming] = createSignal<string>();
   async function remove(id: string) {
@@ -207,47 +182,8 @@ export function SoundboardList(props: { server: Server }) {
           </Show>
         }
       >
-        <Tabs onPointerEnter={warmLibrary} onFocusIn={warmLibrary}>
-          <Segmented
-            aria-label={t`Where the sound comes from`}
-            value={source()}
-            onChange={setSource}
-            options={[
-              {
-                value: "upload",
-                label: t`Upload`,
-                icon: <Icon name="upload-simple" size={16} />,
-              },
-              {
-                value: "library",
-                label: t`Library`,
-                icon: <Icon name="music-note" size={16} />,
-              },
-            ]}
-          />
-        </Tabs>
-        <Show when={source() === "library"}>
-          <Suspense
-            fallback={
-              <Empty>
-                <Trans>Loading…</Trans>
-              </Empty>
-            }
-          >
-            {/* not downloaded: a note in its place; the window and the
-                upload form stay */}
-            <PageBoundary>
-              <SoundLibrary
-                server={props.server}
-                board={board()}
-                canAdd={canManage()}
-              />
-            </PageBoundary>
-          </Suspense>
-        </Show>
         <form
-          hidden={source() !== "upload"}
-          style={{ display: source() === "upload" ? "contents" : "none" }}
+          style={{ display: "contents" }}
           onSubmit={(event) => {
             event.preventDefault();
             void add();
@@ -310,8 +246,7 @@ export function SoundboardList(props: { server: Server }) {
                       >
                         <Trans>
                           An MP3, OGG or WAV file of up to{" "}
-                          {Math.round(maxBytes() / 1000)} KB, then a name. WAV
-                          files are big: longer sounds fit as MP3 or OGG.
+                          {Math.round(maxBytes() / 1000)} KB, then a name.
                         </Trans>
                       </Show>
                     }
@@ -368,16 +303,16 @@ export function SoundboardList(props: { server: Server }) {
                       fallback={
                         <Row>
                           <IconButton
-                            size="sm"
-                            variant="tonal"
+                            size="xs"
+                            variant="toolbar"
                             aria-label={t`Listen to ${sound.name}`}
                             onPress={() => listen(sound._id, sound.volume)}
                           >
                             <Icon name="speaker-high" size={18} />
                           </IconButton>
                           <IconButton
-                            size="sm"
-                            variant="tonal"
+                            size="xs"
+                            variant="toolbar"
                             aria-label={t`Remove ${sound.name}`}
                             data-remove-sound={sound._id}
                             onPress={() => setConfirming(sound._id)}
@@ -417,37 +352,38 @@ export function SoundboardList(props: { server: Server }) {
 }
 
 /**
- * [Choose a sound] [Name ........] [Emoji] [Add sound]
+ * [Choose a sound]
+ * [Name ...................] [Emoji] [Add sound]
  * hint or error
  * Phones: one column.
  */
 const Upload = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "auto minmax(0, 1fr) 120px auto",
+    gridTemplateColumns: "minmax(0, 1fr) 120px auto",
+    gridTemplateAreas: '"file file file" "name emoji add" "hint hint hint"',
     alignItems: "end",
-    columnGap: "16px",
+    columnGap: "12px",
     rowGap: "12px",
     padding: "16px 20px",
     "& > button": { gap: "8px" },
+    "& > button:not([type=submit])": {
+      gridArea: "file",
+      justifySelf: "start",
+      maxWidth: "100%",
+    },
+    "& > button[type=submit]": { gridArea: "add" },
     _phone: {
       gridTemplateColumns: "minmax(0, 1fr)",
+      gridTemplateAreas: '"file" "name" "emoji" "add" "hint"',
       padding: "16px",
       "& > button": { width: "100%", minHeight: "44px" },
     },
   },
 });
 
-const Tabs = styled("div", {
-  base: {
-    display: "flex",
-    padding: "16px 20px 0",
-    _phone: { padding: "16px 16px 0" },
-  },
-});
-
-const Field = styled("div", { base: { minWidth: 0 } });
-const EmojiField = styled("div", { base: { minWidth: 0 } });
+const Field = styled("div", { base: { minWidth: 0, gridArea: "name" } });
+const EmojiField = styled("div", { base: { minWidth: 0, gridArea: "emoji" } });
 
 const Picked = styled("span", {
   base: {
@@ -460,7 +396,7 @@ const Picked = styled("span", {
 
 const Hint = styled("p", {
   base: {
-    gridColumn: "1 / -1",
+    gridArea: "hint",
     margin: 0,
     fontSize: "13px",
     lineHeight: "18px",

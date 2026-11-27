@@ -32,6 +32,21 @@ vi.mock("@revolt/ui", () => {
   };
   return {
     Button,
+    SettingsSection: (props: { children?: JSX.Element }) => (
+      <section>{props.children}</section>
+    ),
+    SettingsRow: (props: {
+      title?: JSX.Element;
+      description?: JSX.Element;
+      control?: () => JSX.Element;
+      "data-testid"?: string;
+    }) => (
+      <div data-testid={props["data-testid"]}>
+        <strong>{props.title}</strong>
+        <span>{props.description}</span>
+        {props.control?.()}
+      </div>
+    ),
     Checkbox: (props: {
       checked?: boolean;
       disabled?: boolean;

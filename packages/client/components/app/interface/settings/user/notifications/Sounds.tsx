@@ -136,15 +136,7 @@ export default function Sounds() {
   return (
     <Show when={settings.desktopNotificationsState !== "unsupported"}>
       <Column gap="xl">
-        <SettingsSection
-          title={<Trans>Message sounds</Trans>}
-          description={
-            <Trans>
-              Previews play even when a sound is switched off. Sounds use the
-              speaker selected in Voice & Video.
-            </Trans>
-          }
-        >
+        <SettingsSection title={<Trans>Message sounds</Trans>}>
           <For each={MESSAGE_SOUNDS}>{row}</For>
         </SettingsSection>
         <SettingsSection title={<Trans>Voice and call sounds</Trans>}>

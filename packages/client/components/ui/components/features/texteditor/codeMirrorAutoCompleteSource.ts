@@ -1,3 +1,4 @@
+import { t } from "@lingui/core/macro";
 import { userHandle } from "@revolt/common/lib/userTag";
 import { Accessor, createMemo } from "solid-js";
 
@@ -11,7 +12,6 @@ import { User } from "@zrzur/sdk/solid";
 import { useClient } from "@revolt/client";
 import {
   isRegionalIndicator,
-  UNICODE_EMOJI_PACK_PUA,
   UNICODE_ZWNJ,
   unicodeEmojiUrl,
 } from "@revolt/markdown/emoji/UnicodeEmoji";
@@ -22,6 +22,7 @@ import { AutoCompleteSearchSpace } from "../../utils/autoComplete";
 import { pickByFold } from "@revolt/common/lib/arabicFold";
 import { EMOJI_KEYS, getEmojiByShorthand } from "@revolt/ui/emojis";
 
+import { channelGlyph } from "./channelGlyph";
 import { isInCodeBlock } from "./codeMirrorCommon";
 
 const MAPPED_EMOJI_KEYS = EMOJI_KEYS.values()
@@ -83,7 +84,7 @@ export function codeMirrorAutoCompleteSource(
     return ([] as Completion[]).concat(
       MAPPED_EMOJI_KEYS.map((emoji) => ({
         ...emoji,
-        apply: `${UNICODE_EMOJI_PACK_PUA[state.settings.getValue("appearance:unicode_emoji")!] ?? ""}${isRegionalIndicator(emoji.apply as string) ? UNICODE_ZWNJ : ""}${emoji.apply as string}`,
+        apply: `${isRegionalIndicator(emoji.apply as string) ? UNICODE_ZWNJ : ""}${emoji.apply as string}`,
         url: unicodeEmojiUrl(
           state.settings.getValue("appearance:unicode_emoji"),
           emoji.apply as string,
@@ -126,6 +127,29 @@ export function codeMirrorAutoCompleteSource(
     }),
   );
 
+  // @everyone and @here, for those who may ping them, after the people
+  const massMentions = createMemo((): Completion[] =>
+    searchSpace()?.massMentions
+      ? [
+          {
+            type: "everyone",
+            label: "@everyone",
+            detail: t`Everyone in this channel`,
+            apply: "@everyone ",
+            glyph: "users-three",
+          } as Completion,
+          {
+            type: "everyone",
+            label: "@here",
+            detail: t`Everyone online in this channel`,
+            apply: "@here ",
+            glyph: "users",
+          } as Completion,
+        ]
+      : [],
+  );
+  const people = createMemo(() => [...users(), ...massMentions()]);
+
   const roles = createMemo(() => {
     return (
       searchSpace()?.roles?.map(
@@ -147,8 +171,11 @@ export function codeMirrorAutoCompleteSource(
         ({
           type: "channel",
           label: ("#" + entry.name).normalize("NFKC"),
-          displayLabel: "#" + entry.name,
+          // the room's icon says what it is: the name alone
+          displayLabel: entry.name,
           apply: `<#${entry.id}> `,
+          glyph: channelGlyph(entry),
+          url: entry.iconURL,
         }) as Completion,
     ),
   );
@@ -194,10 +221,10 @@ export function codeMirrorAutoCompleteSource(
         } as CompletionResult;
       case "@":
         return (
-          folded(users()) ??
+          folded(people()) ??
           ({
             from: token.from,
-            options: users(),
+            options: people(),
             validFor: RE_mentionValidFor,
             update: again,
           } as CompletionResult)

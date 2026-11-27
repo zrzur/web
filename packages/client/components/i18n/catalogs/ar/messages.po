@@ -19675,11 +19675,11 @@ msgstr "مُروَّج"
 
 #: src/interface/Discover.tsx
 msgid "Promoted bots show up first for everyone who looks for bots on Discover. Get added to more servers."
-msgstr "البوتات المروَّجة تظهر أولاً لكل من يبحث عن بوتات في الاستكشاف. اجعله يُضاف إلى سيرفرات أكثر."
+msgstr "البوتات المروَّجة تظهر أولاً لكل من يبحث عن بوتات في «اكتشف». اجعله يُضاف إلى سيرفرات أكثر."
 
 #: src/interface/Discover.tsx
 msgid "Promoted servers show up first for everyone who opens Discover. Get seen and grow faster."
-msgstr "السيرفرات المروَّجة تظهر أولاً لكل من يفتح الاستكشاف. احصل على ظهور أكبر ونمُ أسرع."
+msgstr "السيرفرات المروَّجة تظهر أولاً لكل من يفتح «اكتشف». احصل على ظهور أكبر ونمُ أسرع."
 
 #: components/modal/modals/ReportContent.tsx
 #~ msgid "Promotes harm"
@@ -34120,3 +34120,586 @@ msgstr "أُرسل {0}، وفشل {1}"
 #: components/app/interface/settings/user/profile/studio/StudioPack.tsx
 msgid "Your name and avatar on your designs at designs.zrzur.com, with a page of all your work. Your #tag never shows."
 msgstr "اسمك وصورتك على تصاميمك في designs.zrzur.com، مع صفحة لكل أعمالك. لا يظهر #tag الخاص بك أبدًا."
+
+#: components/app/interface/settings/user
+msgid "A copy of your data"
+msgstr "نسخة من بياناتك"
+
+#: components/app/interface/settings/user
+msgid "Not linked"
+msgstr "غير مرتبط"
+
+#: components/app/interface/settings/user
+msgid "Hide private details"
+msgstr "إخفاء التفاصيل الخاصة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Click a shortcut's keys to change them."
+msgstr "انقر على مفاتيح أي اختصار لتغييرها."
+
+#: components/app/interface/settings/user
+msgid "In the browser, keys work only while the Zrzur tab is active."
+msgstr "في المتصفح تعمل المفاتيح فقط عندما يكون تبويب زرزور نشطًا."
+
+#: components/app/interface/settings/user
+msgid "Keeps the mic open a moment after you let go."
+msgstr "يُبقي المايك مفتوحًا لحظة بعد أن تترك المفتاح."
+
+#: components/app/interface/settings/user
+msgid "Also while Zrzur is closed."
+msgstr "حتى عندما يكون زرزور مغلقًا."
+
+#: components/app/interface/settings/user
+msgid "For weak or metered internet."
+msgstr "للإنترنت الضعيف أو المحدود."
+
+#: components/app/interface/settings/user
+msgid "Players load right away, and their sites see your IP address."
+msgstr "تُحمَّل المشغّلات فورًا، وترى مواقعها عنوان IP الخاص بك."
+
+#: components/app/interface/settings/user
+msgid "Hides your email, tag, invites and DM previews."
+msgstr "يُخفي بريدك الإلكتروني ووسمك والدعوات ومعاينات الرسائل الخاصة."
+
+#: components/app/interface/settings/user
+msgid "Shortcut: <0>{0}</0>"
+msgstr "الاختصار: <0>{0}</0>"
+
+#: components/app/interface/settings/user
+msgid "512 × 512 px · up to {0}"
+msgstr "512 × 512 بكسل · حتى {0}"
+
+#: components/app/interface/settings/user
+msgid "680 × 240 px · up to {0}"
+msgstr "680 × 240 بكسل · حتى {0}"
+
+#: components/app/interface/settings/user
+msgid "Hidden sections are not sent to anyone."
+msgstr "الأقسام المخفية لا تُرسَل إلى أحد."
+
+#: components/app/interface/settings/user
+msgid "Up to {MAX_LINKS} links."
+msgstr "حتى {MAX_LINKS} روابط."
+
+#: components/app/interface/settings/user
+msgid "On designs.zrzur.com. Your #tag never shows."
+msgstr "على designs.zrzur.com. لا يظهر #tag الخاص بك أبدًا."
+
+#: components/app/interface/settings/user
+msgid "Your Twitch channel, and when you are live."
+msgstr "قناتك على Twitch، ومتى تكون في بث مباشر."
+
+#: components/app/interface/settings/user
+msgid "Your GitHub account and your best public repositories."
+msgstr "حسابك على GitHub وأفضل مستودعاتك العامة."
+
+#: components/app/interface/settings/user
+msgid "Your BattleTag, so friends can add you."
+msgstr "‏BattleTag الخاص بك، ليضيفك أصدقاؤك."
+
+#: components/app/interface/settings/user
+msgid "Your Steam name, games and achievements."
+msgstr "اسمك على Steam وألعابك وإنجازاتك."
+
+#: components/app/interface/settings/user
+msgid "Revoking an app ends its access at once. Bots it added stay in their servers."
+msgstr "إلغاء وصول تطبيق ينهي وصوله فورًا. تبقى البوتات التي أضافها في سيرفراتها."
+
+#: components/app/interface/settings/user
+msgid "A ZIP file, sent by e-mail. Once every 24 hours."
+msgstr "ملف ZIP يصلك بالبريد الإلكتروني. مرة كل 24 ساعة."
+
+#: components/app/interface/settings/user
+msgid "Only in the Zrzur desktop app."
+msgstr "فقط في تطبيق زرزور لسطح المكتب."
+
+#: components/app/interface/settings/user
+msgid "A preview: nothing shows on your profile until you turn it on. Untick any game you want to keep to yourself."
+msgstr "معاينة: لا يظهر شيء في ملفك حتى تشغّله. ألغِ تحديد أي لعبة تريد إبقاءها لنفسك."
+
+#: components/app/interface/settings/user
+msgid "While the card is focused."
+msgstr "عندما تكون البطاقة محددة."
+
+#: components/app/interface/settings/user
+msgid "Other devices"
+msgstr "أجهزة أخرى"
+
+#: components/app/interface/settings/user
+msgid "Start one from a message or with +."
+msgstr "ابدأ واحدًا من رسالة أو عبر +."
+
+#: components/app/interface/settings/user
+msgid "In a chat"
+msgstr "في الدردشة"
+
+#: components/app/interface/settings/user
+msgid "In the member list"
+msgstr "في قائمة الأعضاء"
+
+#: components/app/interface/settings/user
+msgid "{name} set"
+msgstr "طقم {name}"
+
+#: components/app/interface/settings/user
+msgid "2 to 32 characters. You can change it twice a day."
+msgstr "من 2 إلى 32 حرفًا. يمكنك تغييره مرتين في اليوم."
+
+#: components/app/interface/settings/user
+msgid "Confirm it's you"
+msgstr "أكّد أنه أنت"
+
+#: components/app/interface/settings/user
+msgid "How do you want to confirm?"
+msgstr "كيف تريد التأكيد؟"
+
+#: components/app/interface/settings/user
+msgid "Code from your authenticator app"
+msgstr "الرمز من تطبيق المصادقة"
+
+#: components/app/interface/settings/user
+msgid "Younger any time; older only once, within your age group. Anything else: privacy@zrzur.com."
+msgstr "الأصغر في أي وقت، والأكبر مرة واحدة فقط ضمن فئتك العمرية. لأي شيء آخر: privacy@zrzur.com."
+
+#: components/app/interface/settings/user
+msgid "Search roles"
+msgstr "ابحث عن رتبة"
+
+#: components/app/interface/settings/user
+msgid "No role matches."
+msgstr "لا توجد رتبة مطابقة."
+
+#: components/app/interface/settings/user
+msgid "No roles."
+msgstr "لا توجد رتب."
+
+#: components/app/interface/settings/user
+msgid "A bot's own role"
+msgstr "رتبة خاصة ببوت"
+
+#: components/app/interface/settings/user
+msgid "Above your highest role"
+msgstr "أعلى من أعلى رتبة لديك"
+
+#: components/app/interface/settings/user
+msgid "Add role"
+msgstr "إضافة رتبة"
+
+#: components/app/interface/settings/user
+msgid "Channels and messages"
+msgstr "القنوات والرسائل"
+
+#: components/app/interface/settings/user
+msgid "New members"
+msgstr "الأعضاء الجدد"
+
+#: components/app/interface/settings/user
+msgid "Transfer or delete"
+msgstr "نقل أو حذف"
+
+#: components/app/interface/settings/user
+msgid "Name, picture, description and notifications."
+msgstr "الاسم والصورة والوصف والإشعارات."
+
+#: components/app/interface/settings/user
+msgid "System messages, threads, events and tickets."
+msgstr "رسائل النظام والخيوط والفعاليات والتذاكر."
+
+#: components/app/interface/settings/user
+msgid "Your own short link, and every invite."
+msgstr "رابطك القصير الخاص، وكل الدعوات."
+
+#: components/app/interface/settings/user
+msgid "1920 × 1080 px · up to {0}"
+msgstr "1920 × 1080 بكسل · حتى {0}"
+
+#: components/app/interface/settings/user
+msgid "Bots get none. Up to {MAX_ROLES} roles."
+msgstr "البوتات لا تحصل عليها. حتى {MAX_ROLES} رتب."
+
+#: components/app/interface/settings/user
+msgid "Nobody is notified."
+msgstr "لا يُنبَّه أحد."
+
+#: components/app/interface/settings/user
+msgid "Asked once, when a new member first opens the server."
+msgstr "تُطرح مرة واحدة عندما يفتح العضو الجديد السيرفر لأول مرة."
+
+#: components/app/interface/settings/user
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name."
+msgstr "ملف MP3 أو OGG أو WAV حتى {0} كيلوبايت، ثم اسم."
+
+#: components/app/interface/settings/user
+msgid "Rules to accept, roles and a welcome."
+msgstr "قواعد للموافقة، ورتب، وترحيب."
+
+#: components/app/interface/settings/user
+msgid "Only you and Zrzur's security reviewers can read it."
+msgstr "يمكن قراءتها لك ولمراجعي الأمان في زرزور فقط."
+
+#: components/app/interface/settings/user
+msgid "Your tickets"
+msgstr "تذاكرك"
+
+#: components/app/interface/settings/user
+msgid "Ticket"
+msgstr "تذكرة"
+
+#: components/app/interface/settings/user
+msgid "Only the Zrzur team can write here."
+msgstr "فريق زرزور وحده يمكنه الكتابة هنا."
+
+#: components/app/interface/settings/user
+msgid "For help, open Settings and choose Contact support."
+msgstr "للمساعدة، افتح الإعدادات واختر «التواصل مع الدعم»."
+
+#: components/app/interface/settings/user
+msgid "{0, plural, one {# option} other {# options}}"
+msgstr "{0, plural, zero {لا خيارات} one {خيار واحد} two {خياران} few {# خيارات} many {# خيارًا} other {# خيار}}"
+
+#: components/app/interface/settings/user
+msgid "A link starting with https://"
+msgstr "رابط يبدأ بـ https://"
+
+#: components/app/interface/settings/user
+msgid "A new secret stops the old one at once."
+msgstr "السر الجديد يوقف القديم فورًا."
+
+#: components/app/interface/settings/user
+msgid "About your bot"
+msgstr "عن البوت"
+
+#: components/app/interface/settings/user
+msgid "Account"
+msgstr "الحساب"
+
+#: components/app/interface/settings/user
+msgid "Add a redirect to get the link."
+msgstr "أضف عنوان إعادة توجيه للحصول على الرابط."
+
+#: components/app/interface/settings/user
+msgid "Anyone can add it to their servers. When off, only you can."
+msgstr "يمكن لأي شخص إضافته إلى سيرفراته. عند الإيقاف، أنت فقط."
+
+#: components/app/interface/settings/user
+msgid "Choose one of your servers."
+msgstr "اختر أحد سيرفراتك."
+
+#: components/app/interface/settings/user
+msgid "Connection"
+msgstr "الاتصال"
+
+#: components/app/interface/settings/user
+msgid "Copy application ID"
+msgstr "نسخ معرّف التطبيق"
+
+#: components/app/interface/settings/user
+msgid "Let people sign in to your app with Zrzur. The client ID is the application ID above."
+msgstr "دع الناس يسجّلون الدخول إلى تطبيقك عبر زرزور. معرّف العميل هو معرّف التطبيق في الأعلى."
+
+#: components/app/interface/settings/user
+msgid "None yet. Without one, your app must use PKCE."
+msgstr "لا يوجد بعد. بدونه يجب أن يستخدم تطبيقك PKCE."
+
+#: components/app/interface/settings/user
+msgid "None. Turn them on in the Bot tab first if your bot needs them."
+msgstr "لا شيء. فعّلها أولًا من تبويب «بوت» إن احتاجها بوتك."
+
+#: components/app/interface/settings/user
+msgid "Privileged intents in this request"
+msgstr "الصلاحيات الخاصة للاتصال في هذا الطلب"
+
+#: components/app/interface/settings/user
+msgid "Redirect URIs"
+msgstr "عناوين إعادة التوجيه"
+
+#: components/app/interface/settings/user
+msgid "Redirects"
+msgstr "إعادة التوجيه"
+
+#: components/app/interface/settings/user
+msgid "Sign-in link"
+msgstr "رابط تسجيل الدخول"
+
+#: components/app/interface/settings/user
+msgid "Support link (optional)"
+msgstr "رابط الدعم (اختياري)"
+
+#: components/app/interface/settings/user
+msgid "The token signs in as your bot. Never share it or show it on screen."
+msgstr "الرمز يسجّل الدخول باسم بوتك. لا تشاركه ولا تُظهره على الشاشة أبدًا."
+
+#: components/app/interface/settings/user
+msgid "Turn on only what your bot needs. A change applies from the bot's next connection."
+msgstr "فعّل فقط ما يحتاجه بوتك. يسري التغيير من اتصال البوت التالي."
+
+#: components/app/interface/settings/user
+msgid "Verified bots get a mark next to their name and can join more than 100 servers. Past 100 servers, privileged intents need approval."
+msgstr "تحصل البوتات الموثّقة على علامة بجانب اسمها ويمكنها الانضمام إلى أكثر من 100 سيرفر. بعد 100 سيرفر تحتاج الصلاحيات المميزة إلى موافقة."
+
+#: components/app/interface/settings/user
+msgid "Website (optional)"
+msgstr "الموقع (اختياري)"
+
+#: components/app/interface/settings/user
+msgid "What it does, who uses it, and what data it keeps"
+msgstr "ماذا يفعل، ومن يستخدمه، وما البيانات التي يحتفظ بها"
+
+#: components/app/interface/settings/user
+msgid "Where people return after signing in. One per line: https, or http://localhost while you test."
+msgstr "حيث يعود الناس بعد تسجيل الدخول. عنوان في كل سطر: https، أو http://localhost أثناء التجربة."
+
+#: components/app/interface/settings/user
+msgid "Whoever opens it picks a server, and the bot joins with these permissions."
+msgstr "من يفتحه يختار سيرفرًا، وينضم البوت بهذه الصلاحيات."
+
+#: components/app/interface/settings/user
+msgid "Write at least {STATEMENT_MIN} characters."
+msgstr "اكتب {STATEMENT_MIN} حرفًا على الأقل."
+
+#: components/app/interface/settings/user
+msgid "Your app adds a new state and code challenge for every sign-in, so the link doesn't work opened as it is."
+msgstr "يضيف تطبيقك state وcode challenge جديدين لكل تسجيل دخول، لذا لا يعمل الرابط إذا فُتح كما هو."
+
+#: components/app/interface/settings/user
+msgid "Zrzur can't show it again. A new token stops the old one."
+msgstr "لا يستطيع زرزور إظهاره مرة أخرى. الرمز الجديد يوقف القديم."
+
+#: components/app/interface/settings/user
+msgid "At most {STATEMENT_MAX} characters."
+msgstr "{STATEMENT_MAX} حرف كحد أقصى."
+
+#: components/app/interface/settings/user
+msgid "By application, reviewed by the Zrzur team: open to every bot, whatever its size; the team looks at its servers, its age and what it does."
+msgstr "بطلب يراجعه فريق زرزور: متاح لكل بوت مهما كان حجمه، ويطّلع الفريق على سيرفراته وعمره وما يفعله."
+
+#: components/app/interface/settings/user
+msgid "Couldn't load the verification."
+msgstr "تعذّر تحميل التوثيق."
+
+#: components/app/interface/settings/user
+msgid "Intents asked for: {0}"
+msgstr "الصلاحيات المطلوبة: {0}"
+
+#: components/app/interface/settings/user
+msgid "No malicious commands, token theft, deception or inflated installs. Any bot can apply, whatever its size; a review decides."
+msgstr "لا أوامر ضارة ولا سرقة رموز ولا خداع ولا تضخيم للتثبيتات. يمكن لأي بوت التقديم مهما كان حجمه، والمراجعة هي التي تقرر."
+
+#: components/app/interface/settings/user
+msgid "Sent on {0}. The team will answer here."
+msgstr "أُرسل في {0}. سيرد الفريق هنا."
+
+#: components/app/interface/settings/user
+msgid "The team looks at the servers that count: your own never do, and one owner's count at most twice."
+msgstr "يطّلع الفريق على السيرفرات التي تُحسب: سيرفراتك لا تُحسب أبدًا، وسيرفرات المالك الواحد تُحسب مرتين على الأكثر."
+
+#: components/app/interface/settings/user
+msgid "What the team looks at"
+msgstr "ما يطّلع عليه الفريق"
+
+#: components/app/interface/settings/user
+msgid "Emoji and sounds"
+msgstr "الإيموجي والأصوات"
+
+#: components/app/interface/settings/user
+msgid "Pause the server during a raid, and filters that stop spam, bad words and unwanted links."
+msgstr "أوقف السيرفر مؤقتًا أثناء الهجوم، وفلاتر توقف الإزعاج والكلمات السيئة والروابط غير المرغوبة."
+
+#: components/app/interface/settings/user
+msgid "Protection"
+msgstr "الحماية"
+
+#: components/app/interface/settings/user
+msgid "Search, change roles, time out, kick or ban, and see who is banned."
+msgstr "ابحث، وغيّر الأدوار، وأسكت، واطرد أو احظر، واطّلع على المحظورين."
+
+#: components/app/interface/settings/user
+msgid "The server's own emoji, and the short sounds members play in voice calls."
+msgstr "إيموجي السيرفر الخاصة، والأصوات القصيرة التي يشغّلها الأعضاء في المكالمات الصوتية."
+
+#: components/app/interface/settings/user
+msgid "Who can get in, what they need before they can talk, the rules they accept and how they are welcomed."
+msgstr "من يمكنه الدخول، وما يحتاجه قبل أن يتكلم، والقواعد التي يقبلها، وكيف يُرحَّب به."
+
+#: components/app/interface/settings/user
+msgid "A GIF or animated WebP plays."
+msgstr "يتحرك ملف GIF أو WebP المتحرك."
+
+#: components/app/interface/settings/user
+msgid "Short sounds members upload and play in voice calls."
+msgstr "أصوات قصيرة يرفعها الأعضاء ويشغّلونها في المكالمات الصوتية."
+
+#: components/app/interface/settings/user
+msgid "No sounds yet. People who manage the soundboard upload them in Server settings, Soundboard."
+msgstr "لا أصوات بعد. يرفعها من يدير لوحة الأصوات من إعدادات السيرفر، لوحة الأصوات."
+
+#: components/app/interface/settings/user
+msgid "Your device's emoji"
+msgstr "إيموجي جهازك"
+
+#: components/app/interface/settings/user
+msgid "Twitter emoji"
+msgstr "إيموجي تويتر"
+
+#: components/app/interface/settings/user
+msgid "Enter one of the recovery codes you saved."
+msgstr "أدخل أحد رموز الاسترداد التي حفظتها."
+
+#: components/app/interface/settings/user
+msgid "Enter the 6-digit code from your authenticator app."
+msgstr "أدخل الرمز المكوّن من 6 أرقام من تطبيق المصادقة."
+
+#: components/app/interface/settings/user
+msgid "Use a recovery code instead"
+msgstr "استخدم رمز استرداد بدلًا من ذلك"
+
+#: components/app/interface/settings/user
+msgid "Use your authenticator app"
+msgstr "استخدم تطبيق المصادقة"
+
+#: components/app/interface/settings/user
+msgid "Other ways to confirm"
+msgstr "طرق أخرى للتأكيد"
+
+#: components/app/interface/settings/user
+msgid "Suppression strength"
+msgstr "قوة الكتم"
+
+#: components/app/interface/settings/user
+msgid "Also quietens typing, clicks and breathing between words."
+msgstr "يُخفت أيضًا صوت الكتابة والنقرات والتنفس بين الكلمات."
+
+#: components/app/interface/settings/user
+msgid "Removes steady noise such as fans and hum."
+msgstr "يزيل الضوضاء الثابتة مثل المراوح والطنين."
+
+#: components/app/interface/settings/user
+msgid "Core concepts"
+msgstr "المفاهيم الأساسية"
+
+#: components/app/interface/settings/user
+msgid "Working with the API"
+msgstr "العمل مع الواجهة"
+
+#: components/app/interface/settings/user
+msgid "Going live"
+msgstr "الإطلاق"
+
+#: components/app/interface/settings/user
+msgid "Rich presence for games and apps"
+msgstr "النشاط المباشر للألعاب والتطبيقات"
+
+#: components/app/interface/settings/user
+msgid "One bot, many servers"
+msgstr "بوت واحد وسيرفرات كثيرة"
+
+#: components/app/interface/settings/user
+msgid "Search the docs"
+msgstr "ابحث في التوثيق"
+
+#: components/app/interface/settings/user
+msgid "Link to this section"
+msgstr "رابط هذا القسم"
+
+#: components/app/interface/settings/user
+msgid "Sort designs"
+msgstr "ترتيب التصاميم"
+
+#: components/app/interface/settings/user
+msgid "Wearing now"
+msgstr "ترتديه الآن"
+
+#: components/app/interface/settings/user
+msgid "Designs couldn't load."
+msgstr "تعذّر تحميل التصاميم."
+
+#: components/app/interface/settings/user
+msgid "Nobody has published one yet."
+msgstr "لم ينشر أحد واحدًا بعد."
+
+#: components/app/interface/settings/user
+msgid "All in Designs"
+msgstr "الكل في التصاميم"
+
+#: src/interface/Discover.tsx
+msgid "Communities reviewed by the Zrzur team."
+msgstr "مجتمعات يراجعها فريق زرزور."
+
+#: src/interface/Discover.tsx
+msgid "See what each bot does and which permissions it asks for."
+msgstr "اطّلع على ما يفعله كل بوت والصلاحيات التي يطلبها."
+
+#: src/interface/Discover.tsx
+msgid "List it from Server settings → Discover."
+msgstr "اعرضه من إعدادات السيرفر ← اكتشف."
+
+#: src/interface/Discover.tsx
+msgid "List it from the bot's settings."
+msgstr "اعرضه من إعدادات البوت."
+
+#: components/app/interface/settings/user
+msgid "Underlined text"
+msgstr "نص مسطّر"
+
+#: components/app/interface/settings/user
+msgid "Sends your message in italics, as something you do."
+msgstr "يرسل رسالتك بخط مائل، كأنها شيء تفعله."
+
+#: components/app/interface/settings/user
+msgid "Hides your message until someone clicks it."
+msgstr "يخفي رسالتك حتى يضغط عليها أحد."
+
+#: components/app/interface/settings/user
+msgid "Adds {face} to your message."
+msgstr "يضيف {face} إلى رسالتك."
+
+#: components/app/interface/settings/user
+msgid "Everyone in this channel"
+msgstr "كل من في هذه القناة"
+
+#: components/app/interface/settings/user
+msgid "Everyone online in this channel"
+msgstr "كل المتصلين في هذه القناة"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "Server"
+msgstr "السيرفر"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "People"
+msgstr "الأشخاص"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "More"
+msgstr "المزيد"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Expression"
+msgstr "التعبير"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Designs server"
+msgstr "سيرفر Zrzur Designs"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Discover server"
+msgstr "سيرفر Zrzur Discover"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Developers server"
+msgstr "سيرفر Zrzur Developers"
+
+#: components/app/interface/settings/user
+msgid "Questions about designs? Ask in the <0>Zrzur Designs server</0>."
+msgstr "أسئلة عن التصاميم؟ اسأل في <0>سيرفر Zrzur Designs</0>."
+
+#: components/app/interface/settings/user
+msgid "Questions about Discover? Ask in the <0>Zrzur Discover server</0>."
+msgstr "أسئلة عن «اكتشف»؟ اسأل في <0>سيرفر Zrzur Discover</0>."
+
+#: components/app/interface/settings/user
+msgid "Questions about building on Zrzur? Ask in the <0>Zrzur Developers server</0>."
+msgstr "أسئلة عن البرمجة على زرزور؟ اسأل في <0>سيرفر Zrzur Developers</0>."

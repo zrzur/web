@@ -9,9 +9,20 @@ import type { Dayjs } from "dayjs";
  * - `t` short time (16:20), `T` long time (16:20:30)
  * - `d` short date (20/04/2021), `D` long date (20 April 2021)
  * - `f` date and time (the default), `F` with the weekday
+ * - `s` short date and time (20/04/2021 16:20), `S` with seconds
  * - `R` relative (in 2 hours, 3 days ago)
  */
-export const TIMESTAMP_FORMATS = ["t", "T", "d", "D", "f", "F", "R"] as const;
+export const TIMESTAMP_FORMATS = [
+  "t",
+  "T",
+  "d",
+  "D",
+  "f",
+  "F",
+  "s",
+  "S",
+  "R",
+] as const;
 export type TimestampFormat = (typeof TIMESTAMP_FORMATS)[number];
 
 /** The largest moment a JavaScript date can hold, in seconds */
@@ -47,6 +58,10 @@ export function formatTimestamp(date: Dayjs, format: TimestampFormat): string {
       return date.format("LL");
     case "F":
       return date.format("LLLL");
+    case "s":
+      return `${date.format("L")} ${date.format("LT")}`;
+    case "S":
+      return `${date.format("L")} ${date.format("LTS")}`;
     case "R":
       return date.fromNow();
     default:

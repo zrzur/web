@@ -88,8 +88,19 @@ export function ForwardMessageModal(
 
   // the app's own channel objects: rows keep their identity (and focus and
   // scroll) when a new message moves a conversation up the list
+  // the places one may send to, worked out once (a permission check per
+  // channel); typing then only searches those
+  const eligible = createMemo(() =>
+    forwardChannels(
+      client().channels.toList(),
+      view,
+      "",
+      sourceMature(),
+      Infinity,
+    ),
+  );
   const targets = createMemo(() =>
-    forwardChannels(client().channels.toList(), view, query(), sourceMature()),
+    forwardChannels(eligible(), view, query(), sourceMature()),
   );
 
   const selectedTarget = () => chosenTarget(targets(), selected());

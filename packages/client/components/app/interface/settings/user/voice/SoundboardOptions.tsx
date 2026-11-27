@@ -17,16 +17,10 @@ export function SoundboardOptions() {
   const toggleMuted = () => setSoundboardChoice({ muted: !muted() });
 
   return (
-    <SettingsSection
-      title={<Trans>Soundboard</Trans>}
-      description={
-        <Trans>Short sounds people play in a voice call, on your device.</Trans>
-      }
-    >
+    <SettingsSection title={<Trans>Soundboard</Trans>}>
       <SettingsRow
         icon={<Icon name="speaker-slash" size={20} />}
         title={<Trans>Mute the soundboard</Trans>}
-        description={t`You hear no soundboard sounds in calls.`}
         onClick={toggleMuted}
         control={(ids) => (
           <Toggle

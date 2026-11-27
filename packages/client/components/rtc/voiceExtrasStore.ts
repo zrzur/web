@@ -23,15 +23,11 @@ import {
 // the screens share (each extra chunk costs the app's first download a few
 // bytes in its import map).
 export {
-  type SoundLibrary,
-  type SoundLibrarySound,
   type StageState,
-  addLibrarySound,
   createSound,
   deleteSound,
   editStage,
   endStage,
-  fetchSoundLibrary,
   fetchStage,
   fetchStreamPreview,
   inviteToSpeak,
@@ -39,10 +35,7 @@ export {
   moveToAudience,
   playSound,
   raiseHand,
-  searchSoundLibrary,
   sendStreamPreview,
-  soundLibraryName,
-  soundLibraryPreviewUrl,
 } from "@zrzur/sdk/solid/voiceExtras";
 export { SoundboardPlayer, soundGain, soundUrl } from "./soundboardPlayer";
 export { setSoundboardChoice, soundboardChoices } from "./soundboardSettings";

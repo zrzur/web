@@ -1,9 +1,9 @@
+import { useSpeaking } from "@revolt/rtc/speaking";
 import { createEffect, createSignal, onCleanup, Show } from "solid-js";
 import {
   TrackReference,
   useEnsureParticipant,
   useIsMuted,
-  useIsSpeaking,
   useTrackRefContext,
   VideoTrack,
 } from "solid-livekit-components";
@@ -108,7 +108,7 @@ export function ParticipantTile(props: TileProps) {
 
   const isVideo = () => !isVideoMuted();
   const isScreenShare = () => track.source === Track.Source.ScreenShare;
-  const isSpeaking = useIsSpeaking(participant);
+  const isSpeaking = useSpeaking(participant);
   const { t } = useLingui();
 
   // What the stream really is right now (not the quality that was picked):
@@ -372,7 +372,10 @@ export const tile = cva({
   base: {
     display: "grid",
     aspectRatio: "16/9",
-    transition: "all .3s ease, width 0s, height 0s",
+    // only what is cheap to animate (all properties made every resize
+    // and layout change of a call animate)
+    transition:
+      "opacity .3s ease, transform .3s ease, border-color .3s ease, box-shadow .3s ease",
     borderRadius: "var(--borderRadius-lg)",
     width: "var(--vc-tile-width)",
     maxWidth: "calc(var(--vc-h) * 16 / 9)",

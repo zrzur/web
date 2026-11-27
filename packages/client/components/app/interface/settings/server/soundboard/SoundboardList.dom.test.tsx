@@ -1,21 +1,13 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/solid";
 import { ReactiveMap } from "@solid-primitives/map";
-import { For, JSX, splitProps } from "solid-js";
+import { JSX, splitProps } from "solid-js";
 import { render } from "solid-js/web";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-// The Library tab opens at once: the soundboard page starts the library
-// list request and loads the tab's chunk as it opens, and asks again on
-// hover or focus of the tabs when the first try failed.
+// The server's sounds are the ones its people upload: no ready-made
+// library, no tabs (owner, 2026-11-27).
 
-const fetchSoundLibrary = vi.fn(async () => ({ categories: [], sounds: [] }));
-const chunkLoaded = vi.fn();
-
-vi.mock("./SoundLibrary", () => {
-  chunkLoaded();
-  return { default: () => <div data-sound-library /> };
-});
 vi.mock("@revolt/rtc/voiceExtrasStore", () => ({
   SoundboardPlayer: class {
     play = vi.fn();
@@ -23,7 +15,6 @@ vi.mock("@revolt/rtc/voiceExtrasStore", () => ({
   },
   createSound: vi.fn(),
   deleteSound: vi.fn(),
-  fetchSoundLibrary: () => fetchSoundLibrary(),
   followVoiceEvents: vi.fn(),
   soundGain: () => 1,
   soundUrl: () => "",
@@ -43,10 +34,6 @@ vi.mock("@revolt/instance", () => ({
 }));
 vi.mock("@revolt/markdown", () => ({ TextWithEmoji: () => <span /> }));
 vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => <i /> }));
-// the boundary around the sound library (its real Button loads @solid-aria)
-vi.mock("@revolt/ui/components/utils/PageBoundary", () => ({
-  PageBoundary: (props: { children: unknown }) => props.children as never,
-}));
 vi.mock("@revolt/ui", () => {
   const Button = (props: Record<string, unknown>) => {
     const [local, rest] = splitProps(props, [
@@ -83,25 +70,6 @@ vi.mock("@revolt/ui", () => {
     SettingsSection: Box,
     SettingsRow: Box,
     TextField: () => <input />,
-    Segmented: (props: {
-      value: string;
-      options: { value: string; label: string }[];
-      onChange: (value: string) => void;
-    }) => (
-      <div role="radiogroup">
-        <For each={props.options}>
-          {(option) => (
-            <button
-              role="radio"
-              aria-checked={option.value === props.value}
-              onClick={() => props.onChange(option.value)}
-            >
-              {option.label}
-            </button>
-          )}
-        </For>
-      </div>
-    ),
   };
 });
 
@@ -113,7 +81,6 @@ let root: HTMLDivElement;
 beforeEach(() => {
   root = document.createElement("div");
   document.body.append(root);
-  fetchSoundLibrary.mockClear();
   i18n.loadAndActivate({ locale: "en", messages: {} });
 });
 afterEach(() => {
@@ -135,26 +102,10 @@ function show() {
 }
 
 describe("soundboard page", () => {
-  it("fetches the library list and its chunk as the page opens", async () => {
+  it("only uploads: no library and no tabs", () => {
     show();
-    expect(fetchSoundLibrary).toHaveBeenCalledTimes(1);
-    await vi.waitFor(() => expect(chunkLoaded).toHaveBeenCalled());
-    // the Upload tab is shown; the library is ready behind its tab
-    expect(root.querySelector("[data-sound-library]")).toBeNull();
-    (root.querySelector('[role="radio"]:last-child') as HTMLElement).click();
-    await vi.waitFor(() =>
-      expect(root.querySelector("[data-sound-library]")).not.toBeNull(),
-    );
-  });
-
-  it("asks again on hover or focus of the tabs", async () => {
-    fetchSoundLibrary.mockRejectedValueOnce(new Error("offline"));
-    show();
-    expect(fetchSoundLibrary).toHaveBeenCalledTimes(1);
-    const tabs = root.querySelector('[role="radiogroup"]')!.parentElement!;
-    tabs.dispatchEvent(new MouseEvent("pointerenter"));
-    expect(fetchSoundLibrary).toHaveBeenCalledTimes(2);
-    tabs.dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
-    expect(fetchSoundLibrary).toHaveBeenCalledTimes(3);
+    expect(root.querySelector('[role="radiogroup"]')).toBeNull();
+    expect(root.textContent).not.toContain("Library");
+    expect(root.querySelector('input[type="file"]')).not.toBeNull();
   });
 });

@@ -12,7 +12,7 @@ curl https://api.zrzur.com/users/@me -H "x-bot-token: YOUR_BOT_TOKEN"
 
 The gateway takes the same token, either in its first message (`Authenticate`) or as `?token=` in the URL. See [Gateway](/developers/docs/gateway).
 
-> The token is a password. Keep it in an environment variable or a secret store, never in code, logs or screenshots. It is shown once, when it is made. You can reset it in the Developer Portal: your application → **Overview** → **Reset token**. After a reset the old token stops working at once.
+> The token is a password. Keep it in an environment variable or a secret store, never in code, logs or screenshots. It is shown once, when it is made. You can reset it in the Developer Portal: your application → **Bot** → **Reset token**. After a reset the old token stops working at once.
 
 ## Which header does what
 

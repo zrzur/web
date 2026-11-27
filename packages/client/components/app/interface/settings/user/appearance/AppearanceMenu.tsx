@@ -1,6 +1,5 @@
 import {
   type UnicodeEmojiPacks,
-  isEmojiPackAvailable,
   UNICODE_EMOJI_PACKS,
   UnicodeEmoji,
 } from "@revolt/markdown/emoji/UnicodeEmoji";
@@ -33,7 +32,6 @@ import {
   MonospaceFonts,
 } from "@revolt/ui/themes/fonts";
 import { AnimationSettings } from "./AnimationSettings";
-import { MyThemes } from "./MyThemes";
 
 /**
  * Action accents only — chrome icons stay muted outline. Raspberry is the
@@ -103,19 +101,9 @@ export function AppearanceMenu() {
     state.theme.setAppearancePreset("custom");
   }
 
-  const emojiPacks = () =>
-    UNICODE_EMOJI_PACKS.filter((pack) => isEmojiPackAvailable(pack));
-
   return (
     <Page>
-      <SettingsSection
-        title={<Trans>Theme</Trans>}
-        description={
-          <Trans>
-            Pick a look, then fine-tune accent, layout and fonts below.
-          </Trans>
-        }
-      >
+      <SettingsSection title={<Trans>Theme</Trans>}>
         <ThemeLibrary role="radiogroup" aria-label={t`Theme`}>
           <ThemeGrid>
             <For each={presets}>
@@ -184,9 +172,6 @@ export function AppearanceMenu() {
         <SettingsRow
           icon={<Icon name="circle-half" size={20} />}
           title={<Trans>Mode</Trans>}
-          description={
-            <Trans>System follows your device's light or dark setting.</Trans>
-          }
           control={(ids) => (
             <Segmented
               aria-labelledby={ids.labelId}
@@ -214,20 +199,10 @@ export function AppearanceMenu() {
         />
       </SettingsSection>
 
-      <SettingsSection
-        title={<Trans>Colours</Trans>}
-        description={
-          <Trans>
-            Accent colours actions and selection. Outline icons stay muted.
-          </Trans>
-        }
-      >
+      <SettingsSection title={<Trans>Colours</Trans>}>
         <SettingsRow
           icon={<Icon name="palette" size={20} />}
           title={<Trans>Accent colour</Trans>}
-          description={
-            <Trans>Buttons, switches, links and selected items.</Trans>
-          }
           control={() => (
             <Swatches
               colours={ACCENTS}
@@ -394,7 +369,7 @@ export function AppearanceMenu() {
                 aria-labelledby={ids.labelId}
                 value={
                   state.settings.getValue("appearance:unicode_emoji") ??
-                  "fluent-flat"
+                  "system"
                 }
                 onChange={(event) =>
                   state.settings.setValue(
@@ -403,17 +378,13 @@ export function AppearanceMenu() {
                   )
                 }
               >
-                <For each={emojiPacks()}>
+                <For each={UNICODE_EMOJI_PACKS}>
                   {(pack) => (
                     <MenuItem value={pack}>
                       {
                         {
-                          system: t`System emoji`,
-                          "fluent-flat": "Fluent Flat",
-                          "fluent-color": "Fluent Color",
-                          "fluent-3d": "Fluent 3D",
-                          twemoji: "Twemoji Classic",
-                          noto: "Noto Color",
+                          system: t`Your device's emoji`,
+                          twemoji: t`Twitter emoji`,
                         }[pack]
                       }
                     </MenuItem>
@@ -426,20 +397,6 @@ export function AppearanceMenu() {
       </SettingsSection>
 
       <AnimationSettings />
-
-      <SettingsSection
-        title={<Trans>Saved themes</Trans>}
-        description={
-          <Trans>
-            Save your current look to switch back to it later, or share it as a
-            file.
-          </Trans>
-        }
-      >
-        <PanelPad>
-          <MyThemes />
-        </PanelPad>
-      </SettingsSection>
     </Page>
   );
 }
@@ -733,12 +690,6 @@ const EmojiSample = styled("span", {
     gap: "8px",
     marginTop: "4px",
     "--emoji-size": "20px",
-  },
-});
-
-const PanelPad = styled("div", {
-  base: {
-    padding: "14px",
   },
 });
 

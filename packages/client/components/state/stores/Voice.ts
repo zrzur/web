@@ -19,6 +19,9 @@ const GAME_KEY_ACTIONS: GameKeyAction[] = [
 
 export type NoiseSuppresionState = "disabled" | "browser" | "enhanced";
 
+/** How hard Enhanced noise suppression works */
+export type NoiseStrength = "standard" | "strong";
+
 const NoiseSuppresionStates: NoiseSuppresionState[] = [
   "disabled",
   "browser",
@@ -71,6 +74,13 @@ export interface TypeVoice {
 
   screenShareQuality: ScreenShareQualityName;
   screenShareContent: ScreenShareContent;
+  /**
+   * Set once the person chose what they share, after 2026-11-27: before,
+   * "Text and slides" was preselected and saved with every share, and its
+   * screencast mode held many shares at a few frames a second
+   */
+  screenShareContentChosen?: boolean;
+  noiseStrength: NoiseStrength;
   screenShareQualityAsk: boolean;
   screenShareAudio: boolean;
 
@@ -153,7 +163,9 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       noiseSupression: "enhanced",
       autoGainControl: true,
       screenShareQuality: "720p30",
-      screenShareContent: "detail",
+      // smooth by default (30 FPS held, like other chat apps)
+      screenShareContent: "motion",
+      noiseStrength: "standard",
       screenShareQualityAsk: true,
       screenShareAudio: true,
       inputVolume: 1.0,
@@ -227,11 +239,21 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
         LEGACY_QUALITIES[input.screenShareQuality];
     }
 
+    // a choice saved before it was a real choice becomes the smooth default
     if (
-      input.screenShareContent === "detail" ||
-      input.screenShareContent === "motion"
+      input.screenShareContentChosen === true &&
+      (input.screenShareContent === "detail" ||
+        input.screenShareContent === "motion")
     ) {
       data.screenShareContent = input.screenShareContent;
+      data.screenShareContentChosen = true;
+    }
+
+    if (
+      input.noiseStrength === "standard" ||
+      input.noiseStrength === "strong"
+    ) {
+      data.noiseStrength = input.noiseStrength;
     }
 
     if (typeof input.screenShareQualityAsk === "boolean") {
@@ -470,13 +492,29 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   set screenShareContent(value: ScreenShareContent) {
     this.set("screenShareContent", value);
+    this.set("screenShareContentChosen", true);
+  }
+
+  /**
+   * Set how hard noise suppression works (Enhanced only)
+   */
+  set noiseStrength(value: NoiseStrength) {
+    this.set("noiseStrength", value);
+  }
+
+  /**
+   * How hard noise suppression works: Standard removes steady noise; Strong
+   * also quietens what RNNoise judges is not speech (typing, clicks, breath)
+   */
+  get noiseStrength(): NoiseStrength {
+    return this.get().noiseStrength ?? "standard";
   }
 
   /**
    * Get what is usually shared
    */
   get screenShareContent(): ScreenShareContent {
-    return this.get().screenShareContent ?? "detail";
+    return this.get().screenShareContent ?? "motion";
   }
 
   /**

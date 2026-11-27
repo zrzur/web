@@ -13,9 +13,9 @@ import { creatorShown } from "./botAbout";
 import { usePublicBot } from "./usePublicBot";
 
 /**
- * Who made this bot. The owner sees their own profile (it opens on click);
- * anyone else sees the maker's name, only when the owner chose to show it
- * (`show_creator`). The owner's account id never reaches other readers.
+ * Who made this bot, with their picture; their profile opens on click. The
+ * owner always sees themselves here; anyone else only when the owner chose
+ * to be shown (`show_creator`).
  */
 export default function ProfileOwner(props: {
   botId: string;
@@ -50,14 +50,49 @@ export default function ProfileOwner(props: {
                 </Owner>
               )}
             </Match>
-            <Match when={creator().kind === "name"}>
-              <Maker data-testid="bot-creator">
-                <Avatar
-                  fallback={(creator() as { name: string }).name}
-                  size={24}
-                />
-                <span dir="auto">{(creator() as { name: string }).name}</span>
-              </Maker>
+            <Match when={creator().kind === "name" && creator()}>
+              {(maker) => {
+                const shown = maker() as {
+                  name: string;
+                  avatar?: string;
+                  id?: string;
+                };
+                const face = (
+                  <>
+                    <Avatar
+                      src={shown.avatar}
+                      fallback={shown.name}
+                      size={24}
+                    />
+                    <span dir="auto">{shown.name}</span>
+                  </>
+                );
+                // with their id (the owner chose to be shown) their profile
+                // opens; an older server sends the name alone
+                return (
+                  <Show
+                    when={shown.id}
+                    fallback={<Maker data-testid="bot-creator">{face}</Maker>}
+                  >
+                    {(id) => (
+                      <Owner
+                        type="button"
+                        data-testid="bot-creator"
+                        onClick={() =>
+                          void client()
+                            .users.fetch(id())
+                            .then((user) =>
+                              openModal({ type: "user_profile", user }),
+                            )
+                            .catch(() => undefined)
+                        }
+                      >
+                        {face}
+                      </Owner>
+                    )}
+                  </Show>
+                );
+              }}
             </Match>
           </Switch>
         </ProfileSection>

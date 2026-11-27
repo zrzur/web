@@ -19,7 +19,8 @@ POST /channels/{target}/messages
 - **Silent messages**: `flags: 1` sends without push or desktop notifications.
 - **Masquerade**: `masquerade: { name, avatar }` shows another name and avatar on the message (needs Masquerade; a `colour` also needs Manage Roles).
 - **Components**: buttons, selects and layout blocks; only bots can send them. See [Buttons, menus and forms](/developers/docs/components).
-- **Mentions**: `<@user id>` pings a user, `<%role id>` a role (needs Mention Roles), `@everyone` and `@online` need Mention Everyone. Without the permission the whole message is refused with `MissingPermission`, it is not sent without the ping. On a self-hosted server with `mass_mentions_enabled = false`, role, `@everyone` and `@online` mentions are sent without notifying anyone instead.
+- **Mentions**: `<@user id>` pings a user, `<%role id>` a role (needs Mention Roles), `@everyone` pings every member who can see the channel and `@here` only those who are online (`@online` is the same); both need Mention Everyone. Without the permission the whole message is refused with `MissingPermission`, it is not sent without the ping. On a self-hosted server with `mass_mentions_enabled = false`, role, `@everyone` and `@here` mentions are sent without notifying anyone instead.
+- **Formatting**: bold, underline, headings, spoilers, coloured code and more, see [Formatting](/developers/docs/messages#formatting).
 - **Channel links**: `<#channel id>` shows a link to a channel or thread. It notifies nobody.
 
 ## Reply {#reply}
@@ -123,3 +124,31 @@ Text search is for people only; bots get `IsBot`, because it would let them read
 A message can carry a poll (`poll` in the message you send: a question, 2 to 10 answers, a duration of 1, 4, 8, 24, 72, 168 or 336 hours, single or multiple choice). Posting one needs Send Messages and Send Embeds. Polls are switched on per server installation (`features.polls` in `GET /`); where they are off, sending one answers `FeatureDisabled`. A message's `poll` shows how many chose each answer; `poll.me` lists the answers the reader chose.
 
 Who voted is never sent to everyone: poll events (`MessagePollVoteAdd`, `MessagePollVoteRemove`, `MessagePollEnd`) carry counts only. `/channels/{target}/messages/{msg}/polls/answers/{answer}/voters` (GET) lists the people who chose an answer, a page at a time, to anyone who can read the message (View Channel and Read Message History), so a voter is visible to everyone in the channel who asks. Bots cannot vote (`IsBot`); they can read voters and end their own polls (`/channels/{target}/messages/{msg}/polls/end`, POST). A vote on a poll that has ended answers `PollEnded`.
+
+## Formatting {#formatting}
+
+Message text, embed descriptions and field values, and `Text` components take the same formatting people type, the same marks as Discord:
+
+- `**bold**`, `*italic*` (or `_italic_`), `__underline__`, `~~strikethrough~~`, and together, such as `__***~~all~~***__`.
+- `# Title`, `## Section` and `### Heading` at the start of a line; `-# small text` for a small, muted line.
+- `> quote` quotes one line; `>>> quote` quotes everything after it, to the end of the message.
+- `- item`, `* item` and `1. item` make lists; two spaces in front nest an item.
+- `||spoiler||` hides text until it is clicked.
+- `[text](https://zrzur.com)` is a link with its own text.
+- `` `code` `` and code blocks with a language for highlighting (`js`, `python`, `json`…). `diff` colours `-` and `+` lines, `fix` writes the block in yellow, `ansi` colours text (below).
+- `<t:1796151600:R>` shows a moment in each reader's own time zone and language. The letter picks the form: `t`, `T`, `d`, `D`, `f`, `F`, `s`, `S` or `R` (in 3 days).
+- `\` in front of a mark writes the mark itself: `\*not italic\*`.
+
+People can also type `/shrug`, `/tableflip`, `/unflip`, `/me` and `/spoiler`. These change their own text before it is sent and never reach a bot; where a bot has a command with the same name, the bot's command is used.
+
+### Coloured text {#ansi}
+
+In a code block marked `ansi`, codes written as ESC `[` number `m` colour the text after them: `30` to `37` the text (grey, red, green, yellow, blue, pink, cyan, white), `40` to `47` the background, `1` bold, `4` underline, `0` back to plain. ESC is the character `\u001b`.
+
+```js
+const esc = "\u001b[";
+const fence = "`".repeat(3);
+await channel.sendMessage(
+  `${fence}ansi\n${esc}31mFailed${esc}0m 2  ${esc}32mPassed${esc}0m 40\n${fence}`,
+);
+```

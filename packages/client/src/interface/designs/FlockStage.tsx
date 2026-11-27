@@ -85,7 +85,9 @@ const Stage = styled("section", {
   base: {
     position: "relative",
     width: "100cqw",
-    marginInlineStart: "calc(50% - 50cqw)",
+    // the whole page wide, also when the panel with you stands beside the
+    // pages (its column moves the pages off the middle: --dz-look-shift)
+    marginInlineStart: "calc(50% - 50cqw + var(--dz-look-shift, 0px))",
     marginBlockStart: "-104px",
     height: "340px",
     isolation: "isolate",

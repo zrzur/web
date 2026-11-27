@@ -47,3 +47,52 @@ export function isAlreadyClosed(error: unknown): boolean {
 export function isAlreadySignedOut(error: unknown): boolean {
   return (error as { type?: string } | undefined)?.type === "InvalidSession";
 }
+
+/** Browser names as people know them; detect-browser gives lower-case ids */
+const BROWSERS: Record<string, string> = {
+  chrome: "Chrome",
+  chromium: "Chromium",
+  crios: "Chrome",
+  edge: "Edge",
+  "edge-chromium": "Edge",
+  "edge-ios": "Edge",
+  firefox: "Firefox",
+  fxios: "Firefox",
+  safari: "Safari",
+  ios: "Safari",
+  "ios-webview": "WebView",
+  opera: "Opera",
+  "opera-mini": "Opera Mini",
+  samsung: "Samsung Internet",
+  yandexbrowser: "Yandex",
+  vivaldi: "Vivaldi",
+  brave: "Brave",
+  electron: "Zrzur",
+};
+
+const SYSTEMS: Record<string, string> = {
+  "Mac OS": "macOS",
+  "Android OS": "Android",
+  "Chrome OS": "ChromeOS",
+};
+
+/** A browser id from detect-browser, as people write it */
+export const browserName = (id: string) =>
+  BROWSERS[id.toLowerCase()] ?? id.charAt(0).toUpperCase() + id.slice(1);
+
+/** An OS name from detect-browser, as people write it */
+export const systemName = (os: string) => SYSTEMS[os] ?? os;
+
+/**
+ * The browser and OS in a session name this app made at sign-in, such as
+ * "Zrzur for Web (chrome on Mac OS)" in whatever language was in use then,
+ * so the list can show every one in the current language. A name the person
+ * chose themselves comes back undefined and is shown as it is.
+ */
+export function sessionDevice(
+  name: string,
+): { browser: string; os: string } | undefined {
+  const found = /\(([a-z][\w-]*) \S+ ([^()]+)\)$/u.exec(name.trim());
+  if (!found || name.length > 80) return undefined;
+  return { browser: browserName(found[1]), os: systemName(found[2].trim()) };
+}

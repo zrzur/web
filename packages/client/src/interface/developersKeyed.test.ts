@@ -18,7 +18,7 @@ describe("Developer Portal bot page", () => {
   it("is rebuilt when another bot is opened", () => {
     expect(source).toMatch(/<Show when=\{selectedId\(\)\} keyed>/);
     const keyed = source.indexOf("<Show when={selectedId()} keyed>");
-    const view = source.indexOf("<ViewBot");
+    const view = source.indexOf("<BotAccess");
     expect(keyed).toBeGreaterThan(-1);
     expect(view).toBeGreaterThan(keyed);
   });

@@ -131,7 +131,8 @@ describe("every all: unset button keeps a position", () => {
 
   it("finds the known buttons (the scan is not empty)", () => {
     expect(all.some((f) => f.file.endsWith("VoiceCallCardPiP.tsx"))).toBe(true);
-    expect(all.length).toBeGreaterThanOrEqual(8);
+    // the support tickets list became settings rows (2026-11-27)
+    expect(all.length).toBeGreaterThanOrEqual(7);
   });
 
   it("has no button without a position", () => {

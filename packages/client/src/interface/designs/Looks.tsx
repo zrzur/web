@@ -288,12 +288,23 @@ export function StyleCard(props: {
             person={props.person}
           />
         </AvatarSpot>
-        {/* the name as people see it, the handle under it */}
+        {/* the name as people see it; under it the username and the
+            pronouns, as the profile itself shows them */}
         <Who>
           <Name dir="auto" style={nameStyle(props.style)}>
             {wearer.who(props.person).name}
           </Name>
-          <small dir="auto">@{wearer.who(props.person).handle}</small>
+          <small dir="auto">
+            <bdi>{wearer.who(props.person).handle}</bdi>
+            <Show when={wearer.real() && wearer.pronouns()}>
+              {(pronouns) => (
+                <>
+                  <span aria-hidden="true"> • </span>
+                  <bdi>{pronouns()}</bdi>
+                </>
+              )}
+            </Show>
+          </small>
         </Who>
         <Show when={plate()}>
           <Plate

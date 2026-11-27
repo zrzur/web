@@ -425,7 +425,7 @@ export function TextChannel(props: ChannelPageProps) {
           </Show>
           <Show
             when={!isOfficialChannel(props.channel)}
-            fallback={<OfficialBanner channel={props.channel} />}
+            fallback={<OfficialBanner />}
           >
             <Show
               when={

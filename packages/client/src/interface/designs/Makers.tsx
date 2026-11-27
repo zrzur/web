@@ -115,9 +115,9 @@ export function CreatorsScene(props: {
 }) {
   const { t } = useLingui();
   const avatar = useCreatorAvatar();
+  // designs joining and leaving arrive live: no asking again
   const community = useCommunity(() => ({
     sort: "popular",
-    version: props.version,
   }));
   const ranked = createMemo(() =>
     rankCreators(

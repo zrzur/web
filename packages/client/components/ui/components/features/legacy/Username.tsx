@@ -26,10 +26,12 @@ type Props = {
  * A display name in a list or a message header.
  *
  * Which colour a name takes, the same rule in every place:
- * 1. The person's own chosen name colour, with its effect. It is their
- *    choice, so it wins over a server role colour (owner, 2026-11-24).
- * 2. A server role colour, when they chose no colour. Their font and the
- *    effects that need no colour of their own (halo, edge, lifted) stay.
+ * 1. The colour of their highest role that has one (`roleColour`): in a
+ *    server, the rank shows (owner, 2026-11-26, replacing the rule of
+ *    2026-11-24). Their font and the effects that need no colour of their
+ *    own (halo, edge, lifted) stay.
+ * 2. Their own chosen name colour, with its effect, when no role of theirs
+ *    has a colour (and everywhere outside a server).
  * 3. The text colour around it.
  *
  * With "Show name styles" off (`view.plain`) nothing chosen is drawn: no
@@ -50,7 +52,8 @@ export function Username(props: Props) {
     "userStyle",
   ]);
 
-  const own = () => hasOwnNameColour(local.userStyle);
+  // a role colour comes first; their own colour shows only without one
+  const own = () => !local.colour && hasOwnNameColour(local.userStyle);
 
   return (
     <span
@@ -59,7 +62,7 @@ export function Username(props: Props) {
       data-name-room=""
     >
       <Show
-        when={!own() && local.colour}
+        when={local.colour}
         fallback={
           <span
             style={nameStyle(local.userStyle)}

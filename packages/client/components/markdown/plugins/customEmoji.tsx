@@ -1,7 +1,7 @@
 import { Match, Switch, createSignal } from "solid-js";
 
-import { Handler } from "mdast-util-to-hast";
 import { RE_CUSTOM_EMOJI } from "@zrzur/sdk/solid";
+import { Handler } from "mdast-util-to-hast";
 import { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 

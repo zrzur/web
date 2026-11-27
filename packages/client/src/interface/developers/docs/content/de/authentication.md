@@ -10,7 +10,7 @@ Jede Anwendung hat ein Bot-Token. Sende es bei jeder REST-Anfrage im Header `x-b
 
 Das Gateway nimmt dasselbe Token, entweder in der ersten Nachricht (`Authenticate`) oder als `?token=` in der Adresse. Siehe [Gateway](/developers/docs/gateway).
 
-> Das Token ist ein Passwort. Bewahre es in einer Umgebungsvariable oder einem Secret-Speicher auf, nie im Code, in Logs oder auf Screenshots. Es wird einmal gezeigt, wenn es entsteht. Zurücksetzen kannst du es im Entwicklerportal: deine Anwendung → **Übersicht** → **Token zurücksetzen**. Danach funktioniert das alte Token sofort nicht mehr.
+> Das Token ist ein Passwort. Bewahre es in einer Umgebungsvariable oder einem Secret-Speicher auf, nie im Code, in Logs oder auf Screenshots. Es wird einmal gezeigt, wenn es entsteht. Zurücksetzen kannst du es im Entwicklerportal: deine Anwendung → **Bot** → **Token zurücksetzen**. Danach funktioniert das alte Token sofort nicht mehr.
 
 ## Welcher Header was tut {#which-header-does-what}
 

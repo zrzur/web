@@ -4,7 +4,6 @@ import {
   Show,
   Switch,
   createMemo,
-  createResource,
   createSignal,
   createUniqueId,
   onCleanup,
@@ -21,11 +20,15 @@ import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
 import { arrivedReminders } from "@revolt/app/interface/saved/savedStore";
 import { useClient } from "@revolt/client";
 import { holdMessages } from "@revolt/client/messagePruner";
+
 import { useTime } from "@revolt/i18n/dayjs";
+import { renderSimpleMarkdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { Avatar, CircularProgress } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
+
+import { mentionsList } from "./mentionsCache";
 
 type Filter = "all" | "mentions" | "friends";
 
@@ -45,15 +48,14 @@ export function NotificationsPhone(props: { onClose: () => void }) {
   const { openModal, showError } = useModals();
 
   const [filter, setFilter] = createSignal<Filter>("all");
-  const [mentions] = createResource(() => client().fetchMentions(50));
+  // the last list at once, refreshed behind it
+  const mentions = mentionsList(client());
   // these come from many channels: they stay in the message cache while the
   // page is open
   onCleanup(
     // read when the cache is looked through, not tracked
     // eslint-disable-next-line solid/reactivity
-    holdMessages(() =>
-      mentions.state === "ready" ? mentions().map((message) => message.id) : [],
-    ),
+    holdMessages(() => (mentions() ?? []).map((message) => message.id)),
   );
 
   const requests = createMemo(() =>
@@ -62,7 +64,7 @@ export function NotificationsPhone(props: { onClose: () => void }) {
 
   /** the messages by day: today, yesterday, then everything earlier */
   const days = createMemo(() => {
-    const list = mentions.state === "ready" ? mentions() : [];
+    const list = mentions() ?? [];
     const now = dayjs();
     const groups: { label: string; items: Message[] }[] = [
       { label: t`Today`, items: [] },
@@ -141,7 +143,7 @@ export function NotificationsPhone(props: { onClose: () => void }) {
   const showMentions = () => filter() !== "friends";
   const nothing = () =>
     !showRequests() &&
-    (!showMentions() || (mentions.state === "ready" && !mentions().length));
+    (!showMentions() || (mentions.state === "ready" && !mentions()?.length));
 
   const filters: { value: Filter; label: () => string }[] = [
     { value: "all", label: () => t`All` },
@@ -300,10 +302,11 @@ export function NotificationsPhone(props: { onClose: () => void }) {
                                   <strong>{placed(item)}</strong>
                                 </Trans>
                               </p>
+                              {/* the words as the chat draws them */}
                               <Quote>
-                                <bdi>
-                                  {client().markdownToText(item.content)}
-                                </bdi>
+                                <div dir="auto">
+                                  {renderSimpleMarkdown(item.content)}
+                                </div>
                               </Quote>
                             </Text>
                             <When>
@@ -534,6 +537,9 @@ const Quote = styled("div", {
     color: "var(--z-fg-muted)",
     lineClamp: 2,
     overflowWrap: "anywhere",
+    textAlign: "start",
+    // drawn, never clicked: the row opens the message
+    pointerEvents: "none",
   },
 });
 

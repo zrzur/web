@@ -45,10 +45,7 @@ export function CreatorPublicName(props: { initial: boolean }) {
       <SettingsRow
         title={<Trans>Show my name on the public Designs site</Trans>}
         description={
-          <Trans>
-            Your name and avatar on your designs at designs.zrzur.com, with a
-            page of all your work. Your #tag never shows.
-          </Trans>
+          <Trans>On designs.zrzur.com. Your #tag never shows.</Trans>
         }
         control={(ids) => (
           <Toggle

@@ -2,6 +2,7 @@ import { VoiceOccupancy } from "@revolt/ui/components/features/voice/VoiceOccupa
 import {
   Accessor,
   ComponentProps,
+  For,
   JSX,
   Match,
   Show,
@@ -43,7 +44,6 @@ import {
 import { useState } from "@revolt/state";
 import {
   Column,
-  Draggable,
   Header,
   MenuButton,
   OverflowingText,
@@ -53,7 +53,6 @@ import {
 import { UnreadCallout } from "@revolt/ui/components/features/navigation/UnreadCallout";
 import { ServerStatusBadges } from "@revolt/ui/components/features/profiles/ServerStatusBadges";
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
-import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import {
   touchHitArea,
@@ -80,12 +79,19 @@ import { sidebarBase } from "./common";
 import { textMatches } from "@revolt/common/lib/arabicFold";
 import {
   OrderedCategory,
-  applyChannelOrdering,
   categoriesToSave,
+  moveCategories,
+  moveChannel,
   orderedCategories,
 } from "./ordering";
 import { ServerPhoneTools } from "./ServerPhoneTools";
 import { ServerStats } from "./ServerStats";
+import {
+  type SidebarDrop,
+  DRAG_ATTRS,
+  createSidebarDrag,
+  sidebarDragStyles,
+} from "./sidebarDrag";
 
 interface Props {
   /**
@@ -120,19 +126,6 @@ interface Props {
  * Ordered category data returned from server
  */
 export type CategoryData = OrderedCategory & { channels: Channel[] };
-
-type OrderingEvent =
-  | {
-      type: "categories";
-      ids: string[];
-    }
-  | {
-      type: "category";
-      id: string;
-      reorderedIds: string[];
-      visibleIds: string[];
-      moved: boolean;
-    };
 
 /**
  * Display server information and channels
@@ -187,6 +180,19 @@ export const ServerSidebar = (props: Props) => {
       "ManagePermissions",
     );
 
+  /**
+   * A new order the server has not confirmed yet: the list shows it at once,
+   * and the server's own update replaces it
+   */
+  const [pendingOrder, setPendingOrder] = createSignal<API.Category[]>();
+  createEffect(
+    on(
+      () => props.server.categories,
+      () => setPendingOrder(undefined),
+      { defer: true },
+    ),
+  );
+
   const categories = createMemo<CategoryData[]>(() => {
     const channels = new Map(
       props.server.channels.map((channel) => [channel.id, channel]),
@@ -194,7 +200,7 @@ export const ServerSidebar = (props: Props) => {
 
     return (
       orderedCategories(
-        props.server.categories,
+        pendingOrder() ?? props.server.categories,
         props.server.channels.map((channel) => channel.id),
       )
         .map((category) => ({
@@ -310,81 +316,147 @@ export const ServerSidebar = (props: Props) => {
   const storedCategoryIds = () =>
     (props.server.categories ?? []).map((category) => category.id);
 
-  /** Save a new order; on failure say so (the list snaps back on reload) */
+  /** Save a new order; on failure say so and show the server's order again */
   async function saveCategories(next: API.Category[]) {
+    setPendingOrder(next);
     try {
       await props.server.edit({ categories: next });
     } catch (error) {
+      setPendingOrder(undefined);
       showError(error);
     }
   }
 
-  let heldEvent: OrderingEvent & { type: "category" } = null!;
-  function handleOrdering(event: OrderingEvent) {
-    if (event.type === "category" && event.moved && !heldEvent) {
-      heldEvent = event;
+  /** Where every channel sits now, hidden ones and search aside */
+  const currentOrder = () =>
+    orderedCategories(
+      pendingOrder() ?? props.server.categories,
+      props.server.channels.map((channel) => channel.id),
+    );
+
+  /** A channel or category was put somewhere new */
+  function drop(move: SidebarDrop) {
+    const ordered = currentOrder();
+    if (move.type === "categories") {
+      void saveCategories(
+        categoriesToSave(
+          moveCategories(ordered, move.ids),
+          storedCategoryIds(),
+        ),
+      );
       return;
     }
 
-    if (event.type === "categories") {
-      const ids = event.ids.filter((id) => id !== "default");
+    const from = ordered.find((category) =>
+      category.channelIds.includes(move.id),
+    )?.id;
+    void saveCategories(
+      categoriesToSave(
+        moveChannel(ordered, move),
+        storedCategoryIds(),
+        from === "default" || move.to === "default" ? "default" : move.to,
+      ),
+    );
 
-      void saveCategories(
-        categoriesToSave(
-          ["default", ...ids]
-            .map((id) => categories().find((category) => category.id === id)!)
-            .filter((category) => category),
-          storedCategoryIds(),
-        ),
-      );
+    // dropped into a closed category: open it, so the channel is seen there
+    const channel = client().channels.get(move.id);
+    const section =
+      move.to === "default"
+        ? `${props.server.id}:default:${channel?.isVoice ? "Voice" : "Text"}`
+        : move.to;
+    if (!state.layout.getSectionState(section, true))
+      state.layout.setSectionState(section, true, true);
+  }
+
+  const canReorder = () => !noOrdering() && !(phone() && query().trim());
+
+  const sidebarDrag = createSidebarDrag({
+    root: list,
+    enabled: canReorder,
+    onActive: (kind) => setDragging(kind === "channel"),
+    onDrop: drop,
+  });
+  onCleanup(() => sidebarDrag.dispose());
+  createEffect(() => {
+    const el = list();
+    if (el) onCleanup(sidebarDrag.listen(el));
+  });
+
+  /**
+   * Alt+Shift+Up or Down on a channel moves it one place, into the next
+   * category at either end of its own; the keyboard's way to drag
+   */
+  function moveByKey(event: KeyboardEvent) {
+    if (
+      !event.altKey ||
+      !event.shiftKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      (event.key !== "ArrowUp" && event.key !== "ArrowDown") ||
+      !canReorder()
+    )
+      return;
+    const row = (event.target as Element).closest<HTMLElement>(
+      `[${DRAG_ATTRS.channel}]`,
+    );
+    const root = list();
+    if (!row || !root) return;
+    event.preventDefault();
+
+    const id = row.getAttribute(DRAG_ATTRS.channel)!;
+    const kind = row.getAttribute(DRAG_ATTRS.kind);
+    const up = event.key === "ArrowUp";
+    const rowsOf = (listEl: Element) =>
+      [...listEl.children].filter((el) => el.hasAttribute(DRAG_ATTRS.channel));
+    const idOf = (el: Element | undefined) =>
+      el?.getAttribute(DRAG_ATTRS.channel) ?? undefined;
+
+    const own = row.parentElement!;
+    const rows = rowsOf(own);
+    const index = rows.indexOf(row);
+    let move: SidebarDrop | undefined;
+
+    if (up ? index > 0 : index < rows.length - 1) {
+      // past its neighbour, in the same category
+      move = {
+        type: "channel",
+        id,
+        to: own.getAttribute(DRAG_ATTRS.list)!,
+        ...(up
+          ? { before: idOf(rows[index - 1]) }
+          : { after: idOf(rows[index + 1]) }),
+      };
     } else {
-      const touched = event.id;
-      void saveCategories(
-        categoriesToSave(
-          categories().map(({ id, title, channelIds }) => {
-            // Text and voice are two views of the same default category. Apply
-            // both drop events so moving between these views cannot lose IDs.
-            if (heldEvent?.id === id && event.id === id) {
-              return {
-                id,
-                title,
-                channelIds: applyChannelOrdering(
-                  applyChannelOrdering(
-                    channelIds,
-                    heldEvent.visibleIds,
-                    heldEvent.reorderedIds,
-                  ),
-                  event.visibleIds,
-                  event.reorderedIds,
-                ),
-              };
-            }
-            const reordered =
-              heldEvent?.id === id
-                ? heldEvent
-                : event.id === id
-                  ? event
-                  : undefined;
-
-            return {
-              id,
-              title,
-              channelIds: reordered
-                ? applyChannelOrdering(
-                    channelIds,
-                    reordered.visibleIds,
-                    reordered.reorderedIds,
-                  )
-                : channelIds,
-            };
-          }),
-          storedCategoryIds(),
-          touched,
-        ),
-      );
-
-      heldEvent = null!;
+      // over the edge: the end of the category above, the start of the one
+      // below (one that takes this kind of channel)
+      const lists = [
+        ...root.querySelectorAll<HTMLElement>(`[${DRAG_ATTRS.list}]`),
+      ].filter((el) => {
+        const accepts = el.getAttribute(DRAG_ATTRS.accepts);
+        return (
+          el.offsetParent !== null && (accepts === "any" || accepts === kind)
+        );
+      });
+      const next = lists[lists.indexOf(own as HTMLElement) + (up ? -1 : 1)];
+      if (!next) return;
+      const there = rowsOf(next).filter((el) => el !== row);
+      move = {
+        type: "channel",
+        id,
+        to: next.getAttribute(DRAG_ATTRS.list)!,
+        ...(up
+          ? { after: idOf(there[there.length - 1]) }
+          : { before: idOf(there[0]) }),
+      };
     }
+
+    drop(move);
+    // the row may be drawn anew in another category: keep the focus on it
+    requestAnimationFrame(() =>
+      root
+        .querySelector<HTMLElement>(`[${DRAG_ATTRS.channel}="${id}"] a`)
+        ?.focus(),
+    );
   }
 
   return (
@@ -433,9 +505,12 @@ export const ServerSidebar = (props: Props) => {
         <UnreadCallout list={list} />
         <div
           ref={setList}
-          use:invisibleScrollable
+          // the drag's own look rides on the directive: a class here would
+          // replace the classes that make the list scroll
+          use:invisibleScrollable={{ class: sidebarDragStyles }}
           style={{ height: "100%" }}
           use:floating={props.menuGenerator(props.server)}
+          onKeyDown={moveByKey}
         >
           <EventsLink server={props.server} />
           <LobbyLink server={props.server} />
@@ -455,12 +530,8 @@ export const ServerSidebar = (props: Props) => {
                   category={category()}
                   channelId={props.channelId}
                   menuGenerator={props.menuGenerator}
-                  dragDisabled={() => true}
-                  setDragDisabled={() => void 0}
                   noOrdering={noOrdering}
-                  handleOrdering={handleOrdering}
                   dragging={dragging}
-                  setDragging={setDragging}
                 />
                 <Category
                   channelType="Voice"
@@ -468,41 +539,31 @@ export const ServerSidebar = (props: Props) => {
                   category={category()}
                   channelId={props.channelId}
                   menuGenerator={props.menuGenerator}
-                  dragDisabled={() => true}
-                  setDragDisabled={() => void 0}
                   noOrdering={noOrdering}
-                  handleOrdering={handleOrdering}
                   dragging={dragging}
-                  setDragging={setDragging}
                 />
               </>
             )}
           </Show>
-          <Draggable
-            dragHandles
-            dropIndicator
-            type="category"
-            // a finger rests on the category name to lift it (touchHold)
-            touchHold
-            disabled={noOrdering()}
-            items={categories().filter((category) => category.id !== "default")}
-            onChange={(ids) => handleOrdering({ type: "categories", ids })}
-          >
-            {(entry) => (
-              <Category
-                server={props.server}
-                category={entry.item}
-                channelId={props.channelId}
-                menuGenerator={props.menuGenerator}
-                dragDisabled={entry.dragDisabled}
-                setDragDisabled={entry.setDragDisabled}
-                noOrdering={noOrdering}
-                handleOrdering={handleOrdering}
-                dragging={dragging}
-                setDragging={setDragging}
-              />
-            )}
-          </Draggable>
+          {/* the categories that can be moved */}
+          <div {...{ [DRAG_ATTRS.sections]: "" }}>
+            <For
+              each={categories().filter(
+                (category) => category.id !== "default",
+              )}
+            >
+              {(category) => (
+                <Category
+                  server={props.server}
+                  category={category}
+                  channelId={props.channelId}
+                  menuGenerator={props.menuGenerator}
+                  noOrdering={noOrdering}
+                  dragging={dragging}
+                />
+              )}
+            </For>
+          </div>
         </div>
       </ChannelList>
     </div>
@@ -659,13 +720,8 @@ function Category(
     category: CategoryData;
     channelId: string | undefined;
     noOrdering: Accessor<boolean>;
-    handleOrdering: (event: OrderingEvent) => void;
     dragging: Accessor<boolean>;
-    setDragging: (active: boolean) => void;
-  } & Pick<Props, "menuGenerator"> & {
-      dragDisabled: Accessor<boolean>;
-      setDragDisabled: (value: boolean) => void;
-    },
+  } & Pick<Props, "menuGenerator">,
 ) {
   const state = useState();
   const client = useClient();
@@ -759,6 +815,7 @@ function Category(
   return (
     <CategorySection
       ref={section}
+      {...{ [DRAG_ATTRS.section]: props.category.id }}
       style={hidden() ? { "padding-top": 0 } : undefined}
     >
       <Show
@@ -766,7 +823,7 @@ function Category(
           (props.category.id !== "default" || props.channelType) && !hidden()
         }
       >
-        <SectionHeader>
+        <SectionHeader {...{ [DRAG_ATTRS.face]: "" }}>
           <div
             use:floating={props.menuGenerator(props.category)}
             // on the wrapper: the drag handle owns the button's own key handler
@@ -794,7 +851,14 @@ function Category(
               aria-keyshortcuts={
                 canOpenSettings() ? "Control+Shift+E" : undefined
               }
-              {...createDragHandle(props.dragDisabled, props.setDragDisabled)}
+              // a category of its own moves by its name (the server's own
+              // Text and Voice groups stay where they are)
+              {...(!props.channelType && props.category.id !== "default"
+                ? {
+                    [DRAG_ATTRS.grip]: "",
+                    "aria-description": t`Drag to reorder`,
+                  }
+                : {})}
             >
               <MdChevronRight {...iconSize(12)} />
               <Show when={isPrivate()}>
@@ -847,34 +911,24 @@ function Category(
           </Show>
         </SectionHeader>
       </Show>
-      <Draggable
-        dropIndicator
-        type="channels"
-        items={channels()}
-        onChange={(reorderedIds) => {
-          const current = channels();
-          props.handleOrdering({
-            type: "category",
-            id: props.category.id,
-            reorderedIds,
-            visibleIds: current.map((channel) => channel.id),
-            moved: reorderedIds.length !== current.length,
-          });
+      <div
+        {...{
+          [DRAG_ATTRS.list]: props.category.id,
+          [DRAG_ATTRS.accepts]: props.channelType
+            ? props.channelType.toLowerCase()
+            : "any",
         }}
-        // a finger rests on a channel to lift it, a quick swipe scrolls
-        touchHold
-        disabled={props.noOrdering() || !isOpen()}
-        minimumDropAreaHeight="42px"
-        onDragChange={props.setDragging}
       >
-        {(entry) => (
-          <Entry
-            channel={entry.item}
-            active={entry.item.id === props.channelId}
-            menuGenerator={props.menuGenerator}
-          />
-        )}
-      </Draggable>
+        <For each={channels()}>
+          {(channel) => (
+            <Entry
+              channel={channel}
+              active={channel.id === props.channelId}
+              menuGenerator={props.menuGenerator}
+            />
+          )}
+        </For>
+      </div>
     </CategorySection>
   );
 }
@@ -1093,10 +1147,15 @@ function Entry(
     <Column
       gap="sm"
       class={voiceDropTarget}
+      {...{
+        [DRAG_ATTRS.channel]: props.channel.id,
+        [DRAG_ATTRS.kind]: props.channel.isVoice ? "voice" : "text",
+      }}
       data-voice-drop={dropHover() ? "" : undefined}
       {...(props.channel.isVoice ? dropHandlers : {})}
     >
       <ChannelRow
+        {...{ [DRAG_ATTRS.face]: "", [DRAG_ATTRS.grip]: "" }}
         data-active={props.active}
         data-tools={canEditChannel() || canInvite()}
       >

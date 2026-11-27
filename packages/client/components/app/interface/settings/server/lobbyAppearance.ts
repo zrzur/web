@@ -1,5 +1,5 @@
-import type { JSX } from "solid-js";
 import type { ServerLobby } from "@zrzur/sdk/solid";
+import type { JSX } from "solid-js";
 
 /** Accept only persisted six-digit colours, never arbitrary CSS. */
 export const lobbyColour = (value?: string) =>
@@ -47,7 +47,12 @@ export function lobbyStyle(lobby: ServerLobby): JSX.CSSProperties {
         ? "linear-gradient(var(--lobby-angle), color-mix(in srgb, var(--lobby-accent, var(--z-accent-fill)) var(--lobby-blend), var(--z-bg-chat)), color-mix(in srgb, var(--lobby-secondary) var(--lobby-blend), var(--z-bg-chat)))"
         : undefined,
     "--lobby-angle": `${a.angle ?? 120}deg`,
-    "--lobby-banner-height": `${a.banner_height ?? 208}px`,
+    // a height the managers chose crops the banner to it; without one the
+    // banner shows whole, in its own shape (owner, 2026-11-27)
+    "--lobby-banner-height":
+      a.banner_height !== undefined && a.banner_height !== null
+        ? `${a.banner_height}px`
+        : undefined,
     "--lobby-radius": `${a.radius ?? 14}px`,
     "--lobby-card-pad": a.density === "Compact" ? "14px" : "22px",
     "--lobby-gap": a.density === "Compact" ? "8px" : "12px",

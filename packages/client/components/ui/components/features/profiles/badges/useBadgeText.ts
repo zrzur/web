@@ -135,10 +135,7 @@ export function useBadgeText(): (id: string) => BadgeText {
         how: "automatic",
       },
       one_year: year(t`One Year on Zrzur`, t`Has been on Zrzur for a year.`),
-      years_2: year(
-        t`Two Years on Zrzur`,
-        t`Has been on Zrzur for two years.`,
-      ),
+      years_2: year(t`Two Years on Zrzur`, t`Has been on Zrzur for two years.`),
       three_years: year(
         t`Three Years on Zrzur`,
         t`Has been on Zrzur for three years.`,
@@ -151,10 +148,7 @@ export function useBadgeText(): (id: string) => BadgeText {
         t`Five Years on Zrzur`,
         t`Has been on Zrzur for five years.`,
       ),
-      years_6: year(
-        t`Six Years on Zrzur`,
-        t`Has been on Zrzur for six years.`,
-      ),
+      years_6: year(t`Six Years on Zrzur`, t`Has been on Zrzur for six years.`),
       years_7: year(
         t`Seven Years on Zrzur`,
         t`Has been on Zrzur for seven years.`,
@@ -191,7 +185,7 @@ export function useBadgeText(): (id: string) => BadgeText {
       verified_bot_developer: {
         name: t`Verified Bot Developer`,
         description: t`Owns or develops a bot that passed Zrzur's verification review.`,
-        earn: t`By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership.`,
+        earn: t`By application, reviewed by the Zrzur team: open to every bot, whatever its size; the team looks at its servers, its age and what it does.`,
         how: "application",
       },
       community_helper: {

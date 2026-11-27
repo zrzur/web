@@ -4,38 +4,52 @@
  * plain HTML of every page (scripts/bot-api/prerender-docs.mjs) share it.
  */
 
-export type PageGroup = "start" | "guides" | "tutorials" | "resources";
+export type PageGroup =
+  | "start"
+  | "concepts"
+  | "interactions"
+  | "resources"
+  | "going-live"
+  | "tutorials"
+  | "reference";
 
+/**
+ * Ordered as a reader builds a bot: start, the ideas everything rests on,
+ * commands and their answers, what a bot works with, going live, then the
+ * tutorials and the reference. "Next" at the end of a page follows it.
+ */
 export const PAGE_ORDER: [PageGroup, string[]][] = [
   ["start", ["overview", "getting-started", "applications"]],
   [
-    "guides",
+    "concepts",
+    ["authentication", "gateway", "events", "oauth2", "errors", "rate-limits"],
+  ],
+  [
+    "interactions",
     [
-      "authentication",
-      "gateway",
-      "events",
       "commands",
       "interactions",
       "components",
       "bots-in-dms",
       "http-interactions",
+    ],
+  ],
+  [
+    "resources",
+    [
       "messages",
       "channels",
       "webhooks",
       "servers",
       "users",
-      "rich-presence",
       "roles",
       "moderation",
       "files",
       "voice",
-      "oauth2",
-      "errors",
-      "rate-limits",
-      "security",
-      "production",
+      "rich-presence",
     ],
   ],
+  ["going-live", ["security", "production"]],
   [
     "tutorials",
     [
@@ -52,7 +66,7 @@ export const PAGE_ORDER: [PageGroup, string[]][] = [
       "tutorial-deploy",
     ],
   ],
-  ["resources", ["raw-http", "sdk", "coverage", "changelog"]],
+  ["reference", ["raw-http", "sdk", "coverage", "changelog"]],
 ];
 
 export const DEFAULT_PAGE = "overview";

@@ -8,12 +8,6 @@ import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
  */
 const parts = () => import("./BotStart");
 
-/** The top of a conversation with a bot, with Start */
-export const BotStart = lazyRetry(
-  () => parts().then((m) => ({ default: m.BotStart })),
-  () => null,
-);
-
 /** Above the message box when a bot link waits for Start */
 export const BotStartBar = lazyRetry(
   () => parts().then((m) => ({ default: m.BotStartBar })),

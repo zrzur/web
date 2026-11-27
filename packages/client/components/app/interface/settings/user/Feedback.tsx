@@ -1,9 +1,7 @@
-import { Show, createSignal } from "solid-js";
-
 import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { BugReportDialog } from "./badges/BugReportDialog";
+import { useSettingsNavigation } from "../Settings";
 
 import {
   bug_report as MdBugReport,
@@ -18,14 +16,16 @@ import { Icon } from "@revolt/ui/icons/Icon";
  * (repos pending creation; links are configuration targets, not proof of existence).
  */
 export function Feedback() {
-  const [reporting, setReporting] = createSignal(false);
+  const { navigate } = useSettingsNavigation();
   return (
     <Column gap="lg">
       <CategoryButton.Group>
         <CategoryButton
           action="chevron"
-          icon={<MdBugReport {...iconSize(22)} />}
-          onClick={() => setReporting(true)}
+          icon={<MdBugReport {...iconSize(20)} />}
+          // its own page under this one (feedback/report), as any settings
+          // page with more to it opens
+          onClick={() => navigate("feedback/report")}
           description={
             <Trans>
               Send a bug or a private security report to the Zrzur team and
@@ -36,15 +36,11 @@ export function Feedback() {
           <Trans>Report a bug</Trans>
         </CategoryButton>
       </CategoryButton.Group>
-      {/* mounted only while open: a closed Dialog still covers the page */}
-      <Show when={reporting()}>
-        <BugReportDialog show onClose={() => setReporting(false)} beta={[]} />
-      </Show>
       <CategoryButton.Group>
         <Link href="https://github.com/zrzur" target="_blank" rel="noreferrer">
           <CategoryButton
             action="external"
-            icon={<Icon name="chat-circle-dots" size={22} />}
+            icon={<Icon name="chat-circle-dots" size={20} />}
             ignoreClick
             description={
               <Trans>
@@ -59,17 +55,16 @@ export function Feedback() {
         <Link href="https://github.com/zrzur" target="_blank" rel="noreferrer">
           <CategoryButton
             action="external"
-            icon={<MdFormatListNumbered {...iconSize(22)} />}
+            icon={<MdFormatListNumbered {...iconSize(20)} />}
             ignoreClick
-            description={<Trans>Submit feedback</Trans>}
           >
-            <Trans>Feedback</Trans>
+            <Trans>Submit feedback</Trans>
           </CategoryButton>
         </Link>
         <Link href="https://github.com/zrzur" target="_blank" rel="noreferrer">
           <CategoryButton
             action="external"
-            icon={<MdBugReport {...iconSize(22)} />}
+            icon={<MdBugReport {...iconSize(20)} />}
             ignoreClick
             description={<Trans>View currently active bug reports here.</Trans>}
           >

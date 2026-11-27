@@ -166,6 +166,28 @@ export const FlowLinks = styled("nav", {
         outlineOffset: "2px",
       },
     },
+
+    // a link that changes the step instead of the page
+    "& button": {
+      display: "inline-flex",
+      alignItems: "center",
+      minHeight: "32px",
+      paddingInline: "4px",
+      border: "none",
+      background: "transparent",
+      borderRadius: "var(--z-radius-xs, 4px)",
+      color: "var(--z-link)",
+      font: "inherit",
+      fontSize: "14px",
+      fontWeight: 500,
+      cursor: "pointer",
+      _phone: { minHeight: "44px" },
+      _hover: { textDecoration: "underline" },
+      _focusVisible: {
+        outline: "2px solid var(--z-focus)",
+        outlineOffset: "2px",
+      },
+    },
   },
 });
 

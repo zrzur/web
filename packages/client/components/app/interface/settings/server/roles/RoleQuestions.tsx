@@ -110,11 +110,7 @@ export function RoleQuestions(props: { server: Server }) {
         <SettingsSection
           title={<Trans>Roles by interest</Trans>}
           description={
-            <Trans>
-              New members answer these in a window when they first open the
-              server, and get each answer's role right away. They can skip it
-              and change their answers later from the server menu.
-            </Trans>
+            <Trans>Asked once, when a new member first opens the server.</Trans>
           }
         >
           <LobbyRoleQuestionsEditor

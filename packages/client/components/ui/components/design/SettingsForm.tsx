@@ -161,8 +161,9 @@ const MediaRow = styled("div", {
   base: {
     display: "flex",
     alignItems: "center",
-    gap: "16px",
-    padding: "14px",
+    // the identity panel's own gap and inset: picture and fields line up
+    gap: "24px",
+    padding: "16px",
     flexWrap: "wrap",
 
     "& + &": {
@@ -212,7 +213,8 @@ const IdentityMedia = styled("div", {
     flexDirection: "column",
     alignItems: "center",
     gap: "8px",
-    width: "120px",
+    // the banner thumbnail below is 128 px wide: both columns line up
+    width: "128px",
     paddingTop: "4px",
 
     "& > span": {

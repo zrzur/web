@@ -12,7 +12,7 @@ Receive commands, buttons and forms at your own HTTPS address, without a gateway
 
 ## Steps
 
-1. Open your bot in the Developer Portal and choose **HTTP interactions**. Make a signing secret and copy it. It is shown once.
+1. Open your bot in the Developer Portal, tab **Bot**, and choose **HTTP interactions**. Make a signing secret and copy it. It is shown once.
 2. Start the example below on your server, with the secret in `ZRZUR_SIGNING_SECRET`.
 3. Enter your address in the same dialog, save and confirm your password. Zrzur sends it two test requests first, in either order: one with a wrong signature, which it must refuse, and a signed `Ping`, which it must answer with `{"type":"Pong"}`. The SDK does both for you.
 

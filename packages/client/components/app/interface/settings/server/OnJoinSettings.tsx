@@ -147,12 +147,7 @@ export function OnJoinSettings(props: { server: Server }) {
     >
       <SettingsSection
         title={<Trans>Roles for everyone who joins</Trans>}
-        description={
-          <Trans>
-            Given the moment someone becomes a member, whichever way they came
-            in. Bots get none. Up to {MAX_ROLES} roles.
-          </Trans>
-        }
+        description={<Trans>Bots get none. Up to {MAX_ROLES} roles.</Trans>}
       >
         <Inside data-on-join="roles">
           <Show
@@ -235,12 +230,7 @@ export function OnJoinSettings(props: { server: Server }) {
 
       <SettingsSection
         title={<Trans>Welcome message</Trans>}
-        description={
-          <Trans>
-            Posted by Zrzur in a channel you pick when someone joins. Nobody is
-            notified.
-          </Trans>
-        }
+        description={<Trans>Nobody is notified.</Trans>}
       >
         <SettingsRow
           icon={<Icon name="hand-waving" size={20} />}

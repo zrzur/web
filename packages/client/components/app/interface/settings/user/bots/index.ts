@@ -1,1 +1,1 @@
-export { ViewBot } from "./ViewBot";
+export { BotAccess, BotGeneral, BotVerificationTab } from "./ViewBot";

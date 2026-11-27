@@ -67,6 +67,21 @@ Use it for tools that need only the HTTP API or the gateway, in any framework.
 
 The client the Zrzur app is built on: a user client with live stores for servers, channels and messages. It can log in with a bot token, but it has no interaction API (commands, components, forms). Use it for tools that act like an app; use `@zrzur/sdk/bot` for bots.
 
+## Other languages {#other-languages}
+
+The [Bot API document](/developers/bot-api.openapi.json) describes every route a bot can use, as OpenAPI 3.0, with the types they take and return. OpenAPI Generator makes a client from it in Python, Go, Java, C#, Rust, PHP and more. It needs Java 11 or newer.
+
+```bash
+curl -o zrzur-bot.json https://app.zrzur.com/developers/bot-api.openapi.json
+npx @openapitools/openapi-generator-cli generate -i zrzur-bot.json -g python -o zrzur-bot
+```
+
+- The client calls `https://api.zrzur.com`, the first server in the document. A self-hosted server is the address you give the client instead.
+- A bot signs in with the `BotToken` scheme, the `x-bot-token` header.
+- The gateway is not part of it. `GET /gateway/schema` describes its events as JSON Schema; connect as in [Gateway](/developers/docs/gateway).
+- `GET /openapi.json` on the API is the whole API, the app's own routes too. The Bot API document is the part a bot can call.
+- For TypeScript, use `@zrzur/sdk`: it is generated from the same API and adds the gateway and the bot helpers.
+
 ## Without an SDK
 
 Every feature is plain HTTP and WebSocket. See [Without a library](/developers/docs/raw-http).

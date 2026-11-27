@@ -16,8 +16,8 @@ import {
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useSettingsNavigation } from "../Settings";
-import { useSaved } from "./savedNotice";
 import { membersCanInvite, opensAccess, withMemberInvites } from "./privacy";
+import { useSaved } from "./savedNotice";
 
 /**
  * Who can join and how. Every choice here is what the backend enforces
@@ -165,7 +165,7 @@ export function ServerAccess(props: { server: Server }) {
               <Button
                 size="sm"
                 variant="tonal"
-                onPress={() => navigate("overview#discovery")}
+                onPress={() => navigate("discovery")}
               >
                 <Trans>Open</Trans>
               </Button>

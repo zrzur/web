@@ -28,19 +28,15 @@ export function StreamerModeSection() {
     <SettingsSection
       title={<Trans>Streamer mode</Trans>}
       description={
-        <Trans>
-          Hides your email, your tag, invite links and codes, and message
-          previews from DMs in notifications, so they never show on stream.
-        </Trans>
+        <Trans>Hides your email, tag, invites and DM previews.</Trans>
       }
     >
       <SettingsRow
         icon={<Icon name="eye-slash" size={20} />}
-        title={<Trans>Streamer mode</Trans>}
+        title={<Trans>Hide private details</Trans>}
         description={
           <Trans>
-            Shortcut: <bdi dir="ltr">{combo()}</bdi>. A small sign at the top
-            shows while it is on.
+            Shortcut: <bdi dir="ltr">{combo()}</bdi>
           </Trans>
         }
         onClick={() => (state.settings.streamerMode = !on())}

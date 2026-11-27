@@ -159,8 +159,12 @@ const base = cva({
       textDecoration: "underline",
     },
 
-    "&:hover .Toolbar": {
-      display: "flex",
+    // real hover only: on a tablet a tap left :hover stuck, and the
+    // toolbar sat over the message above
+    "@media (hover: hover)": {
+      "&:hover .Toolbar": {
+        display: "flex",
+      },
     },
     "&:has(.z-media-player--audio .z-media-volume:hover) > .Toolbar, &:has(.z-media-player--audio .z-media-volume :focus-visible) > .Toolbar":
       {

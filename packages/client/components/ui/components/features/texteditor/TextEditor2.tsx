@@ -168,8 +168,10 @@ export function TextEditor2(props: Props) {
         /* Enable history */
         history(),
 
-        /* Use the bundled Markdown syntax */
-        markdown({ base: markdownLanguage }),
+        /* Use the bundled Markdown syntax. Its own keys stay off: its
+           Enter continued a quote or a list (`>>> text`, `- item`) with a
+           new line instead of sending; Shift+Enter makes a new line */
+        markdown({ base: markdownLanguage, addKeymap: false }),
 
         /* Linewrapping */
         smartLineWrapping,
@@ -352,6 +354,8 @@ const editor = css({
 
   fontWeight: 400,
   fontSize: "var(--message-size)",
+  // iPhone zooms into a field under 16 px every time it is focused
+  _phone: { fontSize: "max(16px, var(--message-size))" },
   fontFamily: "var(--fonts-primary)",
 
   "& .cm-editor": {

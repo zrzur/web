@@ -12,7 +12,7 @@ Empfange Befehle, Schaltflächen und Formulare an deiner eigenen HTTPS-Adresse, 
 
 ## Schritte {#steps}
 
-1. Öffne deinen Bot im Entwicklerportal und wähle **HTTP-Interaktionen**. Erzeuge ein Signier-Geheimnis und kopiere es. Es erscheint einmal.
+1. Öffne deinen Bot im Entwicklerportal, Tab **Bot**, und wähle **HTTP-Interaktionen**. Erzeuge ein Signier-Geheimnis und kopiere es. Es erscheint einmal.
 2. Starte das Beispiel unten auf deinem Server, mit dem Geheimnis in `ZRZUR_SIGNING_SECRET`.
 3. Trage deine Adresse im selben Dialog ein, speichere und bestätige dein Passwort. Zrzur schickt zuerst zwei Testanfragen in beliebiger Reihenfolge: eine mit falscher Signatur, die abgelehnt werden muss, und ein signiertes `Ping`, das `{"type":"Pong"}` bekommen muss. Das SDK erledigt beides.
 

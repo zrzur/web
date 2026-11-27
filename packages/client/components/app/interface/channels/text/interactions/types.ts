@@ -33,10 +33,7 @@ export type CreateInteraction = API.DataCreateInteraction;
 
 /** A message only the invoking user sees */
 export type EphemeralMessage = WithoutNull<
-  Extract<
-    ProtocolV1["server"],
-    { type: "EphemeralMessageCreate" }
-  >["message"]
+  Extract<ProtocolV1["server"], { type: "EphemeralMessageCreate" }>["message"]
 >;
 
 /** Gateway events of the developer platform, as received by a user */

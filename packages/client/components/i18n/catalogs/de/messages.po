@@ -7607,7 +7607,7 @@ msgstr "Tage in deiner Zeit ({0}). Jede Stunde aktualisiert."
 #: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Deafen"
-msgstr "Taubstellen"
+msgstr "Ton aus"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen lower-ranking members in voice call"
@@ -7629,7 +7629,7 @@ msgstr "Eigenen Ton ausschalten"
 #: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Deafen or undeafen"
-msgstr "Taub schalten oder aufheben"
+msgstr "Ton aus oder an"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Deafen or undeafen, in any app"
@@ -15402,7 +15402,7 @@ msgstr "Mikrofon stummschalten"
 #: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Mute or unmute"
-msgstr "Stummschalten oder Stummschaltung aufheben"
+msgstr "Mikrofon stumm oder an"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Mute or unmute, in any app"
@@ -19252,7 +19252,7 @@ msgstr "Beliebte Bots"
 
 #: src/interface/Discover.tsx
 msgid "Popular communities"
-msgstr "Beliebte Communities"
+msgstr "Beliebte Communitys"
 
 #: src/interface/Designs.tsx
 #~ msgid "Popular decorations"
@@ -19435,7 +19435,7 @@ msgstr "Vorschau nur auf diesem Gerät. Du findest sie unter Installiert → Lok
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Previews play even when a sound is switched off. Sounds use the speaker selected in Voice & Video."
-msgstr "Vorschauen werden auch bei ausgeschaltetem Ton abgespielt. Töne nutzen den Lautsprecher aus „Sprache & Video“."
+msgstr "Vorschauen werden auch bei ausgeschaltetem Ton abgespielt. Töne nutzen den Lautsprecher aus „Sprachchat & Video“."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
@@ -19675,11 +19675,11 @@ msgstr "Beworben"
 
 #: src/interface/Discover.tsx
 msgid "Promoted bots show up first for everyone who looks for bots on Discover. Get added to more servers."
-msgstr "Beworbene Bots erscheinen bei allen, die auf Discover nach Bots suchen, ganz oben. Werde zu mehr Servern hinzugefügt."
+msgstr "Beworbene Bots erscheinen bei allen, die in Entdecken nach Bots suchen, ganz oben. Werde zu mehr Servern hinzugefügt."
 
 #: src/interface/Discover.tsx
 msgid "Promoted servers show up first for everyone who opens Discover. Get seen and grow faster."
-msgstr "Beworbene Server erscheinen bei allen, die Discover öffnen, ganz oben. Werde gesehen und wachse schneller."
+msgstr "Beworbene Server erscheinen bei allen, die Entdecken öffnen, ganz oben. Werde gesehen und wachse schneller."
 
 #: components/modal/modals/ReportContent.tsx
 #~ msgid "Promotes harm"
@@ -27788,7 +27788,7 @@ msgstr "Clips einschalten"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Turn it on and choose the key in voice settings."
-msgstr "Schalte es in den Einstellungen „Sprache & Video“ ein und wähle die Taste."
+msgstr "Schalte es in den Einstellungen „Sprachchat & Video“ ein und wähle die Taste."
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Turn off"
@@ -27999,7 +27999,7 @@ msgstr "Unverändert"
 #: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Undeafen"
-msgstr "Taubschaltung aufheben"
+msgstr "Ton an"
 
 #: components/app/menus/VoiceParticipantContextMenu.tsx
 msgid "Undeafen myself"
@@ -29062,7 +29062,7 @@ msgstr "Öffnen"
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/permissionTitles.ts
 msgid "Voice"
-msgstr "Sprache"
+msgstr "Sprachchat"
 
 #: src/interface/events/EventsPage.tsx
 msgctxt "event places"
@@ -29075,7 +29075,7 @@ msgstr "SPRACHE"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Voice & Video"
-msgstr "Sprache & Video"
+msgstr "Sprachchat & Video"
 
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Voice activity"
@@ -34120,3 +34120,586 @@ msgstr "{0} gesendet, {1} fehlgeschlagen"
 #: components/app/interface/settings/user/profile/studio/StudioPack.tsx
 msgid "Your name and avatar on your designs at designs.zrzur.com, with a page of all your work. Your #tag never shows."
 msgstr "Dein Name und Avatar auf deinen Designs auf designs.zrzur.com, mit einer Seite all deiner Werke. Dein #Tag erscheint nie."
+
+#: components/app/interface/settings/user
+msgid "A copy of your data"
+msgstr "Eine Kopie deiner Daten"
+
+#: components/app/interface/settings/user
+msgid "Not linked"
+msgstr "Nicht verknüpft"
+
+#: components/app/interface/settings/user
+msgid "Hide private details"
+msgstr "Private Angaben verbergen"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Click a shortcut's keys to change them."
+msgstr "Klicke auf die Tasten eines Kürzels, um sie zu ändern."
+
+#: components/app/interface/settings/user
+msgid "In the browser, keys work only while the Zrzur tab is active."
+msgstr "Im Browser funktionieren die Tasten nur, solange der Zrzur-Tab aktiv ist."
+
+#: components/app/interface/settings/user
+msgid "Keeps the mic open a moment after you let go."
+msgstr "Lässt das Mikrofon nach dem Loslassen kurz offen."
+
+#: components/app/interface/settings/user
+msgid "Also while Zrzur is closed."
+msgstr "Auch wenn Zrzur geschlossen ist."
+
+#: components/app/interface/settings/user
+msgid "For weak or metered internet."
+msgstr "Für schwaches oder begrenztes Internet."
+
+#: components/app/interface/settings/user
+msgid "Players load right away, and their sites see your IP address."
+msgstr "Player laden sofort, und ihre Seiten sehen deine IP-Adresse."
+
+#: components/app/interface/settings/user
+msgid "Hides your email, tag, invites and DM previews."
+msgstr "Verbirgt E-Mail, Tag, Einladungen und DM-Vorschauen."
+
+#: components/app/interface/settings/user
+msgid "Shortcut: <0>{0}</0>"
+msgstr "Tastenkürzel: <0>{0}</0>"
+
+#: components/app/interface/settings/user
+msgid "512 × 512 px · up to {0}"
+msgstr "512 × 512 px · bis {0}"
+
+#: components/app/interface/settings/user
+msgid "680 × 240 px · up to {0}"
+msgstr "680 × 240 px · bis {0}"
+
+#: components/app/interface/settings/user
+msgid "Hidden sections are not sent to anyone."
+msgstr "Ausgeblendete Bereiche werden an niemanden gesendet."
+
+#: components/app/interface/settings/user
+msgid "Up to {MAX_LINKS} links."
+msgstr "Bis zu {MAX_LINKS} Links."
+
+#: components/app/interface/settings/user
+msgid "On designs.zrzur.com. Your #tag never shows."
+msgstr "Auf designs.zrzur.com. Dein #Tag erscheint nie."
+
+#: components/app/interface/settings/user
+msgid "Your Twitch channel, and when you are live."
+msgstr "Dein Twitch-Kanal und wann du live bist."
+
+#: components/app/interface/settings/user
+msgid "Your GitHub account and your best public repositories."
+msgstr "Dein GitHub-Konto und deine besten öffentlichen Repositorys."
+
+#: components/app/interface/settings/user
+msgid "Your BattleTag, so friends can add you."
+msgstr "Dein BattleTag, damit Freunde dich hinzufügen können."
+
+#: components/app/interface/settings/user
+msgid "Your Steam name, games and achievements."
+msgstr "Dein Steam-Name, deine Spiele und Erfolge."
+
+#: components/app/interface/settings/user
+msgid "Revoking an app ends its access at once. Bots it added stay in their servers."
+msgstr "Widerrufst du eine App, endet ihr Zugriff sofort. Bots, die sie hinzugefügt hat, bleiben auf ihren Servern."
+
+#: components/app/interface/settings/user
+msgid "A ZIP file, sent by e-mail. Once every 24 hours."
+msgstr "Eine ZIP-Datei, per E-Mail. Einmal alle 24 Stunden."
+
+#: components/app/interface/settings/user
+msgid "Only in the Zrzur desktop app."
+msgstr "Nur in der Zrzur-Desktop-App."
+
+#: components/app/interface/settings/user
+msgid "A preview: nothing shows on your profile until you turn it on. Untick any game you want to keep to yourself."
+msgstr "Eine Vorschau: In deinem Profil erscheint nichts, bis du es einschaltest. Entferne den Haken bei Spielen, die du für dich behalten willst."
+
+#: components/app/interface/settings/user
+msgid "While the card is focused."
+msgstr "Solange die Karte im Fokus ist."
+
+#: components/app/interface/settings/user
+msgid "Other devices"
+msgstr "Andere Geräte"
+
+#: components/app/interface/settings/user
+msgid "Start one from a message or with +."
+msgstr "Starte einen über eine Nachricht oder mit +."
+
+#: components/app/interface/settings/user
+msgid "In a chat"
+msgstr "Im Chat"
+
+#: components/app/interface/settings/user
+msgid "In the member list"
+msgstr "In der Mitgliederliste"
+
+#: components/app/interface/settings/user
+msgid "{name} set"
+msgstr "{name}-Set"
+
+#: components/app/interface/settings/user
+msgid "2 to 32 characters. You can change it twice a day."
+msgstr "2 bis 32 Zeichen. Du kannst ihn zweimal am Tag ändern."
+
+#: components/app/interface/settings/user
+msgid "Confirm it's you"
+msgstr "Bestätige, dass du es bist"
+
+#: components/app/interface/settings/user
+msgid "How do you want to confirm?"
+msgstr "Wie möchtest du bestätigen?"
+
+#: components/app/interface/settings/user
+msgid "Code from your authenticator app"
+msgstr "Code aus deiner Authenticator-App"
+
+#: components/app/interface/settings/user
+msgid "Younger any time; older only once, within your age group. Anything else: privacy@zrzur.com."
+msgstr "Jünger jederzeit, älter nur einmal und innerhalb deiner Altersgruppe. Alles andere: privacy@zrzur.com."
+
+#: components/app/interface/settings/user
+msgid "Search roles"
+msgstr "Rollen suchen"
+
+#: components/app/interface/settings/user
+msgid "No role matches."
+msgstr "Keine Rolle passt."
+
+#: components/app/interface/settings/user
+msgid "No roles."
+msgstr "Keine Rollen."
+
+#: components/app/interface/settings/user
+msgid "A bot's own role"
+msgstr "Die eigene Rolle eines Bots"
+
+#: components/app/interface/settings/user
+msgid "Above your highest role"
+msgstr "Über deiner höchsten Rolle"
+
+#: components/app/interface/settings/user
+msgid "Add role"
+msgstr "Rolle hinzufügen"
+
+#: components/app/interface/settings/user
+msgid "Channels and messages"
+msgstr "Kanäle und Nachrichten"
+
+#: components/app/interface/settings/user
+msgid "New members"
+msgstr "Neue Mitglieder"
+
+#: components/app/interface/settings/user
+msgid "Transfer or delete"
+msgstr "Übertragen oder löschen"
+
+#: components/app/interface/settings/user
+msgid "Name, picture, description and notifications."
+msgstr "Name, Bild, Beschreibung und Benachrichtigungen."
+
+#: components/app/interface/settings/user
+msgid "System messages, threads, events and tickets."
+msgstr "Systemnachrichten, Threads, Events und Tickets."
+
+#: components/app/interface/settings/user
+msgid "Your own short link, and every invite."
+msgstr "Dein eigener Kurzlink und alle Einladungen."
+
+#: components/app/interface/settings/user
+msgid "1920 × 1080 px · up to {0}"
+msgstr "1920 × 1080 px · bis {0}"
+
+#: components/app/interface/settings/user
+msgid "Bots get none. Up to {MAX_ROLES} roles."
+msgstr "Bots bekommen keine. Bis zu {MAX_ROLES} Rollen."
+
+#: components/app/interface/settings/user
+msgid "Nobody is notified."
+msgstr "Niemand wird benachrichtigt."
+
+#: components/app/interface/settings/user
+msgid "Asked once, when a new member first opens the server."
+msgstr "Einmal gefragt, wenn ein neues Mitglied den Server zum ersten Mal öffnet."
+
+#: components/app/interface/settings/user
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name."
+msgstr "Eine MP3-, OGG- oder WAV-Datei bis {0} KB, dann ein Name."
+
+#: components/app/interface/settings/user
+msgid "Rules to accept, roles and a welcome."
+msgstr "Regeln zum Zustimmen, Rollen und ein Willkommen."
+
+#: components/app/interface/settings/user
+msgid "Only you and Zrzur's security reviewers can read it."
+msgstr "Nur du und das Sicherheitsteam von Zrzur können sie lesen."
+
+#: components/app/interface/settings/user
+msgid "Your tickets"
+msgstr "Deine Tickets"
+
+#: components/app/interface/settings/user
+msgid "Ticket"
+msgstr "Ticket"
+
+#: components/app/interface/settings/user
+msgid "Only the Zrzur team can write here."
+msgstr "Hier kann nur das Zrzur-Team schreiben."
+
+#: components/app/interface/settings/user
+msgid "For help, open Settings and choose Contact support."
+msgstr "Hilfe findest du in den Einstellungen unter „Support kontaktieren“."
+
+#: components/app/interface/settings/user
+msgid "{0, plural, one {# option} other {# options}}"
+msgstr "{0, plural, one {# Option} other {# Optionen}}"
+
+#: components/app/interface/settings/user
+msgid "A link starting with https://"
+msgstr "Ein Link, der mit https:// beginnt"
+
+#: components/app/interface/settings/user
+msgid "A new secret stops the old one at once."
+msgstr "Ein neues Secret macht das alte sofort ungültig."
+
+#: components/app/interface/settings/user
+msgid "About your bot"
+msgstr "Über deinen Bot"
+
+#: components/app/interface/settings/user
+msgid "Account"
+msgstr "Konto"
+
+#: components/app/interface/settings/user
+msgid "Add a redirect to get the link."
+msgstr "Füge eine Weiterleitung hinzu, um den Link zu erhalten."
+
+#: components/app/interface/settings/user
+msgid "Anyone can add it to their servers. When off, only you can."
+msgstr "Jeder kann ihn zu seinen Servern hinzufügen. Wenn aus, nur du."
+
+#: components/app/interface/settings/user
+msgid "Choose one of your servers."
+msgstr "Wähle einen deiner Server."
+
+#: components/app/interface/settings/user
+msgid "Connection"
+msgstr "Verbindung"
+
+#: components/app/interface/settings/user
+msgid "Copy application ID"
+msgstr "Anwendungs-ID kopieren"
+
+#: components/app/interface/settings/user
+msgid "Let people sign in to your app with Zrzur. The client ID is the application ID above."
+msgstr "Lass Leute sich mit Zrzur in deiner App anmelden. Die Client-ID ist die Anwendungs-ID oben."
+
+#: components/app/interface/settings/user
+msgid "None yet. Without one, your app must use PKCE."
+msgstr "Noch keins. Ohne Secret muss deine App PKCE nutzen."
+
+#: components/app/interface/settings/user
+msgid "None. Turn them on in the Bot tab first if your bot needs them."
+msgstr "Keine. Schalte sie zuerst im Tab „Bot“ ein, falls dein Bot sie braucht."
+
+#: components/app/interface/settings/user
+msgid "Privileged intents in this request"
+msgstr "Privilegierte Intents in dieser Anfrage"
+
+#: components/app/interface/settings/user
+msgid "Redirect URIs"
+msgstr "Weiterleitungs-URIs"
+
+#: components/app/interface/settings/user
+msgid "Redirects"
+msgstr "Weiterleitungen"
+
+#: components/app/interface/settings/user
+msgid "Sign-in link"
+msgstr "Anmeldelink"
+
+#: components/app/interface/settings/user
+msgid "Support link (optional)"
+msgstr "Support-Link (optional)"
+
+#: components/app/interface/settings/user
+msgid "The token signs in as your bot. Never share it or show it on screen."
+msgstr "Mit dem Token meldet man sich als dein Bot an. Teile es nie und zeige es nie auf dem Bildschirm."
+
+#: components/app/interface/settings/user
+msgid "Turn on only what your bot needs. A change applies from the bot's next connection."
+msgstr "Schalte nur ein, was dein Bot braucht. Eine Änderung gilt ab der nächsten Verbindung des Bots."
+
+#: components/app/interface/settings/user
+msgid "Verified bots get a mark next to their name and can join more than 100 servers. Past 100 servers, privileged intents need approval."
+msgstr "Verifizierte Bots erhalten ein Zeichen neben ihrem Namen und können mehr als 100 Servern beitreten. Ab 100 Servern brauchen privilegierte Intents eine Freigabe."
+
+#: components/app/interface/settings/user
+msgid "Website (optional)"
+msgstr "Website (optional)"
+
+#: components/app/interface/settings/user
+msgid "What it does, who uses it, and what data it keeps"
+msgstr "Was er tut, wer ihn nutzt und welche Daten er speichert"
+
+#: components/app/interface/settings/user
+msgid "Where people return after signing in. One per line: https, or http://localhost while you test."
+msgstr "Wohin Leute nach der Anmeldung zurückkehren. Eine pro Zeile: https, oder http://localhost beim Testen."
+
+#: components/app/interface/settings/user
+msgid "Whoever opens it picks a server, and the bot joins with these permissions."
+msgstr "Wer ihn öffnet, wählt einen Server, und der Bot tritt mit diesen Berechtigungen bei."
+
+#: components/app/interface/settings/user
+msgid "Write at least {STATEMENT_MIN} characters."
+msgstr "Schreibe mindestens {STATEMENT_MIN} Zeichen."
+
+#: components/app/interface/settings/user
+msgid "Your app adds a new state and code challenge for every sign-in, so the link doesn't work opened as it is."
+msgstr "Deine App fügt bei jeder Anmeldung einen neuen State und Code-Challenge ein, daher funktioniert der Link so nicht."
+
+#: components/app/interface/settings/user
+msgid "Zrzur can't show it again. A new token stops the old one."
+msgstr "Zrzur kann es nicht erneut anzeigen. Ein neues Token macht das alte ungültig."
+
+#: components/app/interface/settings/user
+msgid "At most {STATEMENT_MAX} characters."
+msgstr "Höchstens {STATEMENT_MAX} Zeichen."
+
+#: components/app/interface/settings/user
+msgid "By application, reviewed by the Zrzur team: open to every bot, whatever its size; the team looks at its servers, its age and what it does."
+msgstr "Auf Antrag, geprüft vom Zrzur-Team: offen für jeden Bot, egal wie groß; das Team sieht sich seine Server, sein Alter und seine Funktionen an."
+
+#: components/app/interface/settings/user
+msgid "Couldn't load the verification."
+msgstr "Die Verifizierung konnte nicht geladen werden."
+
+#: components/app/interface/settings/user
+msgid "Intents asked for: {0}"
+msgstr "Angefragte Intents: {0}"
+
+#: components/app/interface/settings/user
+msgid "No malicious commands, token theft, deception or inflated installs. Any bot can apply, whatever its size; a review decides."
+msgstr "Keine schädlichen Befehle, kein Token-Diebstahl, keine Täuschung und keine künstlich aufgeblähten Installationen. Jeder Bot kann sich bewerben, egal wie groß; eine Prüfung entscheidet."
+
+#: components/app/interface/settings/user
+msgid "Sent on {0}. The team will answer here."
+msgstr "Gesendet am {0}. Das Team antwortet hier."
+
+#: components/app/interface/settings/user
+msgid "The team looks at the servers that count: your own never do, and one owner's count at most twice."
+msgstr "Das Team sieht sich die zählenden Server an: Deine eigenen zählen nie, und die Server einer Person höchstens zweimal."
+
+#: components/app/interface/settings/user
+msgid "What the team looks at"
+msgstr "Was das Team prüft"
+
+#: components/app/interface/settings/user
+msgid "Emoji and sounds"
+msgstr "Emoji und Sounds"
+
+#: components/app/interface/settings/user
+msgid "Pause the server during a raid, and filters that stop spam, bad words and unwanted links."
+msgstr "Pausiere den Server bei einem Raid, und Filter gegen Spam, schlimme Wörter und unerwünschte Links."
+
+#: components/app/interface/settings/user
+msgid "Protection"
+msgstr "Schutz"
+
+#: components/app/interface/settings/user
+msgid "Search, change roles, time out, kick or ban, and see who is banned."
+msgstr "Suchen, Rollen ändern, stummschalten, kicken oder bannen, und sehen, wer gebannt ist."
+
+#: components/app/interface/settings/user
+msgid "The server's own emoji, and the short sounds members play in voice calls."
+msgstr "Die eigenen Emoji des Servers und die kurzen Sounds, die Mitglieder in Sprachanrufen abspielen."
+
+#: components/app/interface/settings/user
+msgid "Who can get in, what they need before they can talk, the rules they accept and how they are welcomed."
+msgstr "Wer hereinkommt, was nötig ist, bevor man schreiben kann, die Regeln, die man akzeptiert, und wie man begrüßt wird."
+
+#: components/app/interface/settings/user
+msgid "A GIF or animated WebP plays."
+msgstr "Ein GIF oder animiertes WebP wird abgespielt."
+
+#: components/app/interface/settings/user
+msgid "Short sounds members upload and play in voice calls."
+msgstr "Kurze Sounds, die Mitglieder hochladen und in Sprachanrufen abspielen."
+
+#: components/app/interface/settings/user
+msgid "No sounds yet. People who manage the soundboard upload them in Server settings, Soundboard."
+msgstr "Noch keine Sounds. Wer das Soundboard verwaltet, lädt sie unter Servereinstellungen, Soundboard hoch."
+
+#: components/app/interface/settings/user
+msgid "Your device's emoji"
+msgstr "Emoji deines Geräts"
+
+#: components/app/interface/settings/user
+msgid "Twitter emoji"
+msgstr "Twitter-Emoji"
+
+#: components/app/interface/settings/user
+msgid "Enter one of the recovery codes you saved."
+msgstr "Gib einen der Wiederherstellungscodes ein, die du gespeichert hast."
+
+#: components/app/interface/settings/user
+msgid "Enter the 6-digit code from your authenticator app."
+msgstr "Gib den 6-stelligen Code aus deiner Authenticator-App ein."
+
+#: components/app/interface/settings/user
+msgid "Use a recovery code instead"
+msgstr "Stattdessen einen Wiederherstellungscode verwenden"
+
+#: components/app/interface/settings/user
+msgid "Use your authenticator app"
+msgstr "Authenticator-App verwenden"
+
+#: components/app/interface/settings/user
+msgid "Other ways to confirm"
+msgstr "Andere Wege zur Bestätigung"
+
+#: components/app/interface/settings/user
+msgid "Suppression strength"
+msgstr "Stärke der Unterdrückung"
+
+#: components/app/interface/settings/user
+msgid "Also quietens typing, clicks and breathing between words."
+msgstr "Dämpft auch Tippen, Klicks und Atmen zwischen den Wörtern."
+
+#: components/app/interface/settings/user
+msgid "Removes steady noise such as fans and hum."
+msgstr "Entfernt gleichmäßige Geräusche wie Lüfter und Brummen."
+
+#: components/app/interface/settings/user
+msgid "Core concepts"
+msgstr "Grundlagen"
+
+#: components/app/interface/settings/user
+msgid "Working with the API"
+msgstr "Mit der API arbeiten"
+
+#: components/app/interface/settings/user
+msgid "Going live"
+msgstr "Live gehen"
+
+#: components/app/interface/settings/user
+msgid "Rich presence for games and apps"
+msgstr "Aktivitätsstatus für Spiele und Apps"
+
+#: components/app/interface/settings/user
+msgid "One bot, many servers"
+msgstr "Ein Bot, viele Server"
+
+#: components/app/interface/settings/user
+msgid "Search the docs"
+msgstr "Doku durchsuchen"
+
+#: components/app/interface/settings/user
+msgid "Link to this section"
+msgstr "Link zu diesem Abschnitt"
+
+#: components/app/interface/settings/user
+msgid "Sort designs"
+msgstr "Designs sortieren"
+
+#: components/app/interface/settings/user
+msgid "Wearing now"
+msgstr "Trägst du gerade"
+
+#: components/app/interface/settings/user
+msgid "Designs couldn't load."
+msgstr "Die Designs konnten nicht geladen werden."
+
+#: components/app/interface/settings/user
+msgid "Nobody has published one yet."
+msgstr "Noch hat niemand eins veröffentlicht."
+
+#: components/app/interface/settings/user
+msgid "All in Designs"
+msgstr "Alle unter Designs"
+
+#: src/interface/Discover.tsx
+msgid "Communities reviewed by the Zrzur team."
+msgstr "Vom Zrzur-Team geprüfte Communitys."
+
+#: src/interface/Discover.tsx
+msgid "See what each bot does and which permissions it asks for."
+msgstr "Sieh, was jeder Bot kann und welche Berechtigungen er anfordert."
+
+#: src/interface/Discover.tsx
+msgid "List it from Server settings → Discover."
+msgstr "Reiche ihn unter Servereinstellungen → Entdecken ein."
+
+#: src/interface/Discover.tsx
+msgid "List it from the bot's settings."
+msgstr "Reiche ihn in den Bot-Einstellungen ein."
+
+#: components/app/interface/settings/user
+msgid "Underlined text"
+msgstr "Unterstrichener Text"
+
+#: components/app/interface/settings/user
+msgid "Sends your message in italics, as something you do."
+msgstr "Sendet deine Nachricht kursiv, als etwas, das du tust."
+
+#: components/app/interface/settings/user
+msgid "Hides your message until someone clicks it."
+msgstr "Verbirgt deine Nachricht, bis jemand darauf klickt."
+
+#: components/app/interface/settings/user
+msgid "Adds {face} to your message."
+msgstr "Fügt {face} an deine Nachricht an."
+
+#: components/app/interface/settings/user
+msgid "Everyone in this channel"
+msgstr "Alle in diesem Kanal"
+
+#: components/app/interface/settings/user
+msgid "Everyone online in this channel"
+msgstr "Alle, die in diesem Kanal online sind"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "Server"
+msgstr "Server"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "People"
+msgstr "Personen"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "More"
+msgstr "Mehr"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Expression"
+msgstr "Ausdruck"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Designs server"
+msgstr "Zrzur-Designs-Server"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Discover server"
+msgstr "Zrzur-Discover-Server"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Developers server"
+msgstr "Zrzur-Developers-Server"
+
+#: components/app/interface/settings/user
+msgid "Questions about designs? Ask in the <0>Zrzur Designs server</0>."
+msgstr "Fragen zu Designs? Frag im <0>Zrzur-Designs-Server</0>."
+
+#: components/app/interface/settings/user
+msgid "Questions about Discover? Ask in the <0>Zrzur Discover server</0>."
+msgstr "Fragen zu Discover? Frag im <0>Zrzur-Discover-Server</0>."
+
+#: components/app/interface/settings/user
+msgid "Questions about building on Zrzur? Ask in the <0>Zrzur Developers server</0>."
+msgstr "Fragen zum Entwickeln mit Zrzur? Frag im <0>Zrzur-Developers-Server</0>."

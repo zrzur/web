@@ -65,6 +65,11 @@ export default defineConfig({
             backgroundRepeat: "no-repeat",
           },
         },
+        // a bar of the app coming in: a short fade, as native apps do
+        zFadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
         slideIn: {
           "0%": {
             transform: "translateY(var(--translateY))",

@@ -54,11 +54,12 @@ Diese kurze Fassung verbindet nicht neu. Ergänze die Schleife aus [Gateway](/de
 
 | Adresse                 | Was                                        |
 | ----------------------- | ------------------------------------------ |
+| [Bot-API-Dokument](/developers/bot-api.openapi.json) | Die Routen, die ein Bot nutzen kann, als OpenAPI 3 |
 | `GET /openapi.json`     | Jede REST-Route als OpenAPI 3              |
 | `GET /gateway/schema`   | Jedes Gateway-Ereignis als JSON Schema     |
 | `GET /`                 | Adressen und Limits dieses Servers         |
 
-Erzeuge daraus einen Client in deiner Sprache.
+Erzeuge daraus einen Client in deiner Sprache: siehe [Andere Sprachen](/developers/docs/sdk#other-languages).
 
 ## Weiter {#next}
 

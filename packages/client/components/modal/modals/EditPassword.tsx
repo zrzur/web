@@ -68,12 +68,6 @@ export function EditPasswordModal(
       onClose={props.onClose}
       persistent={group.isDirty}
       title={<Trans>Change your password</Trans>}
-      description={
-        <Trans>
-          Enter your current password, then choose a new one you don't use
-          anywhere else.
-        </Trans>
-      }
       error={error()}
       actions={[
         { text: <Trans>Cancel</Trans> },

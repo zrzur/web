@@ -105,7 +105,12 @@ export function MediaPlayer(props: {
   async function toggleFullscreen() {
     try {
       if (document.fullscreenElement === root) await document.exitFullscreen();
-      else await root.requestFullscreen();
+      else if (root.requestFullscreen) await root.requestFullscreen();
+      // iPhone: only the video itself goes full screen
+      else
+        (
+          media as HTMLVideoElement & { webkitEnterFullscreen?: () => void }
+        ).webkitEnterFullscreen?.();
     } catch {
       /* Playback remains usable when the host denies fullscreen. */
     }

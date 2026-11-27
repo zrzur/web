@@ -1,7 +1,7 @@
 import { createFormControl, createFormGroup } from "solid-forms";
-import { createMemo, createSignal } from "solid-js";
+import { Show, createMemo, createSignal } from "solid-js";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
+import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 
 import { useClient } from "@revolt/client";
 import {
@@ -95,20 +95,32 @@ export function CreateGroupModal(
             label={t`Group name`}
           />
 
-          <Text class="label">
-            <Trans>Select members to add</Trans>
-          </Text>
+          <Row align style={{ "justify-content": "space-between" }}>
+            <Text class="label">
+              <Trans>Select members to add</Trans>
+            </Text>
+            <Show when={group.controls.users.value.length}>
+              <Text class="label">
+                <Plural
+                  value={group.controls.users.value.length}
+                  one="# selected"
+                  other="# selected"
+                />
+              </Text>
+            </Show>
+          </Row>
 
           <TextField
             value={filter()}
             variant="filled"
             placeholder={t`Search for users...`}
-            onKeyUp={(e) => setFilter(e.currentTarget.value)}
+            onInput={(e) => setFilter(e.currentTarget.value)}
           />
 
           <Form2.VirtualSelect
             items={users()}
             control={group.controls.users}
+            itemHeight={48}
             multiple
           >
             {(item) => (
@@ -116,7 +128,7 @@ export function CreateGroupModal(
                 <Avatar
                   src={item.animatedAvatarURL}
                   fallback={item.displayName}
-                  size={24}
+                  size={32}
                 />{" "}
                 <span>{item.displayName}</span>
               </Row>

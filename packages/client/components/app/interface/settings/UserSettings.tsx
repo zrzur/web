@@ -5,6 +5,7 @@ import { Server } from "@zrzur/sdk/solid";
 import { css } from "styled-system/css";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
+import { richPresenceEnabled } from "@revolt/client/ActivityWorker";
 import { billingAvailable } from "@revolt/client/billing";
 import { CONFIGURATION } from "@revolt/common";
 import {
@@ -17,7 +18,6 @@ import { STAFF_TOOLS_ENABLED } from "@revolt/common/lib/staffTools";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { fetchLatestChangelog } from "@revolt/modal/modals/changelogFeed";
-import { richPresenceEnabled } from "@revolt/client/ActivityWorker";
 import { pluginsEnabled } from "@revolt/plugins/enabled";
 import { useNavigate } from "@revolt/routing";
 import { ColouredText, Column, Text, iconSize } from "@revolt/ui";
@@ -51,10 +51,11 @@ import { SettingsConfiguration } from ".";
 import { SettingsTabs } from "./SettingsTabs";
 import { AccountCard, BackCard } from "./user/_AccountCard";
 import { MyAccount } from "./user/Account";
+import { ActivitySettings } from "./user/activity/ActivitySettings";
 import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
+import { BugReportForm } from "./user/badges/BugReportDialog";
 import { MyBadges } from "./user/badges/MyBadges";
-import { ActivitySettings } from "./user/activity/ActivitySettings";
 import { ConnectedApps } from "./user/ConnectedApps";
 import { Connections } from "./user/connections/Connections";
 import { Feedback } from "./user/Feedback";
@@ -73,7 +74,12 @@ import {
 import { SaveDataSettings } from "./user/SaveData";
 import { Sessions } from "./user/Sessions";
 import { PlusPage, Subscriptions } from "./user/subscriptions";
-import { ContactSupport } from "./user/support/ContactSupport";
+import {
+  ContactSupport,
+  NewTicketPage,
+  TicketPage,
+  TicketTitle,
+} from "./user/support/ContactSupport";
 import { VoiceSettings } from "./user/voice/VoiceSettings";
 import { whatsNewUrl } from "./whatsNew";
 
@@ -85,6 +91,14 @@ const Config: SettingsConfiguration<{ server: Server }> = {
   title(ctx, key) {
     // reached from Advanced, not listed in the sidebar
     if (key === "plugins") return (<Trans>Plugins</Trans>) as unknown as string;
+    // a page under Feedback & reports: its name in the path above it
+    if (key === "feedback/report")
+      return (<Trans>Report a bug</Trans>) as unknown as string;
+    // pages under Contact support: a new ticket, or one ticket by its id
+    if (key === "support/new")
+      return (<Trans>Write to support</Trans>) as unknown as string;
+    if (key.startsWith("support/"))
+      return (<TicketTitle id={key.slice(8)} />) as unknown as string;
 
     return ctx.entries
       .flatMap((category) => category.entries)
@@ -124,7 +138,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             tabs={[
               {
                 id: "profile",
-                label: <Trans>Profile</Trans>,
+                // the page is "Profile" already: the tab says what it holds
+                label: <Trans>Edit profile</Trans>,
                 render: () => <EditProfile />,
               },
               {
@@ -167,11 +182,15 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             ]}
           />
         );
+      case "feedback/report":
+        return <BugReportForm beta={[]} />;
       case "safety":
         // an old link to the page shows nothing while staff tools are hidden
         return STAFF_TOOLS_ENABLED ? <SafetyReviewPage /> : null;
       case "support":
         return <ContactSupport />;
+      case "support/new":
+        return <NewTicketPage />;
       case "plus":
       case "subscriptions":
         return billingAvailable() ? (
@@ -203,6 +222,9 @@ const Config: SettingsConfiguration<{ server: Server }> = {
       case "data":
         return <SaveDataSettings />;
       default:
+        // one support ticket: support/<its id>
+        if (id?.startsWith("support/"))
+          return <TicketPage id={id.slice(8)} />;
         return null;
     }
   },

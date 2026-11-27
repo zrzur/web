@@ -1,3 +1,4 @@
+import { useSpeaking } from "@revolt/rtc/speaking";
 import {
   type JSX,
   For,
@@ -14,7 +15,6 @@ import {
   TrackLoop,
   useEnsureParticipant,
   useIsMuted,
-  useIsSpeaking,
   useMediaDeviceSelect,
   useTrackRefContext,
 } from "solid-livekit-components";
@@ -115,6 +115,9 @@ function DesktopStage(props: { channel: Channel }) {
   const [viewHeight, setViewHeight] = createSignal(800);
   const [dragHeight, setDragHeight] = createSignal<number>();
   const [fullscreen, setFullscreen] = createSignal(false);
+  // where the browser does not give full screen to a page (an embedded
+  // browser that never answers, some webviews), the call fills the window
+  const [filled, setFilled] = createSignal(false);
   let stage: HTMLElement | undefined;
   let anchor: HTMLDivElement | undefined;
 
@@ -129,8 +132,17 @@ function DesktopStage(props: { channel: Channel }) {
   const onFullscreen = () =>
     setFullscreen(!!stage && document.fullscreenElement === stage);
   document.addEventListener("fullscreenchange", onFullscreen);
+  // Escape leaves the window-filling call as it leaves full screen
+  const onEscape = (event: KeyboardEvent) => {
+    if (event.key === "Escape" && filled()) {
+      event.preventDefault();
+      setFilled(false);
+    }
+  };
+  document.addEventListener("keydown", onEscape);
   onCleanup(() => {
     document.removeEventListener("fullscreenchange", onFullscreen);
+    document.removeEventListener("keydown", onEscape);
     if (stage && document.fullscreenElement === stage)
       void document.exitFullscreen().catch(() => undefined);
   });
@@ -140,9 +152,24 @@ function DesktopStage(props: { channel: Channel }) {
 
   const toggleFullscreen = () => {
     if (!stage) return;
-    if (document.fullscreenElement === stage)
+    if (filled()) return setFilled(false);
+    if (document.fullscreenElement === stage) {
       void document.exitFullscreen().catch(() => undefined);
-    else void stage.requestFullscreen?.().catch(() => undefined);
+      return;
+    }
+    const fill = () => {
+      if (document.fullscreenElement !== stage) setFilled(true);
+    };
+    if (!document.fullscreenEnabled || !stage.requestFullscreen) return fill();
+    // a refusal fills the window at once; no answer at all, after a moment
+    const wait = setTimeout(fill, 500);
+    stage.requestFullscreen().then(
+      () => clearTimeout(wait),
+      () => {
+        clearTimeout(wait);
+        fill();
+      },
+    );
   };
 
   // drag the divider: the stage follows the pointer, saved when let go
@@ -192,6 +219,7 @@ function DesktopStage(props: { channel: Channel }) {
           ref={stage}
           class="z-dmcall-stage"
           data-dm-call="stage"
+          data-filled={filled() ? "" : undefined}
           aria-label={t`Call`}
           style={{ height: `${height()}px` }}
         >
@@ -199,7 +227,7 @@ function DesktopStage(props: { channel: Channel }) {
           {/* mic, camera, screen share and hang up are in the voice panel
               of the sidebar: the stage keeps only what it alone does */}
           <StageCorner
-            fullscreen={fullscreen()}
+            fullscreen={fullscreen() || filled()}
             toggleFullscreen={toggleFullscreen}
           />
         </section>
@@ -648,7 +676,7 @@ function PersonTile(props: { channel: Channel; small?: boolean }) {
   const voice = useVoice();
   const participant = useEnsureParticipant();
   const user = useUser(participant.identity);
-  const speaking = useIsSpeaking(participant);
+  const speaking = useSpeaking(participant);
   const muted = useIsMuted({
     participant,
     source: Track.Source.Microphone,

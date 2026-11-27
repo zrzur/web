@@ -69,9 +69,8 @@ import {
   callBitrate,
   watchAudioSettings,
 } from "./audioQuality";
+import { createCallTracks } from "./callFocus";
 import { deviceFallback } from "./callHealth";
-import { type NetworkLevel, weakNetworkSettings } from "./weakNetwork";
-import { watchWeakNetwork } from "./weakNetworkWatch";
 import { InRoom } from "./components/InRoom";
 import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
 import type { GameKeyAction, GameKeysStatus } from "./gameKeys";
@@ -101,6 +100,8 @@ import {
 } from "./screenShare";
 import { createTalkGate } from "./talkGate";
 import type { VoiceProcessor } from "./VoiceProcessor";
+import { type NetworkLevel, weakNetworkSettings } from "./weakNetwork";
+import { watchWeakNetwork } from "./weakNetworkWatch";
 
 /** The call's audio, with LiveKit (loaded with the first call) */
 const RoomAudio = lazy(() => import("./components/RoomAudio"));
@@ -190,7 +191,10 @@ class Voice {
   room: Accessor<Room | undefined>;
   #setRoom: Setter<Room | undefined>;
 
+  /** Cameras and screen shares of the call: always the current room's */
   vidTracks: Accessor<TrackReferenceOrPlaceholder[]>;
+  /** The tracks and the focus (see callFocus.ts) */
+  #call = createCallTracks<TrackReferenceOrPlaceholder>((t) => this.trackId(t));
 
   state: Accessor<State>;
   #setState: Setter<State>;
@@ -259,8 +263,8 @@ class Voice {
   layout: Accessor<VoiceLayout>;
   #setLayout: Setter<VoiceLayout>;
 
+  /** The track shown large: only while it is still in the call */
   focusId: Accessor<string | undefined>;
-  #setFocus: Setter<string | undefined>;
 
   showBar: Accessor<boolean>;
   #setShowBar: Setter<boolean>;
@@ -309,7 +313,7 @@ class Voice {
     this.room = room;
     this.#setRoom = setRoom;
 
-    this.vidTracks = () => [];
+    this.vidTracks = this.#call.tracks;
 
     const [state, setState] = createSignal<State>("READY");
     this.state = state;
@@ -381,9 +385,9 @@ class Voice {
     this.layout = layout;
     this.#setLayout = setLayout;
 
-    const [focus, setFocus] = createSignal<string>();
-    this.focusId = focus;
-    this.#setFocus = setFocus;
+    // a share that ended, or a camera that left, is never the focus: the
+    // call goes back to everyone's tiles at once, in every view
+    this.focusId = this.#call.focus;
 
     const [showBar, setShowBar] = createSignal(true);
     this.showBar = showBar;
@@ -649,13 +653,15 @@ class Voice {
     this.#disposeTracks?.();
     createRoot((dispose) => {
       this.#disposeTracks = dispose;
-      this.vidTracks = lk.useTracks(
+      const tracks = lk.useTracks(
         [
           { source: TrackSource.Camera, withPlaceholder: true },
           { source: TrackSource.ScreenShare, withPlaceholder: false },
         ],
         { room, onlySubscribed: false },
       );
+      this.#call.setSource(tracks);
+      this.#call.forgetEnded(() => this.#setShowBar(true));
     });
 
     // a part of the app that fails to load during the call must not reload
@@ -670,6 +676,17 @@ class Voice {
       this.#setVideo(false);
       this.#setScreenshare(false);
     });
+
+    // the share ended without our buttons (the browser's Stop sharing,
+    // the shared window closed, LiveKit dropping it): say so at once, so
+    // the controls and everyone's view follow
+    room.addListener(
+      "localTrackUnpublished",
+      (publication: { source?: string }) => {
+        if (publication.source === TrackSource.ScreenShare)
+          this.#setScreenshare(false);
+      },
+    );
 
     room.addListener("connected", () => {
       this.#setState("CONNECTED");
@@ -963,7 +980,9 @@ class Voice {
         this.#setRoom();
         this.#setChannel();
         this.#setLayout();
-        this.vidTracks = () => [];
+        this.#call.setSource(() => []);
+        this.#call.setFocus(undefined);
+        this.#setShowBar(true);
       });
       this.#disposeTracks?.();
       this.#disposeTracks = undefined;
@@ -1282,7 +1301,9 @@ class Voice {
           // This catches the ending and disables screen sharing on our side. If this weren't here,
           // livekit would still share stream audio after closing the window being streamed.
           localTrack.on("ended", () => {
-            this.toggleScreenshare();
+            // stop, never toggle: LiveKit may have ended it already, and a
+            // toggle would then start a new share
+            if (this.screenshare()) void this.toggleScreenshare();
             const oldAudioTrack = room.localParticipant.getTrackPublication(
               TrackSource.ScreenShareAudio,
             );
@@ -1387,7 +1408,7 @@ class Voice {
 
   toggleFocus(t?: TrackReferenceOrPlaceholder) {
     const id = t ? this.trackId(t) : undefined;
-    this.#setFocus(
+    this.#call.setFocus(
       this.focusId() === id || this.vidTracks().length < 2 ? undefined : id,
     );
   }

@@ -3,6 +3,8 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+import { withEnglishCode } from "./pageOrder";
+
 // The rich presence page shows a game, not a bot, so its example is not in
 // the bot examples (those run live as bots). The page's code must still be
 // the file, word for word, in all three languages; the SDK's own unit test
@@ -19,9 +21,20 @@ function firstJsBlock(source: string) {
 }
 
 describe("rich presence example", () => {
-  for (const path of ["rich-presence.md", "ar/rich-presence.md", "de/rich-presence.md"])
+  for (const path of [
+    "rich-presence.md",
+    "ar/rich-presence.md",
+    "de/rich-presence.md",
+  ])
     it(`is the example file in ${path}`, () => {
-      const page = readFileSync(join(here, "content", path), "utf8");
+      // a translation points at the English page's code (@@0), as the
+      // site shows it; the code itself lives once, in the English page
+      const english = readFileSync(
+        join(here, "content", "rich-presence.md"),
+        "utf8",
+      );
+      const raw = readFileSync(join(here, "content", path), "utf8");
+      const page = path.includes("/") ? withEnglishCode(raw, english)! : raw;
       expect(firstJsBlock(page)).toBe(file);
     });
 

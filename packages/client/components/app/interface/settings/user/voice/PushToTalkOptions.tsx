@@ -78,25 +78,7 @@ export function PushToTalkOptions() {
   });
 
   return (
-    <SettingsSection
-      title={<Trans>Push to talk</Trans>}
-      description={
-        <Show
-          when={heardInGames()}
-          fallback={
-            <Trans>
-              Push to talk works while Zrzur is the active window and you are
-              not typing.
-            </Trans>
-          }
-        >
-          <Trans>
-            Hold the key to talk. In the desktop app it works in games and other
-            apps too.
-          </Trans>
-        </Show>
-      }
-    >
+    <SettingsSection title={<Trans>Push to talk</Trans>}>
       <SettingsRow
         icon={<Icon name="microphone" size={20} />}
         title={<Trans>Input mode</Trans>}

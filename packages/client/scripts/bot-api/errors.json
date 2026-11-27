@@ -129,6 +129,8 @@
   "VanityTaken": ["The custom address is taken.", "Choose another one."],
   "VanityReserved": ["The custom address is reserved.", "Choose another one."],
   "VanityPaused": ["The custom address is paused.", "Ask support."],
+  "VanityNotEligible": ["The server may not hold a custom invite link: it lacks the members or the activity. `missing` is `Members`, `Activity` or `Both`, with the numbers it has and needs.", "Grow the server first. Official and partner servers have no such limit."],
+  "CommunityDailyLimit": ["The account submitted as many designs today as one day allows (`max`).", "Try again tomorrow."],
   "TooManyCommunityItems": ["The creator reached the limit of items.", "Not for bots."],
   "MissingPlatformPermission": ["This needs a Zrzur staff permission.", "Not for bots."],
   "ProfileTextFiltered": ["The platform word list stopped this text.", "Not for bots."],

@@ -19,6 +19,7 @@ import { styled } from "styled-system/jsx";
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";
+import { Markdown } from "@revolt/markdown";
 import {
   Avatar,
   Button,
@@ -44,13 +45,10 @@ import { useSettingsNavigation } from "../../Settings";
 
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 
-import { EffectDialog } from "./EffectDialog";
-import { FrameDialog } from "./FrameDialog";
+import { LookShelf, useDesignName } from "./LookShelf";
 import {
-  DecorationDialog,
-  LookRow,
-  NameplateDialog,
-  NameStyleDialog,
+  LookItem,
+  NameStyleForm,
   ThemePicker,
   useStyleLabels,
 } from "./StyleEditors";
@@ -309,11 +307,15 @@ export function UserProfileEditor(props: Props) {
     editGroup.controls.style.setValue({ ...style(), ...patch });
     editGroup.controls.style.markDirty(true);
   }
-  const [nameDialog, setNameDialog] = createSignal(false);
-  const [decorationDialog, setDecorationDialog] = createSignal(false);
-  const [nameplateDialog, setNameplateDialog] = createSignal(false);
-  const [effectDialog, setEffectDialog] = createSignal(false);
-  const [frameDialog, setFrameDialog] = createSignal(false);
+  // the Look row open now: its choices show under it (one at a time)
+  type LookRowId = "decoration" | "name" | "nameplate" | "effect" | "frame";
+  const [lookOpen, setLookOpen] = createSignal<LookRowId>();
+  const toggleLook = (id: LookRowId) =>
+    setLookOpen((open) => (open === id ? undefined : id));
+  const decorationName = useDesignName(() => style().decoration);
+  const nameplateName = useDesignName(() => style().nameplate);
+  const effectName = useDesignName(() => style().effect);
+  const frameName = useDesignName(() => style().profile_frame);
   const effectLabel = useEffectLabels();
   const styleLabels = useStyleLabels();
   const fontLabel = () => {
@@ -396,9 +398,7 @@ export function UserProfileEditor(props: Props) {
                 </strong>
                 <span>
                   <Trans>
-                    Recommended: 512 × 512 px (1:1). Up to{" "}
-                    {humanFileSize(avatarLimit())}. Cropped to a circle; keep
-                    faces and logos in the center.
+                    512 × 512 px · up to {humanFileSize(avatarLimit())}
                   </Trans>
                 </span>
               </MediaText>
@@ -431,10 +431,11 @@ export function UserProfileEditor(props: Props) {
                 </strong>
                 <span>
                   <Trans>
-                    Recommended: 680 × 240 px (17:6). Up to{" "}
-                    {humanFileSize(bannerLimit())}. Edges may be cropped on
-                    different screens; keep important details in the center.
+                    680 × 240 px · up to {humanFileSize(bannerLimit())}
                   </Trans>
+                </span>
+                <span>
+                  <Trans>A GIF or animated WebP plays.</Trans>
                 </span>
               </MediaText>
             </MediaRow>
@@ -443,7 +444,8 @@ export function UserProfileEditor(props: Props) {
           <Show when={!props.user.bot}>
             <SettingsSection title={<Trans>Look</Trans>}>
               <LookStack>
-                <LookRow
+                <LookItem
+                  id="decoration"
                   icon={
                     <AvatarDecoration
                       decoration={style().decoration}
@@ -458,10 +460,26 @@ export function UserProfileEditor(props: Props) {
                     </AvatarDecoration>
                   }
                   title={<Trans>Avatar decoration</Trans>}
-                  value={styleLabels.decoration(style().decoration)}
-                  onClick={() => setDecorationDialog(true)}
-                />
-                <LookRow
+                  value={
+                    decorationName() ??
+                    styleLabels.decoration(style().decoration)
+                  }
+                  open={lookOpen() === "decoration"}
+                  onToggle={() => toggleLook("decoration")}
+                >
+                  <LookShelf
+                    kind="decorations"
+                    value={style().decoration}
+                    file={style().decoration_file}
+                    name={shownName()}
+                    avatar={avatarUrl()}
+                    onPick={(decoration, file) =>
+                      setStyle({ decoration, decoration_file: file })
+                    }
+                  />
+                </LookItem>
+                <LookItem
+                  id="name"
                   icon={<Icon name="text-aa" size={20} />}
                   title={<Trans>Name style</Trans>}
                   value={
@@ -473,26 +491,76 @@ export function UserProfileEditor(props: Props) {
                       </Show>
                     </>
                   }
-                  onClick={() => setNameDialog(true)}
-                />
-                <LookRow
+                  open={lookOpen() === "name"}
+                  onToggle={() => toggleLook("name")}
+                >
+                  <NameStyleForm
+                    name={shownName()}
+                    value={style()}
+                    onChange={(patch) => setStyle(patch)}
+                  />
+                </LookItem>
+                <LookItem
+                  id="nameplate"
                   icon={<Icon name="identification-card" size={20} />}
                   title={<Trans>Nameplate</Trans>}
-                  value={styleLabels.nameplate(style().nameplate)}
-                  onClick={() => setNameplateDialog(true)}
-                />
-                <LookRow
+                  value={
+                    nameplateName() ?? styleLabels.nameplate(style().nameplate)
+                  }
+                  open={lookOpen() === "nameplate"}
+                  onToggle={() => toggleLook("nameplate")}
+                >
+                  <LookShelf
+                    kind="nameplates"
+                    value={style().nameplate}
+                    file={style().nameplate_file}
+                    name={shownName()}
+                    avatar={avatarUrl()}
+                    onPick={(nameplate, file) =>
+                      setStyle({ nameplate, nameplate_file: file })
+                    }
+                  />
+                </LookItem>
+                <LookItem
+                  id="effect"
                   icon={<Icon name="sparkle" size={20} />}
                   title={<Trans>Profile effect</Trans>}
-                  value={effectLabel(style().effect)}
-                  onClick={() => setEffectDialog(true)}
-                />
-                <LookRow
+                  value={effectName() ?? effectLabel(style().effect)}
+                  open={lookOpen() === "effect"}
+                  onToggle={() => toggleLook("effect")}
+                >
+                  <LookShelf
+                    kind="effects"
+                    value={style().effect}
+                    file={style().effect_file}
+                    name={shownName()}
+                    avatar={avatarUrl()}
+                    onPick={(effect, file) =>
+                      setStyle({ effect, effect_file: file })
+                    }
+                  />
+                </LookItem>
+                <LookItem
+                  id="frame"
                   icon={<Icon name="user-focus" size={20} />}
                   title={<Trans>Profile frame</Trans>}
-                  value={styleLabels.frame(style().profile_frame)}
-                  onClick={() => setFrameDialog(true)}
-                />
+                  value={
+                    frameName() ?? styleLabels.frame(style().profile_frame)
+                  }
+                  open={lookOpen() === "frame"}
+                  onToggle={() => toggleLook("frame")}
+                >
+                  <LookShelf
+                    kind="frames"
+                    value={style().profile_frame}
+                    file={style().profile_frame_file}
+                    name={shownName()}
+                    avatar={avatarUrl()}
+                    onPick={(profile_frame, file) =>
+                      setStyle({ profile_frame, profile_frame_file: file })
+                    }
+                  />
+                </LookItem>
               </LookStack>
             </SettingsSection>
             <SettingsSection title={<Trans>Profile theme</Trans>}>
@@ -501,84 +569,8 @@ export function UserProfileEditor(props: Props) {
                   value={style().theme}
                   onChange={(theme) => setStyle({ theme })}
                 />
-                <ThemeHint>
-                  <Trans>
-                    Colours your profile card and its banner when you have no
-                    picture.
-                  </Trans>
-                </ThemeHint>
               </ThemeBlock>
             </SettingsSection>
-            <Show when={effectDialog()}>
-              <EffectDialog
-                show={effectDialog()}
-                onClose={() => setEffectDialog(false)}
-                value={style().effect}
-                file={style().effect_file}
-                onApply={(effect) =>
-                  setStyle({
-                    effect,
-                    // a creator's effect stays on until another is chosen
-                    effect_file:
-                      effect === style().effect
-                        ? style().effect_file
-                        : undefined,
-                  })
-                }
-              />
-            </Show>
-            <Show when={frameDialog()}>
-              <FrameDialog
-                show={frameDialog()}
-                onClose={() => setFrameDialog(false)}
-                user={props.user}
-                style={style()}
-                value={style().profile_frame}
-                file={style().profile_frame_file}
-                onApply={(profile_frame, file) =>
-                  setStyle({ profile_frame, profile_frame_file: file })
-                }
-              />
-            </Show>
-            <Show when={nameDialog()}>
-              <NameStyleDialog
-                show={nameDialog()}
-                onClose={() => setNameDialog(false)}
-                name={shownName()}
-                handle={props.user.username}
-                avatar={avatarUrl()}
-                value={style()}
-                onApply={(patch) => setStyle(patch)}
-              />
-            </Show>
-            <Show when={nameplateDialog()}>
-              <NameplateDialog
-                show={nameplateDialog()}
-                onClose={() => setNameplateDialog(false)}
-                name={shownName()}
-                avatar={avatarUrl()}
-                value={style().nameplate}
-                file={style().nameplate_file}
-                onApply={(nameplate, file) =>
-                  setStyle({ nameplate, nameplate_file: file })
-                }
-              />
-            </Show>
-            <Show when={decorationDialog()}>
-              <DecorationDialog
-                show={decorationDialog()}
-                onClose={() => setDecorationDialog(false)}
-                name={shownName()}
-                handle={props.user.username}
-                avatar={avatarUrl()}
-                style={style()}
-                value={style().decoration}
-                file={style().decoration_file}
-                onApply={(decoration, file) =>
-                  setStyle({ decoration, decoration_file: file })
-                }
-              />
-            </Show>
           </Show>
 
           <SettingsSection title={<Trans>About</Trans>}>
@@ -591,7 +583,6 @@ export function UserProfileEditor(props: Props) {
                 control={editGroup.controls.displayName}
                 label={t`Display name`}
                 placeholder={props.user.username}
-                helper={t`Shown instead of your username. Leave empty to use your username.`}
               />
               <Form2.TextField
                 minlength={1}
@@ -612,9 +603,6 @@ export function UserProfileEditor(props: Props) {
                   control={editGroup.controls.bio}
                   placeholder={t`Something cool about me...`}
                 />
-                <BioHint>
-                  <Trans>Markdown and emoji are supported.</Trans>
-                </BioHint>
               </BioField>
             </FormPanel>
           </SettingsSection>
@@ -744,10 +732,18 @@ export function UserProfileEditor(props: Props) {
               <PreviewLabel>
                 <Trans>About me</Trans>
               </PreviewLabel>
-              <PreviewBio data-empty={!editGroup.controls.bio.value?.trim()}>
-                {editGroup.controls.bio.value?.trim() || (
-                  <Trans>Nothing here yet.</Trans>
-                )}
+              <PreviewBio
+                data-empty={!editGroup.controls.bio.value?.trim()}
+                dir="auto"
+              >
+                {/* drawn as the profile draws it: formatting and mentions,
+                    never the ** and <@…> that make them */}
+                <Show
+                  when={editGroup.controls.bio.value?.trim()}
+                  fallback={<Trans>Nothing here yet.</Trans>}
+                >
+                  {(bio) => <Markdown content={bio()} />}
+                </Show>
               </PreviewBio>
             </PreviewBody>
           </PreviewCard>
@@ -845,14 +841,6 @@ const BioLabel = styled("div", {
     fontWeight: 600,
     lineHeight: "18px",
     color: "var(--z-fg-secondary)",
-  },
-});
-
-const BioHint = styled("div", {
-  base: {
-    fontSize: "12px",
-    lineHeight: "16px",
-    color: "var(--z-fg-muted)",
   },
 });
 
@@ -1003,9 +991,10 @@ const PreviewBio = styled("div", {
     fontSize: "13px",
     lineHeight: "19px",
     color: "var(--z-fg-primary)",
-    whiteSpace: "pre-wrap",
     overflowWrap: "anywhere",
     lineClamp: 8,
+    "& p": { margin: 0 },
+    "& a": { textDecoration: "underline" },
 
     "&[data-empty='true']": {
       color: "var(--z-fg-muted)",
@@ -1024,8 +1013,4 @@ const ThemeBlock = styled("div", {
     gap: "12px",
     padding: "16px",
   },
-});
-
-const ThemeHint = styled("p", {
-  base: { margin: 0, fontSize: "13px", color: "var(--z-fg-muted)" },
 });

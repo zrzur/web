@@ -1,8 +1,10 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, it, test } from "vitest";
 
 import {
   applyChannelOrdering,
   categoriesToSave,
+  moveCategories,
+  moveChannel,
   orderedCategories,
 } from "./ordering";
 
@@ -142,5 +144,53 @@ describe("categoriesToSave", () => {
       title: "Games",
       channels: ["b"],
     });
+  });
+});
+
+describe("moveChannel", () => {
+  const ordered = [
+    { id: "default", title: "Default", channelIds: ["a", "v1"] },
+    { id: "c1", title: "One", channelIds: ["b", "c", "d"] },
+    { id: "c2", title: "Two", channelIds: [] },
+  ];
+
+  it("moves within a category, before or after a neighbour", () => {
+    expect(
+      moveChannel(ordered, { id: "d", to: "c1", before: "b" })[1].channelIds,
+    ).toEqual(["d", "b", "c"]);
+    expect(
+      moveChannel(ordered, { id: "b", to: "c1", after: "c" })[1].channelIds,
+    ).toEqual(["c", "b", "d"]);
+  });
+
+  it("moves into another category, an empty one, or out of every one", () => {
+    const into = moveChannel(ordered, { id: "c", to: "c2" });
+    expect(into[1].channelIds).toEqual(["b", "d"]);
+    expect(into[2].channelIds).toEqual(["c"]);
+
+    const out = moveChannel(ordered, { id: "b", to: "default", after: "a" });
+    expect(out[0].channelIds).toEqual(["a", "b", "v1"]);
+    expect(out[1].channelIds).toEqual(["c", "d"]);
+  });
+
+  it("leaves everything as it is for a category it does not know", () => {
+    expect(moveChannel(ordered, { id: "b", to: "gone" })).toBe(ordered);
+  });
+});
+
+describe("moveCategories", () => {
+  it("keeps the default group first and nothing gets lost", () => {
+    const ordered = [
+      { id: "default", title: "Default", channelIds: [] },
+      { id: "x", title: "X", channelIds: [] },
+      { id: "y", title: "Y", channelIds: [] },
+      { id: "z", title: "Z", channelIds: [] },
+    ];
+    expect(moveCategories(ordered, ["z", "x"]).map((c) => c.id)).toEqual([
+      "default",
+      "z",
+      "x",
+      "y",
+    ]);
   });
 });

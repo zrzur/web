@@ -14,7 +14,7 @@ Das Token erscheint einmal, direkt nach dem Erstellen der Anwendung. Kopiere es 
 
 ## 3. Installiere den Bot in einem Testserver {#install-the-bot}
 
-Wähle im Tab „Übersicht“ deiner Anwendung „Zu einem Server hinzufügen“ und dann einen Server, auf dem du „Server verwalten“ hast. [Mehr zum Installieren](/developers/docs/applications#install)
+Wähle im Tab „Installieren“ deiner Anwendung „Zu einem Server hinzufügen“ und dann einen Server, auf dem du „Server verwalten“ hast. [Mehr zum Installieren](/developers/docs/applications#install)
 
 Der Bot bekommt eine eigene Rolle mit den Standardberechtigungen, die du für ihn festgelegt hast (Bot-Einstellungen, Standardberechtigungen), auch wenn ihn jemand über einen Link oder die API installiert. Ein Link mit `?permissions=` gibt stattdessen genau diese Berechtigungen, und `?permissions=0` gibt keine Rolle. Wer installiert, gibt die Standardberechtigungen nur mit Rollen verwalten, und nur den Teil, den er selbst hat; ohne Rollen verwalten kommt der Bot ohne Rolle.
 

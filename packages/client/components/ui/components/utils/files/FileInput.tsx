@@ -53,6 +53,9 @@ interface Props {
   /** Accessible names for the picker and remove buttons */
   label?: string;
   removeLabel?: string;
+  /** The remove button sits on the image's corner instead of beside it, so
+   * the image keeps its place in a column (server icon, banner) */
+  removeCorner?: boolean;
 
   required: boolean;
   disabled: boolean;
@@ -160,6 +163,35 @@ export function FileInput(props: Props) {
     }
   });
 
+  /** the image to click, shared by both layouts */
+  const preview = () => (
+    <ImagePreview
+      role="button"
+      tabIndex={props.disabled ? -1 : 0}
+      aria-label={props.label ?? t`Choose image`}
+      data-empty={!local.file}
+      onClick={() => inputRef!.click()}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          inputRef!.click();
+        }
+      }}
+      style={{
+        "aspect-ratio": props.imageAspect ?? "1/1",
+        height: props.imageHeight ? `${props.imageHeight}px` : undefined,
+      }}
+      rounded={props.imageRounded ?? true}
+    >
+      <Show when={local.file}>
+        <img src={imageSrc()} alt="" />
+      </Show>
+      <ImageHover aria-hidden="true">
+        <Icon name="upload-simple" size={20} />
+      </ImageHover>
+    </ImagePreview>
+  );
+
   return (
     <>
       <Switch
@@ -190,52 +222,44 @@ export function FileInput(props: Props) {
             accept={ALLOWED_IMAGE_TYPES.join(",")}
             {...remote}
           />
-          <Row align justify={props.imageJustify ?? true} gap="md">
-            <ImagePreview
-              role="button"
-              tabIndex={props.disabled ? -1 : 0}
-              aria-label={props.label ?? t`Choose image`}
-              data-empty={!local.file}
-              onClick={() => inputRef!.click()}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  inputRef!.click();
-                }
-              }}
-              style={{
-                "aspect-ratio": props.imageAspect ?? "1/1",
-                height: props.imageHeight
-                  ? `${props.imageHeight}px`
-                  : undefined,
-              }}
-              rounded={props.imageRounded ?? true}
-            >
-              <Show when={local.file}>
-                <img src={imageSrc()} alt="" />
+          <Show
+            when={props.removeCorner}
+            fallback={
+              <Row align justify={props.imageJustify ?? true} gap="md">
+                {preview()}
+                <Show when={props.allowRemoval !== false && props.file}>
+                  <IconButton
+                    variant="toolbar"
+                    size="sm"
+                    aria-label={props.removeLabel ?? t`Remove image`}
+                    use:floating={{
+                      tooltip: {
+                        placement: "top",
+                        content: props.removeLabel ?? t`Remove image`,
+                      },
+                    }}
+                    onPress={onClear}
+                  >
+                    <Icon name="trash" size={18} />
+                  </IconButton>
+                </Show>
+              </Row>
+            }
+          >
+            <Framed>
+              {preview()}
+              <Show when={props.allowRemoval !== false && props.file}>
+                <CornerRemove
+                  type="button"
+                  aria-label={props.removeLabel ?? t`Remove image`}
+                  title={props.removeLabel ?? t`Remove image`}
+                  onClick={onClear}
+                >
+                  <Icon name="trash" size={14} />
+                </CornerRemove>
               </Show>
-              <ImageHover aria-hidden="true">
-                <Icon name="upload-simple" size={20} />
-              </ImageHover>
-            </ImagePreview>
-
-            <Show when={props.allowRemoval !== false && props.file}>
-              <IconButton
-                variant="toolbar"
-                size="sm"
-                aria-label={props.removeLabel ?? t`Remove image`}
-                use:floating={{
-                  tooltip: {
-                    placement: "top",
-                    content: props.removeLabel ?? t`Remove image`,
-                  },
-                }}
-                onPress={onClear}
-              >
-                <Icon name="trash" size={18} />
-              </IconButton>
-            </Show>
-          </Row>
+            </Framed>
+          </Show>
         </Match>
       </Switch>
     </>
@@ -305,5 +329,38 @@ const ImageHover = styled("div", {
       color: "var(--z-fg-muted)",
       background: "transparent",
     },
+  },
+});
+
+/** the image with its remove button on the corner */
+const Framed = styled("div", {
+  base: {
+    position: "relative",
+    display: "inline-flex",
+    flexShrink: 0,
+  },
+});
+
+/** a small round button on the image's top corner */
+const CornerRemove = styled("button", {
+  base: {
+    position: "absolute",
+    top: "-4px",
+    insetInlineEnd: "-4px",
+    display: "grid",
+    placeItems: "center",
+    width: "28px",
+    height: "28px",
+    padding: 0,
+    borderRadius: "50%",
+    border: "1px solid var(--z-border-strong)",
+    background: "var(--z-bg-raised, var(--z-surface-raised))",
+    color: "var(--z-fg-secondary)",
+    "--z-icon-color": "currentColor",
+    cursor: "pointer",
+    boxShadow: "0 1px 4px rgb(0 0 0 / 30%)",
+    transition: "color var(--z-motion-fast, 120ms) ease",
+    _hover: { color: "var(--z-danger)" },
+    _focusVisible: { outline: "2px solid var(--z-focus, var(--z-accent))" },
   },
 });

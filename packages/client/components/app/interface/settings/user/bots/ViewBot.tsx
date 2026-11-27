@@ -1,5 +1,5 @@
 import { userHandle } from "@revolt/common/lib/userTag";
-import { Show, createSignal } from "solid-js";
+import { Show, createSignal, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { IFormControl } from "solid-forms";
@@ -8,9 +8,7 @@ import { Bot } from "@zrzur/sdk/solid";
 
 import { useClient } from "@revolt/client";
 import { createProfileResource } from "@revolt/client/resources";
-import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
-import { getBotLink } from "@revolt/modal/modals/inviteLink";
 import {
   Button,
   Column,
@@ -21,76 +19,64 @@ import {
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { Discoverable } from "../../shared/Discoverable";
-import { UserSummary } from "../account/index";
 import { UserProfileEditor } from "../profile/UserProfileEditor";
-import { BotCommands } from "./BotCommands";
 import { BotVerification } from "./BotVerification";
 import { PrivilegedIntents } from "./PrivilegedIntents";
 
 /**
- * Manage a bot: identity, profile, visibility, invite & credentials, danger
- * zone. Shown as the Overview tab of the bot in the Developer Portal.
+ * A bot in the Developer Portal is split in tabs, each thing in one place
+ * (owner, 2026-11-27: the overview repeated the commands, the ID and the
+ * invite link). This file holds the tabs that belong to the bot account:
+ * General, Bot (credentials and intents) and Verification.
  *
  * The token is never rendered; it can only be copied or reset.
  */
-export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
+
+/** Read and save the privileged intents (the SDK's bot doesn't carry them) */
+function useIntentsApi(bot: Bot) {
+  const client = useClient();
+  return {
+    load: async () => {
+      const response = await client().api.get(`/bots/${bot.id}`);
+      return response.bot.privileged_intents ?? 0;
+    },
+    save: async (next: number) => {
+      const response = await client().api.patch(`/bots/${bot.id}`, {
+        privileged_intents: next,
+      });
+      // the bot comes flattened next to its user
+      return response.privileged_intents ?? next;
+    },
+  };
+}
+
+/** Copy a value and say so at the bottom of the screen */
+function useCopy() {
+  const snackbar = useSnackbar();
+  return (value: string, message: string) => {
+    void navigator.clipboard.writeText(value);
+    snackbar.show({ message, placement: "bottom", closeable: true });
+  };
+}
+
+/** General: the bot's profile, its name and who may add it */
+export function BotGeneral(props: { bot: Bot; onDelete?: () => void }) {
   // `bot` will never change, so we don't care about reactivity here
   // eslint-disable-next-line solid/reactivity
   const profile = createProfileResource(props.bot.user!);
-  const instance = useInstance();
   const { openModal } = useModals();
-  const snackbar = useSnackbar();
-  const { t } = useLingui();
-
-  const copy = (value: string, message: string) => {
-    navigator.clipboard.writeText(value);
-    snackbar.show({ message, placement: "bottom", closeable: true });
-  };
-
-  // Privileged gateway intents (the bot object from the SDK doesn't carry
-  // them yet, so they are read and saved here, with the server's answer)
-  const client = useClient();
-  const [intents, setIntents] = createSignal(0);
-  const loadIntents = async () => {
-    const response = await client().api.get(`/bots/${props.bot.id}`);
-    return response.bot.privileged_intents ?? 0;
-  };
-  const saveIntents = async (next: number) => {
-    const response = await client().api.patch(`/bots/${props.bot.id}`, {
-      privileged_intents: next,
-    });
-    // the bot comes flattened next to its user
-    return response.privileged_intents ?? next;
-  };
-
-  const copyButton = (label: string, onPress: () => void) => (
-    <Button size="sm" variant="tonal" shape="square" onPress={onPress}>
-      <Icon name="copy" size={16} />
-      {label}
-    </Button>
-  );
 
   return (
     <Column gap="xl">
-      <UserSummary
-        user={props.bot.user!}
-        showBadges
-        bannerUrl={profile.data?.animatedBannerURL}
-      />
-
+      {/* the live preview beside the form, as on your own profile: the
+          banner plays there when it is a GIF or animated WebP */}
       <UserProfileEditor
         user={props.bot.user!}
         profile={profile.data}
+        preview
         attach={[
-          {
-            name: "public",
-            value: props.bot.public,
-          },
-          {
-            name: "showCreator",
-            value: props.bot.showCreator,
-          },
+          { name: "public", value: props.bot.public },
+          { name: "showCreator", value: props.bot.showCreator },
         ]}
         onSubmit={(g) => {
           props.bot.edit({
@@ -121,14 +107,22 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
           };
 
           return (
-            <SettingsSection title={<Trans>Visibility</Trans>}>
+            <SettingsSection title={<Trans>Account</Trans>}>
+              <SettingsRow
+                icon={<Icon name="at" size={20} />}
+                title={<Trans>Username</Trans>}
+                description={<>{userHandle(props.bot.user)}</>}
+                onClick={() =>
+                  openModal({ type: "edit_bot_username", bot: props.bot })
+                }
+                navigational
+              />
               <SettingsRow
                 icon={<Icon name="globe" size={20} />}
                 title={<Trans>Public bot</Trans>}
                 description={
                   <Trans>
-                    Allow anyone to invite this bot. When off, only you can add
-                    it to servers.
+                    Anyone can add it to their servers. When off, only you can.
                   </Trans>
                 }
                 onClick={toggle}
@@ -144,19 +138,12 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
               <SettingsRow
                 icon={<Icon name="user" size={20} />}
                 title={<Trans>Show your name on the bot's page</Trans>}
-                description={
-                  <Trans>
-                    When on, people who open this bot's invite page see that you
-                    made it. Off by default.
-                  </Trans>
-                }
                 onClick={toggleCreator}
                 control={(ids) => (
                   <Toggle
                     checked={!!creator.value}
                     onChange={toggleCreator}
                     aria-labelledby={ids.labelId}
-                    aria-describedby={ids.descriptionId}
                   />
                 )}
               />
@@ -165,160 +152,16 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
         }}
       </UserProfileEditor>
 
-      <PrivilegedIntents
-        load={loadIntents}
-        save={saveIntents}
-        onChange={setIntents}
-      />
-
-      <BotCommands botId={props.bot.id} />
-
-      <BotVerification bot={props.bot} intents={intents()} />
-
-      <SettingsSection title={<Trans>Identity</Trans>}>
-        <SettingsRow
-          icon={<Icon name="at" size={20} />}
-          title={<Trans>Username</Trans>}
-          description={<>{userHandle(props.bot.user)}</>}
-          onClick={() =>
-            openModal({ type: "edit_bot_username", bot: props.bot })
-          }
-          navigational
-        />
-        <SettingsRow
-          icon={<Icon name="identification-card" size={20} />}
-          title={<Trans>Bot ID</Trans>}
-          description={<code>{props.bot.id}</code>}
-          control={() =>
-            copyButton(t`Copy`, () =>
-              copy(props.bot.id, t`ID copied to clipboard`),
-            )
-          }
-        />
-      </SettingsSection>
-
-      <SettingsSection title={<Trans>Invite</Trans>}>
-        <SettingsRow
-          icon={<Icon name="user-plus" size={20} />}
-          title={<Trans>Add to a server</Trans>}
-          description={<Trans>Choose one of your servers to add it to.</Trans>}
-          onClick={() =>
-            openModal({
-              type: "add_bot",
-              invite: props.bot.publicBot,
-            })
-          }
-          navigational
-        />
-        <SettingsRow
-          icon={<Icon name="link" size={20} />}
-          title={<Trans>Invite link</Trans>}
-          description={getBotLink(props.bot.id, instance)}
-          control={() =>
-            copyButton(t`Copy`, () =>
-              copy(
-                getBotLink(props.bot.id, instance),
-                t`Invite URL copied to clipboard`,
-              ),
-            )
-          }
-        />
-      </SettingsSection>
-
-      <SettingsSection
-        title={<Trans>Token</Trans>}
-        description={
-          <Trans>
-            The token logs in as your bot. Keep it secret, never paste it in
-            chats or screenshots.
-          </Trans>
-        }
-      >
-        {/* only a hash is stored: the token exists here only right after creation */}
-        <Show
-          when={props.bot.token}
-          fallback={
-            <SettingsRow
-              icon={<Icon name="key" size={20} />}
-              title={<Trans>Bot token</Trans>}
-              description={
-                <Trans>
-                  Zrzur keeps only a fingerprint of it, so it can't be shown
-                  again. Reset it to get a new one.
-                </Trans>
-              }
-            />
-          }
-        >
-          <SettingsRow
-            icon={<Icon name="key" size={20} />}
-            title={<Trans>Bot token</Trans>}
-            description={<Trans>Copy it now. It won't be shown again.</Trans>}
-            control={() =>
-              copyButton(t`Copy token`, () =>
-                copy(props.bot.token, t`Token copied to clipboard`),
-              )
-            }
-          />
-        </Show>
-        <SettingsRow
-          icon={<Icon name="arrows-clockwise" size={20} />}
-          title={<Trans>Reset token</Trans>}
-          description={
-            <Trans>
-              Generate a new token if it was lost or leaked. The old one stops
-              working.
-            </Trans>
-          }
-          control={() => (
-            <Button
-              size="sm"
-              variant="tonal"
-              shape="square"
-              onPress={() =>
-                openModal({ type: "reset_bot_token", bot: props.bot })
-              }
-            >
-              <Trans>Reset</Trans>
-            </Button>
-          )}
-        />
-        <SettingsRow
-          icon={<Icon name="link" size={20} />}
-          title={<Trans>HTTP interactions</Trans>}
-          description={
-            <Trans>
-              Receive commands at your own address instead of the gateway.
-            </Trans>
-          }
-          control={() => (
-            <Button
-              size="sm"
-              variant="tonal"
-              shape="square"
-              onPress={() =>
-                openModal({ type: "interactions_endpoint", bot: props.bot })
-              }
-            >
-              <Trans>Set up</Trans>
-            </Button>
-          )}
-        />
-      </SettingsSection>
-
       <SettingsSection title={<Trans>Danger zone</Trans>}>
         <SettingsRow
           icon={<Icon name="trash" size={20} />}
           danger
           title={<Trans>Delete bot</Trans>}
-          description={
-            <Trans>Permanently deletes this bot. This can't be undone.</Trans>
-          }
+          description={<Trans>This can't be undone.</Trans>}
           control={() => (
             <Button
               size="sm"
               variant="_error"
-              shape="square"
               onPress={() =>
                 openModal({
                   type: "delete_bot",
@@ -332,8 +175,100 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
           )}
         />
       </SettingsSection>
-
-      <Discoverable discoverable={props.bot} />
     </Column>
   );
+}
+
+/** Bot: how the code signs in and what it may receive */
+export function BotAccess(props: { bot: Bot }) {
+  const { openModal } = useModals();
+  const copy = useCopy();
+  const { t } = useLingui();
+  // eslint-disable-next-line solid/reactivity
+  const intents = useIntentsApi(props.bot);
+
+  return (
+    <Column gap="xl">
+      <SettingsSection
+        title={<Trans>Connection</Trans>}
+        description={
+          <Trans>
+            The token signs in as your bot. Never share it or show it on screen.
+          </Trans>
+        }
+      >
+        {/* only a hash is stored: the token exists here only right after creation */}
+        <Show
+          when={props.bot.token}
+          fallback={
+            <SettingsRow
+              icon={<Icon name="key" size={20} />}
+              title={<Trans>Reset token</Trans>}
+              description={
+                <Trans>
+                  Zrzur can't show it again. A new token stops the old one.
+                </Trans>
+              }
+              control={() => (
+                <Button
+                  size="sm"
+                  variant="tonal"
+                  onPress={() =>
+                    openModal({ type: "reset_bot_token", bot: props.bot })
+                  }
+                >
+                  <Trans>Reset</Trans>
+                </Button>
+              )}
+            />
+          }
+        >
+          <SettingsRow
+            icon={<Icon name="key" size={20} />}
+            title={<Trans>Bot token</Trans>}
+            description={<Trans>Copy it now. It won't be shown again.</Trans>}
+            control={() => (
+              <Button
+                size="sm"
+                variant="filled"
+                onPress={() =>
+                  copy(props.bot.token, t`Token copied to clipboard`)
+                }
+              >
+                <Trans>Copy token</Trans>
+              </Button>
+            )}
+          />
+        </Show>
+        <SettingsRow
+          icon={<Icon name="link" size={20} />}
+          title={<Trans>HTTP interactions</Trans>}
+          description={
+            <Trans>
+              Receive commands at your own address instead of the gateway.
+            </Trans>
+          }
+          onClick={() =>
+            openModal({ type: "interactions_endpoint", bot: props.bot })
+          }
+          navigational
+        />
+      </SettingsSection>
+
+      <PrivilegedIntents load={intents.load} save={intents.save} />
+    </Column>
+  );
+}
+
+/**
+ * Verification: the request asks for the privileged intents saved in the
+ * Bot tab, read here so the form sends what is on
+ */
+export function BotVerificationTab(props: { bot: Bot }) {
+  // eslint-disable-next-line solid/reactivity
+  const intents = useIntentsApi(props.bot);
+  // undefined until read: a request never goes out with a guessed mask
+  const [saved, setSaved] = createSignal<number>();
+  onMount(() => void intents.load().then(setSaved, () => setSaved(0)));
+  return <BotVerification bot={props.bot} intents={saved()} />;
 }

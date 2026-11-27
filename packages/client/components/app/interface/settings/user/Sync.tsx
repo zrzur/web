@@ -18,7 +18,7 @@ export default function Sync() {
         <CategoryButton
           action={<Checkbox checked onChange={(value) => void value} />}
           onClick={() => void 0}
-          icon={<MdPalette {...iconSize(22)} />}
+          icon={<MdPalette {...iconSize(20)} />}
           description={
             <Trans>
               Sync appearance options, such as chosen emoji pack and message
@@ -31,7 +31,7 @@ export default function Sync() {
         <CategoryButton
           action={<Checkbox checked onChange={(value) => void value} />}
           onClick={() => void 0}
-          icon={<MdBrush {...iconSize(22)} />}
+          icon={<MdBrush {...iconSize(20)} />}
           description={
             <Trans>Sync your chosen theme, colours, and any custom CSS.</Trans>
           }
@@ -41,7 +41,7 @@ export default function Sync() {
         <CategoryButton
           action={<Checkbox checked onChange={(value) => void value} />}
           onClick={() => void 0}
-          icon={<MdLanguage {...iconSize(22)} />}
+          icon={<MdLanguage {...iconSize(20)} />}
           description={<Trans>Sync your currently chosen language.</Trans>}
         >
           <Trans>Language</Trans>

@@ -40,6 +40,12 @@ function loadGate(context: BaseAudioContext): Promise<boolean> {
   return loading;
 }
 
+/**
+ * Strong noise suppression: frames RNNoise rates below this as speech are
+ * quietened. 0.6 keeps soft speech and cuts typing, clicks and breath.
+ */
+export const STRONG_VAD_THRESHOLD = 0.6;
+
 export class VoiceProcessor implements TrackProcessor<
   Track.Kind.Audio,
   AudioProcessorOptions
@@ -87,6 +93,10 @@ export class VoiceProcessor implements TrackProcessor<
         ),
       );
 
+      // Strong noise suppression: the filter also quietens what it judges
+      // is not speech (see vendor/rnnoise/SOURCES.md)
+      createEffect(() => this.applyStrength());
+
       // Input sensitivity: the gate follows the settings during a call
       createEffect(() => {
         const config = this.gateConfig();
@@ -121,6 +131,15 @@ export class VoiceProcessor implements TrackProcessor<
       thresholdDb: settings.inputThreshold,
       holdMs: GATE_HOLD_MS,
     };
+  }
+
+  /** RNNoise's speech score below which Strong quietens a frame */
+  private applyStrength() {
+    const strong = this.getSettings().noiseStrength === "strong";
+    this.noiseSuppressionNode?.port?.postMessage({
+      message: "SET_VAD_GATE",
+      threshold: strong ? STRONG_VAD_THRESHOLD : 0,
+    });
   }
 
   private setGain(newGain: number) {
@@ -192,6 +211,7 @@ export class VoiceProcessor implements TrackProcessor<
       this.highpassNode.Q.value = Math.SQRT1_2;
 
       this.noiseSuppressionNode = noiseNode;
+      this.applyStrength();
       this.highpassNode.connect(this.noiseSuppressionNode);
 
       // Create a new dynamics compressor

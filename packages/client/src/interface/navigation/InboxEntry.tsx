@@ -4,11 +4,17 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Message } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import { useClient } from "@revolt/client";
 import { Avatar, IconButton } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { Body, Line, Preview, When, Where } from "./MentionsPanel";
+import {
+  Body,
+  Line,
+  MessagePreview,
+  When,
+  Where,
+  usePlace,
+} from "./MentionsPanel";
 
 /**
  * One message in the saved list or the reminders: who wrote it, where, its
@@ -31,18 +37,8 @@ export function InboxEntry(props: {
   testId?: string;
 }) {
   const { t } = useLingui();
-  const client = useClient();
 
-  // server and channel apart: an Arabic name beside a Latin one must not
-  // swap their order
-  const place = (message: Message): string[] => {
-    const channel = message.channel;
-    if (!channel) return [];
-    if (channel.type === "DirectMessage") return [t`Direct message`];
-    const name =
-      channel.type === "SavedMessages" ? t`Saved notes` : `#${channel.name}`;
-    return channel.server ? [channel.server.name, name] : [name];
-  };
+  const place = usePlace();
 
   const files = (message: Message) =>
     (message.attachments ?? []).map((file) => file.filename ?? t`File`);
@@ -84,19 +80,19 @@ export function InboxEntry(props: {
                 </Show>
               </Line>
               <Where>
-                <For each={place(message())}>
-                  {(part, index) => (
-                    <>
-                      {index() > 0 ? " · " : ""}
-                      <bdi>{part}</bdi>
-                    </>
-                  )}
-                </For>
+                <span class="place">
+                  <For each={place(message())}>
+                    {(part, index) => (
+                      <>
+                        {index() > 0 ? " · " : ""}
+                        <bdi>{part}</bdi>
+                      </>
+                    )}
+                  </For>
+                </span>
               </Where>
               <Show when={message().content}>
-                <Preview>
-                  <bdi>{client().markdownToText(message().content)}</bdi>
-                </Preview>
+                <MessagePreview content={message().content} />
               </Show>
               <Show when={files(message()).length}>
                 <Files>
@@ -139,9 +135,9 @@ export function EntryAction(props: {
 }
 
 /**
- * The card of a mention (MentionsPanel `Item`) with the same padding, border,
- * radius and states: the whole card lights up and opens the message; only
- * the icon buttons at the end sit above it. Phones: the rows of one list
+ * The row of a mention (MentionsPanel `Item`) with the same padding, radius
+ * and states: the whole row lights up and opens the message; only the icon
+ * buttons at the end sit above it. Phones: the rows of one list
  * form one filled group with a hairline between them, as the mentions page
  * and the settings lists do.
  */
@@ -153,9 +149,10 @@ const Row = styled("div", {
     gap: "12px",
     width: "100%",
     flexShrink: 0,
-    padding: "12px",
-    border: "var(--z-box-border)",
-    borderRadius: "var(--z-box-radius)",
+    padding: "10px 12px",
+    border: "none",
+    borderRadius: "var(--z-radius-md, 12px)",
+    // each message on its own surface, as in the mentions
     background: "var(--z-box-bg)",
     "&:has(> button:hover)": { background: "var(--z-nav-hover)" },
     "&:has(> button:active)": { background: "var(--z-nav-selected)" },

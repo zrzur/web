@@ -76,6 +76,13 @@ export function ProfileIdentity(props: {
             />
           </Show>
         </DisplayNameGroup>
+        {/* on the name's line, at its far end; a long name sends them to
+            the next line instead of being cut */}
+        <Show when={badges().length}>
+          <BadgeRow data-testid="profile-badge-row">
+            <ProfileBadges ids={badges()} />
+          </BadgeRow>
+        </Show>
       </NameRow>
 
       <Meta>
@@ -98,11 +105,6 @@ export function ProfileIdentity(props: {
           <Pronouns dir="auto">{pronouns()}</Pronouns>
         </Show>
       </Meta>
-      <Show when={badges().length}>
-        <BadgeRow data-testid="profile-badge-row">
-          <ProfileBadges ids={badges()} />
-        </BadgeRow>
-      </Show>
     </Identity>
   );
 }
@@ -119,9 +121,16 @@ const Identity = styled("div", {
 const NameRow = styled("div", {
   base: {
     display: "flex",
+    flexWrap: "wrap",
     alignItems: "center",
-    gap: "8px",
+    gap: "4px 8px",
     minWidth: 0,
+    _phone: {
+      // first in a scrolling card: a target reaching above it would be cut off
+      "& [role=list]": { marginBlock: 0 },
+      // the username's 44 px target reaches up here: keep the badges clear
+      "&:has([role=list])": { paddingBlockEnd: "8px" },
+    },
   },
 });
 
@@ -131,14 +140,8 @@ const DisplayNameGroup = styled("div", {
     alignItems: "center",
     gap: "6px",
     minWidth: 0,
-    // only as wide as the name; the badges keep to the far end
+    // only as wide as the name: the badges follow right after it
     flex: "0 1 auto",
-    _phone: {
-      // first in a scrolling card: a target reaching above it would be cut off
-      "& > [role=list]": { marginBlock: 0 },
-      // the username's 44 px target reaches up here: keep the seal clear of it
-      "&:has(> [role=list])": { paddingBlockEnd: "8px" },
-    },
   },
 });
 
@@ -146,8 +149,12 @@ const BadgeRow = styled("div", {
   base: {
     display: "flex",
     flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    flexShrink: 0,
     minWidth: 0,
-    paddingBlockStart: "4px",
+    // on the name's line, at its far end (the left in Arabic)
+    marginInlineStart: "auto",
   },
 });
 

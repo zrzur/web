@@ -1,5 +1,7 @@
 # Roles and permissions
 
+Who may do what in a server: roles give permissions, channels can change them, and the ranking decides who can manage whom.
+
 ## How permissions are calculated
 
 1. The server owner can do everything. So can a member whose roles, or the server's default permissions, give **Administrator**: no channel setting and no timeout takes anything away from them, and a channel cannot make someone an administrator.

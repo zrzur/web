@@ -18,7 +18,7 @@ Ein Bot-Token ist ein Passwort. Wer es hat, handelt als dein Bot auf jedem Serve
 
 ## Wenn ein Token durchsickert {#leak}
 
-1. Öffne deine Anwendung im [Entwicklerportal](/developers), Tab **Übersicht**, und wähle **Token zurücksetzen**.
+1. Öffne deine Anwendung im [Entwicklerportal](/developers), Tab **Bot**, und wähle **Token zurücksetzen**.
 2. Bestätige deine Identität. Das alte Token stoppt sofort, und offene Verbindungen enden.
 3. Lege das neue Token in deinen Secret-Speicher und starte den Bot neu.
 4. Lies im Audit-Log des Servers nach, was der Bot getan hat. Aktionen deines Bots zeigen ihn als Handelnden.

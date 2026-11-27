@@ -9,7 +9,7 @@ import {
 } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
+import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { TranslatedError } from "@revolt/i18n/errors";
@@ -19,6 +19,8 @@ import {
   FloatingSelect,
   MenuItem,
   Segmented,
+  SettingsRow,
+  SettingsSection,
   TextField,
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -133,21 +135,17 @@ export function CommandManager(props: {
         when={editing()}
         fallback={
           <>
+            {/* the tab is named Commands already: the count and the
+                one main action, then where the list comes from */}
             <Head>
-              <div>
-                <h3>
-                  <Trans>Commands</Trans>
-                </h3>
-                <Muted>
-                  {t`${count("ChatInput")} of ${LIMITS.chatInput} slash commands · ${count("User") + count("Message")} menu commands`}
-                </Muted>
-              </div>
+              <Muted>
+                {t`${count("ChatInput")} of ${LIMITS.chatInput} slash commands · ${count("User") + count("Message")} menu commands`}
+              </Muted>
               <Button
                 size="sm"
                 variant="filled"
                 onPress={() => open(blankCommand())}
               >
-                <Icon name="plus" size={16} />
                 <Trans>New command</Trans>
               </Button>
             </Head>
@@ -155,9 +153,9 @@ export function CommandManager(props: {
               <Trans>
                 If your bot sends its list when it starts, that list replaces
                 what you save here.
-              </Trans>
+              </Trans>{" "}
+              {props.docsLink}
             </Muted>
-            {props.docsLink}
             <Show when={notice()}>
               <Notice role="status">{notice()}</Notice>
             </Show>
@@ -181,7 +179,7 @@ export function CommandManager(props: {
                 </Empty>
               </Match>
               <Match when={list().length}>
-                <Cards>
+                <SettingsSection>
                   <For each={list()}>
                     {(command) => (
                       <CommandCard
@@ -192,7 +190,7 @@ export function CommandManager(props: {
                       />
                     )}
                   </For>
-                </Cards>
+                </SettingsSection>
               </Match>
             </Switch>
             <JsonTools
@@ -346,39 +344,54 @@ function CommandCard(props: {
   const types = useCommandTypeNames();
   const type = () => props.command.type ?? "ChatInput";
   return (
-    <Card data-testid="command-card">
-      <CardText>
-        <strong dir="auto">
-          <bdi>
-            {type() === "ChatInput"
-              ? `/${props.command.name}`
-              : props.command.name}
-          </bdi>
-        </strong>
-        <Muted>
+    <SettingsRow
+      data-testid="command-card"
+      icon={
+        <Icon name={type() === "ChatInput" ? "terminal" : "list"} size={20} />
+      }
+      title={
+        <bdi>
+          {type() === "ChatInput"
+            ? `/${props.command.name}`
+            : props.command.name}
+        </bdi>
+      }
+      description={
+        <>
+          <Show when={props.command.description}>
+            <span dir="auto">{props.command.description}</span>
+            <br />
+          </Show>
           {types[type()]}
           <Show when={props.command.options?.length}>
             {" · "}
-            {t`${props.command.options!.length} options`}
+            <Plural
+              value={props.command.options!.length}
+              one="# option"
+              other="# options"
+            />
           </Show>
           <Show when={props.command.default_member_permissions}>
             {" · "}
             <Trans>Limited by permissions</Trans>
           </Show>
-        </Muted>
-        <Show when={props.command.description}>
-          <span dir="auto">{props.command.description}</span>
-        </Show>
-      </CardText>
-      <CardActions>
-        <Button size="sm" variant="tonal" onPress={props.onEdit}>
-          <Trans>Edit</Trans>
-        </Button>
-        <Button size="sm" variant="_error" onPress={props.onDelete}>
-          {props.confirming ? t`Confirm delete` : t`Delete`}
-        </Button>
-      </CardActions>
-    </Card>
+        </>
+      }
+      control={() => (
+        <CardActions>
+          <Button size="sm" variant="tonal" onPress={props.onEdit}>
+            <Trans>Edit</Trans>
+          </Button>
+          <Button
+            size="sm"
+            variant={props.confirming ? "_error" : "text"}
+            onPress={props.onDelete}
+          >
+            {props.confirming ? t`Confirm delete` : t`Delete`}
+          </Button>
+        </CardActions>
+      )}
+    />
   );
 }
 
@@ -1443,37 +1456,6 @@ const ErrorBox = styled("div", {
 
 const FieldError = styled("span", {
   base: { color: "var(--z-danger)", fontSize: "13px" },
-});
-
-const Cards = styled("div", {
-  base: { display: "flex", flexDirection: "column", gap: "8px" },
-});
-
-const Card = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "12px",
-    padding: "12px 16px",
-    borderRadius: "var(--z-box-radius)",
-    background: "var(--z-box-bg)",
-    border: "var(--z-box-border)",
-    minWidth: 0,
-    flexWrap: "wrap",
-  },
-});
-
-const CardText = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "4px",
-    minWidth: 0,
-    flex: "1 1 240px",
-    "& strong": { fontWeight: 600, overflowWrap: "anywhere" },
-    "& span": { overflowWrap: "anywhere" },
-  },
 });
 
 const CardActions = styled("div", {

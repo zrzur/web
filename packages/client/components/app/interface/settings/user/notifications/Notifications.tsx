@@ -53,12 +53,7 @@ export default function Notifications(props: { isDesktop: boolean }) {
             <SettingsRow
               icon={<Icon name="device-mobile" size={20} />}
               title={<Trans>Push notifications</Trans>}
-              description={
-                <Trans>
-                  Ask the browser to deliver notifications while Zrzur is
-                  closed. Delivery depends on the server's push service.
-                </Trans>
-              }
+              description={<Trans>Also while Zrzur is closed.</Trans>}
               onClick={() => togglePushPermission(true)}
               control={(ids) => (
                 <Toggle

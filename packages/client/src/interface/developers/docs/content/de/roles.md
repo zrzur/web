@@ -1,5 +1,7 @@
 # Rollen und Berechtigungen
 
+Wer auf einem Server was darf: Rollen geben Berechtigungen, Kanäle können sie ändern, und der Rang entscheidet, wer wen verwalten darf.
+
 ## So werden Berechtigungen berechnet {#how-permissions-are-calculated}
 
 1. Der Servereigentümer darf alles. Ebenso ein Mitglied, dem seine Rollen oder die Standardberechtigungen des Servers **Administrator** geben: Keine Kanaleinstellung und kein Timeout nimmt ihm etwas, und ein Kanal kann niemanden zum Administrator machen.

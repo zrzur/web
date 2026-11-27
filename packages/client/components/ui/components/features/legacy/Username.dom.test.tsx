@@ -37,7 +37,7 @@ const styles = (el: HTMLElement, top: HTMLElement) => {
 };
 
 describe("a name with a role colour", () => {
-  it("shows the person's own chosen colour, not the role's", () => {
+  it("shows the highest role's colour over the person's own colour", () => {
     const el = draw({
       username: "Maher",
       colour: ROLE,
@@ -49,11 +49,25 @@ describe("a name with a role colour", () => {
     });
     const name = letters(el);
     const all = styles(name, el);
-    // the chosen blue is drawn, and the role's gradient is not
-    expect(all.some((s) => s.color === "rgb(59, 130, 246)")).toBe(true);
-    expect(all.some((s) => /gradient/.test(s.background))).toBe(false);
-    expect(all.some((s) => /gradient/.test(s.backgroundImage))).toBe(false);
-    // marked, so a nameplate row keeps the colour too
+    // the role's gradient is drawn, and the chosen blue is not
+    expect(all.some((s) => /gradient/.test(s.background))).toBe(true);
+    expect(all.some((s) => s.color === "rgb(59, 130, 246)")).toBe(false);
+    // the chosen font stays
+    expect(all.some((s) => /Georgia/.test(s.fontFamily))).toBe(true);
+    // marked, so a nameplate row keeps the role colour too
+    expect(name.closest("[data-role-colour]")).not.toBeNull();
+    expect(el.querySelector("[data-own-colour]")).toBeNull();
+  });
+
+  it("shows the person's own colour when no role of theirs has one", () => {
+    const el = draw({
+      username: "Maher",
+      userStyle: { name_font: "serif", name_colour: ["#3b82f6"] },
+    });
+    const name = letters(el);
+    expect(styles(name, el).some((s) => s.color === "rgb(59, 130, 246)")).toBe(
+      true,
+    );
     expect(name.closest("[data-own-colour]")).not.toBeNull();
     expect(el.querySelector("[data-role-colour]")).toBeNull();
   });

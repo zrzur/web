@@ -15,6 +15,7 @@ import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { Icon } from "../../icons/Icon";
 import {
   Button,
   Checkbox,
@@ -185,6 +186,7 @@ const FormFileInput = (
     | "imageHeight"
     | "allowRemoval"
     | "removeLabel"
+    | "removeCorner"
     | "process"
   >,
 ) => {
@@ -367,6 +369,47 @@ const FormButtonGroup = (props: {
   );
 };
 
+/** A row of a multiple choice list: lit and ticked when picked */
+const pickRow = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "12px",
+  width: "100%",
+  height: "100%",
+  paddingInline: "8px",
+  border: "none",
+  borderRadius: "var(--z-radius-md, 10px)",
+  background: "transparent",
+  color: "var(--z-fg-primary)",
+  font: "inherit",
+  textAlign: "start",
+  cursor: "pointer",
+  transition: "background var(--z-motion-fast, 120ms) ease",
+  _hover: { background: "var(--z-nav-hover)" },
+  _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "-2px" },
+  "&[aria-pressed=true]": {
+    background: "color-mix(in srgb, var(--z-accent) 14%, transparent)",
+  },
+  "& .who": { flex: 1, minWidth: 0 },
+  "& .tick": {
+    flexShrink: 0,
+    display: "grid",
+    placeItems: "center",
+    width: "20px",
+    height: "20px",
+    borderRadius: "50%",
+    border: "1.5px solid var(--z-border-strong)",
+    color: "transparent",
+    "--z-icon-color": "currentColor",
+    transition: "background var(--z-motion-fast, 120ms) ease",
+  },
+  "&[aria-pressed=true] .tick": {
+    borderColor: "var(--z-accent)",
+    background: "var(--z-accent)",
+    color: "var(--z-accent-text, white)",
+  },
+});
+
 /**
  * Form element for virtual selection
  */
@@ -425,20 +468,34 @@ function FormVirtualSelect<K, T>(props: {
               )}
             >
               <Match when={props.multiple}>
-                <Checkbox
-                  class={css({ width: "100%" })}
-                  onChange={(checked) =>
+                {/* the whole row picks the person, no switch: tap to
+                    add, tap again to take them off */}
+                <button
+                  type="button"
+                  class={pickRow}
+                  aria-pressed={props.control.value.includes(item.item.value)}
+                  onClick={() => {
+                    const picked = props.control.value.includes(
+                      item.item.value,
+                    );
                     props.control.setValue([
                       ...props.control.value.filter(
                         (entry) => entry !== item.item.value,
                       ),
-                      ...(checked ? [item.item.value] : []),
-                    ])
-                  }
-                  checked={props.control.value.includes(item.item.value)}
+                      ...(picked ? [] : [item.item.value]),
+                    ]);
+                  }}
                 >
-                  {props.children(item.item.item)}
-                </Checkbox>
+                  <span class="who">
+                    {props.children(
+                      item.item.item,
+                      props.control.value.includes(item.item.value),
+                    )}
+                  </span>
+                  <span class="tick" aria-hidden="true">
+                    <Icon name="check" size={12} />
+                  </span>
+                </button>
               </Match>
             </Switch>
           </div>

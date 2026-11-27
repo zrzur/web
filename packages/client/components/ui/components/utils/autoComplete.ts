@@ -1,4 +1,3 @@
-import { Accessor, createMemo } from "solid-js";
 import {
   Channel,
   Client,
@@ -8,12 +7,15 @@ import {
   ServerRole,
   User,
 } from "@zrzur/sdk/solid";
+import { Accessor, createMemo } from "solid-js";
 
 export interface AutoCompleteSearchSpace {
   users?: User[];
   members?: ServerMember[];
   channels?: Channel[];
   roles?: ServerRole[];
+  /** @everyone and @here may be mentioned here (Mention Everyone) */
+  massMentions?: boolean;
 }
 
 function generateSearchSpaceFrom(
@@ -23,7 +25,11 @@ function generateSearchSpaceFrom(
   if (object instanceof Message) {
     if (object.channel) return generateSearchSpaceFrom(object.channel, client);
   } else if (object instanceof Channel) {
-    if (object.server) return generateSearchSpaceFrom(object.server, client);
+    if (object.server)
+      return {
+        ...generateSearchSpaceFrom(object.server, client),
+        massMentions: object.havePermission("MentionEveryone"),
+      };
     if (object.type === "Group" || object.type === "DirectMessage") {
       return {
         users: object.recipients,

@@ -2,10 +2,9 @@ import { Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
-import { useQuery, useQueryClient } from "@tanstack/solid-query";
+import { useQueryClient } from "@tanstack/solid-query";
 import { User, UserProfile } from "@zrzur/sdk/solid";
 
-import { useClient } from "@revolt/client";
 import { ProfileSection } from "@revolt/ui/components/features/profiles/ProfileCard";
 import {
   type ProfileTile,
@@ -23,28 +22,10 @@ import {
 } from "@revolt/ui/components/features/profiles/WornPreviews";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 import { useTilesShown } from "@revolt/ui/components/features/profiles/profileSize";
-import {
-  isCommunityRef,
-  userStyleOf,
-} from "@revolt/ui/components/features/profiles/userStyle";
+import { userStyleOf } from "@revolt/ui/components/features/profiles/userStyle";
 
-import { communityApi } from "./communityApi";
+import { useDesignName } from "./LookShelf";
 import { useNameFontLabel, useStyleLabels } from "./styleLabels";
-
-/** The real name of a design someone wears, once it is known */
-function useDesignName(ref: () => string | undefined) {
-  const client = useClient();
-  const query = useQuery(() => ({
-    queryKey: ["community-item", ref()],
-    enabled: isCommunityRef(ref()),
-    queryFn: () =>
-      communityApi
-        .details(client(), ref()!.slice(2))
-        .then((details) => details.item.name)
-        .catch(() => null),
-  }));
-  return () => query.data ?? undefined;
-}
 
 /** The page of a worn design (every one is a creator's, `c:<id>`) */
 const designPage = (ref: string) => `/designs/${ref.slice(2)}`;

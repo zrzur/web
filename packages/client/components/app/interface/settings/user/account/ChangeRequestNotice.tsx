@@ -1,4 +1,5 @@
 import { useLingui } from "@lingui/solid/macro";
+import { whenIdleAndEvery } from "@revolt/common/lib/idle";
 import { withoutNull } from "@zrzur/sdk/solid";
 import { onCleanup, onMount } from "solid-js";
 
@@ -48,11 +49,8 @@ export function ChangeRequestNotice() {
     }
   };
 
-  onMount(() => {
-    void check();
-    const timer = setInterval(() => void check(), RECHECK_MS);
-    onCleanup(() => clearInterval(timer));
-  });
+  // after the first screen, and never from a hidden tab
+  onMount(() => onCleanup(whenIdleAndEvery(() => void check(), RECHECK_MS)));
 
   return null;
 }

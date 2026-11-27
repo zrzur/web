@@ -29,7 +29,7 @@ Embeds nehmen `title` (256), `description` (4096), `url`, `color` (Zahl) oder `c
 
 Um Dateien zu senden, nimm `multipart/form-data` mit `files[0]`, `files[1]`, ... und dem JSON in `payload_json`. Jede Datei durchläuft dieselben Prüfungen wie der Upload eines Mitglieds. Bis zu 5 Dateien mit 20 MB; verweise aus einem Embed mit `attachment://name.png`. Ein Webhook ohne „Dateien hochladen“ bekommt `403`, nie eine Nachricht ohne ihre Dateien.
 
-`@everyone`, `@online` und Rollenerwähnungen benachrichtigen nur, wenn der Webhook die passende Berechtigung hat und `allowed_mentions` sie erlaubt. Neue Webhooks haben keine von beiden, und der Text wird trotzdem gepostet. Bearbeitungen benachrichtigen nie.
+`@everyone`, `@here` und Rollenerwähnungen benachrichtigen nur, wenn der Webhook die passende Berechtigung hat und `allowed_mentions` sie erlaubt. Neue Webhooks haben keine von beiden, und der Text wird trotzdem gepostet. Bearbeitungen benachrichtigen nie.
 
 Interaktive Komponenten funktionieren nur auf Webhooks, die ein Bot erstellt hat, und Klicks gehen an diesen Bot. Andere Webhooks können Links, Text und Medien posten.
 

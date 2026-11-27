@@ -55,6 +55,7 @@ export {
 export { List } from "./List";
 export { CircularProgress } from "./LoadingProgress";
 export { LoadingScreen } from "./LoadingScreen";
+export { LineTabs } from "./LineTabs";
 export { MenuItem } from "./Menu";
 export { MenuButton } from "./MenuButton";
 export { Radio2 } from "./Radio";

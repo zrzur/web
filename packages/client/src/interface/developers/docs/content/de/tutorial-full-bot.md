@@ -30,7 +30,7 @@ In etwa 30 Minuten hast du einen echten Bot: Slash-Befehle, Schaltflächen, ein 
 
 ### 3. Installiere den Bot auf deinem Server, mit Timeout-Berechtigung {#step-3}
 
-Öffne den Tab **OAuth2** deiner Anwendung. Hake im **URL-Generator** `bot.install` an und unter **Bot-Berechtigungen** „Mitglieder in Timeout versetzen“. Öffne den **Einladungslink**, wähle deinen Server und bestätige.
+Öffne den Tab **Installieren** deiner Anwendung. Hake unter **Einladungslink** „Mitglieder in Timeout versetzen“ an. Öffne den **Link**, wähle deinen Server und bestätige.
 
 ### 4. Setze die Rolle des Bots höher {#step-4}
 

@@ -9,10 +9,12 @@ curl "https://api.zrzur.com/"
 
 Every entry says whether existing bots must change. A removal is announced here with its date before it happens. Follow it in a feed reader: [RSS feed](/developers/api-changelog.xml).
 
-## Coming in the next release {#next}
+## Coming in the next release {#upcoming}
 
 **Written and tested locally on 2026-11-21; not live on `api.zrzur.com` yet.** Existing bots keep working: nothing below removes a field. Three behaviours change, marked with **Changes**.
 
+- **Any bot can ask for verification.** `POST /bots/{target}/verification` no longer needs 25 servers that count or a bot 30 days old: the owner needs a confirmed e-mail and to be 18 or older. The bot's servers and age are shown to the reviewers instead. `GET /bots/{target}/verification` now also answers `checks`, the lines the team looks at, and a refused request names the missing ones in `not_eligible:`. See [Server limit and verification](/developers/docs/applications#limits).
+- **A bot's banner on its public profile.** `GET /bots/{target}/invite` answers `banner`, the id of the bot's profile banner, when it has one. A GIF or animated WebP banner plays.
 - **Security: the OAuth2 server list says who may manage.** `GET /oauth2/@me/servers` lists every server the person is in, not the servers they manage. Each entry now has `owner`, `can_manage` and `permissions` (server-wide, a decimal string), and `?manageable=true` lists only the servers they can manage. A bot dashboard must check `can_manage`, and check again with the bot token before every change. See [OAuth2](/developers/docs/oauth2#dashboards).
 - **Changes: server-wide bits in interactions come from the server.** In `user_permissions`, Manage Server, Ban Members, Administrator and the other server-wide bits are what the person holds on the server; a channel override no longer adds or removes them. Channel bits still follow the channel.
 - **Changes: an install gives the default permissions.** An install without `?permissions=` (`POST /bots/{target}/invite`, OAuth2) gives the bot its `default_permissions` through a role of its own, as an install from the Developer Portal does. The installer gives the part they hold, with Manage Roles. An explicit `?permissions=` works as before; `?permissions=0` gives no role, and the add dialog sends it when everything is unticked. Without Manage Roles the installer adds the bot without a role. The OAuth2 consent page shows the default permissions as the most the bot gets when the link names none; approving sends no value, so an installer without Manage Roles adds the bot without a role. See [Start your bot](/developers/docs/getting-started#install-the-bot).

@@ -354,7 +354,11 @@ export function ListingCard(props: {
  * it, on phones too: there the last row's 44 px fit the same room.
  */
 export const CardRoom = styled("div", {
-  base: { "--card-h": "360px" },
+  base: {
+    "--card-h": "360px",
+    // one card per row on a phone: nothing to line up with, no empty band
+    _phone: { "--card-h": "0px" },
+  },
 });
 
 const Card = styled("article", {

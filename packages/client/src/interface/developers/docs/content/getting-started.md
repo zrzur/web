@@ -14,7 +14,7 @@ The token appears once, right after you create the application. Copy it now. Who
 
 ## 3. Install the bot in a test server {#install-the-bot}
 
-On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server. [More about installing](/developers/docs/applications#install)
+On the Install tab of your application choose Add to a server, and pick a server where you have Manage Server. [More about installing](/developers/docs/applications#install)
 
 The bot gets a role of its own with the default permissions you set for it (Bot settings, Default permissions), also when someone installs it with a link or the API. A link with `?permissions=` gives exactly those permissions instead, and `?permissions=0` gives no role. Whoever installs gives the default permissions only if they have Manage Roles, and only the part they hold themselves; without Manage Roles the bot joins without a role.
 

@@ -1,10 +1,10 @@
+import { useSpeaking } from "@revolt/rtc/speaking";
 import { Show } from "solid-js";
 import {
   TrackLoop,
   TrackReference,
   useEnsureParticipant,
   useIsMuted,
-  useIsSpeaking,
   useTrackRefContext,
   useTracks,
   VideoTrack,
@@ -96,7 +96,7 @@ function ConnectedUser() {
     source: Track.Source.Microphone,
   });
 
-  const isSpeaking = useIsSpeaking(participant);
+  const isSpeaking = useSpeaking(participant);
   const user = useUser(participant.identity);
 
   return (

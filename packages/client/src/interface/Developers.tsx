@@ -4,19 +4,27 @@ import {
   Match,
   Show,
   Switch,
+  createEffect,
   createResource,
   createSignal,
+  onMount,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import type { Bot } from "@zrzur/sdk/solid";
+import type { Bot, Client } from "@zrzur/sdk/solid";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import {
   interactionApi,
   oauthApi,
 } from "@revolt/app/interface/channels/text/interactions";
-import { ViewBot } from "@revolt/app/interface/settings/user/bots";
+import { Discoverable } from "@revolt/app/interface/settings/shared/Discoverable";
+import {
+  BotAccess,
+  BotGeneral,
+  BotVerificationTab,
+} from "@revolt/app/interface/settings/user/bots";
 import { CommandManager } from "@revolt/app/interface/settings/user/bots/CommandManager";
 import type { RegisteredCommand } from "@revolt/app/interface/settings/user/bots/commandForm";
 import { useClient } from "@revolt/client";
@@ -25,14 +33,36 @@ import { useError } from "@revolt/i18n";
 import { useModals } from "@revolt/modal";
 import { getBotLink } from "@revolt/modal/modals/inviteLink";
 import { useLocation, useNavigate } from "@revolt/routing";
-import { Avatar, FloatingSelect, Header, MenuItem } from "@revolt/ui";
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  Column,
+  FloatingSelect,
+  Header,
+  LineTabs,
+  MenuItem,
+  SettingsFormPanel,
+  SettingsRow,
+  SettingsSection,
+  TextField,
+} from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { usePermissionNames } from "./OAuth";
 import { HeaderIcon } from "./common/CommonHeader";
 import { docsLinkFromApp } from "./developers/docs/links";
 
-const TABS = ["overview", "commands", "oauth2"] as const;
+// "overview" is General: old links keep working
+const TABS = [
+  "overview",
+  "bot",
+  "commands",
+  "install",
+  "oauth2",
+  "verification",
+  "discover",
+] as const;
 type Tab = (typeof TABS)[number];
 
 /**
@@ -62,11 +92,21 @@ export function Developers() {
   // old links to removed tabs open the overview
   const tab = (): Tab => TABS.find((id) => id === segments()[3]) ?? "overview";
   const selected = () => bots()?.find((bot) => bot.id === selectedId());
+  // a bot's commands are read as it opens, so its Commands tab shows them
+  // at once
+  createEffect(() => {
+    const bot = selected();
+    if (bot) readCommands(client(), bot.id).catch(() => undefined);
+  });
 
   const tabs = (): { id: Tab; label: string }[] => [
-    { id: "overview", label: t`Overview` },
+    { id: "overview", label: t`General` },
+    { id: "bot", label: t`Bot` },
     { id: "commands", label: t`Commands` },
+    { id: "install", label: t`Install` },
     { id: "oauth2", label: t`OAuth2` },
+    { id: "verification", label: t`Verification` },
+    { id: "discover", label: t`Discover` },
   ];
 
   return (
@@ -214,31 +254,32 @@ export function Developers() {
                         {bot().public
                           ? t`Public application`
                           : t`Private application`}
+                        {" · "}
+                        {/* the one place of the ID: it is also the OAuth2
+                            client ID, so every tab shows it here */}
+                        <IdCopy id={bot().id} />
                       </Muted>
                     </div>
                   </AppHeader>
-                  <Tabs role="tablist">
-                    <For each={tabs()}>
-                      {(item) => (
-                        <TabButton
-                          role="tab"
-                          type="button"
-                          aria-selected={tab() === item.id}
-                          onClick={() =>
-                            navigate(`/developers/${bot().id}/${item.id}`)
-                          }
-                        >
-                          {item.label}
-                        </TabButton>
-                      )}
-                    </For>
-                  </Tabs>
+                  {/* every part of the bot one click away, each in one
+                      place (owner, 2026-11-27) */}
+                  <LineTabs
+                    aria-label={t`Application`}
+                    ruled
+                    class={tabRow}
+                    value={tab()}
+                    onChange={(id) => navigate(`/developers/${bot().id}/${id}`)}
+                    options={tabs().map((item) => ({
+                      value: item.id,
+                      label: item.label,
+                    }))}
+                  />
                   {/* rebuilt for each bot: nothing of the previous bot (its
                       intents, a half-edited command) stays on screen */}
                   <Show when={selectedId()} keyed>
                     <Switch>
                       <Match when={tab() === "overview"}>
-                        <ViewBot
+                        <BotGeneral
                           bot={bot()}
                           onDelete={() => {
                             refetch();
@@ -246,11 +287,23 @@ export function Developers() {
                           }}
                         />
                       </Match>
+                      <Match when={tab() === "bot"}>
+                        <BotAccess bot={bot()} />
+                      </Match>
                       <Match when={tab() === "commands"}>
                         <Commands bot={bot()} />
                       </Match>
+                      <Match when={tab() === "install"}>
+                        <Install bot={bot()} />
+                      </Match>
                       <Match when={tab() === "oauth2"}>
                         <OAuth2 bot={bot()} />
+                      </Match>
+                      <Match when={tab() === "verification"}>
+                        <BotVerificationTab bot={bot()} />
+                      </Match>
+                      <Match when={tab() === "discover"}>
+                        <Discoverable discoverable={bot()} />
                       </Match>
                     </Switch>
                   </Show>
@@ -264,27 +317,144 @@ export function Developers() {
   );
 }
 
-function CopyField(props: { label: string; value: string }) {
+/** The application ID, copied with a click */
+function IdCopy(props: { id: string }) {
   const { t } = useLingui();
   const [copied, setCopied] = createSignal(false);
   return (
-    <Field>
-      <span>{props.label}</span>
-      <FieldRow>
-        <code>{props.value}</code>
-        <SmallButton
-          type="button"
-          onClick={() => {
-            navigator.clipboard.writeText(props.value).then(() => {
+    <IdButton
+      type="button"
+      dir="ltr"
+      aria-label={t`Copy application ID`}
+      title={t`Copy application ID`}
+      onClick={() =>
+        void navigator.clipboard.writeText(props.id).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1500);
+        })
+      }
+    >
+      <code>{props.id}</code>
+      <Icon name={copied() ? "check" : "copy"} size={14} />
+    </IdButton>
+  );
+}
+
+/** A value to copy, as a settings row: its name, the value, a Copy button */
+function CopyRow(props: {
+  icon: JSX.Element;
+  title: JSX.Element;
+  value: string;
+  hint?: JSX.Element;
+}) {
+  const [copied, setCopied] = createSignal(false);
+  return (
+    <SettingsRow
+      icon={props.icon}
+      title={props.title}
+      description={
+        <>
+          <Value dir="ltr">{props.value}</Value>
+          <Show when={props.hint}>
+            <br />
+            {props.hint}
+          </Show>
+        </>
+      }
+      control={() => (
+        <Button
+          size="sm"
+          variant="tonal"
+          onPress={() =>
+            void navigator.clipboard.writeText(props.value).then(() => {
               setCopied(true);
               setTimeout(() => setCopied(false), 1500);
-            });
-          }}
+            })
+          }
         >
-          {copied() ? t`Copied` : t`Copy`}
-        </SmallButton>
-      </FieldRow>
-    </Field>
+          <Show when={copied()} fallback={<Trans>Copy</Trans>}>
+            <Trans>Copied</Trans>
+          </Show>
+        </Button>
+      )}
+    />
+  );
+}
+
+/** Ticks for the bot's permissions, in two or three columns */
+function PermissionPicker(props: {
+  value: number;
+  onChange: (value: number) => void;
+}) {
+  const permissionNames = usePermissionNames();
+  const has = (bit: number) => Math.floor(props.value / bit) % 2 === 1;
+  return (
+    <Checks>
+      <For each={permissionNames}>
+        {([bit, name]) => (
+          <Checkbox
+            checked={has(bit)}
+            onChange={() =>
+              props.onChange(has(bit) ? props.value - bit : props.value + bit)
+            }
+          >
+            {name}
+          </Checkbox>
+        )}
+      </For>
+    </Checks>
+  );
+}
+
+// view channels, read history, send messages, send embeds
+const DEFAULT_PERMISSIONS = 2 ** 20 + 2 ** 21 + 2 ** 22 + 2 ** 26;
+
+/**
+ * Install: add the bot to a server now, or build the invite link others
+ * open, with the permissions it asks for
+ */
+function Install(props: { bot: Bot }) {
+  const { openModal } = useModals();
+  const [permissions, setPermissions] = createSignal(DEFAULT_PERMISSIONS);
+  const inviteUrl = () =>
+    getBotLink(
+      props.bot.id,
+      { href: (path) => `${window.location.origin}${path}` },
+      permissions(),
+    );
+
+  return (
+    <Column gap="xl">
+      <SettingsSection>
+        <SettingsRow
+          icon={<Icon name="user-plus" size={20} />}
+          title={<Trans>Add to a server</Trans>}
+          description={<Trans>Choose one of your servers.</Trans>}
+          onClick={() =>
+            openModal({ type: "add_bot", invite: props.bot.publicBot })
+          }
+          navigational
+        />
+      </SettingsSection>
+      <SettingsSection
+        title={<Trans>Invite link</Trans>}
+        description={
+          <Trans>
+            Whoever opens it picks a server, and the bot joins with these
+            permissions.
+          </Trans>
+        }
+      >
+        <SettingsFormPanel>
+          <PermissionPicker value={permissions()} onChange={setPermissions} />
+        </SettingsFormPanel>
+        <CopyRow
+          icon={<Icon name="link" size={20} />}
+          title={<Trans>Link</Trans>}
+          value={inviteUrl()}
+        />
+      </SettingsSection>
+    </Column>
   );
 }
 
@@ -293,22 +463,50 @@ function CopyField(props: { label: string; value: string }) {
  * sends the whole list (PUT), deleting uses the command's own route; both
  * are the routes a bot uses itself.
  */
+/**
+ * Each bot's commands as last read. The tab shows them at once and checks
+ * with the server behind them: every visit and every save used to empty
+ * the list into "Loading…" for a round trip (owner, 2026-11-27).
+ */
+const commandCache = new Map<string, RegisteredCommand[]>();
+const commandRequests = new Map<string, Promise<RegisteredCommand[]>>();
+
+/** Read a bot's commands (one request at a time per bot) and keep them */
+function readCommands(client: Client, botId: string) {
+  let request = commandRequests.get(botId);
+  if (!request) {
+    request = interactionApi
+      .commands(client, botId)
+      .then((list) => {
+        const commands = list as RegisteredCommand[];
+        commandCache.set(botId, commands);
+        return commands;
+      })
+      .finally(() => commandRequests.delete(botId));
+    commandRequests.set(botId, request);
+  }
+  return request;
+}
+
 function Commands(props: { bot: Bot }) {
   const client = useClient();
   const permissionNames = usePermissionNames();
-  const [commands, { refetch }] = createResource(
-    () => props.bot.id,
-    (id) => interactionApi.commands(client(), id),
-  );
+  // eslint-disable-next-line solid/reactivity
+  const [commands, setCommands] = createSignal(commandCache.get(props.bot.id));
+
+  const load = async () => {
+    const fresh = await readCommands(client(), props.bot.id);
+    setCommands(fresh);
+    return fresh;
+  };
+  // a failed refresh keeps what is shown; a first read that fails shows
+  // the error of the next action instead of an endless wait
+  onMount(() => void load().catch(() => undefined));
 
   return (
     <Section>
       <CommandManager
-        commands={
-          commands.state === "ready"
-            ? (commands() as RegisteredCommand[])
-            : undefined
-        }
+        commands={commands()}
         permissionNames={permissionNames}
         save={async (list) => {
           await interactionApi.syncCommands(
@@ -316,12 +514,12 @@ function Commands(props: { bot: Bot }) {
             props.bot.id,
             list as Parameters<typeof interactionApi.syncCommands>[2],
           );
-          await refetch();
+          await load();
         }}
-        reload={async () => ((await refetch()) ?? []) as RegisteredCommand[]}
+        reload={load}
         remove={async (id) => {
           await interactionApi.deleteCommand(client(), props.bot.id, id);
-          await refetch();
+          await load();
         }}
         docsLink={
           <DocsLink href="/developers/docs/commands#register">
@@ -333,6 +531,17 @@ function Commands(props: { bot: Bot }) {
   );
 }
 
+const SCOPES = [
+  "identify",
+  "servers.read",
+  "applications.commands",
+  "bot.install",
+] as const;
+
+/**
+ * OAuth2: sign in with Zrzur from your own app. Where people come back to,
+ * the secret, and the sign-in link with its scopes.
+ */
 function OAuth2(props: { bot: Bot }) {
   const { t } = useLingui();
   const describeError = useError();
@@ -345,11 +554,13 @@ function OAuth2(props: { bot: Bot }) {
   const [uris, setUris] = createSignal<string>();
   const [secret, setSecret] = createSignal<string>();
   const [error, setError] = createSignal<string>();
+  const [busy, setBusy] = createSignal(false);
 
   const text = () => uris() ?? settings()?.redirect_uris.join("\n") ?? "";
 
   async function save() {
     setError(undefined);
+    setBusy(true);
     try {
       const list = text()
         .split("\n")
@@ -359,6 +570,8 @@ function OAuth2(props: { bot: Bot }) {
       setUris(undefined);
     } catch (err) {
       setError(describeError(err));
+    } finally {
+      setBusy(false);
     }
   }
 
@@ -380,99 +593,104 @@ function OAuth2(props: { bot: Bot }) {
   }
 
   return (
-    <Section>
-      <CopyField label={t`Client ID`} value={props.bot.id} />
-      <Field>
-        <span>{t`Redirect URIs (one per line, https or http://localhost)`}</span>
-        <TextArea
-          rows={4}
-          dir="ltr"
-          spellcheck={false}
-          value={text()}
-          onInput={(e) => setUris(e.currentTarget.value)}
-        />
-      </Field>
-      <div>
-        <SmallButton
-          type="button"
-          disabled={uris() === undefined}
-          onClick={save}
+    <Column gap="xl">
+      <Muted>
+        <Trans>
+          Let people sign in to your app with Zrzur. The client ID is the
+          application ID above.
+        </Trans>{" "}
+        <DocsLink href="/developers/docs/oauth2">
+          <Trans>How OAuth2 sign-in works</Trans>
+        </DocsLink>
+      </Muted>
+
+      <SettingsSection>
+        <Show
+          when={secret()}
+          fallback={
+            <SettingsRow
+              icon={<Icon name="key" size={20} />}
+              title={<Trans>Client secret</Trans>}
+              description={
+                settings()?.has_secret
+                  ? t`A new secret stops the old one at once.`
+                  : t`None yet. Without one, your app must use PKCE.`
+              }
+              control={() => (
+                <Button
+                  size="sm"
+                  variant="tonal"
+                  onPress={() => void resetSecret()}
+                >
+                  {settings()?.has_secret ? t`Reset secret` : t`Create secret`}
+                </Button>
+              )}
+            />
+          }
         >
-          {t`Save redirect URIs`}
-        </SmallButton>
-      </div>
-      <Card>
-        <h3>
-          <Trans>Client secret</Trans>
-        </h3>
-        <p>
-          {settings()?.has_secret
-            ? t`A secret exists. Resetting it stops the old one at once.`
-            : t`No secret yet: the app is a public client and must use PKCE (it always must).`}
-        </p>
-        <Show when={secret()}>
-          <CopyField
-            label={t`New secret: copy it now, it is not shown again`}
+          <CopyRow
+            icon={<Icon name="key" size={20} />}
+            title={<Trans>Client secret</Trans>}
             value={secret()!}
+            hint={<Trans>Copy it now. It won't be shown again.</Trans>}
           />
         </Show>
-        <SmallButton type="button" data-danger="" onClick={resetSecret}>
-          {settings()?.has_secret ? t`Reset secret` : t`Create secret`}
-        </SmallButton>
-      </Card>
+      </SettingsSection>
+
+      <SettingsSection
+        title={<Trans>Redirects</Trans>}
+        description={
+          <Trans>
+            Where people return after signing in. One per line: https, or
+            http://localhost while you test.
+          </Trans>
+        }
+      >
+        <SettingsFormPanel>
+          <TextField
+            label={t`Redirect URIs`}
+            rows={4}
+            dir="ltr"
+            spellcheck={false}
+            value={text()}
+            onInput={(e) => setUris(e.currentTarget.value)}
+          />
+          <Actions>
+            <Button
+              size="sm"
+              variant="filled"
+              isDisabled={uris() === undefined || busy()}
+              onPress={() => void save()}
+            >
+              <Trans>Save</Trans>
+            </Button>
+          </Actions>
+        </SettingsFormPanel>
+      </SettingsSection>
       <Show when={error()}>
         <ErrorText role="alert">{error()}</ErrorText>
       </Show>
-      <UrlGenerator
-        bot={props.bot}
-        redirects={settings()?.redirect_uris ?? []}
-      />
-    </Section>
+
+      <SignInLink bot={props.bot} redirects={settings()?.redirect_uris ?? []} />
+    </Column>
   );
 }
 
-const SCOPES = [
-  "identify",
-  "servers.read",
-  "applications.commands",
-  "bot.install",
-] as const;
-
 /**
- * Builds the link that sends people to the consent screen. PKCE values and
+ * The link that sends people to the consent screen. PKCE values and
  * `state` change per sign-in, so the app fills them in.
  */
-function UrlGenerator(props: { bot: Bot; redirects: string[] }) {
+function SignInLink(props: { bot: Bot; redirects: string[] }) {
   const { t } = useLingui();
-  const permissionNames = usePermissionNames();
-  const [scopes, setScopes] = createSignal<string[]>([
-    "bot.install",
-    "applications.commands",
-  ]);
-  const [permissions, setPermissions] = createSignal(
-    // view channels, read history, send messages, send embeds
-    2 ** 20 + 2 ** 21 + 2 ** 22 + 2 ** 26,
-  );
+  const [scopes, setScopes] = createSignal<string[]>(["identify"]);
+  const [permissions, setPermissions] = createSignal(DEFAULT_PERMISSIONS);
   const [redirect, setRedirect] = createSignal<string>();
 
-  const has = (bit: number) => Math.floor(permissions() / bit) % 2 === 1;
   const toggleScope = (scope: string) =>
     setScopes((list) =>
       list.includes(scope)
         ? list.filter((s) => s !== scope)
         : SCOPES.filter((s) => s === scope || list.includes(s)),
-    );
-
-  // only installing the bot (no sign-in scopes): a plain invite link that
-  // works when opened, no redirect or PKCE needed
-  const installOnly = () =>
-    scopes().includes("bot.install") &&
-    scopes().every((s) => s === "bot.install" || s === "applications.commands");
-  const inviteUrl = () =>
-    getBotLink(
-      props.bot.id,
-      { href: (path) => `${window.location.origin}${path}` },
-      permissions(),
     );
 
   const url = () => {
@@ -494,108 +712,73 @@ function UrlGenerator(props: { bot: Bot; redirects: string[] }) {
   };
 
   return (
-    <Card>
-      <h3>
-        <Trans>URL generator</Trans>
-      </h3>
-      <DocsLink href="/developers/docs/oauth2">
-        <Trans>How OAuth2 sign-in works</Trans>
-      </DocsLink>
-      <Group>
-        <legend>{t`Scopes`}</legend>
+    <SettingsSection
+      title={<Trans>Sign-in link</Trans>}
+      description={
+        <Trans>
+          Your app adds a new state and code challenge for every sign-in, so the
+          link doesn't work opened as it is.
+        </Trans>
+      }
+    >
+      <SettingsFormPanel>
         <Checks>
           <For each={SCOPES}>
             {(scope) => (
-              <Check>
-                <input
-                  type="checkbox"
-                  checked={scopes().includes(scope)}
-                  onChange={() => toggleScope(scope)}
-                />
+              <Checkbox
+                checked={scopes().includes(scope)}
+                onChange={() => toggleScope(scope)}
+              >
                 <code>{scope}</code>
-              </Check>
+              </Checkbox>
             )}
           </For>
         </Checks>
-      </Group>
-      <Show when={scopes().includes("servers.read")}>
-        <ScopeWarning role="note">
-          <Trans>
-            The servers list shows servers the user is in. Check{" "}
-            <code>can_manage</code> before letting them change settings.
-          </Trans>
-        </ScopeWarning>
-      </Show>
-      <Show when={scopes().includes("bot.install")}>
-        <Group>
-          <legend>{t`Bot permissions`}</legend>
-          <Checks>
-            <For each={permissionNames}>
-              {([bit, name]) => (
-                <Check>
-                  <input
-                    type="checkbox"
-                    checked={has(bit)}
-                    onChange={() =>
-                      setPermissions((value) =>
-                        has(bit) ? value - bit : value + bit,
-                      )
-                    }
-                  />
-                  <span>{name}</span>
-                </Check>
-              )}
-            </For>
-          </Checks>
-        </Group>
-      </Show>
-      <Show when={installOnly()}>
-        <CopyField label={t`Invite link`} value={inviteUrl()} />
-        <Muted>
-          <Trans>
-            Share this link: it opens Zrzur, the person picks a server and the
-            bot joins with the permissions above.
-          </Trans>
-        </Muted>
-      </Show>
+        <Show when={scopes().includes("servers.read")}>
+          <ScopeWarning role="note">
+            <Trans>
+              The servers list shows servers the user is in. Check{" "}
+              <code>can_manage</code> before letting them change settings.
+            </Trans>
+          </ScopeWarning>
+        </Show>
+        <Show when={scopes().includes("bot.install")}>
+          <PermissionPicker value={permissions()} onChange={setPermissions} />
+        </Show>
+        <Show when={props.redirects.length > 1}>
+          <div dir="ltr">
+            <FloatingSelect
+              aria-label={t`Redirect URI`}
+              value={redirect() ?? props.redirects[0]}
+              onChange={(e) => setRedirect(e.currentTarget.value)}
+            >
+              <For each={props.redirects}>
+                {(uri) => (
+                  <MenuItem dir="ltr" value={uri}>
+                    {uri}
+                  </MenuItem>
+                )}
+              </For>
+            </FloatingSelect>
+          </div>
+        </Show>
+      </SettingsFormPanel>
       <Show
-        when={!installOnly() && props.redirects.length}
+        when={props.redirects.length && scopes().length}
         fallback={
-          <Show when={!installOnly()}>
-            <Muted>
-              <Trans>Add a redirect URI above to generate the URL.</Trans>
-            </Muted>
-          </Show>
+          <SettingsRow
+            icon={<Icon name="link" size={20} />}
+            title={<Trans>Add a redirect to get the link.</Trans>}
+          />
         }
       >
-        <Show when={props.redirects.length > 1}>
-          <Field>
-            <span>{t`Redirect URI`}</span>
-            <div dir="ltr">
-              <FloatingSelect
-                value={redirect() ?? props.redirects[0]}
-                onChange={(e) => setRedirect(e.currentTarget.value)}
-              >
-                <For each={props.redirects}>
-                  {(uri) => (
-                    <MenuItem dir="ltr" value={uri}>
-                      {uri}
-                    </MenuItem>
-                  )}
-                </For>
-              </FloatingSelect>
-            </div>
-          </Field>
-        </Show>
-        <CopyField label={t`Generated URL`} value={url()} />
-        <Muted>
-          <Trans>
-            For your app's sign-in: the app puts a new state and code challenge
-            into it for every sign-in. Opened as it is, the link does not work.
-          </Trans>
-        </Muted>
+        <CopyRow
+          icon={<Icon name="link" size={20} />}
+          title={<Trans>Link</Trans>}
+          value={url()}
+        />
       </Show>
-    </Card>
+    </SettingsSection>
   );
 }
 
@@ -823,122 +1006,13 @@ const AppHeader = styled("div", {
   },
 });
 
-const Tabs = styled("div", {
-  base: {
-    display: "flex",
-    gap: "4px",
-    borderBlockEnd: "1px solid var(--z-border-subtle)",
-    overflowX: "auto",
-  },
-});
-
-const TabButton = styled("button", {
-  base: {
-    padding: "8px 12px",
-    background: "none",
-    border: "none",
-    borderBlockEnd: "2px solid transparent",
-    color: "var(--z-fg-secondary)",
-    cursor: "pointer",
-    whiteSpace: "nowrap",
-    "&[aria-selected=true]": {
-      color: "var(--z-fg-primary)",
-      borderBlockEndColor: "var(--z-accent)",
-    },
-    _focusVisible: { outline: "2px solid var(--z-focus)" },
-  },
-});
-
 const Section = styled("section", {
   base: {
     display: "flex",
     flexDirection: "column",
     gap: "14px",
-    maxWidth: "860px",
     "& p": { color: "var(--z-fg-secondary)", lineHeight: 1.5 },
     "& ol": { paddingInlineStart: "20px", lineHeight: 1.8 },
-  },
-});
-
-const Card = styled("div", {
-  base: {
-    padding: "14px 16px",
-    borderRadius: "var(--z-radius, 8px)",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
-    border: "1px solid var(--z-btn-surface-border)",
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    alignItems: "flex-start",
-    "& h3": { fontSize: "15px", fontWeight: 600, margin: 0 },
-    "& p": { margin: 0 },
-  },
-});
-
-const Field = styled("label", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "6px",
-    // long content (a redirect URI) is cut, it never widens the card
-    minWidth: 0,
-    maxWidth: "100%",
-    fontSize: "13px",
-    fontWeight: 600,
-    color: "var(--z-fg-secondary)",
-  },
-});
-
-const FieldRow = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    "& code": {
-      flex: 1,
-      minWidth: 0,
-      padding: "6px 10px",
-      borderRadius: "6px",
-      background: "var(--z-bg-input)",
-      fontWeight: 400,
-      overflowWrap: "anywhere",
-      userSelect: "all",
-    },
-    "& button": { flexShrink: 0 },
-  },
-});
-
-const SmallButton = styled("button", {
-  base: {
-    minHeight: "30px",
-    paddingInline: "12px",
-    borderRadius: "var(--z-radius, 8px)",
-    background: "var(--z-bg-input)",
-    color: "var(--z-fg-primary)",
-    border: "1px solid var(--z-btn-surface-border)",
-    cursor: "pointer",
-    fontWeight: 600,
-    "&[data-danger]": { color: "var(--z-danger)" },
-    _disabled: { opacity: 0.5, cursor: "not-allowed" },
-    "&:active": { boxShadow: "var(--z-btn-pressed)" },
-    _focusVisible: { outline: "2px solid var(--z-focus)" },
-  },
-});
-
-const TextArea = styled("textarea", {
-  base: {
-    width: "100%",
-    fontFamily: "monospace",
-    fontSize: "13px",
-    fontWeight: 400,
-    padding: "8px 10px",
-    borderRadius: "var(--z-radius, 8px)",
-    background: "var(--z-field-bg)",
-    boxShadow: "var(--z-field-shadow)",
-    color: "var(--z-fg-primary)",
-    border: "1px solid var(--z-field-border)",
-    _focusVisible: { outline: "2px solid var(--z-focus)" },
   },
 });
 
@@ -956,21 +1030,6 @@ const ScopeWarning = styled("p", {
   },
 });
 
-const Group = styled("fieldset", {
-  base: {
-    border: "none",
-    margin: 0,
-    padding: 0,
-    width: "100%",
-    "& legend": {
-      fontSize: "12px",
-      fontWeight: 700,
-      color: "var(--z-fg-muted)",
-      marginBlockEnd: "6px",
-    },
-  },
-});
-
 const Checks = styled("div", {
   base: {
     display: "grid",
@@ -979,20 +1038,45 @@ const Checks = styled("div", {
   },
 });
 
-const Check = styled("label", {
+const ErrorText = styled("div", { base: { color: "var(--z-danger)" } });
+
+/** the bot's tabs: on a narrow screen the row scrolls sideways */
+const tabRow = css({
+  overflowX: "auto",
+  "& > button": { flexShrink: 0 },
+  scrollbarWidth: "none",
+  "&::-webkit-scrollbar": { display: "none" },
+});
+
+/** a value to copy: an ID, a link */
+const Value = styled("code", {
   base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    fontSize: "14px",
+    fontSize: "12px",
+    overflowWrap: "anywhere",
     color: "var(--z-fg-secondary)",
-    cursor: "pointer",
-    "& input": {
-      accentColor: "var(--z-accent)",
-      width: "16px",
-      height: "16px",
-    },
   },
 });
 
-const ErrorText = styled("div", { base: { color: "var(--z-danger)" } });
+/** a form's one action, at its end */
+const Actions = styled("div", {
+  base: { display: "flex", justifyContent: "flex-end" },
+});
+
+const IdButton = styled("button", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    padding: "2px 6px",
+    border: "none",
+    borderRadius: "6px",
+    background: "transparent",
+    color: "inherit",
+    font: "inherit",
+    cursor: "pointer",
+    "--z-icon-color": "currentColor",
+    "& code": { fontSize: "12px" },
+    _hover: { background: "var(--z-bg-raised)", color: "var(--z-fg-primary)" },
+    _focusVisible: { outline: "2px solid var(--z-focus, var(--z-accent))" },
+  },
+});

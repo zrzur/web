@@ -2,7 +2,7 @@
 
 Ein Bot ist ein Zrzur-Konto, das ein Programm steuert. Er ist wie ein Mitglied auf Servern, liest und sendet Nachrichten, antwortet auf Slash-Befehle, zeigt Schaltflächen und Formulare, moderiert, postet Dateien und kann Sprachkanälen beitreten. Menschen installieren ihn; dein Code läuft auf deinem eigenen Rechner oder Server.
 
-Diese Seiten sind alles, was du brauchst. Beginne mit [Starte deinen Bot](/developers/docs/getting-started) und baue dann den [vollständigen Bot](/developers/docs/tutorial-full-bot).
+Beginne mit [Starte deinen Bot](/developers/docs/getting-started) und baue dann den [vollständigen Bot](/developers/docs/tutorial-full-bot).
 
 ## So funktioniert ein Bot {#how-a-bot-works}
 
@@ -20,29 +20,41 @@ Diese Seiten sind alles, was du brauchst. Beginne mit [Starte deinen Bot](/devel
 5. [Nachrichten](/developers/docs/messages), [Rollen und Berechtigungen](/developers/docs/roles), [Moderation](/developers/docs/moderation).
 6. [Fehler](/developers/docs/errors), [Ratenlimits](/developers/docs/rate-limits), [Tokens schützen](/developers/docs/security), [Betrieb in Produktion](/developers/docs/production).
 
+## Alles, was du brauchst {#resources}
+
+| Was              | Wofür                                                                                        | Wo                                                                                                                                                       |
+| ---------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Entwicklerportal | Die Anwendung erstellen, das Token holen, den Bot installieren                               | [Meine Anwendungen](/developers)                                                                                                                         |
+| `@zrzur/sdk`     | Bots in JavaScript oder TypeScript: Befehle, Schaltflächen, das Gateway                      | `npm install @zrzur/sdk` · [npm](https://www.npmjs.com/package/@zrzur/sdk) · [Quellcode](https://github.com/zrzur/sdk-js) · [SDKs](/developers/docs/sdk) |
+| Bot-API-Dokument | Jede Route, die ein Bot nutzen kann, als OpenAPI 3.0: einen Client in jeder Sprache erzeugen | [bot-api.openapi.json](/developers/bot-api.openapi.json) · [Andere Sprachen](/developers/docs/sdk#other-languages)                                       |
+| Gateway-Schema   | Jedes Event und was ein Bot senden kann, als JSON Schema                                     | `GET /gateway/schema` · [Event-Referenz](/developers/docs/events)                                                                                        |
+| Ganze API        | Jede Route, auch die der App selbst                                                          | `GET /openapi.json`                                                                                                                                      |
+| Änderungen       | Was sich geändert hat und was kommt, mit Datum                                               | [API-Änderungsprotokoll](/developers/docs/changelog) · [RSS-Feed](/developers/api-changelog.xml)                                                         |
+| Stand            | Was Bots schon nutzen können und was noch nicht                                              | [Stand und Abdeckung](/developers/docs/coverage)                                                                                                         |
+
 ## Basis-URLs {#base-urls}
 
-| Dienst              | URL                     |
-| ------------------- | ----------------------- |
-| REST-API            | `https://api.zrzur.com` |
-| Gateway (WebSocket) | `wss://events.zrzur.com`    |
-| Dateien             | `https://cdn.zrzur.com` |
-| Sprache (LiveKit)   | `wss://voice.zrzur.com` |
+| Dienst              | URL                      |
+| ------------------- | ------------------------ |
+| REST-API            | `https://api.zrzur.com`  |
+| Gateway (WebSocket) | `wss://events.zrzur.com` |
+| Dateien             | `https://cdn.zrzur.com`  |
+| Sprache (LiveKit)   | `wss://voice.zrzur.com`  |
 
 Selbst gehostete Server haben eigene Adressen. `GET /` auf der API liefert sie, zusammen mit den Limits dieses Servers. Lies diese Felder (die Antwort hat mehr; diese ist gekürzt):
 
 @@0
 
-| Feld                               | Was es ist                                   |
-| ---------------------------------- | -------------------------------------------- |
-| `zrzur`                            | Version des Servers; siehe [API-Änderungsprotokoll](/developers/docs/changelog) |
-| `ws`                               | Gateway-Adresse                              |
-| `features.autumn.url`              | Dateiserver: Hoch- und Herunterladen         |
-| `features.january.url`             | Medien-Proxy für Linkvorschauen              |
-| `features.livekit.nodes[].public_url` | Sprachserver                              |
-| `features.limits.default`          | Limits eines Kontos, etwa die Nachrichtenlänge |
+| Feld                                                                                   | Was es ist                                                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `zrzur`                                                                                | Version des Servers; siehe [API-Änderungsprotokoll](/developers/docs/changelog)                                                                                                                                    |
+| `ws`                                                                                   | Gateway-Adresse                                                                                                                                                                                                    |
+| `features.autumn.url`                                                                  | Dateiserver: Hoch- und Herunterladen                                                                                                                                                                               |
+| `features.january.url`                                                                 | Medien-Proxy für Linkvorschauen                                                                                                                                                                                    |
+| `features.livekit.nodes[].public_url`                                                  | Sprachserver                                                                                                                                                                                                       |
+| `features.limits.default`                                                              | Limits eines Kontos, etwa die Nachrichtenlänge                                                                                                                                                                     |
 | `features.webhooks`, `features.forwarding`, `features.polls`, `features.server_events` | Ob diese Installation Webhooks, das Weiterleiten von Nachrichten, Umfragen und geplante Events eingeschaltet hat. Wo eins `false` ist, antworten seine Routen `FeatureDisabled` (Webhook-Adressen: `404 NotFound`) |
-| `app`                              | Web-App, für Links, die du Menschen zeigst   |
+| `app`                                                                                  | Web-App, für Links, die du Menschen zeigst                                                                                                                                                                         |
 
 @@1
 

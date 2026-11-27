@@ -42,6 +42,11 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { anyTextMatches } from "@revolt/common/lib/arabicFold";
 import { InteractionError } from "./api";
+import {
+  type BuiltinCommand,
+  builtinCommand,
+  builtinMatches,
+} from "./builtinCommands";
 import { dedupeCommands, typedCommand } from "./commandList";
 import {
   AutocompleteTimeout,
@@ -139,10 +144,9 @@ export function CommandPicker(props: Props) {
   const [appFilter, setAppFilter] = createSignal<string>();
 
   const query = () => props.content.slice(1).split(/\s/)[0].toLocaleLowerCase();
-  const typingCommand = () =>
-    !!serverId() &&
-    props.content.startsWith("/") &&
-    !props.content.includes("\n");
+  const typingSlash = () =>
+    props.content.startsWith("/") && !props.content.includes("\n");
+  const typingCommand = () => !!serverId() && typingSlash();
 
   // Typing again after Escape brings the picker back
   createEffect(
@@ -204,11 +208,51 @@ export function CommandPicker(props: Props) {
   const application = (id: string) =>
     commands()?.applications.find((app) => app._id === id);
 
+  // the app's own commands (/shrug, /me…), in every chat, while only the
+  // command word is typed; not while one bot's commands are shown
+  const builtins = createMemo(() =>
+    typingSlash() && !appFilter() && !/\s/.test(props.content)
+      ? builtinMatches(query())
+      : [],
+  );
+
+  type Entry =
+    | { kind: "bot"; command: ApplicationCommand; name: string }
+    | { kind: "builtin"; builtin: BuiltinCommand };
+  const entries = createMemo<Entry[]>(() => [
+    ...(typingCommand()
+      ? matches().map((entry) => ({ kind: "bot" as const, ...entry }))
+      : []),
+    ...builtins().map((builtin) => ({ kind: "builtin" as const, builtin })),
+  ]);
+
   const showList = () =>
-    typingCommand() &&
+    typingSlash() &&
     !dismissed() &&
     !chosen() &&
-    (matches().length > 0 || !!appFilter());
+    (entries().length > 0 || (typingCommand() && !!appFilter()));
+
+  /** A built-in command: its word is written, then the text after it */
+  function pickBuiltin(builtin: BuiltinCommand) {
+    props.setContent(`/${builtin.name} `);
+    setDismissed(true);
+    requestAnimationFrame(() => moveCommandCursor(builtin.name.length + 2));
+  }
+
+  const pickEntry = (entry: Entry) =>
+    entry.kind === "bot" ? pick(entry.command) : pickBuiltin(entry.builtin);
+
+  const builtinText = (builtin: BuiltinCommand) => {
+    const face = builtin.face;
+    switch (builtin.name) {
+      case "me":
+        return t`Sends your message in italics, as something you do.`;
+      case "spoiler":
+        return t`Hides your message until someone clicks it.`;
+      default:
+        return t`Adds ${face} to your message.`;
+    }
+  };
 
   function pick(command: ApplicationCommand, path: string[] = []) {
     setChosen(command);
@@ -265,6 +309,12 @@ export function CommandPicker(props: Props) {
     if (!id || chosen()) return false;
     const text = props.content;
     if (!/^\/\S+\s*$/.test(text)) return false;
+    // `/shrug` alone is sent at once, unless a bot here has the same name
+    if (
+      builtinCommand(text) &&
+      !(commands() && typedCommand(text, usable(), label))
+    )
+      return false;
     // the list could not help a moment ago: this Enter sends the text
     const note = typedNote();
     if (note && note.text === text && note.state !== "loading") {
@@ -332,7 +382,7 @@ export function CommandPicker(props: Props) {
     if (!showList()) return;
     const target = event.target as HTMLElement | null;
     if (!target?.closest?.(".cm-editor")) return;
-    const list = matches();
+    const list = entries();
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
       event.stopPropagation();
@@ -342,7 +392,7 @@ export function CommandPicker(props: Props) {
       event.preventDefault();
       event.stopPropagation();
       const entry = list[active()];
-      if (entry) pick(entry.command);
+      if (entry) pickEntry(entry);
     } else if (event.key === "Escape") {
       event.preventDefault();
       event.stopPropagation();
@@ -423,10 +473,10 @@ export function CommandPicker(props: Props) {
                   application(appFilter()!)?.username)
                 : t`Commands`}
             </PanelTitle>
-            <Show when={matches().length === 0}>
+            <Show when={entries().length === 0}>
               <EmptyLine>{t`No commands match`}</EmptyLine>
             </Show>
-            <For each={matches()}>
+            <For each={entries()}>
               {(entry, index) => (
                 <CommandRow
                   role="option"
@@ -434,25 +484,64 @@ export function CommandPicker(props: Props) {
                   data-active={index() === active() ? "" : undefined}
                   onPointerEnter={() => setActive(index())}
                   onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => pick(entry.command)}
+                  onClick={() => pickEntry(entry)}
                 >
-                  <AppAvatar app={application(entry.command.application_id)} />
-                  <CommandText>
-                    <strong>
-                      <bdi>/{entry.name}</bdi>
-                    </strong>
-                    <span>
-                      {localized(
-                        entry.command.description ?? "",
-                        entry.command.description_localizations,
-                        locale(),
+                  <Switch>
+                    <Match when={entry.kind === "bot" && entry}>
+                      {(bot) => (
+                        <>
+                          <AppAvatar
+                            app={application(bot().command.application_id)}
+                          />
+                          <CommandText>
+                            <strong>
+                              <bdi>/{bot().name}</bdi>
+                            </strong>
+                            <span>
+                              {localized(
+                                bot().command.description ?? "",
+                                bot().command.description_localizations,
+                                locale(),
+                              )}
+                            </span>
+                          </CommandText>
+                          <AppName>
+                            {application(bot().command.application_id)
+                              ?.display_name ??
+                              application(bot().command.application_id)
+                                ?.username}
+                          </AppName>
+                        </>
                       )}
-                    </span>
-                  </CommandText>
-                  <AppName>
-                    {application(entry.command.application_id)?.display_name ??
-                      application(entry.command.application_id)?.username}
-                  </AppName>
+                    </Match>
+                    <Match when={entry.kind === "builtin" && entry}>
+                      {(own) => (
+                        <>
+                          <BuiltinMark aria-hidden="true">
+                            <Icon
+                              name={
+                                own().builtin.name === "me"
+                                  ? "pencil-simple"
+                                  : own().builtin.name === "spoiler"
+                                    ? "eye-slash"
+                                    : "smiley"
+                              }
+                              size={18}
+                            />
+                          </BuiltinMark>
+                          <CommandText>
+                            <strong>
+                              <bdi>/{own().builtin.name}</bdi>
+                            </strong>
+                            <span>
+                              <bdi>{builtinText(own().builtin)}</bdi>
+                            </span>
+                          </CommandText>
+                          <AppName>Zrzur</AppName>
+                        </>
+                      )}
+                    </Match>
+                  </Switch>
                 </CommandRow>
               )}
             </For>
@@ -1292,6 +1381,21 @@ const CommandText = styled("div", {
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
     },
+  },
+});
+
+/** The mark of a built-in command, the size of a bot's picture */
+const BuiltinMark = styled("span", {
+  base: {
+    display: "grid",
+    placeItems: "center",
+    width: "28px",
+    height: "28px",
+    flexShrink: 0,
+    borderRadius: "50%",
+    background: "var(--z-box-bg)",
+    color: "var(--z-fg-secondary)",
+    "--z-icon-color": "currentColor",
   },
 });
 

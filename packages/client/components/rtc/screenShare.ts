@@ -83,7 +83,7 @@ const LAYER_360: ScreenShareLayer = {
  */
 export function screenShareQualities(
   limits: ScreenShareLimits,
-  content: ScreenShareContent = "detail",
+  content: ScreenShareContent = "motion",
 ): Partial<Record<ScreenShareQualityName, ScreenShareQuality>> {
   const [maxW, maxH] = limits.resolution;
   const fps60 = limits.framerate >= 60;
@@ -107,7 +107,9 @@ export function screenShareQualities(
         width: 1280,
         height: 720,
         frameRate: 30,
-        encoding: { maxBitrate: 2_000_000, maxFramerate: 30 },
+        // 720p at 30 FPS for everyone, held steady: room for motion
+        // without the encoder having to drop frames
+        encoding: { maxBitrate: 2_500_000, maxFramerate: 30 },
         layers: [LAYER_360],
       },
     };

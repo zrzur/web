@@ -7,42 +7,71 @@
 
 export type PageId =
   | "overview"
-  | "insights"
+  | "features"
   | "channels"
-  | "joining"
   | "emoji"
   | "soundboard"
-  | "safety"
-  | "log"
+  | "insights"
   | "members"
   | "roles"
-  | "bans"
+  | "invites"
+  | "joining"
+  | "lobby"
+  | "discovery"
+  | "safety"
+  | "log"
   | "apps"
   | "wings";
 
 /**
- * Page ids and aliases from before the 2026-11 consolidation, and the
- * address they open now ("page", "page#section" or "page/sub-view")
+ * Page ids and addresses from before. The long pages of 2026-11 were split
+ * into one page per topic on 2026-11-27, then the pages of one block were
+ * folded back into fuller ones the same day (owner: a page of two words is
+ * not a page). Each old address opens its new place ("page",
+ * "page#section" or "page/sub-view").
  */
 export const ALIASES: Record<string, string> = {
-  lobby: "joining/lobby",
-  events: "overview#events",
-  discover: "overview#discovery",
+  // the one-topic pages of 2026-11-27, folded into fuller pages the same day
+  access: "joining",
+  "access#join-mode": "joining",
+  "access#verification": "joining#verification",
+  "access/requests": "joining/requests",
+  newcomers: "joining#rules",
+  "newcomers#rules": "joining#rules",
+  "newcomers#on-join": "joining#on-join",
+  "newcomers#questions": "joining#questions",
+  bans: "members#bans",
+  emergency: "safety",
+  "emergency#emergency": "safety",
+  filters: "safety#filters",
+  danger: "overview#danger",
+  // the long pages from before
+  "joining#join-mode": "joining",
+  "joining#lobby": "lobby",
+  "joining/lobby": "lobby",
+  rules: "joining#rules",
+  "safety#emergency": "safety",
+  "overview#discovery": "discovery",
+  "overview#verified-server": "discovery#verified-server",
+  "overview#invites": "invites",
+  "overview#features": "features",
+  "overview#threads": "features#threads",
+  "overview#events": "features#events",
+  "overview#tickets": "features#tickets",
+  "members#invites": "invites#invite-list",
+  // older names still in links and notes
+  events: "features#events",
+  discover: "discovery",
   emojis: "emoji",
   sounds: "soundboard",
-  access: "joining#join-mode",
-  privacy: "joining#join-mode",
-  "access/requests": "joining/requests",
+  "emoji#soundboard": "soundboard",
+  privacy: "joining",
   join_requests: "joining/requests",
   requests: "joining/requests",
-  invites: "members#invites",
-  notices: "overview#features",
-  emergency: "safety#emergency",
-  safety: "safety",
+  notices: "features",
   verification: "joining#verification",
   autorole: "joining#on-join",
   welcome: "joining#on-join",
-  filters: "safety#filters",
   audit: "log",
   stats: "insights",
   analytics: "insights",
@@ -88,7 +117,7 @@ export const SECTIONS: SectionInfo[] = [
   },
   {
     id: "discovery",
-    page: "overview",
+    page: "discovery",
     words: {
       en: "discovery discover listing category language tags public list",
       ar: "الاكتشاف اكتشف إدراج الفئة اللغة الوسوم العلامات قائمة عامة",
@@ -97,7 +126,7 @@ export const SECTIONS: SectionInfo[] = [
   },
   {
     id: "invites",
-    page: "overview",
+    page: "invites",
     words: {
       en: "custom invite link vanity short link sharing",
       ar: "رابط دعوة مخصص رابط قصير مشاركة",
@@ -106,7 +135,7 @@ export const SECTIONS: SectionInfo[] = [
   },
   {
     id: "features",
-    page: "overview",
+    page: "features",
     words: {
       en: "features rules channel system messages join leave kick ban welcome counters notices",
       ar: "الميزات قناة القواعد رسائل النظام انضمام مغادرة طرد حظر ترحيب عدادات إشعارات",
@@ -115,7 +144,7 @@ export const SECTIONS: SectionInfo[] = [
   },
   {
     id: "threads",
-    page: "overview",
+    page: "features",
     words: {
       en: "threads forums posts switch on off disable",
       ar: "الخيوط المنتديات المنشورات تشغيل إيقاف تعطيل",
@@ -124,11 +153,29 @@ export const SECTIONS: SectionInfo[] = [
   },
   {
     id: "events",
-    page: "overview",
+    page: "features",
     words: {
       en: "events scheduled lobby welcome page switch on off channel list",
       ar: "الفعاليات الأحداث المجدولة الردهة صفحة الترحيب تشغيل إيقاف قائمة القنوات",
       de: "events veranstaltungen termine lobby willkommensseite einschalten ausschalten kanalliste",
+    },
+  },
+  {
+    id: "tickets",
+    page: "features",
+    words: {
+      en: "tickets support private channel staff help desk",
+      ar: "التذاكر الدعم قناة خاصة الفريق المساعدة",
+      de: "tickets support privater kanal team hilfe",
+    },
+  },
+  {
+    id: "verified-server",
+    page: "discovery",
+    words: {
+      en: "verified server official badge apply check",
+      ar: "سيرفر موثق رسمي شارة تقديم تحقق",
+      de: "verifizierter server offiziell abzeichen bewerben prüfung",
     },
   },
   {
@@ -214,7 +261,7 @@ export const SECTIONS: SectionInfo[] = [
   },
   {
     id: "lobby",
-    page: "joining",
+    page: "lobby",
     words: {
       en: "lobby design colours layout greeting buttons faq tagline about sections channels",
       ar: "الردهة التصميم الألوان التخطيط التحية الأزرار أسئلة شائعة نبذة الأقسام",
@@ -276,8 +323,8 @@ export const SECTIONS: SectionInfo[] = [
     },
   },
   {
-    id: "invites",
-    page: "members",
+    id: "invite-list",
+    page: "invites",
     words: {
       en: "invites active links create revoke uses expiry",
       ar: "الدعوات روابط نشطة إنشاء إلغاء الاستخدامات انتهاء",
@@ -295,7 +342,7 @@ export const SECTIONS: SectionInfo[] = [
   },
   {
     id: "bans",
-    page: "bans",
+    page: "members",
     words: {
       en: "bans unban banned people",
       ar: "الحظر رفع الحظر المحظورون",
@@ -333,17 +380,23 @@ export const SECTIONS: SectionInfo[] = [
 
 /** Page names in the three languages (search only; the sidebar uses Lingui) */
 const PAGE_WORDS: Record<PageId, string> = {
-  overview: "overview general نظرة عامة allgemein übersicht",
-  insights: "insights الإحصاءات einblicke",
+  overview:
+    "overview general profile danger delete transfer ownership نظرة عامة الملف الخطر حذف نقل الملكية allgemein übersicht profil gefahr löschen übertragen",
+  features: "features functions الميزات funktionen",
   channels: "channels القنوات kanäle",
-  joining: "joining onboarding الانضمام الترحيب beitritt willkommen",
   emoji: "emoji الإيموجي emojis",
-  soundboard: "soundboard لوحة الأصوات soundboard",
-  safety: "safety الحماية sicherheit",
+  soundboard: "soundboard sounds لوحة الأصوات الأصوات soundboard sounds",
+  insights: "insights statistics الإحصاءات einblicke statistiken",
+  members: "members bans الأعضاء الحظر mitglieder banns sperren",
+  roles: "roles الأدوار الرتب rollen",
+  invites: "invites invite links الدعوات روابط einladungen",
+  joining:
+    "access who can join joining new members welcome onboarding rules الوصول الانضمام الأعضاء الجدد الترحيب القواعد zugang beitritt neue mitglieder willkommen regeln",
+  lobby: "lobby الردهة lobby",
+  discovery: "discovery discover الاكتشاف entdecken",
+  safety:
+    "protection safety emergency raid filters automod spam الحماية الأمان الطوارئ الفلاتر schutz sicherheit notfall filter",
   log: "audit log سجل التدقيق protokoll",
-  members: "members الأعضاء mitglieder",
-  roles: "roles الأدوار rollen",
-  bans: "bans الحظر banns sperren",
   apps: "apps التطبيقات bots webhooks",
   wings: "wings الأجنحة flügel",
 };

@@ -107,16 +107,11 @@ export function SaveDataSettings() {
     <Column gap="xl">
       <SettingsSection
         // the page's own title says "Save data"; a second one here would repeat it
-        description={
-          <Trans>
-            For weak or metered internet. The choice is kept on this device
-            only, so your phone and your computer can differ.
-          </Trans>
-        }
+        description={<Trans>For weak or metered internet.</Trans>}
       >
         <SettingsRow
           icon={<Icon name="cloud-arrow-down" size={20} />}
-          title={<Trans>Save data</Trans>}
+          title={<Trans>On this device</Trans>}
           description={
             <Trans>
               Uses less mobile data. You can load anything with a tap.

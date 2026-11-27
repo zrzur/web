@@ -12,6 +12,35 @@ describe("who made a bot", () => {
     ).toEqual({ kind: "name", name: "maker" });
   });
 
+  it("shows the maker's own picture, not a letter", () => {
+    expect(
+      creatorShown(
+        {
+          creator: {
+            username: "maker",
+            avatar: { createFileURL: () => "https://cdn/avatars/abc" },
+          },
+        },
+        undefined,
+        "01READER",
+      ),
+    ).toEqual({
+      kind: "name",
+      name: "maker",
+      avatar: "https://cdn/avatars/abc",
+    });
+  });
+
+  it("brings the maker's id, so their profile opens", () => {
+    expect(
+      creatorShown(
+        { creator: { id: "01MAKER", username: "maker" } },
+        undefined,
+        "01READER",
+      ),
+    ).toEqual({ kind: "name", name: "maker", id: "01MAKER" });
+  });
+
   it("prefers the display name", () => {
     expect(
       creatorShown(

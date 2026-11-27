@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/twitter/twemoji",
+  "tag": "v14.0.2",
+  "commit": "7a3dad4a4da30497093dab22eafba135f02308e1",
+  "folder": "assets/svg",
+  "license": "CC-BY-4.0 (graphics), MIT (code)",
+  "attribution": "Emoji graphics by Twitter, Inc and other contributors (Twemoji), licensed under CC-BY 4.0"
+}

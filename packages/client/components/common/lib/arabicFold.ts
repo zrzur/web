@@ -84,15 +84,32 @@ const collators = new Map<string, Intl.Collator>();
  * Arabic names come before Latin ones, hamza forms and vowel marks do not
  * split a letter's names apart, and digits count as numbers.
  */
-export function compareNames(a: string, b: string) {
+let lastLang = "";
+let lastCollator: Intl.Collator | undefined;
+
+/** The collator of the page language, looked up once per language */
+let checked = false;
+function currentCollator() {
+  // one look at the page language per task, not one per comparison of a
+  // sort over thousands of names
+  if (checked && lastCollator) return lastCollator;
+  checked = true;
+  queueMicrotask(() => (checked = false));
   const lang =
     (typeof document !== "undefined" && document.documentElement.lang) || "en";
+  if (lang === lastLang && lastCollator) return lastCollator;
   let collator = collators.get(lang);
   if (!collator) {
     collator = new Intl.Collator(lang, { numeric: true, sensitivity: "base" });
     collators.set(lang, collator);
   }
-  return collator.compare(a, b) || a.localeCompare(b);
+  lastLang = lang;
+  lastCollator = collator;
+  return collator;
+}
+
+export function compareNames(a: string, b: string) {
+  return currentCollator().compare(a, b) || a.localeCompare(b);
 }
 
 /**

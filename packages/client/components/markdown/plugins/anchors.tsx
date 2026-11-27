@@ -35,7 +35,8 @@ const link = cva({
 
 const internalLink = cva({
   base: {
-    verticalAlign: "bottom",
+    // centred on the words around it (bottom sat it some 5px low)
+    verticalAlign: "text-bottom",
 
     gap: "4px",
     paddingInlineStart: "2px",

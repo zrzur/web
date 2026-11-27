@@ -1,9 +1,9 @@
+import { useSpeaking } from "@revolt/rtc/speaking";
 import {
   RoomContext,
   TrackLoop,
   useEnsureParticipant,
   useIsMuted,
-  useIsSpeaking,
   useTracks,
 } from "solid-livekit-components";
 
@@ -56,7 +56,7 @@ function ParticipantLive(props: { channel: Channel }) {
     source: Track.Source.Microphone,
   });
 
-  const isSpeaking = useIsSpeaking(participant);
+  const isSpeaking = useSpeaking(participant);
   const media = usePublishedMedia(participant);
 
   return (

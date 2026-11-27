@@ -26,7 +26,7 @@ const inventory = json(
 );
 const allow = new Set(json(join(here, "check-names.allow.json")));
 
-/** Every property name, enum value, schema name and `type` constant */
+/** Every property name, enum value, schema and security scheme name and `type` constant */
 const known = new Set();
 const walk = (node) => {
   if (Array.isArray(node)) return node.forEach(walk);
@@ -37,7 +37,9 @@ const walk = (node) => {
     if (key === "enum" && Array.isArray(value))
       value.forEach((item) => typeof item === "string" && known.add(item));
     if (
-      (key === "schemas" || key === "definitions") &&
+      (key === "schemas" ||
+        key === "definitions" ||
+        key === "securitySchemes") &&
       value &&
       typeof value === "object"
     )

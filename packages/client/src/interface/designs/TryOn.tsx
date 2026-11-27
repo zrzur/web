@@ -25,7 +25,7 @@ import {
 import { useAccountGate } from "../../DesignsSite";
 
 import { useFontLabel } from "./Home";
-import { type Wear, isOn, takenOff } from "./gallery";
+import { type Place, type Wear, isOn, placeOf, takenOff } from "./gallery";
 
 const same = (a?: string[], b?: string[]) =>
   (a ?? []).join() === (b ?? []).join();
@@ -65,6 +65,8 @@ function createTryOn() {
   const [saved, setSaved] = createSignal<UserStyle>();
   const [error, setError] = createSignal<string>();
   const [lastName, setLastName] = createSignal<string>();
+  // the last design put on: the preview opens where it is seen
+  const [focus, setFocus] = createSignal<Wear>();
 
   const changed = () => !sameStyle(draft(), current());
   const shown = createMemo(() => ({ ...draft(), ...peek() }));
@@ -81,9 +83,11 @@ function createTryOn() {
     if (isOn(draft(), wear)) {
       put(takenOff(wear));
       setLastName(undefined);
+      setFocus(undefined);
     } else {
       put(wear);
       setLastName(name);
+      setFocus(wear);
     }
   }
 
@@ -91,6 +95,7 @@ function createTryOn() {
     setDraft({ ...current() });
     setError(undefined);
     setLastName(undefined);
+    setFocus(undefined);
   }
 
   async function save() {
@@ -188,6 +193,15 @@ function createTryOn() {
     error,
     lastName,
     peek: setPeek,
+    /**
+     * Where the last design put on is seen best; nothing put on: undefined,
+     * the whole look. What the pointer only rests on shows on you but does
+     * not move the preview (it would jump with every tile passed over).
+     */
+    place: (): Place | undefined => {
+      const wear = focus();
+      return wear && Object.keys(wear).length ? placeOf(wear) : undefined;
+    },
     put,
     toggle,
     reset,

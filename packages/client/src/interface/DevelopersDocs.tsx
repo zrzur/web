@@ -1,6 +1,7 @@
 import { Show, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
@@ -18,6 +19,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { docsBase, isDocsSite } from "../siteKind";
 
+import { OfficialServerLink } from "./OfficialServerLink";
 import { DocsPortal } from "./developers/docs/DocsPortal";
 import { pageOfPath, siteAddress } from "./developers/docs/links";
 
@@ -53,7 +55,10 @@ export function DevelopersDocs() {
             <>
               {/* window controls in the desktop app; nothing on the web */}
               <Titlebar bare />
-              <Header placement="primary">
+              {/* the language menu opens below the header: the shared header
+                  clips what overflows it, so this one lets it out, above
+                  the page (the menu was cut off and could not be used) */}
+              <Header placement="primary" class={docsHeader}>
                 <Brand>
                   <Icon name="code" size={22} />
                   <Title>
@@ -72,7 +77,13 @@ export function DevelopersDocs() {
         <DocsPortal
           page={page()}
           site={site}
-          footer={site ? <SiteFooter site="docs" /> : undefined}
+          footer={
+            site ? (
+              <SiteFooter site="docs" />
+            ) : (
+              <OfficialServerLink server="developers" />
+            )
+          }
         />
       </Base>
     </Show>
@@ -135,6 +146,12 @@ const Title = styled("span", {
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   },
+});
+
+const docsHeader = css({
+  overflow: "visible",
+  position: "relative",
+  zIndex: 20,
 });
 
 const Languages = styled("div", {

@@ -34,7 +34,7 @@ An access token reads who someone is, which servers they are in and what they ma
   &code_challenge_method=S256
 ```
 
-That path is on the Zrzur app. The **URL generator** on the OAuth2 tab builds this address. PKCE (`code_challenge`) is always required, also with a client secret.
+That path is on the Zrzur app. The **Sign-in link** on the OAuth2 tab builds this address from the scopes you tick. PKCE (`code_challenge`) is always required, also with a client secret.
 
 4. The person approves. The browser comes back to your redirect URI with `code` and `state`. Check that `state` is yours.
 5. Exchange the code within 10 minutes. It works once.

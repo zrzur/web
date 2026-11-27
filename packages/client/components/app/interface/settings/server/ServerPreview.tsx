@@ -6,6 +6,7 @@ import { styled } from "styled-system/jsx";
 
 import { Avatar } from "@revolt/ui";
 
+import { renderSimpleMarkdown } from "@revolt/markdown";
 import type { ProfileDraft } from "./Overview";
 
 /** Address of a picture that is either already uploaded or still a file */
@@ -28,10 +29,7 @@ function useImage(value: () => string | File[] | null | undefined) {
  * How the server looks in an invite and in Discover. It follows what is
  * typed in the profile fields, before anything is saved.
  */
-export function ServerPreview(props: {
-  server: Server;
-  draft?: ProfileDraft;
-}) {
+export function ServerPreview(props: { server: Server; draft?: ProfileDraft }) {
   const banner = useImage(() => props.draft?.banner ?? props.server.bannerURL);
   const icon = useImage(
     () => props.draft?.icon ?? props.server.animatedIconURL,
@@ -45,7 +43,9 @@ export function ServerPreview(props: {
       <Label>
         <Trans>Preview</Trans>
       </Label>
-      <Banner style={banner() ? { "background-image": `url(${banner()})` } : {}} />
+      <Banner
+        style={banner() ? { "background-image": `url(${banner()})` } : {}}
+      />
       <Body>
         <IconSlot>
           <Avatar
@@ -57,7 +57,10 @@ export function ServerPreview(props: {
         </IconSlot>
         <Name dir="auto">{name()}</Name>
         <Show when={description().trim()}>
-          <Description dir="auto">{description()}</Description>
+          <Description dir="auto">
+            {/* as on the invite page and in Discover: Markdown, not marks */}
+            {renderSimpleMarkdown(description())}
+          </Description>
         </Show>
       </Body>
     </Card>

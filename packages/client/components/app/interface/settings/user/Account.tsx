@@ -30,9 +30,9 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { useSettingsNavigation } from "../Settings";
 
 import { AgeSettings, ChangeRequests, UserSummary } from "./account/index";
+import { type RawApi, fetchDataExport } from "./myData/api";
 import { PrivacySection } from "./Privacy";
 import { StreamerModeSection } from "./StreamerMode";
-import { type RawApi, fetchDataExport } from "./myData/api";
 
 /**
  * Account Page
@@ -54,7 +54,7 @@ export function MyAccount() {
       <EditAccount />
       <PrivacySection />
       <StreamerModeSection />
-      <Security onSessions={() => navigate("sessions")} />
+      <Security />
       <ManageAccount />
     </Column>
   );
@@ -94,8 +94,7 @@ function EditAccount() {
         description={
           // masked until the user explicitly asks to reveal it, and always
           // in streamer mode
-          (!state.settings.streamerMode && email()) ||
-          "•••••••••••@•••••••••••"
+          (!state.settings.streamerMode && email()) || "•••••••••••@•••••••••••"
         }
         control={() => (
           <Row gap="sm">
@@ -119,7 +118,6 @@ function EditAccount() {
       <SettingsRow
         icon={<Icon name="password" size={20} />}
         title={<Trans>Password</Trans>}
-        description={<Trans>Change the password you use to sign in.</Trans>}
         control={() => (
           <Button size="sm" variant="tonal" onPress={editPassword}>
             <Trans>Change</Trans>
@@ -134,7 +132,7 @@ function EditAccount() {
 /**
  * Security: authenticator app, recovery codes, sessions
  */
-function Security(props: { onSessions: () => void }) {
+function Security() {
   const client = useClient();
   const mfa = createMfaResource();
   const snackbar = useSnackbar();
@@ -229,15 +227,7 @@ function Security(props: { onSessions: () => void }) {
   );
 
   return (
-    <SettingsSection
-      title={<Trans>Security</Trans>}
-      description={
-        <Trans>
-          Two-factor authentication protects your account even if your password
-          leaks.
-        </Trans>
-      }
-    >
+    <SettingsSection title={<Trans>Security</Trans>}>
       <SettingsRow
         icon={<Icon name="device-mobile" size={20} />}
         title={
@@ -245,9 +235,6 @@ function Security(props: { onSessions: () => void }) {
             <Trans>Authenticator app</Trans>
             {status(mfa.data?.authenticatorEnabled)}
           </Row>
-        }
-        description={
-          <Trans>Sign in with a one-time code from your phone.</Trans>
         }
         control={() => (
           <Show
@@ -319,15 +306,6 @@ function Security(props: { onSessions: () => void }) {
             </Row>
           </Show>
         )}
-      />
-      <SettingsRow
-        icon={<Icon name="desktop" size={20} />}
-        title={<Trans>Sessions</Trans>}
-        description={
-          <Trans>See where you're signed in and sign out devices.</Trans>
-        }
-        onClick={props.onSessions}
-        navigational
       />
     </SettingsSection>
   );
@@ -420,10 +398,10 @@ function ManageAccount() {
                     Your account and your data (including your messages and
                     friends list) will be erased after you confirm by email and
                     a waiting period. Some records we must keep by law, such as
-                    payments, stay for the time the law requires. You can
-                    cancel before then by writing to {contact()}. Download a
-                    copy of your data first: after you confirm, you can no
-                    longer sign in.
+                    payments, stay for the time the law requires. You can cancel
+                    before then by writing to {contact()}. Download a copy of
+                    your data first: after you confirm, you can no longer sign
+                    in.
                   </Trans>
                 }
               >
@@ -432,9 +410,8 @@ function ManageAccount() {
                   friends list) will be erased {graceDays()} days after you
                   confirm by email. Some records we must keep by law, such as
                   payments, stay for the time the law requires. You can cancel
-                  before then by writing to {contact()}. Download a copy of
-                  your data first: after you confirm, you can no longer sign
-                  in.
+                  before then by writing to {contact()}. Download a copy of your
+                  data first: after you confirm, you can no longer sign in.
                 </Trans>
               </Show>
             }

@@ -304,12 +304,16 @@ export default function VoiceCallCardFloat(props: {
           ?.isSameNode(document.fullscreenElement)
       ) {
         if (document.fullscreenElement) {
-          document.exitFullscreen();
+          void document.exitFullscreen().catch(() => undefined);
         }
-        document.getElementById("floating")?.requestFullscreen();
+        // iPhone Safari has no element fullscreen: the call then fills the
+        // page instead (the layout below), never a thrown error
+        const floating = document.getElementById("floating");
+        if (floating?.requestFullscreen && document.fullscreenEnabled)
+          void floating.requestFullscreen().catch(() => undefined);
       }
     } else if (document.fullscreenElement) {
-      document.exitFullscreen();
+      void document.exitFullscreen().catch(() => undefined);
     }
   });
 
@@ -372,7 +376,9 @@ const Float = styled("div", {
     fullscreen: {
       true: {
         zIndex: 100,
-        height: "100vh",
+        // the visible height on phones: 100vh hid the call controls under
+        // the browser's own bar
+        height: "100dvh",
         top: 0,
         // the whole screen: the call controls stay clear of the notch and
         // the home bar (physical sides: cut-outs do not mirror in Arabic)

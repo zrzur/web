@@ -17,7 +17,7 @@ const key = (
 });
 
 /** Apply an edit to a text */
-function apply(doc: string, from: number, to: number, mark: "**" | "*") {
+function apply(doc: string, from: number, to: number, mark: "**" | "*" | "__") {
   const edit = toggleMark(doc, from, to, mark);
   const next = doc.slice(0, edit.from) + edit.insert + doc.slice(edit.to);
   return { next, selected: next.slice(edit.anchor, edit.head) };
@@ -33,6 +33,11 @@ describe("formatFor", () => {
       formatFor(key("KeyB", { ctrlKey: true, shiftKey: true }), false),
     ).toBe(undefined);
     expect(formatFor(key("KeyB"), false)).toBe(undefined);
+  });
+
+  it("is Ctrl+U for underline", () => {
+    expect(formatFor(key("KeyU", { ctrlKey: true }), false)).toBe("__");
+    expect(formatFor(key("KeyU", { metaKey: true }), true)).toBe("__");
   });
 });
 
@@ -73,6 +78,18 @@ describe("toggleMark", () => {
       selected: "hi",
     });
     expect(apply("*hi*", 1, 3, "**").next).toBe("***hi***");
+  });
+
+  it("underlines with two underscores and takes them off again", () => {
+    expect(apply("say hi now", 4, 6, "__")).toEqual({
+      next: "say __hi__ now",
+      selected: "hi",
+    });
+    expect(apply("say __hi__ now", 6, 8, "__")).toEqual({
+      next: "say hi now",
+      selected: "hi",
+    });
+    expect(apply("**hi**", 2, 4, "__").next).toBe("**__hi__**");
   });
 
   it("puts an empty pair at the cursor", () => {

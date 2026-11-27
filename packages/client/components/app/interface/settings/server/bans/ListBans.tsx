@@ -52,15 +52,7 @@ export function ListServerBans(props: { server: Server }) {
   });
 
   return (
-    <SettingsSection
-      title={<Trans>Banned members</Trans>}
-      description={
-        <Trans>
-          Banned people can't rejoin until they're unbanned, even with an
-          invite.
-        </Trans>
-      }
-    >
+    <SettingsSection title={<Trans>Banned members</Trans>}>
       <Search>
         <TextField
           type="search"

@@ -25,7 +25,7 @@ Ein Zugriffstoken liest, wer jemand ist, auf welchen Servern und was die Person 
 
 @@0
 
-Dieser Pfad liegt in der Zrzur-App. Der **URL-Generator** im Tab OAuth2 baut diese Adresse. PKCE (`code_challenge`) ist immer Pflicht, auch mit Client-Geheimnis.
+Dieser Pfad liegt in der Zrzur-App. Der **Anmeldelink** im Tab OAuth2 baut diese Adresse aus den Scopes, die du anhakst. PKCE (`code_challenge`) ist immer Pflicht, auch mit Client-Geheimnis.
 
 4. Die Person stimmt zu. Der Browser kommt mit `code` und `state` zu deiner Weiterleitungs-URI zurück. Prüfe, dass `state` deins ist.
 5. Tausche den Code innerhalb von 10 Minuten ein. Er funktioniert einmal.

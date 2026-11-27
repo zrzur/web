@@ -1,14 +1,9 @@
-import { For, Index, JSX, Match, Show, Switch, createSignal } from "solid-js";
+import { For, Index, JSX, Show, createEffect, on } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { useState } from "@revolt/state";
-import type { CollectibleRef } from "@revolt/state/stores/Collectibles";
-import { Avatar, Dialog, UserStatus } from "@revolt/ui";
 import { ColourWell } from "@revolt/ui/components/design/ColourWell";
-import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
-import { useDesignMotion } from "@revolt/ui/components/features/profiles/NameplateMotion";
 import {
   NAME_GRADIENTS,
   NAME_SOLIDS,
@@ -20,15 +15,10 @@ import {
   NAME_FONTS,
   NAME_MAX_COLOURS,
   UserStyle,
-  isCommunityRef,
   nameStyle,
-  nameplateBackground,
-  themeColours,
 } from "@revolt/ui/components/features/profiles/userStyle";
 import { THEME_PRESETS } from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { Icon } from "@revolt/ui/icons/Icon";
-
-import { useInstance } from "@revolt/instance";
 
 import { useNameFontLabel, useStyleLabels } from "./styleLabels";
 
@@ -121,42 +111,41 @@ const modeOf = (count: number): NameMode =>
  * three to five), and an effect on top, with a live preview in the viewer's
  * own theme. On a phone the preview stays pinned above the choices.
  */
-export function NameStyleDialog(props: {
-  show: boolean;
-  onClose: () => void;
+export function NameStyleForm(props: {
   name: string;
-  /** @username shown under the name in the preview */
-  handle?: string;
-  avatar?: string;
   value: UserStyle;
-  onApply: (
+  onChange: (
     style: Pick<UserStyle, "name_font" | "name_colour" | "name_effect">,
   ) => void;
 }) {
   const { t, i18n } = useLingui();
   const fontLabel = useNameFontLabel();
-  // the dialog edits a copy; it opens fresh each time
-  /* eslint-disable solid/reactivity */
-  const [font, setFont] = createSignal(props.value.name_font ?? "default");
-  const [colour, setColour] = createSignal<string[]>(
-    (props.value.name_colour ?? []).slice(0, NAME_MAX_COLOURS),
-  );
-  const [effect, setEffect] = createSignal<string | undefined>(
-    props.value.name_effect,
-  );
-  /* eslint-enable solid/reactivity */
+  // the look itself is the state: every choice shows at once, in the
+  // profile preview too, and Save keeps it
+  const font = () => props.value.name_font ?? "default";
+  const colour = () =>
+    (props.value.name_colour ?? []).slice(0, NAME_MAX_COLOURS);
+  const effect = () => props.value.name_effect;
+  const change = (
+    next: Partial<{ font: string; colour: string[]; effect?: string }>,
+  ) => {
+    const f = "font" in next ? next.font! : font();
+    props.onChange({
+      name_font: f === "default" ? undefined : f,
+      name_colour: "colour" in next ? next.colour! : colour(),
+      name_effect: "effect" in next ? next.effect : effect(),
+    });
+  };
+  const setFont = (value: string) => change({ font: value });
+  const setColour = (value: string[]) => change({ colour: value });
+  const setEffect = (value: string | undefined) => change({ effect: value });
+
   const mode = () => modeOf(colour().length);
-  const draft = (): UserStyle => ({
-    name_font: font(),
-    name_colour: colour(),
-    name_effect: effect(),
-  });
-  /** the preview's look: always drawn (even with name styles off), moving */
-  const look = () => nameStyle(draft(), { always: true, moving: true });
-  const changed = () =>
-    font() !== (props.value.name_font ?? "default") ||
-    !sameColours(colour(), props.value.name_colour) ||
-    effect() !== props.value.name_effect;
+  const look = () =>
+    nameStyle(
+      { name_font: font(), name_colour: colour(), name_effect: effect() },
+      { always: true, moving: true },
+    );
   const sample = () => (i18n().locale === "ar" ? "زر" : "Gg");
 
   const modes = (): { id: NameMode; label: string }[] => [
@@ -191,638 +180,207 @@ export function NameStyleDialog(props: {
   function surprise() {
     const pick = <T,>(list: readonly T[]) =>
       list[Math.floor(Math.random() * list.length)];
-    setFont(pick(NAME_FONTS).id);
     const roll = Math.random();
-    setColour(
-      roll < 0.35
-        ? [pick(NAME_SOLIDS)]
-        : roll < 0.7
-          ? [...pick(NAME_GRADIENTS)]
-          : [...pick(NAME_SPECTRA)],
-    );
-    setEffect(Math.random() < 0.6 ? pick(NAME_EFFECTS) : undefined);
+    change({
+      font: pick(NAME_FONTS).id,
+      colour:
+        roll < 0.35
+          ? [pick(NAME_SOLIDS)]
+          : roll < 0.7
+            ? [...pick(NAME_GRADIENTS)]
+            : [...pick(NAME_SPECTRA)],
+      effect: Math.random() < 0.6 ? pick(NAME_EFFECTS) : undefined,
+    });
   }
 
   return (
-    <Dialog
-      tone="edit"
-      iconName="at"
-      show={props.show}
-      onClose={props.onClose}
-      title={<Trans>Display name style</Trans>}
-      description={
-        <Trans>Pick a font, colours and an effect for your display name.</Trans>
-      }
-      size="xl"
-      actions={[
-        {
-          text: <Trans>Reset</Trans>,
-          variant: "text",
-          onClick: () => {
-            setFont("default");
-            setColour([]);
-            setEffect(undefined);
-            return false;
-          },
-        },
-        {
-          text: <Trans>Apply</Trans>,
-          isDisabled: !changed(),
-          onClick: () =>
-            props.onApply({
-              name_font: font() === "default" ? undefined : font(),
-              name_colour: colour(),
-              name_effect: effect(),
-            }),
-        },
-      ]}
-    >
-      <NsLayout>
-        {/* first in reading order: on a phone it stays pinned on top */}
-        <NsPreview aria-label={t`Preview`} role="group">
-          <NsProfile data-profile-preview>
-            <MiniBanner />
-            <MiniAvatar>
-              <Avatar size={64} src={props.avatar} fallback={props.name} />
-            </MiniAvatar>
-            <strong style={look()} data-name-preview>
-              <bdi>{props.name}</bdi>
-            </strong>
-            <Show when={props.handle}>
-              <small>
-                <bdi>@{props.handle}</bdi>
-              </small>
-            </Show>
-          </NsProfile>
-          <NsRows>
-            <NsMessage>
-              <Avatar size={32} src={props.avatar} fallback={props.name} />
-              <div>
-                <span class={"head"}>
-                  <strong style={look()} data-name-preview-row>
-                    <bdi>{props.name}</bdi>
-                  </strong>
-                  <time>
-                    <Trans>now</Trans>
-                  </time>
-                </span>
-                <span>
-                  <Trans>does anyone read this?</Trans>
-                </span>
-              </div>
-            </NsMessage>
-            <NsMember>
-              <Avatar size={24} src={props.avatar} fallback={props.name} />
-              <strong style={look()}>
-                <bdi>{props.name}</bdi>
-              </strong>
-            </NsMember>
-          </NsRows>
-          <NsNote data-wide>
-            <Trans>
-              In a server, a role colour wins over yours, but your font and
-              effect stay. On light themes your colours are darkened a little so
-              the name stays readable.
-            </Trans>
-          </NsNote>
-        </NsPreview>
+    <NsForm>
+      {/* your name as it looks now, above the choices */}
+      <NsLine>
+        <strong style={look()} data-name-preview>
+          <bdi>{props.name}</bdi>
+        </strong>
+        <NsReset
+          type="button"
+          onClick={() =>
+            change({ font: "default", colour: [], effect: undefined })
+          }
+        >
+          <Trans>Reset</Trans>
+        </NsReset>
+      </NsLine>
 
-        <NsForm>
-          <NsSection>
-            <NsLabel>
-              <Trans>Choose font</Trans>
-            </NsLabel>
-            <NsFonts>
-              <For each={NAME_FONTS}>
-                {(option) => (
-                  <NsFont
-                    type="button"
-                    aria-pressed={font() === option.id}
-                    onClick={() => setFont(option.id)}
-                    style={nameStyle(
-                      { name_font: option.id },
-                      { always: true },
-                    )}
-                    title={fontLabel(option.id)}
-                    aria-label={fontLabel(option.id)}
-                  >
-                    {sample()}
-                  </NsFont>
-                )}
-              </For>
-            </NsFonts>
-          </NsSection>
-
-          <NsSection>
-            <NsLabel>
-              <Trans>Choose colour</Trans>
-            </NsLabel>
-            <NsModes role="group">
-              <For each={modes()}>
-                {(option) => (
-                  <NsMode
-                    type="button"
-                    aria-pressed={mode() === option.id}
-                    onClick={() => pickMode(option.id)}
-                  >
-                    {option.label}
-                  </NsMode>
-                )}
-              </For>
-            </NsModes>
-
-            <Show when={mode() !== "none"}>
-              <NsStops>
-                <Index each={colour()}>
-                  {(value, index) => (
-                    <ColourWell
-                      label={
-                        index === 0
-                          ? t`Pick a colour`
-                          : index === 1
-                            ? t`Second colour`
-                            : t`Colour ${index + 1}`
-                      }
-                      value={value()}
-                      onInput={(picked) =>
-                        setColour(
-                          colour().map((c, at) => (at === index ? picked : c)),
-                        )
-                      }
-                    />
-                  )}
-                </Index>
-                <Show when={mode() === "spectrum"}>
-                  <NsStopButtons>
-                    <Show when={colour().length > 3}>
-                      <NsStopButton
-                        type="button"
-                        aria-label={t`Remove the last colour`}
-                        title={t`Remove the last colour`}
-                        onClick={() => setColour(colour().slice(0, -1))}
-                      >
-                        <Icon name="minus" size={18} />
-                      </NsStopButton>
-                    </Show>
-                    <Show when={colour().length < NAME_MAX_COLOURS}>
-                      <NsStopButton
-                        type="button"
-                        aria-label={t`Add a colour`}
-                        title={t`Add a colour`}
-                        onClick={() =>
-                          setColour([
-                            ...colour(),
-                            NAME_SOLIDS[
-                              (colour().length * 5) % NAME_SOLIDS.length
-                            ],
-                          ])
-                        }
-                      >
-                        <Icon name="plus" size={18} />
-                      </NsStopButton>
-                    </Show>
-                  </NsStopButtons>
-                </Show>
-              </NsStops>
-
-              <NsPresets data-mode={mode()}>
-                <For each={presets()}>
-                  {(option) => (
-                    <NsPreset
-                      type="button"
-                      aria-label={option.join(" → ")}
-                      aria-pressed={sameColours(colour(), option)}
-                      onClick={() => setColour([...option])}
-                    >
-                      <span
-                        style={{
-                          background:
-                            option.length >= 2
-                              ? `linear-gradient(90deg, ${option.join(", ")})`
-                              : option[0],
-                        }}
-                      />
-                    </NsPreset>
-                  )}
-                </For>
-              </NsPresets>
-            </Show>
-          </NsSection>
-
-          <NsSection>
-            <NsLabel>
-              <Trans>Choose effect</Trans>
-            </NsLabel>
-            <NsEffects>
-              <For each={effects()}>
-                {(option) => (
-                  <NsEffect
-                    type="button"
-                    aria-pressed={effect() === option.id}
-                    onClick={() => setEffect(option.id)}
-                    data-effect={option.id ?? "none"}
-                  >
-                    <b
-                      aria-hidden="true"
-                      style={nameStyle(
-                        {
-                          name_font: "bold",
-                          name_colour: colour().length
-                            ? colour()
-                            : ["#6dd5ed", "#b794ff"],
-                          name_effect: option.id,
-                        },
-                        { always: true },
-                      )}
-                    >
-                      {sample()}
-                    </b>
-                    <span>{option.label}</span>
-                  </NsEffect>
-                )}
-              </For>
-            </NsEffects>
-            <Show when={effect() === "edge" && colour().length >= 2}>
-              <NsNote>
-                <Trans>
-                  Edge: the first colour fills the letters, the second draws the
-                  border.
-                </Trans>
-              </NsNote>
-            </Show>
-          </NsSection>
-
-          <NsSurprise type="button" onClick={surprise}>
-            <Icon name="sparkle" size={18} />
-            <Trans>Surprise me</Trans>
-          </NsSurprise>
-          <NsNote data-narrow>
-            <Trans>
-              In a server, a role colour wins over yours, but your font and
-              effect stay. On light themes your colours are darkened a little so
-              the name stays readable.
-            </Trans>
-          </NsNote>
-        </NsForm>
-      </NsLayout>
-    </Dialog>
-  );
-}
-
-/**
- * Avatar decorations you have: the one you wear, your favourites and the ones
- * you wore lately (every decoration is a creator's, put on from Designs),
- * with search and a live preview on the user's own card, message and member
- * row.
- */
-export function DecorationDialog(props: {
-  show: boolean;
-  onClose: () => void;
-  name: string;
-  /** @username shown under the name in the preview */
-  handle?: string;
-  avatar?: string;
-  /** the rest of the user's look, so the preview matches what others see */
-  style?: UserStyle;
-  value?: string;
-  /** image of the current community decoration */
-  file?: string;
-  onApply: (decoration: string | undefined, file?: string) => void;
-}) {
-  const { t } = useLingui();
-  const labels = useStyleLabels();
-  const state = useState();
-  const instance = useInstance();
-  /* eslint-disable solid/reactivity */
-  const [choice, setChoice] = createSignal(props.value);
-  const [file, setFile] = createSignal(props.file);
-  /* eslint-enable solid/reactivity */
-  const [search, setSearch] = createSignal("");
-  const [category, setCategory] = createSignal<string>("all");
-
-  const pick = (id: string | undefined, image?: string) => {
-    setChoice(id);
-    setFile(image);
-  };
-
-  const categories = (): {
-    id: string;
-    label: string;
-    icon?: "heart" | "clock-counter-clockwise";
-  }[] => [
-    { id: "all", label: t`All` },
-    { id: "favourites", label: t`Favourites`, icon: "heart" },
-    { id: "recent", label: t`Recent`, icon: "clock-counter-clockwise" },
-  ];
-
-  const matches = (label: string) =>
-    label.toLocaleLowerCase().includes(search().trim().toLocaleLowerCase());
-
-  const refLabel = (ref: CollectibleRef) => labels.decoration(ref.id);
-
-  /** creators' decorations only: a built-in one saved before is gone */
-  const saved = (list: CollectibleRef[]) =>
-    list.filter((ref) => isCommunityRef(ref.id) && matches(refLabel(ref)));
-
-  const favourites = () => saved(state.collectibles.favourites("decorations"));
-  const recent = () => saved(state.collectibles.recent("decorations"));
-
-  /** the one you wear, then your favourites and the ones you wore lately */
-  const included = () => {
-    const worn: CollectibleRef[] = isCommunityRef(props.value)
-      ? [{ id: props.value!, file: props.file }]
-      : [];
-    const seen = new Set<string>();
-    return saved([...worn, ...favourites(), ...recent()]).filter((ref) => {
-      if (seen.has(ref.id)) return false;
-      seen.add(ref.id);
-      return true;
-    });
-  };
-
-  /** the user's look with the decoration being tried on */
-  const draft = (): UserStyle => ({
-    ...props.style,
-    decoration: choice(),
-    decoration_file: file(),
-  });
-  const theme = () => themeColours(props.style);
-  const motion = useDesignMotion();
-  const plate = () =>
-    nameplateBackground(props.style, instance.mediaUrl, { moving: motion() });
-
-  /** one decoration tile: tap to try it on, heart to save it */
-  const Tile = (tile: { id: string; file?: string; label: string }) => (
-    <DecoTile
-      type="button"
-      aria-pressed={choice() === tile.id}
-      onClick={() => pick(tile.id, tile.file)}
-    >
-      <AvatarDecoration decoration={tile.id} file={tile.file} size={48}>
-        <Avatar size={48} src={props.avatar} fallback={props.name} />
-      </AvatarDecoration>
-      <span title={tile.label}>{tile.label}</span>
-      <FavouriteButton
-        active={state.collectibles.isFavourite("decorations", tile.id)}
-        onToggle={() =>
-          state.collectibles.toggleFavourite("decorations", {
-            id: tile.id,
-            file: tile.file,
-          })
-        }
-      />
-      <Show when={choice() === tile.id}>
-        <CheckBadge>
-          <Icon name="check" size={12} />
-        </CheckBadge>
-      </Show>
-    </DecoTile>
-  );
-
-  const SearchBox = () => (
-    <GallerySearch>
-      <Icon name="magnifying-glass" size={16} />
-      <input
-        type="search"
-        placeholder={t`Search decorations`}
-        aria-label={t`Search decorations`}
-        value={search()}
-        onInput={(e) => setSearch(e.currentTarget.value)}
-      />
-    </GallerySearch>
-  );
-
-  return (
-    <Dialog
-      tone="edit"
-      iconName="smiley"
-      show={props.show}
-      onClose={props.onClose}
-      title={<Trans>Change avatar decoration</Trans>}
-      description={
-        <Trans>A frame around your avatar. All of them are free.</Trans>
-      }
-      size="xl"
-      actions={[
-        { text: <Trans>Cancel</Trans>, variant: "text" },
-        {
-          text: <Trans>Apply</Trans>,
-          isDisabled: choice() === props.value,
-          onClick: () => {
-            const id = choice();
-            if (id)
-              state.collectibles.markUsed("decorations", { id, file: file() });
-            props.onApply(id, file());
-          },
-        },
-      ]}
-    >
-      <Split>
-        <div>
-          <GalleryToolbar>
-            <SearchBox />
-            <Chips role="group" aria-label={t`Categories`}>
-              <For each={categories()}>
-                {(entry) => (
-                  <Chip
-                    type="button"
-                    aria-pressed={category() === entry.id}
-                    onClick={() => setCategory(entry.id)}
-                  >
-                    <Show when={entry.icon}>
-                      <Icon name={entry.icon!} size={13} />
-                    </Show>
-                    {entry.label}
-                    <Show
-                      when={
-                        entry.id === "favourites" &&
-                        state.collectibles.favourites("decorations").length
-                      }
-                    >
-                      <TabCount>
-                        {state.collectibles.favourites("decorations").length}
-                      </TabCount>
-                    </Show>
-                  </Chip>
-                )}
-              </For>
-            </Chips>
-          </GalleryToolbar>
-          <GalleryNote>
-            <Trans>
-              More designs by creators are in Designs. Put one on there and it
-              shows here.
-            </Trans>
-          </GalleryNote>
-          <Switch>
-            <Match
-              when={category() === "favourites" || category() === "recent"}
-            >
-              <DecoGrid>
-                <For
-                  each={category() === "favourites" ? favourites() : recent()}
-                  fallback={
-                    <GalleryEmpty>
-                      <Show
-                        when={search().trim()}
-                        fallback={
-                          <Show
-                            when={category() === "favourites"}
-                            fallback={
-                              <Trans>
-                                Decorations you wear will show up here.
-                              </Trans>
-                            }
-                          >
-                            <Trans>
-                              Tap the heart on a decoration to save it here.
-                            </Trans>
-                          </Show>
-                        }
-                      >
-                        <Trans>No decorations match your search.</Trans>
-                      </Show>
-                    </GalleryEmpty>
-                  }
-                >
-                  {(ref) => (
-                    <Tile id={ref.id} file={ref.file} label={refLabel(ref)} />
-                  )}
-                </For>
-              </DecoGrid>
-            </Match>
-            <Match when={true}>
-              <DecoGrid>
-                <Show when={category() === "all" && !search().trim()}>
-                  <DecoTile
-                    type="button"
-                    aria-pressed={!choice()}
-                    onClick={() => pick(undefined)}
-                  >
-                    <Avatar
-                      size={48}
-                      src={props.avatar}
-                      fallback={props.name}
-                    />
-                    <span>{labels.decoration(undefined)}</span>
-                    <Show when={!choice()}>
-                      <CheckBadge>
-                        <Icon name="check" size={12} />
-                      </CheckBadge>
-                    </Show>
-                  </DecoTile>
-                </Show>
-                <For
-                  each={included()}
-                  fallback={
-                    <Show when={search().trim()}>
-                      <GalleryEmpty>
-                        <Trans>No decorations match your search.</Trans>
-                      </GalleryEmpty>
-                    </Show>
-                  }
-                >
-                  {(ref) => (
-                    <Tile id={ref.id} file={ref.file} label={refLabel(ref)} />
-                  )}
-                </For>
-              </DecoGrid>
-            </Match>
-          </Switch>
-        </div>
-
-        <PreviewStack>
-          <PreviewCard
-            style={
-              theme()
-                ? {
-                    background: `linear-gradient(180deg, ${theme()!.top}, ${theme()!.bottom})`,
-                    "--avatar-status-ring": theme()!.top,
-                  }
-                : undefined
-            }
-            data-themed={!!theme()}
-          >
-            <PreviewCardBanner />
-            <PreviewCardAvatar>
-              <AvatarDecoration
-                decoration={choice()}
-                file={file()}
-                size={84}
-                live
+      <NsSection>
+        <NsLabel>
+          <Trans>Choose font</Trans>
+        </NsLabel>
+        <NsFonts>
+          <For each={NAME_FONTS}>
+            {(option) => (
+              <NsFont
+                type="button"
+                aria-pressed={font() === option.id}
+                onClick={() => setFont(option.id)}
+                style={nameStyle({ name_font: option.id }, { always: true })}
+                title={fontLabel(option.id)}
+                aria-label={fontLabel(option.id)}
               >
-                <Avatar
-                  size={84}
-                  src={props.avatar}
-                  fallback={props.name}
-                  holepunch="bottom-right"
-                  overlay={<UserStatus.Graphic status="Online" />}
+                {sample()}
+              </NsFont>
+            )}
+          </For>
+        </NsFonts>
+      </NsSection>
+
+      <NsSection>
+        <NsLabel>
+          <Trans>Choose colour</Trans>
+        </NsLabel>
+        <NsModes role="group">
+          <For each={modes()}>
+            {(option) => (
+              <NsMode
+                type="button"
+                aria-pressed={mode() === option.id}
+                onClick={() => pickMode(option.id)}
+              >
+                {option.label}
+              </NsMode>
+            )}
+          </For>
+        </NsModes>
+
+        <Show when={mode() !== "none"}>
+          <NsStops>
+            <Index each={colour()}>
+              {(value, index) => (
+                <ColourWell
+                  label={
+                    index === 0
+                      ? t`Pick a colour`
+                      : index === 1
+                        ? t`Second colour`
+                        : t`Colour ${index + 1}`
+                  }
+                  value={value()}
+                  onInput={(picked) =>
+                    setColour(
+                      colour().map((c, at) => (at === index ? picked : c)),
+                    )
+                  }
                 />
-              </AvatarDecoration>
-            </PreviewCardAvatar>
-            <strong
-              style={
-                theme()
-                  ? nameStyle({ name_font: props.style?.name_font })
-                  : nameStyle(draft())
-              }
-            >
-              {props.name}
-            </strong>
-            <Show when={props.handle}>
-              <small>
-                <bdi>@{props.handle}</bdi>
-              </small>
+              )}
+            </Index>
+            <Show when={mode() === "spectrum"}>
+              <NsStopButtons>
+                <Show when={colour().length > 3}>
+                  <NsStopButton
+                    type="button"
+                    aria-label={t`Remove the last colour`}
+                    title={t`Remove the last colour`}
+                    onClick={() => setColour(colour().slice(0, -1))}
+                  >
+                    <Icon name="minus" size={18} />
+                  </NsStopButton>
+                </Show>
+                <Show when={colour().length < NAME_MAX_COLOURS}>
+                  <NsStopButton
+                    type="button"
+                    aria-label={t`Add a colour`}
+                    title={t`Add a colour`}
+                    onClick={() =>
+                      setColour([
+                        ...colour(),
+                        NAME_SOLIDS[(colour().length * 5) % NAME_SOLIDS.length],
+                      ])
+                    }
+                  >
+                    <Icon name="plus" size={18} />
+                  </NsStopButton>
+                </Show>
+              </NsStopButtons>
             </Show>
-          </PreviewCard>
-          <Joined>
-            <PreviewMessage data-plain>
-              <AvatarDecoration decoration={choice()} file={file()} size={36}>
-                <Avatar size={36} src={props.avatar} fallback={props.name} />
-              </AvatarDecoration>
-              <div>
-                <span class="head">
-                  <strong style={nameStyle(draft())}>
-                    <bdi>{props.name}</bdi>
-                  </strong>
-                  <time>
-                    <Trans>Today at 12:00</Trans>
-                  </time>
-                </span>
-                <span>
-                  <Trans>Look at my new decoration</Trans>
-                </span>
-              </div>
-            </PreviewMessage>
-            <PreviewMember>
-              <PlateRow
-                class="z-plate"
-                style={plate() ? { "--plate": plate() } : undefined}
-              >
-                <AvatarDecoration decoration={choice()} file={file()} size={30}>
-                  <Avatar
-                    size={30}
-                    src={props.avatar}
-                    fallback={props.name}
-                    holepunch="bottom-right"
-                    overlay={<UserStatus.Graphic status="Online" />}
+          </NsStops>
+
+          <NsPresets data-mode={mode()}>
+            <For each={presets()}>
+              {(option) => (
+                <NsPreset
+                  type="button"
+                  aria-label={option.join(" → ")}
+                  aria-pressed={sameColours(colour(), option)}
+                  onClick={() => setColour([...option])}
+                >
+                  <span
+                    style={{
+                      background:
+                        option.length >= 2
+                          ? `linear-gradient(90deg, ${option.join(", ")})`
+                          : option[0],
+                    }}
                   />
-                </AvatarDecoration>
-                <strong style={nameStyle(draft())}>
-                  <bdi>{props.name}</bdi>
-                </strong>
-              </PlateRow>
-            </PreviewMember>
-          </Joined>
-          <Current>
-            <small>
-              <Trans>Selected</Trans>
-            </small>
-            <strong>{labels.decoration(choice())}</strong>
-          </Current>
-        </PreviewStack>
-      </Split>
-    </Dialog>
+                </NsPreset>
+              )}
+            </For>
+          </NsPresets>
+        </Show>
+      </NsSection>
+
+      <NsSection>
+        <NsLabel>
+          <Trans>Choose effect</Trans>
+        </NsLabel>
+        <NsEffects>
+          <For each={effects()}>
+            {(option) => (
+              <NsEffect
+                type="button"
+                aria-pressed={effect() === option.id}
+                onClick={() => setEffect(option.id)}
+                data-effect={option.id ?? "none"}
+              >
+                <b
+                  aria-hidden="true"
+                  style={nameStyle(
+                    {
+                      name_font: "bold",
+                      name_colour: colour().length
+                        ? colour()
+                        : ["#6dd5ed", "#b794ff"],
+                      name_effect: option.id,
+                    },
+                    { always: true },
+                  )}
+                >
+                  {sample()}
+                </b>
+                <span>{option.label}</span>
+              </NsEffect>
+            )}
+          </For>
+        </NsEffects>
+        <Show when={effect() === "edge" && colour().length >= 2}>
+          <NsNote>
+            <Trans>
+              Edge: the first colour fills the letters, the second draws the
+              border.
+            </Trans>
+          </NsNote>
+        </Show>
+      </NsSection>
+
+      <NsSurprise type="button" onClick={surprise}>
+        <Icon name="sparkle" size={18} />
+        <Trans>Surprise me</Trans>
+      </NsSurprise>
+      <NsNote>
+        <Trans>
+          In a server, a role colour wins over yours, but your font and effect
+          stay. On light themes your colours are darkened a little so the name
+          stays readable.
+        </Trans>
+      </NsNote>
+    </NsForm>
   );
 }
 
@@ -861,264 +419,97 @@ export function FavouriteButton(props: {
 }
 
 /**
- * Nameplate gallery: a background behind your name in member lists
+ * One row of the Look section. It opens in place: the row stays, its arrow
+ * turns, and the choices grow under it inside the same list, with the
+ * profile preview beside them changing as you pick. One row is open at a
+ * time; the row again (or Esc) closes it.
  */
-export function NameplateDialog(props: {
-  show: boolean;
-  onClose: () => void;
-  name: string;
-  avatar?: string;
-  value?: string;
-  file?: string;
-  onApply: (nameplate: string | undefined, file?: string) => void;
-}) {
-  const { t, i18n } = useLingui();
-  const instance = useInstance();
-  const motion = useDesignMotion();
-  const labels = useStyleLabels();
-  /* eslint-disable solid/reactivity */
-  const [choice, setChoice] = createSignal(props.value);
-  const [file, setFile] = createSignal(props.file);
-  /* eslint-enable solid/reactivity */
-  const [search, setSearch] = createSignal("");
-  const pick = (id: string | undefined, image?: string) => {
-    setChoice(id);
-    setFile(image);
-  };
-  const background = () =>
-    nameplateBackground(
-      { nameplate: choice(), nameplate_file: file() },
-      instance.mediaUrl,
-      { moving: motion() },
-    );
-  /** the creator's nameplate you wear: kept, or taken off with None */
-  const worn = () =>
-    isCommunityRef(props.value) &&
-    labels
-      .nameplate(props.value)
-      .toLocaleLowerCase(i18n().locale)
-      .includes(search().trim().toLocaleLowerCase(i18n().locale))
-      ? props.value
-      : undefined;
-
-  /** a member-list row with a nameplate behind it */
-  const Plate = (plate: { background?: string; size?: "small" }) => (
-    <PlateRow
-      class="z-plate"
-      data-size={plate.size}
-      style={plate.background ? { "--plate": plate.background } : undefined}
-    >
-      <Avatar
-        size={plate.size === "small" ? 22 : 30}
-        src={props.avatar}
-        fallback={props.name}
-      />
-      <strong>
-        <bdi>{props.name}</bdi>
-      </strong>
-    </PlateRow>
-  );
-
-  return (
-    <Dialog
-      tone="edit"
-      iconName="identification-card"
-      show={props.show}
-      onClose={props.onClose}
-      title={<Trans>Change nameplate</Trans>}
-      description={
-        <Trans>
-          A background behind your name in member lists. All of them are free.
-        </Trans>
-      }
-      size="xl"
-      actions={[
-        { text: <Trans>Cancel</Trans>, variant: "text" },
-        {
-          text: <Trans>Apply</Trans>,
-          isDisabled: choice() === props.value,
-          onClick: () => props.onApply(choice(), file()),
-        },
-      ]}
-    >
-      <Split>
-        <div>
-          <PlateSearch
-            type="search"
-            placeholder={t`Search nameplates`}
-            aria-label={t`Search nameplates`}
-            value={search()}
-            onInput={(e) => setSearch(e.currentTarget.value)}
-          />
-          <GalleryNote>
-            <Trans>
-              More designs by creators are in Designs. Put one on there and it
-              shows here.
-            </Trans>
-          </GalleryNote>
-          <PlateGrid>
-            <PlateTile
-              type="button"
-              aria-pressed={!choice()}
-              onClick={() => pick(undefined)}
-            >
-              <Plate size="small" />
-              <span>{t`None`}</span>
-              <Show when={!choice()}>
-                <CheckBadge>
-                  <Icon name="check" size={12} />
-                </CheckBadge>
-              </Show>
-            </PlateTile>
-            <Show when={worn()}>
-              {(id) => (
-                <PlateTile
-                  type="button"
-                  aria-pressed={choice() === id()}
-                  onClick={() => pick(id(), props.file)}
-                >
-                  <Plate
-                    size="small"
-                    background={nameplateBackground(
-                      { nameplate: id(), nameplate_file: props.file },
-                      instance.mediaUrl,
-                    )}
-                  />
-                  <span>{labels.nameplate(id())}</span>
-                  <Show when={choice() === id()}>
-                    <CheckBadge>
-                      <Icon name="check" size={12} />
-                    </CheckBadge>
-                  </Show>
-                </PlateTile>
-              )}
-            </Show>
-          </PlateGrid>
-        </div>
-
-        <PreviewStack>
-          <PreviewProfile>
-            <Plate background={background()} />
-          </PreviewProfile>
-          <Note>
-            <Trans>
-              Your nameplate shows behind your name in member lists.
-            </Trans>
-          </Note>
-        </PreviewStack>
-      </Split>
-    </Dialog>
-  );
-}
-
-const PlateRow = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    width: "100%",
-    aspectRatio: "448 / 84",
-    paddingInline: "10px",
-    boxSizing: "border-box",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-sidebar, var(--z-bg-input))",
-    color: "#fff",
-    position: "relative",
-    "& strong": {
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      textOverflow: "ellipsis",
-      fontSize: "14px",
-      fontWeight: 650,
-      textShadow: "0 0 2px rgb(0 0 0 / 60%), 0 1px 4px rgb(0 0 0 / 70%)",
-    },
-    "&[data-size='small']": {
-      gap: "6px",
-      paddingInline: "6px",
-      "& strong": { fontSize: "12px" },
-    },
-  },
-});
-
-const PlateGrid = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-    gap: "10px",
-    maxHeight: "min(420px, 55dvh)",
-    overflowY: "auto",
-    padding: "4px",
-  },
-});
-
-const PlateSearch = styled("input", {
-  base: {
-    width: "100%",
-    height: "36px",
-    boxSizing: "border-box",
-    marginBlockEnd: "12px",
-    paddingInline: "12px",
-    borderRadius: "var(--z-radius-input, 8px)",
-    border: "1px solid var(--z-field-border)",
-    background: "var(--z-field-bg)",
-    color: "var(--z-fg-primary)",
-    fontSize: "14px",
-    "&:focus-visible": {
-      outline: "none",
-      boxShadow: "var(--z-field-focus-shadow)",
-    },
-  },
-});
-
-const PlateTile = styled("button", {
-  base: {
-    // tiles out of view are not drawn, so their flags are not fetched
-    contentVisibility: "auto",
-    containIntrinsicSize: "auto 92px",
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    padding: "12px",
-    border: "1px solid var(--z-btn-surface-border)",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-raised)",
-    color: "var(--z-fg-primary)",
-    font: "inherit",
-    fontSize: "13px",
-    fontWeight: 600,
-    textAlign: "start",
-    cursor: "pointer",
-    _hover: { borderColor: "var(--z-border-strong)" },
-    "&[aria-pressed='true']": {
-      borderColor: "var(--z-accent)",
-      boxShadow: "inset 0 0 0 1px var(--z-accent)",
-    },
-    "&:active": { boxShadow: "var(--z-btn-pressed)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-  },
-});
-/** A row in the Look section that opens one of the dialogs */
-export function LookRow(props: {
+export function LookItem(props: {
+  id: string;
   icon: JSX.Element;
   title: JSX.Element;
   value: JSX.Element;
-  onClick: () => void;
+  open: boolean;
+  onToggle: () => void;
+  children: JSX.Element;
 }) {
+  let row: HTMLButtonElement | undefined;
+  // the opened row comes into view, its choices with it
+  createEffect(
+    on(
+      () => props.open,
+      (open) => {
+        if (open)
+          requestAnimationFrame(() =>
+            row?.scrollIntoView({ block: "nearest", behavior: "smooth" }),
+          );
+      },
+      { defer: true },
+    ),
+  );
   return (
-    <Row type="button" onClick={() => props.onClick()}>
-      <RowIcon>{props.icon}</RowIcon>
-      <span data-text>
-        <strong>{props.title}</strong>
-        <small>{props.value}</small>
-      </span>
-      <Icon name="caret-right" size={16} />
-    </Row>
+    <LookEntry data-open={props.open ? "" : undefined}>
+      <Row
+        ref={row}
+        type="button"
+        id={`look-${props.id}`}
+        aria-expanded={props.open}
+        aria-controls={`look-${props.id}-panel`}
+        onClick={() => props.onToggle()}
+      >
+        <RowIcon>{props.icon}</RowIcon>
+        <span data-text>
+          <strong>{props.title}</strong>
+          <small>{props.value}</small>
+        </span>
+        <Icon name="caret-down" size={16} class="caret" />
+      </Row>
+      <Drawer
+        id={`look-${props.id}-panel`}
+        role="region"
+        aria-labelledby={`look-${props.id}`}
+        onKeyDown={(event) => {
+          if (event.key !== "Escape") return;
+          event.stopPropagation();
+          props.onToggle();
+          row?.focus();
+        }}
+      >
+        <div class="inner">
+          {/* built when first opened, and kept while open */}
+          <Show when={props.open}>
+            <div class="content">{props.children}</div>
+          </Show>
+        </div>
+      </Drawer>
+    </LookEntry>
   );
 }
+
+/** A row and its drawer; the open one is set apart from the others */
+const LookEntry = styled("div", {
+  base: {
+    "& + &": { borderTop: "1px solid var(--z-border-subtle)" },
+    "&[data-open]": { background: "var(--z-box-bg)" },
+    "&[data-open] .caret": { transform: "rotate(180deg)" },
+  },
+});
+
+/** The choices under an open row: they grow open, no box over the page */
+const Drawer = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateRows: "0fr",
+    transition: "grid-template-rows 220ms cubic-bezier(0.2, 0, 0, 1)",
+    "[data-open] > &": { gridTemplateRows: "1fr" },
+    "& > .inner": { overflow: "hidden", minHeight: 0 },
+    "& .content": {
+      padding: "4px 14px 16px",
+      animation: "zFadeIn 220ms ease both",
+    },
+    _motionReduce: { transition: "none", "& .content": { animation: "none" } },
+  },
+});
 
 const ThemeWrap = styled("div", {
   base: { display: "flex", flexDirection: "column", gap: "12px" },
@@ -1189,162 +580,48 @@ const Preset = styled("button", {
   },
 });
 
-const Split = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "minmax(0, 1fr) 260px",
-    gap: "20px",
-    alignItems: "start",
-    "@media (max-width: 720px)": { gridTemplateColumns: "minmax(0, 1fr)" },
-  },
-});
-
-const choice = {
-  border: "1px solid var(--z-border-subtle)",
-  borderRadius: "var(--z-radius, 10px)",
-  background: "var(--z-bg-input)",
-  color: "var(--z-fg-primary)",
-  cursor: "pointer",
-  transition: "border-color 0.12s ease",
-  _hover: { borderColor: "var(--z-border-strong)" },
-  "&[aria-pressed='true']": {
-    borderColor: "var(--z-accent)",
-    boxShadow: "inset 0 0 0 1px var(--z-accent)",
-    background: "color-mix(in srgb, var(--z-accent) 10%, var(--z-bg-input))",
-  },
-  _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
-} as const;
-
-/* ---- display-name style dialog (its own parts; other dialogs keep theirs) ---- */
+/* ---- display-name style: its own parts ---- */
 
 /** one column on a phone; the preview beside the choices on wider screens */
 const NS_NARROW = "@media (max-width: 720px)";
 
-const NsLayout = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "minmax(0, 1fr) 272px",
-    gap: "24px",
-    alignItems: "start",
-    [NS_NARROW]: { gridTemplateColumns: "minmax(0, 1fr)", gap: "4px" },
-  },
-});
-
-const NsPreview = styled("div", {
-  base: {
-    gridColumn: "2",
-    gridRow: "1",
-    position: "sticky",
-    top: 0,
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    [NS_NARROW]: {
-      gridColumn: "1",
-      // pinned on top while the choices scroll under it
-      zIndex: 2,
-      marginInline: "-16px",
-      paddingInline: "16px",
-      paddingBlock: "4px 12px",
-      background:
-        "var(--z-dialog-bg, var(--z-popover-bg, var(--z-bg-modal, var(--z-bg-raised))))",
-      borderBottom: "1px solid var(--z-border-subtle)",
-      // the sheet's body has a little room above its first row: cover it, so
-      // nothing scrolling under the preview peeks out above it
-      "&::before": {
-        content: '""',
-        position: "absolute",
-        insetInline: 0,
-        bottom: "100%",
-        height: "16px",
-        background: "inherit",
-      },
-      "& [data-profile-preview]": { display: "none" },
-      "& [data-wide]": { display: "none" },
-    },
-  },
-});
-
-/** small profile card: banner, avatar over it, name and handle */
-const NsProfile = styled("div", {
+/** Your name as styled now, with Reset beside it */
+const NsLine = styled("div", {
   base: {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
-    gap: "2px",
-    paddingBottom: "16px",
-    overflow: "hidden",
-    borderRadius: "14px",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-    "& strong": {
-      marginTop: "8px",
-      paddingInline: "16px",
-      maxWidth: "100%",
+    gap: "12px",
+    minHeight: "48px",
+    padding: "8px 14px",
+    borderRadius: "var(--z-radius-md, 10px)",
+    background: "var(--z-bg-app)",
+    "& > strong": {
+      flex: 1,
+      minWidth: 0,
       fontSize: "20px",
-      lineHeight: "28px",
-      fontWeight: 700,
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      textOverflow: "ellipsis",
-    },
-    "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
-  },
-});
-
-/** a message and a member-list row, in one box */
-const NsRows = styled("div", {
-  base: {
-    overflow: "hidden",
-    borderRadius: "14px",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-  },
-});
-
-const NsMessage = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    padding: "12px",
-    "& > div": { display: "flex", flexDirection: "column", minWidth: 0 },
-    "& .head": {
-      display: "flex",
-      alignItems: "baseline",
-      gap: "8px",
-      minWidth: 0,
-    },
-    "& .head strong": {
-      fontSize: "15px",
-      fontWeight: 700,
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      textOverflow: "ellipsis",
-    },
-    "& time": { flexShrink: 0, fontSize: "12px", color: "var(--z-fg-muted)" },
-    "& > div > span:last-child": {
-      fontSize: "14px",
-      color: "var(--z-fg-primary)",
-    },
-  },
-});
-
-const NsMember = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    padding: "10px 12px",
-    borderTop: "1px solid var(--z-border-subtle)",
-    "& strong": {
-      minWidth: 0,
-      fontSize: "14px",
       fontWeight: 600,
       overflow: "hidden",
-      whiteSpace: "nowrap",
       textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
     },
+  },
+});
+
+const NsReset = styled("button", {
+  base: {
+    flexShrink: 0,
+    minHeight: "32px",
+    paddingInline: "12px",
+    border: "none",
+    borderRadius: "var(--z-radius-sm, 8px)",
+    background: "transparent",
+    color: "var(--z-fg-secondary)",
+    font: "inherit",
+    fontSize: "13px",
+    cursor: "pointer",
+    _hover: { background: "var(--z-nav-hover)", color: "var(--z-fg-primary)" },
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
+    _phone: { minHeight: "44px" },
   },
 });
 
@@ -1580,155 +857,6 @@ const NsNote = styled("p", {
   },
 });
 
-const PreviewStack = styled("div", {
-  base: { display: "flex", flexDirection: "column", gap: "10px" },
-});
-
-const PreviewProfile = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "10px",
-    padding: "20px 12px",
-    borderRadius: "calc(var(--z-radius, 10px) + 4px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-    "& strong": { fontSize: "18px", fontWeight: 700 },
-    "&[data-big]": { padding: "28px 12px" },
-  },
-});
-
-const PreviewMessage = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    padding: "10px 12px",
-    borderRadius: "var(--z-radius, 10px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-    "& > div": { display: "flex", flexDirection: "column", minWidth: 0 },
-    "& strong": { fontSize: "14px", fontWeight: 700 },
-    "& span": { fontSize: "14px", color: "var(--z-fg-primary)" },
-    "& .head": {
-      display: "flex",
-      alignItems: "baseline",
-      gap: "6px",
-      minWidth: 0,
-    },
-    "& .head strong": {
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      textOverflow: "ellipsis",
-    },
-    "& .head time": { flexShrink: 0 },
-    "& time": { fontSize: "12px", color: "var(--z-fg-muted)" },
-    "&[data-plain]": { border: "none", borderRadius: 0, background: "none" },
-  },
-});
-
-const MiniBanner = styled("div", {
-  base: {
-    alignSelf: "stretch",
-    height: "62px",
-    background:
-      "linear-gradient(135deg, color-mix(in srgb, var(--z-accent) 40%, var(--z-bg-raised)), var(--z-bg-raised))",
-  },
-});
-
-const MiniAvatar = styled("div", {
-  base: {
-    marginTop: "-40px",
-    padding: "4px",
-    borderRadius: "50%",
-    background: "var(--z-bg-input)",
-    lineHeight: 0,
-  },
-});
-
-/** Message + member row stacked in one card */
-const Joined = styled("div", {
-  base: {
-    overflow: "hidden",
-    borderRadius: "var(--z-radius, 10px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-  },
-});
-
-const Note = styled("p", {
-  base: {
-    margin: "2px 2px 0",
-    fontSize: "13px",
-    lineHeight: "18px",
-    color: "var(--z-fg-muted)",
-  },
-});
-
-/** Round check on the chosen tile */
-const CheckBadge = styled("span", {
-  base: {
-    position: "absolute",
-    top: "6px",
-    insetInlineEnd: "6px",
-    display: "grid",
-    placeItems: "center",
-    width: "20px",
-    height: "20px",
-    borderRadius: "50%",
-    background: "var(--z-accent-fill, var(--z-accent))",
-    color: "var(--z-on-accent, #fff)",
-    "--z-icon-color": "currentColor",
-  },
-});
-
-const Current = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "2px",
-    "& small": {
-      fontSize: "11px",
-      fontWeight: 700,
-      color: "var(--z-fg-muted)",
-    },
-    "& strong": { fontSize: "14px" },
-  },
-});
-
-const DecoGrid = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(92px, 1fr))",
-    alignContent: "start",
-    gap: "10px",
-    // same height on every tab, so the dialog doesn't jump around
-    height: "min(360px, 50dvh)",
-    overflowY: "auto",
-    padding: "4px",
-  },
-});
-
-const DecoTile = styled("button", {
-  base: {
-    ...choice,
-    position: "relative",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "10px",
-    height: "112px",
-    font: "inherit",
-    fontSize: "13px",
-    fontWeight: 600,
-    overflow: "hidden",
-  },
-});
-
 const Row = styled("button", {
   base: {
     display: "flex",
@@ -1743,7 +871,6 @@ const Row = styled("button", {
     background: "transparent",
     color: "var(--z-fg-primary)",
     transition: "background var(--z-motion-fast, 120ms) ease",
-    "& + &": { borderTop: "1px solid var(--z-border-subtle)" },
     font: "inherit",
     textAlign: "start",
     cursor: "pointer",
@@ -1761,7 +888,10 @@ const Row = styled("button", {
     },
     "& strong": { fontSize: "14px", fontWeight: 600 },
     "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
-    "&:dir(rtl) > svg:last-child": { transform: "scaleX(-1)" },
+    "& .caret": {
+      flexShrink: 0,
+      transition: "transform 200ms ease",
+    },
   },
 });
 
@@ -1772,119 +902,6 @@ const RowIcon = styled("span", {
     width: "38px",
     height: "38px",
     flexShrink: 0,
-  },
-});
-
-const TabCount = styled("span", {
-  base: {
-    minWidth: "18px",
-    height: "18px",
-    paddingInline: "5px",
-    borderRadius: "999px",
-    background: "color-mix(in srgb, var(--z-fg-primary) 12%, transparent)",
-    fontSize: "11px",
-    lineHeight: "18px",
-    textAlign: "center",
-  },
-});
-
-const GalleryToolbar = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    marginBottom: "10px",
-  },
-});
-
-const GallerySearch = styled("label", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    height: "38px",
-    paddingInline: "12px",
-    borderRadius: "999px",
-    border: "1px solid var(--z-field-border)",
-    background: "var(--z-field-bg)",
-    boxShadow: "var(--z-field-shadow)",
-    color: "var(--z-fg-muted)",
-    "--z-icon-color": "currentColor",
-    _focusWithin: {
-      borderColor: "var(--z-focus)",
-      boxShadow: "var(--z-field-focus-shadow)",
-    },
-    "& input": {
-      flex: 1,
-      minWidth: 0,
-      border: "none",
-      outline: "none",
-      background: "transparent",
-      color: "var(--z-fg-primary)",
-      font: "inherit",
-      fontSize: "14px",
-      textAlign: "start",
-    },
-  },
-});
-
-const Chips = styled("div", {
-  base: { display: "flex", flexWrap: "wrap", gap: "6px" },
-});
-
-const Chip = styled("button", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "5px",
-    "--z-icon-color": "currentColor",
-    height: "30px",
-    paddingInline: "12px",
-    borderRadius: "999px",
-    border: "1px solid var(--z-btn-surface-border)",
-    background: "transparent",
-    color: "var(--z-fg-secondary)",
-    font: "inherit",
-    fontSize: "13px",
-    fontWeight: 650,
-    cursor: "pointer",
-    transition: "background 0.12s ease, color 0.12s ease",
-    _hover: {
-      color: "var(--z-fg-primary)",
-      borderColor: "var(--z-border-strong)",
-    },
-    "&[aria-pressed='true']": {
-      background: "var(--z-accent-fill, var(--z-accent))",
-      borderColor: "var(--z-accent)",
-      color: "var(--z-on-accent, #fff)",
-    },
-    "&:active": { boxShadow: "var(--z-btn-pressed)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-  },
-});
-
-const GalleryEmpty = styled("p", {
-  base: {
-    gridColumn: "1 / -1",
-    margin: 0,
-    padding: "32px 8px",
-    textAlign: "center",
-    fontSize: "14px",
-    color: "var(--z-fg-muted)",
-  },
-});
-
-/** Where the rest of the designs are, above a gallery */
-const GalleryNote = styled("p", {
-  base: {
-    margin: 0,
-    marginBlockEnd: "8px",
-    fontSize: "13px",
-    lineHeight: "20px",
-    color: "var(--z-fg-muted)",
   },
 });
 
@@ -1906,53 +923,10 @@ export const Heart = styled("span", {
     transition: "opacity 0.12s ease, transform 0.12s ease",
     "--z-icon-color": "currentColor",
     "button:hover > &": { opacity: 1 },
+    // touch has no hover: the heart is always there, and bigger
+    "@media (hover: none)": { opacity: 1, width: "32px", height: "32px" },
     _focusVisible: { opacity: 1, outline: "2px solid var(--z-focus)" },
     _hover: { transform: "scale(1.08)" },
     "&[data-active='true']": { opacity: 1, color: "var(--z-accent-text)" },
-  },
-});
-
-/** Small profile card in the decoration preview */
-const PreviewCard = styled("div", {
-  base: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "2px",
-    padding: "0 16px 16px",
-    overflow: "hidden",
-    borderRadius: "var(--z-box-radius)",
-    border: "var(--z-box-border)",
-    background: "var(--z-box-bg)",
-    "--avatar-status-ring": "var(--z-bg-input)",
-    "& strong": { marginTop: "8px", fontSize: "20px", fontWeight: 700 },
-    "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
-    "&[data-themed='true'] strong": { color: "#fff" },
-    "&[data-themed='true'] small": { color: "rgb(255 255 255 / 75%)" },
-  },
-});
-
-const PreviewCardBanner = styled("div", {
-  base: {
-    alignSelf: "stretch",
-    height: "64px",
-    marginInline: "-16px",
-    background: "rgb(255 255 255 / 6%)",
-  },
-});
-
-const PreviewCardAvatar = styled("div", {
-  base: {
-    marginTop: "-46px",
-    lineHeight: 0,
-  },
-});
-
-const PreviewMember = styled("div", {
-  base: {
-    padding: "6px",
-    borderTop: "1px solid var(--z-border-subtle)",
-    "--avatar-status-ring": "var(--z-bg-input)",
   },
 });

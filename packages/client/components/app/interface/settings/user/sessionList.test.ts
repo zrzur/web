@@ -5,6 +5,7 @@ import {
   isAlreadyClosed,
   isAlreadySignedOut,
   readLastUsed,
+  sessionDevice,
 } from "./sessionList";
 
 describe("readLastUsed", () => {
@@ -81,5 +82,27 @@ describe("isAlreadySignedOut", () => {
   it("does not hide a failure to reach the server", () => {
     expect(isAlreadySignedOut({ type: "InternalError" })).toBe(false);
     expect(isAlreadySignedOut(new Error("offline"))).toBe(false);
+  });
+});
+
+describe("sessionDevice", () => {
+  it("reads names made at sign-in, in any language", () => {
+    expect(sessionDevice("Zrzur for Web (chrome on Windows 10)")).toEqual({
+      browser: "Chrome",
+      os: "Windows 10",
+    });
+    expect(sessionDevice("Zrzur für Web (safari auf iOS)")).toEqual({
+      browser: "Safari",
+      os: "iOS",
+    });
+    expect(sessionDevice("زرزور للويب (firefox على Mac OS)")).toEqual({
+      browser: "Firefox",
+      os: "macOS",
+    });
+  });
+
+  it("leaves names people chose alone", () => {
+    expect(sessionDevice("My laptop")).toBeUndefined();
+    expect(sessionDevice("Work (Office PC)")).toBeUndefined();
   });
 });

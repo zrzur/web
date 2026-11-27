@@ -148,7 +148,8 @@ export function CreateInviteModal(
       }
       width={480}
     >
-      <Body>
+      {/* fills the dialog: see Dialog, data-dialog-fill */}
+      <Body data-dialog-fill>
         <Search>
           <Icon name="magnifying-glass" size={16} />
           <input
@@ -177,7 +178,7 @@ export function CreateInviteModal(
             </Empty>
           }
         >
-          <Friends>
+          <Friends data-friends>
             <For each={friends()}>
               {(user) => (
                 <Friend>
@@ -309,12 +310,21 @@ export function CreateInviteModal(
   );
 }
 
+/**
+ * Fits the window: the friends list takes the height that is left, the
+ * search, the link and its settings keep theirs, so nothing is cut off at
+ * the bottom of a short window and a tall one shows more friends
+ */
 const Body = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
     minWidth: 0,
+    flex: "1 1 auto",
+    minHeight: 0,
+    // only the friends list gives way
+    "& > :not([data-friends])": { flexShrink: 0 },
   },
 });
 
@@ -364,8 +374,12 @@ const Friends = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    maxHeight: "240px",
+    // what the window leaves, at least two rows
+    flex: "1 1 auto",
+    minHeight: "112px",
     overflowY: "auto",
+    overscrollBehavior: "contain",
+    "& > *": { flexShrink: 0 },
     // the friends as one group of rows, like Settings (owner, 2026-11-20)
     padding: "4px 8px",
     borderRadius: "var(--z-box-radius)",

@@ -25,14 +25,7 @@ export function VoiceInputOptions() {
 
   return (
     <>
-      <SettingsSection
-        title={<Trans>Devices</Trans>}
-        description={
-          <Trans>
-            Interface sounds and call audio both use the speaker chosen here.
-          </Trans>
-        }
-      >
+      <SettingsSection title={<Trans>Devices</Trans>}>
         <SelectInput kind="audioinput" />
         <SelectInput kind="audiooutput" />
         <Show when={limits().video}>

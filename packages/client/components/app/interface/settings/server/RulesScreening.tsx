@@ -41,7 +41,7 @@ export function RulesScreening(props: { server: Server }) {
   }
 
   return (
-    <SettingsSection title={<Trans>Rules</Trans>}>
+    <SettingsSection>
       <SettingsRow
         icon={<Icon name="check-square" size={20} />}
         title={<Trans>New members accept the rules</Trans>}
@@ -50,11 +50,8 @@ export function RulesScreening(props: { server: Server }) {
             when={props.server.rulesChannelId}
             fallback={<Trans>Needs a rules channel first.</Trans>}
           >
-            <Show
-              when={enabled()}
-              fallback={<Trans>New members can write right away.</Trans>}
-            >
-              <Trans>New members accept the rules before they write.</Trans>
+            <Show when={!enabled()}>
+              <Trans>New members can write right away.</Trans>
             </Show>
           </Show>
         }
@@ -70,7 +67,7 @@ export function RulesScreening(props: { server: Server }) {
               <Button
                 size="sm"
                 variant="tonal"
-                onPress={() => navigate("overview#features")}
+                onPress={() => navigate("features")}
               >
                 <Trans>Choose a rules channel</Trans>
               </Button>

@@ -20,13 +20,13 @@ import {
   waitForStart,
 } from "@revolt/app/interface/channels/text/interactions/botLinks";
 import {
+  BotPage,
   CATEGORIES,
   CardRoom,
   DiscoverKind,
   Hero,
   Listing,
   ListingCard,
-  ListingDetail,
   PrimaryButton,
   ServerPage,
   discoverApi,
@@ -56,6 +56,7 @@ import {
   publicReportUrl,
 } from "@revolt/app/interface/discover/sites";
 import { discoverBase, isDiscoverSite } from "../siteHost";
+import { OfficialServerLink } from "./OfficialServerLink";
 
 /**
  * Discover is served by the Zrzur API itself (`/discover/*`); it never
@@ -66,7 +67,7 @@ import { discoverBase, isDiscoverSite } from "../siteHost";
  *
  *   /servers, /bots          browse: hero, paid places, picks, categories
  *   ?q= &category= &tag= &sort=new   results, shareable as a link
- *   /servers/:id, /bots/:id  details over the page
+ *   /servers/:id, /bots/:id  a server's or bot's own page
  *
  * Moderator tools (the review queue, feature / remove) are not part of
  * Discover; they get their own place.
@@ -109,7 +110,7 @@ export function Discover() {
   //   /                     servers: browse
   //   /<topic>, /<ar|en|de> servers on one topic or in one language
   //   /<custom link or id>  a server's own page (also /servers/<id>)
-  //   /bots, /bots/<id>     bots, with details over the page
+  //   /bots, /bots/<id>     bots, and a bot's own page
   const segments = () => {
     const path = location.pathname;
     const rest = base && path.startsWith(base) ? path.slice(base.length) : path;
@@ -128,6 +129,8 @@ export function Discover() {
     return undefined;
   };
   const detailId = () => (first() === "bots" ? segments()[1] : undefined);
+  /** A server's or a bot's own page, open in place of the lists */
+  const pageId = () => serverSlug() ?? detailId();
 
   const params = createMemo(() => new URLSearchParams(location.search));
   const q = () => params().get("q")?.trim() ?? "";
@@ -234,20 +237,20 @@ export function Discover() {
   document.addEventListener("keydown", onSlash);
   onCleanup(() => document.removeEventListener("keydown", onSlash));
 
-  // Escape leaves a server's page; dialogs and menus over it go first
+  // Escape leaves a server's or bot's page; dialogs and menus over it go first
   const onEscape = (e: KeyboardEvent) => {
     const target = e.target as HTMLElement | null;
     if (
       e.key !== "Escape" ||
       e.defaultPrevented ||
-      !serverSlug() ||
+      !pageId() ||
       target?.closest("input, textarea, [contenteditable='true']") ||
       document.querySelector('[role="dialog"], [role="menu"]')
     )
       return;
     e.preventDefault();
     if (returnTo) navigate(-1);
-    else navigate(base || "/");
+    else navigate(href(kind(), current()));
   };
   document.addEventListener("keydown", onEscape);
   onCleanup(() => document.removeEventListener("keydown", onEscape));
@@ -269,7 +272,6 @@ export function Discover() {
   const [failed, setFailed] = createSignal(false);
   const [hasMore, setHasMore] = createSignal(false);
   const [busy, setBusy] = createSignal<string>();
-  const [copied, setCopied] = createSignal<string>();
   const [promotedRow, setPromotedRow] = createSignal<{
     slots: number;
     open: number;
@@ -493,7 +495,7 @@ export function Discover() {
       ) ?? [],
     );
 
-  // A server opens as a page in place of the lists: remember which card it
+  // A server or bot opens as a page in place of the lists: remember which card it
   // came from (nth is -1 for a pointer) to land on it again
   let returnTo:
     | { id: string; nth: number; top: number; from: string }
@@ -510,13 +512,11 @@ export function Discover() {
       scroller?.querySelector<HTMLElement>("[data-view-heading]")?.focus();
     });
 
-  createEffect(
-    on(browsing, () => !serverSlug() && focusView(), { defer: true }),
-  );
+  createEffect(on(browsing, () => !pageId() && focusView(), { defer: true }));
 
   createEffect(
     on(
-      serverSlug,
+      pageId,
       (slug, previous) => {
         if (slug) {
           const box = scrollBox();
@@ -541,16 +541,12 @@ export function Discover() {
   );
 
   const openDetail = (item: Listing) => {
-    if (item.kind === "servers") {
-      returnTo = {
-        id: item.id,
-        nth: openButtons(item.id).indexOf(
-          document.activeElement as HTMLElement,
-        ),
-        top: scrollBox()?.scrollTop ?? 0,
-        from: here(),
-      };
-    }
+    returnTo = {
+      id: item.id,
+      nth: openButtons(item.id).indexOf(document.activeElement as HTMLElement),
+      top: scrollBox()?.scrollTop ?? 0,
+      from: here(),
+    };
     if (item.promoted && isLoggedIn()) {
       discoverApi
         .event(client(), item.kind, item.id, "click")
@@ -562,7 +558,6 @@ export function Discover() {
         : href(item.kind, current(), item.id),
     );
   };
-  const closeDetail = () => navigate(href(kind(), current()));
 
   // Top-row views count once per server per visit (the server also
   // counts each person once a day)
@@ -632,7 +627,6 @@ export function Discover() {
           .find((server) => server.owner?.self && !server.discoverable),
   );
 
-  const pickTag = (value: string) => navigate(href(kind(), { tag: value }));
   /** A topic starts a fresh list, as a tag does; pressed again it comes off */
   const pickCategory = (value: string) => {
     clearTimeout(timer);
@@ -727,15 +721,6 @@ export function Discover() {
       ? `${CONFIGURATION.DISCOVER_URL}/${item.kind}/${item.id}`
       : undefined;
   };
-
-  const copyLink = (item: Listing, url: string) =>
-    navigator.clipboard
-      ?.writeText(url)
-      .then(() => {
-        setCopied(item.id);
-        setTimeout(() => setCopied(undefined), 2000);
-      })
-      .catch(() => undefined);
 
   /** Quiet on the wall: the page's one filled button is on the listing itself */
   const cardAction = (item: Listing) => (
@@ -970,6 +955,20 @@ export function Discover() {
     </Bar>
   );
 
+  /** A bot's own page, in place of the lists */
+  const botPage = () => (
+    <BotPage
+      listing={detail()}
+      site={site}
+      href={(filters) => href("bots", filters)}
+      takeFocus={(returnTo?.nth ?? -1) >= 0}
+      onReport={() => detail() && report(detail()!)}
+      busy={!!detailId() && busy() === detailId()}
+      onAdd={() => addBot(detailId()!)}
+      onMessage={botDms() ? () => messageBot(detailId()!) : undefined}
+    />
+  );
+
   const ownersCard = () => (
     /* For owners: how to get listed, the same in the app and on the site */
     <Owners data-owners>
@@ -986,15 +985,9 @@ export function Discover() {
         <span>
           <Show
             when={kind() === "servers"}
-            fallback={
-              <Trans>
-                Bot owners can submit theirs from the bot's settings.
-              </Trans>
-            }
+            fallback={<Trans>List it from the bot's settings.</Trans>}
           >
-            <Trans>
-              Server owners can submit theirs from Server settings → Discover.
-            </Trans>
+            <Trans>List it from Server settings → Discover.</Trans>
           </Show>
         </span>
       </div>
@@ -1078,14 +1071,16 @@ export function Discover() {
           {/* one bar for every view: the field keeps its focus between them */}
           {discoverBar()}
           <Show
-            when={!serverSlug()}
+            when={!pageId()}
             fallback={
-              <ServerPage
-                slug={serverSlug()!}
-                site={site}
-                base={base}
-                takeFocus={(returnTo?.nth ?? -1) >= 0}
-              />
+              <Show when={serverSlug()} fallback={botPage()}>
+                <ServerPage
+                  slug={serverSlug()!}
+                  site={site}
+                  base={base}
+                  takeFocus={(returnTo?.nth ?? -1) >= 0}
+                />
+              </Show>
             }
           >
             {/* with a search or a filter the sky steps aside */}
@@ -1110,15 +1105,12 @@ export function Discover() {
                     when={kind() === "servers"}
                     fallback={
                       <Trans>
-                        Bots people built for their servers. See what each one
-                        does and which permissions it asks for.
+                        See what each bot does and which permissions it asks
+                        for.
                       </Trans>
                     }
                   >
-                    <Trans>
-                      Communities their owners run and the Zrzur team checks.
-                      Look around before you join.
-                    </Trans>
+                    <Trans>Communities reviewed by the Zrzur team.</Trans>
                   </Show>
                 </p>
               </Hero>
@@ -1294,8 +1286,9 @@ export function Discover() {
                         <Trans>All bots</Trans>
                       )
                     }
+                    // only when the first page may not be everything
                     more={
-                      page().list.length >= 12
+                      popular().length >= PAGE_SIZE
                         ? () => navigate(href(kind(), { all: true }))
                         : undefined
                     }
@@ -1331,22 +1324,6 @@ export function Discover() {
                         <Trans>No servers are listed yet.</Trans>
                       </Show>
                     </strong>
-                    <span>
-                      <Show
-                        when={kind() === "servers"}
-                        fallback={
-                          <Trans>
-                            Bot owners can submit theirs from the bot's
-                            settings.
-                          </Trans>
-                        }
-                      >
-                        <Trans>
-                          Server owners can submit theirs from Server settings →
-                          Discover.
-                        </Trans>
-                      </Show>
-                    </span>
                   </Empty>
                 </Show>
                 {ownersCard()}
@@ -1367,91 +1344,11 @@ export function Discover() {
                 </PrimaryButton>
               </Empty>
             </Show>
+            <OfficialServerLink server="discover" />
           </Show>
         </Content>
       </Scroll>
 
-      <Show when={detail()} keyed>
-        {(item) => (
-          <ListingDetail
-            listing={item}
-            onClose={closeDetail}
-            onTag={pickTag}
-            secondary={
-              <>
-                <Show when={shareUrl(item)}>
-                  {(url) => (
-                    <PrimaryButton
-                      type="button"
-                      data-variant="secondary"
-                      onClick={() => copyLink(item, url())}
-                    >
-                      <Icon
-                        name={copied() === item.id ? "check" : "link"}
-                        size={16}
-                      />
-                      <Show
-                        when={copied() === item.id}
-                        fallback={<Trans>Copy link</Trans>}
-                      >
-                        <Trans>Copied</Trans>
-                      </Show>
-                    </PrimaryButton>
-                  )}
-                </Show>
-                <Show when={item.kind === "bots" && botDms()}>
-                  <PrimaryButton
-                    type="button"
-                    data-variant="secondary"
-                    data-testid="discover-message-bot"
-                    disabled={busy() === item.id}
-                    onClick={() => messageBot(item.id)}
-                  >
-                    <Icon name="chat-circle" size={16} />
-                    <Trans>Message</Trans>
-                  </PrimaryButton>
-                </Show>
-                <PrimaryButton
-                  type="button"
-                  data-variant="secondary"
-                  onClick={() => report(item)}
-                >
-                  <Icon name="flag" size={16} />
-                  <Trans>Report</Trans>
-                </PrimaryButton>
-              </>
-            }
-            primary={
-              <Show
-                when={item.kind === "servers"}
-                fallback={
-                  <PrimaryButton
-                    type="button"
-                    disabled={busy() === item.id}
-                    onClick={() => addBot(item.id)}
-                  >
-                    <Icon name="plus" size={16} />
-                    <Trans>Add to server</Trans>
-                  </PrimaryButton>
-                }
-              >
-                <PrimaryButton
-                  type="button"
-                  disabled={busy() === item.id}
-                  onClick={() => joinServer(item)}
-                >
-                  <Show
-                    when={isMember(item.id)}
-                    fallback={<Trans>Join server</Trans>}
-                  >
-                    <Trans>Open server</Trans>
-                  </Show>
-                </PrimaryButton>
-              </Show>
-            }
-          />
-        )}
-      </Show>
       {inApp.dialog()}
     </Base>
   );
@@ -1729,6 +1626,9 @@ const Content = styled("div", {
     "& > :not(header) :is(a, button, input, [tabindex])": {
       scrollMarginBlock: "136px 16px",
     },
+    // a heading takes focus only to tell screen readers where they are:
+    // it is not a control, so no ring
+    "& [data-view-heading]": { outline: "none" },
   },
 });
 
@@ -1944,7 +1844,8 @@ const Rows = styled(CardRoom, {
     },
     gridAutoRows: "1fr",
     gap: "8px",
-    _phone: { gridTemplateColumns: "minmax(0, 1fr)" },
+    // one column: each card as tall as its own content
+    _phone: { gridTemplateColumns: "minmax(0, 1fr)", gridAutoRows: "auto" },
   },
 });
 

@@ -6,6 +6,7 @@ export {
   interactionApi,
   oauthApi,
 } from "./api";
+export { applyBuiltin } from "./builtinCommands";
 export { CommandPicker, runActiveCommand } from "./CommandPicker";
 export { EphemeralMessages } from "./EphemeralMessages";
 export { InteractionHeader } from "./InteractionHeader";

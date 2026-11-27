@@ -1,4 +1,11 @@
-import { createMemo, createSignal, Match, Show, Switch } from "solid-js";
+import {
+  createMemo,
+  createSignal,
+  mapArray,
+  Match,
+  Show,
+  Switch,
+} from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { VirtualContainer } from "@minht11/solid-virtual-container";
@@ -7,7 +14,6 @@ import { AvatarDecoration } from "@revolt/ui/components/features/profiles/Avatar
 import { useDesignMotion } from "@revolt/ui/components/features/profiles/NameplateMotion";
 import { nameplateBackground } from "@revolt/ui/components/features/profiles/userStyle";
 import { Channel, ServerMember, User } from "@zrzur/sdk/solid";
-import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { floatingUserMenus } from "@revolt/app/menus/UserContextMenu";
@@ -33,6 +39,8 @@ import { ActivityLine } from "@revolt/ui/components/features/activity/ActivityLi
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
+
+import { memberRow, nameplateLayer, NameStatusStack } from "./memberRowLook";
 
 interface Props {
   /**
@@ -92,84 +100,77 @@ export function ServerMemberSidebar(props: Props) {
       }
     | { t: 1; member: ServerMember; icon?: never; isOnline: boolean };
 
+  // The list is built in three steps, so a change costs only what it
+  // touches (a server's members change all the time: presence, names):
+  // 1. this server's members: a new list only when someone comes or goes
+  // 2. each member's name and group: worked out again for that member alone
+  // 3. the groups, sorted: only when a name or a group changed
+
+  const hoistedRoles = createMemo(() =>
+    props.channel.server!.orderedRoles.filter((role) => role.hoist),
+  );
+
+  const serverMembers = createMemo(
+    () => {
+      const serverId = props.channel.serverId;
+      const list: ServerMember[] = [];
+      for (const member of client().serverMembers.values())
+        if (member.id.server === serverId) list.push(member);
+      return list;
+    },
+    [],
+    {
+      equals: (a, b) =>
+        a.length === b.length && a.every((member, i) => member === b[i]),
+    },
+  );
+
+  /** where one member goes: a hoisted role, Online or Offline (or hidden) */
+  type Placed = { member: ServerMember; name: string; group?: string };
+  const placed = mapArray(serverMembers, (member) =>
+    createMemo<Placed>(
+      () => {
+        const name = member.nickname ?? member.user?.displayName ?? "";
+        // a restricted channel lists only who may see it
+        if (
+          props.channel.potentiallyRestrictedChannel &&
+          !member.hasPermission(props.channel, "ViewChannel")
+        )
+          return { member, name };
+        if (!member.user?.online) return { member, name, group: "offline" };
+        const roles = member.roles;
+        const hoisted = roles.length
+          ? hoistedRoles().find((role) => roles.includes(role.id))
+          : undefined;
+        return { member, name, group: hoisted?.id ?? "default" };
+      },
+      undefined as unknown as Placed,
+      // a status text or an avatar changing moves nobody
+      { equals: (a, b) => a?.name === b.name && a?.group === b.group },
+    ),
+  );
+
   const elements = createMemo(() => {
-    const hoistedRoles = props.channel.server!.orderedRoles.filter(
-      (role) => role.hoist,
-    );
-
-    const restricted = props.channel.potentiallyRestrictedChannel;
-    const byRole: Map<string, { member: ServerMember; displayName: string }[]> =
-      new Map();
-    byRole.set("default", []);
-    byRole.set("offline", []);
-    hoistedRoles.forEach((role) => byRole.set(role.id, []));
-
-    for (const member of client().serverMembers.values()) {
-      if (member.id.server !== props.channel.serverId) {
-        continue;
-      }
-      // If the channel is restricted, check for permission
-      if (restricted && !member.hasPermission(props.channel, "ViewChannel")) {
-        continue;
-      }
-
-      // Only hit the store once to reduce watchers.
-      // If you need to access anything on the member in a loop define a const here.
-      const memberRoles = member.roles;
-      const memberName = member.nickname ?? member.user?.displayName ?? "";
-
-      if (!member.user?.online) {
-        byRole.get("offline")!.push({
-          member,
-          displayName: memberName,
-        });
-        continue;
-      }
-
-      if (memberRoles.length) {
-        let assigned;
-        for (const hoistedRole of hoistedRoles) {
-          if (memberRoles.includes(hoistedRole.id)) {
-            byRole.get(hoistedRole.id)!.push({
-              member,
-              displayName: memberName,
-            });
-            assigned = true;
-            break;
-          }
-        }
-
-        if (assigned) continue;
-      }
-
-      byRole.get("default")!.push({
-        member,
-        displayName: memberName,
-      });
+    const byRole = new Map<string, Placed[]>();
+    for (const entry of placed()) {
+      const place = entry();
+      if (!place.group) continue;
+      const list = byRole.get(place.group);
+      if (list) list.push(place);
+      else byRole.set(place.group, [place]);
     }
 
     const roles: { id: string; name: string; icon?: string }[] = [];
-
-    const elements: MemberRoleElement[] = [];
-
-    for (const role of hoistedRoles) {
-      roles.push({
-        id: role.id,
-        name: role.name,
-        icon: role.icon?.previewUrl,
-      });
-    }
+    for (const role of hoistedRoles())
+      roles.push({ id: role.id, name: role.name, icon: role.icon?.previewUrl });
     roles.push({ id: "default", name: t`Online` });
     roles.push({ id: "offline", name: t`Offline` });
 
+    const elements: MemberRoleElement[] = [];
     for (const role of roles) {
-      const roleMembers = byRole
-        .get(role.id)!
-        .sort((a, b) => compareNames(a.displayName ?? "", b.displayName ?? ""));
-
-      if (!roleMembers?.length) {
-        continue;
-      }
+      const roleMembers = byRole.get(role.id);
+      if (!roleMembers?.length) continue;
+      roleMembers.sort((a, b) => compareNames(a.name, b.name));
 
       elements.push({
         t: 0,
@@ -179,16 +180,13 @@ export function ServerMemberSidebar(props: Props) {
           role.id === "default" || role.id === "offline" ? undefined : role.id,
         count: roleMembers.length,
       });
-
-      for (const member of roleMembers) {
+      for (const entry of roleMembers)
         elements.push({
           t: 1,
-          member: member.member,
+          member: entry.member,
           isOnline: role.id !== "offline",
         });
-      }
     }
-
     return elements;
   });
 
@@ -346,72 +344,6 @@ const MemberTitle = styled("div", {
         marginBottom: "-12px",
       },
     },
-  },
-});
-
-/**
- * Two-line member rows (name + status) are taller than channel rows
- */
-const memberRow = css({
-  position: "relative",
-  "& > *": {
-    height: "var(--z-member-row-height, 44px)",
-  },
-  // keep the row's content above its nameplate
-  "& > :not([data-nameplate])": {
-    position: "relative",
-    zIndex: 1,
-  },
-  // the name starts where the plate is still faint, so it takes the theme's
-  // own ink with a halo of the opposite tone: white on dark themes, dark on
-  // light ones, readable on the page and on the art alike. A name in its
-  // own chosen colour or in a server role colour keeps it. Panda reads only
-  // a written-out key, so these are `PLATE_INK`, `PLATE_NAME_COLOUR` and
-  // `PLATE_OWN_COLOUR` (plateInk.ts) spelt out; plateInk.dom.test checks it.
-  "&[data-plated] > :not([data-nameplate]) *:not([data-own-colour], [data-own-colour] *, [data-role-colour], [data-role-colour] *)":
-    {
-      color: "var(--z-plate-ink, #fff) !important",
-      WebkitTextFillColor: "var(--z-plate-ink, #fff) !important",
-      textShadow:
-        "var(--z-plate-ink-halo, 0 0 2px rgb(0 0 0 / 60%), 0 1px 4px rgb(0 0 0 / 70%))",
-    },
-  // ...and takes back the fill it would inherit from the boxes around it
-  "&[data-plated] :is([data-own-colour], [data-role-colour])": {
-    WebkitTextFillColor: "currentColor",
-  },
-  // an own colour draws its own effect; a role colour keeps the plate's halo
-  "&[data-plated] [data-own-colour]": {
-    textShadow: "none",
-  },
-});
-
-/**
- * Nameplate behind a member row: the same shape as everywhere, and the row's
- * words sit on it in white. It takes the row's height less 3 px above and
- * below, so two plated rows never touch (a 6 px gap), keeps the art's shape
- * from that height and sits at the emblem end; its faint start runs under the
- * avatar.
- */
-const nameplateLayer = css({
-  position: "absolute",
-  insetInlineEnd: "8px",
-  top: "3px",
-  height: "calc(var(--z-member-row-height, 44px) - 6px) !important",
-  aspectRatio: "448 / 84",
-  maxWidth: "calc(100% - 16px)",
-  borderRadius: "var(--z-radius, 10px)",
-  pointerEvents: "none",
-});
-
-/**
- * Styles required to correctly display name and status
- */
-const NameStatusStack = styled("div", {
-  base: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
   },
 });
 

@@ -19,6 +19,8 @@ export function ProfileChipRow<T>(props: {
   /** Every chip, on as many rows as they take (the full profile) */
   all?: boolean;
   children: (item: T) => JSX.Element;
+  /** one more chip that always ends the row (add a role) */
+  trailing?: JSX.Element;
 }) {
   const [fit, setFit] = createSignal<number>();
   const [open, setOpen] = createSignal(false);
@@ -75,6 +77,9 @@ export function ProfileChipRow<T>(props: {
             </span>
           </button>
         </li>
+      </Show>
+      <Show when={props.trailing}>
+        <li>{props.trailing}</li>
       </Show>
     </Row>
   );

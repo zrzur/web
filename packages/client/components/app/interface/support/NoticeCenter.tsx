@@ -1,4 +1,5 @@
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { whenIdleAndEvery } from "@revolt/common/lib/idle";
 import { type API, type WithoutNull, withoutNull } from "@zrzur/sdk/solid";
 import {
   createEffect,
@@ -93,11 +94,8 @@ export function NoticeCenter() {
     ),
   );
 
-  onMount(() => {
-    void check();
-    const timer = setInterval(() => void check(), RECHECK_MS);
-    onCleanup(() => clearInterval(timer));
-  });
+  // after the first screen, and never from a hidden tab
+  onMount(() => onCleanup(whenIdleAndEvery(() => void check(), RECHECK_MS)));
 
   return (
     <Show when={open()}>

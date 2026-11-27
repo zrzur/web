@@ -86,12 +86,13 @@ export function AddMembersToGroupModal(
             value={filter()}
             variant="filled"
             placeholder={t`Search for users...`}
-            onKeyUp={(e) => setFilter(e.currentTarget.value)}
+            onInput={(e) => setFilter(e.currentTarget.value)}
           />
 
           <Form2.VirtualSelect
             items={users()}
             control={group.controls.users}
+            itemHeight={48}
             multiple
           >
             {(item) => (
@@ -99,7 +100,7 @@ export function AddMembersToGroupModal(
                 <Avatar
                   src={item.animatedAvatarURL}
                   fallback={item.displayName}
-                  size={24}
+                  size={32}
                 />{" "}
                 <span>{item.displayName}</span>
               </Row>

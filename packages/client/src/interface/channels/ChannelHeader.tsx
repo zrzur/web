@@ -17,6 +17,7 @@ import { useNavigate } from "@revolt/routing";
 
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import { shortcutFor } from "@revolt/keybinds/active";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
@@ -184,6 +185,22 @@ export function ChannelHeader(props: Props) {
     if (state.state === "search") return state.query;
     return "";
   };
+
+  // Ctrl+F (Command+F on a Mac) where the header shows only the search
+  // icon (a narrower window, a tablet): it opens the search, which then
+  // takes the keys. Where the field is shown, the field itself listens.
+  const onFind = (event: KeyboardEvent) => {
+    if (event.defaultPrevented || event.repeat) return;
+    if (shortcutFor(event) !== "search_channel") return;
+    if (searchValue() === null || !props.setSidebarState) return;
+    if (layout() === "desktop" || props.sidebarState!().state === "search")
+      return;
+    if (document.querySelector("[role=dialog][aria-modal=true]")) return;
+    event.preventDefault();
+    props.setSidebarState({ state: "search", query: "" });
+  };
+  document.addEventListener("keydown", onFind);
+  onCleanup(() => document.removeEventListener("keydown", onFind));
 
   // phones: search takes the whole header, as a search screen with a way
   // back; the keyboard opens on it right away
@@ -694,6 +711,8 @@ export function ChannelHeader(props: Props) {
             <SearchBox
               channel={props.channel}
               placeholder={t`Search`}
+              // opened from its icon or Ctrl+F: the typing goes straight in
+              autofocus={layout() !== "desktop"}
               value={searchValue()!}
               onCommit={(query) =>
                 props.setSidebarState!({ state: "search", query })

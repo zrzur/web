@@ -11,7 +11,8 @@ Ein Bot sendet, bearbeitet und löscht eigene Nachrichten, reagiert, heftet an u
 - **Stille Nachrichten**: `flags: 1` sendet ohne Benachrichtigungen.
 - **Maskerade**: `masquerade: { name, avatar }` zeigt einen anderen Namen und Avatar auf der Nachricht (braucht Masquerade; `colour` braucht auch „Rollen verwalten“).
 - **Komponenten**: Schaltflächen, Menüs und Layoutblöcke; nur Bots können sie senden. Siehe [Schaltflächen, Menüs und Formulare](/developers/docs/components).
-- **Erwähnungen**: `<@user id>` erwähnt einen Benutzer, `<%role id>` eine Rolle (braucht „Rollen erwähnen“), `@everyone` und `@online` brauchen „Alle erwähnen“. Ohne die Berechtigung wird die ganze Nachricht mit `MissingPermission` abgelehnt; sie geht nicht ohne die Erwähnung raus. Auf einem selbst gehosteten Server mit `mass_mentions_enabled = false` gehen Rollen-, `@everyone`- und `@online`-Erwähnungen stattdessen ohne Benachrichtigung raus.
+- **Erwähnungen**: `<@user id>` erwähnt einen Benutzer, `<%role id>` eine Rolle (braucht „Rollen erwähnen“), `@everyone` erreicht jedes Mitglied, das den Kanal sieht, `@here` nur die, die gerade online sind (`@online` ist dasselbe); beide brauchen „Alle erwähnen“. Ohne die Berechtigung wird die ganze Nachricht mit `MissingPermission` abgelehnt; sie geht nicht ohne die Erwähnung raus. Auf einem selbst gehosteten Server mit `mass_mentions_enabled = false` gehen Rollen-, `@everyone`- und `@here`-Erwähnungen stattdessen ohne Benachrichtigung raus.
+- **Formatierung**: fett, unterstrichen, Überschriften, Spoiler, farbiger Code und mehr, siehe [Formatierung](/developers/docs/messages#formatting).
 - **Kanal-Links**: `<#channel id>` zeigt einen Link auf einen Kanal oder Thread. Er benachrichtigt niemanden.
 
 ## Antworten {#reply}
@@ -95,3 +96,25 @@ Textsuche ist nur für Menschen; Bots bekommen `IsBot`, denn sonst könnten sie 
 Eine Nachricht kann eine Umfrage tragen (`poll` in der gesendeten Nachricht: eine Frage, 2 bis 10 Antworten, eine Dauer von 1, 4, 8, 24, 72, 168 oder 336 Stunden, eine oder mehrere Antworten wählbar). Zum Posten braucht es Nachrichten senden und Embeds senden. Umfragen werden pro Server-Installation eingeschaltet (`features.polls` in `GET /`); wo sie aus sind, antwortet das Senden einer Umfrage mit `FeatureDisabled`. `poll` einer Nachricht zeigt, wie viele jede Antwort gewählt haben; `poll.me` nennt die Antworten der lesenden Person.
 
 Wer abgestimmt hat, geht nie an alle: Umfrage-Events (`MessagePollVoteAdd`, `MessagePollVoteRemove`, `MessagePollEnd`) tragen nur Zahlen. `/channels/{target}/messages/{msg}/polls/answers/{answer}/voters` (GET) listet seitenweise, wer eine Antwort gewählt hat, für alle, die die Nachricht lesen können (Kanal ansehen und Nachrichtenverlauf lesen); eine Stimme ist also für alle im Kanal sichtbar, die nachsehen. Bots können nicht abstimmen (`IsBot`); sie können Abstimmende lesen und eigene Umfragen beenden (`/channels/{target}/messages/{msg}/polls/end`, POST). Eine Stimme in einer beendeten Umfrage ergibt `PollEnded`.
+
+## Formatierung {#formatting}
+
+Nachrichtentext, Beschreibungen und Feldwerte von Embeds und `Text`-Komponenten nehmen dieselbe Formatierung, die Menschen tippen, mit denselben Zeichen wie Discord:
+
+- `**bold**`, `*italic*` (oder `_italic_`), `__underline__`, `~~strikethrough~~` und kombiniert, etwa `__***~~all~~***__`.
+- `# Title`, `## Section` und `### Heading` am Zeilenanfang; `-# small text` für eine kleine, gedämpfte Zeile.
+- `> quote` zitiert eine Zeile; `>>> quote` zitiert alles danach bis zum Ende der Nachricht.
+- `- item`, `* item` und `1. item` bilden Listen; zwei Leerzeichen davor rücken einen Eintrag ein.
+- `||spoiler||` verbirgt Text, bis jemand darauf klickt.
+- `[text](https://zrzur.com)` ist ein Link mit eigenem Text.
+- `` `code` `` und Codeblöcke mit einer Sprache für die Hervorhebung (`js`, `python`, `json`…). `diff` färbt `-`- und `+`-Zeilen, `fix` schreibt den Block gelb, `ansi` färbt Text (siehe unten).
+- `<t:1796151600:R>` zeigt einen Zeitpunkt in der Zeitzone und Sprache jedes Lesers. Der Buchstabe wählt die Form: `t`, `T`, `d`, `D`, `f`, `F`, `s`, `S` oder `R` (in 3 Tagen).
+- `\` vor einem Zeichen schreibt das Zeichen selbst: `\*not italic\*`.
+
+Menschen können außerdem `/shrug`, `/tableflip`, `/unflip`, `/me` und `/spoiler` tippen. Diese ändern ihren eigenen Text vor dem Senden und erreichen nie einen Bot; hat ein Bot einen Befehl mit demselben Namen, wird der Befehl des Bots benutzt.
+
+### Farbiger Text {#ansi}
+
+In einem Codeblock mit `ansi` färben Codes der Form ESC `[` Zahl `m` den Text danach: `30` bis `37` die Schrift (grau, rot, grün, gelb, blau, pink, türkis, weiß), `40` bis `47` den Hintergrund, `1` fett, `4` unterstrichen, `0` zurück zu normal. ESC ist das Zeichen `\u001b`.
+
+@@5

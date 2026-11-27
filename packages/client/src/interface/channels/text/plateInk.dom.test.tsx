@@ -53,9 +53,9 @@ describe("words on a nameplate", () => {
   });
 
   it("is the rule the member list draws with", () => {
-    // Panda reads only a written-out key: MemberSidebar spells it out
+    // Panda reads only a written-out key: memberRowLook spells it out
     const source = readFileSync(
-      resolve(__dirname, "MemberSidebar.tsx"),
+      resolve(__dirname, "memberRowLook.ts"),
       "utf8",
     );
     expect(source).toContain(JSON.stringify(PLATE_INK));

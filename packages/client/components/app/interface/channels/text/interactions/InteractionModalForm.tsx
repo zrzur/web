@@ -560,8 +560,35 @@ function FieldView(props: {
   );
 }
 
+/**
+ * A bot's form. Its text fields are drawn as Discord draws them (owner,
+ * 2026-11-27): 40px tall, 8px corners, 12px inside, a crisp 2px ring in the
+ * accent when typing, a red edge and wash on a mistake, half faded when off.
+ * The app's own forms keep the shared field.
+ */
 const Form = styled("form", {
-  base: { display: "flex", flexDirection: "column", gap: "16px" },
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    "& [data-invalid]": {
+      minHeight: "40px",
+      paddingInline: "12px",
+      borderRadius: "8px",
+    },
+    "& [data-invalid]:focus-within": {
+      boxShadow: "inset 0 0 0 1px var(--z-accent)",
+    },
+    "& [data-invalid=true]": {
+      background: "color-mix(in srgb, var(--z-danger) 6%, var(--z-field-bg))",
+    },
+    "& [data-invalid=true]:focus-within": {
+      boxShadow: "inset 0 0 0 1px var(--z-danger)",
+    },
+    "& [data-disabled=true]": { opacity: 0.5 },
+    "& [data-invalid] input": { paddingBlock: "9px" },
+    "& [data-invalid] textarea": { paddingBlock: "11px" },
+  },
 });
 
 const FormText = styled("div", {

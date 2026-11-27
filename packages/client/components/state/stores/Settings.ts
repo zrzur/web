@@ -1,4 +1,5 @@
 import {
+  DEFAULT_EMOJI_PACK,
   UNICODE_EMOJI_PACKS,
   UnicodeEmojiPacks,
 } from "@revolt/markdown/emoji/emojiPacks";
@@ -177,7 +178,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
     return {
       "notifications:desktop": "default",
       "notifications:push": "default",
-      "appearance:unicode_emoji": "fluent-flat",
+      "appearance:unicode_emoji": DEFAULT_EMOJI_PACK,
       "appearance:show_send_button": true,
       "appearance:compact_mode": false,
       "appearance:profile_effects": true,
@@ -206,6 +207,8 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
           out[key] = cleanedValue;
         }
       } else if (key === "appearance:unicode_emoji") {
+        // the retired styles (Fluent, Noto) become the default: the
+        // device's own emoji
         if ((UNICODE_EMOJI_PACKS as readonly unknown[]).includes(input[key])) {
           settings[key] = input[key];
         }

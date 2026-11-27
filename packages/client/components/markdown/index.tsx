@@ -37,6 +37,11 @@ import {
   spoilerHandler,
 } from "./plugins/spoiler";
 import {
+  remarkCodeTones,
+  remarkSubtext,
+  remarkUnderline,
+} from "./plugins/textMarks";
+import {
   RenderTimestamp,
   remarkTimestamps,
   timestampHandler,
@@ -89,6 +94,7 @@ const components = () => ({
   em: elements.emphasis,
   strong: elements.strong,
   del: elements.strikethrough,
+  u: elements.underline,
   h1: elements.heading1,
   h2: elements.heading2,
   h3: elements.heading3,
@@ -131,6 +137,7 @@ const changelogComponents = () => ({
   em: elements.emphasis,
   strong: elements.strong,
   del: elements.strikethrough,
+  u: elements.underline,
   h1: elements.heading1,
   h2: elements.heading2,
   h3: elements.heading3,
@@ -188,6 +195,7 @@ const replyComponents = () => ({
   em: elements.emphasis,
   code: elements.code,
   del: elements.strikethrough,
+  u: elements.underline,
 
   p: (props: { children: JSX.Element }) => <>{props.children}</>,
   h1: (props: { children: JSX.Element }) => <>{props.children}</>,
@@ -241,6 +249,9 @@ export const UNIFIED_PLUGINS = [
 ];
 
 const HTML_UNIFIED_PLUGINS = [
+  remarkUnderline,
+  remarkSubtext,
+  remarkCodeTones,
   remarkMentions,
   remarkTimestamps,
   remarkCommandMentions,
@@ -252,9 +263,11 @@ const HTML_UNIFIED_PLUGINS = [
   remarkHtmlToText,
 ];
 
-const htmlPipeline = HTML_UNIFIED_PLUGINS.reduce(
+const htmlPipeline = HTML_UNIFIED_PLUGINS.reduce<typeof unifiedPipeline>(
   (pipeline, plugin) =>
-    pipeline.use(plugin) as unknown as typeof unifiedPipeline,
+    pipeline.use(
+      plugin as typeof remarkLinkify,
+    ) as unknown as typeof unifiedPipeline,
   unifiedPipeline,
 )
   // @ts-expect-error non-standard elements not recognised by typing
@@ -320,6 +333,8 @@ const replyPipeline = unified()
   .use(remarkCustomEmoji)
   .use(remarkSpoiler)
   .use(remarkLinkify)
+  .use(remarkUnderline)
+  .use(remarkSubtext)
   // @ts-expect-error non-standard elements not recognized by typing
   .use(remarkRehype, {
     handlers: {

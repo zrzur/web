@@ -149,22 +149,15 @@ export function KeybindsSettings() {
         {
           id: "toggle_mute",
           title: <Trans>Mute or unmute</Trans>,
-          description: <Trans>During a call.</Trans>,
         },
         {
           id: "toggle_deafen",
           title: <Trans>Deafen or undeafen</Trans>,
-          description: <Trans>During a call.</Trans>,
         },
         {
           id: "leave_call",
           title: <Trans>Leave the call</Trans>,
-          description: (
-            <>
-              <Trans>During a call.</Trans>
-              {talkNote("leave_call")}
-            </>
-          ),
+          description: <>{talkNote("leave_call")}</>,
         },
         {
           id: "toggle_soundboard",
@@ -178,22 +171,15 @@ export function KeybindsSettings() {
         },
         {
           title: <Trans>Accept a call</Trans>,
-          description: <Trans>While a call rings.</Trans>,
           keys: [["Mod", "Shift", "Enter"]],
         },
         {
           title: <Trans>Decline a call</Trans>,
-          description: <Trans>While a call rings.</Trans>,
           keys: [["Mod", "Shift", "Backspace"]],
         },
         {
           title: <Trans>Move the small call card to another corner</Trans>,
-          description: (
-            <Trans>
-              While the small call card is focused (you are in a call and look
-              at another page).
-            </Trans>
-          ),
+          description: <Trans>While the card is focused.</Trans>,
           keys: [["←"], ["→"], ["↑"], ["↓"]],
         },
         // desktop app: the binds that work in games
@@ -244,16 +230,10 @@ export function KeybindsSettings() {
         { title: <Trans>New line</Trans>, keys: [["Shift", "Enter"]] },
         {
           title: <Trans>Mention someone</Trans>,
-          description: (
-            <Trans>
-              Shift+click a name or picture: the mention goes in at the cursor.
-            </Trans>
-          ),
           keys: [["Shift", t`Click`]],
         },
         {
           title: <Trans>Mention a role or a channel</Trans>,
-          description: <Trans>Shift+click the role or the channel.</Trans>,
           keys: [["Shift", t`Click`]],
         },
         {
@@ -263,6 +243,7 @@ export function KeybindsSettings() {
         },
         { title: <Trans>Bold text</Trans>, keys: [["Mod", "B"]] },
         { title: <Trans>Italic text</Trans>, keys: [["Mod", "I"]] },
+        { title: <Trans>Underlined text</Trans>, keys: [["Mod", "U"]] },
         {
           id: "open_emoji_picker",
           title: <Trans>Open the emoji picker</Trans>,
@@ -270,12 +251,7 @@ export function KeybindsSettings() {
         {
           id: "upload_file",
           title: <Trans>Upload a file</Trans>,
-          description: (
-            <>
-              <Trans>Where you can send files.</Trans>
-              {talkNote("upload_file")}
-            </>
-          ),
+          description: <>{talkNote("upload_file")}</>,
         },
         {
           title: <Trans>Edit your last message</Trans>,
@@ -321,11 +297,6 @@ export function KeybindsSettings() {
         },
         {
           title: <Trans>Reply</Trans>,
-          description: (
-            <Trans>
-              On the message with the keyboard focus. Reach it with ↑ and ↓.
-            </Trans>
-          ),
           keys: [["R"]],
         },
         {
@@ -342,7 +313,6 @@ export function KeybindsSettings() {
         },
         {
           title: <Trans>Pin or unpin</Trans>,
-          description: <Trans>Where you may pin messages.</Trans>,
           keys: [["P"]],
         },
         {
@@ -371,7 +341,6 @@ export function KeybindsSettings() {
         {
           id: "create_poll",
           title: <Trans>Create a poll</Trans>,
-          description: <Trans>In a channel where you can post polls.</Trans>,
         },
       ],
     },
@@ -389,7 +358,6 @@ export function KeybindsSettings() {
         },
         {
           title: <Trans>Choose a command or a suggestion</Trans>,
-          description: <Trans>A command typed in full is chosen too.</Trans>,
           keys: [["Enter"], ["Tab"]],
         },
         {
@@ -431,23 +399,16 @@ export function KeybindsSettings() {
         {
           id: "open_events",
           title: <Trans>Open the server's events</Trans>,
-          description: <Trans>In a server.</Trans>,
         },
         ...(savedRemindersEnabled(client())
           ? [
               {
                 id: "view_saved" as const,
                 title: <Trans>Open saved messages</Trans>,
-                description: (
-                  <Trans>Your private list of messages you kept.</Trans>
-                ),
               },
               {
                 id: "view_reminders" as const,
                 title: <Trans>Open reminders</Trans>,
-                description: (
-                  <Trans>Messages you asked to be reminded of.</Trans>
-                ),
               },
             ]
           : []),
@@ -475,7 +436,6 @@ export function KeybindsSettings() {
         },
         {
           title: <Trans>Search Discover</Trans>,
-          description: <Trans>On the Discover page.</Trans>,
           keys: [["/"]],
         },
       ],
@@ -485,7 +445,6 @@ export function KeybindsSettings() {
       rows: [
         {
           title: <Trans>Save a command</Trans>,
-          description: <Trans>In the command editor.</Trans>,
           keys: [["Mod", "Enter"]],
         },
         {
@@ -500,12 +459,10 @@ export function KeybindsSettings() {
       rows: [
         {
           title: <Trans>New design</Trans>,
-          description: <Trans>On the studio's first page.</Trans>,
           keys: [["N"]],
         },
         {
           title: <Trans>Search your designs</Trans>,
-          description: <Trans>On the studio's first page.</Trans>,
           keys: [["F"]],
         },
         {
@@ -520,7 +477,6 @@ export function KeybindsSettings() {
         },
         {
           title: <Trans>Next step, or send the design</Trans>,
-          description: <Trans>While making a design.</Trans>,
           keys: [["Mod", "Enter"]],
         },
       ],
@@ -532,11 +488,6 @@ export function KeybindsSettings() {
         {
           id: "toggle_streamer",
           title: <Trans>Streamer mode on or off</Trans>,
-          description: (
-            <Trans>
-              Hides your email, tag, invite links and DM previews on screen.
-            </Trans>
-          ),
         },
         {
           title: <Trans>Close a window or menu</Trans>,
@@ -553,16 +504,12 @@ export function KeybindsSettings() {
           icon={<Icon name="keyboard" size={20} />}
           title={<Trans>Keys shown</Trans>}
           description={
-            <Show
-              when={platform() === here}
-              fallback={
-                <Trans>
-                  Another system's keys, to read. You change your own on this
-                  device's set.
-                </Trans>
-              }
-            >
-              <Trans>This device's keys. Look at another system's set.</Trans>
+            // only another system's set needs a word: it can't be changed
+            <Show when={platform() !== here}>
+              <Trans>
+                Another system's keys, to read. You change your own on this
+                device's set.
+              </Trans>
             </Show>
           }
           control={() => (
@@ -583,21 +530,11 @@ export function KeybindsSettings() {
       </SettingsSection>
       <SettingsSection
         title={<Trans>Your shortcuts</Trans>}
-        description={
-          <Trans>
-            Press a shortcut's keys to choose new ones. Your shortcuts follow
-            you to every device you sign in on.
-          </Trans>
-        }
+        description={<Trans>Click a shortcut's keys to change them.</Trans>}
       >
         <SettingsRow
           icon={<Icon name="arrow-u-up-left" size={20} />}
           title={<Trans>Reset all shortcuts</Trans>}
-          description={
-            <Trans>
-              Every shortcut and the push-to-talk key go back to the defaults.
-            </Trans>
-          }
           control={() => (
             <Button
               size="sm"
@@ -606,30 +543,12 @@ export function KeybindsSettings() {
               onPress={() => resetAllShortcuts(state.keybinds)}
               data-testid="keybinds-reset-all"
             >
-              <Trans>Reset all</Trans>
+              <Trans>Reset</Trans>
             </Button>
           )}
         />
       </SettingsSection>
-      <SettingsSection
-        title={<Trans>Push to talk</Trans>}
-        description={
-          <Show
-            when={gameKeys}
-            fallback={
-              <Trans>
-                Hold one key to talk instead of an open microphone. Works while
-                Zrzur is the active window.
-              </Trans>
-            }
-          >
-            <Trans>
-              Hold one key to talk instead of an open microphone. In the desktop
-              app it works in games and other apps too.
-            </Trans>
-          </Show>
-        }
-      >
+      <SettingsSection title={<Trans>Push to talk</Trans>}>
         <SettingsRow
           title={
             voice.inputMode === "ptt" ? <Trans>On</Trans> : <Trans>Off</Trans>

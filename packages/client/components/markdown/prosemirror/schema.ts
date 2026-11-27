@@ -1,6 +1,8 @@
 import { CodeBlockNodeName } from "prosemirror-codemirror-block";
 import { MarkSpec, Schema } from "prosemirror-model";
 
+import { unicodeEmojiUrl } from "../emoji/UnicodeEmoji";
+import { emojiStyle } from "../emoji/emojiPacks";
 import { mention } from "../plugins/mentions";
 
 /// Document schema for the data model used by CommonMark.
@@ -213,7 +215,7 @@ export const schema = new Schema({
       attrs: {
         id: {},
         pack: { default: null },
-        src: {},
+        src: { default: "" },
       },
       group: "inline",
       draggable: true,
@@ -221,25 +223,41 @@ export const schema = new Schema({
         {
           tag: "img[unicode]",
           getAttrs(dom) {
-            return {
-              id: (dom as HTMLElement).getAttribute("unicode"),
-              pack: (dom as HTMLElement).getAttribute("pack"),
-              src: (dom as HTMLElement).getAttribute("src"),
-            };
+            return { id: (dom as HTMLElement).getAttribute("unicode") };
+          },
+        },
+        {
+          tag: "span[unicode]",
+          getAttrs(dom) {
+            return { id: (dom as HTMLElement).getAttribute("unicode") };
           },
         },
       ],
+      // drawn in the reader's style at the moment it is shown: Twemoji as
+      // an image, the device's own emoji as text (never an empty image)
       toDOM(node) {
-        return [
-          "img",
-          {
-            unicode: node.attrs.id,
-            pack: node.attrs.pack,
-            src: node.attrs.src,
-            style:
-              "width: var(--emoji-size); height: var(--emoji-size); display: inline; object-fit: contain",
-          },
-        ];
+        const src = unicodeEmojiUrl(emojiStyle(), node.attrs.id);
+        return src
+          ? [
+              "img",
+              {
+                unicode: node.attrs.id,
+                src,
+                alt: node.attrs.id,
+                style:
+                  "width: var(--emoji-size); height: var(--emoji-size); display: inline; object-fit: contain",
+              },
+            ]
+          : [
+              "span",
+              {
+                unicode: node.attrs.id,
+                contenteditable: "false",
+                style:
+                  'font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif',
+              },
+              node.attrs.id,
+            ];
       },
     },
 

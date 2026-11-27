@@ -1226,6 +1226,8 @@ const Look = styled("span", {
     "--z-icon-color": "currentColor",
     "[role='button']:hover > &, [role='button']:focus-visible > &, [data-looking] > &":
       { opacity: 1 },
+    // touch: the tile shows it opens a preview
+    "@media (hover: none)": { opacity: 1 },
   },
 });
 

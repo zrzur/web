@@ -129,6 +129,18 @@
   padding: 24px;
 }
 
+/* full screen the browser would not give: the call fills the window */
+.z-dmcall-stage[data-filled] {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  height: 100% !important;
+  padding: 24px;
+}
+.z-dmcall-stage[data-filled] .z-dmcall-corner {
+  opacity: 1;
+}
+
 .z-dmcall-tiles {
   display: flex;
   justify-content: center;
@@ -743,4 +755,15 @@
   font-size: 12px;
   line-height: 16px;
   color: var(--z-fg-muted);
+}
+
+/* touch has no hover: the corner buttons stay, at a finger's size */
+@media (hover: none) {
+  .z-dmcall-corner {
+    opacity: 1;
+  }
+  .z-dmcall-corner button {
+    width: 44px;
+    height: 44px;
+  }
 }

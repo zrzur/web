@@ -936,8 +936,9 @@ const Rows = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "6px",
-    marginBlockStart: "6px",
+    // 8px between rows, as between buttons
+    gap: "8px",
+    marginBlockStart: "8px",
     maxWidth: "min(100%, 520px)",
   },
 });
@@ -1008,7 +1009,7 @@ const Row = styled("div", {
   base: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "6px",
+    gap: "8px",
     // a grid of square buttons is a game board: same layout in every language
     // (fit-content keeps it at the start of the message in RTL too)
     "&:has(> [data-square])": { direction: "ltr", width: "fit-content" },
@@ -1016,9 +1017,10 @@ const Row = styled("div", {
 });
 
 /**
- * Bot buttons: flat and solid, one colour per meaning (main, grey,
- * success, danger, link), crisp 4px corners, the same height in a row.
- * Hover brightens a little, pressing settles 1px, disabled fades out.
+ * Bot buttons, sized as Discord's (owner, 2026-11-27): 32px tall, at least
+ * 60px wide, 8px corners, 8px apart; flat and solid, one colour per meaning
+ * (main, grey, success, danger, link). Hover brightens a little, pressing
+ * settles 1px, disabled fades out.
  */
 const buttonBase = {
   position: "relative",
@@ -1030,9 +1032,11 @@ const buttonBase = {
   minWidth: "60px",
   // links too get the 44 px phone target buttons already have
   _phone: { minHeight: "44px" },
-  paddingInline: "16px",
-  borderRadius: "4px",
-  border: "none",
+  // 3px + 11px inside a 1px edge: Discord's 4px by 12px
+  paddingBlock: "3px",
+  paddingInline: "11px",
+  borderRadius: "8px",
+  border: "1px solid color-mix(in srgb, var(--z-fg-primary) 8%, transparent)",
   fontSize: "14px",
   fontWeight: 500,
   lineHeight: "16px",
@@ -1042,22 +1046,26 @@ const buttonBase = {
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   "--z-icon-color": "currentColor",
-  transition: "filter 0.12s ease, background-color 0.12s ease",
+  transition: "filter 0.2s ease, background-color 0.2s ease",
   _hover: { filter: "brightness(1.1)" },
-  "&:active:not(:disabled)": { transform: "translateY(1px)" },
+  "&:active:not(:disabled)": { filter: "brightness(0.92)" },
   _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
-  // faded, colourless and inert: a disabled button never looks like a
-  // live one (a played square on a game board keeps its colour)
-  _disabled: { opacity: 0.45, cursor: "not-allowed", filter: "saturate(0.2)" },
+  // half faded and inert, as Discord: a played square on a game board
+  // keeps its colour
+  _disabled: { opacity: 0.5, cursor: "not-allowed", filter: "none" },
+  // an emoji beside words: 1.375 times the text, as in Discord
+  "&:not([data-square]) [data-emoji]": { fontSize: "1.375em", lineHeight: 1 },
   // waiting for the bot: the spinner covers the label, the width stays
   "&[aria-busy=true] > :not([data-spinner])": { visibility: "hidden" },
+  // an emoji alone: the same button as any other (60 by 32, as Discord),
+  // the emoji a little larger than text; every one the same width, so a
+  // game board lines up
   "&[data-square]": {
-    width: "40px",
-    minWidth: "40px",
-    height: "40px",
+    width: "60px",
+    minWidth: "60px",
     paddingInline: 0,
-    fontSize: "18px",
-    _disabled: { opacity: 0.7, filter: "none" },
+    fontSize: "20px",
+    lineHeight: 1,
   },
 } as const;
 
@@ -1078,21 +1086,13 @@ const ActionButton = styled("button", {
       Secondary: secondary,
       Success: {
         background: "var(--z-status-success)",
-        color: "#0D0E16",
+        // readable on the theme's green, light or dark
+        color: "var(--z-on-success, #0D0E16)",
       },
-      // tinted, not filled: the raspberry of main actions and the red of
-      // leaving or deleting must never be mistaken for each other
+      // solid red with white words, as Discord (owner, 2026-11-27)
       Danger: {
-        background:
-          "color-mix(in srgb, var(--z-danger) 16%, var(--z-bg-raised))",
-        color: "var(--z-danger)",
-        boxShadow:
-          "inset 0 0 0 1px color-mix(in srgb, var(--z-danger) 45%, transparent)",
-        _hover: {
-          filter: "none",
-          background:
-            "color-mix(in srgb, var(--z-danger) 26%, var(--z-bg-raised))",
-        },
+        background: "var(--z-danger-strong, var(--z-danger))",
+        color: "#FFFFFF",
       },
     },
   },
@@ -1123,7 +1123,7 @@ const Spinner = styled("span", {
 });
 
 const EmojiImage = styled("img", {
-  base: { width: "18px", height: "18px", objectFit: "contain" },
+  base: { width: "20px", height: "20px", objectFit: "contain" },
 });
 
 /** Space kept for a custom emoji while it loads (or if it was deleted) */
@@ -1150,8 +1150,9 @@ const SelectTrigger = styled("button", {
     alignItems: "center",
     justifyContent: "space-between",
     gap: "8px",
-    minHeight: "36px",
-    padding: "7px 10px 7px 12px",
+    // 40px, as Discord's menus in a message
+    minHeight: "40px",
+    padding: "8px 8px 8px 12px",
     borderRadius: "8px",
     border: "1px solid var(--z-field-border)",
     background: "var(--z-field-bg)",
@@ -1173,7 +1174,7 @@ const SelectTrigger = styled("button", {
       boxShadow: "0 0 0 3px var(--z-accent-muted)",
     },
     "&[data-open] > svg": { transform: "rotate(180deg)" },
-    _disabled: { opacity: 0.45, cursor: "not-allowed" },
+    _disabled: { opacity: 0.5, cursor: "not-allowed" },
   },
 });
 
@@ -1200,7 +1201,7 @@ const SelectPanel = styled("div", {
     gap: "4px",
     maxHeight: "min(340px, 50dvh, var(--z-select-max-height, 50dvh))",
     boxSizing: "border-box",
-    borderRadius: "12px",
+    borderRadius: "8px",
     padding: "6px",
     background: "var(--z-popover-bg)",
     color: "var(--z-fg-primary)",
@@ -1244,12 +1245,13 @@ const OptionRow = styled("div", {
     alignItems: "center",
     gap: "10px",
     flexShrink: 0,
-    minHeight: "36px",
-    padding: "7px 10px",
+    // roomy rows, as Discord's menus
+    minHeight: "40px",
+    padding: "8px 12px",
     borderRadius: "8px",
     cursor: "pointer",
-    fontSize: "13px",
-    lineHeight: "18px",
+    fontSize: "14px",
+    lineHeight: "20px",
     color: "var(--z-fg-primary)",
     "--z-icon-color": "var(--z-accent)",
     "& > svg": { flexShrink: 0, marginInlineStart: "auto" },

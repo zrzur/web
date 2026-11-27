@@ -188,6 +188,10 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
     >
       <form onSubmit={submit} data-add-bot data-step={step()}>
         <Body>
+          {/* the bot's own banner; a GIF or animated WebP plays */}
+          <Show when={props.invite.banner?.createFileURL()}>
+            {(src) => <BotBanner src={src()} alt="" />}
+          </Show>
           <Pair aria-hidden="true">
             <Avatar
               size={64}
@@ -485,5 +489,17 @@ const Legend = styled("div", {
     fontSize: "12px",
     color: "var(--z-fg-muted)",
     "--z-icon-color": "var(--z-status-warning)",
+  },
+});
+
+/** the bot's banner on top of the dialog, in the profile banner's shape */
+const BotBanner = styled("img", {
+  base: {
+    display: "block",
+    width: "100%",
+    aspectRatio: "680 / 240",
+    objectFit: "cover",
+    borderRadius: "12px",
+    background: "var(--z-bg-raised)",
   },
 });

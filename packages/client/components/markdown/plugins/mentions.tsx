@@ -15,6 +15,7 @@ import { Avatar, ColouredText, iconSize } from "@revolt/ui";
 import { alternate_email as MdAt } from "@revolt/ui/icons/legacy";
 
 import { useUser } from "../users";
+import { RE_MENTION, mentionTarget } from "./mentionTokens";
 
 export function RenderMention(props: {
   mentions?: string;
@@ -36,9 +37,10 @@ export function RenderMention(props: {
         </span>
       </Match>
       <Match when={props.mentions === "online"}>
+        {/* @here (or the older @online): the members who are online */}
         <span class={mention()} dir="auto">
           <MdAt {...iconSize(16)} />
-          online
+          here
         </span>
       </Match>
       <Match when={props.mentions?.startsWith("role:")}>
@@ -130,9 +132,6 @@ const RoleIcon = styled("div", {
   },
 });
 
-const RE_MENTION =
-  /(<@[ABCDEFGHJKMNPQRSTVWXYZ\d]{26}>|@everyone|@online|<%[ABCDEFGHJKMNPQRSTVWXYZ\d]{26}>)/;
-
 export const remarkMentions: Plugin = () => (tree) => {
   visit(
     tree,
@@ -147,25 +146,7 @@ export const remarkMentions: Plugin = () => (tree) => {
 
       const newNodes = elements.map((value, index) =>
         index % 2
-          ? value.startsWith("<@")
-            ? {
-                type: "mention",
-                mentions: "user:" + value.substring(2, value.length - 1),
-              }
-            : value === "@everyone"
-              ? {
-                  type: "mention",
-                  mentions: "everyone",
-                }
-              : value === "@online"
-                ? {
-                    type: "mention",
-                    mentions: "online",
-                  }
-                : {
-                    type: "mention",
-                    mentions: "role:" + value.substring(2, value.length - 1),
-                  }
+          ? { type: "mention", mentions: mentionTarget(value) }
           : {
               type: "text",
               value,
@@ -191,7 +172,8 @@ export const mentionHandler: Handler = (h, node) => {
 
 export const mention = cva({
   base: {
-    verticalAlign: "bottom",
+    // centred on the words around it (bottom sat it some 5px low)
+    verticalAlign: "text-bottom",
 
     gap: "4px",
     paddingInlineStart: "2px",

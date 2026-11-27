@@ -62,7 +62,6 @@ export function InputSensitivityOptions() {
       <SettingsRow
         icon={<Icon name="sparkle" size={20} />}
         title={<Trans>Automatic</Trans>}
-        description={t`Zrzur finds the right level for your room.`}
         onClick={toggle}
         control={(ids) => (
           <Toggle

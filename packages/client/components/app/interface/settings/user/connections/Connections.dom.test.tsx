@@ -126,7 +126,8 @@ const linked = (change: Record<string, unknown> = {}) => ({
       hours: 100,
       achievements_unlocked: 12,
       achievements_total: 30,
-      header_url: "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
+      header_url:
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
       store_url: "https://store.steampowered.com/app/570/",
     },
     {
@@ -183,11 +184,13 @@ afterEach(() => {
 describe("Connections", () => {
   it("asks for consent before leaving for Steam", async () => {
     api.list.mockResolvedValue({ steam: { available: true } });
-    api.start.mockResolvedValue({ url: "https://steamcommunity.com/openid/login?x" });
+    api.start.mockResolvedValue({
+      url: "https://steamcommunity.com/openid/login?x",
+    });
     mount();
     await flush();
 
-    expect(text()).toContain("We never see your Steam password.");
+    expect(text()).toContain("Your Steam name, games and achievements.");
     button("Connect Steam")!.click();
     await flush();
 
@@ -226,7 +229,9 @@ describe("Connections", () => {
 
   it("Steam's sign-in page that never opens gives the button back with what to do", async () => {
     api.list.mockResolvedValue({ steam: { available: true } });
-    api.start.mockResolvedValue({ url: "https://steamcommunity.com/openid/login?x" });
+    api.start.mockResolvedValue({
+      url: "https://steamcommunity.com/openid/login?x",
+    });
     mount();
     await flush();
     button("Connect Steam")!.click();
@@ -271,13 +276,15 @@ describe("Connections", () => {
   });
 
   it("previews a new link and shows it on request", async () => {
-    api.list.mockResolvedValue({ steam: { available: true, account: linked() } });
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked() },
+    });
     api.edit.mockImplementation(async (_c, change) => linked(change));
     mount();
     await flush();
 
     expect(text()).toContain("Gamer");
-    expect(text()).toContain("This is a preview.");
+    expect(text()).toContain("A preview: nothing shows on your profile");
     expect(text()).toContain("Not on your profile");
     expect(text()).toContain("12 of 30 achievements");
 
@@ -289,7 +296,9 @@ describe("Connections", () => {
   });
 
   it("hides one game", async () => {
-    api.list.mockResolvedValue({ steam: { available: true, account: linked() } });
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked() },
+    });
     api.edit.mockImplementation(async (_c, change) => linked(change));
     mount();
     await flush();
@@ -306,7 +315,9 @@ describe("Connections", () => {
   });
 
   it("disconnects in one press", async () => {
-    api.list.mockResolvedValue({ steam: { available: true, account: linked() } });
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked() },
+    });
     api.disconnect.mockResolvedValue(undefined);
     mount();
     await flush();
@@ -354,7 +365,9 @@ describe("Connections", () => {
     const save = button("Save")!;
     expect(save.disabled).toBe(true);
     [...document.querySelectorAll<HTMLInputElement>("input[type=checkbox]")]
-      .find((box) => box.closest("label")?.textContent?.includes("in the United States"))!
+      .find((box) =>
+        box.closest("label")?.textContent?.includes("in the United States"),
+      )!
       .click();
     await flush();
     expect(save.disabled).toBe(false);
@@ -392,7 +405,9 @@ describe("Connections", () => {
   });
 
   it("Refresh reads Steam once agreed", async () => {
-    api.list.mockResolvedValue({ steam: { available: true, account: linked() } });
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked() },
+    });
     api.refresh.mockResolvedValue(linked());
     mount();
     await flush();
@@ -423,7 +438,9 @@ describe("Connections", () => {
     button("Open preview")!.click();
     const shown = openModal.mock.calls[0][0];
     expect(shown.type).toBe("steam_games");
-    expect(shown.games.games.map((g: { appid: number }) => g.appid)).toEqual([570]);
+    expect(shown.games.games.map((g: { appid: number }) => g.appid)).toEqual([
+      570,
+    ]);
     expect(
       shown.games.achievements.map((a: { name: string }) => a.name),
     ).toEqual(["First blood"]);

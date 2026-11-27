@@ -23,6 +23,12 @@ export const paragraph = styled(
   {
     base: {
       "&>code": inlineCodeStyles,
+      // `-# text`: a small, muted line
+      "&[data-subtext]": {
+        fontSize: "0.8125em",
+        lineHeight: "1.375",
+        color: "var(--z-fg-muted)",
+      },
     },
     variants: {
       emojiSize: {
@@ -60,6 +66,13 @@ export const emphasis = styled("em", {
 export const strong = styled("strong", {
   base: {
     fontWeight: "bold",
+  },
+});
+
+/** `__text__`: underlined */
+export const underline = styled("u", {
+  base: {
+    textDecoration: "underline",
   },
 });
 

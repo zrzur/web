@@ -30,6 +30,8 @@ describe("message timestamps", () => {
     expect(formatTimestamp(at, "D")).toBe("July 10, 2021");
     expect(formatTimestamp(at, "f")).toBe("July 10, 2021 1:21 PM");
     expect(formatTimestamp(at, "F")).toBe("Saturday, July 10, 2021 1:21 PM");
+    expect(formatTimestamp(at, "s")).toBe("07/10/2021 1:21 PM");
+    expect(formatTimestamp(at, "S")).toBe("07/10/2021 1:21:08 PM");
   });
 
   it("writes relative times", () => {

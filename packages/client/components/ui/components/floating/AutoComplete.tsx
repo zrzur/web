@@ -1,14 +1,17 @@
 import { userHandle } from "@revolt/common/lib/userTag";
 import { For, JSX, Match, Switch } from "solid-js";
 
-import { ServerMember } from "@zrzur/sdk/solid";
+import { Channel, ServerMember } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { CustomEmoji, UnicodeEmoji } from "@revolt/markdown/emoji";
 import { useState } from "@revolt/state";
 
 import { AutoCompleteState } from "../../directives";
+import { type IconName, Icon } from "../../icons/Icon";
+import { RulesIcon } from "../../icons/RulesIcon";
 import { Avatar } from "../design";
+import { channelGlyph } from "../features/texteditor/channelGlyph";
 import { Column } from "../layout";
 import { ColouredText } from "../utils";
 
@@ -133,7 +136,8 @@ export function AutoComplete(
                 onMouseDown={() => props.select(index())}
                 onMouseEnter={() => props.setSelection(index())}
               >
-                <Name>#{match.channel.name}</Name>
+                <ChannelGlyph channel={match.channel} />
+                <Name>{match.channel.name}</Name>
               </Entry>
             )}
           </For>
@@ -142,6 +146,35 @@ export function AutoComplete(
     </Base>
   );
 }
+
+function ChannelGlyph(props: { channel: Channel }) {
+  const glyph = () => channelGlyph(props.channel);
+  return (
+    <Glyph aria-hidden="true">
+      <Switch fallback={<Icon name={glyph() as IconName} size={20} />}>
+        <Match when={props.channel.iconURL}>
+          {(src) => <img src={src()} alt="" width={20} height={20} />}
+        </Match>
+        <Match when={glyph() === "rules"}>
+          <RulesIcon size={20} />
+        </Match>
+      </Switch>
+    </Glyph>
+  );
+}
+
+const Glyph = styled("span", {
+  base: {
+    display: "grid",
+    placeItems: "center",
+    flexShrink: 0,
+    width: "20px",
+    marginInlineEnd: "8px",
+    color: "var(--z-fg-muted)",
+    "--z-icon-color": "currentColor",
+    "& img": { borderRadius: "4px", objectFit: "cover" },
+  },
+});
 
 /**
  * Individual auto complete entry

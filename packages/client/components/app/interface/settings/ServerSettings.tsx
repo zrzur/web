@@ -1,5 +1,5 @@
 import { lazy } from "@revolt/common/lib/lazyPart";
-import { Suspense } from "solid-js";
+import { type JSX, Suspense } from "solid-js";
 
 import { PageBoundary } from "@revolt/ui/components/utils/PageBoundary";
 
@@ -9,7 +9,7 @@ import { Server } from "@zrzur/sdk/solid";
 import { useClient } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
 import { useModals } from "@revolt/modal";
-import { Icon } from "@revolt/ui/icons/Icon";
+import { type IconName, Icon } from "@revolt/ui/icons/Icon";
 
 import { SettingsConfiguration } from ".";
 import { ChannelPermissionsEditor } from "./channel/permissions/ChannelPermissionsEditor";
@@ -25,9 +25,11 @@ import { ServerAppPage } from "./server/apps/ServerAppPage";
 import { AssistantPage } from "./server/assistant/AssistantPage";
 import {
   AppsPage,
-  BansPage,
   ChannelsPage,
+  DiscoveryPage,
   EmojiPage,
+  FeaturesPage,
+  InvitesPage,
   JoiningPage,
   LogPage,
   MembersPage,
@@ -58,36 +60,38 @@ function SectionTitle(props: { id: string; page: PageId }) {
   switch (`${props.page}#${props.id}`) {
     case "overview#profile":
       return <Trans>Server profile</Trans>;
-    case "overview#discovery":
-      return <Trans>Discovery</Trans>;
-    case "overview#invites":
-      return <Trans>Invites and sharing</Trans>;
-    case "overview#features":
-      return <Trans>Features</Trans>;
-    case "overview#events":
+    case "overview#notifications":
+      return <Trans>Default notifications</Trans>;
+    case "features#features":
+      return <Trans>Channels and messages</Trans>;
+    case "features#threads":
+      return <Trans>Threads and forums</Trans>;
+    case "features#events":
       return <Trans>Events and lobby</Trans>;
+    case "invites#invites":
+      return <Trans>Custom invite link</Trans>;
+    case "invites#invite-list":
+      return <Trans>Active invites</Trans>;
     case "overview#danger":
       return <Trans>Danger zone</Trans>;
-    case "channels#channels":
-      return <Trans>Channels and categories</Trans>;
-    case "joining#rules":
-      return <Trans>Rules to accept</Trans>;
     case "joining#join-mode":
       return <Trans>Who can join</Trans>;
     case "joining#verification":
       return <Trans context="server-settings">Verification</Trans>;
+    case "joining#rules":
+      return <Trans>Rules to accept</Trans>;
+    case "joining#on-join":
+      return <Trans>When someone joins</Trans>;
     case "joining#questions":
       return <Trans>Welcome questions</Trans>;
-    case "joining#lobby":
-      return <Trans>Lobby design</Trans>;
+    case "members#members":
+      return <Trans>Members</Trans>;
+    case "members#bans":
+      return <Trans>Bans</Trans>;
     case "safety#emergency":
       return <Trans>Emergency</Trans>;
     case "safety#filters":
       return <Trans>Filters</Trans>;
-    case "members#members":
-      return <Trans>Everyone in the server</Trans>;
-    case "members#invites":
-      return <Trans>Active invites</Trans>;
     case "apps#bots":
       return <Trans>Bots</Trans>;
     case "apps#webhooks":
@@ -97,24 +101,28 @@ function SectionTitle(props: { id: string; page: PageId }) {
   }
 }
 
-/** Sections the search lists under their page (the rest are whole pages) */
+/**
+ * Sections the search lists under their page: only on pages with more
+ * than one; a page with one topic is found by its own name
+ */
 const SEARCHABLE = new Set([
   "overview#profile",
-  "overview#discovery",
-  "overview#invites",
-  "overview#features",
-  "overview#events",
+  "overview#notifications",
+  "features#features",
+  "features#threads",
+  "features#events",
+  "invites#invites",
+  "invites#invite-list",
   "overview#danger",
-  "channels#channels",
-  "joining#rules",
   "joining#join-mode",
   "joining#verification",
+  "joining#rules",
+  "joining#on-join",
   "joining#questions",
-  "joining#lobby",
+  "members#members",
+  "members#bans",
   "safety#emergency",
   "safety#filters",
-  "members#members",
-  "members#invites",
   "apps#bots",
   "apps#webhooks",
 ]);
@@ -145,9 +153,7 @@ const Config: SettingsConfiguration<Server> = {
       return ctx.context.roles.get(key.substring(6))?.name ?? "";
     }
 
-    if (key === "requests" || key === "joining/requests")
-      return t`Join requests`;
-    if (key === "lobby" || key === "joining/lobby") return t`Lobby design`;
+    if (resolvePage(key) === "joining/requests") return t`Join requests`;
     if (key === "apps/assistant") return t`Zrzur Assistant`;
     if (key.startsWith("apps/bot/")) {
       const bot = useClient()().users.get(key.substring(9));
@@ -190,6 +196,8 @@ const Config: SettingsConfiguration<Server> = {
     switch (id) {
       case "overview":
         return <OverviewPage server={server} />;
+      case "features":
+        return <FeaturesPage server={server} />;
       case "insights":
         // its own loading line while the chunk arrives, so the rest of
         // settings never waits on it
@@ -209,26 +217,28 @@ const Config: SettingsConfiguration<Server> = {
         );
       case "channels":
         return <ChannelsPage server={server} />;
-      case "joining":
-        return <JoiningPage server={server} />;
-      case "joining/lobby":
-        return <LobbySettings server={server} />;
-      case "joining/requests":
-        return <JoinRequests server={server} />;
       case "emoji":
         return <EmojiPage server={server} />;
       case "soundboard":
         return <SoundboardPage server={server} />;
-      case "safety":
-        return <SafetyPage server={server} />;
-      case "log":
-        return <LogPage server={server} />;
       case "members":
         return <MembersPage server={server} />;
       case "roles":
         return <RolesPage server={server} />;
-      case "bans":
-        return <BansPage server={server} />;
+      case "invites":
+        return <InvitesPage server={server} />;
+      case "joining":
+        return <JoiningPage server={server} />;
+      case "joining/requests":
+        return <JoinRequests server={server} />;
+      case "lobby":
+        return <LobbySettings server={server} />;
+      case "discovery":
+        return <DiscoveryPage server={server} />;
+      case "safety":
+        return <SafetyPage server={server} />;
+      case "log":
+        return <LogPage server={server} />;
       case "apps":
         return <AppsPage server={server} />;
       case "apps/assistant":
@@ -252,9 +262,27 @@ const Config: SettingsConfiguration<Server> = {
     // permission to change them the page is read-only, with the reason
     const anyAccess = () => canOpenServerSettings(server);
 
-    // five groups; one icon per page, never reused. Names that mean
+    // Few, full pages, each one click away in the sidebar (owner,
+    // 2026-11-27: a page of one block is not a page; the owner's danger
+    // zone sits at the end of Overview). One icon per page, never reused. Names that mean
     // something else elsewhere in the app carry the "server-settings"
     // context (their own translation).
+    const page = (
+      id: PageId,
+      icon: IconName,
+      title: JSX.Element,
+      description: JSX.Element,
+      hidden = false,
+    ) => ({
+      id,
+      hidden,
+      icon: <Icon name={icon} size={20} />,
+      title,
+      description,
+      keywords: pageKeywords(id),
+      sections: searchSections(id),
+    });
+
     return {
       context: server,
       prepend: (
@@ -263,176 +291,171 @@ const Config: SettingsConfiguration<Server> = {
           <ServerCard server={server} />
         </>
       ),
+      // Grouped by what you do, as in Discord: the server itself, how it
+      // looks and sounds, its people, how they get in, keeping it safe,
+      // then apps and Wings. No heading over a single page.
       entries: [
         {
           hidden: !anyAccess(),
-          title: <Trans>General</Trans>,
+          title: <Trans context="settings-group">Server</Trans>,
           entries: [
-            {
-              id: "overview",
-              icon: <Icon name="identification-card" size={20} />,
-              title: <Trans>Overview</Trans>,
-              description: (
-                <Trans>
-                  How the server looks, how people find and join it, and its
-                  main switches.
-                </Trans>
-              ),
-              keywords: pageKeywords("overview"),
-              sections: searchSections("overview"),
-            },
-            {
-              id: "insights",
-              hidden: !manage(),
-              icon: <Icon name="waveform" size={20} />,
-              title: <Trans context="server insights">Insights</Trans>,
-              description: (
-                <Trans>Joins, messages and activity, day by day.</Trans>
-              ),
-              keywords: pageKeywords("insights"),
-              sections: [],
-            },
-            {
-              id: "channels",
-              icon: <Icon name="hash" size={20} />,
-              title: <Trans>Channels</Trans>,
-              description: <Trans>The channels and their categories.</Trans>,
-              keywords: pageKeywords("channels"),
-              sections: searchSections("channels"),
-            },
+            page(
+              "overview",
+              "identification-card",
+              <Trans>Overview</Trans>,
+              <Trans>Name, picture, description and notifications.</Trans>,
+            ),
+            page(
+              "channels",
+              "hash",
+              <Trans>Channels</Trans>,
+              <Trans>The channels and their categories.</Trans>,
+            ),
+            page(
+              "features",
+              "sliders-horizontal",
+              <Trans>Features</Trans>,
+              <Trans>System messages, threads, events and tickets.</Trans>,
+            ),
+            page(
+              "insights",
+              "waveform",
+              <Trans context="server insights">Insights</Trans>,
+              <Trans>Joins, messages and activity, day by day.</Trans>,
+              !manage(),
+            ),
           ],
         },
         {
           hidden: !anyAccess(),
-          title: <Trans>Community</Trans>,
+          title: <Trans>Expression</Trans>,
           entries: [
-            {
-              id: "joining",
-              icon: <Icon name="sign-in" size={20} />,
-              title: <Trans>Joining</Trans>,
-              description: (
-                <Trans>
-                  Who can join, what they must accept, and what they see first.
-                </Trans>
+            page(
+              "emoji",
+              "smiley",
+              <Trans>Emoji</Trans>,
+              <Trans>The server's own emoji.</Trans>,
+            ),
+            page(
+              "soundboard",
+              "music-note",
+              <Trans>Soundboard</Trans>,
+              <Trans>
+                Short sounds members upload and play in voice calls.
+              </Trans>,
+            ),
+          ],
+        },
+        {
+          hidden: !anyAccess(),
+          title: <Trans context="settings-group">People</Trans>,
+          entries: [
+            page(
+              "members",
+              "users",
+              <Trans>Members</Trans>,
+              <Trans>
+                Search, change roles, time out, kick or ban, and see who is
+                banned.
+              </Trans>,
+              !(
+                canSeeMembers() ||
+                manage() ||
+                server.havePermission("BanMembers")
               ),
-              keywords: pageKeywords("joining"),
-              sections: searchSections("joining"),
-            },
-            {
-              id: "emoji",
-              icon: <Icon name="smiley" size={20} />,
-              title: <Trans>Emoji</Trans>,
-              description: <Trans>The server's own emoji.</Trans>,
-              keywords: pageKeywords("emoji"),
-              sections: searchSections("emoji"),
-            },
-            {
-              id: "soundboard",
-              icon: <Icon name="music-note" size={20} />,
-              title: <Trans>Soundboard</Trans>,
-              description: (
-                <Trans>Short sounds members play in voice calls.</Trans>
-              ),
-              keywords: pageKeywords("soundboard"),
-              sections: searchSections("soundboard"),
-            },
+            ),
+            page(
+              "roles",
+              "key",
+              <Trans>Roles</Trans>,
+              <Trans>Groups of members and what they may do.</Trans>,
+            ),
+          ],
+        },
+        {
+          hidden: !anyAccess(),
+          title: <Trans>Joining</Trans>,
+          entries: [
+            page(
+              "invites",
+              "link",
+              <Trans>Invites</Trans>,
+              <Trans>Your own short link, and every invite.</Trans>,
+            ),
+            page(
+              "joining",
+              "sign-in",
+              <Trans>Access</Trans>,
+              <Trans>
+                Who can get in, what they need before they can talk, the rules
+                they accept and how they are welcomed.
+              </Trans>,
+            ),
+            page(
+              "lobby",
+              "house",
+              <Trans context="server-settings">Lobby</Trans>,
+              <Trans>What new members see first.</Trans>,
+            ),
+            page(
+              "discovery",
+              "compass",
+              <Trans>Discovery</Trans>,
+              <Trans>Whether people can find the server in Discover.</Trans>,
+            ),
           ],
         },
         {
           hidden: !(manage() || server.havePermission("ViewAuditLogs")),
           title: <Trans context="server-settings">Safety</Trans>,
           entries: [
-            {
-              id: "safety",
-              hidden: !manage(),
-              icon: <Icon name="shield-check" size={20} />,
-              title: <Trans context="server-settings">Safety</Trans>,
-              description: (
-                <Trans>
-                  Emergency tools, and filters against spam and unwanted links.
-                </Trans>
-              ),
-              keywords: pageKeywords("safety"),
-              sections: searchSections("safety"),
-            },
-            {
-              id: "log",
-              hidden: !server.havePermission("ViewAuditLogs"),
-              icon: <Icon name="clock-counter-clockwise" size={20} />,
-              title: <Trans>Audit log</Trans>,
-              description: <Trans>Who changed what, and when.</Trans>,
-              keywords: pageKeywords("log"),
-              sections: searchSections("log"),
-            },
-          ],
-        },
-        {
-          hidden: !anyAccess(),
-          title: <Trans>Members</Trans>,
-          entries: [
-            {
-              id: "members",
-              hidden: !(canSeeMembers() || manage()),
-              icon: <Icon name="users" size={20} />,
-              title: <Trans>Members</Trans>,
-              description: (
-                <Trans>Everyone in the server, and its invites.</Trans>
-              ),
-              keywords: pageKeywords("members"),
-              sections: searchSections("members"),
-            },
-            {
-              id: "roles",
-              icon: <Icon name="key" size={20} />,
-              title: <Trans>Roles</Trans>,
-              description: (
-                <Trans>Groups of members and what they may do.</Trans>
-              ),
-              keywords: pageKeywords("roles"),
-              sections: searchSections("roles"),
-            },
-            {
-              id: "bans",
-              hidden: !server.havePermission("BanMembers"),
-              icon: <Icon name="gavel" size={20} />,
-              title: <Trans>Bans</Trans>,
-              description: <Trans>People who can't come back.</Trans>,
-              keywords: pageKeywords("bans"),
-              sections: searchSections("bans"),
-            },
+            page(
+              "safety",
+              "warning-octagon",
+              <Trans>Protection</Trans>,
+              <Trans>
+                Pause the server during a raid, and filters that stop spam, bad
+                words and unwanted links.
+              </Trans>,
+              !manage(),
+            ),
+            page(
+              "log",
+              "clock-counter-clockwise",
+              <Trans>Audit log</Trans>,
+              <Trans>Who changed what, and when.</Trans>,
+              !server.havePermission("ViewAuditLogs"),
+            ),
           ],
         },
         {
           hidden: !(
             manage() ||
             server.havePermission("KickMembers") ||
-            server.havePermission("ManageWebhooks")
+            server.havePermission("ManageWebhooks") ||
+            (billingAvailable() && manage())
           ),
-          title: <Trans>Apps</Trans>,
+          title: <Trans context="settings-group">More</Trans>,
           entries: [
-            {
-              id: "apps",
-              icon: <Icon name="robot" size={20} />,
-              title: <Trans>Apps</Trans>,
-              description: <Trans>Bots and webhooks.</Trans>,
-              keywords: pageKeywords("apps"),
-              sections: searchSections("apps"),
-            },
-          ],
-        },
-        {
-          // paid items only appear where billing is on
-          hidden: !(billingAvailable() && manage()),
-          title: <Trans>Extras</Trans>,
-          entries: [
-            {
-              id: "wings",
-              icon: <Icon name="lightning" size={20} />,
-              title: <Trans context="server-settings">Wings</Trans>,
-              description: <Trans>The server's level and its perks.</Trans>,
-              keywords: pageKeywords("wings"),
-              sections: [],
-            },
+            page(
+              "apps",
+              "robot",
+              <Trans>Apps</Trans>,
+              <Trans>Bots and webhooks.</Trans>,
+              !(
+                manage() ||
+                server.havePermission("KickMembers") ||
+                server.havePermission("ManageWebhooks")
+              ),
+            ),
+            page(
+              "wings",
+              "lightning",
+              <Trans context="server-settings">Wings</Trans>,
+              <Trans>The server's level and its perks.</Trans>,
+              // paid items only appear where billing is on
+              !(billingAvailable() && manage()),
+            ),
           ],
         },
       ],

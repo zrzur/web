@@ -27,8 +27,18 @@ vi.mock("@revolt/ui", () => {
     Dialog: Pass,
     FloatingSelect: Pass,
     MenuItem: Pass,
+    SettingsFormPanel: Pass,
+    SettingsSection: Pass,
+    TextField: Pass,
+    SettingsRow: (props: { title: unknown; onClick?: () => void }) => (
+      <button type="button" onClick={() => props.onClick?.()}>
+        {props.title as never}
+      </button>
+    ),
   };
 });
+const navigate = vi.fn();
+vi.mock("../../Settings", () => ({ useSettingsNavigation: () => ({ navigate }) }));
 vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => <span /> }));
 vi.mock("../profile/CommunityParts", () => ({ useDate: () => () => "Nov 20" }));
 
@@ -37,8 +47,8 @@ import { ContactSupport } from "./ContactSupport";
 let dispose: (() => void) | undefined;
 afterEach(() => dispose?.());
 
-describe("ContactSupport ticket button", () => {
-  it("keeps position: relative next to all: unset (phone tap area)", async () => {
+describe("ContactSupport tickets", () => {
+  it("opens a ticket as its own settings page", async () => {
     i18n.loadAndActivate({ locale: "en", messages: {} });
     document.body.replaceChildren(document.createElement("div"));
     dispose = render(
@@ -52,10 +62,10 @@ describe("ContactSupport ticket button", () => {
     await vi.waitFor(() =>
       expect(document.body.textContent).toContain("My ticket"),
     );
-    const button = [...document.querySelectorAll("button")].find((b) =>
+    const row = [...document.querySelectorAll("button")].find((b) =>
       b.textContent?.includes("My ticket"),
     )!;
-    expect(button.style.all).toBe("unset");
-    expect(button.style.position).toBe("relative");
+    row.click();
+    expect(navigate).toHaveBeenCalledWith("support/T1");
   });
 });

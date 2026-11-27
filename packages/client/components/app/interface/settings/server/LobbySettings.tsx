@@ -762,19 +762,28 @@ const RowTools = styled("div", {
   base: { display: "flex", alignItems: "center", gap: "4px" },
 });
 
+/**
+ * A row's small action (move, remove): the settings' one quiet icon button,
+ * the same as the toolbar buttons elsewhere in settings (colour only, never
+ * a shape behind the icon)
+ */
 const IconButton = styled("button", {
   base: {
     display: "grid",
     placeItems: "center",
-    width: "36px",
-    height: "36px",
-    borderRadius: "8px",
+    width: "32px",
+    height: "32px",
+    borderRadius: "6px",
     border: "none",
     background: "none",
     color: "var(--z-fg-muted)",
     cursor: "pointer",
     "--z-icon-color": "currentColor",
-    _hover: { background: "var(--z-nav-hover)", color: "var(--z-fg-primary)" },
+    _hover: { color: "var(--z-fg-primary)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus, var(--z-accent))",
+      outlineOffset: "1px",
+    },
     _disabled: { opacity: 0.35, cursor: "default", background: "none" },
     _phone: { width: "44px", height: "44px" },
   },

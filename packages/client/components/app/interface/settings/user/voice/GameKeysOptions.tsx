@@ -234,8 +234,7 @@ export function GameKeysOptions() {
           when={bridge}
           fallback={
             <Trans>
-              In the browser, your keys work only while the Zrzur tab is active.
-              To talk while you play, use the Zrzur desktop app.
+              In the browser, keys work only while the Zrzur tab is active.
             </Trans>
           }
         >
@@ -408,10 +407,7 @@ export function GameKeysOptions() {
         icon={<Icon name="timer" size={20} />}
         title={<Trans>Release delay</Trans>}
         description={
-          <Trans>
-            Push to talk keeps the microphone open this long after you let go,
-            so the end of a word is not cut off.
-          </Trans>
+          <Trans>Keeps the mic open a moment after you let go.</Trans>
         }
         control={(ids) => (
           <SelectWidth>

@@ -260,12 +260,12 @@ html[data-installed] {
      places itself: the close button of a full profile left its corner and
      lay at the bottom of the sheet (owner, 2026-11-18). */
   @layer base {
-    :where(.app_body, .settings_cont, .z-dialog)
+    :where(.app_body, .settings_cont, .z-dialog, #floating)
       :where(button:not([role="switch"])) {
       position: relative;
     }
   }
-  :where(.app_body, .settings_cont, .z-dialog)
+  :where(.app_body, .settings_cont, .z-dialog, #floating)
     :where(button:not([role="switch"]))::after {
     content: "";
     position: absolute;
@@ -275,7 +275,7 @@ html[data-installed] {
   /* a button beside a select or a text field is as tall as that field
      (owner, 2026-11-17: "Pause" was drawn shorter than the select next to
      it); siblings in one row share one height */
-  :where(.app_body, .settings_cont, .z-dialog)
+  :where(.app_body, .settings_cont, .z-dialog, #floating)
     :is(span, div, form):has(
       > div > button[aria-haspopup="menu"],
       > .z-text-field

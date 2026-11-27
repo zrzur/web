@@ -95,12 +95,7 @@ export function ProfileSectionsEditor(props: {
     <Column gap="md">
       <SettingsSection
         title={<Trans>Profile sections</Trans>}
-        description={
-          <Trans>
-            Choose what shows on your profile and in what order. Hidden sections
-            are not sent to anyone.
-          </Trans>
-        }
+        description={<Trans>Hidden sections are not sent to anyone.</Trans>}
       >
         <SettingsFormPanel>
           <div>
@@ -178,11 +173,6 @@ export function ProfileSectionsEditor(props: {
             </Draggable>
           </div>
           <Announce aria-live="polite">{announce()}</Announce>
-          <Hint>
-            <Trans>
-              Roles, mutual servers and the message box keep their place.
-            </Trans>
-          </Hint>
         </SettingsFormPanel>
       </SettingsSection>
       <SettingsSaveBar
@@ -288,13 +278,7 @@ export function ProfileLinksEditor(props: {
     <Column gap="md">
       <SettingsSection
         title={<Trans>Links</Trans>}
-        description={
-          <Trans>
-            Up to {MAX_LINKS} links, starting with https://. People see the real
-            site address and a warning before they leave Zrzur. Others can see
-            this.
-          </Trans>
-        }
+        description={<Trans>Up to {MAX_LINKS} links.</Trans>}
       >
         <SettingsFormPanel>
           <Show when={!links().length}>

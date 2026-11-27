@@ -175,8 +175,10 @@
   color: var(--z-fg-primary);
 }
 .z-recorder-wave > span {
+  /* full height, scaled: no layout work while recording */
+  height: 100%;
   background: color-mix(in srgb, var(--z-accent) 70%, transparent);
-  transition: height 0.1s linear;
+  transition: transform 0.1s linear;
 }
 .z-recorder-note {
   flex: 1;

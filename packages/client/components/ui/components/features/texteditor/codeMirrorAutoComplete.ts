@@ -8,6 +8,8 @@ import { EditorView, keymap } from "@codemirror/view";
 import { Accessor } from "solid-js";
 
 import { scrollableStyles } from "../../../directives/scrollable";
+import { type IconName, iconRegistry } from "../../../icons/Icon";
+import { RULES_PATH } from "../../../icons/RulesIcon";
 import { AutoCompleteSearchSpace } from "../../utils/autoComplete";
 import { codeMirrorAutoCompleteSource } from "./codeMirrorAutoCompleteSource";
 
@@ -105,6 +107,24 @@ const completionTheme = EditorView.theme({
     "object-fit": "contain",
     padding: "2px",
   },
+  // the kind of room, before its name: # to write, a speaker to talk…
+  ".cm-channel-preview": {
+    display: "grid",
+    "place-items": "center",
+    "flex-shrink": "0",
+    width: "20px",
+    height: "20px",
+    margin: "2px",
+    color: "var(--z-fg-muted)",
+    "--z-icon-color": "currentColor",
+  },
+  ".cm-channel-preview svg": { width: "20px", height: "20px" },
+  ".cm-channel-preview img": {
+    width: "20px",
+    height: "20px",
+    "border-radius": "4px",
+    "object-fit": "cover",
+  },
   ".cm-role-preview": {
     display: "block",
     "flex-shrink": "0",
@@ -139,6 +159,7 @@ export function codeMirrorAutoComplete(
         );
       } else if (
         completions[0]?.type == "user" ||
+        completions[0]?.type == "everyone" ||
         completions[0]?.type == "role"
       ) {
         return (
@@ -185,6 +206,20 @@ export function codeMirrorAutoComplete(
               preview.appendChild(img);
             } else fallback();
             return preview;
+          } else if (completion.type == "everyone") {
+            // @everyone and @here: a group mark where a picture would be
+            const span = document.createElement("span");
+            span.classList.add(
+              "cm-channel-preview",
+              "z-icon",
+              "z-icon--outline",
+            );
+            const glyph = (completion as Completion & { glyph?: IconName })
+              .glyph;
+            if (glyph && Object.hasOwn(iconRegistry, glyph))
+              // one of the constant drawings of drawings.ts, never user input
+              span.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20">${iconRegistry[glyph]}</svg>`;
+            return span;
           } else if (completion.type == "user") {
             const img = document.createElement("img");
             img.classList.add("cm-user-preview");
@@ -202,8 +237,29 @@ export function codeMirrorAutoComplete(
               "var(--md-sys-color-surface-container-highest)";
             return span;
           } else if (completion.type == "channel") {
+            // the room's own picture, else the mark of its kind (# or a
+            // speaker…), as in the channel list
             const span = document.createElement("span");
             span.classList.add("cm-channel-preview");
+            const { glyph, url } = completion as Completion & {
+              glyph?: IconName | "rules";
+              url?: string;
+            };
+            if (url) {
+              const img = document.createElement("img");
+              img.loading = "lazy";
+              img.alt = "";
+              img.src = url;
+              span.appendChild(img);
+            } else if (glyph === "rules") {
+              // the rules room's own solid book, as in the channel list
+              span.classList.add("z-icon", "z-icon--rules");
+              span.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" fill-rule="evenodd" d="${RULES_PATH}"/></svg>`;
+            } else if (glyph && Object.hasOwn(iconRegistry, glyph)) {
+              span.classList.add("z-icon", "z-icon--outline");
+              // one of the constant drawings of drawings.ts, never user input
+              span.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20">${iconRegistry[glyph]}</svg>`;
+            }
             return span;
           } else {
             return null;

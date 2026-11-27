@@ -209,10 +209,9 @@ function BotMessage(props: {
       username={
         <Username username={botName(client, props.botId, t`The bot`)} />
       }
-      info={<BotLabel
-          official={bot()?.officialBot}
-          verified={bot()?.verifiedBot}
-        />}
+      info={
+        <BotLabel official={bot()?.officialBot} verified={bot()?.verifiedBot} />
+      }
     >
       {props.children}
     </MessageContainer>

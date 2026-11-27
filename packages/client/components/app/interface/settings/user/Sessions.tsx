@@ -10,7 +10,7 @@ import {
   onMount,
 } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { Session } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
@@ -19,17 +19,21 @@ import { TranslatedError } from "@revolt/i18n/errors";
 import { useModals } from "@revolt/modal";
 import {
   Button,
-  CategoryButton,
   CircularProgress,
   Column,
+  Row,
+  SettingsRow,
+  SettingsSection,
   Time,
-  iconSize,
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { logout as MdLogout } from "@revolt/ui/icons/legacy";
-
-import { ListedSession, byLastUsed, readLastUsed } from "./sessionList";
+import {
+  ListedSession,
+  byLastUsed,
+  readLastUsed,
+  sessionDevice,
+} from "./sessionList";
 
 /**
  * Sessions
@@ -75,7 +79,7 @@ export function Sessions() {
   });
 
   return (
-    <Column gap="lg">
+    <Column gap="xl">
       <Switch fallback={<CircularProgress />}>
         <Match when={failure()}>
           <Failure role="alert">
@@ -93,12 +97,6 @@ export function Sessions() {
         <Match when={lastUsed()}>
           {(known) => (
             <>
-              <Note>
-                <Trans>
-                  Devices signed in to your account. Unused ones log out by
-                  themselves.
-                </Trans>
-              </Note>
               <ManageCurrentSession otherSessions={otherSessions} />
               <ListOtherSessions
                 otherSessions={otherSessions}
@@ -112,11 +110,26 @@ export function Sessions() {
   );
 }
 
+/**
+ * A session's name; one made at sign-in is shown in the current language
+ * with proper browser and OS names, whatever language it was made in
+ */
+function SessionName(props: { name?: string }) {
+  const { t } = useLingui();
+  const label = () => {
+    const device = sessionDevice(props.name ?? "");
+    if (!device) return props.name ?? "";
+    const { browser: name, os } = device;
+    return t`Zrzur for Web (${name} on ${os})`;
+  };
+  return <bdi>{label()}</bdi>;
+}
+
 /** When each session was last used, once the list has loaded */
 type LastUsed = ReturnType<typeof readLastUsed>;
 
 /**
- * Manage user's current session
+ * This device: its name, and the actions on it
  */
 function ManageCurrentSession(props: { otherSessions: Accessor<Session[]> }) {
   const client = useClient();
@@ -128,70 +141,63 @@ function ManageCurrentSession(props: { otherSessions: Accessor<Session[]> }) {
   const currentSession = () => client().sessions.get(client().sessionId!);
 
   return (
-    <CategoryButton.Group>
-      <CategoryButton.Collapse
-        title={<Trans>This device</Trans>}
-        description={<bdi>{currentSession()?.name}</bdi>}
+    <SettingsSection title={<Trans>This device</Trans>}>
+      <SettingsRow
         icon={<SessionIcon session={currentSession()} />}
-      >
-        <CategoryButton
-          icon="blank"
-          action="chevron"
-          onClick={() =>
-            currentSession() &&
-            openModal({
-              type: "rename_session",
-              session: currentSession()!,
-            })
-          }
-        >
-          <Trans>Rename</Trans>
-        </CategoryButton>
-        <CategoryButton
-          icon="blank"
-          action="chevron"
-          onClick={() =>
-            currentSession() &&
-            openModal({
-              type: "sign_out_sessions",
-              client: client(),
-              session: currentSession()!,
-            })
-          }
-        >
-          <Trans>Log out</Trans>
-        </CategoryButton>
-      </CategoryButton.Collapse>
-      {/* <CategoryButton
-        action="chevron"
-        icon={
-          <MdAutoMode
-            {...iconSize(24)}
-            fill="var(--md-sys-color-error)"
-          />
+        title={
+          <Capitalise>
+            <SessionName name={currentSession()?.name} />
+          </Capitalise>
         }
-        description={Keeps your last sessions active and automatically logs you out of other ones"}
-      >
-        Keep Last Active Sessions
-      </CategoryButton> */}
+        control={() => (
+          <SessionActions
+            onRename={() =>
+              currentSession() &&
+              openModal({
+                type: "rename_session",
+                session: currentSession()!,
+              })
+            }
+            onLogOut={() =>
+              currentSession() &&
+              openModal({
+                type: "sign_out_sessions",
+                client: client(),
+                session: currentSession()!,
+              })
+            }
+          />
+        )}
+      />
       <Show when={props.otherSessions().length}>
-        <CategoryButton
-          action="chevron"
+        <SettingsRow
+          icon={<Icon name="sign-out" size={20} />}
+          title={<Trans>Log out other sessions</Trans>}
+          danger
+          navigational
           onClick={() =>
             openModal({
               type: "sign_out_sessions",
               client: client(),
             })
           }
-          icon={<MdLogout {...iconSize(24)} fill="var(--md-sys-color-error)" />}
-          description={
-            <Trans>Logs you out of all sessions except this device.</Trans>
-          }
-        >
-          <Trans>Log out other sessions</Trans>
-        </CategoryButton>
+        />
       </Show>
-    </CategoryButton.Group>
+    </SettingsSection>
+  );
+}
+
+/** Rename and log out, as buttons in the row like the other pages */
+function SessionActions(props: { onRename: () => void; onLogOut: () => void }) {
+  return (
+    <Row gap="sm">
+      <Button size="sm" variant="text" onPress={props.onRename}>
+        <Trans>Rename</Trans>
+      </Button>
+      <Button size="sm" variant="tonal" onPress={props.onLogOut}>
+        <Trans>Log out</Trans>
+      </Button>
+    </Row>
   );
 }
 
@@ -206,74 +212,64 @@ function ListOtherSessions(props: {
   const client = useClient();
 
   return (
-    <Show
-      when={props.otherSessions().length}
-      fallback={
-        <Note>
-          <Trans>No other device is signed in.</Trans>
-        </Note>
-      }
-    >
-      <Column>
-        <CategoryButton.Group>
-          <For each={props.otherSessions()}>
-            {(session) => (
-              <CategoryButton.Collapse
-                icon={<SessionIcon session={session} />}
-                title={
-                  <Capitalise>
-                    <bdi>{session.name}</bdi>
-                  </Capitalise>
-                }
-                description={
-                  <Show
-                    when={props.lastUsed.get(session.id)}
-                    fallback={
-                      <Trans>
-                        Created{" "}
-                        <Time value={session.createdAt} format="relative" />
-                      </Trans>
-                    }
-                  >
-                    {(time) => (
-                      <Trans>
-                        Last used <Time value={time()} format="relative" />
-                      </Trans>
-                    )}
-                  </Show>
-                }
-              >
-                <CategoryButton
-                  icon="blank"
-                  action="chevron"
-                  onClick={() =>
+    <SettingsSection title={<Trans>Other devices</Trans>}>
+      <Show
+        when={props.otherSessions().length}
+        fallback={
+          <SettingsRow
+            icon={<Icon name="check-circle" size={20} />}
+            title={<Trans>No other device is signed in.</Trans>}
+          />
+        }
+      >
+        <For each={props.otherSessions()}>
+          {(session) => (
+            <SettingsRow
+              icon={<SessionIcon session={session} />}
+              title={
+                <Capitalise>
+                  <SessionName name={session.name} />
+                </Capitalise>
+              }
+              description={
+                <Show
+                  when={props.lastUsed.get(session.id)}
+                  fallback={
+                    <Trans>
+                      Created{" "}
+                      <Time value={session.createdAt} format="relative" />
+                    </Trans>
+                  }
+                >
+                  {(time) => (
+                    <Trans>
+                      Last used <Time value={time()} format="relative" />
+                    </Trans>
+                  )}
+                </Show>
+              }
+              control={() => (
+                <SessionActions
+                  onRename={() =>
                     openModal({
                       type: "rename_session",
                       session,
                     })
                   }
-                >
-                  <Trans>Rename</Trans>
-                </CategoryButton>
-                <CategoryButton
-                  icon="blank"
-                  action="chevron"
-                  onClick={() =>
+                  onLogOut={() =>
                     openModal({
                       type: "sign_out_sessions",
                       client: client(),
                       session,
                     })
                   }
-                >
-                  <Trans>Log out</Trans>
-                </CategoryButton>
-              </CategoryButton.Collapse>
-            )}
-          </For>
-        </CategoryButton.Group>
-      </Column>
-    </Show>
+                />
+              )}
+            />
+          )}
+        </For>
+      </Show>
+    </SettingsSection>
   );
 }
 
@@ -284,14 +280,6 @@ function ListOtherSessions(props: {
 const Capitalise = styled("div", {
   base: {
     "&::first-letter": { textTransform: "uppercase" },
-  },
-});
-
-const Note = styled("p", {
-  base: {
-    margin: 0,
-    color: "var(--z-fg-muted)",
-    fontSize: "13px",
   },
 });
 
@@ -316,12 +304,14 @@ function SessionIcon(props: { session?: Session }) {
   // device type rather than OS brand marks, so these follow the icon
   // style; the OS name is already shown in the row text
   const name = () => props.session?.name ?? "";
+  // judged by the OS alone: the browser id "ios-webview" also runs on a Mac
+  const system = () => sessionDevice(name())?.os ?? name();
   return (
     <Switch fallback={<Icon name="desktop" size={20} />}>
       <Match when={!name()}>
         <Icon name="question" size={20} />
       </Match>
-      <Match when={/android|i(Pad|Phone)?os|mobile/i.test(name())}>
+      <Match when={/android|i(Pad|Phone)?os|mobile/i.test(system())}>
         <Icon name="device-mobile" size={20} />
       </Match>
     </Switch>

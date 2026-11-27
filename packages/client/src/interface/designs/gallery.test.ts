@@ -13,9 +13,12 @@ import {
 
 import {
   PAGE_TILES,
+  composeLooks,
   isOn,
+  keepSame,
   moreState,
   needsMore,
+  placeOf,
   takenOff,
   weave,
 } from "./gallery";
@@ -152,5 +155,70 @@ describe("sample people", () => {
       "https://cdn/avatars/abc",
     );
     expect(withDefaultAvatar(undefined)).toBeUndefined();
+  });
+});
+
+describe("placeOf", () => {
+  it("opens the preview where a design is seen", () => {
+    expect(placeOf({ nameplate: "neon", nameplate_file: "x" })).toBe("members");
+    expect(placeOf({ profile_frame: "gold" })).toBe("profile");
+    expect(placeOf({ effect: "snow" })).toBe("profile");
+    expect(placeOf({ theme: ["#000", "#fff"] })).toBe("profile");
+    expect(placeOf({ decoration: "ring" })).toBe("chat");
+    expect(placeOf({ profile_frame_file: "f" })).toBe("profile");
+    expect(placeOf({ name_font: "script" })).toBe("chat");
+    expect(placeOf({ decoration: "a", nameplate: "b", name_font: "c" })).toBe(
+      "profile",
+    );
+  });
+});
+
+describe("composeLooks", () => {
+  const bases = [{ name_font: "bold" }, { name_font: "serif" }];
+  it("dresses each base with one design of every kind there is", () => {
+    const looks = composeLooks(
+      bases,
+      {
+        decorations: [{ decoration: "d1" }, { decoration: "d2" }],
+        nameplates: [{ nameplate: "n1" }],
+        frames: [],
+        effects: [{ effect: "e1" }, { effect: "e2" }, { effect: "e3" }],
+      },
+      3,
+    );
+    expect(looks).toEqual([
+      { name_font: "bold", decoration: "d1", nameplate: "n1", effect: "e1" },
+      { name_font: "serif", decoration: "d2", nameplate: "n1", effect: "e2" },
+      { name_font: "bold", decoration: "d1", nameplate: "n1", effect: "e3" },
+    ]);
+  });
+
+  it("makes none without designs to dress them with", () => {
+    expect(
+      composeLooks(
+        bases,
+        { decorations: [], nameplates: [], frames: [], effects: [] },
+        3,
+      ),
+    ).toEqual([]);
+  });
+});
+
+describe("keepSame", () => {
+  it("keeps unchanged entries as the same objects", () => {
+    const known = new Map();
+    const first = keepSame(known, [
+      { key: "a", name: "A" },
+      { key: "b", name: "B" },
+    ]);
+    const second = keepSame(known, [
+      { key: "a", name: "A" },
+      { key: "b", name: "B2" },
+      { key: "c", name: "C" },
+    ]);
+    expect(second[0]).toBe(first[0]);
+    expect(second[1]).not.toBe(first[1]);
+    expect(second[1].name).toBe("B2");
+    expect(second[2].name).toBe("C");
   });
 });

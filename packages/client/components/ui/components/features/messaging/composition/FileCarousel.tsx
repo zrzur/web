@@ -264,6 +264,8 @@ const Preview = styled("div", {
     "& > button:focus-visible": { opacity: 1 },
     "& > button[data-danger='true']": { opacity: 1 },
     "& > button[aria-pressed='true']": { opacity: 1 },
+    // touch has no hover: the buttons are always there
+    "@media (hover: none)": { "& > button": { opacity: 1 } },
   },
 });
 
@@ -330,6 +332,7 @@ const CornerButton = styled("button", {
     padding: 0,
     border: "none",
     borderRadius: "50%",
+    _phone: { width: "32px", height: "32px" },
     cursor: "pointer",
     color: "#fff",
     background: "rgb(0 0 0 / 55%)",

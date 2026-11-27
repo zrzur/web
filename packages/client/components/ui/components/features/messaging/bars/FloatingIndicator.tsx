@@ -8,7 +8,6 @@ import { typography } from "@revolt/ui/components/design";
  */
 export const floatingIndicator = cva({
   base: {
-    // for <Ripple />:
     position: "relative",
 
     display: "flex",
@@ -23,7 +22,9 @@ export const floatingIndicator = cva({
     paddingInline: "12px",
     borderRadius: "10px",
 
-    cursor: "pointer",
+    // a control of the app, not a link on a page: the arrow cursor and no
+    // text to select (userSelect above)
+    cursor: "default",
 
     ...typography.raw({ size: "small" }),
     fontSize: "13px",
@@ -36,11 +37,14 @@ export const floatingIndicator = cva({
     background: "var(--z-popover-bg)",
     border: "1px solid var(--z-popover-border)",
     boxShadow: "var(--z-popover-lift)",
-    transition: "background-color 120ms ease",
+    transition: "background-color 80ms ease, opacity 80ms ease",
     _hover: { background: "var(--z-float-hover)" },
+    // pressed: a quiet darkening, as an app's own buttons do
+    _active: { opacity: 0.85 },
     _phone: { minHeight: "44px" },
 
-    animation: "slideIn 200ms cubic-bezier(0.2, 0, 0, 1) forwards",
+    // comes in quietly, as an app's own bars do: a short fade, no slide
+    animation: "zFadeIn 120ms ease-out both",
     _motionReduce: { animation: "none", transition: "none" },
   },
   variants: {

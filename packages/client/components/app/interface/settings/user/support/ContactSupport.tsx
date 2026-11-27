@@ -1,7 +1,8 @@
-import { For, Show, createResource, createSignal } from "solid-js";
 import { type API, type WithoutNull, withoutNull } from "@zrzur/sdk/solid";
+import { For, Show, createResource, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { resourceValue } from "@revolt/common/lib/resource";
@@ -10,19 +11,56 @@ import {
   Button,
   CategoryButton,
   Column,
-  Dialog,
   FloatingSelect,
   MenuItem,
+  SettingsFormPanel,
+  SettingsRow,
+  SettingsSection,
+  TextField,
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { Card, Cards, Empty, ErrorText, Field, Meta, Pill, TitleLine } from "../badges/parts";
+import { useSettingsNavigation } from "../../Settings";
+import { Empty, ErrorText, Meta, Pill } from "../badges/parts";
 import { useDate } from "../profile/CommunityParts";
 
 type Category = "account" | "billing" | "safety" | "bug" | "feature" | "other";
-const CATEGORIES: Category[] = ["account", "billing", "safety", "bug", "feature", "other"];
+const CATEGORIES: Category[] = [
+  "account",
+  "billing",
+  "safety",
+  "bug",
+  "feature",
+  "other",
+];
 
 type Ticket = WithoutNull<API.TicketView>;
+
+/** The settings path of a ticket's own page */
+export const ticketPage = (id: string) => `support/${id}`;
+
+/**
+ * Subjects of the tickets seen so far, by id: the path above a ticket's
+ * page names it by its subject
+ */
+const [subjects, setSubjects] = createSignal<Record<string, string>>({});
+const remember = (list: { _id: string; subject: string }[]) =>
+  setSubjects((known) => {
+    const next = { ...known };
+    for (const ticket of list) next[ticket._id] = ticket.subject;
+    return next;
+  });
+
+/** A ticket's subject, for the path above its page */
+export function TicketTitle(props: { id: string }) {
+  return (
+    <bdi>
+      <Show when={subjects()[props.id]} fallback={<Trans>Ticket</Trans>}>
+        {(subject) => subject()}
+      </Show>
+    </bdi>
+  );
+}
 
 /** Names of ticket topics in the reader's language */
 function useCategoryName() {
@@ -41,34 +79,49 @@ function useCategoryName() {
   };
 }
 
+/** Names of ticket states in the reader's language */
+function useStatusName() {
+  const { t } = useLingui();
+  return (s: string): string => {
+    // the server may send statuses this app does not know yet
+    const labels: Record<string, string> = {
+      Open: t`Waiting for the team`,
+      Answered: t`Answered`,
+      Closed: t`Closed`,
+    };
+    return labels[s] ?? s;
+  };
+}
+
 /**
- * Contact support: open a ticket and follow the team's answers. People
- * who can't sign in write to support@zrzur.com instead.
+ * Contact support: open a ticket and follow the team's answers. Writing
+ * and reading a ticket each open as a page under this one, as any settings
+ * page with more to it does. People who can't sign in write to
+ * support@zrzur.com instead.
  */
 export function ContactSupport() {
   const client = useClient();
-  const { t } = useLingui();
-  const [tickets, { refetch }] = createResource(() =>
-    client().api.get("/support/tickets").then(withoutNull),
+  const { navigate } = useSettingsNavigation();
+  const [tickets] = createResource(() =>
+    client()
+      .api.get("/support/tickets")
+      .then(withoutNull)
+      .then((list) => {
+        remember(list);
+        return list;
+      }),
   );
-  const [writing, setWriting] = createSignal(false);
-  const [open, setOpen] = createSignal<string | null>(null);
   const date = useDate();
-
   const categoryName = useCategoryName();
-  const statusName = (s: string): string => {
-    // the server may send statuses this app does not know yet
-    const labels: Record<string, string> = { Open: t`Waiting for the team`, Answered: t`Answered`, Closed: t`Closed` };
-    return labels[s] ?? s;
-  };
+  const statusName = useStatusName();
 
   return (
-    <Column gap="lg">
+    <Column gap="xl">
       <CategoryButton.Group>
         <CategoryButton
           action="chevron"
-          icon={<Icon name="headset" size={22} />}
-          onClick={() => setWriting(true)}
+          icon={<Icon name="headset" size={20} />}
+          onClick={() => navigate("support/new")}
           description={
             <Trans>
               Ask the Zrzur team about your account, payments, safety or
@@ -79,95 +132,93 @@ export function ContactSupport() {
           <Trans>Write to support</Trans>
         </CategoryButton>
       </CategoryButton.Group>
-      <Show when={tickets.error}>
-        <ErrorText role="alert">
-          <Trans>Your tickets couldn't be loaded. Try again later.</Trans>
-        </ErrorText>
-      </Show>
-      <Show when={resourceValue(tickets)}>
-        {(list) => (
-          <Show when={list().length > 0} fallback={<Empty><Trans>You haven't written to support yet.</Trans></Empty>}>
-            <Cards>
-              <For each={list()}>
-                {(ticket) => (
-                  <Card>
-                    <button
-                      type="button"
-                      onClick={() => setOpen(ticket._id)}
-                      style={{
-                        all: "unset",
-                        // all: unset drops the button's "relative": the phones' unseen 44 px
-                        // tap area (styles.css) then spread over the whole page and took
-                        // every tap
-                        position: "relative",
-                        cursor: "pointer",
-                        display: "grid",
-                        gap: "4px",
-                        width: "100%",
-                      }}
+
+      <SettingsSection title={<Trans>Your tickets</Trans>}>
+        <Show
+          when={!tickets.error}
+          fallback={
+            <SettingsRow
+              icon={<Icon name="warning" size={20} />}
+              title={
+                <Trans>Your tickets couldn't be loaded. Try again later.</Trans>
+              }
+            />
+          }
+        >
+          <Show
+            when={resourceValue(tickets)?.length}
+            fallback={
+              <SettingsRow
+                icon={<Icon name="tray" size={20} />}
+                title={
+                  <Show
+                    when={resourceValue(tickets)}
+                    fallback={<Trans>Loading…</Trans>}
+                  >
+                    <Trans>You haven't written to support yet.</Trans>
+                  </Show>
+                }
+              />
+            }
+          >
+            <For each={resourceValue(tickets)}>
+              {(ticket) => (
+                <SettingsRow
+                  navigational
+                  icon={<Icon name="chat-circle-dots" size={20} />}
+                  title={<bdi>{ticket.subject}</bdi>}
+                  description={
+                    <>
+                      {categoryName(ticket.category)} ·{" "}
+                      {date(ticket.updated_at)}
+                    </>
+                  }
+                  control={() => (
+                    <Pill
+                      data-tone={
+                        ticket.status === "Answered" ? "accent" : undefined
+                      }
                     >
-                      <TitleLine>
-                        <span dir="auto">{ticket.subject}</span>
-                        <Pill>{statusName(ticket.status)}</Pill>
-                      </TitleLine>
-                      <Meta>
-                        {categoryName(ticket.category)} · {date(ticket.updated_at)}
-                      </Meta>
-                    </button>
-                  </Card>
-                )}
-              </For>
-            </Cards>
+                      {statusName(ticket.status)}
+                    </Pill>
+                  )}
+                  onClick={() => navigate(ticketPage(ticket._id))}
+                />
+              )}
+            </For>
           </Show>
-        )}
-      </Show>
-      <Show when={writing()}>
-        <NewTicket
-          onClose={() => setWriting(false)}
-          onDone={(id) => {
-            setWriting(false);
-            void refetch();
-            setOpen(id);
-          }}
-        />
-      </Show>
-      <Show when={open()}>
-        {(id) => (
-          <TicketView
-            id={id()}
-            statusName={statusName}
-            onClose={() => setOpen(null)}
-            onChanged={() => void refetch()}
-          />
-        )}
-      </Show>
+        </Show>
+      </SettingsSection>
     </Column>
   );
 }
 
-/** A new ticket; `related` links it to an official message it answers */
-export function NewTicket(props: {
-  related?: string;
-  subject?: string;
-  onClose: () => void;
-  onDone: (id: string) => void;
-}) {
+/** What a new ticket holds and how it is sent */
+function createTicketDraft(props: { onDone: (id: string) => void }) {
   const client = useClient();
   const describeError = useError();
-  const categoryName = useCategoryName();
-  const [category, setCategory] = createSignal<Category>(props.related ? "other" : "account");
-  // eslint-disable-next-line solid/reactivity
-  const [subject, setSubject] = createSignal(props.subject ?? "");
+  const [category, setCategory] = createSignal<Category>("account");
+  const [subject, setSubject] = createSignal("");
   const [body, setBody] = createSignal("");
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal("");
 
-  async function submit(e: Event) {
-    e.preventDefault();
+  const ready = () => !!subject().trim() && !!body().trim();
+
+  async function submit(e?: Event) {
+    e?.preventDefault();
+    if (!ready() || busy()) return;
     setBusy(true);
     setError("");
     try {
-      const ticket = withoutNull(await client().api.post("/support/tickets", { category: category(), subject: subject().trim(), body: body().trim(), related: props.related }));
+      const ticket = withoutNull(
+        await client().api.post("/support/tickets", {
+          category: category(),
+          subject: subject().trim(),
+          body: body().trim(),
+        }),
+      );
+      remember([ticket]);
       props.onDone(ticket._id);
     } catch (failure) {
       setError(describeError(failure));
@@ -176,86 +227,130 @@ export function NewTicket(props: {
     }
   }
 
+  return {
+    category,
+    setCategory,
+    subject,
+    setSubject,
+    body,
+    setBody,
+    busy,
+    error,
+    ready,
+    submit,
+  };
+}
+
+/** "Write to support" as its own settings page (support/new) */
+export function NewTicketPage() {
+  const { t } = useLingui();
+  const { navigate } = useSettingsNavigation();
+  const categoryName = useCategoryName();
+  const draft = createTicketDraft({ onDone: (id) => navigate(ticketPage(id)) });
+
   return (
-    <Dialog
-      show
-      tone="info"
-      iconName="headset"
-      onClose={props.onClose}
-      persistent={!!body().trim()}
-      title={<Trans>Write to support</Trans>}
-      size="md"
-      error={error() || undefined}
-      actions={[
-        { text: <Trans>Cancel</Trans>, onClick: props.onClose },
-        {
-          text: <Trans>Send</Trans>,
-          isLoading: busy(),
-          isDisabled: !subject().trim() || !body().trim(),
-          onClick: () => {
-            void submit(new Event("submit"));
-            return false;
-          },
-        },
-      ]}
-    >
-      <form onSubmit={submit} style={{ display: "flex", "flex-direction": "column", gap: "12px" }}>
-        <Field>
-          <span>
-            <Trans>About</Trans>
-          </span>
-          <FloatingSelect
-            value={category()}
-            onChange={(e) => setCategory(e.currentTarget.value as Category)}
+    <form onSubmit={(e) => void draft.submit(e)}>
+      <Column gap="xl">
+        <SettingsSection>
+          <SettingsRow
+            icon={<Icon name="headset" size={20} />}
+            title={<Trans>About</Trans>}
+            control={(ids) => (
+              <FloatingSelect
+                aria-labelledby={ids.labelId}
+                value={draft.category()}
+                onChange={(e) =>
+                  draft.setCategory(e.currentTarget.value as Category)
+                }
+              >
+                <For each={CATEGORIES}>
+                  {(c) => <MenuItem value={c}>{categoryName(c)}</MenuItem>}
+                </For>
+              </FloatingSelect>
+            )}
+          />
+        </SettingsSection>
+
+        <SettingsSection>
+          <SettingsFormPanel>
+            <TextField
+              required
+              maxlength={120}
+              counter
+              label={t`Subject`}
+              value={draft.subject()}
+              onInput={(e) => draft.setSubject(e.currentTarget.value)}
+            />
+            <TextField
+              required
+              maxlength={4000}
+              rows={6}
+              label={t`Your message`}
+              value={draft.body()}
+              onInput={(e) => draft.setBody(e.currentTarget.value)}
+            />
+          </SettingsFormPanel>
+        </SettingsSection>
+
+        <Show when={draft.error()}>
+          <ErrorText role="alert">{draft.error()}</ErrorText>
+        </Show>
+        <Actions>
+          <Button
+            type="button"
+            variant="text"
+            onPress={() => navigate("support")}
           >
-            <For each={CATEGORIES}>
-              {(c) => <MenuItem value={c}>{categoryName(c)}</MenuItem>}
-            </For>
-          </FloatingSelect>
-        </Field>
-        <Field>
-          <span>
-            <Trans>Subject</Trans>
-          </span>
-          <input required maxLength={120} value={subject()} onInput={(e) => setSubject(e.currentTarget.value)} />
-        </Field>
-        <Field>
-          <span>
-            <Trans>Your message</Trans>
-          </span>
-          <textarea required maxLength={4000} rows={6} value={body()} onInput={(e) => setBody(e.currentTarget.value)} />
-        </Field>
-      </form>
-    </Dialog>
+            <Trans>Cancel</Trans>
+          </Button>
+          <Button
+            type="submit"
+            variant="filled"
+            isDisabled={!draft.ready() || draft.busy()}
+          >
+            <Show when={draft.busy()} fallback={<Trans>Send</Trans>}>
+              <Trans>Sending…</Trans>
+            </Show>
+          </Button>
+        </Actions>
+      </Column>
+    </form>
   );
 }
 
-function TicketView(props: {
-  id: string;
-  statusName: (s: string) => string;
-  onClose: () => void;
-  onChanged: () => void;
-}) {
+/** One ticket as its own settings page (support/<id>): the talk and a reply */
+export function TicketPage(props: { id: string }) {
+  const { t } = useLingui();
   const client = useClient();
   const describeError = useError();
   const date = useDate();
+  const categoryName = useCategoryName();
+  const statusName = useStatusName();
   const [ticket, { mutate, refetch }] = createResource(
     () => props.id,
-    (id) => client().api.get(`/support/tickets/${encodeURIComponent(id)}`).then(withoutNull),
+    (id) =>
+      client()
+        .api.get(`/support/tickets/${encodeURIComponent(id)}`)
+        .then(withoutNull)
+        .then((tk) => {
+          remember([tk]);
+          return tk;
+        }),
   );
-  // a failed load is shown by the dialog's own error, never thrown by a read
   const detail = () => resourceValue(ticket);
   const [body, setBody] = createSignal("");
   const [busy, setBusy] = createSignal<string | null>(null);
   const [error, setError] = createSignal("");
 
-  const run = async (key: string, action: (id: string) => Promise<API.TicketView>) => {
+  const run = async (
+    key: string,
+    action: (id: string) => Promise<API.TicketView>,
+  ) => {
     setBusy(key);
     setError("");
     try {
-      mutate(withoutNull(await action(encodeURIComponent(props.id))));
+      mutate(withoutNull(await action(encodeURIComponent(props.id))) as Ticket);
       if (key === "send") setBody("");
-      props.onChanged();
     } catch (failure) {
       setError(describeError(failure));
     } finally {
@@ -264,78 +359,187 @@ function TicketView(props: {
   };
 
   return (
-    <Dialog
-      show
-      tone="info"
-      iconName="headset"
-      onClose={props.onClose}
-      title={detail()?.subject ?? ""}
-      description={detail() ? props.statusName(detail()!.status) : undefined}
-      size="lg"
-      error={error() || undefined}
-      actions={[{ text: <Trans>Close</Trans>, variant: "secondary", onClick: props.onClose }]}
+    <Show
+      when={!ticket.error}
+      fallback={
+        <ErrorText role="alert">
+          <Trans>This ticket couldn't be loaded.</Trans>{" "}
+          <Button variant="text" onPress={() => void refetch()}>
+            <Trans>Try again</Trans>
+          </Button>
+        </ErrorText>
+      }
     >
-      <Show when={!ticket.error} fallback={<ErrorText role="alert"><Trans>This ticket couldn't be loaded.</Trans> <Button variant="text" onPress={() => void refetch()}><Trans>Try again</Trans></Button></ErrorText>}>
-        <Show when={detail()}>
-          {(tk) => (
-            <div style={{ display: "flex", "flex-direction": "column", gap: "12px" }}>
-              <ol style={{ margin: 0, padding: 0, "list-style": "none", display: "grid", gap: "8px", "max-height": "45vh", "overflow-y": "auto" }}>
-                <For each={tk().messages}>
-                  {(m) => (
-                    <li
-                      style={{
-                        padding: "12px 16px",
-                        "border-radius": "12px",
-                        background: m.staff ? "var(--z-accent-subtle, var(--md-sys-color-secondary-container))" : "var(--z-surface-raised, var(--md-sys-color-surface-container-high))",
-                        "border-inline-start": m.staff ? "3px solid var(--z-accent, var(--md-sys-color-primary))" : "none",
-                      }}
-                    >
-                      <Meta>
-                        {m.staff ? <Trans>Zrzur support</Trans> : <Trans>You</Trans>} · {date(m.created_at)}
-                      </Meta>
-                      <p dir="auto" style={{ margin: "4px 0 0", "white-space": "pre-wrap", "overflow-wrap": "anywhere" }}>
-                        {m.body}
-                      </p>
-                    </li>
-                  )}
-                </For>
-              </ol>
-              <Show
-                when={tk().can_reply}
-                fallback={
-                  <Empty>
-                    <Trans>This ticket is closed. Write a new one if you still need help.</Trans>
-                  </Empty>
-                }
-              >
-                <Field>
-                  <span>
-                    <Trans>Reply</Trans>
-                  </span>
-                  <textarea maxLength={4000} rows={3} value={body()} onInput={(e) => setBody(e.currentTarget.value)} />
-                </Field>
-                <div style={{ display: "flex", gap: "8px", "flex-wrap": "wrap" }}>
-                  <Button isDisabled={!body().trim() || busy() !== null} onPress={() => void run("send", (id) => client().api.post(`/support/tickets/${id}/messages`, { body: body().trim() }))}>
-                    <Trans>Send reply</Trans>
-                  </Button>
-                  <Show
-                    when={tk().status !== "Closed"}
-                    fallback={
-                      <Button variant="tonal" isDisabled={busy() !== null} onPress={() => void run("reopen", (id) => client().api.post(`/support/tickets/${id}/reopen`))}>
-                        <Trans>Reopen</Trans>
-                      </Button>
+      <Show
+        when={detail()}
+        fallback={
+          <Empty>
+            <Trans>Loading…</Trans>
+          </Empty>
+        }
+      >
+        {(tk) => (
+          <Column gap="xl">
+            <SettingsSection>
+              <SettingsRow
+                icon={<Icon name="headset" size={20} />}
+                title={categoryName(tk().category)}
+                description={date(tk().updated_at)}
+                control={() => (
+                  <Pill
+                    data-tone={
+                      tk().status === "Answered" ? "accent" : undefined
                     }
                   >
-                    <Button variant="tonal" isDisabled={busy() !== null} onPress={() => void run("close", (id) => client().api.post(`/support/tickets/${id}/close`))}>
-                      <Trans>My problem is solved</Trans>
-                    </Button>
-                  </Show>
-                </div>
+                    {statusName(tk().status)}
+                  </Pill>
+                )}
+              />
+            </SettingsSection>
+
+            <Talk>
+              <For each={tk().messages}>
+                {(m) => (
+                  <li data-staff={m.staff || undefined}>
+                    <Meta>
+                      {m.staff ? (
+                        <Trans>Zrzur support</Trans>
+                      ) : (
+                        <Trans>You</Trans>
+                      )}{" "}
+                      · {date(m.created_at)}
+                    </Meta>
+                    <p dir="auto">{m.body}</p>
+                  </li>
+                )}
+              </For>
+            </Talk>
+
+            <Show
+              when={tk().can_reply}
+              fallback={
+                <SettingsSection>
+                  <SettingsRow
+                    icon={<Icon name="lock-simple" size={20} />}
+                    title={
+                      <Trans>
+                        This ticket is closed. Write a new one if you still need
+                        help.
+                      </Trans>
+                    }
+                  />
+                </SettingsSection>
+              }
+            >
+              <SettingsSection>
+                <SettingsFormPanel>
+                  <TextField
+                    maxlength={4000}
+                    rows={3}
+                    label={t`Reply`}
+                    value={body()}
+                    onInput={(e) => setBody(e.currentTarget.value)}
+                  />
+                </SettingsFormPanel>
+              </SettingsSection>
+            </Show>
+
+            <Show when={error()}>
+              <ErrorText role="alert">{error()}</ErrorText>
+            </Show>
+            <Actions>
+              <Show
+                when={tk().status !== "Closed"}
+                fallback={
+                  <Button
+                    variant="tonal"
+                    isDisabled={busy() !== null}
+                    onPress={() =>
+                      void run("reopen", (id) =>
+                        client().api.post(`/support/tickets/${id}/reopen`),
+                      )
+                    }
+                  >
+                    <Trans>Reopen</Trans>
+                  </Button>
+                }
+              >
+                <Button
+                  variant="text"
+                  isDisabled={busy() !== null}
+                  onPress={() =>
+                    void run("close", (id) =>
+                      client().api.post(`/support/tickets/${id}/close`),
+                    )
+                  }
+                >
+                  <Trans>My problem is solved</Trans>
+                </Button>
               </Show>
-            </div>
-          )}
-        </Show>
+              <Show when={tk().can_reply}>
+                <Button
+                  variant="filled"
+                  isDisabled={!body().trim() || busy() !== null}
+                  onPress={() =>
+                    void run("send", (id) =>
+                      client().api.post(`/support/tickets/${id}/messages`, {
+                        body: body().trim(),
+                      }),
+                    )
+                  }
+                >
+                  <Show
+                    when={busy() === "send"}
+                    fallback={<Trans>Send reply</Trans>}
+                  >
+                    <Trans>Sending…</Trans>
+                  </Show>
+                </Button>
+              </Show>
+            </Actions>
+          </Column>
+        )}
       </Show>
-    </Dialog>
+    </Show>
   );
 }
+
+/** the page's buttons in one row at its end, the main one last */
+const Actions = styled("div", {
+  base: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    gap: "8px",
+  },
+});
+
+/** the talk: the team's answers marked with the accent at their start */
+const Talk = styled("ol", {
+  base: {
+    margin: 0,
+    padding: 0,
+    listStyle: "none",
+    display: "grid",
+    gap: "8px",
+    "& > li": {
+      padding: "12px 16px",
+      borderRadius: "var(--z-box-radius, 12px)",
+      border: "var(--z-box-border)",
+      background: "var(--z-box-bg)",
+      minWidth: 0,
+    },
+    "& > li[data-staff]": {
+      background:
+        "var(--z-accent-subtle, color-mix(in srgb, var(--z-accent) 10%, transparent))",
+      borderInlineStart: "3px solid var(--z-accent)",
+    },
+    "& p": {
+      margin: "4px 0 0",
+      whiteSpace: "pre-wrap",
+      overflowWrap: "anywhere",
+      fontSize: "14px",
+      color: "var(--z-fg-primary)",
+    },
+  },
+});

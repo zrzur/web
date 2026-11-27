@@ -70,7 +70,7 @@ describe("the Save data page", () => {
     const label = document.getElementById(
       toggle().getAttribute("aria-labelledby")!,
     );
-    expect(label?.textContent).toBe("Save data");
+    expect(label?.textContent).toBe("On this device");
   });
 
   it("lists what it changes, one line each", () => {

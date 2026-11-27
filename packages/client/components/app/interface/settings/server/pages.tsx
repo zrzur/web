@@ -52,10 +52,12 @@ import { ServerWebhooks } from "./webhooks/ServerWebhooks";
 
 const isOwner = (server: Server) => !!server.owner?.self;
 
-/** Overview: profile, discovery, invites, features, danger zone */
+/**
+ * Overview: the server's profile, what members are notified about, and for
+ * the owner, giving the server away or deleting it
+ */
 export function OverviewPage(props: { server: Server }) {
   const [draft, setDraft] = createSignal<ProfileDraft>();
-  const client = useClient();
 
   return (
     <PageSave>
@@ -66,101 +68,8 @@ export function OverviewPage(props: { server: Server }) {
           id="profile"
           needs={missing(props.server, "ManageServer")}
           title={<Trans>Server profile</Trans>}
-          description={
-            <Trans>The name, picture and description people see.</Trans>
-          }
         >
           <Overview server={props.server} onDraft={setDraft} />
-        </Anchor>
-
-        <Anchor
-          id="discovery"
-          title={<Trans>Discovery</Trans>}
-          description={
-            <Trans>Whether people can find the server in Discover.</Trans>
-          }
-        >
-          <Show
-            when={isOwner(props.server)}
-            fallback={
-              <ReadOnlyNote role="note">
-                <Trans>
-                  Only the owner of the server can change how it appears in
-                  Discover.
-                </Trans>
-              </ReadOnlyNote>
-            }
-          >
-            <Discoverable discoverable={props.server} fullPage={true} />
-          </Show>
-        </Anchor>
-
-        <Show
-          when={showsVerifiedServer(props.server, applicationsOpen(client()))}
-        >
-          <Anchor
-            id="verified-server"
-            title={<Trans>Verified Server</Trans>}
-            description={
-              <Trans>
-                The Zrzur team's check that this is the official server of a
-                real game, company, creator or project.
-              </Trans>
-            }
-          >
-            <VerifiedServerApplication server={props.server} />
-          </Anchor>
-        </Show>
-
-        <Anchor
-          id="invites"
-          needs={missing(props.server, "ManageServer")}
-          title={<Trans>Invites and sharing</Trans>}
-          description={<Trans>A short link people remember.</Trans>}
-        >
-          <VanityInvite server={props.server} />
-        </Anchor>
-
-        <Anchor
-          id="features"
-          needs={missing(props.server, "ManageServer")}
-          title={<Trans>Features</Trans>}
-          description={
-            <Trans>The rules channel, system messages and counters.</Trans>
-          }
-        >
-          <ChannelExtras server={props.server} />
-        </Anchor>
-
-        <Anchor
-          id="threads"
-          needs={missing(props.server, "ManageServer")}
-          title={<Trans>Threads and forums</Trans>}
-          description={<Trans>Turn them on or off for this server.</Trans>}
-        >
-          <ThreadFeatures server={props.server} />
-        </Anchor>
-
-        <Anchor
-          id="events"
-          needs={missing(props.server, "ManageServer")}
-          title={<Trans>Events and lobby</Trans>}
-          description={
-            <Trans>Rows at the top of the channel list. Both start off.</Trans>
-          }
-        >
-          <EventsLobbySwitches server={props.server} />
-        </Anchor>
-
-        <Anchor
-          id="tickets"
-          needs={missing(props.server, "ManageServer")}
-          title={<Trans context="server-settings">Tickets</Trans>}
-          description={
-            <Trans>Members open a private channel with your staff.</Trans>
-          }
-        >
-          <TicketsSettings server={props.server} />
         </Anchor>
 
         <Anchor
@@ -176,18 +85,110 @@ export function OverviewPage(props: { server: Server }) {
           <ServerDefaultNotifications server={props.server} />
         </Anchor>
 
+        {/* the owner's own, at the end of the page (it was a page of one
+            block: owner, 2026-11-27 "fewer, fuller pages") */}
         <Show when={isOwner(props.server)}>
-          <Anchor
-            id="danger"
-            title={<Trans>Danger zone</Trans>}
-            description={
-              <Trans>Give the server to someone else, or delete it.</Trans>
-            }
-          >
+          <Anchor id="danger" title={<Trans>Danger zone</Trans>}>
             <ServerOwnership server={props.server} />
           </Anchor>
         </Show>
       </PageWithAside>
+    </PageSave>
+  );
+}
+
+/** Features: the rules channel and system messages, threads, events, tickets */
+export function FeaturesPage(props: { server: Server }) {
+  return (
+    <PageSave>
+      <PageStack>
+        <Anchor id="features" needs={missing(props.server, "ManageServer")}>
+          <ChannelExtras server={props.server} />
+        </Anchor>
+
+        <Anchor
+          id="threads"
+          needs={missing(props.server, "ManageServer")}
+          title={<Trans>Threads and forums</Trans>}
+        >
+          <ThreadFeatures server={props.server} />
+        </Anchor>
+
+        <Anchor
+          id="events"
+          needs={missing(props.server, "ManageServer")}
+          title={<Trans>Events and lobby</Trans>}
+        >
+          <EventsLobbySwitches server={props.server} />
+        </Anchor>
+
+        <Anchor
+          id="tickets"
+          needs={missing(props.server, "ManageServer")}
+          title={<Trans context="server-settings">Tickets</Trans>}
+        >
+          <TicketsSettings server={props.server} />
+        </Anchor>
+      </PageStack>
+    </PageSave>
+  );
+}
+
+/** Discovery: being listed in Discover, and the Verified Server check */
+export function DiscoveryPage(props: { server: Server }) {
+  const client = useClient();
+  return (
+    <PageStack>
+      <Anchor id="discovery">
+        <Show
+          when={isOwner(props.server)}
+          fallback={
+            <ReadOnlyNote role="note">
+              <Trans>
+                Only the owner of the server can change how it appears in
+                Discover.
+              </Trans>
+            </ReadOnlyNote>
+          }
+        >
+          <Discoverable discoverable={props.server} fullPage={true} />
+        </Show>
+      </Anchor>
+
+      <Show
+        when={showsVerifiedServer(props.server, applicationsOpen(client()))}
+      >
+        <Anchor
+          id="verified-server"
+          title={<Trans>Verified Server</Trans>}
+          description={
+            <Trans>
+              The Zrzur team's check that this is the official server of a real
+              game, company, creator or project.
+            </Trans>
+          }
+        >
+          <VerifiedServerApplication server={props.server} />
+        </Anchor>
+      </Show>
+    </PageStack>
+  );
+}
+
+/** Invites: the server's own short link and every invite there is */
+export function InvitesPage(props: { server: Server }) {
+  return (
+    <PageSave>
+      <PageStack>
+        <Anchor id="invites" needs={missing(props.server, "ManageServer")}>
+          <VanityInvite server={props.server} />
+        </Anchor>
+        <Show when={props.server.havePermission("ManageServer")}>
+          <Anchor id="invite-list">
+            <ListServerInvites server={props.server} />
+          </Anchor>
+        </Show>
+      </PageStack>
     </PageSave>
   );
 }
@@ -203,10 +204,13 @@ export function ChannelsPage(props: { server: Server }) {
   );
 }
 
-/** Joining and onboarding */
+/**
+ * Joining: who can get in, what they need before they can talk, the rules
+ * they accept, and the roles, welcome and questions they get. One page
+ * from the door to the first message (owner, 2026-11-27: fewer, fuller
+ * pages).
+ */
 export function JoiningPage(props: { server: Server }) {
-  const { navigate } = useSettingsNavigation();
-
   return (
     <PageSave>
       <PageStack>
@@ -214,9 +218,6 @@ export function JoiningPage(props: { server: Server }) {
           id="join-mode"
           needs={missing(props.server, "ManageServer")}
           title={<Trans>Who can join</Trans>}
-          description={
-            <Trans>How people get in, and who may invite them.</Trans>
-          }
         >
           <ServerAccess server={props.server} />
         </Anchor>
@@ -236,9 +237,6 @@ export function JoiningPage(props: { server: Server }) {
           id="rules"
           needs={missing(props.server, "ManageServer")}
           title={<Trans>Rules to accept</Trans>}
-          description={
-            <Trans>New members agree to the rules before they write.</Trans>
-          }
         >
           <RulesScreening server={props.server} />
         </Anchor>
@@ -251,9 +249,6 @@ export function JoiningPage(props: { server: Server }) {
               : missing(props.server, "ManageServer")
           }
           title={<Trans>When someone joins</Trans>}
-          description={
-            <Trans>Roles everyone gets, and a welcome message.</Trans>
-          }
         >
           <OnJoinSettings server={props.server} />
         </Anchor>
@@ -268,34 +263,12 @@ export function JoiningPage(props: { server: Server }) {
         >
           <RoleQuestions server={props.server} />
         </Anchor>
-
-        <Anchor
-          id="lobby"
-          needs={missing(props.server, "ManageServer")}
-          title={<Trans context="server-settings">Lobby</Trans>}
-          description={<Trans>What new members see first.</Trans>}
-        >
-          <SettingsSection>
-            <SettingsRow
-              navigational
-              icon={<Icon name="house" size={20} />}
-              title={<Trans>Lobby design</Trans>}
-              description={
-                <Trans>
-                  Colours, layout, welcome text, buttons and questions of the
-                  lobby.
-                </Trans>
-              }
-              onClick={() => navigate("joining/lobby")}
-            />
-          </SettingsSection>
-        </Anchor>
       </PageStack>
     </PageSave>
   );
 }
 
-/** Emoji */
+/** Emoji: the server's own emoji */
 export function EmojiPage(props: { server: Server }) {
   return (
     <PageStack>
@@ -306,7 +279,7 @@ export function EmojiPage(props: { server: Server }) {
   );
 }
 
-/** Soundboard */
+/** Soundboard: the short sounds the server's people upload */
 export function SoundboardPage(props: { server: Server }) {
   return (
     <PageStack>
@@ -317,7 +290,7 @@ export function SoundboardPage(props: { server: Server }) {
   );
 }
 
-/** Safety: emergency tools and filters */
+/** Safety: pause the server during a raid, and filters for spam and words */
 export function SafetyPage(props: { server: Server }) {
   return (
     <PageStack>
@@ -352,24 +325,18 @@ export function LogPage(props: { server: Server }) {
   );
 }
 
-/** Members and the list of active invites */
+/** Members: everyone in the server, and the people banned from it */
 export function MembersPage(props: { server: Server }) {
   return (
     <PageStack>
       <Show when={canSeeMembers(props.server)}>
-        <Anchor
-          id="members"
-          title={<Trans>Everyone in the server</Trans>}
-          description={
-            <Trans>Search, change roles, time out, kick or ban.</Trans>
-          }
-        >
+        <Anchor id="members">
           <ListServerMembers server={props.server} />
         </Anchor>
       </Show>
-      <Show when={props.server.havePermission("ManageServer")}>
-        <Anchor id="invites">
-          <ListServerInvites server={props.server} />
+      <Show when={props.server.havePermission("BanMembers")}>
+        <Anchor id="bans">
+          <ListServerBans server={props.server} />
         </Anchor>
       </Show>
     </PageStack>
@@ -389,17 +356,6 @@ export function RolesPage(props: { server: Server }) {
         }
       >
         <ServerRoleOverview context={props.server} />
-      </Anchor>
-    </PageStack>
-  );
-}
-
-/** Bans */
-export function BansPage(props: { server: Server }) {
-  return (
-    <PageStack>
-      <Anchor id="bans">
-        <ListServerBans server={props.server} />
       </Anchor>
     </PageStack>
   );
@@ -441,11 +397,7 @@ export function AppsPage(props: { server: Server }) {
           props.server.havePermission("KickMembers")
         }
       >
-        <Anchor
-          id="bots"
-          title={<Trans>Bots</Trans>}
-          description={<Trans>The bots in this server.</Trans>}
-        >
+        <Anchor id="bots" title={<Trans>Bots</Trans>}>
           <ServerBots server={props.server} />
         </Anchor>
       </Show>

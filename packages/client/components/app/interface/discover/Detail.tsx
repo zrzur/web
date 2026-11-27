@@ -1,14 +1,4 @@
-import {
-  For,
-  JSX,
-  Show,
-  createEffect,
-  createSignal,
-  on,
-  onCleanup,
-  onMount,
-} from "solid-js";
-import { Portal } from "solid-js/web";
+import { For, Show, createEffect, createSignal, on, onCleanup } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
@@ -17,7 +7,6 @@ import type { API } from "@zrzur/sdk/solid";
 
 import { useClient } from "@revolt/client";
 import { Avatar } from "@revolt/ui";
-import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -26,18 +15,26 @@ import { usePermissionNames } from "../../../../src/interface/OAuth";
 import { ListingAbout } from "./About";
 import { BotInvite, discoverApi } from "./api";
 import { ListingArt } from "./Art";
-import {
-  Listing,
-  MarkPill,
-  Tag,
-  listingBadge,
-  listingMark,
-  useFileUrl,
-} from "./Cards";
+import { Listing, MarkPill, listingMark, useFileUrl } from "./Cards";
 import { useDiscoverLabels } from "./categories";
 import { listedCommands } from "./find";
-import { paletteTokens } from "./palette";
-import { plainDescription } from "./plainText";
+import {
+  Aside,
+  BannerArea,
+  Columns,
+  Facts,
+  IconFrame,
+  Identity,
+  Main,
+  Muted,
+  Page,
+  PrimaryButton,
+  QuietButton,
+  SecondaryButton,
+  SidePart,
+  SkeletonLine,
+  Tags,
+} from "./ServerPage";
 
 /** Permissions that let a bot change the server or remove people */
 const SENSITIVE = [2 ** 1, 2 ** 2, 2 ** 3, 2 ** 6, 2 ** 7, 2 ** 37];
@@ -47,51 +44,54 @@ const safeLink = (url?: string) =>
   url && /^https?:\/\//i.test(url) ? url : undefined;
 
 /**
- * A listing's full page, over Discover (a sheet from the bottom on phones):
- * what it does, the commands it names, how it shows up in a chat and, in
- * plain words, what it may do on a server. Everything shown comes from the
- * listing and the bot's public invite; a section with nothing true to say is
- * left out.
+ * A listed bot's own page, in place of the lists, laid out like a server's:
+ * what it does and the commands it has on the left; one frame on the side
+ * with the way in, the facts, what it may do on a server, and Report.
+ * Everything shown comes from the listing and the bot's public invite; a
+ * part with nothing true to say is left out.
  */
-export function ListingDetail(props: {
-  listing: Listing;
-  onClose: () => void;
-  onTag?: (tag: string) => void;
-  /** The one way in: join / open / add */
-  primary: JSX.Element;
-  /** Quieter actions on the start side: report, copy link */
-  secondary?: JSX.Element;
+export function BotPage(props: {
+  /** undefined while a direct link is still loading */
+  listing?: Listing;
+  /** the public site (no chat around it, no tab bar on phones) */
+  site: boolean;
+  /** a Discover link with these filters (tags, category) */
+  href: (filters: { tag?: string; category?: string }) => string;
+  /** adding or opening the conversation is under way */
+  busy?: boolean;
+  onAdd: () => void;
+  /** a conversation with the bot, when bots can be written to */
+  onMessage?: () => void;
+  onReport: () => void;
+  /** opened by keyboard from a card, which is gone now: the heading takes over */
+  takeFocus?: boolean;
 }) {
   const { t, i18n } = useLingui();
   const client = useClient();
   const fileUrl = useFileUrl();
   const labels = useDiscoverLabels();
+  const permissionNames = usePermissionNames();
   /** Big numbers, in the digits the rest of the app uses */
   const number = (value: number) =>
     new Intl.NumberFormat(i18n().locale || "en", {
       numberingSystem: "latn",
     }).format(value);
-  const permissionNames = usePermissionNames();
-  let panel: HTMLDivElement | undefined;
-  let previousFocus: HTMLElement | null = null;
 
-  const isBot = () => props.listing.kind === "bots";
-
-  // a plain signal: a resource would suspend the page behind the dialog
+  // a plain signal: a resource would suspend the lists behind the page
   const [invite, setInvite] = createSignal<BotInvite>();
   // undefined until read, or when this server cannot list them
   const [registered, setRegistered] = createSignal<API.ApplicationCommand[]>();
-  // not props: the answer can land after the dialog has closed
+  // not props: the answer can land after the page has closed
   let wanted: string | undefined;
   onCleanup(() => (wanted = undefined));
   createEffect(
     on(
-      () => props.listing.id,
+      () => props.listing?.id,
       (id) => {
-        wanted = isBot() ? id : undefined;
+        wanted = id;
         setInvite(undefined);
         setRegistered(undefined);
-        if (!wanted) return;
+        if (!id) return;
         discoverApi
           .botInvite(client(), id)
           .then((answer) => wanted === id && setInvite(answer))
@@ -100,6 +100,27 @@ export function ListingDetail(props: {
           .botCommands(client(), id)
           .then((answer) => wanted === id && setRegistered(answer))
           .catch(() => undefined);
+      },
+    ),
+  );
+
+  // the tab title names the page while it is open
+  const previousTitle = document.title;
+  onCleanup(() => (document.title = previousTitle));
+  createEffect(() => {
+    const item = props.listing;
+    if (item) document.title = t`${item.name} — Zrzur Discover`;
+  });
+
+  let heading: HTMLHeadingElement | undefined;
+  createEffect(
+    on(
+      () => !!props.listing,
+      (loaded) => {
+        if (!loaded || !props.takeFocus) return;
+        requestAnimationFrame(() => {
+          if (document.activeElement === document.body) heading?.focus();
+        });
       },
     ),
   );
@@ -127,169 +148,87 @@ export function ListingDetail(props: {
       .filter((group) => group.bits.length);
 
   const commands = () =>
-    listedCommands(registered(), props.listing.description, i18n().locale);
-  const moreToSay = () => (props.listing.description ?? "").includes("\n");
-  /** What the bot's first message would read like: its own first line */
-  const firstLine = () =>
-    plainDescription(props.listing.description?.split(/\n/)[0]) || undefined;
-
-  const onKey = (e: KeyboardEvent) => {
-    // a dialog opened from this one (Report) owns the keys while it is open
-    const dialogs = document.querySelectorAll(
-      '[role="dialog"][aria-modal="true"]',
-    );
-    if (dialogs[dialogs.length - 1] !== panel) return;
-    if (e.key === "Escape") {
-      e.preventDefault();
-      e.stopPropagation();
-      props.onClose();
-    }
-    if (e.key !== "Tab" || !panel) return;
-    const controls = Array.from(
-      panel.querySelectorAll<HTMLElement>(
-        'button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]',
-      ),
-    ).filter((element) => element.getClientRects().length > 0);
-    const first = controls[0];
-    const last = controls[controls.length - 1];
-    if (!first) {
-      e.preventDefault();
-      panel.focus();
-      return;
-    }
-    if (
-      e.shiftKey &&
-      (document.activeElement === first || document.activeElement === panel)
-    ) {
-      e.preventDefault();
-      last.focus();
-    } else if (
-      !e.shiftKey &&
-      (document.activeElement === last || document.activeElement === panel)
-    ) {
-      e.preventDefault();
-      first.focus();
-    }
-  };
-
-  onMount(() => {
-    previousFocus =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
-    document.addEventListener("keydown", onKey);
-    panel?.focus();
-  });
-  onCleanup(() => {
-    document.removeEventListener("keydown", onKey);
-    if (previousFocus?.isConnected) previousFocus.focus();
-  });
+    listedCommands(registered(), props.listing?.description, i18n().locale);
+  const privacy = () => safeLink(invite()?.privacy_policy_url);
+  const terms = () => safeLink(invite()?.terms_of_service_url);
 
   return (
-    // in #floating with the app's dialogs, so one opened from here sits on top
-    <Portal mount={document.getElementById("floating") ?? undefined}>
-      {/* outside the page in the DOM: bring Discover's colours along */}
-      <Scrim style={paletteTokens} onClick={props.onClose}>
-        <Panel
-          ref={panel}
-          role="dialog"
-          aria-modal="true"
-          aria-label={props.listing.name}
-          tabIndex={-1}
-          // focus lands here on open; the panel itself needs no ring (the
-          // app-wide focus outline would frame the whole dialog)
-          style={{ outline: "none" }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Close type="button" aria-label={t`Close`} onClick={props.onClose}>
-            <Icon name="x" size={20} />
-          </Close>
-
-          <Scroll>
-            <Hero>
+    <Page data-page data-app={!props.site}>
+      <Show
+        when={props.listing}
+        fallback={
+          <>
+            <BannerArea data-loading />
+            <Columns>
+              <Main>
+                <SkeletonLine data-size="title" />
+                <SkeletonLine />
+                <SkeletonLine />
+              </Main>
+            </Columns>
+          </>
+        }
+      >
+        {(item) => (
+          <>
+            <BannerArea>
               {/* its own banner, or its portrait in birds */}
               <ListingArt
-                kind={props.listing.kind}
-                id={props.listing.id}
-                category={props.listing.category}
-                count={props.listing.count}
-                online={props.listing.online}
-                banner={fileUrl(props.listing.banner)}
+                kind="bots"
+                id={item().id}
+                category={item().category}
+                count={item().count}
+                online={item().online}
+                banner={fileUrl(item().banner)}
                 eager
               />
-            </Hero>
-            <Head>
-              <AvatarRing data-kind={props.listing.kind}>
-                <Avatar
-                  size={88}
-                  src={fileUrl(props.listing.icon)}
-                  fallback={props.listing.name}
-                  shape={isBot() ? "circle" : "rounded-square"}
-                />
-              </AvatarRing>
-              <Show when={listingMark(props.listing)}>
-                <MarkPill listing={props.listing} />
-              </Show>
-            </Head>
-
-            <Title>
-              <h2>
-                <bdi>{props.listing.name}</bdi>
-              </h2>
-              <Show when={listingBadge(props.listing)}>
-                {(badge) => (
-                  <Verified>
-                    <BadgeMark id={badge()} size="xs" />
-                    <Show
-                      when={badge() === "server_official"}
-                      fallback={<Trans>Verified</Trans>}
-                    >
-                      <Trans>Official</Trans>
-                    </Show>
-                  </Verified>
-                )}
-              </Show>
-              <Show when={isBot()}>
-                <BotLabel
-                  verified={props.listing.verified}
-                  official={props.listing.official}
-                />
-              </Show>
-            </Title>
+            </BannerArea>
 
             <Columns>
-              <MainColumn>
-                <Show when={isBot() && firstLine()}>
-                  <Part>
-                    <h3>
-                      <Trans>In your chat</Trans>
-                    </h3>
-                    <ChatPreview aria-hidden="true">
-                      <Avatar
-                        size={40}
-                        src={fileUrl(props.listing.icon)}
-                        fallback={props.listing.name}
-                        shape="circle"
-                      />
-                      <div>
-                        <strong>
-                          <bdi>{props.listing.name}</bdi>
-                          <BotLabel
-                            verified={props.listing.verified}
-                            official={props.listing.official}
-                          />
-                        </strong>
-                        <p dir="auto">{firstLine()}</p>
-                      </div>
-                    </ChatPreview>
-                  </Part>
+              <Main data-main>
+                <Identity>
+                  <IconFrame data-round="true">
+                    <Avatar
+                      size={104}
+                      src={fileUrl(item().icon)}
+                      fallback={item().name}
+                      shape="circle"
+                    />
+                  </IconFrame>
+                  <h1 ref={heading} tabIndex={-1}>
+                    <bdi>{item().name}</bdi>
+                    <BotLabel
+                      verified={item().verified}
+                      official={item().official}
+                    />
+                  </h1>
+                </Identity>
+
+                <Show when={listingMark(item())}>
+                  <MarkPill listing={item()} />
                 </Show>
 
+                <section>
+                  <h2>
+                    <Trans>About this bot</Trans>
+                  </h2>
+                  <Show
+                    when={item().description?.trim()}
+                    fallback={
+                      <Muted>
+                        <Trans>No description yet.</Trans>
+                      </Muted>
+                    }
+                  >
+                    <ListingAbout text={item().description!} />
+                  </Show>
+                </section>
+
                 <Show when={commands().items.length}>
-                  <Part>
-                    <h3>
+                  <section data-similar>
+                    <h2>
                       <Trans>Commands</Trans>
-                    </h3>
+                    </h2>
                     <Show
                       when={commands().source === "registered"}
                       fallback={
@@ -301,9 +240,9 @@ export function ListingDetail(props: {
                               )}
                             </For>
                           </Commands>
-                          <small>
+                          <Note>
                             <Trans>Named in the bot's description.</Trans>
-                          </small>
+                          </Note>
                         </>
                       }
                     >
@@ -325,108 +264,100 @@ export function ListingDetail(props: {
                         </For>
                       </CommandList>
                     </Show>
-                  </Part>
+                  </section>
                 </Show>
+              </Main>
 
-                <Show when={!isBot() || !firstLine() || moreToSay()}>
-                  <Part>
-                    <h3>
-                      <Show
-                        when={isBot()}
-                        fallback={<Trans>About this server</Trans>}
-                      >
-                        <Trans>About this bot</Trans>
-                      </Show>
-                    </h3>
-                    <Show
-                      when={props.listing.description?.trim()}
-                      fallback={
-                        <p data-empty="true">
-                          <Trans>No description yet.</Trans>
-                        </p>
-                      }
+              {/* one frame: the way in, the facts, permissions, report */}
+              <Aside>
+                <SidePart data-action>
+                  <PrimaryButton
+                    type="button"
+                    data-join
+                    data-busy={props.busy}
+                    disabled={props.busy}
+                    onClick={props.onAdd}
+                  >
+                    <span>
+                      <Trans>Add to server</Trans>
+                    </span>
+                  </PrimaryButton>
+                  <Show when={props.onMessage}>
+                    <SecondaryButton
+                      type="button"
+                      data-testid="discover-message-bot"
+                      disabled={props.busy}
+                      onClick={() => props.onMessage?.()}
                     >
-                      <ListingAbout text={props.listing.description!} />
-                    </Show>
-                  </Part>
-                </Show>
-              </MainColumn>
+                      <Icon name="chat-circle" size={16} />
+                      <Trans>Message</Trans>
+                    </SecondaryButton>
+                  </Show>
+                </SidePart>
 
-              <SideColumn>
-                <Part data-facts>
-                  <h3>
-                    <Show
-                      when={isBot()}
-                      fallback={<Trans>Server details</Trans>}
-                    >
-                      <Trans>Bot details</Trans>
-                    </Show>
-                  </h3>
-                  <FactList>
+                <SidePart data-facts>
+                  <h2>
+                    <Trans>Bot details</Trans>
+                  </h2>
+                  <Facts>
                     <div>
                       <dt>
-                        <Show when={isBot()} fallback={<Trans>Members</Trans>}>
-                          <Trans>Servers</Trans>
-                        </Show>
+                        <Trans>Servers</Trans>
                       </dt>
-                      <dd>{number(props.listing.count)}</dd>
+                      <dd>{number(item().count)}</dd>
                     </div>
-                    <Show when={props.listing.category}>
+                    <Show when={item().category}>
                       <div>
                         <dt>
                           <Trans>Category</Trans>
                         </dt>
-                        <dd>{labels.category(props.listing.category)}</dd>
+                        <dd>
+                          <a href={props.href({ category: item().category })}>
+                            {labels.category(item().category)}
+                          </a>
+                        </dd>
                       </div>
                     </Show>
-                    <Show when={props.listing.language}>
+                    <Show when={item().language}>
                       <div>
                         <dt>
                           <Trans>Language</Trans>
                         </dt>
-                        <dd>{labels.language(props.listing.language)}</dd>
+                        <dd>{labels.language(item().language)}</dd>
                       </div>
                     </Show>
-                  </FactList>
-                  <Show when={props.listing.tags.length}>
-                    <TagRow aria-label={t`Tags`}>
-                      <For each={props.listing.tags}>
+                  </Facts>
+                  <Show when={item().tags.length}>
+                    <Tags data-tags aria-label={t`Tags`}>
+                      <For each={item().tags}>
                         {(tag) => (
-                          <Tag
-                            dir="auto"
-                            type="button"
-                            disabled={!props.onTag}
-                            onClick={() => props.onTag?.(tag)}
-                          >
+                          <a dir="auto" href={props.href({ tag })}>
                             <b aria-hidden="true">#</b>
-
                             {tag}
-                          </Tag>
+                          </a>
                         )}
                       </For>
-                    </TagRow>
+                    </Tags>
                   </Show>
-                </Part>
+                </SidePart>
 
                 <Show when={invite()}>
-                  <Part data-gets>
-                    <h3>
-                      <Trans>On a server the bot gets:</Trans>
-                    </h3>
+                  <SidePart data-gets>
+                    <h2>
+                      <Trans>Permissions</Trans>
+                    </h2>
                     <Show
                       when={groups().length}
                       fallback={
-                        <p>
-                          <Trans>
-                            The bot will not be granted any permissions.
-                          </Trans>
-                        </p>
+                        <Note>
+                          <Trans>None</Trans>
+                        </Note>
                       }
                     >
                       <For each={groups()}>
                         {(group) => (
                           <PermissionGroup>
-                            <h4>{group.title}</h4>
+                            <h3>{group.title}</h3>
                             <ul>
                               <For each={group.bits}>
                                 {(bit) => (
@@ -448,312 +379,66 @@ export function ListingDetail(props: {
                         )}
                       </For>
                       <Show when={SENSITIVE.some(has)}>
-                        <small>
+                        <Note>
                           <Trans>
                             Lets the bot change the server or remove people.
                           </Trans>
-                        </small>
+                        </Note>
                       </Show>
                     </Show>
-                  </Part>
-
-                  <Show
-                    when={
-                      safeLink(invite()?.privacy_policy_url) ||
-                      safeLink(invite()?.terms_of_service_url)
-                    }
-                  >
-                    <Links>
-                      <Show when={safeLink(invite()?.privacy_policy_url)}>
-                        <a
-                          href={safeLink(invite()?.privacy_policy_url)}
-                          target="_blank"
-                          rel="noopener nofollow ugc"
-                        >
-                          <Trans>Privacy policy</Trans>
-                          <Icon name="arrow-square-out" size={16} />
-                        </a>
-                      </Show>
-                      <Show when={safeLink(invite()?.terms_of_service_url)}>
-                        <a
-                          href={safeLink(invite()?.terms_of_service_url)}
-                          target="_blank"
-                          rel="noopener nofollow ugc"
-                        >
-                          <Trans>Terms of Service</Trans>
-                          <Icon name="arrow-square-out" size={16} />
-                        </a>
-                      </Show>
-                    </Links>
-                  </Show>
+                    <Show when={privacy() || terms()}>
+                      <Links>
+                        <Show when={privacy()}>
+                          <a
+                            href={privacy()}
+                            target="_blank"
+                            rel="noopener nofollow ugc"
+                          >
+                            <Trans>Privacy policy</Trans>
+                            <Icon name="arrow-square-out" size={16} />
+                          </a>
+                        </Show>
+                        <Show when={terms()}>
+                          <a
+                            href={terms()}
+                            target="_blank"
+                            rel="noopener nofollow ugc"
+                          >
+                            <Trans>Terms of Service</Trans>
+                            <Icon name="arrow-square-out" size={16} />
+                          </a>
+                        </Show>
+                      </Links>
+                    </Show>
+                  </SidePart>
                 </Show>
-              </SideColumn>
-            </Columns>
-          </Scroll>
 
-          <Actions>
-            <Quiet>{props.secondary}</Quiet>
-            <Main>{props.primary}</Main>
-          </Actions>
-        </Panel>
-      </Scrim>
-    </Portal>
+                <SidePart>
+                  <QuietButton
+                    type="button"
+                    data-report
+                    onClick={props.onReport}
+                  >
+                    <Icon name="flag" size={16} />
+                    <Trans>Report bot</Trans>
+                  </QuietButton>
+                </SidePart>
+              </Aside>
+            </Columns>
+          </>
+        )}
+      </Show>
+    </Page>
   );
 }
 
-const Scrim = styled("div", {
-  base: {
-    position: "fixed",
-    inset: 0,
-    zIndex: 100,
-    display: "grid",
-    placeItems: "center",
-    padding: "24px",
-    boxSizing: "border-box",
-    overscrollBehavior: "contain",
-    background: "var(--z-scrim)",
-
-    // phones: a sheet that rises from the bottom edge
-    "@media (max-width: 600px)": {
-      placeItems: "end stretch",
-      padding: "0",
-    },
-  },
-});
-
-const Panel = styled("div", {
-  base: {
-    width: "min(880px, 100%)",
-    minWidth: 0,
-    boxSizing: "border-box",
-    maxHeight: "calc(100dvh - 48px - var(--z-safe-top))",
-    display: "flex",
-    flexDirection: "column",
-    position: "relative",
-    overflow: "hidden",
-    borderRadius: "var(--z-shape-dialog)",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--dz-page)",
-    color: "var(--z-fg-primary)",
-    boxShadow: "0 12px 32px rgb(0 0 0 / 0.45)",
-    outline: "none",
-    // focus moves here when it opens; the panel itself needs no ring
-    animation: "authHintIn 0.18s ease",
-    _motionReduce: { animation: "none" },
-    "--ring": "var(--dz-page)",
-
-    "@media (max-width: 600px)": {
-      width: "100%",
-      maxHeight: "94dvh",
-      borderRadius: "var(--z-shape-sheet) var(--z-shape-sheet) 0 0",
-      borderBottom: "none",
-    },
-  },
-});
-
-const Hero = styled("div", {
-  base: {
-    position: "relative",
-    flexShrink: 0,
-    height: "168px",
-    background: "var(--dz-band)",
-    _phone: { height: "136px" },
-  },
-});
-
-const Close = styled("button", {
-  base: {
-    position: "absolute",
-    zIndex: 2,
-    top: "12px",
-    insetInlineEnd: "12px",
-    width: "36px",
-    height: "36px",
-    display: "grid",
-    placeItems: "center",
-    borderRadius: "50%",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--dz-glass)",
-    color: "var(--z-fg-secondary)",
-    cursor: "pointer",
-    "--z-icon-color": "currentColor",
-    _hover: { color: "var(--z-fg-primary)" },
-    "&:active": { background: "var(--z-nav-selected)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    _phone: { width: "44px", height: "44px" },
-  },
-});
-
-const Scroll = styled("div", {
-  base: {
-    flex: 1,
-    minHeight: 0,
-    overflowY: "auto",
-    overscrollBehavior: "contain",
-  },
-});
-
-const Head = styled("div", {
-  base: {
-    position: "relative",
-    display: "flex",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    gap: "12px",
-    paddingInline: "32px",
-    marginTop: "-48px",
-    _phone: { paddingInline: "16px", marginTop: "-40px" },
-  },
-});
-
-const AvatarRing = styled("div", {
-  base: {
-    padding: "6px",
-    borderRadius: "28px",
-    background: "var(--ring)",
-    lineHeight: 0,
-    "&[data-kind='bots']": { borderRadius: "999px" },
-  },
-});
-
-const Title = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    gap: "4px 12px",
-    minWidth: 0,
-    padding: "12px 32px 0",
-    _phone: { paddingInline: "16px" },
-
-    "& h2": {
-      margin: 0,
-      minWidth: 0,
-      fontSize: "28px",
-      fontWeight: 700,
-      lineHeight: "36px",
-      overflowWrap: "anywhere",
-    },
-  },
-});
-
-const Verified = styled("span", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "4px",
-    fontSize: "13px",
-    fontWeight: 600,
-    color: "var(--z-fg-secondary)",
-  },
-});
-
-/** The listing's facts: a label and its value per row */
-const FactList = styled("dl", {
+/** A quiet line under a part */
+const Note = styled("p", {
   base: {
     margin: 0,
-    "& > div": {
-      display: "flex",
-      alignItems: "baseline",
-      justifyContent: "space-between",
-      gap: "16px",
-      paddingBlock: "8px",
-      "&:first-child": { paddingTop: 0 },
-      "& + div": { borderTop: "1px solid var(--z-border-subtle)" },
-    },
-    "& dt": {
-      fontSize: "14px",
-      lineHeight: "20px",
-      color: "var(--z-fg-secondary)",
-    },
-    "& dd": {
-      margin: 0,
-      minWidth: 0,
-      fontSize: "14px",
-      lineHeight: "20px",
-      fontWeight: 600,
-      textAlign: "end",
-      overflowWrap: "anywhere",
-    },
-  },
-});
-
-/** What it does on the start side, what it may do on the end side */
-const Columns = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "minmax(0, 1fr) auto",
-    gap: "32px",
-    padding: "24px 32px 32px",
-    "@media (max-width: 760px)": {
-      gridTemplateColumns: "minmax(0, 1fr)",
-      gap: "24px",
-    },
-    _phone: { padding: "20px 16px 24px" },
-  },
-});
-
-const MainColumn = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "24px",
-    minWidth: 0,
-  },
-});
-
-const SideColumn = styled("aside", {
-  base: {
-    width: "280px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-    minWidth: 0,
-    padding: "16px",
-    alignSelf: "start",
-    boxSizing: "border-box",
-    borderRadius: "var(--z-shape-card)",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--z-card-bg)",
-    "@media (max-width: 760px)": { width: "auto", alignSelf: "stretch" },
-    // one frame: what the bot gets sits under the facts, past a hairline
-    "& > [data-gets]": {
-      paddingTop: "16px",
-      borderTop: "1px solid var(--z-border-subtle)",
-    },
-  },
-});
-
-const Part = styled("section", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-
-    "& h3": {
-      margin: 0,
-      fontSize: "15px",
-      lineHeight: "24px",
-      fontWeight: 600,
-      color: "var(--z-fg-primary)",
-    },
-    "& > p": {
-      margin: 0,
-      fontSize: "15px",
-      lineHeight: "24px",
-      color: "var(--z-fg-secondary)",
-      whiteSpace: "pre-line",
-      overflowWrap: "anywhere",
-    },
-    "& > p[data-empty='true']": { color: "var(--z-fg-muted)" },
-    "& > small": {
-      fontSize: "12px",
-      lineHeight: "16px",
-      color: "var(--z-fg-muted)",
-    },
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--z-fg-muted)",
   },
 });
 
@@ -811,41 +496,12 @@ const Commands = styled("div", {
   },
 });
 
-/** A message as the bot would post it: its own name, picture and first line */
-const ChatPreview = styled("div", {
-  base: {
-    display: "flex",
-    gap: "12px",
-    padding: "16px",
-    borderRadius: "var(--z-shape-card)",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--z-card-bg)",
-
-    "& > div": { flex: 1, minWidth: 0 },
-    "& strong": {
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-      fontSize: "15px",
-      lineHeight: "24px",
-      fontWeight: 600,
-    },
-    "& p": {
-      margin: 0,
-      fontSize: "14px",
-      lineHeight: "22px",
-      color: "var(--z-fg-primary)",
-      overflowWrap: "anywhere",
-    },
-  },
-});
-
 const PermissionGroup = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
     gap: "4px",
-    "& h4": {
+    "& h3": {
       margin: 0,
       fontSize: "12px",
       lineHeight: "16px",
@@ -898,53 +554,6 @@ const Links = styled("div", {
         outlineOffset: "2px",
       },
       _phone: { minHeight: "44px" },
-    },
-  },
-});
-
-const TagRow = styled("div", {
-  base: { display: "flex", flexWrap: "wrap", gap: "8px" },
-});
-
-const Actions = styled("div", {
-  base: {
-    flexShrink: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "8px",
-    padding: "12px 32px",
-    borderTop: "1px solid var(--dz-edge)",
-    background: "var(--dz-page)",
-
-    "@media (max-width: 600px)": {
-      flexDirection: "column-reverse",
-      alignItems: "stretch",
-      padding: "12px 16px calc(12px + var(--z-safe-bottom))",
-    },
-  },
-});
-
-const Quiet = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
-    minWidth: 0,
-    "&:empty": { display: "none" },
-    "@media (max-width: 600px)": {
-      "& > *": { flex: 1 },
-    },
-  },
-});
-
-const Main = styled("div", {
-  base: {
-    display: "flex",
-    marginInlineStart: "auto",
-    "@media (max-width: 600px)": {
-      marginInlineStart: 0,
-      "& > *": { flex: 1 },
     },
   },
 });

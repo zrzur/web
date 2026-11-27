@@ -6,6 +6,7 @@ import {
   createMemo,
   createResource,
   createSignal,
+  onCleanup,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -88,6 +89,18 @@ export function WebhooksPanel(props: { server?: Server; channel?: Channel }) {
     },
   );
   const refresh = () => setVersion((n) => n + 1);
+  // another admin's new, changed or removed webhook shows here at once
+  const onEvent = (event: unknown) => {
+    const type = (event as { type?: string })?.type;
+    if (
+      type === "WebhookCreate" ||
+      type === "WebhookUpdate" ||
+      type === "WebhookDelete"
+    )
+      refresh();
+  };
+  client().events.on("event", onEvent);
+  onCleanup(() => client().events.off("event", onEvent));
 
   // all webhooks, or only those a bot (or a person) made
   const [maker, setMaker] = createSignal<WebhookMaker>("all");

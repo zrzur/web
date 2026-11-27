@@ -1,5 +1,7 @@
 import type { SelectedTheme } from "@revolt/state/stores/Theme";
 
+import { contrastOn } from "./zrzurTheme";
+
 /**
  * Optional theme library (Appearance → Theme). The default Midnight Pulse
  * look lives in zrzurTheme.ts and is never touched by these.
@@ -836,6 +838,7 @@ export function themeLibraryVariables(
     "--z-presence-dnd": t.error,
     "--z-presence-offline": t.offline,
     "--z-status-success": t.online,
+    "--z-on-success": contrastOn(t.online),
     "--z-status-warning": t.idle,
     "--z-status-error": t.error,
     "--z-danger": t.error,

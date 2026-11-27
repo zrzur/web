@@ -110,11 +110,12 @@ This short version does not reconnect. Add the loop from [Gateway](/developers/d
 
 | Address                 | What                                       |
 | ----------------------- | ------------------------------------------ |
+| [Bot API document](/developers/bot-api.openapi.json) | The routes a bot can use, as OpenAPI 3 |
 | `GET /openapi.json`     | Every REST route, as OpenAPI 3             |
 | `GET /gateway/schema`   | Every gateway event, as JSON Schema        |
 | `GET /`                 | Addresses and limits of this server        |
 
-Generate a client from them in your own language.
+Generate a client from them in your own language: see [Other languages](/developers/docs/sdk#other-languages).
 
 ## Next {#next}
 

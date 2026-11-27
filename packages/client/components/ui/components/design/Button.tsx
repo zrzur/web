@@ -18,6 +18,8 @@ type Props = Omit<
 > & {
   groupActive?: boolean;
   bg?: string;
+  /** a dialog's action that stands apart at the start of its row */
+  "data-start"?: boolean;
 };
 
 /**
@@ -86,6 +88,7 @@ export function Button(props: Props) {
     "aria-selected",
     "tabIndex",
     "role",
+    "data-start",
   ]);
 
   const [style, rest] = splitProps(propsRest, [

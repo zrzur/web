@@ -227,7 +227,7 @@ function PickLanguage() {
   return (
     <Column gap="md">
       <SettingsSection
-        title={<Trans>Language</Trans>}
+        // the page's own title says "Language"
         description={<Trans>Untranslated text falls back to English.</Trans>}
       >
         <div
@@ -358,8 +358,18 @@ function PickDateTime() {
   const now = new Date();
 
   const DATE_FORMATS = ["DD/MM/YYYY", "MM/DD/YYYY", "YYYY-MM-DD"] as const;
+  // the language's own way first when it is none of these (German writes
+  // 26.11.2026): without it the list had nothing to show but "—"
+  const dateFormats = () => {
+    const current = timeLocale()[1].formats.L;
+    return !current || (DATE_FORMATS as readonly string[]).includes(current)
+      ? [...DATE_FORMATS]
+      : [current, ...DATE_FORMATS];
+  };
   const dateName = (format: string) =>
-    format === "DD/MM/YYYY" ? (
+    !(DATE_FORMATS as readonly string[]).includes(format) ? (
+      <Trans>Default</Trans>
+    ) : format === "DD/MM/YYYY" ? (
       <Trans>Day first</Trans>
     ) : format === "MM/DD/YYYY" ? (
       <Trans>Month first</Trans>
@@ -372,7 +382,6 @@ function PickDateTime() {
       <SettingsRow
         icon={<Icon name="calendar" size={20} />}
         title={<Trans>Date format</Trans>}
-        description={<Trans>Used in message timestamps and lists.</Trans>}
         control={(ids) => (
           <SelectWidth>
             <FloatingSelect
@@ -383,7 +392,7 @@ function PickDateTime() {
                   locale.setDateFormat(e.currentTarget.value);
               }}
             >
-              <For each={DATE_FORMATS}>
+              <For each={dateFormats()}>
                 {(format) => (
                   <MenuItem value={format}>
                     {dayjs(lastWeek).format(format)} · {dateName(format)}

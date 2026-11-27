@@ -19,7 +19,7 @@ const state = {
 };
 vi.mock("@revolt/state", () => ({ useState: () => state }));
 
-import { LanguageSwitch } from "./SiteFrame";
+import { LanguageSwitch, SiteFooter } from "./SiteFrame";
 
 let dispose: (() => void) | undefined;
 
@@ -97,5 +97,38 @@ describe("the language menu of Discover and Designs", () => {
     i18n.loadAndActivate({ locale: "ja", messages: {} });
     mount();
     expect(button().textContent).toBe("English");
+  });
+});
+
+describe("the footer of the public sites", () => {
+  it("links each site to its own official server", () => {
+    const linkTo = (site: "designs" | "discover" | "docs") => {
+      dispose?.();
+      document.body.replaceChildren(document.createElement("div"));
+      dispose = render(
+        () => (
+          <I18nProvider i18n={i18n}>
+            <SiteFooter site={site} />
+          </I18nProvider>
+        ),
+        document.body.firstElementChild as HTMLElement,
+      );
+      const link = [...document.querySelectorAll("a")].find((a) =>
+        a.href.startsWith("https://zrzur.cc/"),
+      );
+      return [link?.href, link?.textContent];
+    };
+    expect(linkTo("designs")).toEqual([
+      "https://zrzur.cc/designs",
+      "Zrzur Designs server",
+    ]);
+    expect(linkTo("discover")).toEqual([
+      "https://zrzur.cc/discover",
+      "Zrzur Discover server",
+    ]);
+    expect(linkTo("docs")).toEqual([
+      "https://zrzur.cc/developers",
+      "Zrzur Developers server",
+    ]);
   });
 });

@@ -1,3 +1,5 @@
+import { Show } from "solid-js";
+
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
@@ -72,10 +74,44 @@ export function VoiceProcessingOptions() {
           </SelectWidth>
         )}
       />
+      {/* how hard Enhanced works: only shown where it applies */}
+      <Show when={!music() && voice.noiseSupression === "enhanced"}>
+        <SettingsRow
+          icon={<Icon name="funnel" size={20} />}
+          title={<Trans>Suppression strength</Trans>}
+          description={
+            voice.noiseStrength === "strong" ? (
+              <Trans>
+                Also quietens typing, clicks and breathing between words.
+              </Trans>
+            ) : (
+              <Trans>Removes steady noise such as fans and hum.</Trans>
+            )
+          }
+          control={(ids) => (
+            <SelectWidth>
+              <FloatingSelect
+                aria-labelledby={ids.labelId}
+                value={voice.noiseStrength}
+                onChange={(e) => {
+                  const v = e.currentTarget.value as "standard" | "strong";
+                  if (v) voice.noiseStrength = v;
+                }}
+              >
+                <MenuItem value="standard">
+                  <Trans>Standard</Trans>
+                </MenuItem>
+                <MenuItem value="strong">
+                  <Trans>Strong</Trans>
+                </MenuItem>
+              </FloatingSelect>
+            </SelectWidth>
+          )}
+        />
+      </Show>
       <SettingsRow
         icon={<Icon name="speaker-low" size={20} />}
         title={<Trans>Echo cancellation</Trans>}
-        description={t`Uses the browser's echo cancellation.`}
         disabled={music()}
         onClick={() => (voice.echoCancellation = !voice.echoCancellation)}
         control={(ids) => (
@@ -90,7 +126,6 @@ export function VoiceProcessingOptions() {
       <SettingsRow
         icon={<Icon name="sliders-horizontal" size={20} />}
         title={<Trans>Automatic gain control</Trans>}
-        description={t`Keeps your microphone at a steady level.`}
         disabled={music()}
         onClick={() => (voice.autoGainControl = !voice.autoGainControl)}
         control={(ids) => (

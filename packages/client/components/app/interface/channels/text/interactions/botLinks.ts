@@ -80,27 +80,17 @@ export function dmBot(channel: Channel): User | undefined {
 }
 
 /**
- * Where Start shows in a conversation with a bot, if anywhere: one rule for
- * both places, so there is never more than one Start.
- * - `card`: the conversation is empty and Start was not pressed (a bot link
- *   opened again resets that); the card at its top has Start.
- * - `bar`: it has messages and a bot link is waiting; the bar above the
- *   message box has Start.
- *
- * The messages the app holds decide, not the channel's last message id: the
- * server saves that a moment after a message, and it can still name a
- * deleted one. The card is drawn only once the history is loaded to its
- * start, and the bar waits until a message is loaded.
+ * Where Start shows in a conversation with a bot, if anywhere. A
+ * conversation with a bot is like any other (owner, 2026-11-27: no card at
+ * its top): writing to the bot, or using one of its commands, starts it.
+ * Only a bot link that is waiting (its payload goes to the bot with Start)
+ * puts Start in the bar above the message box.
  */
 export function startPlace(
   client: Client,
   channel: Channel,
-): "card" | "bar" | undefined {
+): "bar" | undefined {
   const bot = dmBot(channel);
   if (!botDmsOn(client) || !bot || bot.relationship === "Blocked") return;
-  const held = client.messages.find(
-    (message) => message.channelId === channel.id,
-  );
-  if (!held) return state.started[channel.id] ? undefined : "card";
   return state.waiting[channel.id] !== undefined ? "bar" : undefined;
 }

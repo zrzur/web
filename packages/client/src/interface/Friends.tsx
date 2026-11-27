@@ -655,6 +655,8 @@ const row = cva({
     "&:focus-visible": { boxShadow: "inset 0 0 0 2px var(--z-focus)" },
     // reveal the @username on hover/focus
     "&:hover strong span, &:focus-visible strong span": { opacity: 1 },
+    // touch has no hover: two friends with one display name stay apart
+    "@media (hover: none)": { "& strong span": { opacity: 1 } },
   },
 });
 

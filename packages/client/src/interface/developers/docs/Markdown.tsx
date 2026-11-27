@@ -1,12 +1,15 @@
 import { For, JSX, Match, Switch, createMemo } from "solid-js";
 
+import { useLingui } from "@lingui/solid/macro";
 import type { Heading, RootContent, Table } from "mdast";
 import { styled } from "styled-system/jsx";
+
+import { Icon } from "@revolt/ui/icons/Icon";
 
 import { CodeBlock } from "./CodeBlock";
 import { Directive } from "./Directives";
 import { hrefHere, leavesHere } from "./here";
-import { headingId, headingText, parseMarkdown } from "./markdownTree";
+import { headingId, headingText, parseMarkdown, textOf } from "./markdownTree";
 
 /**
  * Render a documentation page. Fences named `endpoints`, `events`,
@@ -38,8 +41,59 @@ function Nodes(props: {
 }): JSX.Element {
   return (
     <For each={props.nodes}>
-      {(node) => <Node node={node} onNavigate={props.onNavigate} />}
+      {(node, at) => {
+        const before = props.nodes[at() - 1];
+        // the list under "Next": the pages to read now, as cards
+        return node.type === "list" &&
+          before?.type === "heading" &&
+          headingId(before) === NEXT ? (
+          <NextCards list={node} onNavigate={props.onNavigate} />
+        ) : (
+          <Node node={node} onNavigate={props.onNavigate} />
+        );
+      }}
     </For>
+  );
+}
+
+/** Anchor of the section that ends a page with what to read next */
+export const NEXT = "next";
+
+/** The pages to read next, one card each */
+function NextCards(props: {
+  list: RootContent;
+  onNavigate: (href: string) => void;
+}) {
+  const links = () => {
+    const found: { url: string; text: string }[] = [];
+    const visit = (node: RootContent) => {
+      if (node.type === "link")
+        found.push({ url: node.url, text: textOf(node) });
+      else if ("children" in node)
+        (node.children as RootContent[]).forEach(visit);
+    };
+    visit(props.list);
+    return found;
+  };
+  return (
+    <Cards>
+      <For each={links()}>
+        {(link) => (
+          <a
+            href={hrefHere(link.url)}
+            onClick={(event) => {
+              if (leavesHere(hrefHere(link.url))) return;
+              if (event.ctrlKey || event.metaKey) return;
+              event.preventDefault();
+              props.onNavigate(link.url);
+            }}
+          >
+            <span class="words">{link.text}</span>
+            <Icon name="arrow-right" size={16} class="arrow" />
+          </a>
+        )}
+      </For>
+    </Cards>
   );
 }
 
@@ -69,10 +123,16 @@ function Node(props: {
                 <h1 id={id}>{content}</h1>
               </Match>
               <Match when={heading().depth === 2}>
-                <h2 id={id}>{content}</h2>
+                <h2 id={id}>
+                  {content}
+                  <SectionLink id={id} />
+                </h2>
               </Match>
               <Match when={heading().depth === 3}>
-                <h3 id={id}>{content}</h3>
+                <h3 id={id}>
+                  {content}
+                  <SectionLink id={id} />
+                </h3>
               </Match>
             </Switch>
           );
@@ -103,12 +163,29 @@ function Node(props: {
         <hr />
       </Match>
       <Match when={props.node.type === "blockquote"}>
-        <Note>{children()}</Note>
+        <Note>
+          <Icon name="info" size={18} class="mark" />
+          <div>{children()}</div>
+        </Note>
       </Match>
       <Match when={props.node.type === "list" && props.node}>
         {(node) => {
-          const list = node() as { ordered?: boolean | null };
-          return list.ordered ? <ol>{children()}</ol> : <ul>{children()}</ul>;
+          const list = node() as {
+            ordered?: boolean | null;
+            start?: number | null;
+          };
+          // steps split by a code block go on counting: "4." after three
+          const start = list.start ?? 1;
+          return list.ordered ? (
+            <ol
+              start={start}
+              style={start > 1 ? { "counter-reset": `step ${start - 1}` } : {}}
+            >
+              {children()}
+            </ol>
+          ) : (
+            <ul>{children()}</ul>
+          );
         }}
       </Match>
       <Match when={props.node.type === "listItem" && props.node}>
@@ -222,14 +299,70 @@ function Node(props: {
   );
 }
 
+/** The "#" beside a section title: its own address, for sharing */
+function SectionLink(props: { id: string }) {
+  const { t } = useLingui();
+  return (
+    <a
+      class="anchor"
+      href={`#${props.id}`}
+      aria-label={t`Link to this section`}
+      onClick={(event) => {
+        if (event.ctrlKey || event.metaKey) return;
+        event.preventDefault();
+        history.replaceState(history.state, "", `#${props.id}`);
+        document.getElementById(props.id)?.scrollIntoView({ block: "start" });
+      }}
+    >
+      #
+    </a>
+  );
+}
+
+const Cards = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+    gap: "12px",
+    "& a": {
+      display: "flex",
+      alignItems: "center",
+      gap: "12px",
+      minHeight: "56px",
+      padding: "12px 16px",
+      borderRadius: "var(--z-radius-md, 10px)",
+      border: "1px solid var(--z-border-subtle)",
+      background: "var(--z-box-bg)",
+      color: "var(--z-fg-primary) !important",
+      textDecoration: "none !important",
+      fontWeight: 600,
+      _hover: { borderColor: "var(--z-border-strong)" },
+      _focusVisible: { outline: "2px solid var(--z-focus)" },
+    },
+    "& .words": { flex: 1, minWidth: 0 },
+    "& .arrow": {
+      flexShrink: 0,
+      "--z-icon-color": "var(--z-fg-muted)",
+    },
+    "& a:hover .arrow": { "--z-icon-color": "var(--z-accent)" },
+  },
+});
+
 export const Note = styled("aside", {
   base: {
+    display: "flex",
+    gap: "12px",
+    alignItems: "flex-start",
     padding: "12px 16px",
     borderRadius: "var(--z-radius-md, 8px)",
-    borderInlineStart: "3px solid var(--z-accent)",
-    background: "var(--z-card-bg)",
+    border: "1px solid var(--z-border-subtle)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-secondary)",
+    "--z-icon-color": "var(--z-accent)",
+    "& .mark": { flexShrink: 0, marginBlockStart: "3px" },
+    "& > div": { flex: 1, minWidth: 0 },
     "& p": { margin: 0 },
+    "& p + p": { marginBlockStart: "8px" },
   },
 });
 
@@ -250,6 +383,7 @@ export const TableWrap = styled("div", {
       fontWeight: 600,
       fontSize: "12px",
       whiteSpace: "nowrap",
+      background: "var(--z-box-bg)",
     },
     "& td": {
       padding: "8px 12px",
@@ -258,5 +392,10 @@ export const TableWrap = styled("div", {
       borderBlockEnd: "1px solid var(--z-border-subtle)",
     },
     "& tr:last-child td": { borderBlockEnd: "none" },
+    // a name in a table is read whole: the table scrolls instead
+    "& td:first-child code": {
+      whiteSpace: "nowrap",
+      overflowWrap: "normal",
+    },
   },
 });

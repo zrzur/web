@@ -63,20 +63,23 @@ describe("where Start shows", () => {
   const channel = (id: string) =>
     ({ id, type: "DirectMessage", recipient: bot }) as never;
 
-  it("never in more than one place", () => {
-    // empty: the card; with messages and a link waiting: the bar only
-    expect(startPlace(client(true, []), channel("E1"))).toBe("card");
+  it("shows only for a waiting bot link, in the bar", () => {
+    // no card: an empty conversation with a bot starts like any other
+    expect(startPlace(client(true, []), channel("E1"))).toBeUndefined();
+    // a bot link waits: the bar, empty or not
     waitForStart("H1", "ref");
     expect(startPlace(client(true, [{ channelId: "H1" }]), channel("H1"))).toBe(
       "bar",
     );
+    waitForStart("E4", "ref");
+    expect(startPlace(client(true, []), channel("E4"))).toBe("bar");
     // with messages and no link: nowhere
     expect(
       startPlace(client(true, [{ channelId: "H2" }]), channel("H2")),
     ).toBeUndefined();
-    // pressed in this session: nowhere
-    markStarted("E2");
-    expect(startPlace(client(true, []), channel("E2"))).toBeUndefined();
+    // pressed: the link is used up
+    markStarted("E4");
+    expect(startPlace(client(true, []), channel("E4"))).toBeUndefined();
   });
 
   it("nowhere with bots in DMs off, or for a stopped bot", () => {

@@ -47,10 +47,10 @@ describe("screenShareQualities", () => {
     ).toEqual(["720p30"]);
   });
 
-  it("keeps the existing bitrate caps", () => {
+  it("gives 720p room for 30 steady frames, keeps the others' caps", () => {
     const q = screenShareQualities(plus);
     expect(q["720p30"]!.encoding).toEqual({
-      maxBitrate: 2_000_000,
+      maxBitrate: 2_500_000,
       maxFramerate: 30,
     });
     expect(q["1080p30"]!.encoding.maxBitrate).toBe(5_000_000);
@@ -67,8 +67,9 @@ describe("screenShareQualities", () => {
     const smooth = screenShareQualities(plus, "motion")["1080p60"]!;
     expect(smooth.contentHint).toBe("motion");
     expect(smooth.degradationPreference).toBe("maintain-framerate");
-    // sharp is the default
-    expect(screenShareQualities(plus)["720p30"]!.contentHint).toBe("detail");
+    // smooth is the default: Chrome's screencast mode ("detail") held
+    // shares at a few frames a second (owner, 2026-11-27)
+    expect(screenShareQualities(plus)["720p30"]!.contentHint).toBe("motion");
   });
 
   it("gives weak viewers smaller layers below every quality", () => {
@@ -117,7 +118,7 @@ describe("capture and publish options", () => {
     const high = screenShareQualities(plus)["1080p30"]!;
     expect(captureOptions(high, false)).toEqual({
       resolution: { width: 1920, height: 1080, frameRate: 30 },
-      contentHint: "detail",
+      contentHint: "motion",
       audio: false,
       selfBrowserSurface: "exclude",
       surfaceSwitching: "include",
@@ -244,7 +245,7 @@ describe("applyQuality", () => {
         resolution: { width: 1280, height: 720, frameRate: 30 },
         contentHint: "detail",
       },
-      { maxBitrate: 2_000_000, maxFramerate: 30 },
+      { maxBitrate: 2_500_000, maxFramerate: 30 },
     );
   });
 });

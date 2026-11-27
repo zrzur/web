@@ -248,7 +248,9 @@ const previewUser = cva({
       true: {
         color: "var(--md-sys-color-on-surface)",
 
-        "& svg": {
+        // the avatar only (it is the row's own svg): the status icons at
+        // the end (screen share, camera, muted) stay as they are
+        "& > svg": {
           outlineOffset: "1px",
           outline: "2px solid var(--md-sys-color-primary)",
           borderRadius: "var(--borderRadius-circle)",

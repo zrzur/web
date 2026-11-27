@@ -125,7 +125,7 @@ export function AgeSettings() {
           <SettingsFormPanel>
             <BirthMonthField
               label={t`Month and year of birth`}
-              helper={t`You can make yourself younger at any time. You can make yourself older only once, and only within the same age group. For anything else, write to privacy@zrzur.com.`}
+              helper={t`Younger any time; older only once, within your age group. Anything else: privacy@zrzur.com.`}
               month={month()}
               year={year()}
               disabled={busy()}
@@ -141,7 +141,6 @@ export function AgeSettings() {
                 autocomplete="current-password"
                 required
                 label={t`Current password`}
-                placeholder={t`Enter your current password.`}
                 value={password()}
                 onInput={(event) => setPassword(event.currentTarget.value)}
               />

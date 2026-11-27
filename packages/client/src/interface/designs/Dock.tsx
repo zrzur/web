@@ -1,4 +1,4 @@
-import { For, Show, createSignal, onCleanup } from "solid-js";
+import { Show, createSignal, onCleanup, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
@@ -12,11 +12,128 @@ import { WornAvatar, useWearer } from "./Scenes";
 import { useTryOn } from "./TryOn";
 
 /**
- * You, at the bottom of the gallery: everything you tap lands on your own
- * avatar here, on a phone and on a desktop alike. It opens upward into the
- * whole mirror and never covers more than it must. Save is the one action.
+ * How wide the Designs page has to be for you to stand beside the gallery;
+ * the same width as the page's own layout (WithLook in Designs.tsx)
+ */
+const LOOK_SIDE_PX = 1100;
+
+/**
+ * You, in what you try on, wherever designs are on show. Every tap on a
+ * design lands on you here, and the preview opens where that design is seen:
+ * a nameplate in a member list, a frame on the profile, a name style in a
+ * conversation. With nothing in hand you see your whole look.
+ *
+ * On a wide page you stand beside the gallery, always open; on a narrower
+ * one you are a bar along the bottom that opens upward. Save is the one
+ * action.
  */
 export function Dock() {
+  const [side, setSide] = createSignal(false);
+  let probe: HTMLSpanElement | undefined;
+
+  onMount(() => {
+    const scroll = probe?.closest<HTMLElement>("[data-designs-scroll]");
+    if (!scroll) return;
+    const observer = new ResizeObserver(() => {
+      setSide(scroll.clientWidth >= LOOK_SIDE_PX);
+      // how tall the page's scrolling box is: the panel beside the gallery
+      // fits in it and scrolls on its own to the very end
+      // (nothing laid out yet, a hidden tab: keep what the page had)
+      if (scroll.clientHeight)
+        scroll.style.setProperty("--dz-view-h", `${scroll.clientHeight}px`);
+    });
+    observer.observe(scroll);
+    onCleanup(() => observer.disconnect());
+  });
+
+  return (
+    <>
+      <span ref={probe} hidden />
+      <Show when={side()} fallback={<Bottom />}>
+        <Side />
+      </Show>
+    </>
+  );
+}
+
+/** Beside the gallery: always open, the preview and Save */
+function Side() {
+  const { t } = useLingui();
+  const tryOn = useTryOn();
+  let panel: HTMLElement | undefined;
+
+  // The panel and the gallery scroll each on their own: the panel always
+  // ends at the bottom of the page's box, wherever it stands now (high on
+  // the page before it sticks), so its last part is always in reach, and
+  // the wheel over it moves it alone.
+  onMount(() => {
+    const scroll = panel?.closest<HTMLElement>("[data-designs-scroll]");
+    if (!panel || !scroll) return;
+    let frame = 0;
+    const fit = () => {
+      frame = 0;
+      const room =
+        scroll.getBoundingClientRect().bottom -
+        panel!.getBoundingClientRect().top -
+        16;
+      if (room > 120) panel!.style.maxHeight = `${Math.floor(room)}px`;
+    };
+    const later = () => {
+      if (!frame) frame = requestAnimationFrame(fit);
+    };
+    fit();
+    scroll.addEventListener("scroll", later, { passive: true });
+    window.addEventListener("resize", later);
+    onCleanup(() => {
+      cancelAnimationFrame(frame);
+      scroll.removeEventListener("scroll", later);
+      window.removeEventListener("resize", later);
+    });
+  });
+
+  return (
+    <SidePanel ref={panel} aria-label={t`Your look`}>
+      <SideHead>
+        <h2>
+          <Trans>Your look</Trans>
+        </h2>
+        <Show when={tryOn.changed()}>
+          <button type="button" onClick={() => tryOn.reset()}>
+            <Trans>Reset</Trans>
+          </button>
+        </Show>
+      </SideHead>
+
+      <Mirror
+        style={tryOn.shown()}
+        place={tryOn.place()}
+        whole
+        fullSize
+        label={t`Where to preview`}
+      />
+
+      <Status />
+
+      <Show when={tryOn.changed()}>
+        <SaveBar>
+          <Button
+            size="lg"
+            variant="filled"
+            isDisabled={tryOn.saving()}
+            onPress={() => void tryOn.save()}
+          >
+            <Show when={tryOn.saving()} fallback={<Trans>Save</Trans>}>
+              <Trans>Saving…</Trans>
+            </Show>
+          </Button>
+        </SaveBar>
+      </Show>
+    </SidePanel>
+  );
+}
+
+/** Along the bottom: you, small, opening upward into the preview */
+function Bottom() {
   const { t } = useLingui();
   const tryOn = useTryOn();
   const wearer = useWearer();
@@ -29,33 +146,15 @@ export function Dock() {
   onCleanup(() => document.removeEventListener("keydown", onKey));
 
   return (
-    <Base aria-label={t`Your look`}>
+    <BottomBar aria-label={t`Your look`}>
       <Show when={open()}>
         <Sheet>
-          <Mirror style={tryOn.shown()} />
-          <Parts>
-            <For
-              each={tryOn.parts()}
-              fallback={
-                <span>
-                  <Trans>Nothing on yet. Pick something to try on.</Trans>
-                </span>
-              }
-            >
-              {(part) => (
-                <Chip>
-                  <span>{part.label}</span>
-                  <button
-                    type="button"
-                    aria-label={t`Take off ${part.label}`}
-                    onClick={() => tryOn.put(part.clear)}
-                  >
-                    <Icon name="x" size={12} />
-                  </button>
-                </Chip>
-              )}
-            </For>
-          </Parts>
+          <Mirror
+            style={tryOn.shown()}
+            place={tryOn.place()}
+            whole
+            label={t`Where to preview`}
+          />
           <Show when={tryOn.changed()}>
             <Button size="lg" variant="tonal" onPress={() => tryOn.reset()}>
               <Trans>Reset</Trans>
@@ -64,22 +163,7 @@ export function Dock() {
         </Sheet>
       </Show>
 
-      <Show when={tryOn.error()}>
-        <Line role="alert" data-error>
-          {tryOn.error()}
-        </Line>
-      </Show>
-      <Show when={tryOn.saved() && !tryOn.changed()}>
-        <Line role="status">
-          <Icon name="check-circle" size={16} />
-          <span>
-            <Trans>Saved to your profile.</Trans>
-          </span>
-          <button type="button" onClick={() => void tryOn.undo()}>
-            <Trans>Undo</Trans>
-          </button>
-        </Line>
-      </Show>
+      <Status />
 
       <Bar>
         <You
@@ -126,16 +210,106 @@ export function Dock() {
           </Button>
         </Show>
       </Bar>
-    </Base>
+    </BottomBar>
   );
 }
 
-const Base = styled("aside", {
+/** Saved, or why not */
+function Status() {
+  const tryOn = useTryOn();
+  return (
+    <>
+      <Show when={tryOn.error()}>
+        <Line role="alert" data-error>
+          {tryOn.error()}
+        </Line>
+      </Show>
+      <Show when={tryOn.saved() && !tryOn.changed()}>
+        <Line role="status">
+          <Icon name="check-circle" size={16} />
+          <span>
+            <Trans>Saved to your profile.</Trans>
+          </span>
+          <button type="button" onClick={() => void tryOn.undo()}>
+            <Trans>Undo</Trans>
+          </button>
+        </Line>
+      </Show>
+    </>
+  );
+}
+
+/**
+ * Beside the gallery, it stays in view under the page's own bar and keeps
+ * its own scroll when the preview is taller than the window
+ */
+const SidePanel = styled("aside", {
+  base: {
+    position: "sticky",
+    // under the page's own bar, level with the kinds row beside it
+    top: "calc(var(--dz-under, 0px) + 64px)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    // the page's own scrolling box, less the bar above and a margin below
+    maxHeight: "calc(var(--dz-view-h, 100dvh) - var(--dz-under, 0px) - 80px)",
+    overflowY: "auto",
+    // the wheel over the panel never moves the gallery beside it
+    overscrollBehavior: "contain",
+    scrollbarWidth: "thin",
+    minWidth: 0,
+  },
+});
+
+const SideHead = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "baseline",
+    justifyContent: "space-between",
+    gap: "8px",
+    "& h2": {
+      margin: 0,
+      fontSize: "16px",
+      lineHeight: "24px",
+      fontWeight: 700,
+      color: "var(--z-fg-primary)",
+    },
+    "& button": {
+      padding: 0,
+      border: "none",
+      background: "none",
+      color: "var(--z-fg-secondary)",
+      font: "inherit",
+      fontSize: "13px",
+      fontWeight: 600,
+      cursor: "pointer",
+      _hover: { color: "var(--z-fg-primary)" },
+      _focusVisible: {
+        outline: "2px solid var(--z-focus)",
+        outlineOffset: "2px",
+        borderRadius: "4px",
+      },
+    },
+  },
+});
+
+/** Save, kept at the foot of the panel while it scrolls */
+const SaveBar = styled("div", {
+  base: {
+    position: "sticky",
+    bottom: 0,
+    paddingBlock: "8px 0",
+    background: "var(--z-designs-page)",
+    "& > button": { width: "100%" },
+  },
+});
+
+const BottomBar = styled("aside", {
   base: {
     position: "sticky",
     bottom: "12px",
     zIndex: 4,
-    alignSelf: "center",
+    justifySelf: "center",
     width: "min(100%, 480px)",
     display: "flex",
     flexDirection: "column",
@@ -221,59 +395,6 @@ const Sheet = styled("div", {
     overflowY: "auto",
     padding: "4px",
     "& > button": { flexShrink: 0 },
-  },
-});
-
-const Parts = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
-    "& > span": { fontSize: "13px", color: "var(--z-fg-muted)" },
-  },
-});
-
-const Chip = styled("span", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "4px",
-    height: "32px",
-    maxWidth: "100%",
-    paddingInline: "12px 4px",
-    boxSizing: "border-box",
-    borderRadius: "var(--z-shape-chip, 6px)",
-    background: "var(--z-designs-button)",
-    color: "var(--z-fg-primary)",
-    fontSize: "13px",
-    fontWeight: 500,
-    "& > span": {
-      minWidth: 0,
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
-    "& button": {
-      flexShrink: 0,
-      display: "grid",
-      placeItems: "center",
-      width: "24px",
-      height: "24px",
-      padding: 0,
-      borderRadius: "6px",
-      border: "none",
-      background: "transparent",
-      color: "var(--z-fg-muted)",
-      cursor: "pointer",
-      "--z-icon-color": "currentColor",
-      _hover: { color: "var(--z-fg-primary)" },
-      _focusVisible: {
-        outline: "2px solid var(--z-focus)",
-        outlineOffset: "1px",
-      },
-      _phone: { width: "44px", height: "44px", marginInlineEnd: "-4px" },
-    },
-    _phone: { height: "44px" },
   },
 });
 

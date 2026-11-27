@@ -92,15 +92,8 @@ export function EditUsernameModal(
         </Show>
       }
       description={
-        <Show
-          when={hadOldTag}
-          fallback={
-            <Trans>
-              Your username is yours alone, and friends use it to find you.
-              Enter your current password to confirm.
-            </Trans>
-          }
-        >
+        // only the move away from number tags needs saying
+        <Show when={hadOldTag}>
           <Trans>
             Usernames no longer have a number tag. Choose a username that will
             be yours alone; you can keep{" "}
@@ -142,7 +135,7 @@ export function EditUsernameModal(
             control={group.controls.username}
             label={t`Username`}
             error={usernameError()}
-            helper={t`2 to 32 characters. Capital and small letters count as the same name. You can change it twice a day.`}
+            helper={t`2 to 32 characters. You can change it twice a day.`}
           />
           <Form2.TextField
             name="currentPassword"

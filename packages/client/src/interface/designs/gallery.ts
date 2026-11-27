@@ -175,3 +175,83 @@ export function takenOff(wear: Wear): Wear {
     Object.keys(wear).map((key) => [key, undefined]),
   ) as Wear;
 }
+
+/** The places a style is seen in: a profile, a conversation, a member list */
+export type Place = "profile" | "chat" | "members";
+
+/**
+ * Where a design shows best, so the preview opens there: a nameplate in a
+ * member list, a frame, an effect or profile colours (and a whole look) on
+ * the profile, a decoration and a name style in a conversation
+ */
+export function placeOf(wear: Wear): Place {
+  // a piece and its file are one piece
+  const keys = [
+    ...new Set(Object.keys(wear).map((key) => key.replace(/_file$/, ""))),
+  ];
+  if (keys.length > 2) return "profile";
+  if (keys.includes("nameplate")) return "members";
+  if (
+    keys.includes("profile_frame") ||
+    keys.includes("effect") ||
+    keys.includes("theme")
+  )
+    return "profile";
+  return "chat";
+}
+
+/**
+ * Ready looks put together from the designs there are: each takes one of
+ * the team's looks (profile colours, a name font and colour) and dresses it
+ * with a decoration, a nameplate, a profile frame and an effect, each kind
+ * taken in turn from its list (most worn first), so no two looks are alike.
+ * A kind with nothing in it is simply left out.
+ */
+export function composeLooks(
+  bases: Wear[],
+  parts: {
+    decorations: Wear[];
+    nameplates: Wear[];
+    frames: Wear[];
+    effects: Wear[];
+  },
+  count: number,
+): Wear[] {
+  const kinds = [
+    parts.decorations,
+    parts.nameplates,
+    parts.frames,
+    parts.effects,
+  ];
+  // nothing to dress a look with: the team's looks already stand alone
+  if (!bases.length || !kinds.some((list) => list.length)) return [];
+  return Array.from({ length: count }, (_, i) => {
+    const look: Wear = { ...bases[i % bases.length] };
+    for (const list of kinds)
+      if (list.length) Object.assign(look, list[i % list.length]);
+    return look;
+  });
+}
+
+/**
+ * The same list again, with every entry that did not change kept as the very
+ * object it was: a list drawn by its objects (Solid's For) then redraws only
+ * what changed when the data comes in again, never the whole wall
+ * @param known what the last list held, by key; replaced with this one's
+ */
+export function keepSame<T extends { key: string }>(
+  known: Map<string, { sign: string; entry: T }>,
+  list: T[],
+): T[] {
+  const next = new Map<string, { sign: string; entry: T }>();
+  const kept = list.map((entry) => {
+    const sign = JSON.stringify(entry);
+    const before = known.get(entry.key);
+    const same = before && before.sign === sign ? before.entry : entry;
+    next.set(entry.key, { sign, entry: same });
+    return same;
+  });
+  known.clear();
+  for (const [key, value] of next) known.set(key, value);
+  return kept;
+}

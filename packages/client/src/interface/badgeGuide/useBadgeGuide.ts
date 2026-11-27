@@ -95,9 +95,9 @@ export function useBadgeGuide(): () => {
           {
             id: "verified_bot_developer",
             details: [
-              t`Servers of one owner count at most twice, and your own servers never count.`,
+              t`The team looks at the servers that count: your own never do, and one owner's count at most twice.`,
               t`A clear and accurate description, at least one working feature, a privacy policy if it handles user data, and permissions that fit what it does.`,
-              t`No malicious commands, token theft, deception or inflated installs. 25 servers only unlock the application; a review decides.`,
+              t`No malicious commands, token theft, deception or inflated installs. Any bot can apply, whatever its size; a review decides.`,
               t`After approval the bot shows a check in its Bot label. It ends if the bot changes hands, is suspended or is deleted.`,
             ],
           },

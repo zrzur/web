@@ -419,6 +419,17 @@ export function Messages(props: Props) {
 
   // We need to cache created objects to prevent needless re-rendering
   const objectCache = new Map();
+  /** Day names already formatted, by day and language */
+  const dayLabels = new Map<string, string>();
+  const dayLabel = (date: Date) => {
+    const key = `${dayjs().locale()}:${date.toDateString()}`;
+    let label = dayLabels.get(key);
+    if (!label) {
+      label = dayjs(date).format("LL");
+      dayLabels.set(key, label);
+    }
+    return label;
+  };
 
   // Determine which messages have a tail and add message dividers
   const messagesWithTail = createMemo<ListEntry[]>(() => {
@@ -524,10 +535,14 @@ export function Messages(props: Props) {
 
       // Add date to list, retrieve if it exists in the cache
       if (date) {
+        // the cache is keyed by the shown text: a lookup by the Date (a new
+        // object every time) always missed, and every divider row was made
+        // again on each new message
+        const label = dayLabel(date);
         messagesWithTail.push(
-          objectCache.get(date) ?? {
+          objectCache.get(label) ?? {
             t: 1,
-            date: dayjs(date).format("LL"),
+            date: label,
           },
         );
       }

@@ -3,6 +3,7 @@
   "Bulk": { "docs": "Several events in one packet. `v` holds them in order. Unpack it and handle each one.", "intent": "always" },
   "Error": { "docs": "The gateway refused you. `data.type` is an error type. After `InvalidSession` or `MissingIntent` the connection closes.", "intent": "always" },
   "Authenticated": { "docs": "The token was accepted. `Ready` follows.", "intent": "always" },
+  "ActivityRefused": { "docs": "A `SetActivity` was refused; `error` says why and `source` which activity. The connection goes on: do not send the same activity again.", "intent": "always" },
   "Ready": { "docs": "Your starting data. Events flow from here on. Fields you have no intent for are left out.", "intent": "always" },
   "Pong": { "docs": "The answer to your `Ping`, with the same `data`.", "intent": "always" },
   "Message": { "docs": "A new message. Without `MESSAGE_CONTENT` the text, embeds, files and components are removed, unless the bot wrote it, is mentioned, or it is a DM.", "intent": "SERVER_MESSAGES or DIRECT_MESSAGES" },

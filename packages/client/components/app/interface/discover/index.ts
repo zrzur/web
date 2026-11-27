@@ -4,7 +4,7 @@ export { ListingArt } from "./Art";
 export { hashId } from "./artPaths";
 export * from "./Cards";
 export * from "./categories";
-export { ListingDetail } from "./Detail";
+export { BotPage } from "./Detail";
 export { commandsIn, findLocal, mergeResults, once } from "./find";
 export { Hero } from "./Hero";
 export { isPaidListing, isPaidMark } from "./marks";

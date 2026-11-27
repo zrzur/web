@@ -66,13 +66,6 @@ export function ConnectedApps() {
         <Match when={apps()}>
           {(list) => (
             <>
-              <Note>
-                <Trans>
-                  Apps you allowed to use your account. Revoking one ends its
-                  access at once; bots it added stay in servers until their
-                  managers remove them.
-                </Trans>
-              </Note>
               <Show
                 when={list().length}
                 fallback={
@@ -82,7 +75,14 @@ export function ConnectedApps() {
                   </Empty>
                 }
               >
-                <SettingsSection>
+                <SettingsSection
+                  description={
+                    <Trans>
+                      Revoking an app ends its access at once. Bots it added
+                      stay in their servers.
+                    </Trans>
+                  }
+                >
                   <For each={list()}>
                     {(app) => <AppRow app={app} onRevoked={removed} />}
                   </For>
@@ -215,14 +215,6 @@ function AppRow(props: {
     />
   );
 }
-
-const Note = styled("p", {
-  base: {
-    margin: 0,
-    color: "var(--z-fg-muted)",
-    fontSize: "13px",
-  },
-});
 
 const Empty = styled("div", {
   base: {

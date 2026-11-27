@@ -72,12 +72,6 @@ export function Connections() {
 
   return (
     <Column gap="lg">
-      <Note>
-        <Trans>
-          Show accounts you have on other services on your profile. You choose
-          what shows, and you can hide or disconnect them at any time.
-        </Trans>
-      </Note>
       <Switch fallback={<CircularProgress />}>
         <Match when={failure()}>
           <Failure role="alert">
@@ -229,17 +223,14 @@ function SteamConnect(props: { available: boolean }) {
   return (
     <SettingsSection title={<Trans>Steam</Trans>}>
       <SettingsRow
-        icon={<Icon name="game-controller" size={24} />}
+        icon={<Icon name="game-controller" size={20} />}
         title={<Trans>Connect Steam</Trans>}
         description={
           <Show
             when={props.available}
             fallback={<Trans>Steam can't be linked on this server yet.</Trans>}
           >
-            <Trans>
-              Show your Steam name, games and achievements on your profile. You
-              sign in on Steam's own page. We never see your Steam password.
-            </Trans>
+            <Trans>Your Steam name, games and achievements.</Trans>
           </Show>
         }
         control={() => (
@@ -409,7 +400,7 @@ function SteamLinked(props: {
       }
     >
       <SettingsRow
-        icon={<Icon name="game-controller" size={24} />}
+        icon={<Icon name="game-controller" size={20} />}
         title={
           <Show
             when={props.account.display_name}
@@ -498,9 +489,8 @@ function SteamLinked(props: {
         <Show when={!props.account.shown}>
           <Note>
             <Trans>
-              This is a preview. Nothing shows on your profile until you switch
-              it on. Untick any game you want to keep to yourself; its pictures
-              and achievements are hidden with it.
+              A preview: nothing shows on your profile until you turn it on.
+              Untick any game you want to keep to yourself.
             </Trans>
           </Note>
         </Show>

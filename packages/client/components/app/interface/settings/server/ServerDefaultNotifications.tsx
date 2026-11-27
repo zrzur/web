@@ -58,9 +58,6 @@ export function ServerDefaultNotifications(props: { server: Server }) {
           },
         ]}
       />
-      <Text class="label" size="small">
-        <Trans>Each member can still choose their own setting.</Trans>
-      </Text>
       <Show when={error()}>
         <span role="alert">
           <Text size="small">{error()}</Text>

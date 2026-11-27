@@ -41,7 +41,7 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { CustomEmoji, UnicodeEmoji } from "@revolt/markdown/emoji";
-import { unicodeEmojiUrl } from "@revolt/markdown/emoji/UnicodeEmoji";
+import { setEmojiStyle } from "@revolt/markdown/emoji/emojiPacks";
 import {
   blankModel,
   markdownFromProseMirrorModel,
@@ -151,6 +151,12 @@ type MatchUser = User | ServerMember;
  */
 export function TextEditor(props: Props) {
   const applicationState = useState();
+  // emoji in the message box are drawn in the reader's style
+  createEffect(() =>
+    setEmojiStyle(
+      applicationState.settings.getValue("appearance:unicode_emoji"),
+    ),
+  );
 
   const proseMirror = document.createElement("div");
   proseMirror.style.width = "0px"; // initial width
@@ -456,15 +462,6 @@ export function TextEditor(props: Props) {
                       action.range.from,
                       schema.nodes.rfm_unicode_emoji.createAndFill({
                         id: match.codepoint,
-                        pack: applicationState.settings.getValue(
-                          "appearance:unicode_emoji",
-                        ),
-                        src: unicodeEmojiUrl(
-                          applicationState.settings.getValue(
-                            "appearance:unicode_emoji",
-                          ),
-                          match.codepoint,
-                        ),
                       })!,
                     );
                   } else {

@@ -611,6 +611,22 @@
   "MessagePollChoice": {
    "audience": "users",
    "docs": "Your own choice on a poll changed (people only: bots cannot vote)"
+  },
+  "PrivacyUpdate": {
+   "audience": "users",
+   "docs": "Your own privacy settings changed (from any of your sessions); only ever sent to the person themselves"
+  },
+  "CommunityItemCreate": {
+   "audience": "users"
+  },
+  "CommunityItemUpdate": {
+   "audience": "users"
+  },
+  "CommunityItemDelete": {
+   "audience": "users"
+  },
+  "CommunityItemPopularity": {
+   "audience": "users"
   }
  }
 }

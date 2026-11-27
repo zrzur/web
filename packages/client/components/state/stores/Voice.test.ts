@@ -135,10 +135,25 @@ describe("Voice store: high quality audio", () => {
 });
 
 describe("Voice store: screen share quality", () => {
-  it("starts new users at 720p 30 FPS for text and slides", () => {
+  it("starts everyone at 720p 30 FPS, smooth", () => {
     const data = store().default();
     expect(data.screenShareQuality).toBe("720p30");
-    expect(data.screenShareContent).toBe("detail");
+    expect(data.screenShareContent).toBe("motion");
+    expect(data.noiseStrength).toBe("standard");
+  });
+
+  it("turns the preselected 'text and slides' into smooth, keeps a real choice", () => {
+    // saved with every share while it was preselected: not a choice
+    expect(
+      store().clean({ screenShareContent: "detail" } as never),
+    ).toMatchObject({ screenShareContent: "motion" });
+    // chosen after the fix: kept
+    expect(
+      store().clean({
+        screenShareContent: "detail",
+        screenShareContentChosen: true,
+      } as never),
+    ).toMatchObject({ screenShareContent: "detail" });
   });
 
   it("moves qualities saved before the split to a size and a content", () => {
@@ -164,6 +179,7 @@ describe("Voice store: screen share quality", () => {
       store().clean({
         screenShareQuality: "1080p60",
         screenShareContent: "motion",
+        screenShareContentChosen: true,
       }),
     ).toMatchObject({
       screenShareQuality: "1080p60",
@@ -176,7 +192,7 @@ describe("Voice store: screen share quality", () => {
       } as never),
     ).toMatchObject({
       screenShareQuality: "720p30",
-      screenShareContent: "detail",
+      screenShareContent: "motion",
     });
   });
 });

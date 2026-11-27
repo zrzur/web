@@ -7,6 +7,7 @@ import {
   Show,
   Suspense,
   Switch,
+  createEffect,
   createSignal,
   onCleanup,
   onMount,
@@ -192,6 +193,23 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
       shift(() => ({ padding: framePadding(room()), crossAxis: true })),
     ],
     whileElementsMounted: autoUpdate,
+  });
+
+  // The frame's room is known only once the card has a width (FramedCard
+  // measures it after it is drawn), and the frame changes nothing of the
+  // card's own size, so nothing placed it again: a card near the bottom
+  // kept its spot and its frame reached past the window, over the message
+  // box. Place it again whenever the room it needs is set or changes.
+  createEffect(() => {
+    const box = floating();
+    if (!box || typeof MutationObserver === "undefined") return;
+    const observer = new MutationObserver(() => position.update());
+    observer.observe(box, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["data-frame-room"],
+    });
+    onCleanup(() => observer.disconnect());
   });
 
   /**

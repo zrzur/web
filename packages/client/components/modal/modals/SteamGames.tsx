@@ -11,13 +11,14 @@ import {
   FloatingSelect,
   MenuItem,
 } from "@revolt/ui";
-import { SteamTile } from "@revolt/ui/components/features/profiles/SteamTile";
 import { cutLine } from "@revolt/ui/components/features/profiles/cutLine";
 import {
   formatDay,
   steamProfileUrl,
   steamStoreUrl,
 } from "@revolt/ui/components/features/profiles/linkedGames";
+import { SteamTile } from "@revolt/ui/components/features/profiles/SteamTile";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useModals } from "..";
 import { Modals } from "../types";
@@ -64,7 +65,9 @@ export function SteamGamesModal(
     >
       <Body>
         <Head>
-          <SteamTile name={props.games.display_name} size={48} round />
+          <Avatar aria-hidden="true">
+            <SteamTile name={props.games.display_name} size={48} round />
+          </Avatar>
           <HeadText>
             <Name class={cutLine()} dir="auto">
               {props.games.display_name}
@@ -99,7 +102,7 @@ export function SteamGamesModal(
             </Heading>
             <Grid>
               <For each={props.games.games}>
-                {(item) => (
+                {(item, index) => (
                   <li>
                     <Card
                       type="button"
@@ -109,7 +112,19 @@ export function SteamGamesModal(
                         if (url) openLink(url);
                       }}
                     >
-                      <SteamTile url={item.header_url} name={item.name} wide />
+                      <Art>
+                        <SteamTile
+                          url={item.header_url}
+                          icon={item.icon_url}
+                          name={item.name}
+                          wide
+                        />
+                        <Show when={index() < 3}>
+                          <Rank data-rank={index() + 1} aria-hidden="true">
+                            {index() + 1}
+                          </Rank>
+                        </Show>
+                      </Art>
                       <CardText>
                         <CardName class={cutLine()} dir="auto" lang="en">
                           {item.name}
@@ -129,7 +144,10 @@ export function SteamGamesModal(
                               {t`${number(item.achievements_unlocked ?? 0)} of ${number(item.achievements_total ?? 0)} achievements`}
                             </Show>
                           </span>
-                          <span>{t`${number(item.hours)} h`}</span>
+                          <Hours>
+                            <Icon name="clock" size={13} />
+                            {t`${number(item.hours)} h`}
+                          </Hours>
                         </Facts2>
                       </CardText>
                     </Card>
@@ -207,6 +225,60 @@ export function SteamGamesModal(
     </Dialog>
   );
 }
+
+/** the account's letter on Steam's own deep blue */
+const Avatar = styled("span", {
+  base: {
+    display: "inline-flex",
+    borderRadius: "var(--z-radius-pill)",
+    boxShadow: "0 0 0 2px color-mix(in srgb, #66c0f4 45%, transparent)",
+    "& > span": {
+      background: "linear-gradient(135deg, #1b2838, #2a475e) !important",
+      color: "#c7d5e0 !important",
+    },
+  },
+});
+
+/** the game's picture, with its place among the most played on top */
+const Art = styled("span", {
+  base: {
+    position: "relative",
+    display: "block",
+    "& > span[data-wide]": { display: "flex" },
+  },
+});
+
+const Rank = styled("span", {
+  base: {
+    position: "absolute",
+    insetBlockStart: "8px",
+    insetInlineStart: "8px",
+    display: "grid",
+    placeItems: "center",
+    minWidth: "24px",
+    height: "24px",
+    paddingInline: "6px",
+    borderRadius: "var(--z-radius-pill)",
+    fontSize: "12px",
+    fontWeight: 700,
+    fontVariantNumeric: "tabular-nums",
+    color: "#1a1206",
+    background: "#e9c46a",
+    boxShadow: "0 2px 8px rgb(0 0 0 / 0.4)",
+    "&[data-rank='2']": { background: "#d6dbe4" },
+    "&[data-rank='3']": { background: "#d99a6c" },
+  },
+});
+
+const Hours = styled("span", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px",
+    color: "var(--z-fg-secondary)",
+    "--z-icon-color": "currentColor",
+  },
+});
 
 const Body = styled("div", {
   base: {

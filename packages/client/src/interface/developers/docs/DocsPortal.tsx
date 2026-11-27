@@ -13,7 +13,7 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useLocation, useNavigate } from "@revolt/routing";
-import { Icon } from "@revolt/ui/icons/Icon";
+import { type IconName, Icon } from "@revolt/ui/icons/Icon";
 
 import { loadExamplesFor } from "./examples";
 import { hrefHere, leavesHere } from "./here";
@@ -25,7 +25,7 @@ import {
   pageOfSection,
   partsForMarkdown,
 } from "./inventory";
-import { Markdown } from "./Markdown";
+import { Markdown, NEXT } from "./Markdown";
 import { headingsOf } from "./markdownTree";
 import {
   type PageGroup,
@@ -137,14 +137,14 @@ export function DocsPortal(props: {
     "bots-in-dms": t`Bots in direct messages`,
     "http-interactions": t`Interactions over HTTP`,
     messages: t`Messages`,
-    channels: t`Channels and webhooks`,
+    channels: t`Channels`,
     webhooks: t`Webhooks`,
     servers: t`Servers`,
     users: t`Users and members`,
     roles: t`Roles and permissions`,
     moderation: t`Moderation`,
     files: t`Files`,
-    voice: t`Voice calls`,
+    voice: t`Voice`,
     oauth2: t`OAuth2`,
     errors: t`Errors`,
     "rate-limits": t`Rate limits`,
@@ -157,8 +157,8 @@ export function DocsPortal(props: {
     "tutorial-moderation": t`Moderation bot`,
     "tutorial-welcome": t`Welcome messages`,
     "tutorial-games": t`Games with buttons`,
-    "rich-presence": t`Rich presence for games`,
-    "tutorial-multi-server": t`Many servers`,
+    "rich-presence": t`Rich presence for games and apps`,
+    "tutorial-multi-server": t`One bot, many servers`,
     "tutorial-upload": t`File upload`,
     "tutorial-voice": t`Voice bot`,
     "tutorial-deploy": t`Deployment`,
@@ -168,12 +168,64 @@ export function DocsPortal(props: {
     changelog: t`API changelog`,
   });
 
-  const groups = (): { id: PageGroup; label: string }[] => [
-    { id: "start", label: t`Start here` },
-    { id: "guides", label: t`Guides and reference` },
-    { id: "tutorials", label: t`Tutorials` },
-    { id: "resources", label: t`Resources` },
+  const groups = (): { id: PageGroup; label: string; icon: IconName }[] => [
+    { id: "start", label: t`Start here`, icon: "rocket-launch" },
+    { id: "concepts", label: t`Core concepts`, icon: "books" },
+    {
+      id: "interactions",
+      label: t`Commands and interactions`,
+      icon: "terminal",
+    },
+    { id: "resources", label: t`Working with the API`, icon: "code" },
+    { id: "going-live", label: t`Going live`, icon: "shield-check" },
+    { id: "tutorials", label: t`Tutorials`, icon: "graduation-cap" },
+    { id: "reference", label: t`Reference`, icon: "notebook" },
   ];
+
+  const groupOf = (id: PageGroup) => groups().find((g) => g.id === id);
+
+  // Sections folded away by the reader, remembered on this device; the
+  // section of the open page always shows its pages
+  const FOLDED_KEY = "zrzur:docs-folded";
+  const [folded, setFolded] = createSignal<string[]>(
+    (() => {
+      try {
+        const saved = JSON.parse(localStorage.getItem(FOLDED_KEY) ?? "[]");
+        return Array.isArray(saved) ? saved : [];
+      } catch {
+        return [];
+      }
+    })(),
+  );
+  const isOpen = (id: PageGroup) =>
+    page()?.group === id || !folded().includes(id);
+  const toggleGroup = (id: PageGroup) => {
+    const next = isOpen(id)
+      ? [...folded().filter((g) => g !== id), id]
+      : folded().filter((g) => g !== id);
+    setFolded(next);
+    try {
+      localStorage.setItem(FOLDED_KEY, JSON.stringify(next));
+    } catch {
+      // stays as it is for this visit
+    }
+  };
+
+  // "/" jumps to the search, as on other documentation sites
+  const onSlash = (event: KeyboardEvent) => {
+    if (event.key !== "/" || event.ctrlKey || event.metaKey || event.altKey)
+      return;
+    const target = event.target as HTMLElement | null;
+    if (
+      target?.closest("input, textarea, [contenteditable='true']") ||
+      document.querySelector("[role=dialog][aria-modal=true]")
+    )
+      return;
+    event.preventDefault();
+    document.getElementById("docs-search")?.focus();
+  };
+  document.addEventListener("keydown", onSlash);
+  onCleanup(() => document.removeEventListener("keydown", onSlash));
 
   /** Pages, page sections, endpoints and events */
   const index = createMemo<SearchEntry[]>(() => {
@@ -259,6 +311,53 @@ export function DocsPortal(props: {
     const source = shown()?.source;
     return source ? headingsOf(source) : [];
   });
+  // the section being read, marked in "On this page" as the page scrolls
+  const [reading, setReading] = createSignal<string>();
+  createEffect(
+    on(
+      () => shown()?.id,
+      (id) => {
+        setReading(undefined);
+        const scroller = main;
+        if (!id || !scroller) return;
+        // the section being read is the last one whose title has passed
+        // the top quarter of the text, also after a long jump
+        let frame = 0;
+        const measure = () => {
+          frame = 0;
+          const top = scroller.getBoundingClientRect().top;
+          const line = top + scroller.clientHeight / 4;
+          let current: string | undefined;
+          for (const heading of scroller.querySelectorAll<HTMLElement>(
+            "article h2[id]",
+          )) {
+            if (heading.getBoundingClientRect().top > line) break;
+            current = heading.id;
+          }
+          // at the very end, the last section, however short
+          if (
+            scroller.scrollTop + scroller.clientHeight >=
+            scroller.scrollHeight - 2
+          )
+            current =
+              [...scroller.querySelectorAll<HTMLElement>("article h2[id]")].at(
+                -1,
+              )?.id ?? current;
+          setReading(current);
+        };
+        const onScroll = () => {
+          if (!frame) frame = requestAnimationFrame(measure);
+        };
+        scroller.addEventListener("scroll", onScroll, { passive: true });
+        frame = requestAnimationFrame(measure);
+        onCleanup(() => {
+          cancelAnimationFrame(frame);
+          scroller.removeEventListener("scroll", onScroll);
+        });
+      },
+    ),
+  );
+
   const neighbours = createMemo(() => {
     const at = PAGES.findIndex((p) => p.id === page()?.id);
     return {
@@ -320,22 +419,21 @@ export function DocsPortal(props: {
         data-open={menuOpen() ? "" : undefined}
         aria-label={t`Documentation`}
       >
-        <NavGroup>
-          <ul>
-            <li>
-              <a {...link("/developers")}>
-                <Trans>My applications</Trans>
-              </a>
-            </li>
-          </ul>
-        </NavGroup>
+        {/* back to the portal, apart from the pages */}
+        <PortalLink {...link("/developers")}>
+          <Icon name="squares-four" size={16} />
+          <span class="label">
+            <Trans>My applications</Trans>
+          </span>
+          <Icon name="arrow-right" size={14} class="go" />
+        </PortalLink>
         <Search role="search">
           <Icon name="magnifying-glass" size={16} aria-hidden="true" />
           <input
             id="docs-search"
             aria-label={t`Search the documentation`}
             type="search"
-            placeholder={t`Search pages, endpoints, events`}
+            placeholder={t`Search the docs`}
             value={query()}
             autocomplete="off"
             aria-controls="docs-search-results"
@@ -349,6 +447,9 @@ export function DocsPortal(props: {
               if (event.key === "Escape") setQuery("");
             }}
           />
+          <Show when={!query()}>
+            <Kbd aria-hidden="true">/</Kbd>
+          </Show>
         </Search>
         <Show
           when={query().trim()}
@@ -356,8 +457,18 @@ export function DocsPortal(props: {
             <For each={groups()}>
               {(group) => (
                 <NavGroup>
-                  <h2>{group.label}</h2>
-                  <ul>
+                  <h2>
+                    <button
+                      type="button"
+                      aria-expanded={isOpen(group.id)}
+                      onClick={() => toggleGroup(group.id)}
+                    >
+                      <Icon name={group.icon} size={16} />
+                      <span class="label">{group.label}</span>
+                      <Icon name="caret-down" size={12} class="fold" />
+                    </button>
+                  </h2>
+                  <ul hidden={!isOpen(group.id)}>
                     <For each={PAGES.filter((p) => p.group === group.id)}>
                       {(p) => (
                         <li>
@@ -455,37 +566,62 @@ export function DocsPortal(props: {
                 {(source) => (
                   <>
                     <Article>
+                      {/* which section of the docs this page belongs to */}
+                      <Show when={groupOf(current().group)}>
+                        {(group) => (
+                          <Eyebrow>
+                            <Icon name={group().icon} size={14} />
+                            {group().label}
+                          </Eyebrow>
+                        )}
+                      </Show>
                       <Markdown source={source()} onNavigate={go} />
-                      <Footer>
-                        <Trans>
-                          Reference generated from backend{" "}
-                          {inventory.generated.backend} and OpenAPI{" "}
-                          {inventory.generated.openapi}. Descriptions that come
-                          from the API stay in English.
-                        </Trans>
-                      </Footer>
+                      {/* only where the page shows generated reference */}
+                      <Show when={partsForMarkdown(source()).length}>
+                        <Footer>
+                          <Trans>
+                            Reference generated from backend{" "}
+                            {inventory.generated.backend} and OpenAPI{" "}
+                            {inventory.generated.openapi}. Descriptions that
+                            come from the API stay in English.
+                          </Trans>
+                        </Footer>
+                      </Show>
                     </Article>
-                    <Pager aria-label={t`More pages`}>
-                      <Show when={neighbours().previous} fallback={<span />}>
-                        {(p) => (
-                          <a {...link(`/developers/docs/${p().id}`)}>
-                            <small>{t`Previous`}</small>
-                            <span>{titles()[p().id]}</span>
-                          </a>
-                        )}
-                      </Show>
-                      <Show when={neighbours().next}>
-                        {(p) => (
-                          <a
-                            {...link(`/developers/docs/${p().id}`)}
-                            data-next=""
-                          >
-                            <small>{t`Next`}</small>
-                            <span>{titles()[p().id]}</span>
-                          </a>
-                        )}
-                      </Show>
-                    </Pager>
+                    {/* a page that names what to read next needs no pager */}
+                    <Show when={!sections().some((h) => h.id === NEXT)}>
+                      <Pager aria-label={t`More pages`}>
+                        <Show when={neighbours().previous} fallback={<span />}>
+                          {(p) => (
+                            <a {...link(`/developers/docs/${p().id}`)}>
+                              <Icon name="arrow-left" size={16} class="arrow" />
+                              <span class="words">
+                                <small>{t`Previous`}</small>
+                                <span>{titles()[p().id]}</span>
+                              </span>
+                            </a>
+                          )}
+                        </Show>
+                        <Show when={neighbours().next}>
+                          {(p) => (
+                            <a
+                              {...link(`/developers/docs/${p().id}`)}
+                              data-next=""
+                            >
+                              <span class="words">
+                                <small>{t`Next`}</small>
+                                <span>{titles()[p().id]}</span>
+                              </span>
+                              <Icon
+                                name="arrow-right"
+                                size={16}
+                                class="arrow"
+                              />
+                            </a>
+                          )}
+                        </Show>
+                      </Pager>
+                    </Show>
                   </>
                 )}
               </Show>
@@ -494,7 +630,9 @@ export function DocsPortal(props: {
         </Show>
         {props.footer}
       </Content>
-      <Show when={props.site && sections().length > 1}>
+      {/* in the app too, as on the site: a long page is read by its
+          sections (owner, 2026-11-27) */}
+      <Show when={sections().length > 1}>
         <OnThisPage aria-label={t`On this page`}>
           <h2>{t`On this page`}</h2>
           <ul>
@@ -503,6 +641,9 @@ export function DocsPortal(props: {
                 <li>
                   <a
                     {...link(`/developers/docs/${page()?.id}#${section.id}`)}
+                    aria-current={
+                      reading() === section.id ? "location" : undefined
+                    }
                     dir="auto"
                   >
                     {section.text}
@@ -533,7 +674,7 @@ const Sidebar = styled("nav", {
     flexShrink: 0,
     display: "flex",
     flexDirection: "column",
-    gap: "16px",
+    gap: "12px",
     padding: "16px 8px",
     // the last links scroll clear of the floating account card
     paddingBlockEnd: "calc(var(--z-account-bar-height, 60px) + 32px)",
@@ -584,28 +725,105 @@ const Search = styled("div", {
   },
 });
 
+/** The way back to My applications, above the pages */
+const PortalLink = styled("a", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    marginInline: "8px",
+    minHeight: "38px",
+    paddingInline: "12px",
+    borderRadius: "var(--z-radius-md, 8px)",
+    border: "1px solid var(--z-border-subtle)",
+    background: "var(--z-box-bg)",
+    color: "var(--z-fg-primary)",
+    fontSize: "14px",
+    fontWeight: 600,
+    textDecoration: "none",
+    "--z-icon-color": "var(--z-fg-secondary)",
+    "& .label": { flex: 1, minWidth: 0 },
+    "& .go": { opacity: 0.6 },
+    _hover: { background: "var(--z-nav-hover)" },
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
+    _phone: { minHeight: "44px" },
+  },
+});
+
+/** The key that opens the search */
+const Kbd = styled("kbd", {
+  base: {
+    display: "grid",
+    placeItems: "center",
+    minWidth: "20px",
+    height: "20px",
+    paddingInline: "5px",
+    borderRadius: "5px",
+    border: "1px solid var(--z-border-subtle)",
+    color: "var(--z-fg-muted)",
+    fontFamily: "inherit",
+    fontSize: "12px",
+    lineHeight: 1,
+    _phone: { display: "none" },
+  },
+});
+
+/** One section: its name folds it; its pages hang from a guide line */
 const NavGroup = styled("div", {
   base: {
-    "& h2": {
-      margin: 0,
-      padding: "0 12px 4px",
-      fontSize: "12px",
+    "& h2": { margin: 0 },
+    "& h2 button": {
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
+      width: "100%",
+      minHeight: "32px",
+      padding: "0 12px",
+      border: "none",
+      borderRadius: "var(--z-radius-sm, 6px)",
+      background: "transparent",
+      color: "var(--z-fg-primary)",
+      font: "inherit",
+      fontSize: "13px",
       fontWeight: 700,
-      color: "var(--z-fg-muted)",
+      textAlign: "start",
+      cursor: "pointer",
+      "--z-icon-color": "var(--z-accent)",
+      "& .label": { flex: 1, minWidth: 0 },
+      "& .fold": {
+        "--z-icon-color": "var(--z-fg-muted)",
+        transition: "transform var(--z-motion-fast, 120ms) ease",
+      },
+      "&[aria-expanded='false'] .fold": { transform: "rotate(-90deg)" },
+      _rtl: {
+        "&[aria-expanded='false'] .fold": { transform: "rotate(90deg)" },
+      },
+      _hover: { background: "var(--z-nav-hover)" },
+      _focusVisible: {
+        outline: "2px solid var(--z-focus)",
+        outlineOffset: "-2px",
+      },
+      _phone: { minHeight: "44px" },
     },
     "& ul": {
       listStyle: "none",
-      margin: 0,
+      margin: "2px 0 0",
+      // under the section's icon: one guide line for its pages
+      marginInlineStart: "19px",
       padding: 0,
+      paddingInlineStart: "8px",
+      borderInlineStart: "1px solid var(--z-border-subtle)",
       display: "flex",
       flexDirection: "column",
-      gap: "2px",
+      gap: "1px",
     },
+    "& ul[hidden]": { display: "none" },
     "& a": {
+      position: "relative",
       display: "flex",
       alignItems: "center",
-      minHeight: "32px",
-      padding: "0 12px",
+      minHeight: "30px",
+      padding: "0 10px",
       borderRadius: "var(--z-radius-sm, 6px)",
       color: "var(--z-fg-secondary)",
       textDecoration: "none",
@@ -618,10 +836,20 @@ const NavGroup = styled("div", {
         outline: "2px solid var(--z-focus)",
         outlineOffset: "-2px",
       },
+      // the open page: filled, with the accent on the guide line
       "&[aria-current=page]": {
         background: "var(--z-nav-selected)",
         color: "var(--z-fg-primary)",
         fontWeight: 600,
+      },
+      "&[aria-current=page]::before": {
+        content: '""',
+        position: "absolute",
+        insetInlineStart: "-9px",
+        insetBlock: "6px",
+        width: "2px",
+        borderRadius: "2px",
+        background: "var(--z-accent)",
       },
       _phone: { minHeight: "44px" },
     },
@@ -691,40 +919,110 @@ const MenuButton = styled("button", {
 
 const Article = styled("article", {
   base: {
-    maxWidth: "880px",
+    maxWidth: "800px",
     marginInline: "auto",
+    paddingBlockStart: "8px",
     color: "var(--z-fg-primary)",
-    lineHeight: 1.6,
-    fontSize: "15px",
+    lineHeight: 1.7,
+    fontSize: "16px",
+    _phone: { fontSize: "15px", paddingBlockStart: 0 },
     "& h1": {
       fontSize: "28px",
       fontWeight: 700,
-      margin: "0 0 16px",
+      margin: "0 0 12px",
       lineHeight: 1.25,
+      letterSpacing: "-0.01em",
+    },
+    // the first lines under the title say what the page is for
+    "& h1 + p": {
+      fontSize: "18px",
+      lineHeight: 1.6,
+      marginBlockEnd: "20px",
+      _phone: { fontSize: "16px" },
     },
     "& h2": {
-      fontSize: "20px",
+      fontSize: "22px",
       fontWeight: 650,
-      margin: "32px 0 12px",
+      lineHeight: 1.3,
+      margin: "48px 0 12px",
+      scrollMarginTop: "16px",
+      _phone: { fontSize: "20px", marginBlockStart: "40px" },
+    },
+    "& h3": {
+      fontSize: "18px",
+      fontWeight: 650,
+      lineHeight: 1.35,
+      margin: "32px 0 8px",
       scrollMarginTop: "16px",
     },
-    "& h3": { fontSize: "16px", fontWeight: 650, margin: "24px 0 8px" },
-    "& p": { margin: "0 0 12px", color: "var(--z-fg-secondary)" },
-    // the app's reset takes list markers away; steps and lists need them
+    // the "#" of a section shows where the pointer or the keys are
+    "& .anchor": {
+      marginInlineStart: "8px",
+      paddingInline: "4px",
+      color: "var(--z-fg-muted) !important",
+      textDecoration: "none !important",
+      fontWeight: 400,
+      opacity: 0,
+      transition: "opacity var(--z-motion-fast, 120ms) ease",
+      _focusVisible: { opacity: 1 },
+      _hover: { color: "var(--z-accent) !important" },
+    },
+    "& h2:hover .anchor": { opacity: 1 },
+    "& h3:hover .anchor": { opacity: 1 },
+    "& p": { margin: "0 0 16px", color: "var(--z-fg-secondary)" },
+    "& strong": { color: "var(--z-fg-primary)", fontWeight: 600 },
+    // the app's reset takes list markers away; lists need them
     "& ul": {
-      margin: "0 0 12px",
+      margin: "0 0 16px",
       paddingInlineStart: "24px",
       color: "var(--z-fg-secondary)",
       listStyle: "disc",
     },
-    "& ol": {
-      margin: "0 0 12px",
-      paddingInlineStart: "24px",
-      color: "var(--z-fg-secondary)",
-      listStyle: "decimal",
-    },
     "& li::marker": { color: "var(--z-fg-muted)" },
-    "& li": { marginBlockEnd: "4px" },
+    "& li": { marginBlockEnd: "6px" },
+    // numbered lists are steps: a numbered dot each, joined by a line
+    "& ol": {
+      margin: "0 0 16px",
+      padding: 0,
+      listStyle: "none",
+      counterReset: "step",
+      color: "var(--z-fg-secondary)",
+    },
+    "& ol > li": {
+      position: "relative",
+      counterIncrement: "step",
+      paddingInlineStart: "40px",
+      paddingBlockEnd: "10px",
+      marginBlockEnd: 0,
+      minHeight: "28px",
+    },
+    "& ol > li::before": {
+      content: "counter(step)",
+      position: "absolute",
+      insetInlineStart: 0,
+      top: "1px",
+      width: "26px",
+      height: "26px",
+      display: "grid",
+      placeItems: "center",
+      borderRadius: "50%",
+      border: "1px solid var(--z-border-subtle)",
+      background: "var(--z-box-bg)",
+      color: "var(--z-fg-primary)",
+      fontSize: "13px",
+      fontWeight: 600,
+      lineHeight: 1,
+      fontVariantNumeric: "tabular-nums",
+    },
+    "& ol > li:not(:last-child)::after": {
+      content: '""',
+      position: "absolute",
+      insetInlineStart: "12.5px",
+      top: "31px",
+      bottom: "1px",
+      width: "1px",
+      background: "var(--z-border-subtle)",
+    },
     "& a": {
       color: "var(--z-link)",
       textDecoration: "underline",
@@ -749,14 +1047,28 @@ const Article = styled("article", {
       color: "var(--z-fg-primary)",
       overflowWrap: "anywhere",
     },
-    "& figure": { marginBlockEnd: "16px" },
-    "& aside": { marginBlockEnd: "16px" },
-    "& > div": { marginBlockEnd: "16px" },
+    "& figure": { marginBlockEnd: "20px" },
+    "& aside": { marginBlockEnd: "20px" },
+    "& > div": { marginBlockEnd: "20px" },
     "& hr": {
       border: "none",
       borderBlockStart: "1px solid var(--z-border-subtle)",
       margin: "24px 0",
     },
+  },
+});
+
+/** The section of the docs a page is in, above its title */
+const Eyebrow = styled("p", {
+  base: {
+    display: "flex !important",
+    alignItems: "center",
+    gap: "6px",
+    margin: "0 0 8px !important",
+    fontSize: "13px",
+    fontWeight: 600,
+    color: "var(--z-accent-text, var(--z-accent)) !important",
+    "--z-icon-color": "currentColor",
   },
 });
 
@@ -766,15 +1078,29 @@ const Pager = styled("nav", {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     gap: "12px",
-    maxWidth: "880px",
+    maxWidth: "800px",
     marginInline: "auto",
-    marginBlockStart: "32px",
-    "& a": {
+    marginBlockStart: "48px",
+    paddingBlockStart: "24px",
+    borderBlockStart: "1px solid var(--z-border-subtle)",
+    _phone: { gridTemplateColumns: "1fr" },
+    "& .words": {
+      flex: 1,
+      minWidth: 0,
       display: "flex",
       flexDirection: "column",
       gap: "2px",
+    },
+    "& .arrow": {
+      flexShrink: 0,
+      "--z-icon-color": "var(--z-fg-muted)",
+    },
+    "& a:hover .arrow": { "--z-icon-color": "var(--z-accent)" },
+    "& a": {
+      display: "flex",
+      alignItems: "center",
+      gap: "12px",
       minHeight: "64px",
-      justifyContent: "center",
       padding: "12px 16px",
       borderRadius: "var(--z-radius-md, 10px)",
       border: "1px solid var(--z-border-subtle)",
@@ -788,7 +1114,11 @@ const Pager = styled("nav", {
         background: "var(--z-nav-hover)",
       },
     },
-    "& a[data-next]": { textAlign: "end", gridColumn: 2 },
+    "& a[data-next]": {
+      textAlign: "end",
+      gridColumn: 2,
+      _phone: { gridColumn: 1 },
+    },
     "& small": {
       fontSize: "12px",
       fontWeight: 400,
@@ -834,6 +1164,13 @@ const OnThisPage = styled("nav", {
       _focusVisible: {
         outline: "2px solid var(--z-focus)",
         outlineOffset: "-2px",
+      },
+      // the section being read: the accent line beside it
+      "&[aria-current]": {
+        color: "var(--z-fg-primary)",
+        fontWeight: 600,
+        boxShadow: "inset 2px 0 0 var(--z-accent)",
+        _rtl: { boxShadow: "inset -2px 0 0 var(--z-accent)" },
       },
     },
   },

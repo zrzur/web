@@ -299,15 +299,7 @@ export function AnimationSettings() {
   };
 
   return (
-    <SettingsSection
-      title={<Trans>Animations</Trans>}
-      description={
-        <Trans>
-          Choose how each part of Zrzur moves. The preview shows every change
-          right away.
-        </Trans>
-      }
-    >
+    <SettingsSection title={<Trans>Animations</Trans>}>
       <SettingsRow
         icon={<Icon name="sparkle" size={20} />}
         title={<Trans>Use animations</Trans>}

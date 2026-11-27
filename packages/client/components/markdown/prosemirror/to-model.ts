@@ -1,10 +1,10 @@
+import { Client } from "@zrzur/sdk/solid";
 import { Dayjs } from "dayjs";
 import { Root, RootContent } from "mdast";
 import { Mark, Node } from "prosemirror-model";
-import { Client } from "@zrzur/sdk/solid";
 
 import { UNIFIED_PLUGINS, unifiedPipeline } from "..";
-import { UnicodeEmojiPacks, unicodeEmojiUrl } from "../emoji/UnicodeEmoji";
+import { UnicodeEmojiPacks } from "../emoji/UnicodeEmoji";
 
 import { schema } from "./schema";
 
@@ -152,8 +152,6 @@ function map(
     case "unicodeEmoji":
       return schema.nodes.rfm_unicode_emoji.createAndFill({
         id: node.str,
-        pack: node.pack,
-        src: unicodeEmojiUrl(node.pack, node.str),
       })!;
     case "timestamp":
       return schema.text(`<t:${node.date.unix()}:${node.format}>`);

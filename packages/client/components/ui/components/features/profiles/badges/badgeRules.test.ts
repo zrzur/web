@@ -75,8 +75,8 @@ const RULES: { badge: string; text: string; numbers: string[] }[] = [
   },
   {
     badge: "verified_bot_developer",
-    text: "By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership.",
-    numbers: ["25", "30"],
+    text: "By application, reviewed by the Zrzur team: open to every bot, whatever its size; the team looks at its servers, its age and what it does.",
+    numbers: [],
   },
   {
     badge: "content_creator",
@@ -135,6 +135,9 @@ describe("badge rules in the app", () => {
   });
 
   it("no longer says the old rules", () => {
+    // any bot can ask for verification (owner, 2026-11-27)
+    expect(source).not.toContain("25 legitimate servers");
+    expect(source).not.toContain("25 servers only unlock");
     expect(source).not.toContain("Own a verified server.");
     expect(source).not.toContain("Own a verified bot.");
     expect(source).not.toContain("Apply as a partner");

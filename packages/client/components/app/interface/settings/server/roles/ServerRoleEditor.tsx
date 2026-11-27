@@ -1,8 +1,8 @@
 import { For, Show, createMemo } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import { createFormControl, createFormGroup } from "solid-forms";
 import { API, Server, ServerRole } from "@zrzur/sdk/solid";
+import { createFormControl, createFormGroup } from "solid-forms";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
@@ -236,6 +236,7 @@ export function ServerRoleEditor(props: { context: Server; roleId: string }) {
                     control={editGroup.controls.icon}
                     accept="image/*"
                     label={t`Change role icon`}
+                    removeCorner
                     removeLabel={t`Remove role icon`}
                     imageJustify={false}
                     imageHeight={56}

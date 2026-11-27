@@ -729,7 +729,15 @@ export default class ClientController {
    * Login given a set of credentials
    * @param credentials Credentials
    */
-  async login(credentials: API.DataLogin, modals: ModalControllerExtended) {
+  async login(
+    credentials: API.DataLogin,
+    modals: ModalControllerExtended,
+    /** The sign-in card asks for the code itself, in its own place */
+    askCode?: (
+      methods: API.MFAMethod[],
+      submit: (response: API.MFAResponse) => Promise<MfaLoginOutcome>,
+    ) => Promise<MfaLoginOutcome | undefined>,
+  ) {
     const browser = detect();
 
     // Generate a friendly name for this browser
@@ -778,16 +786,17 @@ export default class ClientController {
       );
 
       const allowed_methods = session.allowed_methods;
-      const outcome: MfaLoginOutcome | undefined = await new Promise(
-        (callback) =>
-          modals.openModal({
-            type: "mfa_flow",
-            state: "login",
-            available_methods: allowed_methods,
-            submit: (response) => step.answer(response),
-            callback,
-          }),
-      );
+      const outcome: MfaLoginOutcome | undefined = askCode
+        ? await askCode(allowed_methods, (response) => step.answer(response))
+        : await new Promise((callback) =>
+            modals.openModal({
+              type: "mfa_flow",
+              state: "login",
+              available_methods: allowed_methods,
+              submit: (response) => step.answer(response),
+              callback,
+            }),
+          );
 
       if (!outcome) throw "Cancelled";
       // back to the password form, which shows why

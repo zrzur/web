@@ -34123,3 +34123,586 @@ msgstr "{0} sent, {1} failed"
 #: components/app/interface/settings/user/profile/studio/StudioPack.tsx
 msgid "Your name and avatar on your designs at designs.zrzur.com, with a page of all your work. Your #tag never shows."
 msgstr "Your name and avatar on your designs at designs.zrzur.com, with a page of all your work. Your #tag never shows."
+
+#: components/app/interface/settings/user
+msgid "A copy of your data"
+msgstr "A copy of your data"
+
+#: components/app/interface/settings/user
+msgid "Not linked"
+msgstr "Not linked"
+
+#: components/app/interface/settings/user
+msgid "Hide private details"
+msgstr "Hide private details"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Click a shortcut's keys to change them."
+msgstr "Click a shortcut's keys to change them."
+
+#: components/app/interface/settings/user
+msgid "In the browser, keys work only while the Zrzur tab is active."
+msgstr "In the browser, keys work only while the Zrzur tab is active."
+
+#: components/app/interface/settings/user
+msgid "Keeps the mic open a moment after you let go."
+msgstr "Keeps the mic open a moment after you let go."
+
+#: components/app/interface/settings/user
+msgid "Also while Zrzur is closed."
+msgstr "Also while Zrzur is closed."
+
+#: components/app/interface/settings/user
+msgid "For weak or metered internet."
+msgstr "For weak or metered internet."
+
+#: components/app/interface/settings/user
+msgid "Players load right away, and their sites see your IP address."
+msgstr "Players load right away, and their sites see your IP address."
+
+#: components/app/interface/settings/user
+msgid "Hides your email, tag, invites and DM previews."
+msgstr "Hides your email, tag, invites and DM previews."
+
+#: components/app/interface/settings/user
+msgid "Shortcut: <0>{0}</0>"
+msgstr "Shortcut: <0>{0}</0>"
+
+#: components/app/interface/settings/user
+msgid "512 × 512 px · up to {0}"
+msgstr "512 × 512 px · up to {0}"
+
+#: components/app/interface/settings/user
+msgid "680 × 240 px · up to {0}"
+msgstr "680 × 240 px · up to {0}"
+
+#: components/app/interface/settings/user
+msgid "Hidden sections are not sent to anyone."
+msgstr "Hidden sections are not sent to anyone."
+
+#: components/app/interface/settings/user
+msgid "Up to {MAX_LINKS} links."
+msgstr "Up to {MAX_LINKS} links."
+
+#: components/app/interface/settings/user
+msgid "On designs.zrzur.com. Your #tag never shows."
+msgstr "On designs.zrzur.com. Your #tag never shows."
+
+#: components/app/interface/settings/user
+msgid "Your Twitch channel, and when you are live."
+msgstr "Your Twitch channel, and when you are live."
+
+#: components/app/interface/settings/user
+msgid "Your GitHub account and your best public repositories."
+msgstr "Your GitHub account and your best public repositories."
+
+#: components/app/interface/settings/user
+msgid "Your BattleTag, so friends can add you."
+msgstr "Your BattleTag, so friends can add you."
+
+#: components/app/interface/settings/user
+msgid "Your Steam name, games and achievements."
+msgstr "Your Steam name, games and achievements."
+
+#: components/app/interface/settings/user
+msgid "Revoking an app ends its access at once. Bots it added stay in their servers."
+msgstr "Revoking an app ends its access at once. Bots it added stay in their servers."
+
+#: components/app/interface/settings/user
+msgid "A ZIP file, sent by e-mail. Once every 24 hours."
+msgstr "A ZIP file, sent by e-mail. Once every 24 hours."
+
+#: components/app/interface/settings/user
+msgid "Only in the Zrzur desktop app."
+msgstr "Only in the Zrzur desktop app."
+
+#: components/app/interface/settings/user
+msgid "A preview: nothing shows on your profile until you turn it on. Untick any game you want to keep to yourself."
+msgstr "A preview: nothing shows on your profile until you turn it on. Untick any game you want to keep to yourself."
+
+#: components/app/interface/settings/user
+msgid "While the card is focused."
+msgstr "While the card is focused."
+
+#: components/app/interface/settings/user
+msgid "Other devices"
+msgstr "Other devices"
+
+#: components/app/interface/settings/user
+msgid "Start one from a message or with +."
+msgstr "Start one from a message or with +."
+
+#: components/app/interface/settings/user
+msgid "In a chat"
+msgstr "In a chat"
+
+#: components/app/interface/settings/user
+msgid "In the member list"
+msgstr "In the member list"
+
+#: components/app/interface/settings/user
+msgid "{name} set"
+msgstr "{name} set"
+
+#: components/app/interface/settings/user
+msgid "2 to 32 characters. You can change it twice a day."
+msgstr "2 to 32 characters. You can change it twice a day."
+
+#: components/app/interface/settings/user
+msgid "Confirm it's you"
+msgstr "Confirm it's you"
+
+#: components/app/interface/settings/user
+msgid "How do you want to confirm?"
+msgstr "How do you want to confirm?"
+
+#: components/app/interface/settings/user
+msgid "Code from your authenticator app"
+msgstr "Code from your authenticator app"
+
+#: components/app/interface/settings/user
+msgid "Younger any time; older only once, within your age group. Anything else: privacy@zrzur.com."
+msgstr "Younger any time; older only once, within your age group. Anything else: privacy@zrzur.com."
+
+#: components/app/interface/settings/user
+msgid "Search roles"
+msgstr "Search roles"
+
+#: components/app/interface/settings/user
+msgid "No role matches."
+msgstr "No role matches."
+
+#: components/app/interface/settings/user
+msgid "No roles."
+msgstr "No roles."
+
+#: components/app/interface/settings/user
+msgid "A bot's own role"
+msgstr "A bot's own role"
+
+#: components/app/interface/settings/user
+msgid "Above your highest role"
+msgstr "Above your highest role"
+
+#: components/app/interface/settings/user
+msgid "Add role"
+msgstr "Add role"
+
+#: components/app/interface/settings/user
+msgid "Channels and messages"
+msgstr "Channels and messages"
+
+#: components/app/interface/settings/user
+msgid "New members"
+msgstr "New members"
+
+#: components/app/interface/settings/user
+msgid "Transfer or delete"
+msgstr "Transfer or delete"
+
+#: components/app/interface/settings/user
+msgid "Name, picture, description and notifications."
+msgstr "Name, picture, description and notifications."
+
+#: components/app/interface/settings/user
+msgid "System messages, threads, events and tickets."
+msgstr "System messages, threads, events and tickets."
+
+#: components/app/interface/settings/user
+msgid "Your own short link, and every invite."
+msgstr "Your own short link, and every invite."
+
+#: components/app/interface/settings/user
+msgid "1920 × 1080 px · up to {0}"
+msgstr "1920 × 1080 px · up to {0}"
+
+#: components/app/interface/settings/user
+msgid "Bots get none. Up to {MAX_ROLES} roles."
+msgstr "Bots get none. Up to {MAX_ROLES} roles."
+
+#: components/app/interface/settings/user
+msgid "Nobody is notified."
+msgstr "Nobody is notified."
+
+#: components/app/interface/settings/user
+msgid "Asked once, when a new member first opens the server."
+msgstr "Asked once, when a new member first opens the server."
+
+#: components/app/interface/settings/user
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name."
+msgstr "An MP3, OGG or WAV file of up to {0} KB, then a name."
+
+#: components/app/interface/settings/user
+msgid "Rules to accept, roles and a welcome."
+msgstr "Rules to accept, roles and a welcome."
+
+#: components/app/interface/settings/user
+msgid "Only you and Zrzur's security reviewers can read it."
+msgstr "Only you and Zrzur's security reviewers can read it."
+
+#: components/app/interface/settings/user
+msgid "Your tickets"
+msgstr "Your tickets"
+
+#: components/app/interface/settings/user
+msgid "Ticket"
+msgstr "Ticket"
+
+#: components/app/interface/settings/user
+msgid "Only the Zrzur team can write here."
+msgstr "Only the Zrzur team can write here."
+
+#: components/app/interface/settings/user
+msgid "For help, open Settings and choose Contact support."
+msgstr "For help, open Settings and choose Contact support."
+
+#: components/app/interface/settings/user
+msgid "{0, plural, one {# option} other {# options}}"
+msgstr "{0, plural, one {# option} other {# options}}"
+
+#: components/app/interface/settings/user
+msgid "A link starting with https://"
+msgstr "A link starting with https://"
+
+#: components/app/interface/settings/user
+msgid "A new secret stops the old one at once."
+msgstr "A new secret stops the old one at once."
+
+#: components/app/interface/settings/user
+msgid "About your bot"
+msgstr "About your bot"
+
+#: components/app/interface/settings/user
+msgid "Account"
+msgstr "Account"
+
+#: components/app/interface/settings/user
+msgid "Add a redirect to get the link."
+msgstr "Add a redirect to get the link."
+
+#: components/app/interface/settings/user
+msgid "Anyone can add it to their servers. When off, only you can."
+msgstr "Anyone can add it to their servers. When off, only you can."
+
+#: components/app/interface/settings/user
+msgid "Choose one of your servers."
+msgstr "Choose one of your servers."
+
+#: components/app/interface/settings/user
+msgid "Connection"
+msgstr "Connection"
+
+#: components/app/interface/settings/user
+msgid "Copy application ID"
+msgstr "Copy application ID"
+
+#: components/app/interface/settings/user
+msgid "Let people sign in to your app with Zrzur. The client ID is the application ID above."
+msgstr "Let people sign in to your app with Zrzur. The client ID is the application ID above."
+
+#: components/app/interface/settings/user
+msgid "None yet. Without one, your app must use PKCE."
+msgstr "None yet. Without one, your app must use PKCE."
+
+#: components/app/interface/settings/user
+msgid "None. Turn them on in the Bot tab first if your bot needs them."
+msgstr "None. Turn them on in the Bot tab first if your bot needs them."
+
+#: components/app/interface/settings/user
+msgid "Privileged intents in this request"
+msgstr "Privileged intents in this request"
+
+#: components/app/interface/settings/user
+msgid "Redirect URIs"
+msgstr "Redirect URIs"
+
+#: components/app/interface/settings/user
+msgid "Redirects"
+msgstr "Redirects"
+
+#: components/app/interface/settings/user
+msgid "Sign-in link"
+msgstr "Sign-in link"
+
+#: components/app/interface/settings/user
+msgid "Support link (optional)"
+msgstr "Support link (optional)"
+
+#: components/app/interface/settings/user
+msgid "The token signs in as your bot. Never share it or show it on screen."
+msgstr "The token signs in as your bot. Never share it or show it on screen."
+
+#: components/app/interface/settings/user
+msgid "Turn on only what your bot needs. A change applies from the bot's next connection."
+msgstr "Turn on only what your bot needs. A change applies from the bot's next connection."
+
+#: components/app/interface/settings/user
+msgid "Verified bots get a mark next to their name and can join more than 100 servers. Past 100 servers, privileged intents need approval."
+msgstr "Verified bots get a mark next to their name and can join more than 100 servers. Past 100 servers, privileged intents need approval."
+
+#: components/app/interface/settings/user
+msgid "Website (optional)"
+msgstr "Website (optional)"
+
+#: components/app/interface/settings/user
+msgid "What it does, who uses it, and what data it keeps"
+msgstr "What it does, who uses it, and what data it keeps"
+
+#: components/app/interface/settings/user
+msgid "Where people return after signing in. One per line: https, or http://localhost while you test."
+msgstr "Where people return after signing in. One per line: https, or http://localhost while you test."
+
+#: components/app/interface/settings/user
+msgid "Whoever opens it picks a server, and the bot joins with these permissions."
+msgstr "Whoever opens it picks a server, and the bot joins with these permissions."
+
+#: components/app/interface/settings/user
+msgid "Write at least {STATEMENT_MIN} characters."
+msgstr "Write at least {STATEMENT_MIN} characters."
+
+#: components/app/interface/settings/user
+msgid "Your app adds a new state and code challenge for every sign-in, so the link doesn't work opened as it is."
+msgstr "Your app adds a new state and code challenge for every sign-in, so the link doesn't work opened as it is."
+
+#: components/app/interface/settings/user
+msgid "Zrzur can't show it again. A new token stops the old one."
+msgstr "Zrzur can't show it again. A new token stops the old one."
+
+#: components/app/interface/settings/user
+msgid "At most {STATEMENT_MAX} characters."
+msgstr "At most {STATEMENT_MAX} characters."
+
+#: components/app/interface/settings/user
+msgid "By application, reviewed by the Zrzur team: open to every bot, whatever its size; the team looks at its servers, its age and what it does."
+msgstr "By application, reviewed by the Zrzur team: open to every bot, whatever its size; the team looks at its servers, its age and what it does."
+
+#: components/app/interface/settings/user
+msgid "Couldn't load the verification."
+msgstr "Couldn't load the verification."
+
+#: components/app/interface/settings/user
+msgid "Intents asked for: {0}"
+msgstr "Intents asked for: {0}"
+
+#: components/app/interface/settings/user
+msgid "No malicious commands, token theft, deception or inflated installs. Any bot can apply, whatever its size; a review decides."
+msgstr "No malicious commands, token theft, deception or inflated installs. Any bot can apply, whatever its size; a review decides."
+
+#: components/app/interface/settings/user
+msgid "Sent on {0}. The team will answer here."
+msgstr "Sent on {0}. The team will answer here."
+
+#: components/app/interface/settings/user
+msgid "The team looks at the servers that count: your own never do, and one owner's count at most twice."
+msgstr "The team looks at the servers that count: your own never do, and one owner's count at most twice."
+
+#: components/app/interface/settings/user
+msgid "What the team looks at"
+msgstr "What the team looks at"
+
+#: components/app/interface/settings/user
+msgid "Emoji and sounds"
+msgstr "Emoji and sounds"
+
+#: components/app/interface/settings/user
+msgid "Pause the server during a raid, and filters that stop spam, bad words and unwanted links."
+msgstr "Pause the server during a raid, and filters that stop spam, bad words and unwanted links."
+
+#: components/app/interface/settings/user
+msgid "Protection"
+msgstr "Protection"
+
+#: components/app/interface/settings/user
+msgid "Search, change roles, time out, kick or ban, and see who is banned."
+msgstr "Search, change roles, time out, kick or ban, and see who is banned."
+
+#: components/app/interface/settings/user
+msgid "The server's own emoji, and the short sounds members play in voice calls."
+msgstr "The server's own emoji, and the short sounds members play in voice calls."
+
+#: components/app/interface/settings/user
+msgid "Who can get in, what they need before they can talk, the rules they accept and how they are welcomed."
+msgstr "Who can get in, what they need before they can talk, the rules they accept and how they are welcomed."
+
+#: components/app/interface/settings/user
+msgid "A GIF or animated WebP plays."
+msgstr "A GIF or animated WebP plays."
+
+#: components/app/interface/settings/user
+msgid "Short sounds members upload and play in voice calls."
+msgstr "Short sounds members upload and play in voice calls."
+
+#: components/app/interface/settings/user
+msgid "No sounds yet. People who manage the soundboard upload them in Server settings, Soundboard."
+msgstr "No sounds yet. People who manage the soundboard upload them in Server settings, Soundboard."
+
+#: components/app/interface/settings/user
+msgid "Your device's emoji"
+msgstr "Your device's emoji"
+
+#: components/app/interface/settings/user
+msgid "Twitter emoji"
+msgstr "Twitter emoji"
+
+#: components/app/interface/settings/user
+msgid "Enter one of the recovery codes you saved."
+msgstr "Enter one of the recovery codes you saved."
+
+#: components/app/interface/settings/user
+msgid "Enter the 6-digit code from your authenticator app."
+msgstr "Enter the 6-digit code from your authenticator app."
+
+#: components/app/interface/settings/user
+msgid "Use a recovery code instead"
+msgstr "Use a recovery code instead"
+
+#: components/app/interface/settings/user
+msgid "Use your authenticator app"
+msgstr "Use your authenticator app"
+
+#: components/app/interface/settings/user
+msgid "Other ways to confirm"
+msgstr "Other ways to confirm"
+
+#: components/app/interface/settings/user
+msgid "Suppression strength"
+msgstr "Suppression strength"
+
+#: components/app/interface/settings/user
+msgid "Also quietens typing, clicks and breathing between words."
+msgstr "Also quietens typing, clicks and breathing between words."
+
+#: components/app/interface/settings/user
+msgid "Removes steady noise such as fans and hum."
+msgstr "Removes steady noise such as fans and hum."
+
+#: components/app/interface/settings/user
+msgid "Core concepts"
+msgstr "Core concepts"
+
+#: components/app/interface/settings/user
+msgid "Working with the API"
+msgstr "Working with the API"
+
+#: components/app/interface/settings/user
+msgid "Going live"
+msgstr "Going live"
+
+#: components/app/interface/settings/user
+msgid "Rich presence for games and apps"
+msgstr "Rich presence for games and apps"
+
+#: components/app/interface/settings/user
+msgid "One bot, many servers"
+msgstr "One bot, many servers"
+
+#: components/app/interface/settings/user
+msgid "Search the docs"
+msgstr "Search the docs"
+
+#: components/app/interface/settings/user
+msgid "Link to this section"
+msgstr "Link to this section"
+
+#: components/app/interface/settings/user
+msgid "Sort designs"
+msgstr "Sort designs"
+
+#: components/app/interface/settings/user
+msgid "Wearing now"
+msgstr "Wearing now"
+
+#: components/app/interface/settings/user
+msgid "Designs couldn't load."
+msgstr "Designs couldn't load."
+
+#: components/app/interface/settings/user
+msgid "Nobody has published one yet."
+msgstr "Nobody has published one yet."
+
+#: components/app/interface/settings/user
+msgid "All in Designs"
+msgstr "All in Designs"
+
+#: src/interface/Discover.tsx
+msgid "Communities reviewed by the Zrzur team."
+msgstr "Communities reviewed by the Zrzur team."
+
+#: src/interface/Discover.tsx
+msgid "See what each bot does and which permissions it asks for."
+msgstr "See what each bot does and which permissions it asks for."
+
+#: src/interface/Discover.tsx
+msgid "List it from Server settings → Discover."
+msgstr "List it from Server settings → Discover."
+
+#: src/interface/Discover.tsx
+msgid "List it from the bot's settings."
+msgstr "List it from the bot's settings."
+
+#: components/app/interface/settings/user
+msgid "Underlined text"
+msgstr "Underlined text"
+
+#: components/app/interface/settings/user
+msgid "Sends your message in italics, as something you do."
+msgstr "Sends your message in italics, as something you do."
+
+#: components/app/interface/settings/user
+msgid "Hides your message until someone clicks it."
+msgstr "Hides your message until someone clicks it."
+
+#: components/app/interface/settings/user
+msgid "Adds {face} to your message."
+msgstr "Adds {face} to your message."
+
+#: components/app/interface/settings/user
+msgid "Everyone in this channel"
+msgstr "Everyone in this channel"
+
+#: components/app/interface/settings/user
+msgid "Everyone online in this channel"
+msgstr "Everyone online in this channel"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "Server"
+msgstr "Server"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "People"
+msgstr "People"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "settings-group"
+msgid "More"
+msgstr "More"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Expression"
+msgstr "Expression"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Designs server"
+msgstr "Zrzur Designs server"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Discover server"
+msgstr "Zrzur Discover server"
+
+#: components/app/interface/settings/user
+msgid "Zrzur Developers server"
+msgstr "Zrzur Developers server"
+
+#: components/app/interface/settings/user
+msgid "Questions about designs? Ask in the <0>Zrzur Designs server</0>."
+msgstr "Questions about designs? Ask in the <0>Zrzur Designs server</0>."
+
+#: components/app/interface/settings/user
+msgid "Questions about Discover? Ask in the <0>Zrzur Discover server</0>."
+msgstr "Questions about Discover? Ask in the <0>Zrzur Discover server</0>."
+
+#: components/app/interface/settings/user
+msgid "Questions about building on Zrzur? Ask in the <0>Zrzur Developers server</0>."
+msgstr "Questions about building on Zrzur? Ask in the <0>Zrzur Developers server</0>."

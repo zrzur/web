@@ -33,7 +33,7 @@ Open the [Developer Portal](/developers), choose **New application**, enter a na
 
 ### 3. Install the bot in your server, with Timeout Members {#step-3}
 
-Open the tab **OAuth2** of your application. In **URL generator**, tick `bot.install`, and under **Bot permissions** tick **Timeout Members**. Open the **Invite link**, pick your server and confirm.
+Open the tab **Install** of your application. Under **Invite link**, tick **Time out members**. Open the **Link**, pick your server and confirm.
 
 ### 4. Move the bot's role up {#step-4}
 

@@ -48,6 +48,7 @@ export class Sync extends AbstractStore<"sync", TypeSynchronisation> {
       revision: {
         collectibles: 0,
         keybinds: 0,
+        "lobby-steps": 0,
         ordering: 0,
         notifications: 0,
         "release-notes": 0,
@@ -88,7 +89,9 @@ export class Sync extends AbstractStore<"sync", TypeSynchronisation> {
     }
 
     for (const key in response) {
-      const [ts, data] = response[key];
+      // always [timestamp, value]: OpenAPI 3.0 cannot say a fixed pair, so
+      // the generated type is only an array of both
+      const [ts, data] = response[key] as unknown as [number, string];
       this.merge(ts, key as keyof SyncedStore, data);
     }
   }

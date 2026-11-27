@@ -126,9 +126,9 @@ describe("badge texts: one source", () => {
     expect(owner).toContain("180 days");
     expect(owner).toContain("DNS");
     const developer = text("verified_bot_developer" as AnyBadgeId).earn;
-    expect(developer).toContain("25");
-    expect(developer).toContain("30 days");
-    expect(developer).toContain("ownership");
+    // any bot may ask (owner, 2026-11-27): no number keeps one out
+    expect(developer).not.toContain("25");
+    expect(developer).toContain("servers");
     for (const badge of active()) {
       expect(text(badge.id).earn).not.toContain("Own a verified server");
       expect(text(badge.id).earn).not.toContain("Own a verified bot");

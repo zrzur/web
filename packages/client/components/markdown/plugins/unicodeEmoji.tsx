@@ -8,7 +8,6 @@ import {
   RE_UNICODE_EMOJI,
   UNICODE_EMOJI_MAX_PACK,
   UNICODE_EMOJI_MIN_PACK,
-  UNICODE_EMOJI_PUA_PACK,
   UNICODE_ZWNJ,
   UnicodeEmojiPacks,
 } from "../emoji/UnicodeEmoji";
@@ -18,9 +17,10 @@ import {
  */
 export function RenderUnicodeEmoji(props: {
   str: string;
-  pack: UnicodeEmojiPacks;
+  pack?: UnicodeEmojiPacks;
 }) {
-  return <UnicodeEmoji emoji={props.str} pack={props.pack} />;
+  // the reader's own style, whatever the sender used
+  return <UnicodeEmoji emoji={props.str} />;
 }
 
 export function parseUnicodeEmoji(str: string): {
@@ -42,7 +42,6 @@ export function parseUnicodeEmoji(str: string): {
         isRegionalIndicator(subStr.substring(1))
           ? subStr.substring(1)
           : subStr,
-      pack: UNICODE_EMOJI_PUA_PACK[selectorChar],
     };
   } else {
     return {

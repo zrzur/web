@@ -1,4 +1,4 @@
-import { Match, Switch, createSignal } from "solid-js";
+import { Match, Show, Switch, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
@@ -18,6 +18,7 @@ import { useModals } from "@revolt/modal";
 import { A, Navigate } from "@revolt/routing";
 
 import { useState } from "@revolt/state";
+import { takePendingInvite } from "../invite/inviteLogic";
 import {
   AuthButton,
   FlowActions,
@@ -25,7 +26,7 @@ import {
   FlowText,
   FlowTitle,
 } from "./Flow";
-import { takePendingInvite } from "../invite/inviteLogic";
+import { type MfaAsk, FlowMfaStep } from "./FlowMfaStep";
 import { Fields, Form, SubmitButton } from "./Form";
 import { asksForCaptcha, loginCredentials } from "./loginStepUp";
 
@@ -43,6 +44,22 @@ export default function FlowLogin() {
   const { config } = useInstance();
   // set once the server asks for a captcha after many wrong passwords
   const [stepUp, setStepUp] = createSignal(false);
+  // the second step, asked in this card (not a dialog over it)
+  const [mfa, setMfa] = createSignal<MfaAsk>();
+  const askCode = (
+    methods: MfaAsk["methods"],
+    submit: MfaAsk["submit"],
+  ): Promise<Parameters<MfaAsk["done"]>[0]> =>
+    new Promise((resolve) =>
+      setMfa({
+        methods,
+        submit,
+        done: (outcome) => {
+          setMfa(undefined);
+          resolve(outcome);
+        },
+      }),
+    );
   const {
     lifecycle,
     isLoggedIn,
@@ -71,8 +88,11 @@ export default function FlowLogin() {
       return await login(
         loginCredentials(email, password, data.get("captcha") as string),
         modals,
+        askCode,
       );
     } catch (error) {
+      // went back from the code step: the password form, quietly
+      if (error === "Cancelled") return false;
       if (asksForCaptcha(error) && config.features.captcha.enabled)
         setStepUp(true);
       throw error;
@@ -152,34 +172,39 @@ export default function FlowLogin() {
     <Switch
       fallback={
         <>
-          <FlowTitle
-            subtitle={
-              <Trans>Log in to pick up right where you left off.</Trans>
-            }
-          >
-            <Trans>Welcome back</Trans>
-          </FlowTitle>
-          <Form
-            onSubmit={performLogin}
-            captcha={stepUp() ? config.features.captcha.key : undefined}
-            actions={
-              <FlowActions>
-                <SubmitButton>
-                  <Trans>Log in</Trans>
-                </SubmitButton>
-              </FlowActions>
-            }
-          >
-            <Fields fields={["email", "password"]} />
-          </Form>
-          <FlowLinks aria-label={t`Account help`}>
-            <A href="/login/reset">
-              <Trans>Forgot password?</Trans>
-            </A>
-            <A href="/login/resend">
-              <Trans>Resend verification</Trans>
-            </A>
-          </FlowLinks>
+          <Show when={mfa()}>{(ask) => <FlowMfaStep ask={ask()} />}</Show>
+          {/* kept while the code is asked, so a step that runs out comes
+              back here with its reason */}
+          <div style={{ display: mfa() ? "none" : "contents" }}>
+            <FlowTitle
+              subtitle={
+                <Trans>Log in to pick up right where you left off.</Trans>
+              }
+            >
+              <Trans>Welcome back</Trans>
+            </FlowTitle>
+            <Form
+              onSubmit={performLogin}
+              captcha={stepUp() ? config.features.captcha.key : undefined}
+              actions={
+                <FlowActions>
+                  <SubmitButton>
+                    <Trans>Log in</Trans>
+                  </SubmitButton>
+                </FlowActions>
+              }
+            >
+              <Fields fields={["email", "password"]} />
+            </Form>
+            <FlowLinks aria-label={t`Account help`}>
+              <A href="/login/reset">
+                <Trans>Forgot password?</Trans>
+              </A>
+              <A href="/login/resend">
+                <Trans>Resend verification</Trans>
+              </A>
+            </FlowLinks>
+          </div>
         </>
       }
     >
@@ -241,9 +266,7 @@ export default function FlowLogin() {
           </AuthButton>
         </FlowActions>
       </Match>
-      <Match
-        when={lifecycle.state() === State.AgeRequired && confirmUnder16()}
-      >
+      <Match when={lifecycle.state() === State.AgeRequired && confirmUnder16()}>
         <FlowTitle subtitle={<UnderMinimumConfirmText />}>
           <Trans>The date you entered is under 16</Trans>
         </FlowTitle>

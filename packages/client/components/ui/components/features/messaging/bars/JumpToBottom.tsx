@@ -7,7 +7,6 @@ import { iconSize } from "@revolt/ui";
 
 import { expand_more as MdExpandMore } from "@revolt/ui/icons/legacy";
 
-import { Ripple } from "../../../../components/design";
 import { floatingIndicator } from "./FloatingIndicator";
 
 interface Props {
@@ -27,12 +26,33 @@ interface Props {
   loading?: boolean;
 }
 
+/**
+ * A slim tab resting on the message box, as wide as it and a little in
+ * from its corners: plain words on the start side, the way back on the
+ * end. No pill, no glow (owner, 2026-11-27).
+ */
 const bar = css({
-  marginBottom: "var(--gap-md)",
-  // a real button: the browser's own look off, the shared bar look on
   appearance: "none",
   font: "inherit",
   textAlign: "start",
+  whiteSpace: "nowrap",
+  // as wide as the message box, a little in from its corners
+  width: "calc(100% - 24px) !important",
+  minWidth: 0,
+  overflow: "hidden",
+  marginInline: "12px",
+  // sits on the message box's top edge
+  marginBottom: "-1px",
+  minHeight: "30px !important",
+  paddingBlock: "4px !important",
+  paddingInline: "12px !important",
+  gap: "12px !important",
+  borderRadius: "8px 8px 0 0 !important",
+  borderBottom: "none !important",
+  boxShadow: "none !important",
+  background: "var(--z-bg-raised, var(--z-popover-bg)) !important",
+  "--z-icon-color": "var(--z-fg-secondary)",
+  _hover: { background: "var(--z-float-hover) !important" },
   _focusVisible: {
     outline: "2px solid var(--z-focus, var(--z-accent))",
     outlineOffset: "2px",
@@ -44,9 +64,12 @@ const bar = css({
     width: "44px !important",
     minHeight: "44px",
     marginInlineStart: "auto",
+    marginInlineEnd: 0,
+    marginBottom: "var(--gap-md)",
     padding: "0 !important",
     justifyContent: "center",
     borderRadius: "14px !important",
+    borderBottom: "1px solid var(--z-popover-border) !important",
     overflow: "visible",
   },
 });
@@ -61,8 +84,21 @@ const spoken = {
   whiteSpace: "nowrap",
 } as const;
 
-const grow = css({ flexGrow: 1, minWidth: 0, _phone: spoken });
-const action = css({ flexShrink: 0, _phone: spoken });
+const grow = css({
+  flexGrow: 1,
+  minWidth: 0,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  fontWeight: 400,
+  color: "var(--z-fg-secondary)",
+  _phone: spoken,
+});
+const action = css({
+  flexShrink: 0,
+  fontWeight: 600,
+  color: "var(--z-fg-primary)",
+  _phone: spoken,
+});
 
 /** phones: how many messages arrived, on the button's corner */
 const count = css({
@@ -99,7 +135,6 @@ export function JumpToBottom(props: Props) {
       aria-busy={props.loading ? "true" : undefined}
       onClick={() => props.onClick()}
     >
-      <Ripple />
       <span class={grow} aria-live="polite">
         <Show
           when={props.unseen}

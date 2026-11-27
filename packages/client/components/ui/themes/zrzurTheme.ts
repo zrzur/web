@@ -379,7 +379,7 @@ function luminance(hex: string): number {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
-function contrastOn(accent: string): string {
+export function contrastOn(accent: string): string {
   const ink = ZRZUR_UNIFIED_DARK.bgApp;
   const paper = "#FFFFFF";
   const value = luminance(accent);
@@ -1073,6 +1073,9 @@ export function createZrzurSemanticVariables(
     "--z-badge": dark ? d.danger : l.danger,
     "--z-focus": focus,
     "--z-status-success": dark ? d.success : l.success,
+    // text on a green fill, by contrast: dark on the light mint, white on
+    // the deep teal of light mode
+    "--z-on-success": contrastOn(dark ? d.success : l.success),
     "--z-status-warning": dark ? d.warning : l.warning,
     // components read --z-warning; without it light mode showed dark amber
     "--z-warning": dark ? d.warning : l.warning,

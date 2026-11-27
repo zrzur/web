@@ -17,7 +17,7 @@ import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
-import { Button, Segmented } from "@revolt/ui";
+import { Button, LineTabs } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 /**
@@ -51,31 +51,28 @@ export function ThreadsPanel(props: { channel: Channel }) {
 
   return (
     <Panel>
+      {/* one row: which threads, and the one action */}
       <Header>
-        <Segmented
+        <LineTabs
           aria-label={t`Threads`}
           value={archived() ? "archived" : "active"}
           onChange={(value) => setArchived(value === "archived")}
           options={[
             { value: "active", label: t`Active` },
-            {
-              value: "archived",
-              label: t`Archived`,
-              icon: <Icon name="archive" size={16} />,
-            },
+            { value: "archived", label: t`Archived` },
           ]}
         />
         <Show when={startAccess(channel()) === "allowed"}>
-          <Button
-            size="sm"
-            variant="tonal"
-            onPress={() =>
+          <NewThread
+            type="button"
+            aria-label={t`New thread`}
+            title={t`New thread`}
+            onClick={() =>
               openModal({ type: "create_thread", channel: channel() })
             }
           >
-            <Icon name="plus" size={16} />
-            <Trans>New thread</Trans>
-          </Button>
+            <Icon name="plus" size={18} />
+          </NewThread>
         </Show>
       </Header>
 
@@ -129,7 +126,7 @@ export function ThreadsPanel(props: { channel: Channel }) {
                 {archived() ? (
                   <Trans>Threads that were archived show here.</Trans>
                 ) : (
-                  <Trans>Start one from a message, or with New thread.</Trans>
+                  <Trans>Start one from a message or with +.</Trans>
                 )}
               </span>
             </Show>
@@ -192,29 +189,46 @@ const Panel = styled("div", {
   },
 });
 
-/** Active / Archived on one side, the one action on the other */
+/** Active / Archived on one side, the one action on the other: one row */
 const Header = styled("div", {
   base: {
     display: "flex",
-    flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "space-between",
     gap: "8px",
-    // phones: the switch and the button are one height, on the fill of
-    // every other box (owner, 2026-11-17)
-    _phone: {
-      flexWrap: "nowrap",
-      "& > *": {
-        height: "40px !important",
-        minHeight: "40px !important",
-        borderRadius: "12px !important",
-        border: "none !important",
-        boxShadow: "none !important",
-        background:
-          "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
-      },
-      "& > [role='radiogroup'] > *": { height: "32px", minHeight: "32px" },
+    borderBottom: "1px solid var(--z-border-soft, var(--z-divider))",
+    // phones: the panel sits on the screen's edge, the row keeps its air
+    _phone: { paddingInline: "12px" },
+  },
+});
+
+/** Start a thread: a small square button, its name in its tooltip */
+const NewThread = styled("button", {
+  base: {
+    flexShrink: 0,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "30px",
+    height: "30px",
+    marginBottom: "3px",
+    padding: 0,
+    border: "none",
+    borderRadius: "8px",
+    background: "transparent",
+    color: "var(--z-fg-secondary)",
+    "--z-icon-color": "currentColor",
+    cursor: "pointer",
+    _hover: {
+      background: "var(--z-bg-raised)",
+      color: "var(--z-fg-primary)",
     },
+    _active: { opacity: 0.85 },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus, var(--z-accent))",
+      outlineOffset: "2px",
+    },
+    _phone: { width: "44px", height: "44px", marginBottom: 0 },
   },
 });
 

@@ -167,3 +167,26 @@ describe("TextEditor2 when it leaves the page", () => {
     destroy.mockRestore();
   });
 });
+
+describe("TextEditor2 Enter in a quote or a list", () => {
+  it.each(["> quoted", ">>> quoted\nto the end", "- item", "1. item"])(
+    "sends %j instead of starting a new line",
+    (draft) => {
+      const onComplete = vi.fn();
+      const content = mount(() => (
+        <TextEditor2
+          initialValue={[draft]}
+          onChange={() => undefined}
+          onComplete={onComplete}
+        />
+      ));
+      const view = EditorView.findFromDOM(content as HTMLElement)!;
+      view.dispatch({ selection: { anchor: draft.length } });
+      content.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
+      );
+      expect(onComplete).toHaveBeenCalledTimes(1);
+      expect(view.state.doc.toString()).toBe(draft);
+    },
+  );
+});

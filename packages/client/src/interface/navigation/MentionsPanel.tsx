@@ -7,7 +7,7 @@ import {
   Suspense,
   Switch,
   createEffect,
-  createResource,
+  createMemo,
   onCleanup,
 } from "solid-js";
 import { Portal } from "solid-js/web";
@@ -33,13 +33,17 @@ import {
 import { TextTabs } from "@revolt/app/interface/settings/SettingsTabs";
 import { useClient } from "@revolt/client";
 import { holdMessages } from "@revolt/client/messagePruner";
+
 import { useDevice } from "@revolt/common";
 import { backCloses } from "@revolt/common/lib/backCloses";
+import { useTime } from "@revolt/i18n";
 import { shortcutFor } from "@revolt/keybinds/active";
+import { renderSimpleMarkdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { Avatar, CircularProgress, Time, useSnackbar } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
+import { mentionsList } from "./mentionsCache";
 
 // phones only, and only once it is opened: kept out of the files the app
 // installs up front (scripts/precacheShell.mjs)
@@ -248,45 +252,64 @@ export function MentionsHost() {
 
 /**
  * Mentions inbox: messages from the last 30 days that mention you (by name,
- * by one of your roles, or with @everyone / @here) in channels you can see.
- * Select one to jump to it. Opens as a small box on wide screens and as a
- * sheet on phones.
+ * by one of your roles, or with @everyone / @here) in channels you can see,
+ * by day, newest first. Select one to jump to it.
  *
- * Mentions
- * The last 30 days. Select one to jump to it.
- * [avatar] Name  Server · #channel · 1h
- *          preview of the message…
+ * Today
+ * [avatar] Name                          14:30
+ *          Server · #channel     @everyone
+ *          the message, as it reads in the chat…
  */
 export function MentionsPanel(props: InboxPanelProps) {
   const { t } = useLingui();
   const client = useClient();
   const navigate = useNavigate();
-  const [mentions] = createResource(() => client().fetchMentions(50));
+  const dayjs = useTime();
+  // the last list at once, refreshed behind it
+  const mentions = mentionsList(client());
   // these come from many channels: they stay in the message cache while
   // the box is open
   onCleanup(
     // read when the cache is looked through, not tracked
-    // eslint-disable-next-line solid/reactivity
-    holdMessages(() =>
-      mentions.state === "ready" ? mentions().map((message) => message.id) : [],
-    ),
+    holdMessages(() => (mentions() ?? []).map((message) => message.id)),
   );
 
-  // server and channel apart: an Arabic name beside a Latin one must not
-  // swap their order
-  const place = (message: Message): string[] => {
-    const channel = message.channel;
-    if (!channel) return [];
-    if (channel.type === "DirectMessage") return [t`Direct message`];
-    const name =
-      channel.type === "SavedMessages" ? t`Saved notes` : `#${channel.name}`;
-    return channel.server ? [channel.server.name, name] : [name];
+  /** the day a mention is under: Today, Yesterday, or its date */
+  const dayOf = (date: Date) => {
+    const day = dayjs(date).startOf("day");
+    const today = dayjs().startOf("day");
+    if (day.isSame(today)) return t`Today`;
+    if (day.isSame(today.subtract(1, "day"))) return t`Yesterday`;
+    return day.format("LL");
   };
-
-  const open = (message: Message) => {
-    navigate(message.path);
-    props.onNavigate?.();
-  };
+  const days = createMemo(() => {
+    // a day, then one box per person and place: their mentions one after
+    // the other (name and place said once, at the top of the box)
+    const groups: { label: string; bundles: Message[][] }[] = [];
+    for (const message of mentions() ?? []) {
+      const label = dayOf(message.createdAt);
+      let day = groups.at(-1);
+      if (day?.label !== label) {
+        day = { label, bundles: [] };
+        groups.push(day);
+      }
+      const bundle = day.bundles.at(-1);
+      const before = bundle?.at(-1);
+      if (
+        bundle &&
+        before &&
+        before.authorId === message.authorId &&
+        before.channelId === message.channelId
+      )
+        bundle.push(message);
+      else day.bundles.push([message]);
+    }
+    // inside a box the words read as in the chat, oldest first (a reply
+    // under what it answers); the boxes stay newest first
+    for (const day of groups)
+      day.bundles = day.bundles.map((bundle) => bundle.toReversed());
+    return groups;
+  });
 
   return (
     <Panel>
@@ -301,9 +324,6 @@ export function MentionsPanel(props: InboxPanelProps) {
         >
           {props.tabs}
         </Show>
-        <p>
-          <Trans>The last 30 days. Select one to jump to it.</Trans>
-        </p>
       </Head>
       <List>
         <Switch>
@@ -325,47 +345,172 @@ export function MentionsPanel(props: InboxPanelProps) {
             </Center>
           </Match>
           <Match when={mentions()}>
-            <For each={mentions()}>
-              {(message) => (
-                <Item type="button" onClick={() => open(message)}>
-                  <Avatar
-                    size={36}
-                    src={message.animatedAvatarURL}
-                    fallback={message.username}
-                  />
-                  <Body>
-                    <Line>
-                      <strong
-                        dir="auto"
-                        style={{ color: message.roleColour ?? undefined }}
-                      >
-                        {message.username}
-                      </strong>
-                      <When>
-                        <Time format="relative" value={message.createdAt} />
-                      </When>
-                    </Line>
-                    <Where>
-                      <For each={place(message)}>
-                        {(part, index) => (
-                          <>
-                            {index() > 0 ? " · " : ""}
-                            <bdi>{part}</bdi>
-                          </>
-                        )}
-                      </For>
-                    </Where>
-                    <Preview>
-                      <bdi>{client().markdownToText(message.content)}</bdi>
-                    </Preview>
-                  </Body>
-                </Item>
+            <For each={days()}>
+              {(day) => (
+                <Day>
+                  <DayLabel>{day.label}</DayLabel>
+                  <For each={day.bundles}>
+                    {(bundle) => (
+                      <Bundle>
+                        <For each={bundle}>
+                          {(message, index) => (
+                            <MessageRow
+                              message={message}
+                              more={index() > 0}
+                              note={
+                                <Time format="time" value={message.createdAt} />
+                              }
+                              how={<MentionKind message={message} />}
+                              onOpen={(m) => {
+                                navigate(m.path);
+                                props.onNavigate?.();
+                              }}
+                            />
+                          )}
+                        </For>
+                      </Bundle>
+                    )}
+                  </For>
+                </Day>
               )}
             </For>
           </Match>
         </Switch>
       </List>
     </Panel>
+  );
+}
+
+/** Server and channel apart: an Arabic name beside a Latin one must not
+ * swap their order */
+export function usePlace() {
+  const { t } = useLingui();
+  return (message: Message): string[] => {
+    const channel = message.channel;
+    if (!channel) return [];
+    if (channel.type === "DirectMessage") return [t`Direct message`];
+    const name =
+      channel.type === "SavedMessages" ? t`Saved notes` : `#${channel.name}`;
+    return channel.server ? [channel.server.name, name] : [name];
+  };
+}
+
+/**
+ * The words of a message as they read in the chat: mentions, emoji and
+ * formatting drawn, nothing in it clickable (the row opens the message).
+ * Its own direction: an Arabic line reads right to left beside an English
+ * name.
+ */
+export function MessagePreview(props: { content: string }) {
+  return (
+    <Preview dir="auto" data-preview>
+      {renderSimpleMarkdown(props.content)}
+    </Preview>
+  );
+}
+
+/**
+ * How a mention reached you, when it was not by your name: @everyone,
+ * @here or one of your roles
+ */
+function MentionKind(props: { message: Message }) {
+  const client = useClient();
+  const byName = () =>
+    !!props.message.mentionIds?.includes(client().user?.id ?? "");
+  const role = () => props.message.roleMentions?.find((r) => r.assigned);
+  return (
+    <Show when={!byName()}>
+      <Switch>
+        <Match when={props.message.mentionsEveryone}>
+          <Kind>@everyone</Kind>
+        </Match>
+        <Match when={props.message.mentionsOnline}>
+          <Kind>@here</Kind>
+        </Match>
+        <Match when={role()}>
+          {(r) => (
+            <Kind style={{ color: r().colour ?? undefined }}>
+              <bdi>@{r().name}</bdi>
+            </Kind>
+          )}
+        </Match>
+      </Switch>
+    </Show>
+  );
+}
+
+/**
+ * One message in a list of the box: who wrote it and where, with a time
+ * (or another note) at the end, and its words. The whole row opens it.
+ */
+export function MessageRow(props: {
+  message: Message;
+  note?: JSX.Element;
+  /** beside where it is: how it reached you */
+  how?: JSX.Element;
+  /** the same person, in the same place, as the row above: words only */
+  more?: boolean;
+  onOpen: (message: Message) => void;
+}) {
+  const place = usePlace();
+  return (
+    <Item
+      type="button"
+      data-more={props.more || undefined}
+      onClick={() => props.onOpen(props.message)}
+    >
+      <Show
+        when={!props.more}
+        fallback={
+          <>
+            {/* where the avatar is: the time, shown on the line you point
+                at (as the chat does) */}
+            <span class="gap">{props.note}</span>
+            <Body>
+              <Show when={props.message.content}>
+                <MessagePreview content={props.message.content} />
+              </Show>
+              {props.how}
+            </Body>
+          </>
+        }
+      >
+        <Avatar
+          size={36}
+          src={props.message.animatedAvatarURL}
+          fallback={props.message.username}
+        />
+        <Body>
+          <Line>
+            <strong
+              dir="auto"
+              style={{ color: props.message.roleColour ?? undefined }}
+            >
+              {props.message.username}
+            </strong>
+            <Show when={props.note}>
+              <When>{props.note}</When>
+            </Show>
+          </Line>
+          <Where>
+            <span class="place">
+              <For each={place(props.message)}>
+                {(part, index) => (
+                  <>
+                    {index() > 0 ? " · " : ""}
+                    <bdi>{part}</bdi>
+                  </>
+                )}
+              </For>
+            </span>
+            {props.how}
+          </Where>
+          <Show when={props.message.content}>
+            <MessagePreview content={props.message.content} />
+          </Show>
+        </Body>
+      </Show>
+    </Item>
   );
 }
 
@@ -461,14 +606,14 @@ export const List = styled("div", {
     overflowY: "auto",
     display: "flex",
     flexDirection: "column",
-    gap: "8px",
+    gap: "6px",
     // phones: entries touch, as one group (InboxEntry); the mentions use
     // their own page there
     _phone: { paddingInline: "4px", gap: 0 },
   },
 });
 
-/** One mention, in its own box */
+/** One message: a row of the list, lit where the pointer is */
 export const Item = styled("button", {
   base: {
     display: "flex",
@@ -476,10 +621,28 @@ export const Item = styled("button", {
     gap: "12px",
     width: "100%",
     flexShrink: 0,
-    padding: "12px",
-    border: "1px solid var(--z-card-border, var(--z-border-soft))",
-    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
-    background: "var(--z-card-bg)",
+    position: "relative",
+    padding: "10px 12px",
+    border: "none",
+    borderRadius: "var(--z-radius-md, 12px)",
+    background: "transparent",
+    // a following message of the same box: its words under the first's,
+    // its time where the avatar is, on the line you point at
+    "&[data-more]": { paddingBlock: "4px 8px" },
+    "&[data-more] .gap": {
+      width: "36px",
+      flexShrink: 0,
+      paddingBlockStart: "2px",
+      fontSize: "11px",
+      lineHeight: "18px",
+      whiteSpace: "nowrap",
+      textAlign: "center",
+      color: "var(--z-fg-muted)",
+      opacity: 0,
+    },
+    "&[data-more]:hover .gap": { opacity: 1 },
+    "&[data-more]:focus-visible .gap": { opacity: 1 },
+    "&[data-more] [data-preview]": { margin: 0 },
     color: "inherit",
     font: "inherit",
     textAlign: "start",
@@ -527,23 +690,85 @@ export const When = styled("span", {
 
 export const Where = styled("div", {
   base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
     minWidth: 0,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
     fontSize: "12px",
     color: "var(--z-fg-muted)",
+    "& .place": {
+      minWidth: 0,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
   },
 });
 
-export const Preview = styled("p", {
+export const Preview = styled("div", {
   base: {
     margin: "4px 0 0",
     fontSize: "14px",
     lineHeight: "20px",
     color: "var(--z-fg-secondary)",
-    lineClamp: 3,
+    lineClamp: 2,
     overflowWrap: "anywhere",
+    textAlign: "start",
+    // drawn, never clicked: the row opens the message
+    pointerEvents: "none",
+  },
+});
+
+/** One person's mentions in one place, one after the other: one box */
+const Bundle = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: "var(--z-radius-md, 12px)",
+    background: "var(--z-box-bg)",
+    overflow: "hidden",
+    // the line under the pointer lights up, inside the box
+    "& > button": { borderRadius: 0 },
+  },
+});
+
+/** One day of mentions */
+const Day = styled("section", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "6px",
+    "& + &": { marginBlockStart: "12px" },
+  },
+});
+
+/** Today, Yesterday or the date, above that day's mentions */
+const DayLabel = styled("h3", {
+  base: {
+    position: "sticky",
+    top: 0,
+    zIndex: 1,
+    margin: 0,
+    padding: "6px 12px 4px",
+    fontSize: "12px",
+    fontWeight: 600,
+    color: "var(--z-fg-muted)",
+    background: "var(--z-bg-modal, var(--z-bg-raised))",
+    _phone: { background: "var(--z-bg-nav)" },
+  },
+});
+
+/** How a mention reached you (@everyone, @here, a role) */
+const Kind = styled("span", {
+  base: {
+    flexShrink: 0,
+    paddingInline: "6px",
+    borderRadius: "999px",
+    background: "var(--z-bg-input)",
+    color: "var(--z-fg-secondary)",
+    fontSize: "11px",
+    fontWeight: 600,
+    lineHeight: "18px",
   },
 });
 
