@@ -37,9 +37,11 @@
 /* The angle turns a nameplate's mask to the name, in either direction */
 :root {
   --z-plate-angle: 90deg;
+  --z-plate-ltr: 1;
 }
 :root[dir="rtl"] {
   --z-plate-angle: 270deg;
+  --z-plate-ltr: 0;
 }
 
 /*

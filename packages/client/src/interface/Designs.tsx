@@ -406,9 +406,6 @@ function Gallery() {
                     onOpen={setOpen}
                     onDesign={(slug) => go(`/${slug}`)}
                     onMaker={(id) => go(`/creator/${id}`)}
-                    onFrameGuide={
-                      framesOpen() ? () => go("/frame-guide") : undefined
-                    }
                   />
                 </Match>
 
