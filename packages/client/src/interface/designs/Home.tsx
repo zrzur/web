@@ -6,7 +6,7 @@ import { styled } from "styled-system/jsx";
 import { type CommunityItem } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useNameFontLabel } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient } from "@revolt/client";
-import { Button, LineTabs } from "@revolt/ui";
+import { LineTabs } from "@revolt/ui";
 import { userStyleOf } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -39,7 +39,6 @@ export function DesignsHome(props: {
   onDesign: (slug: string) => void;
   onMaker: (id: string) => void;
   /** the frame guide; only while creators' frames are open */
-  onFrameGuide?: () => void;
 }) {
   const { t } = useLingui();
   const vibeText = useVibeText();
@@ -146,39 +145,6 @@ export function DesignsHome(props: {
               </SortSpot>
             </Show>
           </Kinds>
-
-          {/* the way to making one, where frames are shown */}
-          <Show
-            when={
-              props.onFrameGuide &&
-              !mood() &&
-              (props.filter === "frames" ||
-                (props.filter === "all" && !props.query.trim()))
-            }
-          >
-            <MakeFrame data-testid="designs-frame-guide">
-              <Icon name="paint-brush" size={20} />
-              <div>
-                <strong>
-                  <Trans>Make your own profile frame</Trans>
-                </strong>
-                <span>
-                  <Trans>
-                    The canvas, the safe zone and a ready template, in one
-                    guide.
-                  </Trans>
-                </span>
-              </div>
-              <Button
-                variant="tonal"
-                size="sm"
-                data-testid="designs-frame-guide-open"
-                onPress={() => props.onFrameGuide?.()}
-              >
-                <Trans>How to design a frame</Trans>
-              </Button>
-            </MakeFrame>
-          </Show>
 
           <Show
             when={firstPage() && tiles().length}
@@ -328,38 +294,5 @@ const SortSpot = styled("div", {
     alignSelf: "center",
     marginInlineStart: "auto",
     _phone: { "& button": { minHeight: "44px" } },
-  },
-});
-
-/** one quiet row: the guide to making a frame */
-const MakeFrame = styled("aside", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "16px",
-    padding: "12px 16px",
-    borderRadius: "var(--z-box-radius, 14px)",
-    border: "var(--z-box-border, 1px solid var(--z-border-subtle))",
-    background: "var(--z-box-bg, var(--z-designs-surface))",
-    "--z-icon-color": "var(--z-accent-text)",
-    "& > div": {
-      display: "flex",
-      flexDirection: "column",
-      gap: "2px",
-      flex: 1,
-      minWidth: 0,
-    },
-    "& strong": { fontSize: "15px", lineHeight: "22px", fontWeight: 600 },
-    "& span": {
-      fontSize: "13px",
-      lineHeight: "20px",
-      color: "var(--z-fg-secondary)",
-    },
-    "& button": { flexShrink: 0 },
-    _phone: {
-      flexWrap: "wrap",
-      "& > div": { flexBasis: "calc(100% - 36px)" },
-      "& button": { minHeight: "44px", width: "100%" },
-    },
   },
 });

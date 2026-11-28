@@ -397,7 +397,8 @@ function Member(props: {
     nameplateBackground(
       (props.user ?? props.member?.user)?.style,
       instance.mediaUrl,
-      { moving: hovered() && motion() },
+      // kept in shape and held to the row's end, as Discord shows it
+      { moving: hovered() && motion(), rowHeight: 44 },
     );
 
   return (

@@ -11,7 +11,7 @@ export const PLATE_HEIGHT = 192;
  */
 const ROW = {
   width: 243,
-  height: 38,
+  height: 44,
   avatar: 32,
   avatarInset: 8,
   nameInset: 48,
@@ -40,14 +40,15 @@ export function plateVisibility(x: number, direction: PlateDirection) {
 }
 
 /**
- * The member row laid over the image, in image pixels. `center / cover` on a
- * row wider than the image scales it to the row's width, so nothing is lost
- * at the sides and the same amount goes at the top and the bottom.
+ * The member row laid over the image, in image pixels. The plate fills the
+ * row's box and the art is stretched to it (`100% 100%`), so the whole image
+ * is seen: nothing is cut at the top, the bottom or the sides. Across, the
+ * image is scaled by the row's width; up and down, by its height.
  */
 export function plateGuide() {
   const scale = PLATE_WIDTH / ROW.width;
-  const shown = ROW.height * scale;
-  const crop = (PLATE_HEIGHT - shown) / 2;
+  const scaleY = PLATE_HEIGHT / ROW.height;
+  const crop = 0;
   const middle = PLATE_HEIGHT / 2;
   const radius = (ROW.avatar * scale) / 2;
   const avatar = (ROW.avatarInset + ROW.avatar / 2) * scale;
@@ -67,7 +68,7 @@ export function plateGuide() {
         from: PLATE_WIDTH - nameStart - nameWidth,
         to: PLATE_WIDTH - nameStart,
       },
-      height: ROW.nameHeight * scale,
+      height: ROW.nameHeight * scaleY,
     },
     /** fully seen from here on, in each direction */
     full: { ltr: FADE_FULL * PLATE_WIDTH, rtl: (1 - FADE_FULL) * PLATE_WIDTH },

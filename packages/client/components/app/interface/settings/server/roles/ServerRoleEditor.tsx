@@ -22,6 +22,7 @@ import {
   Text,
   Toggle,
 } from "@revolt/ui";
+import { Avatar } from "@revolt/ui/components/design";
 import { typography } from "@revolt/ui/components/design/Text";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { createMaterialColourVariables } from "@revolt/ui/themes";
@@ -29,6 +30,7 @@ import { createMaterialColourVariables } from "@revolt/ui/themes";
 import { cropProcess } from "@revolt/modal/modals/CropProcess";
 import { useSettingsNavigation } from "../../Settings";
 import { ChannelPermissionsEditor } from "../../channel/permissions/ChannelPermissionsEditor";
+import { ViewAsRoleRow } from "./ViewAsRoleRow";
 
 function RoleColourPicker(props: {
   colour: string | null;
@@ -37,6 +39,9 @@ function RoleColourPicker(props: {
 }) {
   const { t } = useLingui();
   const state = useState();
+  const client = useClient();
+  // the preview shows the person editing, as they would look with this role
+  const me = () => client().user;
 
   const colourPreviews = createMemo(() => {
     const theme = state.theme.activeTheme;
@@ -86,9 +91,16 @@ function RoleColourPicker(props: {
               <PreviewMessage>
                 <PreviewAvatar
                   style={{
-                    background: preview.colours["surface-container-highest"],
+                    // a faint ring: a dark picture still shows its circle on a dark theme
+                    "box-shadow": `0 0 0 1px ${preview.colours["outline-variant"]}`,
                   }}
-                />
+                >
+                  <Avatar
+                    size={36}
+                    src={me()?.animatedAvatarURL ?? me()?.avatarURL}
+                    fallback={(me()?.displayName ?? me()?.username ?? "?").slice(0, 1)}
+                  />
+                </PreviewAvatar>
                 <PreviewMessageContent>
                   <PreviewUsername>
                     <ColouredText
@@ -299,6 +311,7 @@ export function ServerRoleEditor(props: { context: Server; roleId: string }) {
         />
 
         <SettingsSection title={<Trans>Manage</Trans>}>
+          <ViewAsRoleRow server={props.context} roleIds={[props.roleId]} />
           <SettingsRow
             icon={<Icon name="identification-card" size={20} />}
             title={<Trans>Role ID</Trans>}
@@ -384,16 +397,18 @@ const PreviewMessage = styled("div", {
     minWidth: 0,
     display: "flex",
     alignItems: "center",
-    gap: "var(--gap-md)",
+    gap: "12px",
   },
 });
 
 const PreviewAvatar = styled("span", {
   base: {
-    width: "28px",
-    height: "28px",
+    display: "flex",
+    width: "36px",
+    height: "36px",
     flexShrink: 0,
     borderRadius: "50%",
+    overflow: "hidden",
   },
 });
 

@@ -10,9 +10,9 @@ import {
 describe("the nameplate template", () => {
   const guide = plateGuide();
 
-  it("crops what the member row crops, the same at top and bottom", () => {
-    expect(guide.crop).toBeCloseTo(15.95, 1);
-    expect(guide.bottom - guide.top).toBeCloseTo(160.1, 1);
+  it("shows the whole image: the plate fills the row's box, nothing is cut", () => {
+    expect(guide.crop).toBe(0);
+    expect(guide.bottom - guide.top).toBe(192);
     expect(guide.top + guide.bottom).toBeCloseTo(192);
   });
 
@@ -26,7 +26,7 @@ describe("the nameplate template", () => {
   it("starts the name after the avatar, mirrored", () => {
     expect(guide.name.ltr.from).toBeCloseTo(202.3, 1);
     expect(guide.name.rtl.to).toBeCloseTo(821.7, 1);
-    expect(guide.name.height).toBeCloseTo(75.9, 1);
+    expect(guide.name.height).toBeCloseTo(78.5, 1);
   });
 
   it("fades as the row's mask does", () => {
@@ -56,12 +56,12 @@ describe("the nameplate template", () => {
 
   it("gives the studio marks in the same places", () => {
     expect(plateMarks()).toEqual({
-      crop: "8.30%",
+      crop: "0.00%",
       avatarInset: "3.29%",
       avatarSize: "13.17%",
       nameInset: "19.75%",
       nameSize: "22.22%",
-      nameEdge: "30.25%",
+      nameEdge: "29.55%",
     });
   });
 });

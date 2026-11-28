@@ -468,7 +468,7 @@ export function communityStillUrl(
 export function nameplateBackground(
   style: UserStyle | undefined,
   mediaUrl: string,
-  options: { moving?: boolean } = {},
+  options: { moving?: boolean; rowHeight?: number } = {},
 ): string | undefined {
   const id = style?.nameplate;
   if (!isCommunityRef(id)) return;
@@ -476,7 +476,152 @@ export function nameplateBackground(
   const url = options.moving
     ? communityFileUrl(mediaUrl, file)
     : communityStillUrl(mediaUrl, file);
-  return url ? `url("${url}") center / 100% 100% no-repeat` : undefined;
+  if (!url) return undefined;
+  // the drawing itself fills the box: an empty margin around it is left out
+  const drawn = file ? plateDrawn(file, communityStillUrl(mediaUrl, file)!) : undefined;
+  // a member row waits for the measure (a moment) rather than jump into place
+  if (options.rowHeight && file && drawn === undefined) return undefined;
+  const fit = drawn
+    ? options.rowHeight
+      ? fitRow(drawn.width, drawn.height, drawn.box, options.rowHeight)
+      : fitDrawing(drawn.width, drawn.height, drawn.box)
+    : undefined;
+  return fit
+    ? `url("${url}") ${fit.position} / ${fit.size} no-repeat`
+    : `url("${url}") center / 100% 100% no-repeat`;
+}
+
+/**
+ * A nameplate in a member row, as Discord shows one: never stretched out of
+ * shape. The drawing is scaled to the row's height, keeping its proportions,
+ * and held to the row's end (right, the emblem's side); whatever is left over
+ * at the start runs under the avatar, where the mask fades it out anyway.
+ */
+export function fitRow(
+  width: number,
+  height: number,
+  box: { minX: number; minY: number; maxX: number; maxY: number },
+  rowHeight: number,
+): PlateFit {
+  const drawnH = box.maxY - box.minY + 1;
+  const scale = rowHeight / drawnH;
+  const px = (n: number) => `${Math.round(n * 100) / 100}px`;
+  return {
+    size: `${px(width * scale)} ${px(height * scale)}`,
+    // held to the row's end: the drawing's right edge on the row's right, or
+    // in right-to-left languages its left edge on the row's left
+    // (--z-plate-ltr is 1 or 0, set with the page's direction)
+    position: `calc(var(--z-plate-ltr, 1) * (100% + ${px((width - 1 - box.maxX) * scale)}) - (1 - var(--z-plate-ltr, 1)) * ${px(box.minX * scale)}) ${px(-box.minY * scale)}`,
+  };
+}
+
+/** Where a nameplate's drawing sits in its image: size and position for CSS */
+export type PlateFit = { size: string; position: string };
+
+/**
+ * The background size and position that stretch the drawn part of an image
+ * (the box `minX..maxX`, `minY..maxY` of its pixels, in a `width` x `height`
+ * image) to the whole element. Undefined when the drawing already fills it.
+ * Percent positions do not depend on the element's size: the same fit holds
+ * in the member list, a card or a preview.
+ */
+export function fitDrawing(
+  width: number,
+  height: number,
+  box: { minX: number; minY: number; maxX: number; maxY: number },
+): PlateFit | undefined {
+  const drawnW = box.maxX - box.minX + 1;
+  const drawnH = box.maxY - box.minY + 1;
+  if (drawnW <= 0 || drawnH <= 0) return undefined;
+  // a margin under 2 percent is not worth stretching for
+  if (drawnW >= width * 0.98 && drawnH >= height * 0.98) return undefined;
+  const at = (start: number, drawn: number, whole: number) =>
+    drawn >= whole ? 50 : (start / (whole - drawn)) * 100;
+  const pct = (n: number) => `${Math.round(n * 1000) / 1000}%`;
+  return {
+    size: `${pct((width / drawnW) * 100)} ${pct((height / drawnH) * 100)}`,
+    position: `${pct(at(box.minX, drawnW, width))} ${pct(at(box.minY, drawnH, height))}`,
+  };
+}
+
+/** The box of an image's visible pixels (alpha above a faint trace) */
+export function drawnBox(data: Uint8ClampedArray, width: number, height: number) {
+  let minX = width;
+  let minY = height;
+  let maxX = -1;
+  let maxY = -1;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      if (data[(y * width + x) * 4 + 3] > 12) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+  return maxX < 0 ? undefined : { minX, minY, maxX, maxY };
+}
+
+/** A nameplate image measured: its size and the box of its drawing */
+export type PlateDrawn = {
+  width: number;
+  height: number;
+  box: { minX: number; minY: number; maxX: number; maxY: number };
+};
+
+/** Images measured so far, by file: null when they can't be read */
+const [plateDrawns, setPlateDrawns] = createSignal(
+  new Map<string, PlateDrawn | null>(),
+);
+const measuring = new Set<string>();
+const loading = new Map<string, HTMLImageElement>();
+
+/**
+ * Where a nameplate's drawing sits in its image, once measured (reactive: a
+ * caller in a memo or JSX updates when it arrives). Measured once per file,
+ * from its still, on a canvas; until then, and if the image can't be read,
+ * the art is stretched whole as before.
+ */
+export function plateDrawn(file: string, stillUrl: string): PlateDrawn | null | undefined {
+  // undefined: being measured; null: can't be read (the art is shown whole)
+  const known = plateDrawns().get(file);
+  if (known !== undefined) return known;
+  if (measuring.has(file) || typeof document === "undefined") return undefined;
+  measuring.add(file);
+  const img = new Image();
+  // held until it answers: an image nothing refers to may be collected
+  // before it loads, and then it never answers at all
+  loading.set(file, img);
+  let answered = false;
+  const done = (drawn: PlateDrawn | null) => {
+    if (answered) return;
+    answered = true;
+    loading.delete(file);
+    setPlateDrawns((all) => new Map(all).set(file, drawn));
+  };
+  // a plate is never held back for long: after 4 s it shows whole
+  setTimeout(() => done(null), 4000);
+  img.crossOrigin = "anonymous";
+  img.decoding = "async";
+  img.onload = () => {
+    try {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      if (!ctx || !canvas.width || !canvas.height) return done(null);
+      ctx.drawImage(img, 0, 0);
+      const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      const box = drawnBox(pixels, canvas.width, canvas.height);
+      done(box ? { width: canvas.width, height: canvas.height, box } : null);
+    } catch {
+      done(null);
+    }
+  };
+  img.onerror = () => done(null);
+  img.src = stillUrl;
+  return undefined;
 }
 
 /**

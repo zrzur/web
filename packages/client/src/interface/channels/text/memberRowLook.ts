@@ -44,20 +44,19 @@ export const memberRow = css({
 });
 
 /**
- * Nameplate behind a member row: the same shape as everywhere, and the row's
- * words sit on it in white. It takes the row's height less 3 px above and
- * below, so two plated rows never touch (a 6 px gap), keeps the art's shape
- * from that height and sits at the emblem end; its faint start runs under the
- * avatar.
+ * Nameplate behind a member row: it fills the row's own box exactly (the box
+ * that lights up on hover: 8 px in from each side, the row's full height,
+ * the same rounding), and the row's words sit on it in white. The art is
+ * stretched to the box, whose shape is close to the art's own; its faint
+ * start runs under the avatar.
  */
 export const nameplateLayer = css({
   position: "absolute",
+  insetInlineStart: "8px",
   insetInlineEnd: "8px",
-  top: "3px",
-  height: "calc(var(--z-member-row-height, 44px) - 6px) !important",
-  aspectRatio: "448 / 84",
-  maxWidth: "calc(100% - 16px)",
-  borderRadius: "var(--z-radius, 10px)",
+  top: 0,
+  height: "var(--z-member-row-height, 44px) !important",
+  borderRadius: "var(--z-shape-chip, var(--z-radius-sm, 6px))",
   pointerEvents: "none",
 });
 

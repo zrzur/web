@@ -15,7 +15,12 @@ import {
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import type { API, Channel, Server } from "@zrzur/sdk/solid";
+import {
+  type API,
+  type Channel,
+  type Server,
+  viewingAs,
+} from "@zrzur/sdk/solid";
 import { css, cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
@@ -92,6 +97,7 @@ import {
   createSidebarDrag,
   sidebarDragStyles,
 } from "./sidebarDrag";
+import { ViewAsBanner } from "./ViewAsBanner";
 
 interface Props {
   /**
@@ -207,8 +213,20 @@ export const ServerSidebar = (props: Props) => {
           ...category,
           channels: category.channelIds
             .map((id) => channels.get(id)!)
-            .filter((channel) => channel),
+            .filter((channel) => channel)
+            // viewing as a role: only the channels that role can see
+            .filter(
+              (channel) =>
+                !viewingAs(props.server.id) ||
+                channel.havePermission("ViewChannel"),
+            ),
         }))
+        .filter(
+          (category) =>
+            !viewingAs(props.server.id) ||
+            category.id === "default" ||
+            category.channels.length,
+        )
         .map((category) => {
           const q = phone() ? query().trim() : "";
           if (!q) return category;
@@ -494,6 +512,7 @@ export const ServerSidebar = (props: Props) => {
           </Header>
         </Match>
       </Switch>
+      <ViewAsBanner server={props.server} />
       <Show when={phone()}>
         <ServerPhoneTools
           server={props.server}

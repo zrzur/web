@@ -12,7 +12,6 @@ import { useModals } from "@revolt/modal";
 import { type IconName, Icon } from "@revolt/ui/icons/Icon";
 
 import { SettingsConfiguration } from ".";
-import { ChannelPermissionsEditor } from "./channel/permissions/ChannelPermissionsEditor";
 import { JoinRequests } from "./server/JoinRequests";
 import { LobbySettings } from "./server/LobbySettings";
 import { ServerCard } from "./server/ServerCard";
@@ -47,6 +46,7 @@ import {
   splitAddress,
 } from "./server/registry";
 import { ServerRoleEditor } from "./server/roles/ServerRoleEditor";
+import { EveryoneRoleEditor } from "./server/roles/ViewAsRoleRow";
 import { BackCard } from "./user/_AccountCard";
 
 // charts and their strings load only when the page opens
@@ -185,9 +185,7 @@ const Config: SettingsConfiguration<Server> = {
 
     if (id.startsWith("roles/")) {
       if (id === "roles/default") {
-        return (
-          <ChannelPermissionsEditor type="server_default" context={server} />
-        );
+        return <EveryoneRoleEditor server={server} />;
       }
 
       return <ServerRoleEditor context={server} roleId={id.substring(6)} />;

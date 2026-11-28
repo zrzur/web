@@ -34703,3 +34703,23 @@ msgstr "أسئلة عن «اكتشف»؟ اسأل في <0>سيرفر Zrzur Disco
 #: components/app/interface/settings/user
 msgid "Questions about building on Zrzur? Ask in the <0>Zrzur Developers server</0>."
 msgstr "أسئلة عن البرمجة على زرزور؟ اسأل في <0>سيرفر Zrzur Developers</0>."
+
+#: components/app/interface/settings/server/roles/ViewAsRoleRow.tsx
+msgid "View server as this role"
+msgstr "عرض السيرفر بهذا الدور"
+
+#: components/app/interface/settings/server/roles/ViewAsRoleRow.tsx
+msgid "See the channels and actions members with this role have. Only your view changes."
+msgstr "شاهد القنوات والإجراءات المتاحة للأعضاء بهذا الدور. يتغيّر عرضك أنت فقط."
+
+#: components/app/interface/settings/server/roles/ViewAsRoleRow.tsx
+msgid "View as role"
+msgstr "عرض بهذا الدور"
+
+#: src/interface/navigation/channels/ViewAsBanner.tsx
+msgid "Viewing as"
+msgstr "تعرض بدور"
+
+#: src/interface/navigation/channels/ViewAsBanner.tsx
+msgid "Exit"
+msgstr "خروج"
